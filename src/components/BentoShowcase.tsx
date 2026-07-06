@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Smartphone, Mail } from "lucide-react";
+import { Smartphone, Mail, Volume2 } from "lucide-react";
 import Dither from "./ui/dither";
 
 // ── SUB-COMPONENT 1: IMAGE REVEAL CARD ──
@@ -273,9 +273,13 @@ function DynamicIslandCard() {
 
 // ── SUB-COMPONENT 5: THINGS DRAG AND SCROLL CARD ──
 const DRAG_ITEMS = [
-  { emoji: "🪐", label: "Planet", color: "from-[#C084FC] to-[#8B5CF6]" },
   { emoji: "🍔", label: "Burger", color: "from-[#FCD34D] to-[#F59E0B]" },
-  { emoji: "🚀", label: "Rocket", color: "from-[#F97316] to-[#EF4444]" }
+  { emoji: "🍎", label: "Apple", color: "from-[#FCA5A5] to-[#EF4444]" },
+  { emoji: "🐟", label: "Fish", color: "from-[#93C5FD] to-[#3B82F6]" },
+  { emoji: "🪐", label: "Planet", color: "from-[#C084FC] to-[#8B5CF6]" },
+  { emoji: "🧥", label: "Coat", color: "from-[#FDBA74] to-[#F97316]" },
+  { emoji: "🐠", label: "Fishy", color: "from-[#6EE7B7] to-[#10B981]" },
+  { emoji: "⛳", label: "Golf", color: "from-[#A7F3D0] to-[#34D399]" }
 ];
 
 function ThingsDragAndScrollCard() {
@@ -283,7 +287,7 @@ function ThingsDragAndScrollCard() {
   
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[580px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50" />
 
@@ -298,10 +302,10 @@ function ThingsDragAndScrollCard() {
       {/* Dragging Container Area */}
       <div 
         ref={containerRef}
-        className="relative z-10 w-full h-[100px] bg-black/45 border border-white/5 rounded-xl p-3 overflow-hidden flex gap-3 justify-center items-center"
+        className="relative z-10 w-full h-[380px] bg-black/45 border border-white/5 rounded-xl p-4 overflow-hidden flex flex-wrap gap-3 justify-center items-center content-center"
       >
-        <span className="absolute top-2 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none">
-          Drag items
+        <span className="absolute top-3 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none">
+          Drag any item inside
         </span>
         
         {DRAG_ITEMS.map((item, index) => (
@@ -311,10 +315,10 @@ function ThingsDragAndScrollCard() {
             dragConstraints={containerRef}
             dragElastic={0.15}
             whileDrag={{ scale: 1.1, zIndex: 100 }}
-            className={`flex items-center gap-1 px-2.5 py-1.5 bg-gradient-to-br ${item.color} rounded-full cursor-grab active:cursor-grabbing shadow-lg border border-white/10 shrink-0 select-none`}
+            className={`flex items-center gap-1.5 px-3 py-2 bg-gradient-to-br ${item.color} rounded-full cursor-grab active:cursor-grabbing shadow-lg border border-white/10 shrink-0 select-none`}
           >
-            <span className="text-sm">{item.emoji}</span>
-            <span className="text-[9px] font-mono font-bold text-black uppercase tracking-wider">{item.label}</span>
+            <span className="text-base">{item.emoji}</span>
+            <span className="text-[10px] font-mono font-bold text-black uppercase tracking-wider">{item.label}</span>
           </motion.div>
         ))}
       </div>
@@ -375,6 +379,135 @@ function DitherCard() {
   );
 }
 
+// ── SUB-COMPONENT 7: TEXT ROLL GLITCH CARD (New!) ──
+function TextRollCard() {
+  const [hovered, setHovered] = useState(false);
+  const word = "KOMOREBI";
+  
+  return (
+    <div 
+      className="relative w-full h-[300px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#121212] via-transparent to-[#1a1a1a]/30 opacity-50" />
+
+      {/* Header */}
+      <div className="relative z-10 w-full flex items-center justify-between">
+        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+          TEXT WAVE
+        </span>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+      </div>
+
+      {/* Text Roll Canvas area */}
+      <div className="relative z-10 w-full flex items-center justify-center h-28">
+        <div className="flex overflow-hidden py-1">
+          {word.split("").map((letter, index) => (
+            <div key={index} className="relative h-10 w-6 sm:w-7 overflow-hidden flex justify-center">
+              <motion.span
+                animate={{ y: hovered ? "-100%" : "0%" }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
+                className="absolute text-2xl sm:text-3xl font-heading font-bold text-white/60 tracking-wider"
+              >
+                {letter}
+              </motion.span>
+              <motion.span
+                initial={{ y: "100%" }}
+                animate={{ y: hovered ? "0%" : "100%" }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
+                className="absolute text-2xl sm:text-3xl font-heading font-bold text-sun-gold tracking-wider"
+              >
+                {letter}
+              </motion.span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-10">
+        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+          Letter Shifter
+        </span>
+        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+          Text roll hover
+        </h3>
+      </div>
+    </div>
+  );
+}
+
+// ── SUB-COMPONENT 8: BORDER BEAM CARD (New!) ──
+function BorderBeamCard() {
+  const [hovered, setHovered] = useState(false);
+  
+  return (
+    <div 
+      className="relative w-full h-[300px] bg-[#121212] rounded-2xl overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* ── ROTATING CONIC BORDER GLOW BEAM ── */}
+      <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-100 transition-opacity duration-700 ease-out overflow-hidden">
+        <div 
+          className="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent_60%,#E8A969_90%,transparent_100%)] animate-[spin_4s_linear_infinite]"
+          style={{ transformOrigin: "center" }}
+        />
+      </div>
+      {/* Inner Mask (leaves a sharp 1px border gap) */}
+      <div className="absolute inset-[1px] bg-[#121212] rounded-[15px] z-10 pointer-events-none" />
+
+      {/* Header */}
+      <div className="relative z-20 w-full flex items-center justify-between">
+        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+          BORDER GLOW
+        </span>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+      </div>
+
+      {/* Soundwave Visualizer Area */}
+      <div className="relative z-20 w-full flex flex-col gap-3.5 bg-black/45 border border-white/5 rounded-xl p-4 h-28 justify-center">
+        <div className="flex items-center gap-2">
+          <Volume2 className="w-4 h-4 text-sun-gold/75 animate-pulse" />
+          <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">
+            Audio wave rendering
+          </span>
+        </div>
+        
+        {/* Animated Bar graph lines */}
+        <div className="flex items-end justify-between w-full h-10 px-2 gap-1.5">
+          {[2.5, 1.2, 3.8, 2.0, 1.0, 3.2, 4.5, 1.8, 2.8, 3.5, 1.4, 2.9, 4.0, 2.2, 1.5].map((val, idx) => (
+            <motion.div 
+              key={idx}
+              animate={{ 
+                height: hovered 
+                  ? [`${val * 8}px`, `${Math.max(4, val * 5)}px`, `${val * 8}px`]
+                  : `${val * 6}px`
+              }}
+              transition={{ 
+                repeat: Infinity, 
+                duration: 1.0 + (idx % 3) * 0.25, 
+                ease: "easeInOut" 
+              }}
+              className="flex-grow bg-gradient-to-t from-sun-gold/20 to-sun-gold rounded-full"
+              style={{ width: "4px" }}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-20">
+        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+          CSS Borders
+        </span>
+        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+          Border beam
+        </h3>
+      </div>
+    </div>
+  );
+}
+
 // ── MAIN BENTO SHOWCASE COMPONENT ──
 export default function BentoShowcase() {
   return (
@@ -399,12 +532,14 @@ export default function BentoShowcase() {
         <div className="flex flex-col gap-6 w-full">
           <ImageRevealCard />
           <DevouringDetailsCard />
+          <TextRollCard />
         </div>
 
         {/* Column 2 */}
         <div className="flex flex-col gap-6 w-full">
           <HoverMembersCard />
           <DynamicIslandCard />
+          <BorderBeamCard />
         </div>
 
         {/* Column 3 */}
@@ -412,6 +547,7 @@ export default function BentoShowcase() {
           <ThingsDragAndScrollCard />
           <DitherCard />
         </div>
+
       </div>
     </section>
   );
