@@ -40,3 +40,8 @@ AGENTS.md
 
 # Lovable cache
 .lovable/
+
+# Brand Identity & Formatting
+Komorebi-Brand-Identity.md
+.prettierrc
+.prettierignore
