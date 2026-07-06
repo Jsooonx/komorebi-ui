@@ -764,6 +764,444 @@ function InfiniteMarqueeCard() {
   );
 }
 
+// ── SUB-COMPONENT 11: MAGNETIC CURSOR FIELD CARD (Tall Box, row-span-2) ──
+function MagneticCursorFieldCard() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  // 3D Tilt handler
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: x * 10, y: -y * 10 });
+
+    // Track mouse position relative to canvas
+    if (canvasRef.current) {
+      const canvasRect = canvasRef.current.getBoundingClientRect();
+      const mx = e.clientX - canvasRect.left;
+      const my = e.clientY - canvasRect.top;
+      (canvasRef.current as any).mouseX = mx;
+      (canvasRef.current as any).mouseY = my;
+      (canvasRef.current as any).isInside = true;
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+    if (canvasRef.current) {
+      (canvasRef.current as any).isInside = false;
+    }
+  };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let width = (canvas.width = canvas.offsetWidth);
+    let height = (canvas.height = canvas.offsetHeight);
+
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    };
+    window.addEventListener("resize", handleResize);
+
+    // Grid config
+    const spacing = 22;
+    const dots: { x: number; y: number; ox: number; oy: number }[] = [];
+
+    for (let x = spacing / 2; x < width; x += spacing) {
+      for (let y = spacing / 2; y < height; y += spacing) {
+        dots.push({ x, y, ox: x, oy: y });
+      }
+    }
+
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      const mx = (canvas as any).mouseX || 0;
+      const my = (canvas as any).mouseY || 0;
+      const isInside = (canvas as any).isInside || false;
+
+      dots.forEach((dot) => {
+        let dx = 0;
+        let dy = 0;
+        let dist = 0;
+
+        if (isInside) {
+          dx = mx - dot.ox;
+          dy = my - dot.oy;
+          dist = Math.sqrt(dx * dx + dy * dy);
+        }
+
+        // Warp effect
+        if (isInside && dist < 120) {
+          const force = (120 - dist) / 120;
+          // Pull dots slightly towards cursor
+          dot.x = dot.ox + (dx / dist) * force * 15;
+          dot.y = dot.oy + (dy / dist) * force * 15;
+          
+          // Draw dot
+          ctx.beginPath();
+          ctx.arc(dot.x, dot.y, 1.8 + force * 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(232, 169, 105, ${0.15 + force * 0.7})`;
+          ctx.fill();
+        } else {
+          // Return to original position
+          dot.x += (dot.ox - dot.x) * 0.15;
+          dot.y += (dot.oy - dot.y) * 0.15;
+
+          ctx.beginPath();
+          ctx.arc(dot.x, dot.y, 1.2, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(255, 255, 255, 0.12)";
+          ctx.fill();
+        }
+      });
+
+      // Draw subtle magnetic lines
+      if (isInside) {
+        ctx.beginPath();
+        ctx.arc(mx, my, 40, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(232, 169, 105, 0.08)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return (
+    <div 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-full h-[544px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group"
+      style={{ perspective: 1000 }}
+    >
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50" />
+
+      {/* Header */}
+      <div className="relative z-10 w-full flex items-center justify-between">
+        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+          MAGNETIC FIELD
+        </span>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+      </div>
+
+      {/* Interactive Canvas Area */}
+      <motion.div 
+        animate={{ rotateY: tilt.x, rotateX: tilt.y }}
+        transition={{ type: "spring", stiffness: 180, damping: 22 }}
+        style={{ transformStyle: "preserve-3d" }}
+        className="relative z-20 w-full h-[340px] border border-white/5 rounded-xl overflow-hidden bg-black/60 backdrop-blur-sm"
+      >
+        <canvas ref={canvasRef} className="w-full h-full block" />
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.4))]" />
+      </motion.div>
+
+      <div className="relative z-10">
+        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+          Vector attraction
+        </span>
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
+          Magnetic cursor field
+        </h3>
+      </div>
+    </div>
+  );
+}
+
+// ── SUB-COMPONENT 12: AUDIO EQUALIZER CARD ──
+function AudioEqualizerCard() {
+  const [hovered, setHovered] = useState(false);
+  const barCount = 14;
+
+  return (
+    <div 
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Header */}
+      <div className="relative z-10 w-full flex items-center justify-between">
+        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+          EQUALIZER
+        </span>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+      </div>
+
+      {/* Visual Bar Equalizer */}
+      <div className="relative w-full h-28 flex items-end justify-center gap-1.5 px-4 bg-black/45 border border-white/5 rounded-xl overflow-hidden">
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#E8A969]/10 to-transparent pointer-events-none" />
+        
+        {Array.from({ length: barCount }).map((_, i) => {
+          // Generate unique animated height constraints
+          const delay = i * 0.08;
+          const duration = 0.5 + Math.random() * 0.6;
+          return (
+            <motion.div
+              key={i}
+              className="w-1.5 rounded-t-full bg-gradient-to-t from-[#BECB6D] to-[#E8A969]"
+              animate={{ 
+                height: hovered 
+                  ? [8, 48 + Math.random() * 40, 16, 72 + Math.random() * 20, 8] 
+                  : [8, 20 + Math.sin(i) * 12, 8] 
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: hovered ? duration : 1.2,
+                delay: delay,
+                ease: "easeInOut"
+              }}
+              style={{ height: 8 }}
+            />
+          );
+        })}
+      </div>
+
+      <div className="relative z-10">
+        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+          Frequency visualizer
+        </span>
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
+          Responsive equalizer
+        </h3>
+      </div>
+    </div>
+  );
+}
+
+// ── SUB-COMPONENT 13: MORPHING LIQUID BLOB CARD ──
+function MorphingBlobCard() {
+  const [hovered, setHovered] = useState(false);
+
+  // SVG morphing paths
+  const pathA = "M21,-20.7C27.9,-13.7,34.7,-5.7,35.4,2.9C36.1,11.5,30.6,20.8,22.7,26.7C14.7,32.7,4.3,35.4,-5.2,34.2C-14.7,33,-23.4,27.8,-28.9,20C-34.4,12.3,-36.8,1.9,-34.5,-7.2C-32.3,-16.3,-25.3,-24,-17.1,-30.5C-8.9,-37,-0.7,-42.2,6.1,-40.4C13,-38.7,14.1,-27.8,21,-20.7Z";
+  const pathB = "M23.5,-23.9C29.6,-16.9,33,-7.4,32.7,1.8C32.4,11.1,28.4,20,21.5,25.9C14.6,31.8,4.7,34.7,-4.8,33.5C-14.2,32.3,-23.2,27.1,-29.4,19.2C-35.7,11.3,-39.3,0.7,-37.2,-9.2C-35.1,-19.1,-27.2,-28.3,-17.9,-34.7C-8.6,-41.1,2.1,-44.7,11.8,-42.4C21.5,-40.1,17.4,-30.9,23.5,-23.9Z";
+  const pathC = "M20.2,-20.5C26,-13.8,30.7,-5.9,30.8,1.9C30.9,9.8,26.4,17.7,19.8,23.3C13.2,28.9,4.4,32.3,-4.2,31.4C-12.8,30.4,-21.3,25.2,-26.8,17.8C-32.3,10.4,-34.8,0.8,-32.9,-8C-31,-16.8,-24.8,-24.8,-17.1,-31.1C-9.3,-37.4,-0.1,-42.1,7.5,-40.3C15.1,-38.5,14.4,-27.1,20.2,-20.5Z";
+
+  return (
+    <div 
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Header */}
+      <div className="relative z-10 w-full flex items-center justify-between">
+        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+          LIQUID BLOBS
+        </span>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+      </div>
+
+      {/* Morphing Area */}
+      <div className="relative w-full h-28 flex items-center justify-center bg-black/45 border border-white/5 rounded-xl overflow-hidden">
+        <div className="absolute inset-0 z-0 bg-gradient-to-tr from-white/[0.02] to-transparent pointer-events-none" />
+        <svg viewBox="-50 -50 100 100" className="w-24 h-24 relative z-10">
+          <motion.path
+            fill="url(#blob-gradient)"
+            animate={{ 
+              d: hovered ? [pathA, pathB, pathC, pathA] : [pathC, pathA, pathB, pathC]
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: hovered ? 4 : 8,
+              ease: "easeInOut"
+            }}
+          />
+          <defs>
+            <linearGradient id="blob-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#BECB6D" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#E8A969" stopOpacity="0.8" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div className="relative z-10">
+        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+          SVG Morphing
+        </span>
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
+          Organic liquid shape
+        </h3>
+      </div>
+    </div>
+  );
+}
+
+// ── SUB-COMPONENT 14: HOLOGRAPHIC TERMINAL CARD ──
+function HolographicTerminalCard() {
+  const [logs, setLogs] = useState<string[]>([]);
+  const [hovered, setHovered] = useState(false);
+
+  const commandPool = [
+    "komorebi-ui init --theme=dark",
+    "Installing dependencies...",
+    "Done. Added 12 components successfully",
+    "Fetching updates from registry...",
+    "Loaded dither.tsx [1.2kb]",
+    "Loaded split-text.tsx [2.4kb]",
+    "Running dev server on port 3000",
+    "Compiled bundle successfully in 23ms"
+  ];
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setLogs((prev) => {
+        const next = [...prev, commandPool[index]];
+        if (next.length > 4) next.shift(); // Keep only latest 4 lines
+        return next;
+      });
+      index = (index + 1) % commandPool.length;
+    }, 2800);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div 
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Header */}
+      <div className="relative z-10 w-full flex items-center justify-between">
+        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+          TERMINAL
+        </span>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+      </div>
+
+      {/* Terminal View */}
+      <div className="relative w-full h-28 bg-black/75 border border-white/5 rounded-xl p-3.5 font-mono text-[9px] text-white/80 overflow-hidden flex flex-col justify-end gap-1">
+        {/* Hologram scanline scan shader */}
+        {hovered && (
+          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.04] via-transparent to-transparent bg-[size:100%_4px] animate-[pulse_1s_infinite] pointer-events-none z-20" />
+        )}
+        
+        {logs.map((log, i) => (
+          <div key={i} className="flex items-center gap-1.5">
+            <span className="text-[#E8A969] select-none">&gt;</span>
+            <span className={log.includes("successfully") ? "text-[#BECB6D]" : ""}>
+              {log}
+            </span>
+          </div>
+        ))}
+        {logs.length === 0 && <div className="text-white/30 animate-pulse">Awaiting log streams...</div>}
+      </div>
+
+      <div className="relative z-10">
+        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+          Live stream logger
+        </span>
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
+          Holographic terminal logs
+        </h3>
+      </div>
+    </div>
+  );
+}
+
+// ── SUB-COMPONENT 15: GRAVITY BUBBLES CARD ──
+function GravityBubblesCard() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  // 3D Tilt handler - bubbles react in opposition to tilt
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
+    setTilt({ x: x * 15, y: y * 15 });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
+
+  const bubbles = [
+    { size: 28, x: "25%", y: "45%", delay: 0, color: "from-[#BECB6D]/30 to-[#E8A969]/10", tx: -20, ty: -25 },
+    { size: 18, x: "65%", y: "25%", delay: 0.4, color: "from-[#E8A969]/30 to-[#BECB6D]/10", tx: 25, ty: -15 },
+    { size: 22, x: "45%", y: "65%", delay: 0.2, color: "from-[#BECB6D]/20 to-[#BECB6D]/5", tx: -10, ty: 25 },
+    { size: 14, x: "75%", y: "70%", delay: 0.6, color: "from-[#E8A969]/20 to-[#E8A969]/5", tx: 20, ty: 15 }
+  ];
+
+  return (
+    <div 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+    >
+      {/* Header */}
+      <div className="relative z-10 w-full flex items-center justify-between">
+        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+          GRAVITY DRIFT
+        </span>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+      </div>
+
+      {/* Physics Chamber */}
+      <div className="relative w-full h-28 bg-black/45 border border-white/5 rounded-xl overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />
+
+        {bubbles.map((bubble, i) => (
+          <motion.div
+            key={i}
+            className={`absolute rounded-full bg-gradient-to-br ${bubble.color} border border-white/10`}
+            style={{
+              width: bubble.size,
+              height: bubble.size,
+              left: bubble.x,
+              top: bubble.y
+            }}
+            animate={{ 
+              x: tilt.x * -1.8 + bubble.tx * 0.2,
+              y: tilt.y * -1.8 + bubble.ty * 0.2,
+              scale: [1, 1.05, 1]
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 14,
+              scale: {
+                repeat: Infinity,
+                duration: 3,
+                delay: bubble.delay
+              }
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10">
+        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+          Tilt physics reaction
+        </span>
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
+          Floating gravity bubbles
+        </h3>
+      </div>
+    </div>
+  );
+}
+
 // ── MAIN BENTO SHOWCASE COMPONENT ──
 export default function BentoShowcase() {
   return (
@@ -774,7 +1212,7 @@ export default function BentoShowcase() {
       {/* ── HEADER ── */}
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center mb-20 w-full">
         <SplitText
-          text="12+ Creative components"
+          text="17+ Creative components"
           className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white mb-6 leading-tight inline-block"
           tag="h2"
           splitType="words"
@@ -803,6 +1241,11 @@ export default function BentoShowcase() {
         <BorderBeamCard />
         <InteractiveNavbarCard />
         <InfiniteMarqueeCard />
+        <MagneticCursorFieldCard />
+        <AudioEqualizerCard />
+        <MorphingBlobCard />
+        <HolographicTerminalCard />
+        <GravityBubblesCard />
       </div>
     </section>
   );
