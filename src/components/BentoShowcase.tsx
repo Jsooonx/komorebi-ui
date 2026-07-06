@@ -540,43 +540,6 @@ function BorderBeamCard() {
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
-      {/* Soundwave Visualizer Area */}
-      <div className="relative z-20 w-full flex flex-col gap-2.5 bg-black/45 border border-white/5 rounded-xl p-3 h-20 justify-center">
-        <div className="flex items-center gap-1.5">
-          <Volume2 className="w-3.5 h-3.5 text-sun-gold/75 animate-pulse" />
-          <span className="text-[8px] font-mono text-white/50 uppercase tracking-widest">
-            Audio wave rendering
-          </span>
-        </div>
-        
-        {/* Animated Bar graph lines */}
-        <div className="flex items-end justify-center w-full h-8 px-2 gap-[3px]">
-          {[2.5, 1.2, 3.8, 2.0, 1.0, 3.2, 4.5, 1.8, 2.8, 3.5, 1.4, 2.9, 4.0, 2.2, 1.5].map((val, idx) => (
-            <motion.div 
-              key={idx}
-              animate={{ 
-                height: hovered 
-                  ? [`${val * 6}px`, `${Math.max(4, val * 2.5)}px`, `${val * 6}px`]
-                  : "6px"
-              }}
-              transition={
-                hovered 
-                  ? { 
-                      repeat: Infinity, 
-                      duration: 0.6 + (idx % 4) * 0.15, 
-                      ease: "easeInOut" 
-                    }
-                  : { 
-                      duration: 0.35,
-                      ease: "easeOut"
-                    }
-              }
-              className="bg-gradient-to-t from-sun-gold/20 to-sun-gold rounded-full shrink-0 w-[3.5px]"
-            />
-          ))}
-        </div>
-      </div>
-
       <div className="relative z-20">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           CSS Borders
