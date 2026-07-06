@@ -895,13 +895,13 @@ function MorphingBlobCard() {
       onMouseLeave={handleMouseLeave}
       animate={{ rotateY: tilt.x, rotateX: tilt.y }}
       transition={{ type: "spring", stiffness: 180, damping: 22 }}
-      className="relative w-full h-[544px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group"
+      className="relative w-full h-[544px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group antialiased"
       style={{ perspective: 1000, transformStyle: "preserve-3d" }}
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50 pointer-events-none" />
 
       {/* Header */}
-      <div className="relative z-10 w-full flex items-center justify-between" style={{ transform: "translateZ(20px)" }}>
+      <div className="relative z-10 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
           PIPELINE STEPPER
         </span>
@@ -909,7 +909,7 @@ function MorphingBlobCard() {
       </div>
 
       {/* Stepper Interactive Area */}
-      <div className="relative w-full z-10 flex flex-col gap-4 mt-2" style={{ transform: "translateZ(30px)" }}>
+      <div className="relative w-full z-10 flex flex-col gap-4 mt-2">
         {/* Step Indicator Header */}
         <div className="relative w-full flex items-center justify-between px-3">
           {/* Progress bar line in background */}
@@ -1203,7 +1203,7 @@ function MorphingBlobCard() {
         </div>
       </div>
 
-      <div className="relative z-10" style={{ transform: "translateZ(20px)" }}>
+      <div className="relative z-10">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Multi-step flow
         </span>
