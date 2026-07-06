@@ -474,22 +474,28 @@ function BorderBeamCard() {
         </div>
         
         {/* Animated Bar graph lines */}
-        <div className="flex items-end justify-between w-full h-8 px-1 gap-1">
+        <div className="flex items-end justify-center w-full h-8 px-2 gap-[3px]">
           {[2.5, 1.2, 3.8, 2.0, 1.0, 3.2, 4.5, 1.8, 2.8, 3.5, 1.4, 2.9, 4.0, 2.2, 1.5].map((val, idx) => (
             <motion.div 
               key={idx}
               animate={{ 
                 height: hovered 
-                  ? [`${val * 6}px`, `${Math.max(3, val * 3.5)}px`, `${val * 6}px`]
-                  : `${val * 4}px`
+                  ? [`${val * 6}px`, `${Math.max(4, val * 2.5)}px`, `${val * 6}px`]
+                  : "6px"
               }}
-              transition={{ 
-                repeat: Infinity, 
-                duration: 1.0 + (idx % 3) * 0.25, 
-                ease: "easeInOut" 
-              }}
-              className="flex-grow bg-gradient-to-t from-sun-gold/20 to-sun-gold rounded-full"
-              style={{ width: "3px" }}
+              transition={
+                hovered 
+                  ? { 
+                      repeat: Infinity, 
+                      duration: 0.6 + (idx % 4) * 0.15, 
+                      ease: "easeInOut" 
+                    }
+                  : { 
+                      duration: 0.35,
+                      ease: "easeOut"
+                    }
+              }
+              className="bg-gradient-to-t from-sun-gold/20 to-sun-gold rounded-full shrink-0 w-[3.5px]"
             />
           ))}
         </div>
