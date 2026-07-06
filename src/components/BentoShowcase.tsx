@@ -47,7 +47,7 @@ function ImageRevealCard() {
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Widget Preview
         </span>
-        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
           Image reveal
         </h3>
       </div>
@@ -106,7 +106,7 @@ function HoverMembersCard() {
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Interactive Team
         </span>
-        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
           Hover members
         </h3>
       </div>
@@ -176,7 +176,7 @@ function DevouringDetailsCard() {
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Devouring Inputs
         </span>
-        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
           Devouring details sign in
         </h3>
       </div>
@@ -263,7 +263,7 @@ function DynamicIslandCard() {
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Hardware Interface
         </span>
-        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
           Dynamic island
         </h3>
       </div>
@@ -437,7 +437,7 @@ function ThingsDragAndScrollCard() {
                   <span className="text-[9px] font-mono text-[#E8A969] tracking-wider uppercase block mb-0.5">
                     component template
                   </span>
-                  <h4 className="font-serif text-white text-base font-normal tracking-wide leading-none">
+                  <h4 className="font-sans text-white text-sm font-medium tracking-wide leading-none">
                     {card.title}
                   </h4>
                 </div>
@@ -451,7 +451,7 @@ function ThingsDragAndScrollCard() {
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Interactive layout
         </span>
-        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
           Toolkit stack swiper
         </h3>
       </div>
@@ -495,7 +495,7 @@ function DitherCard() {
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           WebGL Canvas
         </span>
-        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
           Dither waves
         </h3>
       </div>
@@ -553,7 +553,7 @@ function TextRollCard() {
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Letter Shifter
         </span>
-        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
           Text roll hover
         </h3>
       </div>
@@ -629,7 +629,7 @@ function BorderBeamCard() {
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           CSS Borders
         </span>
-        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
           Border beam
         </h3>
       </div>
@@ -715,7 +715,7 @@ function InteractiveNavbarCard() {
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Interactive navigation
         </span>
-        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
           Mac-style magnifying dock
         </h3>
       </div>
@@ -805,7 +805,7 @@ function InfiniteMarqueeCard() {
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Seamless loops
         </span>
-        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
           Infinite marquee
         </h3>
       </div>
