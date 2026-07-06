@@ -1078,20 +1078,20 @@ function MorphingBlobCard() {
             <AnimatePresence>
               {activeStep > 0 && (
                 <motion.button 
+                  layout
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.08)" }} 
                   whileTap={{ scale: 0.95 }}
                   onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                  className="px-2.5 py-1 rounded bg-white/5 border border-white/5 text-[9px] font-mono text-white/60 transition-colors cursor-pointer"
+                  className="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/5 text-[9px] font-mono text-white/60 transition-colors cursor-pointer"
                 >
                   Back
                 </motion.button>
               )}
             </AnimatePresence>
             <motion.button 
-              whileHover={{ scale: 1.05, backgroundColor: activeStep === 2 ? "#eab308" : "#d99855" }} 
+              layout
               whileTap={{ scale: 0.95 }}
               onClick={(e) => {
                 e.stopPropagation();
@@ -1101,7 +1101,7 @@ function MorphingBlobCard() {
                   handleNext();
                 }
               }}
-              className="px-2.5 py-1 rounded bg-[#E8A969] text-[9px] font-mono text-black font-semibold transition-colors cursor-pointer"
+              className="px-2.5 py-1 rounded bg-[#E8A969] hover:bg-[#d99855] text-[9px] font-mono text-black font-semibold transition-colors cursor-pointer"
             >
               {activeStep === 2 ? "Reset" : "Next"}
             </motion.button>
