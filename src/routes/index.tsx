@@ -4,6 +4,7 @@ import DynamicIsland from "@/components/DynamicIsland";
 import Hero from "@/components/Hero";
 import ShowcaseTerminal from "@/components/ShowcaseTerminal";
 import SplitText from "@/components/ui/SplitText";
+import BentoShowcase from "@/components/BentoShowcase";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -79,6 +80,9 @@ function Index() {
           <ShowcaseTerminal />
         </motion.div>
       </motion.section>
+
+      {/* ── SECTION 3: BENTO COMPONENTS GRID SHOWCASE ── */}
+      <BentoShowcase />
     </main>
   );
 }
