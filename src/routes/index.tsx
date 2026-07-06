@@ -74,6 +74,7 @@ function Index() {
 
         {/* Live Interactive 3-Panel Terminal */}
         <motion.div 
+          id="playground"
           variants={itemVariants}
           className="w-full max-w-[1500px]"
         >
