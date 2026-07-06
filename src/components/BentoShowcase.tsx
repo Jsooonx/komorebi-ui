@@ -337,7 +337,15 @@ function ThingsDragAndScrollCard() {
 
         {/* SVG Bezier connectors & flow particles */}
         <svg
-          className="absolute inset-0 w-full h-full pointer-events-none overflow-visible z-10"
+          className="absolute pointer-events-none overflow-visible z-10"
+          style={{ 
+            width: 340, 
+            height: 340, 
+            left: "50%", 
+            top: "50%", 
+            marginLeft: -170, 
+            marginTop: -170 
+          }}
           viewBox="-170 -170 340 340"
         >
           {/* Node 0 Path */}
@@ -367,10 +375,10 @@ function ThingsDragAndScrollCard() {
 
         {/* Center core engine */}
         <motion.div
-          style={{ transform: "translateZ(40px)" }}
+          style={{ z: 40, position: "absolute", left: "50%", top: "50%" }}
           animate={{ scale: [1, 1.06, 1] }}
           transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-          className="w-14 h-14 rounded-full bg-gradient-to-br from-[#E8A969] to-[#c78848] flex items-center justify-center shadow-2xl shadow-[#E8A969]/20 relative z-20 border border-white/10"
+          className="w-14 h-14 -ml-7 -mt-7 rounded-full bg-gradient-to-br from-[#E8A969] to-[#c78848] flex items-center justify-center shadow-2xl shadow-[#E8A969]/20 z-20 border border-white/10"
         >
           <Sparkles className="w-5 h-5 text-black" />
         </motion.div>
@@ -381,7 +389,7 @@ function ThingsDragAndScrollCard() {
           defaultY={-80}
           icon={<Terminal className="w-4 h-4 text-[#E8A969]" />}
           onPosChange={(pos) => setN0(pos)}
-          translateZ="25px"
+          z={25}
         />
 
         <InteractiveNode 
@@ -389,7 +397,7 @@ function ThingsDragAndScrollCard() {
           defaultY={-80}
           icon={<Cpu className="w-4 h-4 text-[#E8A969]" />}
           onPosChange={(pos) => setN1(pos)}
-          translateZ="25px"
+          z={25}
         />
 
         <InteractiveNode 
@@ -397,7 +405,7 @@ function ThingsDragAndScrollCard() {
           defaultY={80}
           icon={<Zap className="w-4 h-4 text-[#E8A969]" />}
           onPosChange={(pos) => setN2(pos)}
-          translateZ="25px"
+          z={25}
         />
 
         <InteractiveNode 
@@ -405,7 +413,7 @@ function ThingsDragAndScrollCard() {
           defaultY={80}
           icon={<Shield className="w-4 h-4 text-[#E8A969]" />}
           onPosChange={(pos) => setN3(pos)}
-          translateZ="25px"
+          z={25}
         />
       </motion.div>
 
@@ -426,13 +434,13 @@ function InteractiveNode({
   defaultY, 
   icon, 
   onPosChange,
-  translateZ
+  z
 }: { 
   defaultX: number;
   defaultY: number;
   icon: React.ReactNode;
   onPosChange: (pos: { x: number; y: number }) => void;
-  translateZ: string;
+  z: number;
 }) {
   const nodeX = useMotionValue(defaultX);
   const nodeY = useMotionValue(defaultY);
@@ -451,7 +459,7 @@ function InteractiveNode({
       drag
       dragConstraints={{ left: -145, right: 145, top: -145, bottom: 145 }}
       dragElastic={0.15}
-      style={{ x: nodeX, y: nodeY, transform: `translateZ(${translateZ})`, position: "absolute" }}
+      style={{ x: nodeX, y: nodeY, z, position: "absolute", left: "50%", top: "50%" }}
       whileDrag={{ scale: 1.15, zIndex: 100 }}
       className="w-10 h-10 -ml-5 -mt-5 rounded-full border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md flex items-center justify-center cursor-grab active:cursor-grabbing hover:border-[#E8A969]/30 transition-colors shadow-lg z-25"
     >
