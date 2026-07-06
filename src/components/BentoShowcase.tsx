@@ -582,7 +582,14 @@ import { useMotionValue, useSpring, useTransform } from "framer-motion";
 
 function InteractiveNavbarCard() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [tooltipText, setTooltipText] = useState("");
   const mouseX = useMotionValue(Infinity);
+
+  useEffect(() => {
+    if (hoveredIdx !== null) {
+      setTooltipText(DOCK_ITEMS[hoveredIdx].label);
+    }
+  }, [hoveredIdx]);
 
   return (
     <div 
@@ -602,20 +609,15 @@ function InteractiveNavbarCard() {
       <div className="relative z-10 w-full flex flex-col items-center justify-center h-28 gap-4">
         {/* Tooltip display */}
         <div className="h-6 flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            {hoveredIdx !== null && (
-              <motion.div
-                key={hoveredIdx}
-                initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="px-2.5 py-0.5 rounded bg-black/80 border border-white/10 text-[9px] font-mono font-semibold text-[#E8A969] tracking-wider uppercase shadow-xl"
-              >
-                {DOCK_ITEMS[hoveredIdx].label}
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div
+            className={`px-2.5 py-0.5 rounded bg-black/80 border border-white/10 text-[9px] font-mono font-semibold text-[#E8A969] tracking-wider uppercase shadow-xl transition-all duration-200 ease-out ${
+              hoveredIdx !== null 
+                ? "opacity-100 translate-y-0 scale-100" 
+                : "opacity-0 translate-y-1.5 scale-90"
+            }`}
+          >
+            {tooltipText}
+          </div>
         </div>
 
         {/* Dock Bar */}
