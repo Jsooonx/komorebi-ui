@@ -912,15 +912,18 @@ function MorphingBlobCard() {
       <div className="relative w-full z-10 flex flex-col gap-4 mt-2">
         {/* Step Indicator Header */}
         <div className="relative w-full flex items-center justify-between px-3">
-          {/* Progress bar line in background */}
-          <div className="absolute top-[13px] left-10 right-10 h-[2px] bg-white/5 z-0" />
-          <motion.div 
-            className="absolute top-[13px] left-10 h-[2px] bg-[#E8A969] z-0" 
-            initial={{ width: "0%" }}
-            animate={{ width: activeStep === 0 ? "0%" : activeStep === 1 ? "50%" : "100%" }}
-            transition={{ type: "spring", stiffness: 120, damping: 14 }}
-            style={{ right: 40 }}
-          />
+          {/* Progress bar container (aligned exactly to circle centers) */}
+          <div className="absolute top-[13px] left-[26px] right-[26px] h-[2px] z-0">
+            {/* Background line */}
+            <div className="w-full h-full bg-white/5" />
+            {/* Active animated line */}
+            <motion.div 
+              className="absolute top-0 left-0 h-full bg-[#E8A969]" 
+              initial={{ width: "0%" }}
+              animate={{ width: activeStep === 0 ? "0%" : activeStep === 1 ? "50%" : "100%" }}
+              transition={{ type: "spring", stiffness: 120, damping: 14 }}
+            />
+          </div>
 
           {steps.map((step, idx) => {
             const isActive = idx === activeStep;
