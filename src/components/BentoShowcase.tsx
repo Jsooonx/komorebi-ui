@@ -847,16 +847,33 @@ function AudioEqualizerCard() {
   );
 }
 
-// ── SUB-COMPONENT 13: INTERACTIVE STEPPER CARD ──
+// ── SUB-COMPONENT 13: INTERACTIVE STEPPER CARD (Tall Box, row-span-2) ──
 function MorphingBlobCard() {
   const [activeStep, setActiveStep] = useState(0);
-  const [params, setParams] = useState({ ssl: true, minify: false });
+  const [params, setParams] = useState({ ssl: true, minify: false, cdn: true });
+  const [projName, setProjName] = useState("my-awesome-app");
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [launchStatus, setLaunchStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const steps = [
     { title: "Configuration", desc: "Setting up parameters" },
-    { title: "Verification", desc: "Running integrity checks" },
-    { title: "Deployment", desc: "Pipeline active & ready" }
+    { title: "Project Setup", desc: "Set project identifier" },
+    { title: "Deployment", desc: "Pipeline verification" }
   ];
+
+  // 3D Tilt handler
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: x * 8, y: -y * 8 });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
 
   const handleNext = () => {
     if (activeStep < 2) setActiveStep((prev) => prev + 1);
@@ -866,30 +883,43 @@ function MorphingBlobCard() {
     if (activeStep > 0) setActiveStep((prev) => prev - 1);
   };
 
+  const handleReset = () => {
+    setActiveStep(0);
+    setLaunchStatus('idle');
+  };
+
   return (
-    <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+    <motion.div 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{ rotateY: tilt.x, rotateX: tilt.y }}
+      transition={{ type: "spring", stiffness: 180, damping: 22 }}
+      className="relative w-full h-[544px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group"
+      style={{ perspective: 1000, transformStyle: "preserve-3d" }}
     >
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50 pointer-events-none" />
+
       {/* Header */}
-      <div className="relative z-10 w-full flex items-center justify-between">
+      <div className="relative z-10 w-full flex items-center justify-between" style={{ transform: "translateZ(20px)" }}>
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
-          STEPPER COMPONENT
+          PIPELINE STEPPER
         </span>
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
       {/* Stepper Interactive Area */}
-      <div className="relative w-full h-32 flex flex-col justify-between bg-black/45 border border-white/5 rounded-xl p-4 overflow-hidden">
+      <div className="relative w-full z-10 flex flex-col gap-4 mt-2" style={{ transform: "translateZ(30px)" }}>
         {/* Step Indicator Header */}
-        <div className="relative w-full flex items-center justify-between px-2">
+        <div className="relative w-full flex items-center justify-between px-3">
           {/* Progress bar line in background */}
-          <div className="absolute top-[13px] left-8 right-8 h-[2px] bg-white/5 z-0" />
+          <div className="absolute top-[13px] left-10 right-10 h-[2px] bg-white/5 z-0" />
           <motion.div 
-            className="absolute top-[13px] left-8 h-[2px] bg-[#E8A969] z-0" 
+            className="absolute top-[13px] left-10 h-[2px] bg-[#E8A969] z-0" 
             initial={{ width: "0%" }}
             animate={{ width: activeStep === 0 ? "0%" : activeStep === 1 ? "50%" : "100%" }}
             transition={{ type: "spring", stiffness: 120, damping: 14 }}
-            style={{ right: 32 }}
+            style={{ right: 40 }}
           />
 
           {steps.map((step, idx) => {
@@ -904,7 +934,7 @@ function MorphingBlobCard() {
                 <motion.div 
                   className={`w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-mono border font-semibold transition-colors duration-300 ${
                     isActive 
-                      ? "bg-[#E8A969] text-black border-[#E8A969] shadow-lg shadow-[#E8A969]/20" 
+                      ? "bg-[#E8A969] text-black border-[#E8A969]" 
                       : isCompleted
                         ? "bg-black text-[#BECB6D] border-[#BECB6D]/55"
                         : "bg-[#161616] text-white/30 border-white/5"
@@ -936,82 +966,186 @@ function MorphingBlobCard() {
           })}
         </div>
 
-        {/* Step Interactive Visual Box */}
-        <div className="relative w-full h-8 flex items-center justify-center overflow-hidden border-b border-white/5 pb-1">
-          <AnimatePresence mode="wait">
-            {activeStep === 0 && (
-              <motion.div
-                key="step-0-visual"
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -5 }}
-                className="flex items-center gap-4 text-[10px] text-white/70"
-              >
-                <div className="flex items-center gap-1.5">
-                  <span>SSL</span>
-                  <div 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setParams(p => ({ ...p, ssl: !p.ssl }));
-                    }}
-                    className={`w-7 h-4 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.ssl ? "bg-[#BECB6D] justify-end" : "bg-white/10 justify-start"}`}
-                  >
-                    <motion.div 
-                      layout 
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      className="w-3 h-3 rounded-full bg-black" 
+        {/* Step Interactive Visual Box - HEIGHT EXPANDS DYNAMICALLY! */}
+        <motion.div 
+          animate={{ height: activeStep === 0 ? 160 : activeStep === 1 ? 230 : 160 }}
+          transition={{ type: "spring", stiffness: 100, damping: 15 }}
+          className="relative w-full bg-black/45 border border-white/5 rounded-xl p-5 overflow-hidden flex flex-col justify-between"
+        >
+          <div className="absolute inset-0 z-0 bg-gradient-to-tr from-white/[0.01] to-transparent pointer-events-none" />
+          
+          <div className="relative z-10 w-full h-full flex flex-col justify-center">
+            <AnimatePresence mode="wait">
+              {activeStep === 0 && (
+                <motion.div
+                  key="step-0-visual"
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  className="flex flex-col gap-3 w-full"
+                >
+                  <span className="text-[10px] font-mono text-white/40 text-left uppercase tracking-wider block mb-1">
+                    Environment Parameters
+                  </span>
+                  
+                  <div className="flex items-center justify-between text-xs text-white/70">
+                    <span>SSL/TLS Certificate</span>
+                    <div 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setParams(p => ({ ...p, ssl: !p.ssl }));
+                      }}
+                      className={`w-8 h-4.5 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.ssl ? "bg-[#BECB6D] justify-end" : "bg-white/10 justify-start"}`}
+                    >
+                      <motion.div 
+                        layout 
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        className="w-3.5 h-3.5 rounded-full bg-black" 
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs text-white/70">
+                    <span>Code Minification</span>
+                    <div 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setParams(p => ({ ...p, minify: !p.minify }));
+                      }}
+                      className={`w-8 h-4.5 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.minify ? "bg-[#BECB6D] justify-end" : "bg-white/10 justify-start"}`}
+                    >
+                      <motion.div 
+                        layout 
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        className="w-3.5 h-3.5 rounded-full bg-black" 
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs text-white/70">
+                    <span>Global Edge CDN</span>
+                    <div 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setParams(p => ({ ...p, cdn: !p.cdn }));
+                      }}
+                      className={`w-8 h-4.5 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.cdn ? "bg-[#BECB6D] justify-end" : "bg-white/10 justify-start"}`}
+                    >
+                      <motion.div 
+                        layout 
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        className="w-3.5 h-3.5 rounded-full bg-black" 
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {activeStep === 1 && (
+                <motion.div
+                  key="step-1-visual"
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  className="flex flex-col gap-2 w-full"
+                >
+                  <div className="flex flex-col gap-1.5 w-full text-left">
+                    <label className="text-[9px] font-mono text-white/40 uppercase tracking-widest">
+                      Project name identifier
+                    </label>
+                    <input 
+                      type="text"
+                      value={projName}
+                      onChange={(e) => setProjName(e.target.value)}
+                      className="w-full bg-[#161616] border border-white/10 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#E8A969] transition-colors font-mono"
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </div>
-                </div>
 
-                <div className="flex items-center gap-1.5">
-                  <span>Minify</span>
-                  <div 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setParams(p => ({ ...p, minify: !p.minify }));
-                    }}
-                    className={`w-7 h-4 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.minify ? "bg-[#BECB6D] justify-end" : "bg-white/10 justify-start"}`}
-                  >
-                    <motion.div 
-                      layout 
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      className="w-3 h-3 rounded-full bg-black" 
-                    />
+                  {/* Expandable Advanced Options! */}
+                  <div className="w-full flex flex-col gap-1.5 text-left mt-2.5">
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); setShowAdvanced(!showAdvanced); }}
+                      className="flex items-center gap-1 text-[9px] font-mono text-[#E8A969] hover:underline cursor-pointer"
+                    >
+                      <span>{showAdvanced ? "▼" : "▶"} Advanced Options</span>
+                    </button>
+                    <AnimatePresence>
+                      {showAdvanced && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden bg-black/30 border border-white/5 rounded p-2 text-[9px] font-mono text-white/50 flex flex-col gap-1"
+                        >
+                          <div>Hosting Provider: Cloudflare Pages</div>
+                          <div>Deploy Region: Global Edge (Auto)</div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                </div>
-              </motion.div>
-            )}
+                </motion.div>
+              )}
 
-            {activeStep === 1 && (
-              <motion.div
-                key="step-1-visual"
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -5 }}
-                className="flex items-center gap-2.5"
-              >
-                <div className="w-4 h-4 rounded-full border border-t-transparent border-[#E8A969] animate-spin" />
-                <span className="text-[9px] font-mono text-[#E8A969] animate-pulse">
-                  Verifying build payload...
-                </span>
-              </motion.div>
-            )}
+              {activeStep === 2 && (
+                <motion.div
+                  key="step-2-visual"
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  className="flex flex-col gap-3 w-full text-left font-mono"
+                >
+                  <span className="text-[10px] text-white/40 uppercase tracking-wider block">
+                    Configuration Review
+                  </span>
+                  
+                  <div className="text-[10px] text-white/70 flex flex-col gap-1">
+                    <div>Project: <span className="text-white">{projName || "unnamed"}</span></div>
+                    <div>SSL Certificate: <span className="text-[#BECB6D]">{params.ssl ? "Active" : "Disabled"}</span></div>
+                    <div>Minification: <span className={params.minify ? "text-[#BECB6D]" : "text-white/40"}>{params.minify ? "Enabled" : "Disabled"}</span></div>
+                    <div>CDN Cache: <span className="text-[#BECB6D]">{params.cdn ? "Enabled" : "Disabled"}</span></div>
+                  </div>
 
-            {activeStep === 2 && (
-              <motion.div
-                key="step-2-visual"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                className="text-[#BECB6D] text-[10px] font-semibold"
-              >
-                <span>Pipeline live on edge</span>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+                  {/* Launch trigger action */}
+                  <div className="mt-1 w-full">
+                    {launchStatus === 'idle' && (
+                      <motion.button
+                        whileTap={{ scale: 0.95 }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setLaunchStatus('loading');
+                          setTimeout(() => {
+                            setLaunchStatus('success');
+                          }, 1600);
+                        }}
+                        className="w-full py-1.5 rounded bg-[#BECB6D] hover:bg-[#a9b954] text-[10px] text-black font-semibold transition-colors cursor-pointer"
+                      >
+                        Launch Pipeline
+                      </motion.button>
+                    )}
+                    {launchStatus === 'loading' && (
+                      <div className="flex items-center justify-center gap-2 py-1">
+                        <div className="w-3.5 h-3.5 rounded-full border border-t-transparent border-[#E8A969] animate-spin" />
+                        <span className="text-[9px] text-[#E8A969] animate-pulse">Deploying to edge...</span>
+                      </div>
+                    )}
+                    {launchStatus === 'success' && (
+                      <motion.div 
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="flex items-center justify-center gap-1.5 py-1 text-[#BECB6D] text-[10px] font-semibold"
+                      >
+                        <Sparkles className="w-3 h-3 text-[#BECB6D] animate-bounce" />
+                        <span>Deployment Successful!</span>
+                      </motion.div>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
 
         {/* Step Text Footer & Control Buttons */}
         <div className="h-10 w-full flex items-center justify-between text-xs px-1">
@@ -1056,7 +1190,7 @@ function MorphingBlobCard() {
               onClick={(e) => {
                 e.stopPropagation();
                 if (activeStep === 2) {
-                  setActiveStep(0);
+                  handleReset();
                 } else {
                   handleNext();
                 }
@@ -1069,7 +1203,7 @@ function MorphingBlobCard() {
         </div>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10" style={{ transform: "translateZ(20px)" }}>
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Multi-step flow
         </span>
@@ -1077,7 +1211,7 @@ function MorphingBlobCard() {
           Interactive stepper component
         </h3>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -1155,89 +1289,7 @@ function HolographicTerminalCard() {
   );
 }
 
-// ── SUB-COMPONENT 15: GRAVITY BUBBLES CARD ──
-function GravityBubblesCard() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
-  // 3D Tilt handler - bubbles react in opposition to tilt
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
-    setTilt({ x: x * 15, y: y * 15 });
-  };
-
-  const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
-  };
-
-  const bubbles = [
-    { size: 28, x: "25%", y: "45%", delay: 0, color: "from-[#BECB6D]/30 to-[#E8A969]/10", tx: -20, ty: -25 },
-    { size: 18, x: "65%", y: "25%", delay: 0.4, color: "from-[#E8A969]/30 to-[#BECB6D]/10", tx: 25, ty: -15 },
-    { size: 22, x: "45%", y: "65%", delay: 0.2, color: "from-[#BECB6D]/20 to-[#BECB6D]/5", tx: -10, ty: 25 },
-    { size: 14, x: "75%", y: "70%", delay: 0.6, color: "from-[#E8A969]/20 to-[#E8A969]/5", tx: 20, ty: 15 }
-  ];
-
-  return (
-    <div 
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
-    >
-      {/* Header */}
-      <div className="relative z-10 w-full flex items-center justify-between">
-        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
-          GRAVITY DRIFT
-        </span>
-        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
-      </div>
-
-      {/* Physics Chamber */}
-      <div className="relative w-full h-28 bg-black/45 border border-white/5 rounded-xl overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />
-
-        {bubbles.map((bubble, i) => (
-          <motion.div
-            key={i}
-            className={`absolute rounded-full bg-gradient-to-br ${bubble.color} border border-white/10`}
-            style={{
-              width: bubble.size,
-              height: bubble.size,
-              left: bubble.x,
-              top: bubble.y
-            }}
-            animate={{ 
-              x: tilt.x * -1.8 + bubble.tx * 0.2,
-              y: tilt.y * -1.8 + bubble.ty * 0.2,
-              scale: [1, 1.05, 1]
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 80,
-              damping: 14,
-              scale: {
-                repeat: Infinity,
-                duration: 3,
-                delay: bubble.delay
-              }
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="relative z-10">
-        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
-          Tilt physics reaction
-        </span>
-        <h3 className="font-sans text-base font-medium tracking-tight text-white">
-          Floating gravity bubbles
-        </h3>
-      </div>
-    </div>
-  );
-}
 
 // ── MAIN BENTO SHOWCASE COMPONENT ──
 export default function BentoShowcase() {
@@ -1282,7 +1334,6 @@ export default function BentoShowcase() {
         <AudioEqualizerCard />
         <MorphingBlobCard />
         <HolographicTerminalCard />
-        <GravityBubblesCard />
       </div>
     </section>
   );
