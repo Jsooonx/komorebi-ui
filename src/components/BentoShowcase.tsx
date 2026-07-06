@@ -804,10 +804,9 @@ function MagneticCursorFieldCard() {
 
           {/* Center text visual */}
           <div className="w-full flex justify-center items-center h-28 pointer-events-none select-none">
-            <div className="text-4xl font-mono font-bold text-[#E8A969] flex items-center tracking-tight">
-              <span>&gt;</span>
-              <span className="animate-[pulse_1s_infinite] ml-0.5">_</span>
-            </div>
+            <span className="text-3xl font-sans font-bold text-[#E8A969] tracking-[0.2em] uppercase">
+              KOMOREBI
+            </span>
           </div>
 
           {/* Footer */}
