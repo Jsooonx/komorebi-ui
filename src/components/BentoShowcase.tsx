@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Smartphone, Mail, Volume2 } from "lucide-react";
 import Dither from "./ui/dither";
+import SplitText from "./ui/SplitText";
 
 // ── SUB-COMPONENT 1: IMAGE REVEAL CARD ──
 function ImageRevealCard() {
@@ -517,9 +518,19 @@ export default function BentoShowcase() {
     >
       {/* ── HEADER ── */}
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center mb-20 w-full">
-        <h2 className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white mb-6 leading-tight">
-          12+ Creative components
-        </h2>
+        <SplitText
+          text="12+ Creative components"
+          className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white mb-6 leading-tight inline-block"
+          tag="h2"
+          splitType="words"
+          delay={80}
+          duration={0.8}
+          ease="power3.out"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-120px"
+        />
         <p className="text-sm sm:text-base text-white/60 max-w-xl leading-relaxed font-heading">
           No extra packages - just copy the code or install directly with our CLI <code className="text-[#E8A969] bg-white/5 px-1.5 py-0.5 rounded font-mono">npx komorebi-ui init</code>.
         </p>
