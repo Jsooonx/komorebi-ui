@@ -65,7 +65,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative overflow-hidden min-h-screen bg-warm-cream flex flex-col justify-between py-16 px-6 md:px-12 select-none">
+    <section className="relative overflow-hidden min-h-screen bg-warm-cream flex flex-col justify-between py-16 px-6 md:px-12 select-none">
       
       {/* ── AMBIENT WEBGL DARK VEIL BACKGROUND ── */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-60">
