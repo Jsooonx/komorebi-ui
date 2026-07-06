@@ -5,7 +5,6 @@ import Hero from "@/components/Hero";
 import ShowcaseTerminal from "@/components/ShowcaseTerminal";
 import SplitText from "@/components/ui/SplitText";
 import BentoShowcase from "@/components/BentoShowcase";
-import HoverSliderShowcase from "@/components/HoverSliderShowcase";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -84,9 +83,6 @@ function Index() {
 
       {/* ── SECTION 3: BENTO COMPONENTS GRID SHOWCASE ── */}
       <BentoShowcase />
-
-      {/* ── SECTION 4: INTERACTIVE HOVER SLIDER SHOWCASE ── */}
-      <HoverSliderShowcase />
     </main>
   );
 }
