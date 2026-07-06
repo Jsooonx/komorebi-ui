@@ -513,9 +513,26 @@ function BorderBeamCard() {
   );
 }
 
-// ── SUB-COMPONENT 9: KEYCAP MATRIX (Card 9 - New Wide!) ──
-function KeycapMatrixCard() {
-  const keys = ["Q", "W", "E", "R", "T", "Y", "A", "S", "D", "F", "G", "H"];
+// ── SUB-COMPONENT 9: SPRING CONFIGURATOR (Card 9 - Wide) ──
+type SpringPreset = "Stiff" | "Soft" | "Bouncy";
+
+const SPRING_PRESETS: Record<SpringPreset, { stiffness: number; damping: number }> = {
+  Stiff: { stiffness: 350, damping: 25 },
+  Soft: { stiffness: 120, damping: 20 },
+  Bouncy: { stiffness: 200, damping: 10 }
+};
+
+function SpringConfiguratorCard() {
+  const [activePreset, setActivePreset] = useState<SpringPreset>("Bouncy");
+  const [trigger, setTrigger] = useState(0);
+
+  const handleSelect = (preset: SpringPreset) => {
+    setActivePreset(preset);
+    setTrigger(prev => prev + 1);
+  };
+
+  const currentPhysics = SPRING_PRESETS[activePreset];
+
   return (
     <div 
       className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:col-span-2 md:col-span-2 group"
@@ -525,36 +542,77 @@ function KeycapMatrixCard() {
       {/* Header */}
       <div className="relative z-10 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
-          KEY MATRIX
+          SPRING PHYSICS PREVIEW
         </span>
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
-      {/* Keycaps Grid */}
-      <div className="relative z-10 flex flex-wrap gap-2.5 justify-center items-center h-24 max-w-lg mx-auto">
-        {keys.map((key, index) => (
+      {/* Main interactive area */}
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 h-28 items-center">
+        {/* Left Side: Controls */}
+        <div className="flex flex-col gap-2.5">
+          <div className="flex gap-2">
+            {(Object.keys(SPRING_PRESETS) as SpringPreset[]).map((preset) => {
+              const isActive = activePreset === preset;
+              return (
+                <button
+                  key={preset}
+                  onClick={() => handleSelect(preset)}
+                  className={`text-[9px] font-mono font-semibold uppercase tracking-wider px-2 py-0.5 rounded border transition-all ${
+                    isActive 
+                      ? "border-[#E8A969] text-[#E8A969] bg-[#E8A969]/5"
+                      : "border-white/10 text-white/50 bg-white/5 hover:text-white/80 hover:border-white/20"
+                  }`}
+                >
+                  {preset}
+                </button>
+              );
+            })}
+          </div>
+          
+          {/* Reactive code snippet */}
+          <div className="bg-black/45 border border-white/5 rounded-lg p-2 font-mono text-[9px] leading-relaxed text-white/60">
+            <span className="text-sun-gold/90">transition</span>={`{{`}
+            <div className="pl-3">
+              type: <span className="text-green-400">"spring"</span>,
+              <br />
+              stiffness: <span className="text-blue-400">{currentPhysics.stiffness}</span>,
+              <br />
+              damping: <span className="text-blue-400">{currentPhysics.damping}</span>
+            </div>
+            {`}}`}
+          </div>
+        </div>
+
+        {/* Right Side: Interactive Preview */}
+        <div className="flex items-center justify-center h-full border border-white/5 rounded-xl bg-black/25 relative overflow-hidden group/preview">
+          <span className="absolute top-1.5 text-[8px] font-mono text-white/20 uppercase tracking-widest pointer-events-none">
+            Click box below
+          </span>
           <motion.div
-            key={index}
-            whileHover={{ 
-              scale: 1.15, 
-              borderColor: "rgba(232, 169, 105, 0.4)", 
-              color: "#E8A969",
-              boxShadow: "0 0 12px rgba(232, 169, 105, 0.15)"
+            key={trigger}
+            initial={{ scale: 0.4, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{
+              type: "spring",
+              stiffness: currentPhysics.stiffness,
+              damping: currentPhysics.damping
             }}
-            transition={{ type: "spring", damping: 12, stiffness: 250 }}
-            className="w-10 h-10 sm:w-12 sm:h-12 bg-black/45 border border-white/5 rounded-xl flex items-center justify-center font-mono text-sm text-white/40 transition-colors"
+            className="w-12 h-12 bg-[#161616] border border-[#E8A969]/20 rounded-xl flex items-center justify-center shadow-lg relative group-hover/preview:border-[#E8A969]/50 transition-colors"
           >
-            {key}
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#E8A969]/5 to-transparent rounded-xl" />
+            <span className="font-serif text-base text-[#E8A969] font-semibold">K</span>
           </motion.div>
-        ))}
+        </div>
       </div>
 
       <div className="relative z-10">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
-          Keyboard triggers
+          Physics configurator
         </span>
         <h3 className="font-serif text-lg text-white font-normal leading-tight">
-          Interactive keycaps
+          Spring configurator
         </h3>
       </div>
     </div>
@@ -649,7 +707,7 @@ export default function BentoShowcase() {
         <DitherCard />
         <TextRollCard />
         <BorderBeamCard />
-        <KeycapMatrixCard />
+        <SpringConfiguratorCard />
         <InfiniteMarqueeCard />
       </div>
     </section>
