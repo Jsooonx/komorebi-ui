@@ -733,10 +733,6 @@ function WireframeMeshCard() {
 
       {/* Centered Panel */}
       <div className="relative z-20 w-full max-w-sm mx-auto bg-black/40 border border-white/5 backdrop-blur-xl rounded-xl p-4 flex flex-col items-center text-center gap-1.5 shadow-2xl">
-        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#E8A969]/10 border border-[#E8A969]/20 text-[9px] font-mono text-[#E8A969] tracking-wider uppercase">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#E8A969] animate-pulse" />
-          organic grid physics
-        </div>
         <h4 className="font-serif text-white text-base font-normal tracking-wide">
           Structural wireframe deformation
         </h4>
