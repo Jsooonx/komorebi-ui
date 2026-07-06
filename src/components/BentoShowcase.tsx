@@ -887,6 +887,7 @@ function AudioEqualizerCard() {
 // ── SUB-COMPONENT 13: INTERACTIVE STEPPER CARD ──
 function MorphingBlobCard() {
   const [activeStep, setActiveStep] = useState(0);
+  const [params, setParams] = useState({ ssl: true, minify: false });
 
   const steps = [
     { title: "Configuration", desc: "Setting up parameters" },
@@ -924,7 +925,7 @@ function MorphingBlobCard() {
             className="absolute top-[13px] left-8 h-[2px] bg-[#E8A969] z-0" 
             initial={{ width: "0%" }}
             animate={{ width: activeStep === 0 ? "0%" : activeStep === 1 ? "50%" : "100%" }}
-            transition={{ type: "spring", stiffness: 100, damping: 15 }}
+            transition={{ type: "spring", stiffness: 120, damping: 14 }}
             style={{ right: 32 }}
           />
 
@@ -945,17 +946,115 @@ function MorphingBlobCard() {
                         ? "bg-black text-[#BECB6D] border-[#BECB6D]/55"
                         : "bg-[#161616] text-white/30 border-white/5"
                   }`}
-                  animate={{ scale: isActive ? 1.12 : 1 }}
+                  animate={{ 
+                    scale: isActive ? 1.15 : 1,
+                    boxShadow: isActive ? "0 0 12px rgba(232,169,105,0.4)" : "none"
+                  }}
                 >
-                  {idx + 1}
+                  {isCompleted ? (
+                    <motion.svg 
+                      className="w-3.5 h-3.5" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor" 
+                      strokeWidth="3"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </motion.svg>
+                  ) : (
+                    <span>{idx + 1}</span>
+                  )}
                 </motion.div>
               </button>
             );
           })}
         </div>
 
-        {/* Step Content */}
-        <div className="h-12 w-full flex items-center justify-between text-xs px-1">
+        {/* Step Interactive Visual Box */}
+        <div className="relative w-full h-8 flex items-center justify-center overflow-hidden border-b border-white/5 pb-1">
+          <AnimatePresence mode="wait">
+            {activeStep === 0 && (
+              <motion.div
+                key="step-0-visual"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                className="flex items-center gap-4 text-[10px] text-white/70"
+              >
+                <div className="flex items-center gap-1.5">
+                  <span>SSL</span>
+                  <div 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setParams(p => ({ ...p, ssl: !p.ssl }));
+                    }}
+                    className={`w-7 h-4 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.ssl ? "bg-[#BECB6D]" : "bg-white/10"}`}
+                  >
+                    <motion.div 
+                      layout 
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="w-3 h-3 rounded-full bg-black" 
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <span>Minify</span>
+                  <div 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setParams(p => ({ ...p, minify: !p.minify }));
+                    }}
+                    className={`w-7 h-4 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.minify ? "bg-[#BECB6D]" : "bg-white/10"}`}
+                  >
+                    <motion.div 
+                      layout 
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="w-3 h-3 rounded-full bg-black" 
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {activeStep === 1 && (
+              <motion.div
+                key="step-1-visual"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                className="flex items-center gap-2.5"
+              >
+                <div className="w-4 h-4 rounded-full border border-t-transparent border-[#E8A969] animate-spin" />
+                <span className="text-[9px] font-mono text-[#E8A969] animate-pulse">
+                  Verifying build payload...
+                </span>
+              </motion.div>
+            )}
+
+            {activeStep === 2 && (
+              <motion.div
+                key="step-2-visual"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 200, damping: 10 }}
+                className="flex items-center gap-1.5 text-[#BECB6D] text-[10px] font-semibold"
+              >
+                <div className="w-4 h-4 rounded-full bg-[#BECB6D]/20 border border-[#BECB6D]/30 flex items-center justify-center">
+                  <Sparkles className="w-2.5 h-2.5 text-[#BECB6D] animate-bounce" />
+                </div>
+                <span>Pipeline live on edge</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Step Text Footer & Control Buttons */}
+        <div className="h-10 w-full flex items-center justify-between text-xs px-1">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeStep}
@@ -965,10 +1064,10 @@ function MorphingBlobCard() {
               transition={{ duration: 0.18 }}
               className="flex flex-col text-left"
             >
-              <span className="font-sans font-medium text-white text-xs">
+              <span className="font-sans font-medium text-white text-[11px] leading-tight">
                 {steps[activeStep].title}
               </span>
-              <span className="font-mono text-[9px] text-white/45">
+              <span className="font-mono text-[9px] text-white/45 leading-none mt-0.5">
                 {steps[activeStep].desc}
               </span>
             </motion.div>
@@ -976,20 +1075,36 @@ function MorphingBlobCard() {
 
           {/* Stepper Actions */}
           <div className="flex gap-2">
-            {activeStep > 0 && (
-              <button 
-                onClick={handlePrev}
-                className="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/5 text-[9px] font-mono text-white/60 transition-colors cursor-pointer"
-              >
-                Back
-              </button>
-            )}
-            <button 
-              onClick={activeStep === 2 ? () => setActiveStep(0) : handleNext}
-              className="px-2.5 py-1 rounded bg-[#E8A969] hover:bg-[#d99855] text-[9px] font-mono text-black font-semibold transition-colors cursor-pointer"
+            <AnimatePresence>
+              {activeStep > 0 && (
+                <motion.button 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.08)" }} 
+                  whileTap={{ scale: 0.95 }}
+                  onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                  className="px-2.5 py-1 rounded bg-white/5 border border-white/5 text-[9px] font-mono text-white/60 transition-colors cursor-pointer"
+                >
+                  Back
+                </motion.button>
+              )}
+            </AnimatePresence>
+            <motion.button 
+              whileHover={{ scale: 1.05, backgroundColor: activeStep === 2 ? "#eab308" : "#d99855" }} 
+              whileTap={{ scale: 0.95 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (activeStep === 2) {
+                  setActiveStep(0);
+                } else {
+                  handleNext();
+                }
+              }}
+              className="px-2.5 py-1 rounded bg-[#E8A969] text-[9px] font-mono text-black font-semibold transition-colors cursor-pointer"
             >
               {activeStep === 2 ? "Reset" : "Next"}
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
