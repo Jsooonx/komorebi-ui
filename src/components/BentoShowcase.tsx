@@ -344,10 +344,10 @@ export default function BentoShowcase() {
       {/* ── HEADER ── */}
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center mb-20 w-full">
         <h2 className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white mb-6 leading-tight">
-          105+ Outstanding components
+          12+ Creative components
         </h2>
         <p className="text-sm sm:text-base text-white/60 max-w-xl leading-relaxed font-heading">
-          No extra packages — just one file for each component. Use directly with your fav ShadCN CLI.
+          No extra packages — just copy the code or install directly with our CLI <code className="text-[#E8A969] bg-white/5 px-1.5 py-0.5 rounded font-mono">npx komorebi-ui init</code>.
         </p>
       </div>
 
