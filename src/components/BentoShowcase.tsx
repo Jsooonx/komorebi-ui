@@ -281,9 +281,14 @@ const CARD_DATA = [
     glow: "rgba(190, 203, 109, 0.25)",
     icon: <Sparkles className="w-4 h-4 text-[#E8A969]" />,
     visual: (
-      <div className="relative w-full h-24 flex items-center justify-center pointer-events-none">
-        <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#BECB6D]/40 to-[#E8A969]/40 blur-xl animate-pulse" />
-        <div className="absolute w-12 h-12 rounded-full border border-[#E8A969]/20 animate-spin" style={{ animationDuration: "6s" }} />
+      <div className="relative w-full h-[140px] rounded-lg overflow-hidden border border-white/5 bg-[#121212] pointer-events-none">
+        <img 
+          src="/scenery_aurora.png" 
+          alt="Aurora Scenery" 
+          draggable={false}
+          className="w-full h-full object-cover opacity-85 select-none pointer-events-none" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
       </div>
     )
   },
@@ -295,12 +300,14 @@ const CARD_DATA = [
     glow: "rgba(232, 169, 105, 0.25)",
     icon: <Cpu className="w-4 h-4 text-[#E8A969]" />,
     visual: (
-      <div className="relative w-24 h-24 flex items-center justify-center mx-auto my-auto pointer-events-none">
-        <div className="absolute w-16 h-16 border border-dashed border-[#E8A969]/20 rounded-full animate-[spin_12s_linear_infinite]" />
-        <div className="absolute w-2 h-2 rounded-full bg-[#E8A969] top-3 left-3 animate-ping" />
-        <div className="w-8 h-8 rounded-full bg-[#E8A969]/20 border border-[#E8A969]/30 flex items-center justify-center">
-          <Cpu className="w-4 h-4 text-[#E8A969]/80" />
-        </div>
+      <div className="relative w-full h-[140px] rounded-lg overflow-hidden border border-white/5 bg-[#121212] pointer-events-none">
+        <img 
+          src="/scenery_sunset.png" 
+          alt="Sunset Scenery" 
+          draggable={false}
+          className="w-full h-full object-cover opacity-85 select-none pointer-events-none" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
       </div>
     )
   },
@@ -312,10 +319,14 @@ const CARD_DATA = [
     glow: "rgba(232, 169, 105, 0.2)",
     icon: <Terminal className="w-4 h-4 text-[#E8A969]" />,
     visual: (
-      <div className="flex gap-2.5 bg-black/45 border border-white/5 rounded-xl p-3 mx-auto my-auto pointer-events-none shadow-lg">
-        <div className="w-6 h-6 rounded bg-gradient-to-tr from-[#BECB6D]/20 to-[#E8A969]/20 border border-white/5 animate-pulse" />
-        <div className="w-6 h-6 rounded bg-gradient-to-tr from-[#BECB6D]/20 to-[#E8A969]/20 border border-white/5 animate-bounce" style={{ animationDelay: "0.15s" }} />
-        <div className="w-6 h-6 rounded bg-gradient-to-tr from-[#BECB6D]/20 to-[#E8A969]/20 border border-white/5 animate-pulse" style={{ animationDelay: "0.3s" }} />
+      <div className="relative w-full h-[140px] rounded-lg overflow-hidden border border-white/5 bg-[#121212] pointer-events-none">
+        <img 
+          src="/scenery_mountains.png" 
+          alt="Mountain Scenery" 
+          draggable={false}
+          className="w-full h-full object-cover opacity-85 select-none pointer-events-none" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
       </div>
     )
   }
