@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Smartphone, Mail, Volume2 } from "lucide-react";
+import { Smartphone, Mail, Volume2, Sparkles, Terminal, Cpu, Zap, GitBranch, Shield } from "lucide-react";
 import Dither from "./ui/dither";
 import SplitText from "./ui/SplitText";
 
@@ -271,17 +271,7 @@ function DynamicIslandCard() {
   );
 }
 
-// ── SUB-COMPONENT 5: THINGS DRAG AND SCROLL CARD ──
-const DRAG_ITEMS = [
-  { emoji: "🍔", label: "Burger", color: "from-[#FCD34D] to-[#F59E0B]" },
-  { emoji: "🍎", label: "Apple", color: "from-[#FCA5A5] to-[#EF4444]" },
-  { emoji: "🐟", label: "Fish", color: "from-[#93C5FD] to-[#3B82F6]" },
-  { emoji: "🪐", label: "Planet", color: "from-[#C084FC] to-[#8B5CF6]" },
-  { emoji: "🧥", label: "Coat", color: "from-[#FDBA74] to-[#F97316]" },
-  { emoji: "🐠", label: "Fishy", color: "from-[#6EE7B7] to-[#10B981]" },
-  { emoji: "⛳", label: "Golf", color: "from-[#A7F3D0] to-[#34D399]" }
-];
-
+// ── SUB-COMPONENT 5: THINGS DRAG AND SCROLL CARD (Orbital Gravity Sandbox) ──
 function ThingsDragAndScrollCard() {
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -294,44 +284,109 @@ function ThingsDragAndScrollCard() {
       {/* Header */}
       <div className="relative z-10 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
-          PHYSICS DRAG
+          ORBITAL PHYSICS
         </span>
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
-      {/* Dragging Container Area */}
+      {/* Orbit Sandbox Area */}
       <div 
         ref={containerRef}
-        className="relative z-10 w-full h-[340px] bg-black/45 border border-white/5 rounded-xl p-4 overflow-hidden flex flex-wrap gap-3 justify-center items-center content-center"
+        className="relative z-10 w-full h-[340px] bg-black/45 border border-white/5 rounded-xl overflow-hidden flex items-center justify-center"
       >
-        <span className="absolute top-3 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none">
-          Drag any item inside
+        <span className="absolute top-3 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none z-30">
+          Drag nodes to warp orbits
         </span>
-        
-        {DRAG_ITEMS.map((item, index) => (
-          <motion.div
-            key={index}
-            drag
-            dragConstraints={containerRef}
-            dragElastic={0.15}
-            whileDrag={{ scale: 1.1, zIndex: 100 }}
-            className={`flex items-center gap-1.5 px-3 py-2 bg-gradient-to-br ${item.color} rounded-full cursor-grab active:cursor-grabbing shadow-lg border border-white/10 shrink-0 select-none`}
-          >
-            <span className="text-base">{item.emoji}</span>
-            <span className="text-[10px] font-mono font-bold text-black uppercase tracking-wider">{item.label}</span>
-          </motion.div>
-        ))}
+
+        {/* Concentric Orbit Paths */}
+        <div className="absolute w-32 h-32 border border-dashed border-white/5 rounded-full pointer-events-none" />
+        <div className="absolute w-52 h-52 border border-dashed border-white/5 rounded-full pointer-events-none" />
+
+        {/* Center core */}
+        <motion.div
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          className="w-16 h-16 rounded-full bg-gradient-to-br from-[#E8A969] to-[#c78848] flex items-center justify-center shadow-xl shadow-[#E8A969]/10 relative z-20"
+        >
+          <Sparkles className="w-6 h-6 text-black" />
+        </motion.div>
+
+        {/* Node 1: Terminal */}
+        <OrbitalNode 
+          containerRef={containerRef}
+          defaultX={-65}
+          defaultY={-45}
+          icon={<Terminal className="w-4 h-4 text-[#E8A969]" />}
+        />
+
+        {/* Node 2: CPU */}
+        <OrbitalNode 
+          containerRef={containerRef}
+          defaultX={65}
+          defaultY={-45}
+          icon={<Cpu className="w-4 h-4 text-[#E8A969]" />}
+        />
+
+        {/* Node 3: Zap */}
+        <OrbitalNode 
+          containerRef={containerRef}
+          defaultX={-75}
+          defaultY={55}
+          icon={<Zap className="w-4 h-4 text-[#E8A969]" />}
+        />
+
+        {/* Node 4: GitBranch */}
+        <OrbitalNode 
+          containerRef={containerRef}
+          defaultX={75}
+          defaultY={55}
+          icon={<GitBranch className="w-4 h-4 text-[#E8A969]" />}
+        />
+
+        {/* Node 5: Shield */}
+        <OrbitalNode 
+          containerRef={containerRef}
+          defaultX={0}
+          defaultY={85}
+          icon={<Shield className="w-4 h-4 text-[#E8A969]" />}
+        />
       </div>
 
       <div className="relative z-10">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
-          Interactive Physics
+          Interactive gravity
         </span>
         <h3 className="font-serif text-lg text-white font-normal leading-tight">
-          Things drag and scroll
+          Orbital gravity sandbox
         </h3>
       </div>
     </div>
+  );
+}
+
+function OrbitalNode({ 
+  containerRef, 
+  defaultX, 
+  defaultY, 
+  icon 
+}: { 
+  containerRef: React.RefObject<HTMLDivElement>;
+  defaultX: number;
+  defaultY: number;
+  icon: React.ReactNode;
+}) {
+  return (
+    <motion.div
+      drag
+      dragConstraints={containerRef}
+      dragElastic={0.2}
+      whileDrag={{ scale: 1.15, zIndex: 100 }}
+      animate={{ x: defaultX, y: defaultY }}
+      transition={{ type: "spring", stiffness: 80, damping: 10 }}
+      className="absolute w-11 h-11 rounded-full border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md flex items-center justify-center cursor-grab active:cursor-grabbing hover:border-[#E8A969]/30 transition-colors shadow-lg z-10"
+    >
+      {icon}
+    </motion.div>
   );
 }
 
