@@ -338,7 +338,7 @@ function ThingsDragAndScrollCard() {
     setTilt({ x: 0, y: 0 });
   };
 
-  const handleSwipe = (direction: number) => {
+  const handleSwipe = () => {
     setStack((prev) => {
       const next = [...prev];
       const top = next.shift()!;
@@ -386,13 +386,62 @@ function ThingsDragAndScrollCard() {
             const isTop = index === 0;
 
             return (
-              <SwipeableCard
+              <motion.div
                 key={card.id}
-                card={card}
-                index={index}
-                isTop={isTop}
-                handleSwipe={handleSwipe}
-              />
+                drag={isTop ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.8}
+                onDragEnd={(e, info) => {
+                  if (Math.abs(info.offset.x) > 85) {
+                    handleSwipe();
+                  }
+                }}
+                animate={{
+                  scale: 1 - index * 0.06,
+                  y: index * 16,
+                  z: (3 - index) * 10,
+                  opacity: 1 - index * 0.25
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 24
+                }}
+                style={{
+                  zIndex: 3 - index,
+                  boxShadow: `0 20px 45px -15px ${card.glow}`
+                }}
+                whileDrag={{ scale: 1.05, cursor: "grabbing" }}
+                className="absolute w-full h-full rounded-2xl border border-white/10 bg-black/75 backdrop-blur-md p-5 flex flex-col justify-between select-none cursor-grab active:cursor-grabbing overflow-hidden"
+              >
+                {/* Card Background Glow */}
+                <div className={`absolute inset-0 z-0 bg-gradient-to-tr ${card.color} opacity-40`} />
+
+                {/* Card Top Label */}
+                <div className="relative z-10 w-full flex items-center justify-between">
+                  <span className="text-[8px] font-mono text-white/35 tracking-wider uppercase">
+                    {card.tag}
+                  </span>
+                  <div className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                    {card.icon}
+                  </div>
+                </div>
+
+                {/* Dynamic Graphic Center */}
+                <div className="relative z-10 w-full flex items-center justify-center">
+                  {card.visual}
+                </div>
+
+                {/* Card Footer Text */}
+                <div className="relative z-10">
+                  <span className="text-[9px] font-mono text-[#E8A969] tracking-wider uppercase block mb-0.5">
+                    component template
+                  </span>
+                  <h4 className="font-sans text-white text-sm font-medium tracking-wide leading-none">
+                    {card.title}
+                  </h4>
+                </div>
+              </motion.div>
             );
           })}
         </div>
@@ -407,86 +456,6 @@ function ThingsDragAndScrollCard() {
         </h3>
       </div>
     </div>
-  );
-}
-
-function SwipeableCard({ 
-  card, 
-  index, 
-  isTop, 
-  handleSwipe 
-}: { 
-  card: typeof CARD_DATA[0]; 
-  index: number; 
-  isTop: boolean; 
-  handleSwipe: (dir: number) => void;
-}) {
-  const x = useMotionValue(0);
-  const rotate = useTransform(x, [-200, 200], [-25, 25]);
-
-  return (
-    <motion.div
-      drag={isTop ? "x" : false}
-      dragConstraints={{ left: -400, right: 400 }}
-      style={{
-        x: isTop ? x : 0,
-        rotate: isTop ? rotate : 0,
-        zIndex: 3 - index,
-        boxShadow: `0 20px 45px -15px ${card.glow}`
-      }}
-      onDragEnd={(e, info) => {
-        if (Math.abs(info.offset.x) > 100) {
-          const dir = info.offset.x > 0 ? 1 : -1;
-          handleSwipe(dir);
-          // Reset x coordinate for reuse when going to the bottom
-          setTimeout(() => x.set(0), 100);
-        } else {
-          // Spring snap back
-          animate(x, 0, { type: "spring", stiffness: 350, damping: 22 });
-        }
-      }}
-      animate={{
-        scale: 1 - index * 0.06,
-        y: index * 16,
-        z: (3 - index) * 10,
-        opacity: 1 - index * 0.25
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 24
-      }}
-      whileDrag={{ scale: 1.05, cursor: "grabbing" }}
-      className="absolute w-full h-full rounded-2xl border border-white/10 bg-black/75 backdrop-blur-md p-5 flex flex-col justify-between select-none cursor-grab active:cursor-grabbing overflow-hidden"
-    >
-      {/* Card Background Glow */}
-      <div className={`absolute inset-0 z-0 bg-gradient-to-tr ${card.color} opacity-40`} />
-
-      {/* Card Top Label */}
-      <div className="relative z-10 w-full flex items-center justify-between">
-        <span className="text-[8px] font-mono text-white/35 tracking-wider uppercase">
-          {card.tag}
-        </span>
-        <div className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-          {card.icon}
-        </div>
-      </div>
-
-      {/* Dynamic Graphic Center */}
-      <div className="relative z-10 w-full flex items-center justify-center">
-        {card.visual}
-      </div>
-
-      {/* Card Footer Text */}
-      <div className="relative z-10">
-        <span className="text-[9px] font-mono text-[#E8A969] tracking-wider uppercase block mb-0.5">
-          component template
-        </span>
-        <h4 className="font-sans text-white text-sm font-medium tracking-wide leading-none">
-          {card.title}
-        </h4>
-      </div>
-    </motion.div>
   );
 }
 
