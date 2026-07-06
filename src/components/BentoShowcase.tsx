@@ -3,6 +3,7 @@ import { motion, AnimatePresence, animate } from "framer-motion";
 import { Smartphone, Mail, Volume2, Sparkles, Terminal, Cpu, Zap, GitBranch, Shield, Home, Folder, Settings, User } from "lucide-react";
 import Dither from "./ui/dither";
 import SplitText from "./ui/SplitText";
+import PixelCard from "./ui/PixelCard";
 
 // ── SUB-COMPONENT 1: IMAGE REVEAL CARD ──
 function ImageRevealCard() {
@@ -764,10 +765,9 @@ function InfiniteMarqueeCard() {
   );
 }
 
-// ── SUB-COMPONENT 11: MAGNETIC CURSOR FIELD CARD (Tall Box, row-span-2) ──
+// ── SUB-COMPONENT 11: PIXEL CARD (Tall Box, row-span-2) ──
 function MagneticCursorFieldCard() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   // 3D Tilt handler
@@ -776,152 +776,51 @@ function MagneticCursorFieldCard() {
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     setTilt({ x: x * 10, y: -y * 10 });
-
-    // Track mouse position relative to canvas
-    if (canvasRef.current) {
-      const canvasRect = canvasRef.current.getBoundingClientRect();
-      const mx = e.clientX - canvasRect.left;
-      const my = e.clientY - canvasRect.top;
-      (canvasRef.current as any).mouseX = mx;
-      (canvasRef.current as any).mouseY = my;
-      (canvasRef.current as any).isInside = true;
-    }
   };
 
   const handleMouseLeave = () => {
     setTilt({ x: 0, y: 0 });
-    if (canvasRef.current) {
-      (canvasRef.current as any).isInside = false;
-    }
   };
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationFrameId: number;
-    let width = (canvas.width = canvas.offsetWidth);
-    let height = (canvas.height = canvas.offsetHeight);
-
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
-    };
-    window.addEventListener("resize", handleResize);
-
-    // Grid config
-    const spacing = 22;
-    const dots: { x: number; y: number; ox: number; oy: number }[] = [];
-
-    for (let x = spacing / 2; x < width; x += spacing) {
-      for (let y = spacing / 2; y < height; y += spacing) {
-        dots.push({ x, y, ox: x, oy: y });
-      }
-    }
-
-    const draw = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      const mx = (canvas as any).mouseX || 0;
-      const my = (canvas as any).mouseY || 0;
-      const isInside = (canvas as any).isInside || false;
-
-      dots.forEach((dot) => {
-        let dx = 0;
-        let dy = 0;
-        let dist = 0;
-
-        if (isInside) {
-          dx = mx - dot.ox;
-          dy = my - dot.oy;
-          dist = Math.sqrt(dx * dx + dy * dy);
-        }
-
-        // Warp effect
-        if (isInside && dist < 120) {
-          const force = (120 - dist) / 120;
-          // Pull dots slightly towards cursor
-          dot.x = dot.ox + (dx / dist) * force * 15;
-          dot.y = dot.oy + (dy / dist) * force * 15;
-          
-          // Draw dot
-          ctx.beginPath();
-          ctx.arc(dot.x, dot.y, 1.8 + force * 1.5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(232, 169, 105, ${0.15 + force * 0.7})`;
-          ctx.fill();
-        } else {
-          // Return to original position
-          dot.x += (dot.ox - dot.x) * 0.15;
-          dot.y += (dot.oy - dot.y) * 0.15;
-
-          ctx.beginPath();
-          ctx.arc(dot.x, dot.y, 1.2, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(255, 255, 255, 0.12)";
-          ctx.fill();
-        }
-      });
-
-      // Draw subtle magnetic lines
-      if (isInside) {
-        ctx.beginPath();
-        ctx.arc(mx, my, 40, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(232, 169, 105, 0.08)";
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
-
-      animationFrameId = requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
   return (
-    <div 
+    <motion.div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full h-[544px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group"
-      style={{ perspective: 1000 }}
+      animate={{ rotateY: tilt.x, rotateX: tilt.y }}
+      transition={{ type: "spring", stiffness: 180, damping: 22 }}
+      className="relative w-full h-[544px] rounded-2xl border border-white/5 overflow-hidden lg:row-span-2 group cursor-pointer select-none bg-[#121212]"
+      style={{ perspective: 1000, transformStyle: "preserve-3d" }}
     >
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50" />
+      <PixelCard variant="gold" className="w-full h-full border-none bg-transparent">
+        <div className="absolute inset-0 flex flex-col justify-between p-6 z-10" style={{ transform: "translateZ(30px)" }}>
+          {/* Header */}
+          <div className="w-full flex items-center justify-between">
+            <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+              PIXEL CANVAS
+            </span>
+            <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+          </div>
 
-      {/* Header */}
-      <div className="relative z-10 w-full flex items-center justify-between">
-        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
-          MAGNETIC FIELD
-        </span>
-        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
-      </div>
+          {/* Center visual icon or glow */}
+          <div className="w-full flex justify-center items-center h-28 pointer-events-none">
+            <div className="w-16 h-16 rounded-full bg-black/80 border border-white/10 flex items-center justify-center shadow-lg shadow-[#E8A969]/15">
+              <Terminal className="w-5 h-5 text-[#E8A969] animate-pulse" />
+            </div>
+          </div>
 
-      {/* Interactive Canvas Area */}
-      <motion.div 
-        animate={{ rotateY: tilt.x, rotateX: tilt.y }}
-        transition={{ type: "spring", stiffness: 180, damping: 22 }}
-        style={{ transformStyle: "preserve-3d" }}
-        className="relative z-20 w-full h-[340px] border border-white/5 rounded-xl overflow-hidden bg-black/60 backdrop-blur-sm"
-      >
-        <canvas ref={canvasRef} className="w-full h-full block" />
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.4))]" />
-      </motion.div>
-
-      <div className="relative z-10">
-        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
-          Vector attraction
-        </span>
-        <h3 className="font-sans text-base font-medium tracking-tight text-white">
-          Magnetic cursor field
-        </h3>
-      </div>
-    </div>
+          {/* Footer */}
+          <div>
+            <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+              Interactive pixel grid
+            </span>
+            <h3 className="font-sans text-base font-medium tracking-tight text-white">
+              Shimmer pixel card
+            </h3>
+          </div>
+        </div>
+      </PixelCard>
+    </motion.div>
   );
 }
 
