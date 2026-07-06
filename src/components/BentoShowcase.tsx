@@ -271,119 +271,189 @@ function DynamicIslandCard() {
   );
 }
 
-// ── SUB-COMPONENT 5: THINGS DRAG AND SCROLL CARD (Orbital Gravity Sandbox) ──
+// ── SUB-COMPONENT 5: THINGS DRAG AND SCROLL CARD (3D Tilting Neural Pipeline Sandbox) ──
 function ThingsDragAndScrollCard() {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  // 3D Tilt handler
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
+    setTilt({ x: x * 14, y: -y * 14 }); // Tilt up to 14 degrees
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
+
+  // Node relative positions (relative to center of container 0,0)
+  const [n0, setN0] = useState({ x: -95, y: -80 });
+  const [n1, setN1] = useState({ x: 95, y: -80 });
+  const [n2, setN2] = useState({ x: -95, y: 80 });
+  const [n3, setN3] = useState({ x: 95, y: 80 });
+
+  // Bezier path generators
+  const getPath = (nodePos: { x: number; y: number }) => {
+    // S-curve from center (0,0) to node position
+    return `M 0 0 C ${nodePos.x / 2} 0, ${nodePos.x / 2} ${nodePos.y}, ${nodePos.x} ${nodePos.y}`;
+  };
+
   return (
     <div 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className="relative w-full h-[544px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group"
+      style={{ perspective: 1000 }}
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50" />
 
       {/* Header */}
       <div className="relative z-10 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
-          ORBITAL PHYSICS
+          NEURAL PIPELINE
         </span>
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
-      {/* Orbit Sandbox Area */}
-      <div 
-        ref={containerRef}
-        className="relative z-10 w-full h-[340px] bg-black/45 border border-white/5 rounded-xl overflow-hidden flex items-center justify-center"
+      {/* 3D Tilt Sandbox */}
+      <motion.div
+        animate={{ rotateY: tilt.x, rotateX: tilt.y }}
+        transition={{ type: "spring", stiffness: 180, damping: 22 }}
+        style={{ transformStyle: "preserve-3d" }}
+        className="relative z-20 w-full h-[340px] bg-black/45 border border-white/5 rounded-xl overflow-hidden flex items-center justify-center"
       >
-        <span className="absolute top-3 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none z-30">
-          Drag nodes to warp orbits
+        {/* Subtle grid pattern background */}
+        <div className="absolute inset-0 opacity-5 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:20px_20px]" />
+
+        <span 
+          style={{ transform: "translateZ(30px)" }}
+          className="absolute top-3 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none z-30"
+        >
+          Drag nodes to warp pipeline
         </span>
 
-        {/* Concentric Orbit Paths */}
-        <div className="absolute w-32 h-32 border border-dashed border-white/5 rounded-full pointer-events-none" />
-        <div className="absolute w-52 h-52 border border-dashed border-white/5 rounded-full pointer-events-none" />
-
-        {/* Center core */}
-        <motion.div
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-          className="w-16 h-16 rounded-full bg-gradient-to-br from-[#E8A969] to-[#c78848] flex items-center justify-center shadow-xl shadow-[#E8A969]/10 relative z-20"
+        {/* SVG Bezier connectors & flow particles */}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none overflow-visible z-10"
+          viewBox="-170 -170 340 340"
         >
-          <Sparkles className="w-6 h-6 text-black" />
+          {/* Node 0 Path */}
+          <path id="path-0" d={getPath(n0)} stroke="rgba(232, 169, 105, 0.15)" strokeWidth="1.5" fill="none" />
+          <circle r="3" fill="#E8A969" style={{ filter: "drop-shadow(0 0 4px #E8A969)" }}>
+            <animateMotion dur="2.4s" repeatCount="indefinite" path={getPath(n0)} />
+          </circle>
+
+          {/* Node 1 Path */}
+          <path id="path-1" d={getPath(n1)} stroke="rgba(232, 169, 105, 0.15)" strokeWidth="1.5" fill="none" />
+          <circle r="3" fill="#E8A969" style={{ filter: "drop-shadow(0 0 4px #E8A969)" }}>
+            <animateMotion dur="2s" repeatCount="indefinite" path={getPath(n1)} />
+          </circle>
+
+          {/* Node 2 Path */}
+          <path id="path-2" d={getPath(n2)} stroke="rgba(232, 169, 105, 0.15)" strokeWidth="1.5" fill="none" />
+          <circle r="3" fill="#E8A969" style={{ filter: "drop-shadow(0 0 4px #E8A969)" }}>
+            <animateMotion dur="2.8s" repeatCount="indefinite" path={getPath(n2)} />
+          </circle>
+
+          {/* Node 3 Path */}
+          <path id="path-3" d={getPath(n3)} stroke="rgba(232, 169, 105, 0.15)" strokeWidth="1.5" fill="none" />
+          <circle r="3" fill="#E8A969" style={{ filter: "drop-shadow(0 0 4px #E8A969)" }}>
+            <animateMotion dur="1.8s" repeatCount="indefinite" path={getPath(n3)} />
+          </circle>
+        </svg>
+
+        {/* Center core engine */}
+        <motion.div
+          style={{ transform: "translateZ(40px)" }}
+          animate={{ scale: [1, 1.06, 1] }}
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          className="w-14 h-14 rounded-full bg-gradient-to-br from-[#E8A969] to-[#c78848] flex items-center justify-center shadow-2xl shadow-[#E8A969]/20 relative z-20 border border-white/10"
+        >
+          <Sparkles className="w-5 h-5 text-black" />
         </motion.div>
 
-        {/* Node 1: Terminal */}
-        <OrbitalNode 
-          containerRef={containerRef}
-          defaultX={-65}
-          defaultY={-45}
+        {/* Draggable Branch Nodes positioned absolutely relative to center */}
+        <InteractiveNode 
+          defaultX={-95}
+          defaultY={-80}
           icon={<Terminal className="w-4 h-4 text-[#E8A969]" />}
+          onPosChange={(pos) => setN0(pos)}
+          translateZ="25px"
         />
 
-        {/* Node 2: CPU */}
-        <OrbitalNode 
-          containerRef={containerRef}
-          defaultX={65}
-          defaultY={-45}
+        <InteractiveNode 
+          defaultX={95}
+          defaultY={-80}
           icon={<Cpu className="w-4 h-4 text-[#E8A969]" />}
+          onPosChange={(pos) => setN1(pos)}
+          translateZ="25px"
         />
 
-        {/* Node 3: Zap */}
-        <OrbitalNode 
-          containerRef={containerRef}
-          defaultX={-75}
-          defaultY={55}
+        <InteractiveNode 
+          defaultX={-95}
+          defaultY={80}
           icon={<Zap className="w-4 h-4 text-[#E8A969]" />}
+          onPosChange={(pos) => setN2(pos)}
+          translateZ="25px"
         />
 
-        {/* Node 4: GitBranch */}
-        <OrbitalNode 
-          containerRef={containerRef}
-          defaultX={75}
-          defaultY={55}
-          icon={<GitBranch className="w-4 h-4 text-[#E8A969]" />}
-        />
-
-        {/* Node 5: Shield */}
-        <OrbitalNode 
-          containerRef={containerRef}
-          defaultX={0}
-          defaultY={85}
+        <InteractiveNode 
+          defaultX={95}
+          defaultY={80}
           icon={<Shield className="w-4 h-4 text-[#E8A969]" />}
+          onPosChange={(pos) => setN3(pos)}
+          translateZ="25px"
         />
-      </div>
+      </motion.div>
 
       <div className="relative z-10">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
-          Interactive gravity
+          Data flow pipeline
         </span>
         <h3 className="font-serif text-lg text-white font-normal leading-tight">
-          Orbital gravity sandbox
+          Neural network sandbox
         </h3>
       </div>
     </div>
   );
 }
 
-function OrbitalNode({ 
-  containerRef, 
+function InteractiveNode({ 
   defaultX, 
   defaultY, 
-  icon 
+  icon, 
+  onPosChange,
+  translateZ
 }: { 
-  containerRef: React.RefObject<HTMLDivElement>;
   defaultX: number;
   defaultY: number;
   icon: React.ReactNode;
+  onPosChange: (pos: { x: number; y: number }) => void;
+  translateZ: string;
 }) {
+  const nodeX = useMotionValue(defaultX);
+  const nodeY = useMotionValue(defaultY);
+
+  useEffect(() => {
+    const unsubX = nodeX.on("change", (val) => onPosChange({ x: val, y: nodeY.get() }));
+    const unsubY = nodeY.on("change", (val) => onPosChange({ x: nodeX.get(), y: val }));
+    return () => {
+      unsubX();
+      unsubY();
+    };
+  }, [nodeX, nodeY, onPosChange]);
+
   return (
     <motion.div
       drag
-      dragConstraints={containerRef}
-      dragElastic={0.2}
+      dragConstraints={{ left: -145, right: 145, top: -145, bottom: 145 }}
+      dragElastic={0.15}
+      style={{ x: nodeX, y: nodeY, transform: `translateZ(${translateZ})`, position: "absolute" }}
       whileDrag={{ scale: 1.15, zIndex: 100 }}
-      animate={{ x: defaultX, y: defaultY }}
-      transition={{ type: "spring", stiffness: 80, damping: 10 }}
-      className="absolute w-11 h-11 rounded-full border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md flex items-center justify-center cursor-grab active:cursor-grabbing hover:border-[#E8A969]/30 transition-colors shadow-lg z-10"
+      className="w-10 h-10 -ml-5 -mt-5 rounded-full border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md flex items-center justify-center cursor-grab active:cursor-grabbing hover:border-[#E8A969]/30 transition-colors shadow-lg z-25"
     >
       {icon}
     </motion.div>
