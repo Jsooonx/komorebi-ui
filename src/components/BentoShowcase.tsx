@@ -271,10 +271,60 @@ function DynamicIslandCard() {
   );
 }
 
-// ── SUB-COMPONENT 5: THINGS DRAG AND SCROLL CARD (3D Tilting Neural Pipeline Sandbox) ──
+// ── SUB-COMPONENT 5: THINGS DRAG AND SCROLL CARD (Draggable 3D Card Stack Swiper) ──
+const CARD_DATA = [
+  {
+    id: 0,
+    tag: "WEBGL & SHADERS",
+    title: "Fluid Aurora",
+    color: "from-[#BECB6D]/20 via-[#E8A969]/10 to-[#BECB6D]/5",
+    glow: "rgba(190, 203, 109, 0.25)",
+    icon: <Sparkles className="w-4 h-4 text-[#E8A969]" />,
+    visual: (
+      <div className="relative w-full h-24 flex items-center justify-center">
+        <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#BECB6D]/40 to-[#E8A969]/40 blur-xl animate-pulse" />
+        <div className="absolute w-12 h-12 rounded-full border border-[#E8A969]/20 animate-spin" style={{ animationDuration: "6s" }} />
+      </div>
+    )
+  },
+  {
+    id: 1,
+    tag: "CONTINUOUS MECHANICS",
+    title: "Newtonian Orbit",
+    color: "from-[#E8A969]/20 via-[#BECB6D]/10 to-[#E8A969]/5",
+    glow: "rgba(232, 169, 105, 0.25)",
+    icon: <Cpu className="w-4 h-4 text-[#E8A969]" />,
+    visual: (
+      <div className="relative w-24 h-24 flex items-center justify-center mx-auto my-auto pointer-events-none">
+        <div className="absolute w-16 h-16 border border-dashed border-[#E8A969]/20 rounded-full animate-[spin_12s_linear_infinite]" />
+        <div className="absolute w-2 h-2 rounded-full bg-[#E8A969] top-3 left-3 animate-ping" />
+        <div className="w-8 h-8 rounded-full bg-[#E8A969]/20 border border-[#E8A969]/30 flex items-center justify-center">
+          <Cpu className="w-4 h-4 text-[#E8A969]/80" />
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 2,
+    tag: "3D PARALLAX DEPTH",
+    title: "Holographic Dock",
+    color: "from-[#BECB6D]/15 via-[#E8A969]/15 to-[#112115]/5",
+    glow: "rgba(232, 169, 105, 0.2)",
+    icon: <Terminal className="w-4 h-4 text-[#E8A969]" />,
+    visual: (
+      <div className="flex gap-2.5 bg-black/45 border border-white/5 rounded-xl p-3 mx-auto my-auto pointer-events-none shadow-lg">
+        <div className="w-6 h-6 rounded bg-gradient-to-tr from-[#BECB6D]/20 to-[#E8A969]/20 border border-white/5 animate-pulse" />
+        <div className="w-6 h-6 rounded bg-gradient-to-tr from-[#BECB6D]/20 to-[#E8A969]/20 border border-white/5 animate-bounce" style={{ animationDelay: "0.15s" }} />
+        <div className="w-6 h-6 rounded bg-gradient-to-tr from-[#BECB6D]/20 to-[#E8A969]/20 border border-white/5 animate-pulse" style={{ animationDelay: "0.3s" }} />
+      </div>
+    )
+  }
+];
+
 function ThingsDragAndScrollCard() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [stack, setStack] = useState([0, 1, 2]);
 
   // 3D Tilt handler
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -288,16 +338,13 @@ function ThingsDragAndScrollCard() {
     setTilt({ x: 0, y: 0 });
   };
 
-  // Node relative positions (relative to center of container 0,0)
-  const [n0, setN0] = useState({ x: -95, y: -80 });
-  const [n1, setN1] = useState({ x: 95, y: -80 });
-  const [n2, setN2] = useState({ x: -95, y: 80 });
-  const [n3, setN3] = useState({ x: 95, y: 80 });
-
-  // Bezier path generators
-  const getPath = (nodePos: { x: number; y: number }) => {
-    // S-curve from center (0,0) to node position
-    return `M 0 0 C ${nodePos.x / 2} 0, ${nodePos.x / 2} ${nodePos.y}, ${nodePos.x} ${nodePos.y}`;
+  const handleSwipe = (direction: number) => {
+    setStack((prev) => {
+      const next = [...prev];
+      const top = next.shift()!;
+      next.push(top);
+      return next;
+    });
   };
 
   return (
@@ -313,7 +360,7 @@ function ThingsDragAndScrollCard() {
       {/* Header */}
       <div className="relative z-10 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
-          NEURAL PIPELINE
+          DECK SWIPER
         </span>
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
@@ -323,148 +370,92 @@ function ThingsDragAndScrollCard() {
         animate={{ rotateY: tilt.x, rotateX: tilt.y }}
         transition={{ type: "spring", stiffness: 180, damping: 22 }}
         style={{ transformStyle: "preserve-3d" }}
-        className="relative z-20 w-full h-[340px] bg-black/45 border border-white/5 rounded-xl overflow-hidden flex items-center justify-center"
+        className="relative z-20 w-full h-[340px] flex items-center justify-center"
       >
-        {/* Subtle grid pattern background */}
-        <div className="absolute inset-0 opacity-5 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:20px_20px]" />
-
         <span 
-          style={{ transform: "translateZ(30px)" }}
-          className="absolute top-3 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none z-30"
+          style={{ transform: "translateZ(40px)" }}
+          className="absolute top-0 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none z-30"
         >
-          Drag nodes to warp pipeline
+          Swipe cards left or right
         </span>
 
-        {/* SVG Bezier connectors & flow particles */}
-        <svg
-          className="absolute pointer-events-none overflow-visible z-10"
-          style={{ 
-            width: 340, 
-            height: 340, 
-            left: "50%", 
-            top: "50%", 
-            marginLeft: -170, 
-            marginTop: -170 
-          }}
-          viewBox="-170 -170 340 340"
-        >
-          {/* Node 0 Path */}
-          <path id="path-0" d={getPath(n0)} stroke="rgba(232, 169, 105, 0.15)" strokeWidth="1.5" fill="none" />
-          <circle r="3" fill="#E8A969" style={{ filter: "drop-shadow(0 0 4px #E8A969)" }}>
-            <animateMotion dur="2.4s" repeatCount="indefinite" path={getPath(n0)} />
-          </circle>
+        {/* Card Pile */}
+        <div className="relative w-[230px] h-[290px] flex items-center justify-center">
+          {stack.map((cardId, index) => {
+            const card = CARD_DATA.find((c) => c.id === cardId)!;
+            const isTop = index === 0;
 
-          {/* Node 1 Path */}
-          <path id="path-1" d={getPath(n1)} stroke="rgba(232, 169, 105, 0.15)" strokeWidth="1.5" fill="none" />
-          <circle r="3" fill="#E8A969" style={{ filter: "drop-shadow(0 0 4px #E8A969)" }}>
-            <animateMotion dur="2s" repeatCount="indefinite" path={getPath(n1)} />
-          </circle>
+            return (
+              <motion.div
+                key={card.id}
+                drag={isTop ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.6}
+                onDragEnd={(e, info) => {
+                  if (Math.abs(info.offset.x) > 120) {
+                    handleSwipe(info.offset.x > 0 ? 1 : -1);
+                  }
+                }}
+                animate={{
+                  scale: 1 - index * 0.06,
+                  y: index * 16,
+                  z: (3 - index) * 10,
+                  opacity: 1 - index * 0.25
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 24
+                }}
+                style={{
+                  zIndex: 3 - index,
+                  boxShadow: `0 20px 45px -15px ${card.glow}`
+                }}
+                whileDrag={{ scale: 1.05, cursor: "grabbing" }}
+                className="absolute w-full h-full rounded-2xl border border-white/10 bg-black/75 backdrop-blur-md p-5 flex flex-col justify-between select-none cursor-grab active:cursor-grabbing overflow-hidden"
+              >
+                {/* Card Background Glow */}
+                <div className={`absolute inset-0 z-0 bg-gradient-to-tr ${card.color} opacity-40`} />
 
-          {/* Node 2 Path */}
-          <path id="path-2" d={getPath(n2)} stroke="rgba(232, 169, 105, 0.15)" strokeWidth="1.5" fill="none" />
-          <circle r="3" fill="#E8A969" style={{ filter: "drop-shadow(0 0 4px #E8A969)" }}>
-            <animateMotion dur="2.8s" repeatCount="indefinite" path={getPath(n2)} />
-          </circle>
+                {/* Card Top Label */}
+                <div className="relative z-10 w-full flex items-center justify-between">
+                  <span className="text-[8px] font-mono text-white/35 tracking-wider uppercase">
+                    {card.tag}
+                  </span>
+                  <div className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                    {card.icon}
+                  </div>
+                </div>
 
-          {/* Node 3 Path */}
-          <path id="path-3" d={getPath(n3)} stroke="rgba(232, 169, 105, 0.15)" strokeWidth="1.5" fill="none" />
-          <circle r="3" fill="#E8A969" style={{ filter: "drop-shadow(0 0 4px #E8A969)" }}>
-            <animateMotion dur="1.8s" repeatCount="indefinite" path={getPath(n3)} />
-          </circle>
-        </svg>
+                {/* Dynamic Graphic Center */}
+                <div className="relative z-10 w-full flex items-center justify-center">
+                  {card.visual}
+                </div>
 
-        {/* Center core engine */}
-        <motion.div
-          style={{ z: 40, position: "absolute", left: "50%", top: "50%" }}
-          animate={{ scale: [1, 1.06, 1] }}
-          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-          className="w-14 h-14 -ml-7 -mt-7 rounded-full bg-gradient-to-br from-[#E8A969] to-[#c78848] flex items-center justify-center shadow-2xl shadow-[#E8A969]/20 z-20 border border-white/10"
-        >
-          <Sparkles className="w-5 h-5 text-black" />
-        </motion.div>
-
-        {/* Draggable Branch Nodes positioned absolutely relative to center */}
-        <InteractiveNode 
-          defaultX={-95}
-          defaultY={-80}
-          icon={<Terminal className="w-4 h-4 text-[#E8A969]" />}
-          onPosChange={(pos) => setN0(pos)}
-          z={25}
-        />
-
-        <InteractiveNode 
-          defaultX={95}
-          defaultY={-80}
-          icon={<Cpu className="w-4 h-4 text-[#E8A969]" />}
-          onPosChange={(pos) => setN1(pos)}
-          z={25}
-        />
-
-        <InteractiveNode 
-          defaultX={-95}
-          defaultY={80}
-          icon={<Zap className="w-4 h-4 text-[#E8A969]" />}
-          onPosChange={(pos) => setN2(pos)}
-          z={25}
-        />
-
-        <InteractiveNode 
-          defaultX={95}
-          defaultY={80}
-          icon={<Shield className="w-4 h-4 text-[#E8A969]" />}
-          onPosChange={(pos) => setN3(pos)}
-          z={25}
-        />
+                {/* Card Footer Text */}
+                <div className="relative z-10">
+                  <span className="text-[9px] font-mono text-[#E8A969] tracking-wider uppercase block mb-0.5">
+                    component template
+                  </span>
+                  <h4 className="font-serif text-white text-base font-normal tracking-wide leading-none">
+                    {card.title}
+                  </h4>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </motion.div>
 
       <div className="relative z-10">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
-          Data flow pipeline
+          Interactive layout
         </span>
         <h3 className="font-serif text-lg text-white font-normal leading-tight">
-          Neural network sandbox
+          Toolkit stack swiper
         </h3>
       </div>
     </div>
-  );
-}
-
-function InteractiveNode({ 
-  defaultX, 
-  defaultY, 
-  icon, 
-  onPosChange,
-  z
-}: { 
-  defaultX: number;
-  defaultY: number;
-  icon: React.ReactNode;
-  onPosChange: (pos: { x: number; y: number }) => void;
-  z: number;
-}) {
-  const nodeX = useMotionValue(defaultX);
-  const nodeY = useMotionValue(defaultY);
-
-  useEffect(() => {
-    const unsubX = nodeX.on("change", (val) => onPosChange({ x: val, y: nodeY.get() }));
-    const unsubY = nodeY.on("change", (val) => onPosChange({ x: nodeX.get(), y: val }));
-    return () => {
-      unsubX();
-      unsubY();
-    };
-  }, [nodeX, nodeY, onPosChange]);
-
-  return (
-    <motion.div
-      drag
-      dragConstraints={{ left: -145, right: 145, top: -145, bottom: 145 }}
-      dragElastic={0.15}
-      style={{ x: nodeX, y: nodeY, z, position: "absolute", left: "50%", top: "50%" }}
-      whileDrag={{ scale: 1.15, zIndex: 100 }}
-      className="w-10 h-10 -ml-5 -mt-5 rounded-full border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md flex items-center justify-center cursor-grab active:cursor-grabbing hover:border-[#E8A969]/30 transition-colors shadow-lg z-25"
-    >
-      {icon}
-    </motion.div>
   );
 }
 
