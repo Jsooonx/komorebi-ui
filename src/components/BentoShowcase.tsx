@@ -802,10 +802,11 @@ function MagneticCursorFieldCard() {
             <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
           </div>
 
-          {/* Center visual icon or glow */}
-          <div className="w-full flex justify-center items-center h-28 pointer-events-none">
-            <div className="w-16 h-16 rounded-full bg-black/80 border border-white/10 flex items-center justify-center shadow-lg shadow-[#E8A969]/15">
-              <Terminal className="w-5 h-5 text-[#E8A969] animate-pulse" />
+          {/* Center text visual */}
+          <div className="w-full flex justify-center items-center h-28 pointer-events-none select-none">
+            <div className="text-4xl font-mono font-bold text-[#E8A969] flex items-center tracking-tight">
+              <span>&gt;</span>
+              <span className="animate-[pulse_1s_infinite] ml-0.5">_</span>
             </div>
           </div>
 
