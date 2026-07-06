@@ -280,7 +280,8 @@ const CARD_DATA = [
       <img 
         src="/scenery_aurora.png" 
         alt="Aurora Scenery" 
-        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+        draggable={false}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out select-none pointer-events-none" 
       />
     )
   },
@@ -291,7 +292,8 @@ const CARD_DATA = [
       <img 
         src="/scenery_sunset.png" 
         alt="Sunset Scenery" 
-        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+        draggable={false}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out select-none pointer-events-none" 
       />
     )
   },
@@ -302,7 +304,8 @@ const CARD_DATA = [
       <img 
         src="/scenery_mountains.png" 
         alt="Mountain Scenery" 
-        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+        draggable={false}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out select-none pointer-events-none" 
       />
     )
   }
