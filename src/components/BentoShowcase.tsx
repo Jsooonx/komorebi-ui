@@ -884,59 +884,122 @@ function AudioEqualizerCard() {
   );
 }
 
-// ── SUB-COMPONENT 13: MORPHING LIQUID BLOB CARD ──
+// ── SUB-COMPONENT 13: INTERACTIVE STEPPER CARD ──
 function MorphingBlobCard() {
-  const [hovered, setHovered] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
 
-  // SVG morphing paths
-  const pathA = "M21,-20.7C27.9,-13.7,34.7,-5.7,35.4,2.9C36.1,11.5,30.6,20.8,22.7,26.7C14.7,32.7,4.3,35.4,-5.2,34.2C-14.7,33,-23.4,27.8,-28.9,20C-34.4,12.3,-36.8,1.9,-34.5,-7.2C-32.3,-16.3,-25.3,-24,-17.1,-30.5C-8.9,-37,-0.7,-42.2,6.1,-40.4C13,-38.7,14.1,-27.8,21,-20.7Z";
-  const pathB = "M23.5,-23.9C29.6,-16.9,33,-7.4,32.7,1.8C32.4,11.1,28.4,20,21.5,25.9C14.6,31.8,4.7,34.7,-4.8,33.5C-14.2,32.3,-23.2,27.1,-29.4,19.2C-35.7,11.3,-39.3,0.7,-37.2,-9.2C-35.1,-19.1,-27.2,-28.3,-17.9,-34.7C-8.6,-41.1,2.1,-44.7,11.8,-42.4C21.5,-40.1,17.4,-30.9,23.5,-23.9Z";
-  const pathC = "M20.2,-20.5C26,-13.8,30.7,-5.9,30.8,1.9C30.9,9.8,26.4,17.7,19.8,23.3C13.2,28.9,4.4,32.3,-4.2,31.4C-12.8,30.4,-21.3,25.2,-26.8,17.8C-32.3,10.4,-34.8,0.8,-32.9,-8C-31,-16.8,-24.8,-24.8,-17.1,-31.1C-9.3,-37.4,-0.1,-42.1,7.5,-40.3C15.1,-38.5,14.4,-27.1,20.2,-20.5Z";
+  const steps = [
+    { title: "Configuration", desc: "Setting up parameters" },
+    { title: "Verification", desc: "Running integrity checks" },
+    { title: "Deployment", desc: "Pipeline active & ready" }
+  ];
+
+  const handleNext = () => {
+    if (activeStep < 2) setActiveStep((prev) => prev + 1);
+  };
+
+  const handlePrev = () => {
+    if (activeStep > 0) setActiveStep((prev) => prev - 1);
+  };
 
   return (
     <div 
       className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       {/* Header */}
       <div className="relative z-10 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
-          LIQUID BLOBS
+          STEPPER COMPONENT
         </span>
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
-      {/* Morphing Area */}
-      <div className="relative w-full h-28 flex items-center justify-center bg-black/45 border border-white/5 rounded-xl overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-gradient-to-tr from-white/[0.02] to-transparent pointer-events-none" />
-        <svg viewBox="-50 -50 100 100" className="w-24 h-24 relative z-10">
-          <motion.path
-            fill="url(#blob-gradient)"
-            animate={{ 
-              d: hovered ? [pathA, pathB, pathC, pathA] : [pathC, pathA, pathB, pathC]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: hovered ? 4 : 8,
-              ease: "easeInOut"
-            }}
+      {/* Stepper Interactive Area */}
+      <div className="relative w-full h-32 flex flex-col justify-between bg-black/45 border border-white/5 rounded-xl p-4 overflow-hidden">
+        {/* Step Indicator Header */}
+        <div className="relative w-full flex items-center justify-between px-2">
+          {/* Progress bar line in background */}
+          <div className="absolute top-[13px] left-8 right-8 h-[2px] bg-white/5 z-0" />
+          <motion.div 
+            className="absolute top-[13px] left-8 h-[2px] bg-[#E8A969] z-0" 
+            initial={{ width: "0%" }}
+            animate={{ width: activeStep === 0 ? "0%" : activeStep === 1 ? "50%" : "100%" }}
+            transition={{ type: "spring", stiffness: 100, damping: 15 }}
+            style={{ right: 32 }}
           />
-          <defs>
-            <linearGradient id="blob-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#BECB6D" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#E8A969" stopOpacity="0.8" />
-            </linearGradient>
-          </defs>
-        </svg>
+
+          {steps.map((step, idx) => {
+            const isActive = idx === activeStep;
+            const isCompleted = idx < activeStep;
+            return (
+              <button 
+                key={idx} 
+                onClick={() => setActiveStep(idx)}
+                className="relative z-10 flex flex-col items-center focus:outline-none cursor-pointer"
+              >
+                <motion.div 
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-mono border font-semibold transition-colors duration-300 ${
+                    isActive 
+                      ? "bg-[#E8A969] text-black border-[#E8A969] shadow-lg shadow-[#E8A969]/20" 
+                      : isCompleted
+                        ? "bg-black text-[#BECB6D] border-[#BECB6D]/55"
+                        : "bg-[#161616] text-white/30 border-white/5"
+                  }`}
+                  animate={{ scale: isActive ? 1.12 : 1 }}
+                >
+                  {idx + 1}
+                </motion.div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Step Content */}
+        <div className="h-12 w-full flex items-center justify-between text-xs px-1">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeStep}
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.18 }}
+              className="flex flex-col text-left"
+            >
+              <span className="font-sans font-medium text-white text-xs">
+                {steps[activeStep].title}
+              </span>
+              <span className="font-mono text-[9px] text-white/45">
+                {steps[activeStep].desc}
+              </span>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Stepper Actions */}
+          <div className="flex gap-2">
+            {activeStep > 0 && (
+              <button 
+                onClick={handlePrev}
+                className="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/5 text-[9px] font-mono text-white/60 transition-colors cursor-pointer"
+              >
+                Back
+              </button>
+            )}
+            <button 
+              onClick={activeStep === 2 ? () => setActiveStep(0) : handleNext}
+              className="px-2.5 py-1 rounded bg-[#E8A969] hover:bg-[#d99855] text-[9px] font-mono text-black font-semibold transition-colors cursor-pointer"
+            >
+              {activeStep === 2 ? "Reset" : "Next"}
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="relative z-10">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
-          SVG Morphing
+          Multi-step flow
         </span>
         <h3 className="font-sans text-base font-medium tracking-tight text-white">
-          Organic liquid shape
+          Interactive stepper component
         </h3>
       </div>
     </div>
