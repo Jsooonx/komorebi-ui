@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, animate } from "framer-motion";
 import { Smartphone, Mail, Volume2, Sparkles, Terminal, Cpu, Zap, GitBranch, Shield, Home, Folder, Settings, User } from "lucide-react";
 import Dither from "./ui/dither";
 import SplitText from "./ui/SplitText";
@@ -373,39 +373,13 @@ function ThingsDragAndScrollCard() {
             const isTop = index === 0;
 
             return (
-              <motion.div
+              <SwipeableCard
                 key={card.id}
-                drag={isTop ? "x" : false}
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.6}
-                onDragEnd={(e, info) => {
-                  if (Math.abs(info.offset.x) > 120) {
-                    handleSwipe(info.offset.x > 0 ? 1 : -1);
-                  }
-                }}
-                animate={{
-                  scale: 1 - index * 0.06,
-                  y: index * 16,
-                  z: (3 - index) * 10,
-                  opacity: 1 - index * 0.25
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 24
-                }}
-                style={{
-                  zIndex: 3 - index,
-                  boxShadow: `0 20px 45px -15px ${card.glow}`
-                }}
-                whileDrag={{ scale: 1.05, cursor: "grabbing" }}
-                className="absolute w-full h-full rounded-2xl border border-white/10 bg-black/75 backdrop-blur-md flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
-              >
-                {/* Full-bleed visual content */}
-                <div className="absolute inset-0 w-full h-full">
-                  {card.visual}
-                </div>
-              </motion.div>
+                card={card}
+                index={index}
+                isTop={isTop}
+                handleSwipe={handleSwipe}
+              />
             );
           })}
         </div>
@@ -420,6 +394,63 @@ function ThingsDragAndScrollCard() {
         </h3>
       </div>
     </div>
+  );
+}
+
+function SwipeableCard({ 
+  card, 
+  index, 
+  isTop, 
+  handleSwipe 
+}: { 
+  card: typeof CARD_DATA[0]; 
+  index: number; 
+  isTop: boolean; 
+  handleSwipe: (dir: number) => void;
+}) {
+  const x = useMotionValue(0);
+  const rotate = useTransform(x, [-200, 200], [-25, 25]);
+
+  return (
+    <motion.div
+      drag={isTop ? "x" : false}
+      dragConstraints={{ left: -400, right: 400 }}
+      style={{
+        x: isTop ? x : 0,
+        rotate: isTop ? rotate : 0,
+        zIndex: 3 - index,
+        boxShadow: `0 20px 45px -15px ${card.glow}`
+      }}
+      onDragEnd={(e, info) => {
+        if (Math.abs(info.offset.x) > 100) {
+          const dir = info.offset.x > 0 ? 1 : -1;
+          handleSwipe(dir);
+          // Reset x coordinate for reuse when going to the bottom
+          setTimeout(() => x.set(0), 100);
+        } else {
+          // Spring snap back
+          animate(x, 0, { type: "spring", stiffness: 350, damping: 22 });
+        }
+      }}
+      animate={{
+        scale: 1 - index * 0.06,
+        y: index * 16,
+        z: (3 - index) * 10,
+        opacity: 1 - index * 0.25
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 24
+      }}
+      whileDrag={{ scale: 1.05, cursor: "grabbing" }}
+      className="absolute w-full h-full rounded-2xl border border-white/10 bg-black/75 backdrop-blur-md flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
+    >
+      {/* Full-bleed visual content */}
+      <div className="absolute inset-0 w-full h-full">
+        {card.visual}
+      </div>
+    </motion.div>
   );
 }
 
