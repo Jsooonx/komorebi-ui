@@ -78,9 +78,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Komorebi UI — Light, shadow, and organic flow for modern webs" },
+      { title: "Komorebi UI - Light, shadow, and organic flow for modern webs" },
       { name: "description", content: "A visual-first, organic animation library for React and modern web development." },
-      { property: "og:title", content: "Komorebi UI — Organic animations for modern webs" },
+      { property: "og:title", content: "Komorebi UI - Organic animations for modern webs" },
       { property: "og:description", content: "A visual-first, organic animation library for React and modern web development." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

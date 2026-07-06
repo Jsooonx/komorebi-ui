@@ -347,8 +347,9 @@ export default function BentoShowcase() {
           12+ Creative components
         </h2>
         <p className="text-sm sm:text-base text-white/60 max-w-xl leading-relaxed font-heading">
-          No extra packages — just copy the code or install directly with our CLI <code className="text-[#E8A969] bg-white/5 px-1.5 py-0.5 rounded font-mono">npx komorebi-ui init</code>.
+          No extra packages - just copy the code or install directly with our CLI <code className="text-[#E8A969] bg-white/5 px-1.5 py-0.5 rounded font-mono">npx komorebi-ui init</code>.
         </p>
+
       </div>
 
       {/* ── BENTO GRID ── */}

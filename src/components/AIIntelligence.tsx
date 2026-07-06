@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 const QUESTIONS = [
   {
     q: "Can I afford to invest $500 this month?",
-    a: "Based on your current income and expenses, you'll have around $620 in available balance after bills. Investing $500 is within reach — but consider saving at least $200 as an emergency buffer.",
+    a: "Based on your current income and expenses, you'll have around $620 in available balance after bills. Investing $500 is within reach - but consider saving at least $200 as an emergency buffer.",
   },
   {
     q: "When will I reach my savings goal?",
@@ -13,7 +13,7 @@ const QUESTIONS = [
   },
   {
     q: "How much did I spend on food last month?",
-    a: "You spent $643 on food in March — $421 on groceries and $222 on dining out. That's 18% above your monthly food budget of $545.",
+    a: "You spent $643 on food in March - $421 on groceries and $222 on dining out. That's 18% above your monthly food budget of $545.",
   },
 ];
 
