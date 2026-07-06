@@ -275,56 +275,35 @@ function DynamicIslandCard() {
 const CARD_DATA = [
   {
     id: 0,
-    tag: "WEBGL & SHADERS",
-    title: "Fluid Aurora",
-    color: "from-[#BECB6D]/20 via-[#E8A969]/10 to-[#BECB6D]/5",
-    glow: "rgba(190, 203, 109, 0.25)",
-    icon: <Sparkles className="w-4 h-4 text-[#E8A969]" />,
+    glow: "rgba(190, 203, 109, 0.2)",
     visual: (
-      <div className="relative w-full h-[150px] rounded-lg overflow-hidden border border-white/5 bg-[#121212]">
-        <img 
-          src="/neon_banana_aurora.png" 
-          alt="Neon Banana Aurora" 
-          className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-      </div>
+      <img 
+        src="/scenery_aurora.png" 
+        alt="Aurora Scenery" 
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+      />
     )
   },
   {
     id: 1,
-    tag: "CONTINUOUS MECHANICS",
-    title: "Newtonian Orbit",
-    color: "from-[#E8A969]/20 via-[#BECB6D]/10 to-[#E8A969]/5",
-    glow: "rgba(232, 169, 105, 0.25)",
-    icon: <Cpu className="w-4 h-4 text-[#E8A969]" />,
+    glow: "rgba(232, 169, 105, 0.2)",
     visual: (
-      <div className="relative w-full h-[150px] rounded-lg overflow-hidden border border-white/5 bg-[#121212]">
-        <img 
-          src="/neon_banana_sunset.png" 
-          alt="Neon Banana Sunset" 
-          className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-      </div>
+      <img 
+        src="/scenery_sunset.png" 
+        alt="Sunset Scenery" 
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+      />
     )
   },
   {
     id: 2,
-    tag: "3D PARALLAX DEPTH",
-    title: "Holographic Dock",
-    color: "from-[#BECB6D]/15 via-[#E8A969]/15 to-[#112115]/5",
-    glow: "rgba(232, 169, 105, 0.2)",
-    icon: <Terminal className="w-4 h-4 text-[#E8A969]" />,
+    glow: "rgba(232, 169, 105, 0.15)",
     visual: (
-      <div className="relative w-full h-[150px] rounded-lg overflow-hidden border border-white/5 bg-[#121212]">
-        <img 
-          src="/neon_banana_space.png" 
-          alt="Neon Banana Space" 
-          className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-      </div>
+      <img 
+        src="/scenery_mountains.png" 
+        alt="Mountain Scenery" 
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+      />
     )
   }
 ];
@@ -420,34 +399,11 @@ function ThingsDragAndScrollCard() {
                   boxShadow: `0 20px 45px -15px ${card.glow}`
                 }}
                 whileDrag={{ scale: 1.05, cursor: "grabbing" }}
-                className="absolute w-full h-full rounded-2xl border border-white/10 bg-black/75 backdrop-blur-md p-5 flex flex-col justify-between select-none cursor-grab active:cursor-grabbing overflow-hidden"
+                className="absolute w-full h-full rounded-2xl border border-white/10 bg-black/75 backdrop-blur-md flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
               >
-                {/* Card Background Glow */}
-                <div className={`absolute inset-0 z-0 bg-gradient-to-tr ${card.color} opacity-40`} />
-
-                {/* Card Top Label */}
-                <div className="relative z-10 w-full flex items-center justify-between">
-                  <span className="text-[8px] font-mono text-white/35 tracking-wider uppercase">
-                    {card.tag}
-                  </span>
-                  <div className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                    {card.icon}
-                  </div>
-                </div>
-
-                {/* Dynamic Graphic Center */}
-                <div className="relative z-10 w-full flex items-center justify-center">
+                {/* Full-bleed visual content */}
+                <div className="absolute inset-0 w-full h-full">
                   {card.visual}
-                </div>
-
-                {/* Card Footer Text */}
-                <div className="relative z-10">
-                  <span className="text-[9px] font-mono text-[#E8A969] tracking-wider uppercase block mb-0.5">
-                    component template
-                  </span>
-                  <h4 className="font-sans text-white text-sm font-medium tracking-wide leading-none">
-                    {card.title}
-                  </h4>
                 </div>
               </motion.div>
             );
