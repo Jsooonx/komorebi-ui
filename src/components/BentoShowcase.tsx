@@ -513,106 +513,244 @@ function BorderBeamCard() {
   );
 }
 
-// ── SUB-COMPONENT 9: SPRING CONFIGURATOR (Card 9 - Wide) ──
-type SpringPreset = "Stiff" | "Soft" | "Bouncy";
+// ── SUB-COMPONENT 9: WIREFRAME MESH CARD (Card 9 - New Wide!) ──
+function WireframeMeshCard() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
+  const mouseRef = useRef({ x: -1000, y: -1000 });
 
-const SPRING_PRESETS: Record<SpringPreset, { stiffness: number; damping: number }> = {
-  Stiff: { stiffness: 350, damping: 25 },
-  Soft: { stiffness: 120, damping: 20 },
-  Bouncy: { stiffness: 200, damping: 10 }
-};
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-function SpringConfiguratorCard() {
-  const [activePreset, setActivePreset] = useState<SpringPreset>("Bouncy");
-  const [trigger, setTrigger] = useState(0);
+    let animationFrameId: number;
+    let width = canvas.width = canvas.offsetWidth;
+    let height = canvas.height = canvas.offsetHeight;
 
-  const handleSelect = (preset: SpringPreset) => {
-    setActivePreset(preset);
-    setTrigger(prev => prev + 1);
-  };
+    // Grid config
+    const cols = 28;
+    const rows = 10;
+    const points: { x: number; y: number; ox: number; oy: number; cx: number; cy: number }[] = [];
 
-  const currentPhysics = SPRING_PRESETS[activePreset];
+    // Initialize points
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const ox = (width / (cols - 1)) * c;
+        const oy = (height / (rows - 1)) * r;
+        points.push({
+          x: ox,
+          y: oy,
+          ox: ox,
+          oy: oy,
+          cx: ox,
+          cy: oy
+        });
+      }
+    }
+
+    let time = 0;
+
+    const render = () => {
+      time += 0.04;
+      ctx.clearRect(0, 0, width, height);
+
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+
+      // Update positions
+      points.forEach(p => {
+        // Wave noise
+        const wave = Math.sin(time + p.ox * 0.015) * 8;
+        const targetX = p.ox;
+        const targetY = p.oy + wave;
+
+        // Mouse deform
+        const dx = targetX - mx;
+        const dy = targetY - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const radius = 120;
+
+        let rx = targetX;
+        let ry = targetY;
+
+        if (dist < radius) {
+          const force = (radius - dist) / radius;
+          // Push away
+          const angle = Math.atan2(dy, dx);
+          rx += Math.cos(angle) * force * 35;
+          ry += Math.sin(angle) * force * 25;
+        }
+
+        // Lerp/Spring inertia
+        p.cx += (rx - p.cx) * 0.12;
+        p.cy += (ry - p.cy) * 0.12;
+      });
+
+      // Draw grid lines
+      ctx.strokeStyle = "rgba(232, 169, 105, 0.12)";
+      ctx.lineWidth = 1;
+
+      for (let r = 0; r < rows; r++) {
+        ctx.beginPath();
+        for (let c = 0; c < cols; c++) {
+          const idx = r * cols + c;
+          const p = points[idx];
+          if (c === 0) {
+            ctx.moveTo(p.cx, p.cy);
+          } else {
+            ctx.lineTo(p.cx, p.cy);
+          }
+        }
+        ctx.stroke();
+      }
+
+      for (let c = 0; c < cols; c++) {
+        ctx.beginPath();
+        for (let r = 0; r < rows; r++) {
+          const idx = r * cols + c;
+          const p = points[idx];
+          if (r === 0) {
+            ctx.moveTo(p.cx, p.cy);
+          } else {
+            ctx.lineTo(p.cx, p.cy);
+          }
+        }
+        ctx.stroke();
+      }
+
+      // Draw points (dots)
+      points.forEach(p => {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+        ctx.beginPath();
+        ctx.arc(p.cx, p.cy, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Highlight dots near mouse
+        const dx = p.cx - mx;
+        const dy = p.cy - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 80) {
+          ctx.fillStyle = "rgba(232, 169, 105, 0.8)";
+          ctx.beginPath();
+          ctx.arc(p.cx, p.cy, 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+
+      // Mouse glow
+      if (mx > 0 && mx < width && my > 0 && my < height) {
+        const grad = ctx.createRadialGradient(mx, my, 0, mx, my, 80);
+        grad.addColorStop(0, "rgba(232, 169, 105, 0.08)");
+        grad.addColorStop(1, "rgba(232, 169, 105, 0)");
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(mx, my, 80, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    // Handle mouse move
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current.x = e.clientX - rect.left;
+      mouseRef.current.y = e.clientY - rect.top;
+    };
+
+    const handleMouseLeave = () => {
+      mouseRef.current.x = -1000;
+      mouseRef.current.y = -1000;
+    };
+
+    const handleResize = () => {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+      
+      // Re-initialize points
+      points.length = 0;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const ox = (width / (cols - 1)) * c;
+          const oy = (height / (rows - 1)) * r;
+          points.push({
+            x: ox,
+            y: oy,
+            ox: ox,
+            oy: oy,
+            cx: ox,
+            cy: oy
+          });
+        }
+      }
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("mousemove", handleMouseMove);
+      container.addEventListener("mouseleave", handleMouseLeave);
+      window.addEventListener("resize", handleResize);
+    }
+
+    render();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      if (container) {
+        container.removeEventListener("mousemove", handleMouseMove);
+        container.removeEventListener("mouseleave", handleMouseLeave);
+      }
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div 
+      ref={containerRef}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:col-span-2 md:col-span-2 group"
     >
-      <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-transparent to-[#1a1a1a]/30 opacity-50" />
+      {/* Background wireframe mesh */}
+      <canvas 
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full z-0 opacity-40 group-hover:opacity-75 transition-opacity duration-700 pointer-events-none"
+      />
+
+      {/* Grid Vignette Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#121212] via-transparent to-[#121212] opacity-80 pointer-events-none z-10" />
 
       {/* Header */}
-      <div className="relative z-10 w-full flex items-center justify-between">
+      <div className="relative z-20 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
-          SPRING PHYSICS PREVIEW
+          NEURAL NETWORK
         </span>
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
-      {/* Main interactive area */}
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 h-28 items-center">
-        {/* Left Side: Controls */}
-        <div className="flex flex-col gap-2.5">
-          <div className="flex gap-2">
-            {(Object.keys(SPRING_PRESETS) as SpringPreset[]).map((preset) => {
-              const isActive = activePreset === preset;
-              return (
-                <button
-                  key={preset}
-                  onClick={() => handleSelect(preset)}
-                  className={`text-[9px] font-mono font-semibold uppercase tracking-wider px-2 py-0.5 rounded border transition-all ${
-                    isActive 
-                      ? "border-[#E8A969] text-[#E8A969] bg-[#E8A969]/5"
-                      : "border-white/10 text-white/50 bg-white/5 hover:text-white/80 hover:border-white/20"
-                  }`}
-                >
-                  {preset}
-                </button>
-              );
-            })}
-          </div>
-          
-          {/* Reactive code snippet */}
-          <div className="bg-black/45 border border-white/5 rounded-lg p-2 font-mono text-[9px] leading-relaxed text-white/60">
-            <span className="text-sun-gold/90">transition</span>={`{{`}
-            <div className="pl-3">
-              type: <span className="text-green-400">"spring"</span>,
-              <br />
-              stiffness: <span className="text-blue-400">{currentPhysics.stiffness}</span>,
-              <br />
-              damping: <span className="text-blue-400">{currentPhysics.damping}</span>
-            </div>
-            {`}}`}
-          </div>
+      {/* Centered Panel */}
+      <div className="relative z-20 w-full max-w-sm mx-auto bg-black/40 border border-white/5 backdrop-blur-xl rounded-xl p-4 flex flex-col items-center text-center gap-1.5 shadow-2xl">
+        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#E8A969]/10 border border-[#E8A969]/20 text-[9px] font-mono text-[#E8A969] tracking-wider uppercase">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#E8A969] animate-pulse" />
+          organic grid physics
         </div>
-
-        {/* Right Side: Interactive Preview */}
-        <div className="flex items-center justify-center h-full border border-white/5 rounded-xl bg-black/25 relative overflow-hidden group/preview">
-          <span className="absolute top-1.5 text-[8px] font-mono text-white/20 uppercase tracking-widest pointer-events-none">
-            Click box below
-          </span>
-          <motion.div
-            key={trigger}
-            initial={{ scale: 0.4, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{
-              type: "spring",
-              stiffness: currentPhysics.stiffness,
-              damping: currentPhysics.damping
-            }}
-            className="w-12 h-12 bg-[#161616] border border-[#E8A969]/20 rounded-xl flex items-center justify-center shadow-lg relative group-hover/preview:border-[#E8A969]/50 transition-colors"
-          >
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#E8A969]/5 to-transparent rounded-xl" />
-            <span className="font-serif text-base text-[#E8A969] font-semibold">K</span>
-          </motion.div>
-        </div>
+        <h4 className="font-serif text-white text-base font-normal tracking-wide">
+          Structural wireframe deformation
+        </h4>
+        <p className="text-[10px] text-white/45 font-heading max-w-[280px]">
+          Hover and glide over the canvas backdrop to warp the coordinates of the mesh in real time.
+        </p>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-20">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
-          Physics configurator
+          WebGL & Canvas
         </span>
         <h3 className="font-serif text-lg text-white font-normal leading-tight">
-          Spring configurator
+          Deformable wireframe grid
         </h3>
       </div>
     </div>
@@ -707,7 +845,7 @@ export default function BentoShowcase() {
         <DitherCard />
         <TextRollCard />
         <BorderBeamCard />
-        <SpringConfiguratorCard />
+        <WireframeMeshCard />
         <InfiniteMarqueeCard />
       </div>
     </section>
