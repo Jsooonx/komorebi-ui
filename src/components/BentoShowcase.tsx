@@ -38,9 +38,7 @@ function ImageRevealCard() {
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
           REVEAL STYLE
         </span>
-        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center border border-white/10 text-white text-[9px] font-mono">
-          R
-        </div>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
       <div className="relative z-10">
@@ -79,9 +77,7 @@ function HoverMembersCard() {
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
           STAGGER VIEW
         </span>
-        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center border border-white/10 text-white text-[9px] font-mono">
-          M
-        </div>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
       {/* Centered Avatar list */}
@@ -144,9 +140,7 @@ function DevouringDetailsCard() {
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
           MOTION INPUT
         </span>
-        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center border border-white/10 text-white text-[9px] font-mono">
-          S
-        </div>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
       {/* Sign in Mockup Box */}
@@ -204,9 +198,7 @@ function DynamicIslandCard() {
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
           HARDWARE MORPH
         </span>
-        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center border border-white/10 text-white text-[9px] font-mono">
-          D
-        </div>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
       {/* Centered Dynamic Island capsule */}
@@ -303,9 +295,7 @@ function ThingsDragAndScrollCard() {
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
           PHYSICS DRAG
         </span>
-        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center border border-white/10 text-white text-[9px] font-mono">
-          T
-        </div>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
       {/* Dragging Container Area */}
