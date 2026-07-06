@@ -35,7 +35,7 @@ function ImageRevealCard() {
         </span>
       </motion.div>
 
-      {/* Card Header & Footer (always visible/on top of image) */}
+      {/* Card Header & Footer */}
       <div className="relative z-10 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
           REVEAL STYLE
@@ -131,7 +131,7 @@ function DevouringDetailsCard() {
 
   return (
     <div 
-      className="relative w-full h-[300px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -146,18 +146,18 @@ function DevouringDetailsCard() {
       </div>
 
       {/* Sign in Mockup Box */}
-      <div className="relative z-10 w-full bg-[#161616] border border-white/5 rounded-xl p-4 flex flex-col gap-2">
-        <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest block">
+      <div className="relative z-10 w-full bg-[#161616] border border-white/5 rounded-xl p-3 flex flex-col gap-1.5">
+        <span className="text-[8px] font-mono text-white/40 uppercase tracking-widest block">
           Sign in command
         </span>
-        <div className="flex items-center justify-between bg-black/45 border border-white/5 rounded-lg px-3 py-2.5 h-11">
-          <div className="flex items-center gap-1.5 font-mono text-xs text-white/90">
-            <Mail className="w-3.5 h-3.5 text-white/40" />
+        <div className="flex items-center justify-between bg-black/45 border border-white/5 rounded-lg px-3 py-2 h-9">
+          <div className="flex items-center gap-1.5 font-mono text-[11px] text-white/90">
+            <Mail className="w-3 h-3 text-white/40" />
             <span>{emailText}</span>
             <motion.span 
               animate={{ opacity: [1, 0, 1] }} 
               transition={{ repeat: Infinity, duration: 0.8 }}
-              className="w-1.5 h-3 bg-sun-gold"
+              className="w-1 h-3 bg-sun-gold"
             />
           </div>
           <motion.div 
@@ -165,7 +165,7 @@ function DevouringDetailsCard() {
               borderColor: hovered ? "rgba(232, 169, 105, 0.4)" : "rgba(255, 255, 255, 0.1)",
               boxShadow: hovered ? "0 0 10px rgba(232, 169, 105, 0.15)" : "none"
             }}
-            className="flex items-center gap-1 text-[10px] font-mono text-sun-gold border border-white/10 px-2 py-0.5 rounded bg-white/5 select-none"
+            className="flex items-center gap-0.5 text-[9px] font-mono text-sun-gold border border-white/10 px-1.5 py-0.5 rounded bg-white/5 select-none"
           >
             enter ↵
           </motion.div>
@@ -189,7 +189,7 @@ function DynamicIslandCard() {
   const [hovered, setHovered] = useState(false);
   return (
     <div 
-      className="relative w-full h-[300px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -204,16 +204,16 @@ function DynamicIslandCard() {
       </div>
 
       {/* Centered Dynamic Island capsule */}
-      <div className="relative z-10 flex items-center justify-center h-28 w-full">
+      <div className="relative z-10 flex items-center justify-center h-20 w-full">
         <motion.div
           animate={{ 
-            width: hovered ? 220 : 120,
-            height: hovered ? 76 : 28,
-            borderRadius: hovered ? 24 : 14,
+            width: hovered ? 200 : 110,
+            height: hovered ? 64 : 26,
+            borderRadius: hovered ? 20 : 12,
             backgroundColor: hovered ? "#1a1a1a" : "#000000"
           }}
           transition={{ type: "spring", damping: 20, stiffness: 200 }}
-          className="border border-white/5 flex items-center justify-center p-3 relative overflow-hidden shadow-2xl"
+          className="border border-white/5 flex items-center justify-center p-2 relative overflow-hidden shadow-2xl"
         >
           <AnimatePresence mode="wait">
             {!hovered ? (
@@ -222,10 +222,10 @@ function DynamicIslandCard() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="flex items-center gap-2"
+                className="flex items-center gap-1.5"
               >
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-[10px] font-mono font-semibold text-white/60 tracking-wider uppercase">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-[9px] font-mono font-semibold text-white/60 tracking-wider uppercase">
                   ACTIVE
                 </span>
               </motion.div>
@@ -236,22 +236,21 @@ function DynamicIslandCard() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.15 }}
-                className="w-full flex flex-col justify-center items-center gap-1.5"
+                className="w-full flex flex-col justify-center items-center gap-1"
               >
                 <div className="w-full flex items-center justify-between px-1">
-                  <Smartphone className="w-4 h-4 text-sun-gold" />
-                  <span className="text-[10px] font-mono font-medium text-white/80">
+                  <Smartphone className="w-3 h-3 text-sun-gold" />
+                  <span className="text-[9px] font-mono font-medium text-white/80">
                     Find My iPhone
                   </span>
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping" />
                 </div>
-                <div className="w-full flex items-center justify-between px-1 mt-1 bg-black/35 rounded-lg py-1 px-2 border border-white/5">
-                  <span className="text-[9px] font-mono text-white/40">Searching...</span>
+                <div className="w-full flex items-center justify-between px-1 mt-0.5 bg-black/35 rounded-md py-0.5 px-1.5 border border-white/5">
+                  <span className="text-[8px] font-mono text-white/40">Searching...</span>
                   <div className="flex gap-0.5 items-center">
-                    <span className="w-0.5 h-2.5 bg-sun-gold animate-bounce" style={{ animationDelay: "0s" }} />
-                    <span className="w-0.5 h-3 bg-sun-gold animate-bounce" style={{ animationDelay: "0.1s" }} />
+                    <span className="w-0.5 h-2 bg-sun-gold animate-bounce" style={{ animationDelay: "0s" }} />
+                    <span className="w-0.5 h-2.5 bg-sun-gold animate-bounce" style={{ animationDelay: "0.1s" }} />
                     <span className="w-0.5 h-1.5 bg-sun-gold animate-bounce" style={{ animationDelay: "0.2s" }} />
-                    <span className="w-0.5 h-3.5 bg-sun-gold animate-bounce" style={{ animationDelay: "0.3s" }} />
                   </div>
                 </div>
               </motion.div>
@@ -288,7 +287,7 @@ function ThingsDragAndScrollCard() {
   
   return (
     <div 
-      className="relative w-full h-[580px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[544px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group"
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50" />
 
@@ -303,7 +302,7 @@ function ThingsDragAndScrollCard() {
       {/* Dragging Container Area */}
       <div 
         ref={containerRef}
-        className="relative z-10 w-full h-[380px] bg-black/45 border border-white/5 rounded-xl p-4 overflow-hidden flex flex-wrap gap-3 justify-center items-center content-center"
+        className="relative z-10 w-full h-[340px] bg-black/45 border border-white/5 rounded-xl p-4 overflow-hidden flex flex-wrap gap-3 justify-center items-center content-center"
       >
         <span className="absolute top-3 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none">
           Drag any item inside
@@ -344,7 +343,7 @@ function DitherCard() {
   }, []);
 
   return (
-    <div className="relative w-full h-[300px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group">
+    <div className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group">
       {/* Header */}
       <div className="relative z-10 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
@@ -354,7 +353,7 @@ function DitherCard() {
       </div>
 
       {/* Dither Shader Area */}
-      <div className="relative w-full h-32 rounded-xl overflow-hidden border border-white/5 bg-black">
+      <div className="relative w-full h-28 rounded-xl overflow-hidden border border-white/5 bg-black">
         {isClient && (
           <Dither 
             waveSpeed={0.08}
@@ -380,14 +379,14 @@ function DitherCard() {
   );
 }
 
-// ── SUB-COMPONENT 7: TEXT ROLL GLITCH CARD (New!) ──
+// ── SUB-COMPONENT 7: TEXT ROLL GLITCH CARD ──
 function TextRollCard() {
   const [hovered, setHovered] = useState(false);
   const word = "KOMOREBI";
   
   return (
     <div 
-      className="relative w-full h-[300px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -402,14 +401,14 @@ function TextRollCard() {
       </div>
 
       {/* Text Roll Canvas area */}
-      <div className="relative z-10 w-full flex items-center justify-center h-28">
+      <div className="relative z-10 w-full flex items-center justify-center h-20">
         <div className="flex overflow-hidden py-1">
           {word.split("").map((letter, index) => (
-            <div key={index} className="relative h-10 w-6 sm:w-7 overflow-hidden flex justify-center">
+            <div key={index} className="relative h-8 w-5 sm:w-6 overflow-hidden flex justify-center">
               <motion.span
                 animate={{ y: hovered ? "-100%" : "0%" }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
-                className="absolute text-2xl sm:text-3xl font-heading font-bold text-white/60 tracking-wider"
+                className="absolute text-xl sm:text-2xl font-heading font-bold text-white/60 tracking-wider"
               >
                 {letter}
               </motion.span>
@@ -417,7 +416,7 @@ function TextRollCard() {
                 initial={{ y: "100%" }}
                 animate={{ y: hovered ? "0%" : "100%" }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
-                className="absolute text-2xl sm:text-3xl font-heading font-bold text-sun-gold tracking-wider"
+                className="absolute text-xl sm:text-2xl font-heading font-bold text-sun-gold tracking-wider"
               >
                 {letter}
               </motion.span>
@@ -438,24 +437,23 @@ function TextRollCard() {
   );
 }
 
-// ── SUB-COMPONENT 8: BORDER BEAM CARD (New!) ──
+// ── SUB-COMPONENT 8: BORDER BEAM CARD ──
 function BorderBeamCard() {
   const [hovered, setHovered] = useState(false);
   
   return (
     <div 
-      className="relative w-full h-[300px] bg-[#121212] rounded-2xl overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* ── ROTATING CONIC BORDER GLOW BEAM ── */}
+      {/* rotating border glow */}
       <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-100 transition-opacity duration-700 ease-out overflow-hidden">
         <div 
           className="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent_60%,#E8A969_90%,transparent_100%)] animate-[spin_4s_linear_infinite]"
           style={{ transformOrigin: "center" }}
         />
       </div>
-      {/* Inner Mask (leaves a sharp 1px border gap) */}
       <div className="absolute inset-[1px] bg-[#121212] rounded-[15px] z-10 pointer-events-none" />
 
       {/* Header */}
@@ -467,23 +465,23 @@ function BorderBeamCard() {
       </div>
 
       {/* Soundwave Visualizer Area */}
-      <div className="relative z-20 w-full flex flex-col gap-3.5 bg-black/45 border border-white/5 rounded-xl p-4 h-28 justify-center">
-        <div className="flex items-center gap-2">
-          <Volume2 className="w-4 h-4 text-sun-gold/75 animate-pulse" />
-          <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">
+      <div className="relative z-20 w-full flex flex-col gap-2.5 bg-black/45 border border-white/5 rounded-xl p-3 h-20 justify-center">
+        <div className="flex items-center gap-1.5">
+          <Volume2 className="w-3.5 h-3.5 text-sun-gold/75 animate-pulse" />
+          <span className="text-[8px] font-mono text-white/50 uppercase tracking-widest">
             Audio wave rendering
           </span>
         </div>
         
         {/* Animated Bar graph lines */}
-        <div className="flex items-end justify-between w-full h-10 px-2 gap-1.5">
+        <div className="flex items-end justify-between w-full h-8 px-1 gap-1">
           {[2.5, 1.2, 3.8, 2.0, 1.0, 3.2, 4.5, 1.8, 2.8, 3.5, 1.4, 2.9, 4.0, 2.2, 1.5].map((val, idx) => (
             <motion.div 
               key={idx}
               animate={{ 
                 height: hovered 
-                  ? [`${val * 8}px`, `${Math.max(4, val * 5)}px`, `${val * 8}px`]
-                  : `${val * 6}px`
+                  ? [`${val * 6}px`, `${Math.max(3, val * 3.5)}px`, `${val * 6}px`]
+                  : `${val * 4}px`
               }}
               transition={{ 
                 repeat: Infinity, 
@@ -491,7 +489,7 @@ function BorderBeamCard() {
                 ease: "easeInOut" 
               }}
               className="flex-grow bg-gradient-to-t from-sun-gold/20 to-sun-gold rounded-full"
-              style={{ width: "4px" }}
+              style={{ width: "3px" }}
             />
           ))}
         </div>
@@ -503,6 +501,105 @@ function BorderBeamCard() {
         </span>
         <h3 className="font-serif text-lg text-white font-normal leading-tight">
           Border beam
+        </h3>
+      </div>
+    </div>
+  );
+}
+
+// ── SUB-COMPONENT 9: KEYCAP MATRIX (Card 9 - New Wide!) ──
+function KeycapMatrixCard() {
+  const keys = ["Q", "W", "E", "R", "T", "Y", "A", "S", "D", "F", "G", "H"];
+  return (
+    <div 
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:col-span-2 md:col-span-2 group"
+    >
+      <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-transparent to-[#1a1a1a]/30 opacity-50" />
+
+      {/* Header */}
+      <div className="relative z-10 w-full flex items-center justify-between">
+        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+          KEY MATRIX
+        </span>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+      </div>
+
+      {/* Keycaps Grid */}
+      <div className="relative z-10 flex flex-wrap gap-2.5 justify-center items-center h-24 max-w-lg mx-auto">
+        {keys.map((key, index) => (
+          <motion.div
+            key={index}
+            whileHover={{ 
+              scale: 1.15, 
+              borderColor: "rgba(232, 169, 105, 0.4)", 
+              color: "#E8A969",
+              boxShadow: "0 0 12px rgba(232, 169, 105, 0.15)"
+            }}
+            transition={{ type: "spring", damping: 12, stiffness: 250 }}
+            className="w-10 h-10 sm:w-12 sm:h-12 bg-black/45 border border-white/5 rounded-xl flex items-center justify-center font-mono text-sm text-white/40 transition-colors"
+          >
+            {key}
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="relative z-10">
+        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+          Keyboard triggers
+        </span>
+        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+          Interactive keycaps
+        </h3>
+      </div>
+    </div>
+  );
+}
+
+// ── SUB-COMPONENT 10: INFINITE MARQUEE (Card 10 - New!) ──
+const TECH_TAGS = [
+  "React", "TypeScript", "WebGL", "GSAP", "TailwindCSS", "Framer Motion", "ThreeJS", "Vite"
+];
+
+function InfiniteMarqueeCard() {
+  return (
+    <div 
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+    >
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#121212] via-transparent to-[#1c1c1c]/10 opacity-50" />
+
+      {/* Header */}
+      <div className="relative z-10 w-full flex items-center justify-between">
+        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+          INFINITE LOOP
+        </span>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+      </div>
+
+      {/* Horizontal scrolling marquee */}
+      <div className="relative z-10 w-full overflow-hidden h-12 flex items-center bg-black/35 border border-white/5 rounded-xl px-2">
+        <motion.div 
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+          className="flex gap-3 w-max shrink-0"
+        >
+          {TECH_TAGS.concat(TECH_TAGS).map((tag, index) => (
+            <div 
+              key={index}
+              className="flex items-center gap-1.5 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono text-white/70"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-[#E8A969]/80" />
+              {tag}
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      <div className="relative z-10">
+        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+          Seamless loops
+        </span>
+        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+          Infinite marquee
         </h3>
       </div>
     </div>
@@ -538,27 +635,16 @@ export default function BentoShowcase() {
 
       {/* ── BENTO GRID ── */}
       <div className="w-full max-w-[1200px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        {/* Column 1 */}
-        <div className="flex flex-col gap-6 w-full">
-          <ImageRevealCard />
-          <DevouringDetailsCard />
-          <TextRollCard />
-        </div>
-
-        {/* Column 2 */}
-        <div className="flex flex-col gap-6 w-full">
-          <HoverMembersCard />
-          <DynamicIslandCard />
-          <BorderBeamCard />
-        </div>
-
-        {/* Column 3 */}
-        <div className="flex flex-col gap-6 w-full">
-          <ThingsDragAndScrollCard />
-          <DitherCard />
-        </div>
-
+        <ImageRevealCard />
+        <HoverMembersCard />
+        <ThingsDragAndScrollCard />
+        <DevouringDetailsCard />
+        <DynamicIslandCard />
+        <DitherCard />
+        <TextRollCard />
+        <BorderBeamCard />
+        <KeycapMatrixCard />
+        <InfiniteMarqueeCard />
       </div>
     </section>
   );
