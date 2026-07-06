@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Smartphone, Mail } from "lucide-react";
+import Dither from "./ui/dither";
 
 // ── SUB-COMPONENT 1: IMAGE REVEAL CARD ──
 function ImageRevealCard() {
@@ -272,13 +273,9 @@ function DynamicIslandCard() {
 
 // ── SUB-COMPONENT 5: THINGS DRAG AND SCROLL CARD ──
 const DRAG_ITEMS = [
-  { emoji: "🍔", label: "Burger", color: "from-[#FCD34D] to-[#F59E0B]" },
-  { emoji: "🍎", label: "Apple", color: "from-[#FCA5A5] to-[#EF4444]" },
-  { emoji: "🐟", label: "Fish", color: "from-[#93C5FD] to-[#3B82F6]" },
   { emoji: "🪐", label: "Planet", color: "from-[#C084FC] to-[#8B5CF6]" },
-  { emoji: "🧥", label: "Coat", color: "from-[#FDBA74] to-[#F97316]" },
-  { emoji: "🐠", label: "Fishy", color: "from-[#6EE7B7] to-[#10B981]" },
-  { emoji: "⛳", label: "Golf", color: "from-[#A7F3D0] to-[#34D399]" }
+  { emoji: "🍔", label: "Burger", color: "from-[#FCD34D] to-[#F59E0B]" },
+  { emoji: "🚀", label: "Rocket", color: "from-[#F97316] to-[#EF4444]" }
 ];
 
 function ThingsDragAndScrollCard() {
@@ -286,7 +283,7 @@ function ThingsDragAndScrollCard() {
   
   return (
     <div 
-      className="relative w-full h-[580px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50" />
 
@@ -301,10 +298,10 @@ function ThingsDragAndScrollCard() {
       {/* Dragging Container Area */}
       <div 
         ref={containerRef}
-        className="relative z-10 w-full h-[380px] bg-black/45 border border-white/5 rounded-xl p-4 overflow-hidden flex flex-wrap gap-3 justify-center items-center content-center"
+        className="relative z-10 w-full h-[100px] bg-black/45 border border-white/5 rounded-xl p-3 overflow-hidden flex gap-3 justify-center items-center"
       >
-        <span className="absolute top-3 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none">
-          Drag any item inside
+        <span className="absolute top-2 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none">
+          Drag items
         </span>
         
         {DRAG_ITEMS.map((item, index) => (
@@ -314,10 +311,10 @@ function ThingsDragAndScrollCard() {
             dragConstraints={containerRef}
             dragElastic={0.15}
             whileDrag={{ scale: 1.1, zIndex: 100 }}
-            className={`flex items-center gap-1.5 px-3 py-2 bg-gradient-to-br ${item.color} rounded-full cursor-grab active:cursor-grabbing shadow-lg border border-white/10 shrink-0 select-none`}
+            className={`flex items-center gap-1 px-2.5 py-1.5 bg-gradient-to-br ${item.color} rounded-full cursor-grab active:cursor-grabbing shadow-lg border border-white/10 shrink-0 select-none`}
           >
-            <span className="text-base">{item.emoji}</span>
-            <span className="text-[10px] font-mono font-bold text-black uppercase tracking-wider">{item.label}</span>
+            <span className="text-sm">{item.emoji}</span>
+            <span className="text-[9px] font-mono font-bold text-black uppercase tracking-wider">{item.label}</span>
           </motion.div>
         ))}
       </div>
@@ -328,6 +325,50 @@ function ThingsDragAndScrollCard() {
         </span>
         <h3 className="font-serif text-lg text-white font-normal leading-tight">
           Things drag and scroll
+        </h3>
+      </div>
+    </div>
+  );
+}
+
+// ── SUB-COMPONENT 6: RETRO DITHER CARD ──
+function DitherCard() {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return (
+    <div className="relative w-full h-[300px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group">
+      {/* Header */}
+      <div className="relative z-10 w-full flex items-center justify-between">
+        <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
+          RETRO SHADER
+        </span>
+        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+      </div>
+
+      {/* Dither Shader Area */}
+      <div className="relative w-full h-32 rounded-xl overflow-hidden border border-white/5 bg-black">
+        {isClient && (
+          <Dither 
+            waveSpeed={0.08}
+            waveFrequency={3.5}
+            waveAmplitude={0.4}
+            waveColor={[0.1, 0.25, 0.7]} // Indigo-blue glow
+            baseColor={[0.02, 0.03, 0.08]} // Very dark midnight blue
+            colorNum={4}
+            pixelSize={3}
+          />
+        )}
+      </div>
+
+      <div className="relative z-10">
+        <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
+          WebGL Canvas
+        </span>
+        <h3 className="font-serif text-lg text-white font-normal leading-tight">
+          Dither waves
         </h3>
       </div>
     </div>
@@ -349,7 +390,6 @@ export default function BentoShowcase() {
         <p className="text-sm sm:text-base text-white/60 max-w-xl leading-relaxed font-heading">
           No extra packages - just copy the code or install directly with our CLI <code className="text-[#E8A969] bg-white/5 px-1.5 py-0.5 rounded font-mono">npx komorebi-ui init</code>.
         </p>
-
       </div>
 
       {/* ── BENTO GRID ── */}
@@ -367,11 +407,11 @@ export default function BentoShowcase() {
           <DynamicIslandCard />
         </div>
 
-        {/* Column 3 (Tall Column spanned vertically) */}
-        <div className="flex flex-col gap-6 w-full lg:col-span-1 md:col-span-2 lg:h-auto">
+        {/* Column 3 */}
+        <div className="flex flex-col gap-6 w-full">
           <ThingsDragAndScrollCard />
+          <DitherCard />
         </div>
-
       </div>
     </section>
   );
