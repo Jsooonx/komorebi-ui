@@ -991,7 +991,7 @@ function MorphingBlobCard() {
                       e.stopPropagation();
                       setParams(p => ({ ...p, ssl: !p.ssl }));
                     }}
-                    className={`w-7 h-4 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.ssl ? "bg-[#BECB6D]" : "bg-white/10"}`}
+                    className={`w-7 h-4 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.ssl ? "bg-[#BECB6D] justify-end" : "bg-white/10 justify-start"}`}
                   >
                     <motion.div 
                       layout 
@@ -1008,7 +1008,7 @@ function MorphingBlobCard() {
                       e.stopPropagation();
                       setParams(p => ({ ...p, minify: !p.minify }));
                     }}
-                    className={`w-7 h-4 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.minify ? "bg-[#BECB6D]" : "bg-white/10"}`}
+                    className={`w-7 h-4 rounded-full flex items-center p-0.5 transition-colors cursor-pointer ${params.minify ? "bg-[#BECB6D] justify-end" : "bg-white/10 justify-start"}`}
                   >
                     <motion.div 
                       layout 
@@ -1042,11 +1042,8 @@ function MorphingBlobCard() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                className="flex items-center gap-1.5 text-[#BECB6D] text-[10px] font-semibold"
+                className="text-[#BECB6D] text-[10px] font-semibold"
               >
-                <div className="w-4 h-4 rounded-full bg-[#BECB6D]/20 border border-[#BECB6D]/30 flex items-center justify-center">
-                  <Sparkles className="w-2.5 h-2.5 text-[#BECB6D] animate-bounce" />
-                </div>
                 <span>Pipeline live on edge</span>
               </motion.div>
             )}
