@@ -578,8 +578,11 @@ const DOCK_ITEMS = [
   { label: "Profile", icon: <User className="w-5 h-5 text-[#E8A969]" /> }
 ];
 
+import { useMotionValue, useSpring, useTransform } from "framer-motion";
+
 function InteractiveNavbarCard() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const mouseX = useMotionValue(Infinity);
 
   return (
     <div 
@@ -616,43 +619,24 @@ function InteractiveNavbarCard() {
         </div>
 
         {/* Dock Bar */}
-        <div className="flex items-end justify-center gap-3.5 bg-black/35 border border-white/5 rounded-2xl px-5 h-16 pb-2.5 backdrop-blur-md shadow-2xl">
-          {DOCK_ITEMS.map((item, idx) => {
-            const isHovered = hoveredIdx === idx;
-            const isNeighbor = hoveredIdx !== null && Math.abs(hoveredIdx - idx) === 1;
-            
-            let scale = 1.0;
-            let y = 0;
-            
-            if (isHovered) {
-              scale = 1.35;
-              y = -14;
-            } else if (isNeighbor) {
-              scale = 1.15;
-              y = -6;
-            }
-
-            return (
-              <motion.div
-                key={idx}
-                onMouseEnter={() => setHoveredIdx(idx)}
-                onMouseLeave={() => setHoveredIdx(null)}
-                animate={{ 
-                  scale, 
-                  y 
-                }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 300, 
-                  damping: 18 
-                }}
-                className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center shadow-lg relative group/item hover:border-[#E8A969]/30 transition-colors cursor-pointer shrink-0"
-              >
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent rounded-xl opacity-0 group-hover/item:opacity-100 transition-opacity" />
-                {item.icon}
-              </motion.div>
-            );
-          })}
+        <div 
+          onMouseMove={(e) => mouseX.set(e.clientX)}
+          onMouseLeave={() => {
+            mouseX.set(Infinity);
+            setHoveredIdx(null);
+          }}
+          className="flex items-end justify-center gap-3.5 bg-black/35 border border-white/5 rounded-2xl px-5 h-16 pb-2.5 backdrop-blur-md shadow-2xl"
+        >
+          {DOCK_ITEMS.map((item, idx) => (
+            <DockIcon
+              key={idx}
+              mouseX={mouseX}
+              label={item.label}
+              icon={item.icon}
+              idx={idx}
+              setHoveredIdx={setHoveredIdx}
+            />
+          ))}
         </div>
       </div>
 
@@ -667,6 +651,45 @@ function InteractiveNavbarCard() {
     </div>
   );
 }
+
+function DockIcon({ 
+  mouseX, 
+  icon, 
+  idx, 
+  setHoveredIdx 
+}: { 
+  mouseX: any; 
+  label: string; 
+  icon: React.ReactNode; 
+  idx: number;
+  setHoveredIdx: (idx: number | null) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  
+  const distance = useTransform(mouseX, (val: number) => {
+    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
+    return val - bounds.x - bounds.width / 2;
+  });
+
+  const widthTransform = useTransform(distance, [-100, 0, 100], [40, 56, 40]);
+  const yTransform = useTransform(distance, [-100, 0, 100], [0, -14, 0]);
+
+  const width = useSpring(widthTransform, { stiffness: 450, damping: 25 });
+  const y = useSpring(yTransform, { stiffness: 450, damping: 25 });
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ width, height: width, y }}
+      onMouseEnter={() => setHoveredIdx(idx)}
+      className="rounded-xl bg-white/5 border border-white/5 flex items-center justify-center shadow-lg relative group/item hover:border-[#E8A969]/30 cursor-pointer shrink-0"
+    >
+      <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent rounded-xl opacity-0 group-hover/item:opacity-100 transition-opacity" />
+      {icon}
+    </motion.div>
+  );
+}
+
 
 // ── SUB-COMPONENT 10: INFINITE MARQUEE (Card 10 - New!) ──
 const TECH_TAGS = [
