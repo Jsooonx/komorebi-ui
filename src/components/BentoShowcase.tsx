@@ -824,60 +824,76 @@ function MagneticCursorFieldCard() {
   );
 }
 
-// ── SUB-COMPONENT 12: AUDIO EQUALIZER CARD ──
+// ── SUB-COMPONENT 12: BORDER GLOW CARD ──
 function AudioEqualizerCard() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
-  const barCount = 14;
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
 
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
     >
+      {/* Spotlight Glow */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300"
+        style={{
+          opacity: hovered ? 1 : 0,
+          background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 169, 105, 0.08), transparent 80%)`
+        }}
+      />
+
+      {/* Border Glow Highlight */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300"
+        style={{
+          opacity: hovered ? 0.35 : 0,
+          border: '1px solid #E8A969',
+          borderRadius: 'inherit'
+        }}
+      />
+
       {/* Header */}
       <div className="relative z-10 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
-          EQUALIZER
+          BORDER GLOW
         </span>
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
-      {/* Visual Bar Equalizer */}
-      <div className="relative w-full h-28 flex items-end justify-center gap-1.5 px-4 bg-black/45 border border-white/5 rounded-xl overflow-hidden">
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#E8A969]/10 to-transparent pointer-events-none" />
-        
-        {Array.from({ length: barCount }).map((_, i) => {
-          // Generate unique animated height constraints
-          const delay = i * 0.08;
-          const duration = 0.5 + Math.random() * 0.6;
-          return (
-            <motion.div
-              key={i}
-              className="w-1.5 rounded-t-full bg-gradient-to-t from-[#BECB6D] to-[#E8A969]"
-              animate={{ 
-                height: hovered 
-                  ? [8, 48 + Math.random() * 40, 16, 72 + Math.random() * 20, 8] 
-                  : [8, 20 + Math.sin(i) * 12, 8] 
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: hovered ? duration : 1.2,
-                delay: delay,
-                ease: "easeInOut"
-              }}
-              style={{ height: 8 }}
-            />
-          );
-        })}
+      {/* Center Empty Visual */}
+      <div className="relative w-full h-28 flex items-center justify-center bg-black/45 border border-white/5 rounded-xl overflow-hidden">
+        {/* Ambient inner glow */}
+        <div 
+          className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300"
+          style={{
+            opacity: hovered ? 1 : 0,
+            background: `radial-gradient(180px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 169, 105, 0.12), transparent 70%)`
+          }}
+        />
+        {/* Micro details or glow dot in the center */}
+        <div className="relative z-10 w-1.5 h-1.5 rounded-full bg-[#E8A969] shadow-[0_0_12px_#E8A969] transition-transform duration-300 group-hover:scale-[2.5]" />
       </div>
 
       <div className="relative z-10">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
-          Frequency visualizer
+          CSS Borders
         </span>
         <h3 className="font-sans text-base font-medium tracking-tight text-white">
-          Responsive equalizer
+          Border beam
         </h3>
       </div>
     </div>
