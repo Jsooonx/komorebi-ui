@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FolderOpen, Play, RotateCcw, ArrowUpRight, ChevronDown } from "lucide-react";
+import { FolderOpen, Play, RotateCcw } from "lucide-react";
 import StoryCard from "./StoryCard";
 import Analytics from "./Analytics";
 import RotatingText from "./ui/RotatingText";
@@ -15,234 +15,321 @@ const TABS = [
   { id: "text-reveal", label: "Text Reveal", disabled: true },
 ];
 
+const CHAR_STEP = 0.038;
+
+function animateLines(selector: string, baseDelay: number, lineGap: number) {
+  const nodes = document.querySelectorAll<HTMLElement>(selector);
+  nodes.forEach((lineInner, lineIdx) => {
+    const lineDelay = baseDelay + lineIdx * lineGap;
+    let charCount = 0;
+    const walker = document.createTreeWalker(lineInner, NodeFilter.SHOW_TEXT);
+    const textNodes: Text[] = [];
+    let n: Node | null = walker.nextNode();
+    while (n) {
+      textNodes.push(n as Text);
+      n = walker.nextNode();
+    }
+    textNodes.forEach((textNode) => {
+      const text = textNode.nodeValue ?? "";
+      const frag = document.createDocumentFragment();
+      for (const ch of text) {
+        if (ch === " ") {
+          frag.appendChild(document.createTextNode(" "));
+        } else {
+          const span = document.createElement("span");
+          span.className = "hero__char";
+          span.textContent = ch;
+          span.style.animationDelay = `${lineDelay + charCount * CHAR_STEP}s`;
+          frag.appendChild(span);
+          charCount++;
+        }
+      }
+      textNode.parentNode?.replaceChild(frag, textNode);
+    });
+  });
+}
+
 function AuraHeroPreview() {
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.015,
-        delayChildren: 0.1,
-      },
-    },
-  };
+  const heroRef = useRef<HTMLDivElement>(null);
 
-  const charVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
+  useEffect(() => {
+    let started = false;
+    const startAnimations = () => {
+      if (started) return;
+      started = true;
+      document.body.classList.add("is-ready");
+      animateLines(".terminal-preview-container .hero__heading .hero__line-inner", 0.3, 0.85);
+      animateLines(".terminal-preview-container .hero__label .hero__line-inner", 0.3, 0.65);
+      animateLines(".terminal-preview-container .hero__desc .hero__line-inner", 0.3, 0.65);
+    };
 
-  const line1 = "Automating customer";
-  const line2 = "delight at scale — is an";
-  const line3 = "Algorithm";
+    const fallback = window.setTimeout(startAnimations, 200);
+
+    const sideLinks = document.querySelectorAll<HTMLAnchorElement>(".terminal-preview-container .side-nav__link");
+    const onSideClick = (ev: Event) => {
+      const link = ev.currentTarget as HTMLAnchorElement;
+      sideLinks.forEach((l) => {
+        l.classList.remove("side-nav__link--active");
+        l.querySelector(".side-nav__line")?.remove();
+      });
+      link.classList.add("side-nav__link--active");
+      const line = document.createElement("span");
+      line.className = "side-nav__line";
+      link.appendChild(line);
+    };
+    sideLinks.forEach((l) => l.addEventListener("click", onSideClick));
+
+    return () => {
+      window.clearTimeout(fallback);
+      sideLinks.forEach((l) => l.removeEventListener("click", onSideClick));
+    };
+  }, []);
+
+  const ArrowIcon = () => (
+    <svg
+      className="btn__arrow"
+      viewBox="0 0 8 8"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 7L7 1M7 1H2M7 1V6"
+        stroke="currentColor"
+        strokeWidth="1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-[#08090c] text-white flex flex-col justify-between p-8 font-heading select-none text-left">
-      {/* Background Natural Scenery */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/aura-hero-bg.png"
-          alt="Aura Natural Scenery"
-          className="w-full h-full object-cover opacity-80"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/75" />
-      </div>
-
-      {/* Header */}
-      <div className="relative z-10 flex items-center justify-between w-full shrink-0">
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <svg className="w-20 h-6 overflow-visible" viewBox="0 0 120 30" fill="none">
-            <motion.circle
-              cx="14.3"
-              cy="14.9"
-              r="7"
-              stroke="#fff"
-              strokeWidth="2.5"
-              fill="none"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4 }}
-            />
-            <motion.path
-              d="M28.5 14.6C28.4 12.3 27.7 10 26.5 8C25.3 6 23.6 4.3 21.5 3.2C19.4 2 17.1 1.5 14.7 1.5C12.4 1.5 10.1 2.2 8.1 3.4"
-              stroke="#fff"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            />
-            <motion.path
-              d="M37.5 14.9C37.5 12.2 36.6 9.5 35.1 7.3C33.5 5 31.3 3.3 28.7 2.4"
-              stroke="#fff"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            />
-            <motion.g
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <text x="46" y="22" fontFamily="Inter Tight" fontSize="22" fontWeight="700" fill="#fff" letterSpacing="-0.5">
-                Aura
-              </text>
-              <text x="96" y="10" fontSize="10" fill="#fff">
-                ™
-              </text>
-            </motion.g>
-          </svg>
+    <div className="terminal-preview-container w-full h-full absolute inset-0 overflow-hidden rounded-2xl select-none text-left">
+      <div className="hero" ref={heroRef}>
+        <div className="hero__bg">
+          <img
+            className="w-full h-full object-cover"
+            src="/aura-hero-bg.png"
+            alt="Aura Cosmic Network Flow"
+          />
+        </div>
+        <div className="hero__overlay" />
+        <div className="hero__gradient-top" />
+        <div className="hero__gradient-bottom" />
+        
+        <div className="hero__blur">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="hero__blur-layer" />
+          ))}
         </div>
 
-        {/* Navigation pill */}
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex items-center gap-6 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-[13px] font-medium text-white/70 shadow-lg"
-        >
-          <span className="hover:text-white transition-colors cursor-pointer">Widget</span>
-          <span className="hover:text-white transition-colors cursor-pointer flex items-center gap-1.5">
-            Integrations
-            <span className="px-1.5 py-0.5 rounded-full bg-[#00f5a0]/15 text-[#00f5a0] text-[10px] font-bold">12</span>
-          </span>
-          <span className="hover:text-white transition-colors cursor-pointer">Pricing</span>
-          <span className="hover:text-white transition-colors cursor-pointer">Docs</span>
-        </motion.div>
+        <header className="header">
+          <a href="#" className="logo" aria-label="Aura AI">
+            <svg
+              className="logo__icon"
+              viewBox="0 0 122 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                className="logo__circle"
+                cx="14.3"
+                cy="14.9"
+                r="7"
+                fill="none"
+                stroke="#fff"
+                strokeWidth="3"
+              />
+              <path
+                className="logo__arc-1a"
+                pathLength="100"
+                stroke="#fff"
+                strokeWidth="3"
+                strokeLinecap="round"
+                fill="none"
+                d="M28.4955 14.6513C28.4346 12.2923 27.7563 9.99047 26.5284 7.9753C25.3005 5.96012 23.5657 4.30202 21.4972 3.1663C19.4287 2.03059 17.0985 1.45693 14.7392 1.50252C12.3798 1.54811 10.0736 2.21137 8.05047 3.42615"
+              />
+              <path
+                className="logo__arc-1b"
+                pathLength="100"
+                stroke="#fff"
+                strokeWidth="3"
+                strokeLinecap="round"
+                fill="none"
+                d="M28.4955 14.6513C28.5564 17.0104 27.998 19.3442 26.8757 21.4201C25.7535 23.496 24.1067 25.2414 22.0996 26.4824C20.0924 27.7234 17.795 28.4166 15.4365 28.4929C13.0779 28.5692 10.7405 28.026 8.65735 26.9173"
+              />
+              <path
+                className="logo__arc-2a"
+                pathLength="100"
+                stroke="#fff"
+                strokeWidth="3"
+                strokeLinecap="round"
+                fill="none"
+                d="M37.4997 14.9144C37.4824 12.1783 36.634 9.51197 35.0671 7.26888C33.5001 5.02578 31.2885 3.31178 28.7254 2.35403"
+              />
+              <path
+                className="logo__arc-2b"
+                pathLength="100"
+                stroke="#fff"
+                strokeWidth="3"
+                strokeLinecap="round"
+                fill="none"
+                d="M37.4997 14.9144C37.5171 17.6506 36.7026 20.3274 35.1642 22.5902C33.6258 24.853 31.4361 26.5949 28.8853 27.5851"
+              />
+              <g className="logo__text-group">
+                <text
+                  x="46"
+                  y="22"
+                  fontFamily="Inter Tight"
+                  fontSize="22"
+                  fontWeight="700"
+                  fill="#fff"
+                  letterSpacing="-0.5"
+                >
+                  Aura
+                </text>
+                <text className="logo__tm" x="96" y="10">
+                  ™
+                </text>
+              </g>
+            </svg>
+          </a>
 
-        {/* CTA */}
-        <motion.button
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white text-black font-medium text-[13px] hover:bg-white/90 active:scale-95 transition-all shadow-md cursor-pointer"
-        >
-          Request Demo
-          <ArrowUpRight className="w-3.5 h-3.5" />
-        </motion.button>
-      </div>
+          <nav className="nav-pill" aria-label="Primary">
+            <a className="nav-pill__link" href="#widget">
+              Widget
+            </a>
+            <a className="nav-pill__link" href="#integrations">
+              Integrations<span className="nav-pill__badge">12</span>
+            </a>
+            <a className="nav-pill__link" href="#pricing">
+              Pricing
+            </a>
+            <a className="nav-pill__link" href="#docs">
+              Docs
+            </a>
+          </nav>
 
-      {/* Main Slogan in Center-Left */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 max-w-2xl text-left mt-8 select-none"
-      >
-        <h1 className="text-4xl md:text-5xl font-medium tracking-tight text-white leading-[1.15]">
-          <span className="block overflow-hidden pb-1">
-            {line1.split("").map((ch, i) => (
-              <motion.span key={i} variants={charVariants} className="inline-block whitespace-pre">
-                {ch}
-              </motion.span>
-            ))}
+          <button className="btn btn--header">
+            Request Demo
+            <ArrowIcon />
+          </button>
+        </header>
+
+        {/* Slogan - B2B AI Support */}
+        <h1 className="hero__heading">
+          <span className="hero__line">
+            <span className="hero__line-inner">Automating customer</span>
           </span>
-          <span className="block overflow-hidden pb-1">
-            {line2.split("").map((ch, i) => (
-              <motion.span key={i} variants={charVariants} className="inline-block whitespace-pre">
-                {ch}
-              </motion.span>
-            ))}
+          <span className="hero__line">
+            <span className="hero__line-inner">delight at scale — is an</span>
           </span>
-          <span className="block overflow-hidden">
-            {line3.split("").map((ch, i) => (
-              <motion.span
-                key={i}
-                variants={charVariants}
-                className="inline-block italic font-serif font-normal text-white/90 whitespace-pre"
-              >
-                {ch}
-              </motion.span>
-            ))}
+          <span className="hero__line">
+            <span className="hero__line-inner">
+              <em>Algorithm</em>
+            </span>
           </span>
         </h1>
-      </motion.div>
 
-      {/* Side Links on Right */}
-      <div className="absolute right-8 top-1/2 -translate-y-1/2 z-10 flex flex-col gap-4 items-end text-xs font-mono">
-        <div className="flex items-center gap-2 text-white">
-          <span>Home</span>
-          <span className="w-3 h-[1px] bg-white" />
-        </div>
-        <div className="text-white/40 hover:text-white/70 transition-colors cursor-pointer">Automation</div>
-        <div className="text-white/40 hover:text-white/70 transition-colors cursor-pointer">Integrations</div>
-        <div className="text-white/40 hover:text-white/70 transition-colors cursor-pointer">Pricing Plan</div>
-        <div className="text-white/40 hover:text-white/70 transition-colors cursor-pointer">Contact Us</div>
-      </div>
+        <nav className="side-nav" aria-label="Sections">
+          <a className="side-nav__link side-nav__link--active" href="#home">
+            <span className="side-nav__link-text">Home</span>
+            <span className="side-nav__line" />
+          </a>
+          <a className="side-nav__link" href="#automation">
+            <span className="side-nav__link-text">Automation</span>
+          </a>
+          <a className="side-nav__link" href="#integrations">
+            <span className="side-nav__link-text">Integrations</span>
+          </a>
+          <a className="side-nav__link" href="#pricing">
+            <span className="side-nav__link-text">Pricing Plan</span>
+          </a>
+          <a className="side-nav__link" href="#contact">
+            <span className="side-nav__link-text">Contact Us</span>
+          </a>
+        </nav>
 
-      {/* Bottom Panel */}
-      <div className="relative z-10 flex items-end justify-between w-full shrink-0 gap-8 mt-4">
-        {/* Left Side: Stats and Desc */}
-        <div className="flex flex-col gap-2 max-w-md">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-xs font-mono uppercase tracking-widest text-[#00f5a0]"
-          >
-            01 — Our vision
-          </motion.div>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-            className="text-xs text-white/50 leading-relaxed font-heading"
-          >
-            We power the next generation of B2B support, transforming manual ticketing backlogs into instant self-learning conversations.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="flex items-center gap-4 mt-2"
-          >
-            <button className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-white font-medium text-[13px] cursor-pointer">
+        <div className="hero__blur-bar" />
+
+        <div className="hero__bottom">
+          <div className="hero__label">
+            <span className="hero__line">
+              <span className="hero__line-inner">01 — Our vision</span>
+            </span>
+          </div>
+          <p className="hero__desc">
+            <span className="hero__line">
+              <span className="hero__line-inner">
+                We power the next generation of B2B support,
+              </span>
+            </span>
+            <span className="hero__line">
+              <span className="hero__line-inner">
+                transforming manual ticketing backlogs into
+              </span>
+            </span>
+            <span className="hero__line">
+              <span className="hero__line-inner">instant self-learning conversations.</span>
+            </span>
+          </p>
+          <div className="hero__actions">
+            <button className="btn btn--footer">
               Explore integrations
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <ArrowIcon />
             </button>
-            <div className="flex items-center gap-1.5 text-xs text-white/60 hover:text-white cursor-pointer group">
-              <span>Scroll down</span>
-              <ChevronDown className="w-4 h-4 animate-bounce" />
+            <button className="scroll-down" id="scrollDown">
+              <span className="scroll-down__text">Scroll down</span>
+              <span className="scroll-down__circle">
+                <svg
+                  viewBox="0 0 7.222 8.667"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3.611 1V7.667M3.611 7.667L1 5M3.611 7.667L6.222 5"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          {/* Conversational SDK Card */}
+          <a className="about-card" href="#widget">
+            <div className="about-card__image">
+              <img
+                src="/aura-about-card.png"
+                alt="Aura AI Conversational Sphere"
+              />
             </div>
-          </motion.div>
+            <div className="about-card__content">
+              <div>
+                <h3 className="about-card__title">SDK Integration</h3>
+                <p className="about-card__text">
+                  Deploy a self-learning widget that integrates directly with your codebase in under two minutes.
+                </p>
+              </div>
+              <svg
+                className="about-card__arrow"
+                viewBox="0 0 77 13"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 6.5H75M75 6.5L70 1.5M75 6.5L70 11.5"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </a>
         </div>
-
-        {/* Right Side: Conversational SDK Card */}
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          whileHover={{ y: -4, scale: 1.02 }}
-          className="flex w-[320px] bg-white text-black p-1.5 rounded-lg overflow-hidden shadow-2xl shrink-0 cursor-pointer"
-        >
-          <div className="w-[110px] h-[85px] shrink-0 rounded overflow-hidden p-0.5 bg-black/5">
-            <img src="/aura-about-card.png" alt="Aura Orb" className="w-full h-full object-cover rounded" />
-          </div>
-          <div className="flex flex-col justify-between p-2 flex-grow">
-            <div>
-              <h4 className="text-[11px] font-bold uppercase tracking-wider text-black">SDK Integration</h4>
-              <p className="text-[10px] text-black/60 leading-snug mt-1 font-heading">
-                Deploy a self-learning widget that integrates directly with your codebase in under two minutes.
-              </p>
-            </div>
-            <ArrowUpRight className="w-4 h-4 text-black/35 self-end transition-colors group-hover:text-black" />
-          </div>
-        </motion.div>
       </div>
-
-      {/* 8-layer progressive blur backdrop bar simulation */}
-      <div className="absolute left-0 right-0 bottom-0 h-16 pointer-events-none bg-gradient-to-t from-black/80 to-transparent z-5" />
     </div>
   );
 }
