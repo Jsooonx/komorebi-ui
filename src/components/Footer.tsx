@@ -7,8 +7,8 @@ export default function Footer() {
     explore: [
       { name: "Terminal Playground", href: "#showcase" },
       { name: "Bento Components", href: "#bento-showcase" },
-      { name: "Template Showcase", href: "#template-showcase" },
-      { name: "CLI Tooling", href: "#" }
+      { name: "Template Showcase", href: "#templates" },
+      { name: "CLI Tooling", href: "#showcase" }
     ],
     components: [
       { name: "Attractor Field", href: "#bento-showcase" },

@@ -106,9 +106,10 @@ export default function DynamicIsland() {
           
           {/* Navigation Links (Hidden on small screens) */}
           <nav className="hidden sm:flex items-center gap-5 text-xs font-heading font-medium text-moss-green/75">
-            <NavLink to="/">Home</NavLink>
-            <NavLink href="#showcase">Showcase</NavLink>
-            <NavLink href="#about">Concept</NavLink>
+            <NavLink href="#">Home</NavLink>
+            <NavLink href="#showcase">Playground</NavLink>
+            <NavLink href="#bento-showcase">Components</NavLink>
+            <NavLink href="#templates">Templates</NavLink>
           </nav>
 
           <div className="w-[1px] h-4 bg-white/20 hidden sm:block"></div>
