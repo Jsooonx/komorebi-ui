@@ -6,6 +6,7 @@ import ShowcaseTerminal from "@/components/ShowcaseTerminal";
 import SplitText from "@/components/ui/SplitText";
 import BentoShowcase from "@/components/BentoShowcase";
 import TemplateShowcase from "@/components/TemplateShowcase";
+import Footer from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -87,6 +88,9 @@ function Index() {
 
       {/* ── SECTION 4: WEBSITE TEMPLATE SHOWCASE (PROMPT LIBRARY) ── */}
       <TemplateShowcase />
+
+      {/* ── FOOTER ── */}
+      <Footer />
     </main>
   );
 }
