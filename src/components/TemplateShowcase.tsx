@@ -33,14 +33,14 @@ const TEMPLATES: TemplateItem[] = [
     PreviewComponent: JPlusHeroPreview,
   },
   {
-    id: "kubrik",
-    title: "Kubrik - B2B AI Widget",
+    id: "aura",
+    title: "Aura - B2B Conversational AI",
     creator: "AI / SaaS",
     creatorAvatar: "/KomorebiLogoUpdate1.png",
     sections: "6 Sections",
     badgeType: "get",
-    tags: ["B2B", "SaaS", "Luxury Tech", "Staggered Text"],
-    prompt: "Build a luxury tech landing page based on the Kubrik design system. The page should feature a deep black slate obsidian background (#08090c) and a top header nav-pill with transparent blurs and a glowing integrations badge. The hero has a centered header with staggered typing animations: 'Automating customer delight at scale — is an Algorithm'. On the right, place a side navigation, and at the bottom left, stats about the vision. On the bottom right, display an interactive white 'SDK Integration' card with a 3D organic glossy sphere.",
+    tags: ["B2B", "SaaS", "Conversational AI", "Staggered Text"],
+    prompt: "Build a luxury conversational B2B AI landing page based on the Aura AI design system. The page should feature a deep black slate obsidian background (#08090c) and a top header nav-pill with transparent blurs and a glowing integrations badge. The hero has a centered header with staggered typing animations: 'Automating customer delight at scale — is an Algorithm'. On the right, place a side navigation, and at the bottom left, stats about the vision. On the bottom right, display an interactive white 'SDK Integration' card with a 3D organic glossy sphere.",
     PreviewComponent: KubrikHeroPreview,
   },
   {
