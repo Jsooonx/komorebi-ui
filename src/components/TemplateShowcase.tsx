@@ -101,7 +101,7 @@ function TemplateCard({ item }: { item: TemplateItem }) {
   const { PreviewComponent } = item;
 
   return (
-    <div className="flex flex-col bg-[#0f0f12] border border-white/5 rounded-3xl overflow-hidden hover:border-white/10 transition-all select-none group">
+    <div className="flex flex-col bg-[#0f0f12] border border-white/5 rounded-lg overflow-hidden hover:border-white/10 transition-all select-none group">
       {/* Visual Live Preview Viewport Mock */}
       <div 
         ref={containerRef}

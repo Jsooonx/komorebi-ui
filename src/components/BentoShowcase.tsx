@@ -10,7 +10,7 @@ function ImageRevealCard() {
   const [hovered, setHovered] = useState(false);
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -69,7 +69,7 @@ function HoverMembersCard() {
   const [hovered, setHovered] = useState(false);
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -132,7 +132,7 @@ function DevouringDetailsCard() {
 
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -190,7 +190,7 @@ function DynamicIslandCard() {
   const [hovered, setHovered] = useState(false);
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -325,7 +325,7 @@ function ThingsDragAndScrollCard() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full h-[544px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group"
+      className="relative w-full h-[544px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group"
       style={{ perspective: 1000 }}
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50" />
@@ -385,7 +385,7 @@ function ThingsDragAndScrollCard() {
                   boxShadow: `0 20px 45px -15px ${card.glow}`
                 }}
                 whileDrag={{ scale: 1.05, cursor: "grabbing" }}
-                className="absolute w-full h-full rounded-2xl border border-white/10 bg-black flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
+                className="absolute w-full h-full rounded-lg border border-white/10 bg-black flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
               >
                 <img 
                   src={card.src} 
@@ -419,7 +419,7 @@ function DitherCard() {
   }, []);
 
   return (
-    <div className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group">
+    <div className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group">
       {/* Header */}
       <div className="relative z-10 w-full flex items-center justify-between">
         <span className="text-[10px] font-mono text-white/45 tracking-widest uppercase">
@@ -462,7 +462,7 @@ function TextRollCard() {
   
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -519,7 +519,7 @@ function BorderBeamCard() {
   
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-lg overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -577,7 +577,7 @@ function InteractiveNavbarCard() {
 
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:col-span-2 md:col-span-2 group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:col-span-2 md:col-span-2 group"
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-[#E8A969]/5 to-[#121212] opacity-60" />
 
@@ -611,7 +611,7 @@ function InteractiveNavbarCard() {
             mouseX.set(Infinity);
             setHoveredIdx(null);
           }}
-          className="flex items-end justify-center gap-3.5 bg-black/35 border border-white/5 rounded-2xl px-5 h-16 pb-2.5 backdrop-blur-md shadow-2xl"
+          className="flex items-end justify-center gap-3.5 bg-black/35 border border-white/5 rounded-lg px-5 h-16 pb-2.5 backdrop-blur-md shadow-2xl"
         >
           {DOCK_ITEMS.map((item, idx) => (
             <DockIcon
@@ -685,7 +685,7 @@ const TECH_TAGS = [
 function InfiniteMarqueeCard() {
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#121212] via-transparent to-[#1c1c1c]/10 opacity-50" />
 
@@ -752,7 +752,7 @@ function MagneticCursorFieldCard() {
       onMouseLeave={handleMouseLeave}
       animate={{ rotateY: tilt.x, rotateX: tilt.y }}
       transition={{ type: "spring", stiffness: 180, damping: 22 }}
-      className="relative w-full h-[544px] rounded-2xl border border-white/5 overflow-hidden lg:row-span-2 group cursor-pointer select-none bg-[#121212]"
+      className="relative w-full h-[544px] rounded-lg border border-white/5 overflow-hidden lg:row-span-2 group cursor-pointer select-none bg-[#121212]"
       style={{ perspective: 1000, transformStyle: "preserve-3d" }}
     >
       <PixelCard variant="gold" className="w-full h-full border-none bg-transparent">
@@ -794,7 +794,7 @@ function AudioEqualizerCard() {
 
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -895,7 +895,7 @@ function MorphingBlobCard() {
       onMouseLeave={handleMouseLeave}
       animate={{ rotateY: tilt.x, rotateX: tilt.y }}
       transition={{ type: "spring", stiffness: 180, damping: 22 }}
-      className="relative w-full h-[544px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group antialiased"
+      className="relative w-full h-[544px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group antialiased"
       style={{ perspective: 1000, transformStyle: "preserve-3d" }}
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50 pointer-events-none" />
@@ -1280,7 +1280,7 @@ function HolographicTerminalCard() {
 
   return (
     <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
