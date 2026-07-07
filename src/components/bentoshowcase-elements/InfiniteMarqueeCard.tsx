@@ -1,42 +1,9 @@
 import { motion } from "framer-motion";
+import { Cpu, Zap, GitBranch, Shield } from "lucide-react";
 
 const TECH_TAGS = [
   "React", "TypeScript", "WebGL", "GSAP", "TailwindCSS", "Framer Motion", "ThreeJS", "Vite"
 ];
-
-function getTechLogoUrl(tech: string) {
-  const token = "pk_FklYVGBwT-mKrXMQ7yPyqQ";
-  let domain = "";
-  switch (tech) {
-    case "React":
-      domain = "react.dev";
-      break;
-    case "TypeScript":
-      domain = "typescriptlang.org";
-      break;
-    case "WebGL":
-      domain = "khronos.org";
-      break;
-    case "GSAP":
-      domain = "greensock.com";
-      break;
-    case "TailwindCSS":
-      domain = "tailwindcss.com";
-      break;
-    case "Framer Motion":
-      domain = "framer.com";
-      break;
-    case "ThreeJS":
-      domain = "threejs.org";
-      break;
-    case "Vite":
-      domain = "vitejs.dev";
-      break;
-    default:
-      domain = "github.com";
-  }
-  return `https://img.logo.dev/${domain}?token=${token}`;
-}
 
 export default function InfiniteMarqueeCard() {
   return (
@@ -61,14 +28,10 @@ export default function InfiniteMarqueeCard() {
               key={`tech1-${idx}`} 
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/45 border border-white/5"
             >
-              <img 
-                src={getTechLogoUrl(tech)} 
-                alt={`${tech} logo`} 
-                className="w-3.5 h-3.5 shrink-0 object-contain rounded-sm"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-              />
+              {idx % 4 === 0 && <Cpu className="w-3.5 h-3.5 text-[#BECB6D]" />}
+              {idx % 4 === 1 && <Zap className="w-3.5 h-3.5 text-[#BECB6D]" />}
+              {idx % 4 === 2 && <GitBranch className="w-3.5 h-3.5 text-[#BECB6D]" />}
+              {idx % 4 === 3 && <Shield className="w-3.5 h-3.5 text-[#BECB6D]" />}
               <span className="text-[10px] font-mono text-white/90 font-medium tracking-wide uppercase">
                 {tech}
               </span>
@@ -80,14 +43,10 @@ export default function InfiniteMarqueeCard() {
               key={`tech2-${idx}`} 
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/45 border border-white/5"
             >
-              <img 
-                src={getTechLogoUrl(tech)} 
-                alt={`${tech} logo`} 
-                className="w-3.5 h-3.5 shrink-0 object-contain rounded-sm"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-              />
+              {idx % 4 === 0 && <Cpu className="w-3.5 h-3.5 text-[#BECB6D]" />}
+              {idx % 4 === 1 && <Zap className="w-3.5 h-3.5 text-[#BECB6D]" />}
+              {idx % 4 === 2 && <GitBranch className="w-3.5 h-3.5 text-[#BECB6D]" />}
+              {idx % 4 === 3 && <Shield className="w-3.5 h-3.5 text-[#BECB6D]" />}
               <span className="text-[10px] font-mono text-white/90 font-medium tracking-wide uppercase">
                 {tech}
               </span>
