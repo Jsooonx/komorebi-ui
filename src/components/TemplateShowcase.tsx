@@ -212,13 +212,6 @@ export default function TemplateShowcase() {
       <div className="max-w-[1500px] mx-auto flex flex-col items-center">
         {/* Section Heading */}
         <div className="text-center flex flex-col items-center mb-16 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00f5a0]/5 border border-[#00f5a0]/15 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00f5a0] animate-pulse" />
-            <span className="text-[10px] uppercase font-bold tracking-widest text-[#00f5a0]">
-              04 — Prompt to Build
-            </span>
-          </div>
-
           <div className="mb-6">
             <SplitText
               text="Build entire websites in one prompt."
