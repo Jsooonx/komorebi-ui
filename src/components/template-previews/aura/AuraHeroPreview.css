@@ -1,17 +1,17 @@
-/* ============ KUBRIK TEMPLATE PREVIEW KEYFRAMES ============ */
-@keyframes kubrik-CircleGrow { to { transform: scale(1); opacity:1; } }
-@keyframes kubrik-ArcDraw1 { to { stroke-dashoffset:0; opacity:1; transform: translateX(0);} }
-@keyframes kubrik-ArcDraw2 { to { stroke-dashoffset:0; opacity:1; transform: translateX(0);} }
-@keyframes kubrik-TextReveal { to { opacity:1; filter: blur(0); transform: translateX(0);} }
-@keyframes kubrik-PillReveal { to { transform: scaleX(1); opacity:1; } }
-@keyframes kubrik-LinkReveal { to { opacity:1; transform: translateY(0); } }
-@keyframes kubrik-Bounce { 0%{transform:scale(0);opacity:0;} 60%{transform:scale(1.1);opacity:1;} 100%{transform:scale(1);opacity:1;} }
-@keyframes kubrik-Bounce_2 { 0%{transform:scale(0);opacity:0;} 60%{transform:scale(1);opacity:1;} 100%{transform:scale(1);opacity:1;} }
-@keyframes kubrik-CharReveal { to { transform: translateY(0); opacity:1; } }
-@keyframes kubrik-TextReveal2 { to { opacity:1; transform: translateY(0); } }
+/* ============ aura TEMPLATE PREVIEW KEYFRAMES ============ */
+@keyframes aura-CircleGrow { to { transform: scale(1); opacity:1; } }
+@keyframes aura-ArcDraw1 { to { stroke-dashoffset:0; opacity:1; transform: translateX(0);} }
+@keyframes aura-ArcDraw2 { to { stroke-dashoffset:0; opacity:1; transform: translateX(0);} }
+@keyframes aura-TextReveal { to { opacity:1; filter: blur(0); transform: translateX(0);} }
+@keyframes aura-PillReveal { to { transform: scaleX(1); opacity:1; } }
+@keyframes aura-LinkReveal { to { opacity:1; transform: translateY(0); } }
+@keyframes aura-Bounce { 0%{transform:scale(0);opacity:0;} 60%{transform:scale(1.1);opacity:1;} 100%{transform:scale(1);opacity:1;} }
+@keyframes aura-Bounce_2 { 0%{transform:scale(0);opacity:0;} 60%{transform:scale(1);opacity:1;} 100%{transform:scale(1);opacity:1;} }
+@keyframes aura-CharReveal { to { transform: translateY(0); opacity:1; } }
+@keyframes aura-TextReveal2 { to { opacity:1; transform: translateY(0); } }
 
-/* ============ KUBRIK HERO PREVIEW STYLES ============ */
-.kubrik-preview {
+/* ============ aura HERO PREVIEW STYLES ============ */
+.aura-preview {
   --bg: #08090c;
   --text: #ffffff;
   --text-muted: rgba(255,255,255,0.749);
@@ -67,15 +67,15 @@
   &:not(.is-ready) .logo__text-group { opacity: 0; animation-play-state: paused !important; }
   
   .logo__circle { transform-origin: 14.3px 14.9px; transform: scale(0); opacity: 0;
-    animation: kubrik-CircleGrow 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards; }
+    animation: aura-CircleGrow 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards; }
   
   .logo__arc-1a,.logo__arc-1b { stroke-dasharray:100; stroke-dashoffset:100; opacity:0; transform: translateX(-14px);
-    animation: kubrik-ArcDraw1 0.65s cubic-bezier(0.16,1,0.3,1) 0.55s forwards; }
+    animation: aura-ArcDraw1 0.65s cubic-bezier(0.16,1,0.3,1) 0.55s forwards; }
   .logo__arc-2a,.logo__arc-2b { stroke-dasharray:100; stroke-dashoffset:100; opacity:0; transform: translateX(-14px);
-    animation: kubrik-ArcDraw2 0.5s  cubic-bezier(0.16,1,0.3,1) 1.25s forwards; }
+    animation: aura-ArcDraw2 0.5s  cubic-bezier(0.16,1,0.3,1) 1.25s forwards; }
   
   .logo__text-group { opacity:0; filter: blur(10px); transform: translateX(28px);
-    animation: kubrik-TextReveal 1.9s cubic-bezier(0.16,1,0.3,1) 1.25s forwards; }
+    animation: aura-TextReveal 1.9s cubic-bezier(0.16,1,0.3,1) 1.25s forwards; }
   
   .logo__tm { font-family:"Inter Tight",sans-serif; font-size:20px; fill:#fff; }
   
@@ -89,13 +89,13 @@
     backdrop-filter: blur(7px);
     box-shadow: 0 4px 24px rgba(0,0,0,0.18);
     transform-origin: center; transform: scaleX(0); opacity: 0;
-    animation: kubrik-PillReveal 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
+    animation: aura-PillReveal 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
   }
   &:not(.is-ready) .nav-pill { animation-play-state: paused !important; }
   
   .nav-pill__link { font-size: 13px; font-weight:500; color: var(--text-muted);
     transition: color 0.2s ease; display:inline-flex; align-items:center; gap: 6px;
-    opacity: 0; transform: translateY(14px); animation: kubrik-LinkReveal 0.65s cubic-bezier(0.16,1,0.3,1) forwards; }
+    opacity: 0; transform: translateY(14px); animation: aura-LinkReveal 0.65s cubic-bezier(0.16,1,0.3,1) forwards; }
   &:not(.is-ready) .nav-pill__link { animation-play-state: paused !important; }
   .nav-pill__link:hover { color:#fff; }
   .nav-pill__link:nth-child(1){animation-delay:0.75s;}
@@ -113,8 +113,8 @@
     cursor:pointer; }
   .btn__arrow { width:8px; height:8px; }
   
-  .btn--header { background:#fff; color:#000; opacity:0; transform: scale(0); animation: kubrik-Bounce 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s forwards; }
-  .btn--footer { background:#fff; color:var(--dark-text); opacity:0; transform: scale(0); animation: kubrik-Bounce 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s forwards; }
+  .btn--header { background:#fff; color:#000; opacity:0; transform: scale(0); animation: aura-Bounce 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s forwards; }
+  .btn--footer { background:#fff; color:var(--dark-text); opacity:0; transform: scale(0); animation: aura-Bounce 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s forwards; }
   &:not(.is-ready) .btn--header, &:not(.is-ready) .btn--footer { animation-play-state: paused !important; }
   
   .hero__heading { position:absolute; left: var(--page-pad); top: 22%; width: 720px; z-index:5;
@@ -127,7 +127,7 @@
   .hero__heading em { font-style: italic; font-weight: 700; }
   
   .hero__char { display:inline-block; transform: translateY(110%); opacity:0;
-    animation: kubrik-CharReveal 0.65s cubic-bezier(0.16,1,0.3,1) forwards; }
+    animation: aura-CharReveal 0.65s cubic-bezier(0.16,1,0.3,1) forwards; }
   &:not(.is-ready) .hero__char { animation-play-state: paused !important; }
   
   .side-nav { position:absolute; right: var(--page-pad); top:50%; transform: translateY(-50%); z-index:5;
@@ -137,7 +137,7 @@
   .side-nav__link--active { color:#ececec; opacity: 1; }
   
   .side-nav__link-text { display:inline-block; opacity: 0; transform: translateY(14px);
-    animation: kubrik-TextReveal2 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+    animation: aura-TextReveal2 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
   &:not(.is-ready) .side-nav__link-text, &:not(.is-ready) .side-nav__line { animation-play-state: paused !important; opacity:0; }
   .side-nav__link:nth-child(1) .side-nav__link-text { animation-delay:0.5s; }
   .side-nav__link:nth-child(2) .side-nav__link-text { animation-delay:0.7s; }
@@ -146,7 +146,7 @@
   .side-nav__link:nth-child(5) .side-nav__link-text { animation-delay:1.3s; }
   
   .side-nav__line { display:inline-block; width:12px; height:1px; background:#fff; opacity: 0;
-    animation: kubrik-TextReveal2 0.6s cubic-bezier(0.16,1,0.3,1) 0.5s forwards; }
+    animation: aura-TextReveal2 0.6s cubic-bezier(0.16,1,0.3,1) 0.5s forwards; }
   
   .hero__bottom { position:absolute; left:var(--page-pad); right:var(--page-pad); bottom:0; z-index:5;
     display:grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto auto;
@@ -160,7 +160,7 @@
   .about-card { grid-column:2; grid-row: 1 / span 3; align-self:end;
     display:flex; width: 310px; background:#fff;
     border-radius: var(--card-radius); overflow:hidden; transform: scale(0); opacity: 0;
-    animation: kubrik-Bounce_2 0.9s cubic-bezier(0.16,1,0.3,1) 1.2s forwards;
+    animation: aura-Bounce_2 0.9s cubic-bezier(0.16,1,0.3,1) 1.2s forwards;
     transition: transform 0.25s ease, box-shadow 0.25s ease; }
   &:not(.is-ready) .about-card { animation-play-state: paused !important; }
   .about-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
@@ -175,7 +175,7 @@
   .about-card:hover .about-card__arrow { color: rgba(0,0,0,0.6); }
   
   .scroll-down { display:inline-flex; align-items:center; gap:6px; cursor:pointer; background:none;
-    opacity:0; transform: scale(0); animation: kubrik-Bounce 0.9s cubic-bezier(0.16,1,0.3,1) 1.4s forwards; }
+    opacity:0; transform: scale(0); animation: aura-Bounce 0.9s cubic-bezier(0.16,1,0.3,1) 1.4s forwards; }
   &:not(.is-ready) .scroll-down { animation-play-state: paused !important; }
   .scroll-down__text { font-family:"Inter Tight",sans-serif; font-size: 13px; font-weight:700; letter-spacing:-0.18px;
     background: linear-gradient(90deg, #fff -7.5%, rgba(255,255,255,0) -7.49%, #fff 48.59%, #fff 48.61%, rgba(255,255,255,0) 107%);

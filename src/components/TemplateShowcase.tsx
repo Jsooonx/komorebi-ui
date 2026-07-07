@@ -1,12 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Clipboard, Check } from "lucide-react";
 import SplitText from "./ui/SplitText";
-import JPlusHeroPreview from "./template-previews/jplus/JPlusHeroPreview";
-import KubrikHeroPreview from "./template-previews/kubrik/KubrikHeroPreview";
-import ShyenHeroPreview from "./template-previews/shyen/ShyenHeroPreview";
-import SynergeusHeroPreview from "./template-previews/synergeus/SynergeusHeroPreview";
+
+// Lazy load website template previews to defer hls.js and heavy layouts
+const JPlusHeroPreview = lazy(() => import("./template-previews/jplus/JPlusHeroPreview"));
+const AuraHeroPreview = lazy(() => import("./template-previews/aura/AuraHeroPreview"));
+const ShyenHeroPreview = lazy(() => import("./template-previews/shyen/ShyenHeroPreview"));
+const SynergeusHeroPreview = lazy(() => import("./template-previews/synergeus/SynergeusHeroPreview"));
 
 interface TemplateItem {
   id: string;
@@ -41,7 +43,7 @@ const TEMPLATES: TemplateItem[] = [
     badgeType: "get",
     tags: ["B2B", "SaaS", "Conversational AI", "Staggered Text"],
     prompt: "Build a luxury conversational B2B AI landing page based on the Aura AI design system. The page should feature a deep black slate obsidian background (#08090c) and a top header nav-pill with transparent blurs and a glowing integrations badge. The hero has a centered header with staggered typing animations: 'Automating customer delight at scale — is an Algorithm'. On the right, place a side navigation, and at the bottom left, stats about the vision. On the bottom right, display an interactive white 'SDK Integration' card with a 3D organic glossy sphere.",
-    PreviewComponent: KubrikHeroPreview,
+    PreviewComponent: AuraHeroPreview,
   },
   {
     id: "shyen",
@@ -119,7 +121,9 @@ function TemplateCard({ item }: { item: TemplateItem }) {
             transform: `scale(${scale})` 
           }}
         >
-          <PreviewComponent key={hoverKey} />
+          <Suspense fallback={<div className="w-full h-full bg-[#08090c] animate-pulse" />}>
+            <PreviewComponent key={hoverKey} />
+          </Suspense>
         </div>
 
         {/* Scaled browser overlay mock dots */}

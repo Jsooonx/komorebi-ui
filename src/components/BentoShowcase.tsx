@@ -1,9 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense, lazy } from "react";
 import { motion, AnimatePresence, animate } from "framer-motion";
 import { Smartphone, Mail, Volume2, Sparkles, Terminal, Cpu, Zap, GitBranch, Shield, Home, Folder, Settings, User } from "lucide-react";
-import Dither from "./ui/dither";
 import SplitText from "./ui/SplitText";
 import PixelCard from "./ui/PixelCard";
+
+// Lazy load heavy WebGL dither canvas
+const Dither = lazy(() => import("./ui/dither"));
 
 // ── SUB-COMPONENT 1: IMAGE REVEAL CARD ──
 function ImageRevealCard() {
@@ -431,15 +433,17 @@ function DitherCard() {
       {/* Dither Shader Area */}
       <div className="relative w-full h-28 rounded-xl overflow-hidden border border-white/5 bg-black">
         {isClient && (
-          <Dither 
-            waveSpeed={0.08}
-            waveFrequency={3.5}
-            waveAmplitude={0.4}
-            waveColor={[0.1, 0.25, 0.7]} // Indigo-blue glow
-            baseColor={[0.02, 0.03, 0.08]} // Very dark midnight blue
-            colorNum={4}
-            pixelSize={3}
-          />
+          <Suspense fallback={<div className="w-full h-full bg-black animate-pulse" />}>
+            <Dither 
+              waveSpeed={0.08}
+              waveFrequency={3.5}
+              waveAmplitude={0.4}
+              waveColor={[0.1, 0.25, 0.7]} // Indigo-blue glow
+              baseColor={[0.02, 0.03, 0.08]} // Very dark midnight blue
+              colorNum={4}
+              pixelSize={3}
+            />
+          </Suspense>
         )}
       </div>
 

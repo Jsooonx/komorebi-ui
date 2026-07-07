@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import "./KubrikHeroPreview.css";
+import "./AuraHeroPreview.css";
 
 const CHAR_STEP = 0.038;
 
@@ -35,7 +35,7 @@ function animateLines(container: HTMLElement, selector: string, baseDelay: numbe
   });
 }
 
-export default function KubrikHeroPreview() {
+export default function AuraHeroPreview() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function KubrikHeroPreview() {
       if (started) return;
       started = true;
       
-      const container = heroRef.current?.closest(".kubrik-preview");
+      const container = heroRef.current?.closest(".aura-preview");
       if (container) {
         container.classList.remove("is-ready");
         void container.offsetWidth; // Force reflow
@@ -60,7 +60,7 @@ export default function KubrikHeroPreview() {
 
     return () => {
       window.clearTimeout(fallback);
-      const container = heroRef.current?.closest(".kubrik-preview");
+      const container = heroRef.current?.closest(".aura-preview");
       if (container) {
         container.classList.remove("is-ready");
       }
@@ -85,7 +85,7 @@ export default function KubrikHeroPreview() {
   );
 
   return (
-    <div className="kubrik-preview w-full h-full absolute inset-0 overflow-hidden rounded-2xl select-none text-left">
+    <div className="aura-preview w-full h-full absolute inset-0 overflow-hidden rounded-2xl select-none text-left">
       <div className="hero" ref={heroRef}>
         <div className="hero__bg">
           <img

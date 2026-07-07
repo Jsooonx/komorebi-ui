@@ -12,4 +12,26 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              if (id.includes("three") || id.includes("@react-three") || id.includes("postprocessing")) {
+                return "vendor-threejs";
+              }
+              if (id.includes("gsap") || id.includes("framer-motion") || id.includes("animejs")) {
+                return "vendor-animations";
+              }
+              if (id.includes("hls.js")) {
+                return "vendor-hls";
+              }
+              return "vendor";
+            }
+          },
+        },
+      },
+    },
+  },
 });

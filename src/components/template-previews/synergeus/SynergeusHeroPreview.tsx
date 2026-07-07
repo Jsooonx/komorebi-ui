@@ -64,7 +64,7 @@ export default function SynergeusHeroPreview() {
     <div className="synergeus-preview w-full h-full absolute inset-0 overflow-hidden select-none text-left">
       {/* Background Mux Video Stream */}
       <div className="hero-video-container">
-        <video ref={videoRef} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+        <video ref={videoRef} autoPlay loop muted playsInline preload="none" className="w-full h-full object-cover" />
       </div>
       
       {/* Dark overlay */}

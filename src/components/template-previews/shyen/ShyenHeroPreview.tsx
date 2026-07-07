@@ -176,7 +176,7 @@ export default function ShyenHeroPreview() {
               muted
               loop
               playsInline
-              preload="auto"
+              preload="none"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/40" />
 
