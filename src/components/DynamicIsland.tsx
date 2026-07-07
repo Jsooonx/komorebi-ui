@@ -21,6 +21,21 @@ function NavLink({ to, href, children }: { to?: string; href?: string; children:
   const content = <TextRoll hovered={isHovered}>{children}</TextRoll>;
   const baseClass = "hover:text-sun-gold transition-colors cursor-pointer flex items-center";
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (href && href.startsWith("#")) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      if (targetId) {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
   if (to) {
     return (
       <Link 
@@ -37,6 +52,7 @@ function NavLink({ to, href, children }: { to?: string; href?: string; children:
   return (
     <a 
       href={href} 
+      onClick={handleScroll}
       onMouseEnter={() => setIsHovered(true)} 
       onMouseLeave={() => setIsHovered(false)}
       className={baseClass}

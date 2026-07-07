@@ -46,6 +46,21 @@ export default function Footer() {
     });
   };
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      if (targetId) {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <footer className="relative z-10 bg-[#000] border-t border-white/5 py-24 px-6 md:px-12 flex flex-col items-center select-none antialiased">
       <div className="w-full max-w-[1200px]">
@@ -61,6 +76,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <a 
                     href={item.href}
+                    onClick={(e) => handleScroll(e, item.href)}
                     className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
                   >
                     {item.name}
@@ -80,6 +96,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <a 
                     href={item.href}
+                    onClick={(e) => handleScroll(e, item.href)}
                     className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
                   >
                     {item.name}
@@ -99,6 +116,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <a 
                     href={item.href}
+                    onClick={(e) => handleScroll(e, item.href)}
                     className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
                   >
                     {item.name}
@@ -118,6 +136,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <a 
                     href={item.href}
+                    onClick={(e) => handleScroll(e, item.href)}
                     className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
                   >
                     {item.name}
@@ -137,6 +156,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <a 
                     href={item.href}
+                    onClick={(e) => handleScroll(e, item.href)}
                     className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
                   >
                     {item.name}
@@ -156,6 +176,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <a 
                     href={item.href}
+                    onClick={(e) => handleScroll(e, item.href)}
                     className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
                   >
                     {item.name}
