@@ -220,7 +220,7 @@ export default function TemplateShowcase() {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={sectionVariants}
-      className="relative z-10 bg-[#07070a] py-24 sm:py-32 px-6 md:px-12 border-t border-white/5 select-none"
+      className="relative z-10 bg-[#090909] py-24 sm:py-32 px-6 md:px-12 select-none"
     >
       <div className="max-w-[1500px] mx-auto flex flex-col items-center">
         {/* Section Heading */}
