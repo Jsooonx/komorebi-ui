@@ -103,10 +103,24 @@ function TemplateCard({ item }: { item: TemplateItem }) {
 
   const { PreviewComponent } = item;
   const [hoverKey, setHoverKey] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    setHoverKey((k) => k + 1);
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn("Video playback restart prevented: ", err);
+        });
+      }
+    }
+  };
 
   return (
     <div 
-      onMouseEnter={() => setHoverKey((k) => k + 1)}
+      onMouseEnter={handleMouseEnter}
       className="flex flex-col bg-[#0f0f12] border border-white/5 rounded-lg overflow-hidden hover:border-white/10 transition-all select-none group"
     >
       {/* Visual Live Preview Viewport Mock */}
@@ -116,7 +130,7 @@ function TemplateCard({ item }: { item: TemplateItem }) {
       >
         {item.videoSrc ? (
           <video
-            key={hoverKey}
+            ref={videoRef}
             src={item.videoSrc}
             autoPlay
             loop
