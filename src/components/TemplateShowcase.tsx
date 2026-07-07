@@ -99,9 +99,13 @@ function TemplateCard({ item }: { item: TemplateItem }) {
   };
 
   const { PreviewComponent } = item;
+  const [hoverKey, setHoverKey] = useState(0);
 
   return (
-    <div className="flex flex-col bg-[#0f0f12] border border-white/5 rounded-lg overflow-hidden hover:border-white/10 transition-all select-none group">
+    <div 
+      onMouseEnter={() => setHoverKey((k) => k + 1)}
+      className="flex flex-col bg-[#0f0f12] border border-white/5 rounded-lg overflow-hidden hover:border-white/10 transition-all select-none group"
+    >
       {/* Visual Live Preview Viewport Mock */}
       <div 
         ref={containerRef}
@@ -115,7 +119,7 @@ function TemplateCard({ item }: { item: TemplateItem }) {
             transform: `scale(${scale})` 
           }}
         >
-          <PreviewComponent />
+          <PreviewComponent key={hoverKey} />
         </div>
 
         {/* Scaled browser overlay mock dots */}
