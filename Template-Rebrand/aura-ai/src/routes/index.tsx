@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400;1,700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400;1,700&display=swap",
       },
     ],
   }),
@@ -268,7 +268,7 @@ function Index() {
         </span>
         <span className="hero__line">
           <span className="hero__line-inner">
-            <em className="italic font-serif font-normal">Algorithm</em>
+            <em>Algorithm</em>
           </span>
         </span>
       </h1>
