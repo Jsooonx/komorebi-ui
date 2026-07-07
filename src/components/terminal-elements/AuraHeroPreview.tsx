@@ -3,8 +3,8 @@ import "./AuraHeroPreview.css";
 
 const CHAR_STEP = 0.038;
 
-function animateLines(selector: string, baseDelay: number, lineGap: number) {
-  const nodes = document.querySelectorAll<HTMLElement>(selector);
+function animateLines(container: HTMLElement, selector: string, baseDelay: number, lineGap: number) {
+  const nodes = container.querySelectorAll<HTMLElement>(selector);
   nodes.forEach((lineInner, lineIdx) => {
     const lineDelay = baseDelay + lineIdx * lineGap;
     let charCount = 0;
@@ -46,12 +46,16 @@ export default function AuraHeroPreview() {
       
       const container = heroRef.current?.closest(".aura-preview-container");
       if (container) {
+        container.classList.remove("is-ready");
+        // Force reflow
+        void container.offsetWidth;
         container.classList.add("is-ready");
+        
+        // Scope the split text animations directly to the component root container
+        animateLines(container, ".hero__heading .hero__line-inner", 0.3, 0.85);
+        animateLines(container, ".hero__label .hero__line-inner", 0.3, 0.65);
+        animateLines(container, ".hero__desc .hero__line-inner", 0.3, 0.65);
       }
-      
-      animateLines(".aura-preview-container .hero__heading .hero__line-inner", 0.3, 0.85);
-      animateLines(".aura-preview-container .hero__label .hero__line-inner", 0.3, 0.65);
-      animateLines(".aura-preview-container .hero__desc .hero__line-inner", 0.3, 0.65);
     };
 
     const fallback = window.setTimeout(startAnimations, 200);
