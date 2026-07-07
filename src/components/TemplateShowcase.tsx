@@ -19,7 +19,8 @@ interface TemplateItem {
   badgeType: "copy" | "get" | "premium";
   tags: string[];
   prompt: string;
-  PreviewComponent: React.ComponentType;
+  PreviewComponent?: React.ComponentType;
+  videoSrc?: string;
 }
 
 const TEMPLATES: TemplateItem[] = [
@@ -43,7 +44,7 @@ const TEMPLATES: TemplateItem[] = [
     badgeType: "get",
     tags: ["B2B", "SaaS", "Conversational AI", "Staggered Text"],
     prompt: "Build a luxury conversational B2B AI landing page based on the Aura AI design system. The page should feature a deep black slate obsidian background (#08090c) and a top header nav-pill with transparent blurs and a glowing integrations badge. The hero has a centered header with staggered typing animations: 'Automating customer delight at scale — is an Algorithm'. On the right, place a side navigation, and at the bottom left, stats about the vision. On the bottom right, display an interactive white 'SDK Integration' card with a 3D organic glossy sphere.",
-    PreviewComponent: AuraHeroPreview,
+    videoSrc: "/Aura-AI.mp4",
   },
   {
     id: "shyen",
@@ -113,18 +114,33 @@ function TemplateCard({ item }: { item: TemplateItem }) {
         ref={containerRef}
         className="relative w-full aspect-video bg-[#08090c] border-b border-white/5 overflow-hidden"
       >
-        <div 
-          className="absolute origin-top-left pointer-events-none"
-          style={{ 
-            width: 1400, 
-            height: 800, 
-            transform: `scale(${scale})` 
-          }}
-        >
-          <Suspense fallback={<div className="w-full h-full bg-[#08090c] animate-pulse" />}>
-            <PreviewComponent key={hoverKey} />
-          </Suspense>
-        </div>
+        {item.videoSrc ? (
+          <video
+            key={hoverKey}
+            src={item.videoSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          PreviewComponent && (
+            <div 
+              className="absolute origin-top-left pointer-events-none"
+              style={{ 
+                width: 1400, 
+                height: 800, 
+                transform: `scale(${scale})` 
+              }}
+            >
+              <Suspense fallback={<div className="w-full h-full bg-[#08090c] animate-pulse" />}>
+                <PreviewComponent key={hoverKey} />
+              </Suspense>
+            </div>
+          )
+        )}
 
         {/* Scaled browser overlay mock dots */}
         <div className="absolute top-3 left-4 flex gap-1.5 z-20">
