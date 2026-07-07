@@ -1,14 +1,8 @@
-import { useEffect, useRef, useState, Suspense, lazy } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Clipboard, Check } from "lucide-react";
 import SplitText from "./ui/SplitText";
-
-// Lazy load website template previews to defer hls.js and heavy layouts
-const JPlusHeroPreview = lazy(() => import("./template-previews/jplus/JPlusHeroPreview"));
-const AuraHeroPreview = lazy(() => import("./template-previews/aura/AuraHeroPreview"));
-const ShyenHeroPreview = lazy(() => import("./template-previews/shyen/ShyenHeroPreview"));
-const SynergeusHeroPreview = lazy(() => import("./template-previews/synergeus/SynergeusHeroPreview"));
 
 interface TemplateItem {
   id: string;
@@ -19,7 +13,6 @@ interface TemplateItem {
   badgeType: "copy" | "get" | "premium";
   tags: string[];
   prompt: string;
-  PreviewComponent?: React.ComponentType;
   videoSrc?: string;
 }
 
@@ -33,7 +26,6 @@ const TEMPLATES: TemplateItem[] = [
     badgeType: "copy",
     tags: ["E-Commerce", "Dark UI", "Subscription", "Subtle Animation"],
     prompt: "Create a premium e-commerce landing page called JPlus for digital subscriptions. The design must be ultra-dark and modern with a browser viewport frame. The header has a JPlus logo, navigation, and 'Start shopping' button. Inside the browser window, display a sidebar listing categories (AI Tools, Streaming, Productivity, Design) and a main content grid. The grid should feature a beige analytics card ('Orders today: 1,247 delivered', 'Success: 99%') with a smooth line chart, and a pink customer card ('10k+ verified users'). Add subtle entrance animations on mount.",
-    PreviewComponent: JPlusHeroPreview,
   },
   {
     id: "aura",
@@ -55,7 +47,6 @@ const TEMPLATES: TemplateItem[] = [
     badgeType: "copy",
     tags: ["Healthcare", "Split Screen", "Ambient Video", "Clinician Chat"],
     prompt: "Build a mental wellness AI platform landing page called Shyen. The layout must be a split-screen design. The left column features a dark green-yellow atmospheric blurred lighting gradient, a serif heading 'Your mind never gonna stop.', description lines, and a dark pill-shaped waitlist form. The right column features an ambient video overlay, clinician-designed chat simulation bubbles ('This helped me organize my thoughts...'), Lara Simon's avatar, and green-tinted feature tags ('AI Meditation', 'Full Body syncing', 'AI Data Insights').",
-    PreviewComponent: ShyenHeroPreview,
   },
   {
     id: "synergeus",
@@ -66,26 +57,12 @@ const TEMPLATES: TemplateItem[] = [
     badgeType: "premium",
     tags: ["Fintech", "Mux Video", "Analytics Overlay", "Luxury Black"],
     prompt: "Build a minimal, dark financial assistant landing page called Synergeus. The hero section has a fullscreen ambient Mux stream video background, a dark linear gradient overlay, and a centered white navigation menu. The headline reads 'Our AI simplify your financial life' in a bold serif display. Below it, place a white rounded 'Start free trial now' CTA. On the right, render a floating glass transaction history card with user picture overlays and automated transaction slides.",
-    PreviewComponent: SynergeusHeroPreview,
   },
 ];
 
 function TemplateCard({ item }: { item: TemplateItem }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(0.25);
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const width = entry.contentRect.width;
-        setScale(width / 1400); // 1400px is target preview width
-      }
-    });
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   const handleCopy = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -101,7 +78,6 @@ function TemplateCard({ item }: { item: TemplateItem }) {
     }
   };
 
-  const { PreviewComponent } = item;
   const [hoverKey, setHoverKey] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -140,20 +116,19 @@ function TemplateCard({ item }: { item: TemplateItem }) {
             className="w-full h-full object-cover"
           />
         ) : (
-          PreviewComponent && (
-            <div 
-              className="absolute origin-top-left pointer-events-none"
-              style={{ 
-                width: 1400, 
-                height: 800, 
-                transform: `scale(${scale})` 
-              }}
-            >
-              <Suspense fallback={<div className="w-full h-full bg-[#08090c] animate-pulse" />}>
-                <PreviewComponent key={hoverKey} />
-              </Suspense>
+          <div className="w-full h-full bg-gradient-to-br from-[#08090c] to-[#12131a] flex flex-col items-center justify-center relative p-6 overflow-hidden">
+            {/* Ambient background glow */}
+            <div className="absolute w-32 h-32 rounded-full bg-white/[0.02] blur-2xl pointer-events-none" />
+            
+            <div className="z-10 flex flex-col items-center gap-1.5 text-center">
+              <span className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-[9px] font-mono text-white/40 tracking-wider uppercase">
+                In Queue
+              </span>
+              <h4 className="font-serif text-white/20 text-xl font-semibold tracking-wide italic mt-1 select-none">
+                Coming Soon
+              </h4>
             </div>
-          )
+          </div>
         )}
 
         {/* Scaled browser overlay mock dots */}
