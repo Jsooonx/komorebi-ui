@@ -24,8 +24,8 @@ const TEMPLATES: TemplateItem[] = [
   {
     id: "jplus",
     title: "JPlus - Subscription E-Commerce",
-    creator: "Bogdan Falin",
-    creatorAvatar: "https://qclay.design/lovable/codeba/icons/Sr.svg",
+    creator: "E-Commerce",
+    creatorAvatar: "/KomorebiLogoUpdate1.png",
     sections: "2 Sections",
     badgeType: "copy",
     tags: ["E-Commerce", "Dark UI", "Subscription", "Subtle Animation"],
@@ -35,8 +35,8 @@ const TEMPLATES: TemplateItem[] = [
   {
     id: "kubrik",
     title: "Kubrik - B2B AI Widget",
-    creator: "Bogdan Falin",
-    creatorAvatar: "https://qclay.design/lovable/shyen/header_elipse.png",
+    creator: "AI / SaaS",
+    creatorAvatar: "/KomorebiLogoUpdate1.png",
     sections: "6 Sections",
     badgeType: "get",
     tags: ["B2B", "SaaS", "Luxury Tech", "Staggered Text"],
@@ -46,8 +46,8 @@ const TEMPLATES: TemplateItem[] = [
   {
     id: "shyen",
     title: "Shyen - AI Mental Wellness",
-    creator: "Bogdan Falin",
-    creatorAvatar: "https://qclay.design/lovable/shyen/header_elipse.png",
+    creator: "AI Wellness",
+    creatorAvatar: "/KomorebiLogoUpdate1.png",
     sections: "9 Sections",
     badgeType: "copy",
     tags: ["Healthcare", "Split Screen", "Ambient Video", "Clinician Chat"],
@@ -57,8 +57,8 @@ const TEMPLATES: TemplateItem[] = [
   {
     id: "synergeus",
     title: "Synergeus - AI Fintech Portal",
-    creator: "Bogdan Falin",
-    creatorAvatar: "https://qclay.design/lovable/codeba/icons/Nm.svg",
+    creator: "AI Fintech",
+    creatorAvatar: "/KomorebiLogoUpdate1.png",
     sections: "10 Sections",
     badgeType: "premium",
     tags: ["Fintech", "Mux Video", "Analytics Overlay", "Luxury Black"],
