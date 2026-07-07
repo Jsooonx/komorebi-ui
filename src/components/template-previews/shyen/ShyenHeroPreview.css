@@ -1,0 +1,44 @@
+/* ============ SHYEN TEMPLATE PREVIEW KEYFRAMES ============ */
+@keyframes shyen-FormPulse {
+  0%   { opacity: 0; transform: scale(0.85); }
+  60%  { opacity: 1; transform: scale(1.04); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ============ SHYEN HERO PREVIEW STYLES ============ */
+.shyen-preview {
+  background-color: #091814;
+  color: #ffffff;
+  font-family: "Inter Tight", "Inter", sans-serif;
+  width: 1400px;
+  height: 800px;
+  position: relative;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+
+  /* Scoped resets */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  button { font-family: inherit; border: none; background: none; cursor: pointer; }
+
+  .hero-section { position: relative; width: 100%; height: 100%; overflow: hidden; background: #091814; }
+  
+  .pill-button {
+    display: inline-flex;
+    padding: 10px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    background: #FAFF67;
+    color: #0F1A14;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+  .pill-button:hover {
+    background: #e6ea5c;
+    transform: scale(1.02);
+  }
+}

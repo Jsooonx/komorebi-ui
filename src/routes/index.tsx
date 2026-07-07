@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import ShowcaseTerminal from "@/components/ShowcaseTerminal";
 import SplitText from "@/components/ui/SplitText";
 import BentoShowcase from "@/components/BentoShowcase";
+import TemplateShowcase from "@/components/TemplateShowcase";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -83,6 +84,9 @@ function Index() {
 
       {/* ── SECTION 3: BENTO COMPONENTS GRID SHOWCASE ── */}
       <BentoShowcase />
+
+      {/* ── SECTION 4: WEBSITE TEMPLATE SHOWCASE (PROMPT LIBRARY) ── */}
+      <TemplateShowcase />
     </main>
   );
 }
