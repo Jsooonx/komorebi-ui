@@ -285,10 +285,10 @@ function ComponentDetail() {
               <motion.section 
                 id="code-pane-container"
                 initial={isLargeScreen ? { width: 0, opacity: 0 } : { height: 0, opacity: 0 }}
-                animate={isLargeScreen ? { width: "50%", opacity: 1 } : { height: "50%", opacity: 1 }}
+                animate={isLargeScreen ? { width: "40%", opacity: 1 } : { height: "50%", opacity: 1 }}
                 exit={isLargeScreen ? { width: 0, opacity: 0 } : { height: 0, opacity: 0 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full lg:w-1/2 h-1/2 lg:h-full border-b lg:border-b-0 lg:border-r border-white/5 bg-[#07070a] flex flex-col overflow-hidden relative"
+                className="w-full lg:w-[40%] h-1/2 lg:h-full border-b lg:border-b-0 lg:border-r border-white/5 bg-[#07070a] flex flex-col overflow-hidden relative"
               >
                 {/* Code pane header bar */}
                 <div className="h-10 border-b border-white/5 flex items-center justify-between px-6 bg-[#07070a] shrink-0">
