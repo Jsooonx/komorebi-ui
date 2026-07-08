@@ -230,7 +230,7 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
 
   return (
     <div 
-      className="relative w-full rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group min-h-[180px]"
+      className="relative w-full h-[440px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       style={cssVariables}
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-[#E8A969]/5 to-[#121212] opacity-60 pointer-events-none" />
@@ -240,7 +240,7 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
-      <div className="relative z-10 w-full flex flex-col items-center justify-center flex-1">
+      <div className="relative z-10 w-full flex flex-col items-center justify-start pt-4 flex-1">
         <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 
