@@ -1,5 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import SplitText from "./ui/SplitText";
 import ImageRevealCard from "./bentoshowcase-elements/ImageRevealCard";
 import HoverMembersCard from "./bentoshowcase-elements/HoverMembersCard";
@@ -44,13 +45,15 @@ function BentoCell({
   };
 
   return (
-    <div
+    <motion.div
+      layoutId={`card-container-${id}`}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       className={`block hover:opacity-95 transition-opacity cursor-pointer select-none ${className || ""}`}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 

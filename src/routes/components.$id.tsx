@@ -180,13 +180,19 @@ function ComponentDetail() {
           </div>
 
           <div className="flex items-center gap-3">
-            <Link 
-              to="/"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 text-xs text-white/60 hover:text-white transition-all"
+            <button 
+              onClick={() => {
+                if (window.history.length > 1) {
+                  window.history.back();
+                } else {
+                  navigate({ to: "/" });
+                }
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 text-xs text-white/60 hover:text-white transition-all cursor-pointer bg-transparent border-0"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Home</span>
-            </Link>
+              <span>Back</span>
+            </button>
           </div>
         </header>
       )}
