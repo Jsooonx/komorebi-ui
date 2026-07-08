@@ -55,57 +55,58 @@ export default function ToolkitStackSwiper({ minimal = false }: { minimal?: bool
       style={{ transformStyle: "preserve-3d" }}
       className="relative z-20 w-full h-full flex items-center justify-center"
     >
-      <span 
-        style={{ transform: "translateZ(40px)" }}
-        className="absolute top-4 text-[9px] font-mono text-white/30 uppercase tracking-widest select-none pointer-events-none z-30"
-      >
-        Swipe cards left or right
-      </span>
+      <div className="flex flex-col items-center gap-6" style={{ transform: "translateZ(40px)" }}>
+        <span 
+          className="text-[9px] font-mono text-white/35 uppercase tracking-widest select-none pointer-events-none z-30"
+        >
+          Swipe cards left or right
+        </span>
 
-      {/* Card Pile */}
-      <div className="relative w-[150px] h-[190px] flex items-center justify-center">
-        {stack.map((cardId, index) => {
-          const card = CARD_DATA.find((c) => c.id === cardId)!;
-          const isTop = index === 0;
+        {/* Card Pile */}
+        <div className="relative w-[150px] h-[190px] flex items-center justify-center">
+          {stack.map((cardId, index) => {
+            const card = CARD_DATA.find((c) => c.id === cardId)!;
+            const isTop = index === 0;
 
-          return (
-            <motion.div
-              key={card.id}
-              drag={isTop ? "x" : false}
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.8}
-              onDragEnd={(e, info) => {
-                if (Math.abs(info.offset.x) > 85) {
-                  handleSwipe();
-                }
-              }}
-              animate={{
-                scale: 1 - index * 0.06,
-                y: index * 12,
-                z: (3 - index) * 10,
-                opacity: 1 - index * 0.25
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 24
-              }}
-              style={{
-                zIndex: 3 - index,
-                boxShadow: `0 20px 45px -15px ${card.glow}`
-              }}
-              whileDrag={{ scale: 1.05, cursor: "grabbing" }}
-              className="absolute w-full h-full rounded-lg border border-white/10 bg-black flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
-            >
-              <img 
-                src={card.src} 
-                alt={card.title} 
-                draggable={false}
-                className="w-full h-full object-cover select-none pointer-events-none" 
-              />
-            </motion.div>
-          );
-        })}
+            return (
+              <motion.div
+                key={card.id}
+                drag={isTop ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.8}
+                onDragEnd={(e, info) => {
+                  if (Math.abs(info.offset.x) > 85) {
+                    handleSwipe();
+                  }
+                }}
+                animate={{
+                  scale: 1 - index * 0.06,
+                  y: index * 12,
+                  z: (3 - index) * 10,
+                  opacity: 1 - index * 0.25
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 24
+                }}
+                style={{
+                  zIndex: 3 - index,
+                  boxShadow: `0 20px 45px -15px ${card.glow}`
+                }}
+                whileDrag={{ scale: 1.05, cursor: "grabbing" }}
+                className="absolute w-full h-full rounded-lg border border-white/10 bg-black flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
+              >
+                <img 
+                  src={card.src} 
+                  alt={card.title} 
+                  draggable={false}
+                  className="w-full h-full object-cover select-none pointer-events-none" 
+                />
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </motion.div>
   );
