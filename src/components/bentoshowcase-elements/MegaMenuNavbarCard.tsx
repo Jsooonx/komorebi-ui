@@ -93,7 +93,18 @@ function NavbarContent({
 
       {/* Nav */}
       <div className="hidden md:flex items-center">
-        <NavigationMenu>
+        <style dangerouslySetInnerHTML={{ __html: `
+          .mega-menu-nav [data-state="closed"] {
+            animation-duration: 200ms !important;
+            --tw-exit-scale: 0.9 !important;
+            --tw-exit-opacity: 0 !important;
+          }
+          .mega-menu-nav [data-state="open"] {
+            animation-duration: 200ms !important;
+            --tw-enter-scale: 0.9 !important;
+          }
+        `}} />
+        <NavigationMenu className="mega-menu-nav">
           <NavigationMenuList className="gap-0">
 
             {/* Home */}
