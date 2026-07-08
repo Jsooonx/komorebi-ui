@@ -521,7 +521,7 @@ function ComponentDetail() {
 
               <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
                 <PreviewComponent
-                  minimal={true}
+                  minimal={comp.id === "dynamic-island" || comp.id === "pixel-shimmer" ? false : true}
                   activeState={comp.id === "dynamic-island" ? dynamicIslandState : undefined}
                 />
               </div>

@@ -59,6 +59,8 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add dynamic-island",
     isNew: true,
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[240px]",
   },
   {
     id: "dither-canvas",
@@ -120,6 +122,8 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "Interactive pixel-surface shimmer card with hover and focus-aware glow pulses.",
     cliCommand: "npx komorebi-ui add pixel-shimmer",
     dependencies: [],
+    gridClass: "md:row-span-2",
+    viewportHeightClass: "h-[380px]",
   },
   {
     id: "pipeline-stepper",
