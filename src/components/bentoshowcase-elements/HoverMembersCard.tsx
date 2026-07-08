@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const MEMBERS = [
   { name: "John D.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80" },
@@ -11,6 +11,7 @@ const MEMBERS = [
 
 export default function HoverMembersCard({ minimal = false }: { minimal?: boolean }) {
   const [hovered, setHovered] = useState(false);
+  const [activeMemberIdx, setActiveMemberIdx] = useState<number | null>(null);
 
   const content = (
     <div className="relative z-10 flex justify-center items-center h-full w-full">
@@ -23,10 +24,38 @@ export default function HoverMembersCard({ minimal = false }: { minimal?: boolea
               rotate: hovered ? (i - 2) * 4 : 0
             }}
             transition={{ type: "spring", damping: 18, stiffness: 220 }}
-            className="relative w-12 h-12 rounded-full border-2 border-[#121212] overflow-hidden"
-            style={{ zIndex: hovered ? 10 + i : 1 }}
+            onMouseEnter={() => {
+              setHovered(true);
+              setActiveMemberIdx(i);
+            }}
+            onMouseLeave={() => {
+              setHovered(false);
+              setActiveMemberIdx(null);
+            }}
+            className="relative w-12 h-12"
+            style={{ zIndex: activeMemberIdx === i ? 50 : (hovered ? 10 + i : 1) }}
           >
-            <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+            {/* Animated Tooltip */}
+            <AnimatePresence>
+              {activeMemberIdx === i && (
+                <motion.div
+                  initial={{ opacity: 0, y: 5, x: "-50%", scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, x: "-50%", scale: 1 }}
+                  exit={{ opacity: 0, y: 5, scale: 0.9 }}
+                  transition={{ type: "spring", damping: 15, stiffness: 300 }}
+                  className="absolute -top-10 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-[#1a1a1e] border border-white/10 rounded-lg shadow-2xl text-[9px] font-semibold text-white whitespace-nowrap z-50 pointer-events-none"
+                >
+                  {member.name}
+                  {/* Tooltip triangle indicator */}
+                  <div className="absolute top-full left-1/2 -translate-y-[1px] -translate-x-1/2 w-0 h-0 border-l-[4.5px] border-l-transparent border-r-[4.5px] border-r-transparent border-t-[4.5px] border-t-[#1a1a1e]" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Avatar frame container */}
+            <div className="w-full h-full rounded-full border-2 border-[#121212] overflow-hidden shadow-md cursor-pointer select-none">
+              <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+            </div>
           </motion.div>
         ))}
       </div>
@@ -63,22 +92,7 @@ export default function HoverMembersCard({ minimal = false }: { minimal?: boolea
 
       {/* Centered Avatar list */}
       <div className="relative z-10 flex justify-center items-center h-20">
-        <div className="flex -space-x-4">
-          {MEMBERS.map((member, i) => (
-            <motion.div
-              key={i}
-              animate={{ 
-                x: hovered ? (i - 2) * 16 : 0,
-                rotate: hovered ? (i - 2) * 4 : 0
-              }}
-              transition={{ type: "spring", damping: 18, stiffness: 220 }}
-              className="relative w-12 h-12 rounded-full border-2 border-[#121212] overflow-hidden"
-              style={{ zIndex: hovered ? 10 + i : 1 }}
-            >
-              <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
-            </motion.div>
-          ))}
-        </div>
+        {content}
       </div>
 
       <div className="relative z-10">
