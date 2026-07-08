@@ -240,7 +240,7 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
         <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
       </div>
 
-      <div className="relative z-10 w-full flex flex-col items-center justify-center flex-1">
+      <div className="relative z-10 w-full flex flex-col items-center justify-start pt-4 flex-1">
         <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 
