@@ -497,7 +497,7 @@ function ComponentDetail() {
                           className={`py-1.5 rounded-lg text-[10px] font-medium border transition-all cursor-pointer ${
                             dynamicIslandState === state
                               ? "bg-[#E8A969]/15 border-[#E8A969]/40 text-[#E8A969]"
-                              : "bg-[#090909] border-white/5 hover:bg-white/5 text-white/60 hover:text-white"
+                              : "bg-white/[0.02] border-white/5 hover:bg-white/5 text-white/60 hover:text-white"
                           }`}
                         >
                           {state}

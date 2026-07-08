@@ -9,6 +9,7 @@ import {
   Phone, 
   PhoneOff, 
   CheckCircle2, 
+  Check, 
   Trash2, 
   Square 
 } from "lucide-react";
@@ -26,10 +27,12 @@ export default function DynamicIslandCard({
   // Interactive Ring state: silent mode ON vs OFF
   const [silentMode, setSilentMode] = useState(true);
 
-  // Real-time Timer state (starting from 00:00.0)
+  // Real-time Timer state ("running" -> "stopped")
+  const [timerAction, setTimerAction] = useState<"running" | "stopped">("running");
   const [timerTenths, setTimerTenths] = useState(0);
 
-  // Real-time Record state (starting from 0:00)
+  // Real-time Record state ("recording" -> "stopped")
+  const [recordAction, setRecordAction] = useState<"recording" | "stopped">("recording");
   const [recordSecs, setRecordSecs] = useState(0);
 
   // AirDrop Progress state (0 to 100)
@@ -46,28 +49,32 @@ export default function DynamicIslandCard({
   // Reset or run interval for Timer
   useEffect(() => {
     if (resolvedState === "timer") {
-      setTimerTenths(0);
-      const id = setInterval(() => {
-        setTimerTenths((prev) => prev + 1);
-      }, 100);
-      return () => clearInterval(id);
+      if (timerAction === "running") {
+        const id = setInterval(() => {
+          setTimerTenths((prev) => prev + 1);
+        }, 100);
+        return () => clearInterval(id);
+      }
     } else {
+      setTimerAction("running");
       setTimerTenths(0);
     }
-  }, [resolvedState]);
+  }, [resolvedState, timerAction]);
 
   // Reset or run interval for Record
   useEffect(() => {
     if (resolvedState === "record") {
-      setRecordSecs(0);
-      const id = setInterval(() => {
-        setRecordSecs((prev) => prev + 1);
-      }, 1000);
-      return () => clearInterval(id);
+      if (recordAction === "recording") {
+        const id = setInterval(() => {
+          setRecordSecs((prev) => prev + 1);
+        }, 1000);
+        return () => clearInterval(id);
+      }
     } else {
+      setRecordAction("recording");
       setRecordSecs(0);
     }
-  }, [resolvedState]);
+  }, [resolvedState, recordAction]);
 
   // Reset or run interval for AirDrop
   useEffect(() => {
@@ -140,9 +147,11 @@ export default function DynamicIslandCard({
       case "ring":
         return { width: 250, height: 46, borderRadius: 23, bg: "#000000" };
       case "timer":
-        return { width: 230, height: 46, borderRadius: 23, bg: "#000000" };
+        if (timerAction === "stopped") return { width: 270, height: 50, borderRadius: 25, bg: "#000000" };
+        return { width: 260, height: 48, borderRadius: 24, bg: "#000000" };
       case "record":
-        return { width: 230, height: 46, borderRadius: 23, bg: "#000000" };
+        if (recordAction === "stopped") return { width: 280, height: 50, borderRadius: 25, bg: "#000000" };
+        return { width: 270, height: 48, borderRadius: 24, bg: "#000000" };
       case "music":
         return { width: 290, height: 76, borderRadius: 24, bg: "#0a0a0c" };
       case "airdrop":
@@ -208,13 +217,42 @@ export default function DynamicIslandCard({
         );
 
       case "timer":
+        if (timerAction === "stopped") {
+          return (
+            <motion.div 
+              key="timerStopped" 
+              initial={{ opacity: 0, scale: 0.95 }} 
+              animate={{ opacity: 1, scale: 1 }} 
+              exit={{ opacity: 0 }} 
+              className="flex items-center justify-between w-full px-4 py-1.5"
+            >
+              <div className="flex items-center gap-2">
+                <Square className="w-3.5 h-3.5 text-orange-400 fill-orange-400" />
+                <span className="text-xs font-semibold text-white/95">Timer Stopped</span>
+              </div>
+              <div className="flex items-center gap-2.5 shrink-0">
+                <span className="text-xs font-mono font-bold text-orange-400">{formatTimer(timerTenths)}</span>
+                <div
+                  onClick={() => {
+                    setTimerAction("running");
+                    setTimerTenths(0);
+                  }}
+                  className="px-2.5 py-1 rounded-full bg-orange-500/25 hover:bg-orange-500/40 text-orange-400 text-[10px] font-medium transition-colors cursor-pointer"
+                >
+                  Reset
+                </div>
+              </div>
+            </motion.div>
+          );
+        }
+
         return (
           <motion.div 
-            key="timer" 
+            key="timerActive" 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
             exit={{ opacity: 0 }} 
-            className="flex items-center justify-between w-full px-4.5 py-1"
+            className="flex items-center justify-between w-full px-4.5 py-1.5"
           >
             <span className="flex items-center gap-2.5">
               <div className="w-4 h-4 rounded-full border-2 border-orange-500/60 flex items-center justify-center">
@@ -224,28 +262,75 @@ export default function DynamicIslandCard({
                 {formatTimer(timerTenths)}
               </span>
             </span>
-            <span className="text-[10px] font-mono text-white/50 uppercase tracking-widest font-semibold">
-              Timer
-            </span>
+            <div className="flex items-center gap-2.5 shrink-0">
+              <span className="text-[10px] font-mono text-white/50 uppercase tracking-widest font-semibold">
+                Timer
+              </span>
+              <div
+                onClick={() => setTimerAction("stopped")}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-500/25 hover:bg-orange-500/40 text-orange-400 text-[10px] font-medium transition-colors cursor-pointer"
+              >
+                <Square className="w-2.5 h-2.5 fill-current" />
+                <span>Stop</span>
+              </div>
+            </div>
           </motion.div>
         );
 
       case "record":
+        if (recordAction === "stopped") {
+          return (
+            <motion.div 
+              key="recordStopped" 
+              initial={{ opacity: 0, scale: 0.95 }} 
+              animate={{ opacity: 1, scale: 1 }} 
+              exit={{ opacity: 0 }} 
+              className="flex items-center justify-between w-full px-4 py-1.5"
+            >
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-semibold text-white/95">Voice Memo Saved</span>
+              </div>
+              <div className="flex items-center gap-2.5 shrink-0">
+                <span className="text-xs font-mono font-bold text-white/85">{formatSecs(recordSecs)}</span>
+                <div
+                  onClick={() => {
+                    setRecordAction("recording");
+                    setRecordSecs(0);
+                  }}
+                  className="px-2.5 py-1 rounded-full bg-red-500/25 hover:bg-red-500/40 text-red-400 text-[10px] font-medium transition-colors cursor-pointer"
+                >
+                  New
+                </div>
+              </div>
+            </motion.div>
+          );
+        }
+
         return (
           <motion.div 
-            key="record" 
+            key="recordActive" 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
             exit={{ opacity: 0 }} 
-            className="flex items-center justify-between w-full px-4.5 py-1"
+            className="flex items-center justify-between w-full px-4.5 py-1.5"
           >
             <span className="flex items-center gap-2.5">
               <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
               <span className="text-xs font-mono font-medium text-white/95">Voice Memo</span>
             </span>
-            <span className="text-xs font-mono text-red-400 font-bold tracking-wider">
-              {formatSecs(recordSecs)}
-            </span>
+            <div className="flex items-center gap-2.5 shrink-0">
+              <span className="text-xs font-mono text-red-400 font-bold tracking-wider">
+                {formatSecs(recordSecs)}
+              </span>
+              <div
+                onClick={() => setRecordAction("stopped")}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/25 hover:bg-red-500/40 text-red-400 text-[10px] font-medium transition-colors cursor-pointer"
+              >
+                <Square className="w-2.5 h-2.5 fill-current" />
+                <span>Stop</span>
+              </div>
+            </div>
           </motion.div>
         );
 
@@ -523,9 +608,9 @@ export default function DynamicIslandCard({
             <div className="flex items-center gap-2 shrink-0">
               <div
                 onClick={() => setScreenRecordAction("saved")}
-                className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white/90 hover:text-white text-[11px] font-medium transition-colors cursor-pointer"
+                className="flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/20 hover:bg-emerald-500/35 text-emerald-400 text-[11px] font-medium transition-colors cursor-pointer"
               >
-                <Square className="w-3 h-3 fill-current" />
+                <CheckCircle2 className="w-3.5 h-3.5" />
                 <span>Done</span>
               </div>
               <div
