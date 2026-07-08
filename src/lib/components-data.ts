@@ -195,6 +195,6 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     cliCommand: "npx komorebi-ui add mega-menu-navbar",
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
-    viewportHeightClass: "h-[320px]"
+    viewportHeightClass: "h-[380px]"
   }
 ];
