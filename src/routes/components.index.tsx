@@ -169,7 +169,6 @@ function ComponentsIndex() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [copiedCli, setCopiedCli] = useState<string | null>(null);
-  const [sidebarVisible, setSidebarVisible] = useState(true);
 
   // Group components and count totals
   const categories = ["All", ...Array.from(new Set(COMPONENTS_DATA.map(c => c.category)))];
@@ -239,100 +238,70 @@ function ComponentsIndex() {
       {/* ── MAIN CONTENT SIDEBAR LAYOUT ── */}
       <div className="flex-1 flex pt-16 relative w-full gap-0">
         
-        {/* Floating tab button to reopen sidebar when hidden */}
-        {!sidebarVisible && (
-          <button 
-            onClick={() => setSidebarVisible(true)}
-            className="fixed left-0 top-[20%] z-30 flex items-center justify-center pl-2.5 pr-2 py-3 bg-[#0c0c0e]/95 border border-l-0 border-white/10 rounded-r-xl text-white/40 hover:text-white transition-all cursor-pointer shadow-lg hover:pl-3.5 duration-200 active:scale-95 group"
-            title="Show Sidebar"
-          >
-            <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
-          </button>
-        )}
-        
-        {/* LEFT SIDEBAR: Categories selector list (Aceternity style) */}
-        <AnimatePresence initial={false}>
-          {sidebarVisible && (
-            <motion.aside
-              initial={{ width: 0, opacity: 0, borderRightWidth: 0 }}
-              animate={{ width: 256, opacity: 1, borderRightWidth: 1 }}
-              exit={{ width: 0, opacity: 0, borderRightWidth: 0 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="hidden lg:flex w-64 shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex-col justify-between border-r border-white/5 overflow-hidden pl-6 md:pl-12 pr-6"
-            >
-              <div className="space-y-8 min-w-[200px]">
-                <div className="flex items-center justify-between px-1">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-white/80">Filter Categories</h3>
-                  <button 
-                    onClick={() => setSidebarVisible(false)}
-                    className="p-1 hover:bg-white/5 rounded border border-white/5 text-white/40 hover:text-white/85 cursor-pointer transition-all hover:scale-105 active:scale-95 group flex items-center justify-center"
-                    title="Hide Sidebar"
-                  >
-                    <ChevronLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform duration-200" />
-                  </button>
-                </div>
+        {/* LEFT SIDEBAR: Categories selector list (Aceternity style) - Pinned to left edge */}
+        <aside className="hidden lg:flex w-64 shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex-col justify-between border-r border-white/5 overflow-hidden pl-6 md:pl-12 pr-6">
+          <div className="space-y-8 min-w-[200px]">
+            <div className="flex items-center gap-2 px-1">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-white/80">Filter Categories</h3>
+            </div>
 
-                <nav className="space-y-1.5">
-                  {categories.map((cat) => {
-                    const isActive = activeCategory === cat;
-                    const count = getCategoryCount(cat);
-                    return (
-                      <button
-                        key={cat}
-                        onClick={() => setActiveCategory(cat)}
-                        className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl border text-left transition-all group cursor-pointer ${
-                          isActive 
-                            ? "bg-[#E8A969]/10 border-[#E8A969]/30 text-[#E8A969]" 
-                            : "bg-white/[0.01] border-white/5 hover:bg-white/[0.03] hover:border-white/10 text-white/60 hover:text-white"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className={`${isActive ? "text-[#E8A969]" : "text-white/40 group-hover:text-white/60"}`}>
-                            {getCategoryIcon(cat)}
-                          </span>
-                          <span className="text-xs font-medium">{cat}</span>
-                        </div>
-                        <span className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded-full ${
-                          isActive ? "bg-[#E8A969]/20 text-[#E8A969]" : "bg-white/5 text-white/40"
-                        }`}>
-                          {count}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </nav>
-              </div>
-
-              {/* Quick installation tip card */}
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3 min-w-[200px]">
-                <div className="flex items-center gap-2">
-                  <Terminal className="w-3.5 h-3.5 text-[#BECB6D]" />
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-white/60">Developer CLI</span>
-                </div>
-                <p className="text-[11px] text-white/40 leading-relaxed">
-                  Initialize the styling system and dependencies in one step:
-                </p>
-                <div className="flex items-center justify-between gap-2 bg-black/60 border border-white/5 rounded-lg px-3 py-1.5 font-mono text-[9px] text-[#BECB6D]">
-                  <span>npx komorebi-ui init</span>
-                  <button 
-                    onClick={async () => {
-                      await navigator.clipboard.writeText("npx komorebi-ui init");
-                      toast.success("Init command copied!");
-                    }}
-                    className="hover:text-white transition-colors cursor-pointer"
+            <nav className="space-y-1.5">
+              {categories.map((cat) => {
+                const isActive = activeCategory === cat;
+                const count = getCategoryCount(cat);
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl border text-left transition-all group cursor-pointer ${
+                      isActive 
+                        ? "bg-[#E8A969]/10 border-[#E8A969]/30 text-[#E8A969]" 
+                        : "bg-white/[0.01] border-white/5 hover:bg-white/[0.03] hover:border-white/10 text-white/60 hover:text-white"
+                    }`}
                   >
-                    <Copy className="w-3 h-3" />
+                    <div className="flex items-center gap-3">
+                      <span className={`${isActive ? "text-[#E8A969]" : "text-white/40 group-hover:text-white/60"}`}>
+                        {getCategoryIcon(cat)}
+                      </span>
+                      <span className="text-xs font-medium">{cat}</span>
+                    </div>
+                    <span className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded-full ${
+                      isActive ? "bg-[#E8A969]/20 text-[#E8A969]" : "bg-white/5 text-white/40"
+                    }`}>
+                      {count}
+                    </span>
                   </button>
-                </div>
-              </div>
-            </motion.aside>
-          )}
-        </AnimatePresence>
+                );
+              })}
+            </nav>
+          </div>
+
+          {/* Quick installation tip card */}
+          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3 min-w-[200px]">
+            <div className="flex items-center gap-2">
+              <Terminal className="w-3.5 h-3.5 text-[#BECB6D]" />
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-white/60">Developer CLI</span>
+            </div>
+            <p className="text-[11px] text-white/40 leading-relaxed">
+              Initialize the styling system and dependencies in one step:
+            </p>
+            <div className="flex items-center justify-between gap-2 bg-black/60 border border-white/5 rounded-lg px-3 py-1.5 font-mono text-[9px] text-[#BECB6D]">
+              <span>npx komorebi-ui init</span>
+              <button 
+                onClick={async () => {
+                  await navigator.clipboard.writeText("npx komorebi-ui init");
+                  toast.success("Init command copied!");
+                }}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                <Copy className="w-3 h-3" />
+              </button>
+            </div>
+          </div>
+        </aside>
 
         {/* RIGHT AREA: Header, Search, Grid lists */}
-        <main className={`flex-1 pt-10 pb-24 overflow-hidden flex flex-col transition-all duration-300 px-6 md:px-12 ${
-          sidebarVisible ? "lg:pl-8 lg:pr-12" : "lg:pl-12 lg:pr-12"
-        }`}>
+        <main className="flex-1 pt-10 pb-24 overflow-hidden flex flex-col px-6 md:px-12 lg:pl-8 lg:pr-12">
           
           {/* Header titles */}
           <div className="mb-10 text-left">
