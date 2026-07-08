@@ -124,7 +124,7 @@ export default function DynamicIsland() {
           <nav className="hidden sm:flex items-center gap-5 text-xs font-heading font-medium text-moss-green/75">
             <NavLink href="#">Home</NavLink>
             <NavLink href="#showcase">Playground</NavLink>
-            <NavLink href="#bento-showcase">Components</NavLink>
+            <NavLink to="/components">Components</NavLink>
             <NavLink href="#templates">Templates</NavLink>
           </nav>
 
