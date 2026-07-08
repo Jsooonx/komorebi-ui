@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Globe, Shield, Zap, ArrowRight, Terminal, Activity } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -17,7 +16,6 @@ interface FeatureItem {
   title: string;
   description: string;
   color: string;
-  icon: "globe" | "shield" | "zap" | "activity";
 }
 
 interface ResourceItem {
@@ -25,13 +23,13 @@ interface ResourceItem {
   description: string;
 }
 
-// ── Static data (no JSX at module scope) ───────────────────────────────────────
+// ── Static data ────────────────────────────────────────────────────────────────
 
 const FEATURES: FeatureItem[] = [
-  { icon: "globe",    title: "Global CDN",          description: "Deploy to 200+ edge locations worldwide.", color: "#E8A969" },
-  { icon: "shield",   title: "Zero-Trust Security", description: "End-to-end encryption by default.",         color: "#BECB6D" },
-  { icon: "zap",      title: "Instant Deploys",     description: "Push to live in under 30 seconds.",         color: "#E8A969" },
-  { icon: "activity", title: "Live Analytics",      description: "Real-time performance metrics dashboard.",  color: "#BECB6D" },
+  { title: "Global CDN",          description: "Deploy to 200+ edge locations worldwide.", color: "#E8A969" },
+  { title: "Zero-Trust Security", description: "End-to-end encryption by default.",         color: "#BECB6D" },
+  { title: "Instant Deploys",     description: "Push to live in under 30 seconds.",         color: "#E8A969" },
+  { title: "Live Analytics",      description: "Real-time performance metrics dashboard.",  color: "#BECB6D" },
 ];
 
 const RESOURCES: ResourceItem[] = [
@@ -40,27 +38,12 @@ const RESOURCES: ResourceItem[] = [
   { title: "Status Page",   description: "Live uptime and incident reports." },
 ];
 
-// ── Icon resolver (JSX inside function scope) ──────────────────────────────────
-
-function FeatureIcon({ type, color }: { type: FeatureItem["icon"]; color: string }) {
-  const cls = `w-4 h-4`;
-  const style = { color };
-  switch (type) {
-    case "globe":    return <Globe    className={cls} style={style} />;
-    case "shield":   return <Shield   className={cls} style={style} />;
-    case "zap":      return <Zap      className={cls} style={style} />;
-    case "activity": return <Activity className={cls} style={style} />;
-  }
-}
-
 // ── Subcomponents ──────────────────────────────────────────────────────────────
 
 function FeatureCard({ item }: { item: FeatureItem }) {
   return (
     <div className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
-      <div className="mt-0.5 shrink-0">
-        <FeatureIcon type={item.icon} color={item.color} />
-      </div>
+      <div className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: item.color }} />
       <div>
         <p className="text-xs font-medium text-white/90 group-hover:text-white transition-colors">
           {item.title}
@@ -82,7 +65,6 @@ function ResourceRow({ item }: { item: ResourceItem }) {
         </p>
         <p className="text-[10px] text-white/35 mt-0.5">{item.description}</p>
       </div>
-      <ArrowRight className="w-3 h-3 text-white/20 group-hover:text-white/60 transition-colors shrink-0" />
     </div>
   );
 }
@@ -138,20 +120,15 @@ function NavbarContent({
                 <div className="p-3 w-[380px] bg-[#0c0c0e] border border-white/10 rounded-xl shadow-2xl">
                   <div className="flex items-center justify-between px-2 pb-2 mb-1 border-b border-white/5">
                     <span className="text-[10px] font-mono text-white/35 uppercase tracking-widest">Platform</span>
-                    <span className="flex items-center gap-1 text-[10px] text-[#E8A969] font-medium">
-                      <Sparkles className="w-3 h-3" />
-                      New in v2.0
-                    </span>
+                    <span className="text-[10px] text-[#E8A969] font-medium">New in v2.0</span>
                   </div>
                   <div className="grid grid-cols-2 gap-1">
                     {FEATURES.map((f) => <FeatureCard key={f.title} item={f} />)}
                   </div>
                   <div className="mt-2 pt-2 border-t border-white/5 px-2">
                     <NavigationMenuLink asChild>
-                      <button className="flex items-center gap-1.5 text-[11px] text-[#BECB6D] hover:text-white transition-colors font-medium cursor-pointer">
-                        <Terminal className="w-3 h-3" />
+                      <button className="text-[11px] text-[#BECB6D] hover:text-white transition-colors font-medium cursor-pointer">
                         View all features
-                        <ArrowRight className="w-3 h-3" />
                       </button>
                     </NavigationMenuLink>
                   </div>
@@ -198,7 +175,6 @@ function NavbarContent({
         whileTap={{ scale: 0.97 }}
         className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#E8A969]/15 border border-[#E8A969]/25 text-[#E8A969] text-xs font-heading font-medium hover:bg-[#E8A969]/25 transition-colors cursor-pointer shrink-0"
       >
-        <Sparkles className="w-3 h-3" />
         Get Started
       </motion.button>
 
