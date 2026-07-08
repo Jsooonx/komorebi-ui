@@ -235,14 +235,8 @@ export default function MorphingBlobCard({ minimal = false }: { minimal?: boolea
   }
 
   return (
-    <motion.div 
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={{ rotateY: tilt.x, rotateX: tilt.y }}
-      transition={{ type: "spring", stiffness: 180, damping: 22 }}
+    <div 
       className="relative w-full h-[544px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group antialiased"
-      style={{ perspective: 1000, transformStyle: "preserve-3d" }}
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#121212] via-transparent to-[#1a1a1a]/20 opacity-50 pointer-events-none" />
 
@@ -265,6 +259,6 @@ export default function MorphingBlobCard({ minimal = false }: { minimal?: boolea
           Interactive stepper component
         </h3>
       </div>
-    </motion.div>
+    </div>
   );
 }
