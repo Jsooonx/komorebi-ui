@@ -44,16 +44,13 @@ const RESOURCES: ResourceItem[] = [
 
 function FeatureCard({ item }: { item: FeatureItem }) {
   return (
-    <div className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
-      <div className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: item.color }} />
-      <div>
-        <p className="text-xs font-medium text-white/90 group-hover:text-white transition-colors">
-          {item.title}
-        </p>
-        <p className="text-[11px] text-white/45 leading-relaxed mt-0.5">
-          {item.description}
-        </p>
-      </div>
+    <div className="p-2.5 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
+      <p className="text-xs font-medium text-white/90 group-hover:text-white transition-colors">
+        {item.title}
+      </p>
+      <p className="text-[11px] text-white/45 leading-relaxed mt-0.5">
+        {item.description}
+      </p>
     </div>
   );
 }
@@ -128,20 +125,9 @@ function NavbarContent({
                 Features
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="p-3 w-[380px] bg-[#0c0c0e] border border-white/10 rounded-xl shadow-2xl">
-                  <div className="flex items-center justify-between px-2 pb-2 mb-1 border-b border-white/5">
-                    <span className="text-[10px] font-mono text-white/35 uppercase tracking-widest">Platform</span>
-                    <span className="text-[10px] text-[#E8A969] font-medium">New in v2.0</span>
-                  </div>
+                <div className="p-2 w-[360px] bg-[#0c0c0e] border border-white/10 rounded-xl shadow-2xl">
                   <div className="grid grid-cols-2 gap-1">
                     {FEATURES.map((f) => <FeatureCard key={f.title} item={f} />)}
-                  </div>
-                  <div className="mt-2 pt-2 border-t border-white/5 px-2">
-                    <NavigationMenuLink asChild>
-                      <button className="text-[11px] text-[#BECB6D] hover:text-white transition-colors font-medium cursor-pointer">
-                        View all features
-                      </button>
-                    </NavigationMenuLink>
                   </div>
                 </div>
               </NavigationMenuContent>
