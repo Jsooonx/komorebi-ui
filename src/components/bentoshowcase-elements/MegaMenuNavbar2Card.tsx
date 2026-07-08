@@ -250,7 +250,7 @@ export default function MegaMenuNavbar2Card({ minimal = false }: { minimal?: boo
     return (
       <div 
         onScroll={handleScroll}
-        className="w-full h-full bg-transparent overflow-y-auto scrollbar-none select-none relative"
+        className="w-full h-[400px] bg-transparent overflow-y-auto scrollbar-none select-none relative"
         style={cssVariables}
       >
         <div className="sticky top-0 z-20 w-full flex justify-center">

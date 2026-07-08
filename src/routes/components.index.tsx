@@ -69,7 +69,7 @@ const itemVariants = {
   }
 };
 
-function ComponentCard({ item }: { item: ComponentItem }) {
+function ComponentCard({ item, isBackNavigation }: { item: ComponentItem; isBackNavigation?: boolean }) {
   const [copiedCli, setCopiedCli] = useState(false);
   const PreviewComp = item.component;
   const navigate = useNavigate();
@@ -113,7 +113,10 @@ function ComponentCard({ item }: { item: ComponentItem }) {
   };
 
   return (
-    <motion.div variants={itemVariants} className={item.gridClass || ""}>
+    <motion.div 
+      variants={isBackNavigation ? undefined : itemVariants} 
+      className={item.gridClass || ""}
+    >
       <div
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
@@ -372,7 +375,7 @@ function ComponentsIndex() {
                         className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
                       >
                         {filteredComponents.filter(c => c.isNew).map((item) => (
-                          <ComponentCard key={item.id} item={item} />
+                          <ComponentCard key={item.id} item={item} isBackNavigation={isBackNavigation} />
                         ))}
                       </motion.div>
                     </div>
@@ -396,7 +399,7 @@ function ComponentsIndex() {
                         className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
                       >
                         {filteredComponents.filter(c => !c.isNew).map((item) => (
-                          <ComponentCard key={item.id} item={item} />
+                          <ComponentCard key={item.id} item={item} isBackNavigation={isBackNavigation} />
                         ))}
                       </motion.div>
                     </div>
