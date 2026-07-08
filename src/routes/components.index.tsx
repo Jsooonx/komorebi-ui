@@ -147,9 +147,6 @@ function ComponentCard({
                 New
               </span>
             )}
-            <span className="text-white/40 group-hover:translate-x-0.5 transition-transform ml-1">
-              â†—
-            </span>
           </div>
         </div>
       </div>
