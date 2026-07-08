@@ -125,14 +125,7 @@ function ComponentCard({ item }: { item: ComponentItem }) {
             <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
           </div>
 
-          {/* Quick CLI Trigger button overlay (visible on card hover) */}
-          <button
-            onClick={handleCopyCli}
-            className="absolute top-2.5 right-3 z-20 flex items-center justify-center p-1.5 rounded-lg bg-black/60 border border-white/10 text-white/60 hover:text-white pointer-events-auto opacity-0 group-hover:opacity-100 transition-opacity"
-            title="Copy component add CLI command"
-          >
-            {copiedCli ? <Check className="w-3.5 h-3.5 text-[#00f5a0]" /> : <Terminal className="w-3.5 h-3.5 text-[#BECB6D]" />}
-          </button>
+
 
           {/* Actual component preview rendering */}
           <div className="w-full h-full flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity overflow-hidden">
