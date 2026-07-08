@@ -223,19 +223,7 @@ function ComponentsIndex() {
             </span>
           </Link>
           <ChevronRight className="w-4 h-4 text-white/20" />
-          <button 
-            onClick={() => setSidebarVisible(!sidebarVisible)}
-            className="flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-white/5 border border-white/10 hover:border-white/25 text-xs font-medium text-white/40 hover:text-white/80 transition-all cursor-pointer font-mono active:scale-[0.98]"
-            title={sidebarVisible ? "Hide Sidebar" : "Show Sidebar"}
-          >
-            <span>Components</span>
-            <div className="w-[1px] h-2.5 bg-white/10 mx-0.5" />
-            {sidebarVisible ? (
-              <ChevronLeft className="w-3 h-3 text-white/40" />
-            ) : (
-              <ChevronRight className="w-3 h-3 text-white/40" />
-            )}
-          </button>
+          <span className="text-xs font-medium text-white/40 font-mono">Components</span>
         </div>
 
         <nav className="flex items-center gap-6">
@@ -251,6 +239,17 @@ function ComponentsIndex() {
       {/* ── MAIN CONTENT SIDEBAR LAYOUT ── */}
       <div className="flex-1 flex pt-16 relative w-full gap-0">
         
+        {/* Floating tab button to reopen sidebar when hidden */}
+        {!sidebarVisible && (
+          <button 
+            onClick={() => setSidebarVisible(true)}
+            className="fixed left-0 top-[20%] z-30 flex items-center justify-center pl-2.5 pr-2 py-3 bg-[#0c0c0e]/95 border border-l-0 border-white/10 rounded-r-xl text-white/40 hover:text-white transition-all cursor-pointer shadow-lg hover:pl-3.5 duration-200 active:scale-95 group"
+            title="Show Sidebar"
+          >
+            <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
+          </button>
+        )}
+        
         {/* LEFT SIDEBAR: Categories selector list (Aceternity style) */}
         <AnimatePresence initial={false}>
           {sidebarVisible && (
@@ -262,8 +261,15 @@ function ComponentsIndex() {
               className="hidden lg:flex w-64 shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex-col justify-between border-r border-white/5 overflow-hidden pl-6 md:pl-12 pr-6"
             >
               <div className="space-y-8 min-w-[200px]">
-                <div className="flex items-center gap-2 px-1">
+                <div className="flex items-center justify-between px-1">
                   <h3 className="text-xs font-semibold uppercase tracking-wider text-white/80">Filter Categories</h3>
+                  <button 
+                    onClick={() => setSidebarVisible(false)}
+                    className="p-1 hover:bg-white/5 rounded border border-white/5 text-white/40 hover:text-white/85 cursor-pointer transition-all hover:scale-105 active:scale-95 group flex items-center justify-center"
+                    title="Hide Sidebar"
+                  >
+                    <ChevronLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform duration-200" />
+                  </button>
                 </div>
 
                 <nav className="space-y-1.5">
