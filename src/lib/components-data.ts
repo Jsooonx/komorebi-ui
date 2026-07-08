@@ -181,7 +181,8 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     code: PixelShimmerCode,
     cliCommand: "npx komorebi-ui add pixel-shimmer",
     dependencies: [],
-    viewportHeightClass: "h-[250px]",
+    gridClass: "md:row-span-2",
+    viewportHeightClass: "h-[380px]",
   },
   {
     id: "pipeline-stepper",
