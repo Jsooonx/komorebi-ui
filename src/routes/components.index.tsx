@@ -236,7 +236,6 @@ function ComponentsIndex() {
         <aside className="hidden lg:block w-64 shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex flex-col justify-between">
           <div className="space-y-8">
             <div className="flex items-center gap-2 px-1">
-              <Sparkles className="w-4 h-4 text-[#E8A969]" />
               <h3 className="text-xs font-semibold uppercase tracking-wider text-white/80">Filter Categories</h3>
             </div>
 
