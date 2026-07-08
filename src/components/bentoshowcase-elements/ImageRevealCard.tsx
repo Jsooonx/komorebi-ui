@@ -6,15 +6,15 @@ export default function ImageRevealCard({ minimal = false }: { minimal?: boolean
 
   if (minimal) {
     return (
-      <div 
+      <div
         className="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer select-none group"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <img 
-            src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" 
-            alt="Nature Scenery" 
+          <img
+            src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80"
+            alt="Nature Scenery"
             className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 ease-out"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
@@ -34,16 +34,16 @@ export default function ImageRevealCard({ minimal = false }: { minimal?: boolean
   }
 
   return (
-    <div 
+    <div
       className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div className="absolute inset-0 z-0 overflow-hidden">
         {/* Underneath: Premium image reveal */}
-        <img 
-          src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" 
-          alt="Nature Scenery" 
+        <img
+          src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80"
+          alt="Nature Scenery"
           className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 ease-out"
         />
         {/* Color overlay */}
@@ -73,9 +73,7 @@ export default function ImageRevealCard({ minimal = false }: { minimal?: boolean
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Widget Preview
         </span>
-        <h3 className="font-sans text-base font-medium tracking-tight text-white">
-          Image reveal
-        </h3>
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">Image reveal</h3>
       </div>
     </div>
   );

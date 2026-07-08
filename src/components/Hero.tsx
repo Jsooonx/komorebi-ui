@@ -18,7 +18,7 @@ const COMPAT_BRANDS = [
   { domain: "antigravity.google", name: "Antigravity" },
   { domain: "manus.space", name: "Manus" },
   { domain: "cursor.com", name: "Cursor" },
-  { domain: "kimi.ai", name: "Kimi" }
+  { domain: "kimi.ai", name: "Kimi" },
 ];
 
 export default function Hero() {
@@ -31,13 +31,13 @@ export default function Hero() {
       await navigator.clipboard.writeText(commandText);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-      
+
       // Trigger canvas-confetti with brand colors
       confetti({
         particleCount: 80,
         spread: 50,
         origin: { y: 0.8 },
-        colors: ["#BECB6D", "#E8A969", "#112115", "#EAF1C1"]
+        colors: ["#BECB6D", "#E8A969", "#112115", "#EAF1C1"],
       });
     } catch (err) {
       console.error("Failed to copy text: ", err);
@@ -50,23 +50,22 @@ export default function Hero() {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        delayChildren: 0.1
-      }
-    }
+        delayChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
-    }
+      transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+    },
   };
 
   return (
     <section className="relative overflow-hidden min-h-screen bg-warm-cream flex flex-col justify-between py-16 px-6 md:px-12 select-none">
-      
       {/* ── AMBIENT WEBGL DARK VEIL BACKGROUND ── */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-60">
         <DarkVeil
@@ -93,8 +92,6 @@ export default function Hero() {
         animate="visible"
         className="relative z-10 flex flex-col items-center justify-center flex-grow text-center max-w-4xl mx-auto w-full my-auto"
       >
-
-
         {/* Large Editorial Headline */}
         <motion.h1
           variants={itemVariants}
@@ -123,7 +120,7 @@ export default function Hero() {
               ease="power3.out"
               splitType="words"
               from={{ opacity: 0, y: 40 }}
-              to={{ opacity: 1, y: 0, delay: 0.6 } as any}
+              to={{ opacity: 1, y: 0, delay: 0.6 }}
             />{" "}
             <SplitText
               text="modern webs."
@@ -133,13 +130,10 @@ export default function Hero() {
               ease="power3.out"
               splitType="words"
               from={{ opacity: 0, y: 40 }}
-              to={{ opacity: 1, y: 0, delay: 1.2 } as any}
+              to={{ opacity: 1, y: 0, delay: 1.2 }}
             />
           </span>
         </motion.h1>
-
-
-
 
         {/* CTA Section: CLI Command & Browse */}
         <motion.div
@@ -147,7 +141,7 @@ export default function Hero() {
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
         >
           {/* CLI Command Pill (Inspired by Skiper UI) */}
-          <div 
+          <div
             onClick={handleCopy}
             className="group flex items-center justify-between gap-3 px-5 py-3 rounded-full bg-white/5 text-moss-green border border-white/10 shadow-lg cursor-pointer hover:bg-white/10 active:scale-[0.98] transition-all w-full sm:w-auto font-mono text-sm max-w-[310px]"
           >
@@ -155,7 +149,7 @@ export default function Hero() {
               <Terminal className="w-4 h-4 text-sage-green shrink-0" />
               <span className="select-all">{commandText}</span>
             </div>
-            <button 
+            <button
               className="p-1 hover:bg-white/10 rounded-full transition-colors cursor-pointer text-moss-green/80 group-hover:text-moss-green shrink-0"
               title="Copy to clipboard"
             >
@@ -204,13 +198,10 @@ export default function Hero() {
             <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-warm-cream to-transparent pointer-events-none z-10" />
             {/* Right Edge Overlay */}
             <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-warm-cream to-transparent pointer-events-none z-10" />
-            
+
             <div className="flex items-center animate-marquee gap-10 w-max shrink-0 h-12">
               {COMPAT_BRANDS.concat(COMPAT_BRANDS).map((brand, idx) => (
-                <div 
-                  key={idx} 
-                  className="flex items-center gap-2.5 shrink-0 cursor-pointer group"
-                >
+                <div key={idx} className="flex items-center gap-2.5 shrink-0 cursor-pointer group">
                   <img
                     src={`https://img.logo.dev/${brand.domain}?token=pk_FklYVGBwT-mKrXMQ7yPyqQ&format=png`}
                     alt={brand.name}
@@ -226,11 +217,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-
       </motion.div>
-
-
-
     </section>
   );
 }

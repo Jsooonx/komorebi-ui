@@ -2,14 +2,20 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Sparkles, Terminal, X, CornerDownLeft } from "lucide-react";
-import { COMPONENTS_DATA, ComponentItem } from "@/lib/components-data";
+import { COMPONENTS_MANIFEST, type ComponentManifestItem } from "@/lib/components-manifest";
 
-export default function SearchPalette() {
+export default function SearchPalette({
+  initialOpen = false,
+  onInitialOpenHandled,
+}: {
+  initialOpen?: boolean;
+  onInitialOpenHandled?: () => void;
+}) {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(initialOpen);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
-  
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Listen for Cmd+K / Ctrl+K and custom event
@@ -29,7 +35,7 @@ export default function SearchPalette() {
 
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("open-search-palette", handleCustomOpen);
-    
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("open-search-palette", handleCustomOpen);
@@ -37,7 +43,7 @@ export default function SearchPalette() {
   }, []);
 
   // Filter components based on search query
-  const filtered = COMPONENTS_DATA.filter((item) => {
+  const filtered = COMPONENTS_MANIFEST.filter((item) => {
     const term = query.toLowerCase();
     return (
       item.name.toLowerCase().includes(term) ||
@@ -61,6 +67,15 @@ export default function SearchPalette() {
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!initialOpen) {
+      return;
+    }
+
+    setIsOpen(true);
+    onInitialOpenHandled?.();
+  }, [initialOpen, onInitialOpenHandled]);
+
   // Handle arrow key navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!isOpen || filtered.length === 0) return;
@@ -77,7 +92,7 @@ export default function SearchPalette() {
     }
   };
 
-  const handleSelect = (item: ComponentItem) => {
+  const handleSelect = (item: ComponentManifestItem) => {
     setIsOpen(false);
     navigate({ to: `/components/${item.id}` });
   };
@@ -86,7 +101,6 @@ export default function SearchPalette() {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh] px-4">
-          
           {/* Backdrop Blur Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -116,7 +130,7 @@ export default function SearchPalette() {
                 placeholder="Search animations, prompts, categories..."
                 className="w-full pl-14 pr-24 py-5 bg-transparent text-moss-green text-lg font-heading font-medium focus:outline-none placeholder-moss-green/30"
               />
-              
+
               {/* Keyboard indicators */}
               <div className="absolute right-5 flex items-center gap-2 pointer-events-none">
                 <span className="text-[10px] font-mono font-medium border border-moss-green/20 px-1.5 py-0.5 rounded text-moss-green/50 bg-moss-green/5 uppercase tracking-wider">
@@ -126,9 +140,7 @@ export default function SearchPalette() {
             </div>
 
             {/* Results Pane */}
-            <div 
-              className="flex-grow overflow-y-auto p-4 flex flex-col gap-1 max-h-[40vh] custom-scrollbar"
-            >
+            <div className="flex-grow overflow-y-auto p-4 flex flex-col gap-1 max-h-[40vh] custom-scrollbar">
               {filtered.length > 0 ? (
                 filtered.map((item, idx) => {
                   const isSelected = selectedIndex === idx;
@@ -138,15 +150,19 @@ export default function SearchPalette() {
                       onClick={() => handleSelect(item)}
                       onMouseEnter={() => setSelectedIndex(idx)}
                       className={`flex items-center justify-between p-3.5 rounded-2xl cursor-pointer transition-all duration-150 ${
-                        isSelected 
-                          ? "bg-white/10 text-moss-green shadow-md translate-x-1" 
+                        isSelected
+                          ? "bg-white/10 text-moss-green shadow-md translate-x-1"
                           : "hover:bg-white/5 text-moss-green/70"
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-xl transition-colors ${
-                          isSelected ? "bg-white/10 text-sun-gold" : "bg-white/5 text-moss-green/50"
-                        }`}>
+                        <div
+                          className={`p-2 rounded-xl transition-colors ${
+                            isSelected
+                              ? "bg-white/10 text-sun-gold"
+                              : "bg-white/5 text-moss-green/50"
+                          }`}
+                        >
                           {item.category === "Living Data" ? (
                             <Sparkles className="w-4.5 h-4.5" />
                           ) : (
@@ -157,17 +173,19 @@ export default function SearchPalette() {
                           <span className="text-sm font-semibold tracking-tight font-heading">
                             {item.name}
                           </span>
-                          <span className={`text-[11px] font-medium font-mono uppercase tracking-wider mt-0.5 ${
-                            isSelected ? "text-moss-green/60" : "text-moss-green/40"
-                          }`}>
+                          <span
+                            className={`text-[11px] font-medium font-mono uppercase tracking-wider mt-0.5 ${
+                              isSelected ? "text-moss-green/60" : "text-moss-green/40"
+                            }`}
+                          >
                             {item.category}
                           </span>
                         </div>
                       </div>
-                      
+
                       {/* Action trigger icon */}
                       {isSelected && (
-                        <motion.div 
+                        <motion.div
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           className="flex items-center gap-1 text-[11px] font-mono text-sun-gold bg-white/10 px-2 py-1 rounded-lg"
@@ -195,17 +213,17 @@ export default function SearchPalette() {
             {/* command footer */}
             <div className="bg-moss-green/5 border-t border-moss-green/10 px-5 py-3 flex items-center justify-between text-[11px] font-heading text-moss-green/50 select-none">
               <div className="flex items-center gap-3">
-                <span className="flex items-center gap-0.5"><span className="font-semibold text-moss-green">↑↓</span> to navigate</span>
+                <span className="flex items-center gap-0.5">
+                  <span className="font-semibold text-moss-green">↑↓</span> to navigate
+                </span>
                 <span className="w-[1px] h-3.5 bg-moss-green/10"></span>
-                <span className="flex items-center gap-0.5"><span className="font-semibold text-moss-green">Enter</span> to select</span>
+                <span className="flex items-center gap-0.5">
+                  <span className="font-semibold text-moss-green">Enter</span> to select
+                </span>
               </div>
-              <div className="font-serif italic text-xs">
-                Komorebi Command Center
-              </div>
+              <div className="font-serif italic text-xs">Komorebi Command Center</div>
             </div>
-
           </motion.div>
-          
         </div>
       )}
     </AnimatePresence>

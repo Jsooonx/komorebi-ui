@@ -21,8 +21,7 @@ function useCountUp(target: number, start: number, isInView: boolean, duration =
 }
 
 const fmt = (n: number) =>
-  "$" +
-  n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 export default function Analytics({ preview = false }: { preview?: boolean } = {}) {
   const ref = useRef<HTMLDivElement>(null);
@@ -34,74 +33,78 @@ export default function Analytics({ preview = false }: { preview?: boolean } = {
   return (
     <div
       ref={ref}
-      style={preview ? {
-        background: "transparent",
-        padding: 0,
-      } : {
-        background: "#000",
-        padding: "80px 48px",
-      }}
+      style={
+        preview
+          ? {
+              background: "transparent",
+              padding: 0,
+            }
+          : {
+              background: "#000",
+              padding: "80px 48px",
+            }
+      }
       className="overflow-hidden w-full"
     >
       {!preview && (
         <div ref={ref} style={{ textAlign: "center", marginBottom: 64 }}>
-        <div
-          className="font-heading"
-          style={{
-            fontSize: 12,
-            fontWeight: 500,
-            letterSpacing: 2,
-            color: "rgba(255,255,255,0.50)",
-            marginBottom: 16,
-          }}
-        >
-          ANALYTICS
-        </div>
-        <motion.h2
-          initial={{ opacity: 0, filter: "blur(12px)", y: 30 }}
-          animate={isInView ? { opacity: 1, filter: "blur(0px)", y: 0 } : {}}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{ margin: 0, color: "#fff" }}
-        >
-          <span
+          <div
             className="font-heading"
             style={{
-              display: "block",
-              fontSize: 72,
-              fontWeight: 400,
-              lineHeight: 1.15,
-              letterSpacing: "-0.2px",
+              fontSize: 12,
+              fontWeight: 500,
+              letterSpacing: 2,
+              color: "rgba(255,255,255,0.50)",
+              marginBottom: 16,
             }}
           >
-            Smarter cash flow
-          </span>
-          <span
-            className="font-serif"
+            ANALYTICS
+          </div>
+          <motion.h2
+            initial={{ opacity: 0, filter: "blur(12px)", y: 30 }}
+            animate={isInView ? { opacity: 1, filter: "blur(0px)", y: 0 } : {}}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{ margin: 0, color: "#fff" }}
+          >
+            <span
+              className="font-heading"
+              style={{
+                display: "block",
+                fontSize: 72,
+                fontWeight: 400,
+                lineHeight: 1.15,
+                letterSpacing: "-0.2px",
+              }}
+            >
+              Smarter cash flow
+            </span>
+            <span
+              className="font-serif"
+              style={{
+                display: "block",
+                fontSize: 72,
+                fontWeight: 400,
+                lineHeight: 1.15,
+                letterSpacing: "-0.2px",
+              }}
+            >
+              insights at a glance
+            </span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, filter: "blur(8px)", y: 20 }}
+            animate={isInView ? { opacity: 1, filter: "blur(0px)", y: 0 } : {}}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="font-heading"
             style={{
-              display: "block",
-              fontSize: 72,
+              fontSize: 16,
               fontWeight: 400,
-              lineHeight: 1.15,
-              letterSpacing: "-0.2px",
+              color: "rgba(255,255,255,0.60)",
+              marginTop: 16,
             }}
           >
-            insights at a glance
-          </span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, filter: "blur(8px)", y: 20 }}
-          animate={isInView ? { opacity: 1, filter: "blur(0px)", y: 0 } : {}}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="font-heading"
-          style={{
-            fontSize: 16,
-            fontWeight: 400,
-            color: "rgba(255,255,255,0.60)",
-            marginTop: 16,
-          }}
-        >
-          Keep your income and expense in sync with real-time AI
-        </motion.p>
+            Keep your income and expense in sync with real-time AI
+          </motion.p>
         </div>
       )}
 
@@ -131,7 +134,9 @@ export default function Analytics({ preview = false }: { preview?: boolean } = {
               zIndex: 0,
             }}
           />
-          <div style={{ position: "absolute", inset: 0, zIndex: 1, background: "rgba(0,0,0,0.35)" }} />
+          <div
+            style={{ position: "absolute", inset: 0, zIndex: 1, background: "rgba(0,0,0,0.35)" }}
+          />
 
           <div
             style={{
@@ -185,21 +190,78 @@ export default function Analytics({ preview = false }: { preview?: boolean } = {
             >
               {fmt(bigNum)}
             </div>
-            <div style={{ width: "100%", borderTop: "1px dashed rgba(255,255,255,0.20)", marginBottom: 20 }} />
+            <div
+              style={{
+                width: "100%",
+                borderTop: "1px dashed rgba(255,255,255,0.20)",
+                marginBottom: 20,
+              }}
+            />
 
             {[
-              { label: "Income", value: "$15,500", w: "75%", fill: "linear-gradient(90deg, #1DC47D 60.8%, rgba(29,196,125,0) 100%)" },
-              { label: "Investment", value: "$4,250", w: "45%", fill: "linear-gradient(90deg, #B48F17 55.74%, rgba(180,143,23,0) 100%)" },
-              { label: "Expenses", value: "$8,200", w: "60%", fill: "linear-gradient(90deg, #FFF 52.46%, rgba(255,255,255,0) 100%)" },
+              {
+                label: "Income",
+                value: "$15,500",
+                w: "75%",
+                fill: "linear-gradient(90deg, #1DC47D 60.8%, rgba(29,196,125,0) 100%)",
+              },
+              {
+                label: "Investment",
+                value: "$4,250",
+                w: "45%",
+                fill: "linear-gradient(90deg, #B48F17 55.74%, rgba(180,143,23,0) 100%)",
+              },
+              {
+                label: "Expenses",
+                value: "$8,200",
+                w: "60%",
+                fill: "linear-gradient(90deg, #FFF 52.46%, rgba(255,255,255,0) 100%)",
+              },
             ].map((r) => (
               <div key={r.label} style={{ marginBottom: 16 }}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span className="font-heading" style={{ fontSize: 13, color: "rgba(255,255,255,0.70)" }}>{r.label}</span>
-                  <span className="font-heading" style={{ fontSize: 13, color: "#fff", fontWeight: 500 }}>{r.value}</span>
+                  <span
+                    className="font-heading"
+                    style={{ fontSize: 13, color: "rgba(255,255,255,0.70)" }}
+                  >
+                    {r.label}
+                  </span>
+                  <span
+                    className="font-heading"
+                    style={{ fontSize: 13, color: "#fff", fontWeight: 500 }}
+                  >
+                    {r.value}
+                  </span>
                 </div>
-                <div style={{ height: 5, borderRadius: 5, width: "100%", marginTop: 6, position: "relative" }}>
-                  <div style={{ position: "absolute", inset: 0, opacity: 0.13, background: "linear-gradient(90deg, #040504 0%, rgba(4,5,4,0.50) 100%)", borderRadius: 5 }} />
-                  <div style={{ position: "absolute", left: 0, top: 0, height: "100%", width: r.w, borderRadius: 5, background: r.fill }} />
+                <div
+                  style={{
+                    height: 5,
+                    borderRadius: 5,
+                    width: "100%",
+                    marginTop: 6,
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      opacity: 0.13,
+                      background: "linear-gradient(90deg, #040504 0%, rgba(4,5,4,0.50) 100%)",
+                      borderRadius: 5,
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      top: 0,
+                      height: "100%",
+                      width: r.w,
+                      borderRadius: 5,
+                      background: r.fill,
+                    }}
+                  />
                 </div>
               </div>
             ))}
@@ -208,15 +270,30 @@ export default function Analytics({ preview = false }: { preview?: boolean } = {
           <div style={{ position: "absolute", bottom: 22, left: 32, right: 32, zIndex: 2 }}>
             <h3
               className="font-serif"
-              style={{ fontSize: 26, fontWeight: 400, fontStyle: "italic", color: "#fff", marginBottom: 8, margin: 0, marginBlockEnd: 8 }}
+              style={{
+                fontSize: 26,
+                fontWeight: 400,
+                fontStyle: "italic",
+                color: "#fff",
+                marginBottom: 8,
+                margin: 0,
+                marginBlockEnd: 8,
+              }}
             >
               See the full picture of your finances.
             </h3>
             <p
               className="font-heading"
-              style={{ fontSize: 13, fontWeight: 400, lineHeight: 1.6, color: "rgba(255,255,255,0.65)", margin: 0 }}
+              style={{
+                fontSize: 13,
+                fontWeight: 400,
+                lineHeight: 1.6,
+                color: "rgba(255,255,255,0.65)",
+                margin: 0,
+              }}
             >
-              AI keeps your income, expenses, and goals effortlessly aligned giving you a clearer view of your financial rhythm, smarter decisions, and lasting stability.
+              AI keeps your income, expenses, and goals effortlessly aligned giving you a clearer
+              view of your financial rhythm, smarter decisions, and lasting stability.
             </p>
           </div>
         </motion.div>
@@ -246,7 +323,9 @@ export default function Analytics({ preview = false }: { preview?: boolean } = {
               zIndex: 0,
             }}
           />
-          <div style={{ position: "absolute", inset: 0, zIndex: 1, background: "rgba(0,0,0,0.25)" }} />
+          <div
+            style={{ position: "absolute", inset: 0, zIndex: 1, background: "rgba(0,0,0,0.25)" }}
+          />
 
           <div
             className="font-heading"
@@ -293,7 +372,10 @@ export default function Analytics({ preview = false }: { preview?: boolean } = {
               </span>
               <Info size={16} color="rgba(0,0,0,0.35)" />
             </div>
-            <div className="font-heading" style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", marginBottom: 14 }}>
+            <div
+              className="font-heading"
+              style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", marginBottom: 14 }}
+            >
               Sent today
             </div>
             <button
@@ -369,7 +451,11 @@ export default function Analytics({ preview = false }: { preview?: boolean } = {
                 padding: "8px 16px 8px 10px",
               }}
             >
-              <img src="https://qclay.design/lovable/synergy/Logo-lov.svg" alt="Synergeus" style={{ height: 18 }} />
+              <img
+                src="https://qclay.design/lovable/synergy/Logo-lov.svg"
+                alt="Synergeus"
+                style={{ height: 18 }}
+              />
             </div>
             <button
               style={{
@@ -392,13 +478,26 @@ export default function Analytics({ preview = false }: { preview?: boolean } = {
           <div style={{ position: "absolute", bottom: 22, left: 32, right: 32, zIndex: 2 }}>
             <h3
               className="font-serif"
-              style={{ fontSize: 24, fontWeight: 400, color: "#fff", marginBottom: 8, margin: 0, marginBlockEnd: 8 }}
+              style={{
+                fontSize: 24,
+                fontWeight: 400,
+                color: "#fff",
+                marginBottom: 8,
+                margin: 0,
+                marginBlockEnd: 8,
+              }}
             >
               Your money, perfect transactions
             </h3>
             <p
               className="font-heading"
-              style={{ fontSize: 13, fontWeight: 400, lineHeight: 1.6, color: "rgba(255,255,255,0.65)", margin: 0 }}
+              style={{
+                fontSize: 13,
+                fontWeight: 400,
+                lineHeight: 1.6,
+                color: "rgba(255,255,255,0.65)",
+                margin: 0,
+              }}
             >
               Stay grounded with real-time visibility into where your money's going and growing.
             </p>

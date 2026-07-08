@@ -14,7 +14,10 @@ export default function TextRollCard({ minimal = false }: { minimal?: boolean })
       >
         <div className="flex overflow-hidden py-1">
           {word.split("").map((letter, index) => (
-            <div key={index} className="relative h-8 w-5 sm:w-6 overflow-hidden flex justify-center">
+            <div
+              key={index}
+              className="relative h-8 w-5 sm:w-6 overflow-hidden flex justify-center"
+            >
               <motion.span
                 animate={{ y: hovered ? "-100%" : "0%" }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
@@ -36,9 +39,9 @@ export default function TextRollCard({ minimal = false }: { minimal?: boolean })
       </div>
     );
   }
-  
+
   return (
-    <div 
+    <div
       className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -57,7 +60,10 @@ export default function TextRollCard({ minimal = false }: { minimal?: boolean })
       <div className="relative z-10 w-full flex items-center justify-center h-20">
         <div className="flex overflow-hidden py-1">
           {word.split("").map((letter, index) => (
-            <div key={index} className="relative h-8 w-5 sm:w-6 overflow-hidden flex justify-center">
+            <div
+              key={index}
+              className="relative h-8 w-5 sm:w-6 overflow-hidden flex justify-center"
+            >
               <motion.span
                 animate={{ y: hovered ? "-100%" : "0%" }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}

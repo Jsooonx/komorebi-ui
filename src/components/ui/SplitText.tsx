@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import React, { useRef, useEffect, useState, useMemo } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,30 +11,30 @@ export interface SplitTextProps {
   delay?: number;
   duration?: number;
   ease?: string | ((t: number) => number);
-  splitType?: 'chars' | 'words' | 'lines' | 'words, chars';
+  splitType?: "chars" | "words" | "lines" | "words, chars";
   from?: gsap.TweenVars;
   to?: gsap.TweenVars;
   threshold?: number;
   rootMargin?: string;
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
-  textAlign?: React.CSSProperties['textAlign'];
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
+  textAlign?: React.CSSProperties["textAlign"];
   onLetterAnimationComplete?: () => void;
 }
 
 const SplitText: React.FC<SplitTextProps> = ({
   text,
-  className = '',
+  className = "",
   delay = 50,
   duration = 1.25,
-  ease = 'power3.out',
-  splitType = 'chars',
+  ease = "power3.out",
+  splitType = "chars",
   from = { opacity: 0, y: 40 },
   to = { opacity: 1, y: 0 },
   threshold = 0.1,
-  rootMargin = '-100px',
-  tag = 'p',
-  textAlign = 'center',
-  onLetterAnimationComplete
+  rootMargin = "-100px",
+  tag = "p",
+  textAlign = "center",
+  onLetterAnimationComplete,
 }) => {
   const ref = useRef<HTMLElement>(null);
   const animationCompletedRef = useRef(false);
@@ -47,7 +47,7 @@ const SplitText: React.FC<SplitTextProps> = ({
   }, [onLetterAnimationComplete]);
 
   useEffect(() => {
-    if (document.fonts.status === 'loaded') {
+    if (document.fonts.status === "loaded") {
       setFontsLoaded(true);
     } else {
       document.fonts.ready.then(() => {
@@ -60,10 +60,10 @@ const SplitText: React.FC<SplitTextProps> = ({
     const startPct = (1 - threshold) * 100;
     const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
     const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
-    const marginUnit = marginMatch ? marginMatch[2] || 'px' : 'px';
+    const marginUnit = marginMatch ? marginMatch[2] || "px" : "px";
     const sign =
       marginValue === 0
-        ? ''
+        ? ""
         : marginValue < 0
           ? `-=${Math.abs(marginValue)}${marginUnit}`
           : `+=${marginValue}${marginUnit}`;
@@ -77,15 +77,15 @@ const SplitText: React.FC<SplitTextProps> = ({
 
       const el = ref.current;
       let targets: Element[] = [];
-      
-      if (splitType.includes('chars')) {
-        targets = Array.from(el.querySelectorAll('.split-char'));
+
+      if (splitType.includes("chars")) {
+        targets = Array.from(el.querySelectorAll(".split-char"));
       }
-      if (!targets.length && splitType.includes('words')) {
-        targets = Array.from(el.querySelectorAll('.split-word'));
+      if (!targets.length && splitType.includes("words")) {
+        targets = Array.from(el.querySelectorAll(".split-word"));
       }
       if (!targets.length) {
-        targets = Array.from(el.querySelectorAll('.split-char, .split-word'));
+        targets = Array.from(el.querySelectorAll(".split-char, .split-word"));
       }
 
       const tween = gsap.fromTo(
@@ -101,19 +101,19 @@ const SplitText: React.FC<SplitTextProps> = ({
             start: scrollTriggerStart,
             once: true,
             fastScrollEnd: true,
-            anticipatePin: 0.4
+            anticipatePin: 0.4,
           },
           onComplete: () => {
             animationCompletedRef.current = true;
             onCompleteRef.current?.();
           },
-          willChange: 'transform, opacity',
-          force3D: true
-        }
+          willChange: "transform, opacity",
+          force3D: true,
+        },
       );
 
       return () => {
-        ScrollTrigger.getAll().forEach(st => {
+        ScrollTrigger.getAll().forEach((st) => {
           if (st.trigger === el) st.kill();
         });
         tween.kill();
@@ -130,20 +130,26 @@ const SplitText: React.FC<SplitTextProps> = ({
         JSON.stringify(to),
         threshold,
         rootMargin,
-        fontsLoaded
+        fontsLoaded,
       ],
-      scope: ref
-    }
+      scope: ref,
+    },
   );
 
-  const style: React.CSSProperties = useMemo(() => ({
-    textAlign,
-    wordWrap: 'break-word',
-    willChange: 'transform, opacity'
-  }), [textAlign]);
+  const style: React.CSSProperties = useMemo(
+    () => ({
+      textAlign,
+      wordWrap: "break-word",
+      willChange: "transform, opacity",
+    }),
+    [textAlign],
+  );
 
-  const classes = useMemo(() => `split-parent overflow-hidden inline-block whitespace-normal ${className}`, [className]);
-  const Tag = (tag || 'p') as React.ElementType;
+  const classes = useMemo(
+    () => `split-parent overflow-hidden inline-block whitespace-normal ${className}`,
+    [className],
+  );
+  const Tag = (tag || "p") as React.ElementType;
 
   const renderedContent = useMemo(() => {
     const words = text.split(/(\s+)/);
@@ -151,13 +157,13 @@ const SplitText: React.FC<SplitTextProps> = ({
       if (/^\s+$/.test(word)) {
         return (
           <span key={wordIdx} className="split-space inline-block">
-            {word.replace(/ /g, '\u00A0')}
+            {word.replace(/ /g, "\u00A0")}
           </span>
         );
       }
       return (
         <span key={wordIdx} className="split-word inline-block whitespace-nowrap">
-          {word.split('').map((char, charIdx) => (
+          {word.split("").map((char, charIdx) => (
             <span key={charIdx} className="split-char inline-block">
               {char}
             </span>

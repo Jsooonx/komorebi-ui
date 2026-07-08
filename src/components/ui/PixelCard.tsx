@@ -317,7 +317,7 @@ export default function PixelCard({
       style={style}
       className={cn(
         "relative overflow-hidden w-full h-full border border-white/5 rounded-2xl bg-black/60 select-none",
-        className
+        className,
       )}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

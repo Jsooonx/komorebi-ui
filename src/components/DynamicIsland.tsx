@@ -7,9 +7,9 @@ import TextRoll from "./ui/TextRoll";
 // Sunlight Leaf Logo
 export function SunlightLeafLogo({ className = "w-6 h-6" }: { className?: string }) {
   return (
-    <img 
-      src="/KomorebiLogoUpdate1_transparent.png" 
-      alt="Komorebi UI" 
+    <img
+      src="/KomorebiLogoUpdate1_transparent.png"
+      alt="Komorebi UI"
       className={`${className} object-contain rounded`}
     />
   );
@@ -17,7 +17,7 @@ export function SunlightLeafLogo({ className = "w-6 h-6" }: { className?: string
 
 function NavLink({ to, href, children }: { to?: string; href?: string; children: string }) {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const content = <TextRoll hovered={isHovered}>{children}</TextRoll>;
   const baseClass = "hover:text-sun-gold transition-colors cursor-pointer flex items-center";
 
@@ -38,9 +38,9 @@ function NavLink({ to, href, children }: { to?: string; href?: string; children:
 
   if (to) {
     return (
-      <Link 
-        to={to} 
-        onMouseEnter={() => setIsHovered(true)} 
+      <Link
+        to={to}
+        onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={baseClass}
       >
@@ -50,10 +50,10 @@ function NavLink({ to, href, children }: { to?: string; href?: string; children:
   }
 
   return (
-    <a 
-      href={href} 
+    <a
+      href={href}
       onClick={handleScroll}
-      onMouseEnter={() => setIsHovered(true)} 
+      onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={baseClass}
     >
@@ -75,7 +75,10 @@ export default function DynamicIsland() {
       const parts = location.pathname.split("/");
       const id = parts[parts.length - 1] || parts[parts.length - 2];
       const formatted = id
-        ? id.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")
+        ? id
+            .split("-")
+            .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(" ")
         : "Component";
       setActiveComponentId(formatted);
     } else {
@@ -90,10 +93,7 @@ export default function DynamicIsland() {
   return (
     <div className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4 md:px-8">
       {/* Skiper-style Floating Pill Navbar */}
-      <div 
-        className="pointer-events-auto w-full max-w-5xl flex items-center justify-between rounded-2xl bg-warm-cream/80 text-moss-green shadow-[0_12px_40px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.08)] border border-white/5 border-t-white/15 backdrop-blur-xl px-6 py-3"
-      >
-        
+      <div className="pointer-events-auto w-full max-w-5xl flex items-center justify-between rounded-2xl bg-warm-cream/80 text-moss-green shadow-[0_12px_40px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.08)] border border-white/5 border-t-white/15 backdrop-blur-xl px-6 py-3">
         {/* LEFT SIDE: Brand Logo & Title (or Back Button in Details) */}
         <div className="flex items-center gap-3">
           {isDetailRoute ? (
@@ -119,7 +119,6 @@ export default function DynamicIsland() {
 
         {/* MIDDLE/RIGHT SIDE: Navigation & Actions */}
         <div className="flex items-center gap-6">
-          
           {/* Navigation Links (Hidden on small screens) */}
           <nav className="hidden sm:flex items-center gap-5 text-xs font-heading font-medium text-moss-green/75">
             <NavLink href="#">Home</NavLink>
@@ -153,7 +152,6 @@ export default function DynamicIsland() {
             )}
           </div>
         </div>
-
       </div>
     </div>
   );

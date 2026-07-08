@@ -25,7 +25,8 @@ const TEMPLATES: TemplateItem[] = [
     sections: "2 Sections",
     badgeType: "copy",
     tags: ["E-Commerce", "Dark UI", "Subscription", "Subtle Animation"],
-    prompt: "Create a premium e-commerce landing page called JPlus for digital subscriptions. The design must be ultra-dark and modern with a browser viewport frame. The header has a JPlus logo, navigation, and 'Start shopping' button. Inside the browser window, display a sidebar listing categories (AI Tools, Streaming, Productivity, Design) and a main content grid. The grid should feature a beige analytics card ('Orders today: 1,247 delivered', 'Success: 99%') with a smooth line chart, and a pink customer card ('10k+ verified users'). Add subtle entrance animations on mount.",
+    prompt:
+      "Create a premium e-commerce landing page called JPlus for digital subscriptions. The design must be ultra-dark and modern with a browser viewport frame. The header has a JPlus logo, navigation, and 'Start shopping' button. Inside the browser window, display a sidebar listing categories (AI Tools, Streaming, Productivity, Design) and a main content grid. The grid should feature a beige analytics card ('Orders today: 1,247 delivered', 'Success: 99%') with a smooth line chart, and a pink customer card ('10k+ verified users'). Add subtle entrance animations on mount.",
   },
   {
     id: "aura",
@@ -35,7 +36,8 @@ const TEMPLATES: TemplateItem[] = [
     sections: "6 Sections",
     badgeType: "get",
     tags: ["B2B", "SaaS", "Conversational AI", "Staggered Text"],
-    prompt: "Build a luxury conversational B2B AI landing page based on the Aura AI design system. The page should feature a deep black slate obsidian background (#08090c) and a top header nav-pill with transparent blurs and a glowing integrations badge. The hero has a centered header with staggered typing animations: 'Automating customer delight at scale — is an Algorithm'. On the right, place a side navigation, and at the bottom left, stats about the vision. On the bottom right, display an interactive white 'SDK Integration' card with a 3D organic glossy sphere.",
+    prompt:
+      "Build a luxury conversational B2B AI landing page based on the Aura AI design system. The page should feature a deep black slate obsidian background (#08090c) and a top header nav-pill with transparent blurs and a glowing integrations badge. The hero has a centered header with staggered typing animations: 'Automating customer delight at scale — is an Algorithm'. On the right, place a side navigation, and at the bottom left, stats about the vision. On the bottom right, display an interactive white 'SDK Integration' card with a 3D organic glossy sphere.",
     videoSrc: "/Aura-AI.mp4",
   },
   {
@@ -46,7 +48,8 @@ const TEMPLATES: TemplateItem[] = [
     sections: "9 Sections",
     badgeType: "copy",
     tags: ["Healthcare", "Split Screen", "Ambient Video", "Clinician Chat"],
-    prompt: "Build a mental wellness AI platform landing page called Shyen. The layout must be a split-screen design. The left column features a dark green-yellow atmospheric blurred lighting gradient, a serif heading 'Your mind never gonna stop.', description lines, and a dark pill-shaped waitlist form. The right column features an ambient video overlay, clinician-designed chat simulation bubbles ('This helped me organize my thoughts...'), Lara Simon's avatar, and green-tinted feature tags ('AI Meditation', 'Full Body syncing', 'AI Data Insights').",
+    prompt:
+      "Build a mental wellness AI platform landing page called Shyen. The layout must be a split-screen design. The left column features a dark green-yellow atmospheric blurred lighting gradient, a serif heading 'Your mind never gonna stop.', description lines, and a dark pill-shaped waitlist form. The right column features an ambient video overlay, clinician-designed chat simulation bubbles ('This helped me organize my thoughts...'), Lara Simon's avatar, and green-tinted feature tags ('AI Meditation', 'Full Body syncing', 'AI Data Insights').",
   },
   {
     id: "synergeus",
@@ -56,7 +59,8 @@ const TEMPLATES: TemplateItem[] = [
     sections: "10 Sections",
     badgeType: "premium",
     tags: ["Fintech", "Mux Video", "Analytics Overlay", "Luxury Black"],
-    prompt: "Build a minimal, dark financial assistant landing page called Synergeus. The hero section has a fullscreen ambient Mux stream video background, a dark linear gradient overlay, and a centered white navigation menu. The headline reads 'Our AI simplify your financial life' in a bold serif display. Below it, place a white rounded 'Start free trial now' CTA. On the right, render a floating glass transaction history card with user picture overlays and automated transaction slides.",
+    prompt:
+      "Build a minimal, dark financial assistant landing page called Synergeus. The hero section has a fullscreen ambient Mux stream video background, a dark linear gradient overlay, and a centered white navigation menu. The headline reads 'Our AI simplify your financial life' in a bold serif display. Below it, place a white rounded 'Start free trial now' CTA. On the right, render a floating glass transaction history card with user picture overlays and automated transaction slides.",
   },
   {
     id: "vesper",
@@ -66,7 +70,8 @@ const TEMPLATES: TemplateItem[] = [
     sections: "8 Sections",
     badgeType: "premium",
     tags: ["Minimalist", "Developer", "Obsidian Dark", "Command Menu"],
-    prompt: "Create a minimalist obsidian developer space portfolio template called Vesper with an integrated command panel palette and tabbed code editor mockup interfaces.",
+    prompt:
+      "Create a minimalist obsidian developer space portfolio template called Vesper with an integrated command panel palette and tabbed code editor mockup interfaces.",
   },
   {
     id: "aeon",
@@ -76,7 +81,8 @@ const TEMPLATES: TemplateItem[] = [
     sections: "5 Sections",
     badgeType: "copy",
     tags: ["Workspace", "Calendar Widget", "Drag & Drop", "Warm Accent"],
-    prompt: "Create a warm calendar and workspace planner landing page called Aeon featuring drag and drop task lists and customizable time block visualizations.",
+    prompt:
+      "Create a warm calendar and workspace planner landing page called Aeon featuring drag and drop task lists and customizable time block visualizations.",
   },
   {
     id: "apex",
@@ -86,7 +92,8 @@ const TEMPLATES: TemplateItem[] = [
     sections: "12 Sections",
     badgeType: "premium",
     tags: ["Trading Desk", "WebGL Canvas", "Live Stats", "Dark Cyan"],
-    prompt: "Create a high-frequency trading desk dashboard portal called Apex with interactive WebGL charting grids and simulated order book telemetry blocks.",
+    prompt:
+      "Create a high-frequency trading desk dashboard portal called Apex with interactive WebGL charting grids and simulated order book telemetry blocks.",
   },
   {
     id: "kora",
@@ -96,7 +103,8 @@ const TEMPLATES: TemplateItem[] = [
     sections: "6 Sections",
     badgeType: "copy",
     tags: ["Soundscape", "Web Audio API", "Ambient Glow", "Minimalism"],
-    prompt: "Create an ambient soundscape music player landing page called Kora with interactive audio-reactive elements and premium minimal player interfaces.",
+    prompt:
+      "Create an ambient soundscape music player landing page called Kora with interactive audio-reactive elements and premium minimal player interfaces.",
   },
 ];
 
@@ -135,12 +143,12 @@ function TemplateCard({ item }: { item: TemplateItem }) {
   };
 
   return (
-    <div 
+    <div
       onMouseEnter={handleMouseEnter}
       className="flex flex-col bg-[#0f0f12] border border-white/5 rounded-lg overflow-hidden hover:border-white/10 transition-all select-none group"
     >
       {/* Visual Live Preview Viewport Mock */}
-      <div 
+      <div
         ref={containerRef}
         className="relative w-full aspect-video bg-[#08090c] border-b border-white/5 overflow-hidden"
       >
@@ -159,7 +167,7 @@ function TemplateCard({ item }: { item: TemplateItem }) {
           <div className="w-full h-full bg-gradient-to-br from-[#08090c] to-[#12131a] flex flex-col items-center justify-center relative p-6 overflow-hidden">
             {/* Ambient background glow */}
             <div className="absolute w-32 h-32 rounded-full bg-white/[0.02] blur-2xl pointer-events-none" />
-            
+
             <div className="z-10 flex flex-col items-center gap-1.5 text-center">
               <span className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-[9px] font-mono text-white/40 tracking-wider uppercase">
                 In Queue
@@ -183,13 +191,17 @@ function TemplateCard({ item }: { item: TemplateItem }) {
           <button
             onClick={handleCopy}
             className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-medium transition-all ${
-              copied 
-                ? "bg-[#00f5a0]/15 text-[#00f5a0] border border-[#00f5a0]/25" 
+              copied
+                ? "bg-[#00f5a0]/15 text-[#00f5a0] border border-[#00f5a0]/25"
                 : "bg-white/10 hover:bg-white/20 text-white/80 border border-white/10"
             }`}
           >
             {copied ? <Check className="w-3 h-3" /> : <Clipboard className="w-3 h-3" />}
-            {item.badgeType === "premium" && !copied ? "Get Premium Prompt" : copied ? "Copied" : "Copy Prompt"}
+            {item.badgeType === "premium" && !copied
+              ? "Get Premium Prompt"
+              : copied
+                ? "Copied"
+                : "Copy Prompt"}
           </button>
         </div>
       </div>
@@ -198,9 +210,9 @@ function TemplateCard({ item }: { item: TemplateItem }) {
       <div className="p-5 flex flex-col flex-grow text-left">
         {/* Creator Info */}
         <div className="flex items-center gap-2.5 mb-3.5">
-          <img 
-            src={item.creatorAvatar} 
-            alt={item.creator} 
+          <img
+            src={item.creatorAvatar}
+            alt={item.creator}
             className="w-5 h-5 rounded-full border border-white/10"
           />
           <span className="text-[11px] text-white/40 font-medium">{item.creator}</span>
@@ -209,15 +221,13 @@ function TemplateCard({ item }: { item: TemplateItem }) {
         </div>
 
         {/* Title */}
-        <h3 className="text-base font-semibold text-white/95 leading-tight mb-2">
-          {item.title}
-        </h3>
+        <h3 className="text-base font-semibold text-white/95 leading-tight mb-2">{item.title}</h3>
 
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5 mt-auto pt-3 border-t border-white/5">
           {item.tags.slice(0, 3).map((tag) => (
-            <span 
-              key={tag} 
+            <span
+              key={tag}
               className="text-[9px] font-medium text-white/50 px-2 py-0.5 rounded bg-white/5 border border-white/[0.03]"
             >
               {tag}
@@ -284,12 +294,13 @@ export default function TemplateShowcase() {
             variants={itemVariants}
             className="text-sm sm:text-base text-white/50 leading-relaxed font-heading"
           >
-            Select a premium template layout, copy its structured AI prompt parameters, and spin up production-ready React pages in Claude, Lovable, or v0.
+            Select a premium template layout, copy its structured AI prompt parameters, and spin up
+            production-ready React pages in Claude, Lovable, or v0.
           </motion.p>
         </div>
 
         {/* 1 Row Grid of 4 Cards */}
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >

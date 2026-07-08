@@ -17,13 +17,13 @@ import HolographicTerminalCard from "./bentoshowcase-elements/HolographicTermina
 // Lazy-load the heavy WebGL/Three.js DitherCard to keep initial bundle lean
 const DitherCard = lazy(() => import("./bentoshowcase-elements/DitherCard"));
 
-function BentoCell({ 
-  id, 
-  className, 
-  children 
-}: { 
-  id: string; 
-  className?: string; 
+function BentoCell({
+  id,
+  className,
+  children,
+}: {
+  id: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   const navigate = useNavigate();
@@ -58,8 +58,8 @@ function BentoCell({
 
 export default function Highlights() {
   return (
-    <section 
-      id="highlights" 
+    <section
+      id="highlights"
       className="relative z-10 bg-[#090909] py-24 sm:py-32 px-6 md:px-12 flex flex-col items-center select-none"
     >
       {/* ── HEADER ── */}
@@ -78,7 +78,11 @@ export default function Highlights() {
           rootMargin="-120px"
         />
         <p className="text-sm sm:text-base text-white/60 max-w-xl leading-relaxed font-heading">
-          No extra packages - just copy the code or install directly with our CLI <code className="text-[#E8A969] bg-white/5 px-1.5 py-0.5 rounded font-mono">npx komorebi-ui init</code>.
+          No extra packages - just copy the code or install directly with our CLI{" "}
+          <code className="text-[#E8A969] bg-white/5 px-1.5 py-0.5 rounded font-mono">
+            npx komorebi-ui init
+          </code>
+          .
         </p>
       </div>
 
@@ -100,7 +104,9 @@ export default function Highlights() {
           <DynamicIslandCard />
         </BentoCell>
         <BentoCell id="dither-canvas">
-          <Suspense fallback={<div className="w-full h-full bg-[#0a0a0a] rounded-2xl animate-pulse" />}>
+          <Suspense
+            fallback={<div className="w-full h-full bg-[#0a0a0a] rounded-2xl animate-pulse" />}
+          >
             <DitherCard />
           </Suspense>
         </BentoCell>

@@ -13,7 +13,7 @@ export default function DitherCard({ minimal = false }: { minimal?: boolean }) {
     <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5 bg-black">
       {isClient && (
         <Suspense fallback={<div className="w-full h-full bg-black animate-pulse" />}>
-          <Dither 
+          <Dither
             waveSpeed={0.08}
             waveFrequency={3.5}
             waveAmplitude={0.4}
@@ -28,11 +28,7 @@ export default function DitherCard({ minimal = false }: { minimal?: boolean }) {
   );
 
   if (minimal) {
-    return (
-      <div className="w-full h-full select-none">
-        {content}
-      </div>
-    );
+    return <div className="w-full h-full select-none">{content}</div>;
   }
 
   return (
@@ -46,17 +42,13 @@ export default function DitherCard({ minimal = false }: { minimal?: boolean }) {
       </div>
 
       {/* Dither Shader Area */}
-      <div className="relative w-full h-28">
-        {content}
-      </div>
+      <div className="relative w-full h-28">{content}</div>
 
       <div className="relative z-10">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           WebGL Canvas
         </span>
-        <h3 className="font-sans text-base font-medium tracking-tight text-white">
-          Dither waves
-        </h3>
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">Dither waves</h3>
       </div>
     </div>
   );

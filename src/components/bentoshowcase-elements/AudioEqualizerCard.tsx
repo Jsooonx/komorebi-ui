@@ -7,7 +7,8 @@ export default function AudioEqualizerCard({ minimal = false }: { minimal?: bool
 
   if (minimal) {
     return (
-      <div className="w-full h-full flex items-end justify-center gap-1.5 px-4 select-none overflow-hidden relative"
+      <div
+        className="w-full h-full flex items-end justify-center gap-1.5 px-4 select-none overflow-hidden relative"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -19,16 +20,16 @@ export default function AudioEqualizerCard({ minimal = false }: { minimal?: bool
             <motion.div
               key={i}
               className="w-1.5 rounded-t-full bg-gradient-to-t from-[#BECB6D] to-[#E8A969]"
-              animate={{ 
-                height: hovered 
-                  ? [8, 48 + Math.random() * 40, 16, 72 + Math.random() * 20, 8] 
-                  : [8, 20 + Math.sin(i) * 12, 8] 
+              animate={{
+                height: hovered
+                  ? [8, 48 + Math.random() * 40, 16, 72 + Math.random() * 20, 8]
+                  : [8, 20 + Math.sin(i) * 12, 8],
               }}
               transition={{
                 repeat: Infinity,
                 duration: hovered ? duration : 1.2,
                 delay: delay,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               style={{ height: 8 }}
             />
@@ -39,7 +40,7 @@ export default function AudioEqualizerCard({ minimal = false }: { minimal?: bool
   }
 
   return (
-    <div 
+    <div
       className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -55,7 +56,7 @@ export default function AudioEqualizerCard({ minimal = false }: { minimal?: bool
       {/* Visual Bar Equalizer */}
       <div className="relative w-full h-28 flex items-end justify-center gap-1.5 px-4 bg-black/45 border border-white/5 rounded-xl overflow-hidden">
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#E8A969]/10 to-transparent pointer-events-none" />
-        
+
         {Array.from({ length: barCount }).map((_, i) => {
           // Generate unique animated height constraints
           const delay = i * 0.08;
@@ -64,16 +65,16 @@ export default function AudioEqualizerCard({ minimal = false }: { minimal?: bool
             <motion.div
               key={i}
               className="w-1.5 rounded-t-full bg-gradient-to-t from-[#BECB6D] to-[#E8A969]"
-              animate={{ 
-                height: hovered 
-                  ? [8, 48 + Math.random() * 40, 16, 72 + Math.random() * 20, 8] 
-                  : [8, 20 + Math.sin(i) * 12, 8] 
+              animate={{
+                height: hovered
+                  ? [8, 48 + Math.random() * 40, 16, 72 + Math.random() * 20, 8]
+                  : [8, 20 + Math.sin(i) * 12, 8],
               }}
               transition={{
                 repeat: Infinity,
                 duration: hovered ? duration : 1.2,
                 delay: delay,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               style={{ height: 8 }}
             />

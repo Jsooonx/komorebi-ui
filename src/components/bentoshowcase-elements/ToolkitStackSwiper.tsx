@@ -6,20 +6,20 @@ const CARD_DATA = [
     id: 0,
     glow: "rgba(190, 203, 109, 0.25)",
     src: "/scenery_aurora.png",
-    title: "Aurora Scenery"
+    title: "Aurora Scenery",
   },
   {
     id: 1,
     glow: "rgba(232, 169, 105, 0.25)",
     src: "/scenery_sunset.png",
-    title: "Sunset Scenery"
+    title: "Sunset Scenery",
   },
   {
     id: 2,
     glow: "rgba(232, 169, 105, 0.2)",
     src: "/scenery_mountains.png",
-    title: "Mountain Scenery"
-  }
+    title: "Mountain Scenery",
+  },
 ];
 
 export default function ToolkitStackSwiper({ minimal = false }: { minimal?: boolean }) {
@@ -56,9 +56,7 @@ export default function ToolkitStackSwiper({ minimal = false }: { minimal?: bool
       className="relative z-20 w-full h-full flex items-center justify-center"
     >
       <div className="flex flex-col items-center gap-6" style={{ transform: "translateZ(40px)" }}>
-        <span 
-          className="text-[9px] font-mono text-white/35 uppercase tracking-widest select-none pointer-events-none z-30"
-        >
+        <span className="text-[9px] font-mono text-white/35 uppercase tracking-widest select-none pointer-events-none z-30">
           Swipe cards left or right
         </span>
 
@@ -83,25 +81,25 @@ export default function ToolkitStackSwiper({ minimal = false }: { minimal?: bool
                   scale: 1 - index * 0.06,
                   y: index * 12,
                   z: (3 - index) * 10,
-                  opacity: 1 - index * 0.25
+                  opacity: 1 - index * 0.25,
                 }}
                 transition={{
                   type: "spring",
                   stiffness: 300,
-                  damping: 24
+                  damping: 24,
                 }}
                 style={{
                   zIndex: 3 - index,
-                  boxShadow: `0 20px 45px -15px ${card.glow}`
+                  boxShadow: `0 20px 45px -15px ${card.glow}`,
                 }}
                 whileDrag={{ scale: 1.05, cursor: "grabbing" }}
                 className="absolute w-full h-full rounded-lg border border-white/10 bg-black flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
               >
-                <img 
-                  src={card.src} 
-                  alt={card.title} 
+                <img
+                  src={card.src}
+                  alt={card.title}
                   draggable={false}
-                  className="w-full h-full object-cover select-none pointer-events-none" 
+                  className="w-full h-full object-cover select-none pointer-events-none"
                 />
               </motion.div>
             );
@@ -113,7 +111,7 @@ export default function ToolkitStackSwiper({ minimal = false }: { minimal?: bool
 
   if (minimal) {
     return (
-      <div 
+      <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -126,7 +124,7 @@ export default function ToolkitStackSwiper({ minimal = false }: { minimal?: bool
   }
 
   return (
-    <div 
+    <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}

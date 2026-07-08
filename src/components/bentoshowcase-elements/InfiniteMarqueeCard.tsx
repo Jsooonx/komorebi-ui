@@ -2,7 +2,14 @@ import { motion } from "framer-motion";
 import { Cpu, Zap, GitBranch, Shield } from "lucide-react";
 
 const TECH_TAGS = [
-  "React", "TypeScript", "WebGL", "GSAP", "TailwindCSS", "Framer Motion", "ThreeJS", "Vite"
+  "React",
+  "TypeScript",
+  "WebGL",
+  "GSAP",
+  "TailwindCSS",
+  "Framer Motion",
+  "ThreeJS",
+  "Vite",
 ];
 
 export default function InfiniteMarqueeCard({ minimal = false }: { minimal?: boolean }) {
@@ -12,8 +19,8 @@ export default function InfiniteMarqueeCard({ minimal = false }: { minimal?: boo
       <div className="flex gap-4 w-max animate-[marquee_20s_linear_infinite] whitespace-nowrap">
         {/* First loop */}
         {TECH_TAGS.map((tech, idx) => (
-          <div 
-            key={`tech1-${idx}`} 
+          <div
+            key={`tech1-${idx}`}
             className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/45 border border-white/5"
           >
             {idx % 4 === 0 && <Cpu className="w-3.5 h-3.5 text-[#BECB6D]" />}
@@ -27,8 +34,8 @@ export default function InfiniteMarqueeCard({ minimal = false }: { minimal?: boo
         ))}
         {/* Second identical loop */}
         {TECH_TAGS.map((tech, idx) => (
-          <div 
-            key={`tech2-${idx}`} 
+          <div
+            key={`tech2-${idx}`}
             className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/45 border border-white/5"
           >
             {idx % 4 === 0 && <Cpu className="w-3.5 h-3.5 text-[#BECB6D]" />}

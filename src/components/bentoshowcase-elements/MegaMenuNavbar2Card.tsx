@@ -27,16 +27,28 @@ interface ResourceItem {
 // ── Static data ────────────────────────────────────────────────────────────────
 
 const FEATURES: FeatureItem[] = [
-  { title: "Global CDN",          description: "Deploy to 200+ edge locations worldwide.", color: "#E8A969" },
-  { title: "Zero-Trust Security", description: "End-to-end encryption by default.",         color: "#BECB6D" },
-  { title: "Instant Deploys",     description: "Push to live in under 30 seconds.",         color: "#E8A969" },
-  { title: "Live Analytics",      description: "Real-time performance metrics dashboard.",  color: "#BECB6D" },
+  {
+    title: "Global CDN",
+    description: "Deploy to 200+ edge locations worldwide.",
+    color: "#E8A969",
+  },
+  {
+    title: "Zero-Trust Security",
+    description: "End-to-end encryption by default.",
+    color: "#BECB6D",
+  },
+  { title: "Instant Deploys", description: "Push to live in under 30 seconds.", color: "#E8A969" },
+  {
+    title: "Live Analytics",
+    description: "Real-time performance metrics dashboard.",
+    color: "#BECB6D",
+  },
 ];
 
 const RESOURCES: ResourceItem[] = [
   { title: "Documentation", description: "Guides, API references, and examples." },
-  { title: "Changelog",     description: "What's new in each release." },
-  { title: "Status Page",   description: "Live uptime and incident reports." },
+  { title: "Changelog", description: "What's new in each release." },
+  { title: "Status Page", description: "Live uptime and incident reports." },
 ];
 
 // ── Subcomponents ──────────────────────────────────────────────────────────────
@@ -47,9 +59,7 @@ function FeatureCard({ item }: { item: FeatureItem }) {
       <p className="text-xs font-medium text-white/90 group-hover:text-white transition-colors">
         {item.title}
       </p>
-      <p className="text-[11px] text-white/45 leading-relaxed mt-0.5">
-        {item.description}
-      </p>
+      <p className="text-[11px] text-white/45 leading-relaxed mt-0.5">{item.description}</p>
     </div>
   );
 }
@@ -79,7 +89,7 @@ function NavbarContent({
   isMorphed: boolean;
 }) {
   return (
-    <motion.div 
+    <motion.div
       layout
       transition={{ type: "spring", stiffness: 260, damping: 26 }}
       className={`w-full flex items-center justify-between transition-all duration-300 ${
@@ -98,7 +108,9 @@ function NavbarContent({
 
       {/* Nav */}
       <div className="hidden md:flex items-center">
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
           .mega-menu-nav-2 [data-state="closed"] {
             animation-duration: 200ms !important;
             --tw-exit-scale: 0.9 !important;
@@ -108,10 +120,11 @@ function NavbarContent({
             animation-duration: 200ms !important;
             --tw-enter-scale: 0.9 !important;
           }
-        `}} />
+        `,
+          }}
+        />
         <NavigationMenu className="mega-menu-nav-2">
           <NavigationMenuList className="gap-0">
-
             {/* Home */}
             <NavigationMenuItem>
               <button
@@ -135,7 +148,9 @@ function NavbarContent({
               <NavigationMenuContent>
                 <div className="p-2 w-[360px] bg-[#0c0c0e] border border-white/10 rounded-xl shadow-2xl">
                   <div className="grid grid-cols-2 gap-1">
-                    {FEATURES.map((f) => <FeatureCard key={f.title} item={f} />)}
+                    {FEATURES.map((f) => (
+                      <FeatureCard key={f.title} item={f} />
+                    ))}
                   </div>
                 </div>
               </NavigationMenuContent>
@@ -149,7 +164,9 @@ function NavbarContent({
               <NavigationMenuContent>
                 <div className="p-3 w-[260px] bg-[#0c0c0e] border border-white/10 rounded-xl shadow-2xl">
                   <div className="flex flex-col gap-0.5">
-                    {RESOURCES.map((r) => <ResourceRow key={r.title} item={r} />)}
+                    {RESOURCES.map((r) => (
+                      <ResourceRow key={r.title} item={r} />
+                    ))}
                   </div>
                 </div>
               </NavigationMenuContent>
@@ -169,7 +186,6 @@ function NavbarContent({
                 Pricing
               </button>
             </NavigationMenuItem>
-
           </NavigationMenuList>
         </NavigationMenu>
       </div>
@@ -197,13 +213,15 @@ function MockContent() {
           High-performance primitives designed for the modern web applications.
         </p>
       </div>
-      
+
       {/* Section features */}
       <div className="grid grid-cols-2 gap-3">
         <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl">
           <div className="w-1.5 h-1.5 rounded-full bg-[#E8A969] mb-1.5" />
           <h5 className="text-[11px] text-white/80 font-medium">Ultra Fast</h5>
-          <p className="text-[9px] text-white/30 mt-0.5">Sub-millisecond interactive response times.</p>
+          <p className="text-[9px] text-white/30 mt-0.5">
+            Sub-millisecond interactive response times.
+          </p>
         </div>
         <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl">
           <div className="w-1.5 h-1.5 rounded-full bg-[#BECB6D] mb-1.5" />
@@ -248,7 +266,7 @@ export default function MegaMenuNavbar2Card({ minimal = false }: { minimal?: boo
 
   if (minimal) {
     return (
-      <div 
+      <div
         onScroll={handleScroll}
         className="w-full h-[400px] bg-[#050506] border border-white/10 rounded-xl overflow-y-auto scrollbar-none select-none relative"
         style={cssVariables}
@@ -263,7 +281,7 @@ export default function MegaMenuNavbar2Card({ minimal = false }: { minimal?: boo
   }
 
   return (
-    <div 
+    <div
       onScroll={handleScroll}
       className="relative w-full h-[440px] rounded-2xl bg-[#050506] border border-white/10 overflow-y-auto scrollbar-none flex flex-col select-none group"
       style={cssVariables}
@@ -276,7 +294,7 @@ export default function MegaMenuNavbar2Card({ minimal = false }: { minimal?: boo
       {/* Main scrolling dummy area */}
       <div className="flex-1">
         <MockContent />
-        
+
         {/* Footer indicator inside bento to remind scroll action */}
         <div className="px-6 pb-6 pt-16 flex items-center justify-between text-[10px] text-white/30 border-t border-white/[0.02] mt-8 bg-black/10">
           <span>Scroll down inside this card to morph navbar</span>

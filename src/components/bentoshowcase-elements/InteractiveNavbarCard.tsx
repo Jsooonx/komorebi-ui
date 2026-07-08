@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { Home, Folder, Terminal, Settings, Mail, User } from "lucide-react";
 
 const DOCK_ITEMS = [
@@ -8,23 +8,22 @@ const DOCK_ITEMS = [
   { label: "Terminal", icon: <Terminal className="w-5 h-5 text-[#E8A969]" /> },
   { label: "Settings", icon: <Settings className="w-5 h-5 text-[#E8A969]" /> },
   { label: "Mail", icon: <Mail className="w-5 h-5 text-[#E8A969]" /> },
-  { label: "Profile", icon: <User className="w-5 h-5 text-[#E8A969]" /> }
+  { label: "Profile", icon: <User className="w-5 h-5 text-[#E8A969]" /> },
 ];
 
-function DockIcon({ 
-  mouseX, 
-  icon, 
-  idx, 
-  setHoveredIdx 
-}: { 
-  mouseX: any; 
-  label: string; 
-  icon: React.ReactNode; 
+function DockIcon({
+  mouseX,
+  icon,
+  idx,
+  setHoveredIdx,
+}: {
+  mouseX: MotionValue<number>;
+  icon: React.ReactNode;
   idx: number;
   setHoveredIdx: (idx: number | null) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  
+
   const distance = useTransform(mouseX, (val: number) => {
     const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
     return val - bounds.x - bounds.width / 2;
@@ -66,8 +65,8 @@ export default function InteractiveNavbarCard({ minimal = false }: { minimal?: b
       <div className="h-6 flex items-center justify-center">
         <div
           className={`px-2.5 py-0.5 rounded bg-black/80 border border-white/10 text-[9px] font-mono font-semibold text-[#E8A969] tracking-wider uppercase shadow-xl transition-all duration-200 ease-out ${
-            hoveredIdx !== null 
-              ? "opacity-100 translate-y-0 scale-100" 
+            hoveredIdx !== null
+              ? "opacity-100 translate-y-0 scale-100"
               : "opacity-0 translate-y-1.5 scale-90"
           }`}
         >
@@ -76,7 +75,7 @@ export default function InteractiveNavbarCard({ minimal = false }: { minimal?: b
       </div>
 
       {/* Dock Bar */}
-      <div 
+      <div
         onMouseMove={(e) => mouseX.set(e.clientX)}
         onMouseLeave={() => {
           mouseX.set(Infinity);
@@ -88,7 +87,6 @@ export default function InteractiveNavbarCard({ minimal = false }: { minimal?: b
           <DockIcon
             key={idx}
             mouseX={mouseX}
-            label={item.label}
             icon={item.icon}
             idx={idx}
             setHoveredIdx={setHoveredIdx}
@@ -103,9 +101,7 @@ export default function InteractiveNavbarCard({ minimal = false }: { minimal?: b
   }
 
   return (
-    <div 
-      className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:col-span-2 md:col-span-2 group"
-    >
+    <div className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:col-span-2 md:col-span-2 group">
       <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-[#E8A969]/5 to-[#121212] opacity-60" />
 
       {/* Header */}

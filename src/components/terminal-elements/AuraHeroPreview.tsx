@@ -3,7 +3,12 @@ import "./AuraHeroPreview.css";
 
 const CHAR_STEP = 0.038;
 
-function animateLines(container: HTMLElement, selector: string, baseDelay: number, lineGap: number) {
+function animateLines(
+  container: HTMLElement,
+  selector: string,
+  baseDelay: number,
+  lineGap: number,
+) {
   const nodes = container.querySelectorAll<HTMLElement>(selector);
   nodes.forEach((lineInner, lineIdx) => {
     const lineDelay = baseDelay + lineIdx * lineGap;
@@ -40,17 +45,18 @@ export default function AuraHeroPreview() {
 
   useEffect(() => {
     let started = false;
+    const rootNode = heroRef.current;
     const startAnimations = () => {
       if (started) return;
       started = true;
-      
-      const container = heroRef.current?.closest(".aura-preview-container");
+
+      const container = rootNode?.closest(".aura-preview-container");
       if (container) {
         container.classList.remove("is-ready");
         // Force reflow
         void container.offsetWidth;
         container.classList.add("is-ready");
-        
+
         // Scope the split text animations directly to the component root container
         animateLines(container, ".hero__heading .hero__line-inner", 0.3, 0.85);
         animateLines(container, ".hero__label .hero__line-inner", 0.3, 0.65);
@@ -60,7 +66,9 @@ export default function AuraHeroPreview() {
 
     const fallback = window.setTimeout(startAnimations, 200);
 
-    const sideLinks = document.querySelectorAll<HTMLAnchorElement>(".aura-preview-container .side-nav__link");
+    const sideLinks = document.querySelectorAll<HTMLAnchorElement>(
+      ".aura-preview-container .side-nav__link",
+    );
     const onSideClick = (ev: Event) => {
       const link = ev.currentTarget as HTMLAnchorElement;
       sideLinks.forEach((l) => {
@@ -77,7 +85,7 @@ export default function AuraHeroPreview() {
     return () => {
       window.clearTimeout(fallback);
       sideLinks.forEach((l) => l.removeEventListener("click", onSideClick));
-      const container = heroRef.current?.closest(".aura-preview-container");
+      const container = rootNode?.closest(".aura-preview-container");
       if (container) {
         container.classList.remove("is-ready");
       }
@@ -85,12 +93,7 @@ export default function AuraHeroPreview() {
   }, []);
 
   const ArrowIcon = () => (
-    <svg
-      className="btn__arrow"
-      viewBox="0 0 8 8"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg className="btn__arrow" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M1 7L7 1M7 1H2M7 1V6"
         stroke="currentColor"
@@ -114,7 +117,7 @@ export default function AuraHeroPreview() {
         <div className="hero__overlay" />
         <div className="hero__gradient-top" />
         <div className="hero__gradient-bottom" />
-        
+
         <div className="hero__blur">
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="hero__blur-layer" />
@@ -258,14 +261,10 @@ export default function AuraHeroPreview() {
           </div>
           <p className="hero__desc">
             <span className="hero__line">
-              <span className="hero__line-inner">
-                We power the next generation of B2B support,
-              </span>
+              <span className="hero__line-inner">We power the next generation of B2B support,</span>
             </span>
             <span className="hero__line">
-              <span className="hero__line-inner">
-                transforming manual ticketing backlogs into
-              </span>
+              <span className="hero__line-inner">transforming manual ticketing backlogs into</span>
             </span>
             <span className="hero__line">
               <span className="hero__line-inner">instant self-learning conversations.</span>
@@ -279,11 +278,7 @@ export default function AuraHeroPreview() {
             <button className="scroll-down" id="scrollDown">
               <span className="scroll-down__text">Scroll down</span>
               <span className="scroll-down__circle">
-                <svg
-                  viewBox="0 0 7.222 8.667"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg viewBox="0 0 7.222 8.667" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M3.611 1V7.667M3.611 7.667L1 5M3.611 7.667L6.222 5"
                     stroke="currentColor"
@@ -299,16 +294,14 @@ export default function AuraHeroPreview() {
           {/* Conversational SDK Card */}
           <a className="about-card" href="#widget">
             <div className="about-card__image">
-              <img
-                src="/aura-about-card.png"
-                alt="Aura AI Conversational Sphere"
-              />
+              <img src="/aura-about-card.png" alt="Aura AI Conversational Sphere" />
             </div>
             <div className="about-card__content">
               <div>
                 <h3 className="about-card__title">SDK Integration</h3>
                 <p className="about-card__text">
-                  Deploy a self-learning widget that integrates directly with your codebase in under two minutes.
+                  Deploy a self-learning widget that integrates directly with your codebase in under
+                  two minutes.
                 </p>
               </div>
               <svg

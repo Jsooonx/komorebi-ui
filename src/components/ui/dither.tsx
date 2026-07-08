@@ -1,9 +1,8 @@
-/* eslint-disable react/no-unknown-property */
-import { useRef, useState, useEffect, forwardRef } from 'react';
-import { Canvas, useFrame, useThree, ThreeEvent } from '@react-three/fiber';
-import { EffectComposer, wrapEffect } from '@react-three/postprocessing';
-import { Effect } from 'postprocessing';
-import * as THREE from 'three';
+import { useRef, useState, useEffect, forwardRef } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { EffectComposer, wrapEffect } from "@react-three/postprocessing";
+import { Effect } from "postprocessing";
+import * as THREE from "three";
 
 const waveVertexShader = `
 precision highp float;
@@ -134,41 +133,43 @@ void mainImage(in vec4 inputColor, in vec2 uv, out vec4 outputColor) {
 `;
 
 class RetroEffectImpl extends Effect {
-  public uniforms: Map<string, THREE.Uniform<any>>;
+  public uniforms: Map<string, THREE.Uniform<number>>;
   constructor() {
-    const uniforms = new Map<string, THREE.Uniform<any>>([
-      ['colorNum', new THREE.Uniform(4.0)],
-      ['pixelSize', new THREE.Uniform(2.0)]
+    const uniforms = new Map<string, THREE.Uniform<number>>([
+      ["colorNum", new THREE.Uniform(4.0)],
+      ["pixelSize", new THREE.Uniform(2.0)],
     ]);
-    super('RetroEffect', ditherFragmentShader, { uniforms });
+    super("RetroEffect", ditherFragmentShader, { uniforms });
     this.uniforms = uniforms;
   }
   set colorNum(value: number) {
-    this.uniforms.get('colorNum')!.value = value;
+    this.uniforms.get("colorNum")!.value = value;
   }
   get colorNum(): number {
-    return this.uniforms.get('colorNum')!.value;
+    return this.uniforms.get("colorNum")!.value;
   }
   set pixelSize(value: number) {
-    this.uniforms.get('pixelSize')!.value = value;
+    this.uniforms.get("pixelSize")!.value = value;
   }
   get pixelSize(): number {
-    return this.uniforms.get('pixelSize')!.value;
+    return this.uniforms.get("pixelSize")!.value;
   }
 }
 
 // Wrap components outside of the render cycle to prevent performance issues and React warnings.
 const WrappedRetroEffect = wrapEffect(RetroEffectImpl);
 
-const RetroEffect = forwardRef<RetroEffectImpl, { colorNum: number; pixelSize: number }>((props, ref) => {
-  const { colorNum, pixelSize } = props;
-  return <WrappedRetroEffect ref={ref} colorNum={colorNum} pixelSize={pixelSize} />;
-});
+const RetroEffect = forwardRef<RetroEffectImpl, { colorNum: number; pixelSize: number }>(
+  (props, ref) => {
+    const { colorNum, pixelSize } = props;
+    return <WrappedRetroEffect ref={ref} colorNum={colorNum} pixelSize={pixelSize} />;
+  },
+);
 
-RetroEffect.displayName = 'RetroEffect';
+RetroEffect.displayName = "RetroEffect";
 
 interface WaveUniforms {
-  [key: string]: THREE.Uniform<any>;
+  [key: string]: THREE.Uniform<number> | THREE.Uniform<THREE.Vector2> | THREE.Uniform<THREE.Color>;
   time: THREE.Uniform<number>;
   resolution: THREE.Uniform<THREE.Vector2>;
   waveSpeed: THREE.Uniform<number>;
@@ -204,7 +205,7 @@ function DitheredWaves({
   pixelSize,
   disableAnimation,
   enableMouseInteraction,
-  mouseRadius
+  mouseRadius,
 }: DitheredWavesProps) {
   const mesh = useRef<THREE.Mesh>(null);
   const mouseRef = useRef(new THREE.Vector2());
@@ -220,7 +221,7 @@ function DitheredWaves({
     baseColor: new THREE.Uniform(new THREE.Color(...baseColor)),
     mousePos: new THREE.Uniform(new THREE.Vector2(0, 0)),
     enableMouseInteraction: new THREE.Uniform(enableMouseInteraction ? 1 : 0),
-    mouseRadius: new THREE.Uniform(mouseRadius)
+    mouseRadius: new THREE.Uniform(mouseRadius),
   });
 
   useEffect(() => {
@@ -238,14 +239,11 @@ function DitheredWaves({
     const handleGlobalMouseMove = (e: MouseEvent) => {
       const rect = gl.domElement.getBoundingClientRect();
       const dpr = gl.getPixelRatio();
-      mouseRef.current.set(
-        (e.clientX - rect.left) * dpr,
-        (e.clientY - rect.top) * dpr
-      );
+      mouseRef.current.set((e.clientX - rect.left) * dpr, (e.clientY - rect.top) * dpr);
     };
-    window.addEventListener('mousemove', handleGlobalMouseMove);
+    window.addEventListener("mousemove", handleGlobalMouseMove);
     return () => {
-      window.removeEventListener('mousemove', handleGlobalMouseMove);
+      window.removeEventListener("mousemove", handleGlobalMouseMove);
     };
   }, [enableMouseInteraction, gl]);
 
@@ -321,18 +319,18 @@ export default function Dither({
   pixelSize = 2,
   disableAnimation = false,
   enableMouseInteraction = true,
-  mouseRadius = 1
+  mouseRadius = 1,
 }: DitherProps) {
   return (
     <Canvas
       className="w-full h-full relative"
       camera={{ position: [0, 0, 6] }}
       dpr={1.0}
-      gl={{ 
-        antialias: false, 
+      gl={{
+        antialias: false,
         powerPreference: "high-performance",
         failIfMajorPerformanceCaveat: false,
-        preserveDrawingBuffer: false 
+        preserveDrawingBuffer: false,
       }}
     >
       <DitheredWaves

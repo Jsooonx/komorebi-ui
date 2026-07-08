@@ -22,9 +22,7 @@ export const TextRoll: React.FC<{
     >
       <div>
         {children.split("").map((l, i) => {
-          const delay = center
-            ? STAGGER * Math.abs(i - (children.length - 1) / 2)
-            : STAGGER * i;
+          const delay = center ? STAGGER * Math.abs(i - (children.length - 1) / 2) : STAGGER * i;
 
           return (
             <motion.span
@@ -51,9 +49,7 @@ export const TextRoll: React.FC<{
       </div>
       <div className="absolute inset-0">
         {children.split("").map((l, i) => {
-          const delay = center
-            ? STAGGER * Math.abs(i - (children.length - 1) / 2)
-            : STAGGER * i;
+          const delay = center ? STAGGER * Math.abs(i - (children.length - 1) / 2) : STAGGER * i;
 
           return (
             <motion.span

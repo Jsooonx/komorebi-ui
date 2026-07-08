@@ -9,27 +9,45 @@
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --color-warm-cream: #090909; /* Matte Black to match Page 2 */
-  --color-moss-green: #F4F7DF; /* Soft Warm Cream */
-  --color-sage-green: #BECB6D;
-  --color-soft-sage: #1E3526; /* Dark Moss Sage */
-  --color-sun-gold: #E8A969;
+  --color-moss-green: #f4f7df; /* Soft Warm Cream */
+  --color-sage-green: #becb6d;
+  --color-soft-sage: #1e3526; /* Dark Moss Sage */
+  --color-sun-gold: #e8a969;
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
-.animate-marquee { animation: marquee 14s linear infinite; }
+.animate-marquee {
+  animation: marquee 14s linear infinite;
+}
 
 @keyframes story-fill-1 {
-  0%   { transform: scaleX(0); }
-  50%  { transform: scaleX(1); }
-  100% { transform: scaleX(1); }
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(1);
+  }
 }
 @keyframes story-fill-2 {
-  0%   { transform: scaleX(0); }
-  50%  { transform: scaleX(0); }
-  100% { transform: scaleX(1); }
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
 }
 .story-bar-1 .story-bar-fill {
   animation: story-fill-1 6s linear infinite;
@@ -40,7 +58,9 @@
   transform-origin: left center;
 }
 
-body { font-family: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif; }
+body {
+  font-family: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -103,25 +123,25 @@ body { font-family: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif
 
 :root {
   --radius: 0.625rem;
-  --background: #0B130E;
-  --foreground: #F4F7DF;
-  --card: #1E3526;
-  --card-foreground: #F4F7DF;
-  --popover: #1E3526;
-  --popover-foreground: #F4F7DF;
-  --primary: #F4F7DF;
-  --primary-foreground: #0B130E;
-  --secondary: #BECB6D;
-  --secondary-foreground: #0B130E;
+  --background: #0b130e;
+  --foreground: #f4f7df;
+  --card: #1e3526;
+  --card-foreground: #f4f7df;
+  --popover: #1e3526;
+  --popover-foreground: #f4f7df;
+  --primary: #f4f7df;
+  --primary-foreground: #0b130e;
+  --secondary: #becb6d;
+  --secondary-foreground: #0b130e;
   --muted: rgba(244, 247, 223, 0.08);
   --muted-foreground: rgba(244, 247, 223, 0.6);
-  --accent: #BECB6D;
-  --accent-foreground: #0B130E;
+  --accent: #becb6d;
+  --accent-foreground: #0b130e;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: rgba(244, 247, 223, 0.15);
   --input: rgba(244, 247, 223, 0.15);
-  --ring: #E8A969;
+  --ring: #e8a969;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);

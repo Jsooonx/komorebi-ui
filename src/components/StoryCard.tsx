@@ -81,7 +81,8 @@ export default function StoryCard() {
           style={{
             position: "absolute",
             inset: 0,
-            background: "radial-gradient(circle at 30% 15%, rgba(230,255,120,0.25), transparent 55%)",
+            background:
+              "radial-gradient(circle at 30% 15%, rgba(230,255,120,0.25), transparent 55%)",
             pointerEvents: "none",
           }}
         />
@@ -163,15 +164,23 @@ export default function StoryCard() {
         >
           {slide === 0 ? (
             <>
-              <span className="font-heading" style={{ fontWeight: 700 }}>Guiding</span>
+              <span className="font-heading" style={{ fontWeight: 700 }}>
+                Guiding
+              </span>
               <br />
-              <span className="font-serif" style={{ fontStyle: "italic", fontWeight: 400 }}>your money</span>
+              <span className="font-serif" style={{ fontStyle: "italic", fontWeight: 400 }}>
+                your money
+              </span>
             </>
           ) : (
             <>
-              <span className="font-heading" style={{ fontWeight: 700 }}>Building</span>
+              <span className="font-heading" style={{ fontWeight: 700 }}>
+                Building
+              </span>
               <br />
-              <span className="font-serif" style={{ fontStyle: "italic", fontWeight: 400 }}>the future</span>
+              <span className="font-serif" style={{ fontStyle: "italic", fontWeight: 400 }}>
+                the future
+              </span>
             </>
           )}
         </motion.h3>

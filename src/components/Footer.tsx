@@ -9,35 +9,35 @@ export default function Footer() {
       { name: "Terminal Playground", href: "#showcase" },
       { name: "Bento Components", href: "#bento-showcase" },
       { name: "Template Showcase", href: "#templates" },
-      { name: "CLI Tooling", href: "#showcase" }
+      { name: "CLI Tooling", href: "#showcase" },
     ],
     components: [
       { name: "Mac-Dock Navbar", href: "/components/interactive-navbar" },
       { name: "Audio Equalizer", href: "/components/audio-equalizer" },
       { name: "Pipeline Stepper", href: "/components/pipeline-stepper" },
-      { name: "Holographic Terminal", href: "/components/holographic-terminal" }
+      { name: "Holographic Terminal", href: "/components/holographic-terminal" },
     ],
     templates: [
       { name: "Aura AI Website", href: "#templates" },
       { name: "Showcase Queue", href: "#templates" },
-      { name: "Coming Soon", href: "#templates" }
+      { name: "Coming Soon", href: "#templates" },
     ],
     resources: [
       { name: "GitHub Repository", href: "https://github.com/Jsooonx/komorebi-ui" },
       { name: "Components Catalog", href: "/components" },
       { name: "Documentation", href: "https://github.com/Jsooonx/komorebi-ui#readme" },
-      { name: "Report an Issue", href: "https://github.com/Jsooonx/komorebi-ui/issues" }
+      { name: "Report an Issue", href: "https://github.com/Jsooonx/komorebi-ui/issues" },
     ],
     company: [
       { name: "Overview", href: "#showcase" },
       { name: "Bento Components", href: "#bento-showcase" },
       { name: "Template Library", href: "#templates" },
-      { name: "GitHub", href: "https://github.com/Jsooonx/komorebi-ui" }
+      { name: "GitHub", href: "https://github.com/Jsooonx/komorebi-ui" },
     ],
     social: [
       { name: "X (Twitter)", href: "https://x.com/Jsooonx" },
-      { name: "GitHub", href: "https://github.com/Jsooonx/komorebi-ui" }
-    ]
+      { name: "GitHub", href: "https://github.com/Jsooonx/komorebi-ui" },
+    ],
   };
 
   const handleThemeToggle = () => {
@@ -63,7 +63,8 @@ export default function Footer() {
 
   function FooterLink({ item }: { item: { name: string; href: string } }) {
     const isLocalRoute = item.href.startsWith("/");
-    const baseClass = "text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block";
+    const baseClass =
+      "text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block";
 
     if (isLocalRoute) {
       return (
@@ -74,11 +75,7 @@ export default function Footer() {
     }
 
     return (
-      <a 
-        href={item.href}
-        onClick={(e) => handleScroll(e, item.href)}
-        className={baseClass}
-      >
+      <a href={item.href} onClick={(e) => handleScroll(e, item.href)} className={baseClass}>
         {item.name}
       </a>
     );
@@ -189,13 +186,11 @@ export default function Footer() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#BECB6D] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#BECB6D]"></span>
               </span>
-              <span className="text-[11px] font-sans text-white/60">
-                All systems operational
-              </span>
+              <span className="text-[11px] font-sans text-white/60">All systems operational</span>
             </div>
 
             {/* Premium Theme Switch Button */}
-            <motion.button 
+            <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={handleThemeToggle}
               className="flex items-center justify-center w-7 h-7 bg-black border border-white/10 hover:border-white/20 rounded-md transition-colors cursor-pointer focus:outline-none"

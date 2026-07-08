@@ -12,7 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import SearchPalette from "@/components/SearchPalette";
+import LazySearchPalette from "@/components/LazySearchPalette";
 
 function NotFoundComponent() {
   return (
@@ -80,9 +80,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Komorebi UI - Light, shadow, and organic flow for modern webs" },
-      { name: "description", content: "A visual-first, organic animation library for React and modern web development." },
+      {
+        name: "description",
+        content: "A visual-first, organic animation library for React and modern web development.",
+      },
       { property: "og:title", content: "Komorebi UI - Organic animations for modern webs" },
-      { property: "og:description", content: "A visual-first, organic animation library for React and modern web development." },
+      {
+        property: "og:description",
+        content: "A visual-first, organic animation library for React and modern web development.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -131,7 +137,7 @@ function RootComponent() {
       <ScrollRestoration />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
-      <SearchPalette />
+      <LazySearchPalette />
     </QueryClientProvider>
   );
 }

@@ -2,11 +2,31 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const MEMBERS = [
-  { name: "John D.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80" },
-  { name: "Sarah K.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80" },
-  { name: "Alex M.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80" },
-  { name: "Emily R.", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80" },
-  { name: "David L.", avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=120&h=120&q=80" }
+  {
+    name: "John D.",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80",
+  },
+  {
+    name: "Sarah K.",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80",
+  },
+  {
+    name: "Alex M.",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80",
+  },
+  {
+    name: "Emily R.",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80",
+  },
+  {
+    name: "David L.",
+    avatar:
+      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=120&h=120&q=80",
+  },
 ];
 
 export default function HoverMembersCard({ minimal = false }: { minimal?: boolean }) {
@@ -19,9 +39,9 @@ export default function HoverMembersCard({ minimal = false }: { minimal?: boolea
         {MEMBERS.map((member, i) => (
           <motion.div
             key={i}
-            animate={{ 
+            animate={{
               x: hovered ? (i - 2) * 16 : 0,
-              rotate: hovered ? (i - 2) * 4 : 0
+              rotate: hovered ? (i - 2) * 4 : 0,
             }}
             transition={{ type: "spring", damping: 18, stiffness: 220 }}
             onMouseEnter={() => {
@@ -33,7 +53,7 @@ export default function HoverMembersCard({ minimal = false }: { minimal?: boolea
               setActiveMemberIdx(null);
             }}
             className="relative w-12 h-12"
-            style={{ zIndex: activeMemberIdx === i ? 50 : (hovered ? 10 + i : 1) }}
+            style={{ zIndex: activeMemberIdx === i ? 50 : hovered ? 10 + i : 1 }}
           >
             {/* Animated Tooltip */}
             <AnimatePresence>
@@ -64,7 +84,7 @@ export default function HoverMembersCard({ minimal = false }: { minimal?: boolea
 
   if (minimal) {
     return (
-      <div 
+      <div
         className="w-full h-full flex items-center justify-center cursor-pointer select-none"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -75,7 +95,7 @@ export default function HoverMembersCard({ minimal = false }: { minimal?: boolea
   }
 
   return (
-    <div 
+    <div
       className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -91,17 +111,13 @@ export default function HoverMembersCard({ minimal = false }: { minimal?: boolea
       </div>
 
       {/* Centered Avatar list */}
-      <div className="relative z-10 flex justify-center items-center h-20">
-        {content}
-      </div>
+      <div className="relative z-10 flex justify-center items-center h-20">{content}</div>
 
       <div className="relative z-10">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Interactive Team
         </span>
-        <h3 className="font-sans text-base font-medium tracking-tight text-white">
-          Hover members
-        </h3>
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">Hover members</h3>
       </div>
     </div>
   );

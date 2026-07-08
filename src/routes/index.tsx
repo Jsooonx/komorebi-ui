@@ -1,13 +1,15 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import DeferredSection from "@/components/DeferredSection";
 import DynamicIsland from "@/components/DynamicIsland";
 import Hero from "@/components/Hero";
-import ShowcaseTerminal from "@/components/ShowcaseTerminal";
 import SplitText from "@/components/ui/SplitText";
-import Highlights from "@/components/Highlights";
-import TemplateShowcase from "@/components/TemplateShowcase";
 import Footer from "@/components/Footer";
+
+const ShowcaseTerminal = lazy(() => import("@/components/ShowcaseTerminal"));
+const Highlights = lazy(() => import("@/components/Highlights"));
+const TemplateShowcase = lazy(() => import("@/components/TemplateShowcase"));
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -31,7 +33,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.85,
-      ease: [0.16, 1, 0.3, 1], // easeOutExpo
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
@@ -46,9 +48,8 @@ function Index() {
       <DynamicIsland />
       <Hero />
 
-      {/* ── SECTION 2: INTERACTIVE COMPONENT SHOWCASE TERMINAL ── */}
-      <motion.section 
-        id="showcase" 
+      <motion.section
+        id="showcase"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-120px" }}
@@ -71,30 +72,50 @@ function Index() {
               rootMargin="-120px"
             />
           </div>
-          <motion.p 
+          <motion.p
             variants={itemVariants}
             className="text-sm sm:text-base text-white/60 max-w-xl leading-relaxed font-heading"
           >
-            Tweak component parameters live, view instant code setups, and preview premium physics-backed animation styles directly inside the playground.
+            Tweak component parameters live, view instant code setups, and preview premium
+            physics-backed animation styles directly inside the playground.
           </motion.p>
         </div>
 
-        {/* Live Interactive 3-Panel Terminal */}
-        <motion.div 
-          variants={itemVariants}
-          className="w-full max-w-[1500px]"
-        >
-          <ShowcaseTerminal />
+        <motion.div variants={itemVariants} className="w-full max-w-[1500px]">
+          <DeferredSection
+            fallback={
+              <div className="h-[820px] w-full rounded-3xl border border-white/10 bg-[#080B09] shadow-[0_24px_64px_rgba(0,0,0,0.6)]" />
+            }
+          >
+            <Suspense
+              fallback={
+                <div className="h-[820px] w-full rounded-3xl border border-white/10 bg-[#080B09] shadow-[0_24px_64px_rgba(0,0,0,0.6)]" />
+              }
+            >
+              <ShowcaseTerminal />
+            </Suspense>
+          </DeferredSection>
         </motion.div>
       </motion.section>
 
-      {/* ── SECTION 3: BENTO COMPONENTS GRID SHOWCASE ── */}
-      <Highlights />
+      <DeferredSection
+        fallback={<div className="min-h-[1200px] bg-[#090909]" aria-hidden="true" />}
+        rootMargin="420px 0px"
+      >
+        <Suspense fallback={<div className="min-h-[1200px] bg-[#090909]" aria-hidden="true" />}>
+          <Highlights />
+        </Suspense>
+      </DeferredSection>
 
-      {/* ── SECTION 4: WEBSITE TEMPLATE SHOWCASE (PROMPT LIBRARY) ── */}
-      <TemplateShowcase />
+      <DeferredSection
+        fallback={<div className="min-h-[920px] bg-[#090909]" aria-hidden="true" />}
+        rootMargin="420px 0px"
+      >
+        <Suspense fallback={<div className="min-h-[920px] bg-[#090909]" aria-hidden="true" />}>
+          <TemplateShowcase />
+        </Suspense>
+      </DeferredSection>
 
-      {/* ── FOOTER ── */}
       <Footer />
     </main>
   );

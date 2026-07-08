@@ -6,7 +6,7 @@ const terminalContent = [
   "✔ Added 12 components",
   "> npm run dev",
   "✔ Server running on port 3000",
-  "✔ Compiled successfully in 23ms"
+  "✔ Compiled successfully in 23ms",
 ];
 
 export default function HolographicTerminalCard({ minimal = false }: { minimal?: boolean }) {
@@ -28,18 +28,18 @@ export default function HolographicTerminalCard({ minimal = false }: { minimal?:
       const timer = setTimeout(() => {
         setActiveLine(currentFullLine.slice(0, charIdx + 1));
         if (charIdx + 1 < currentFullLine.length) {
-          setCharIdx(prev => prev + 1);
+          setCharIdx((prev) => prev + 1);
         } else {
           // Finished typing line, commit to main lines array
           setTimeout(() => {
-            setLines(prev => {
+            setLines((prev) => {
               const next = [...prev, currentFullLine];
               if (next.length > 4) next.shift();
               return next;
             });
             setActiveLine("");
             setCharIdx(0);
-            setCurrentLineIdx(prev => (prev + 1) % terminalContent.length);
+            setCurrentLineIdx((prev) => (prev + 1) % terminalContent.length);
           }, 600);
         }
       }, 60);
@@ -47,12 +47,12 @@ export default function HolographicTerminalCard({ minimal = false }: { minimal?:
     } else {
       // If it's status output, print it instantly after a small delay
       const timer = setTimeout(() => {
-        setLines(prev => {
+        setLines((prev) => {
           const next = [...prev, currentFullLine];
           if (next.length > 4) next.shift();
           return next;
         });
-        setCurrentLineIdx(prev => (prev + 1) % terminalContent.length);
+        setCurrentLineIdx((prev) => (prev + 1) % terminalContent.length);
       }, 700);
       return () => clearTimeout(timer);
     }
@@ -60,7 +60,8 @@ export default function HolographicTerminalCard({ minimal = false }: { minimal?:
 
   if (minimal) {
     return (
-      <div className="w-full h-full flex flex-col justify-center p-3 select-none"
+      <div
+        className="w-full h-full flex flex-col justify-center p-3 select-none"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -71,9 +72,7 @@ export default function HolographicTerminalCard({ minimal = false }: { minimal?:
             <div className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
             <div className="w-2 h-2 rounded-full bg-[#27c93f]" />
           </div>
-          <span className="text-[8px] font-mono text-white/35 uppercase tracking-widest">
-            bash
-          </span>
+          <span className="text-[8px] font-mono text-white/35 uppercase tracking-widest">bash</span>
           <div className="w-10" />
         </div>
 
@@ -91,7 +90,7 @@ export default function HolographicTerminalCard({ minimal = false }: { minimal?:
               </span>
             </div>
           ))}
-          
+
           {activeLine && (
             <div className="flex items-center gap-1.5 leading-relaxed">
               <span className="text-[#E8A969]">{activeLine}</span>
@@ -111,7 +110,7 @@ export default function HolographicTerminalCard({ minimal = false }: { minimal?:
   }
 
   return (
-    <div 
+    <div
       className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -133,9 +132,7 @@ export default function HolographicTerminalCard({ minimal = false }: { minimal?:
             <div className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
             <div className="w-2 h-2 rounded-full bg-[#27c93f]" />
           </div>
-          <span className="text-[8px] font-mono text-white/35 uppercase tracking-widest">
-            bash
-          </span>
+          <span className="text-[8px] font-mono text-white/35 uppercase tracking-widest">bash</span>
           <div className="w-10" />
         </div>
 
@@ -153,7 +150,7 @@ export default function HolographicTerminalCard({ minimal = false }: { minimal?:
               </span>
             </div>
           ))}
-          
+
           {activeLine && (
             <div className="flex items-center gap-1.5 leading-relaxed">
               <span className="text-[#E8A969]">{activeLine}</span>

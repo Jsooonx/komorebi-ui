@@ -31,16 +31,16 @@ export default function DevouringDetailsCard({ minimal = false }: { minimal?: bo
             <div className="flex items-center gap-1.5 font-mono text-[11px] text-white/90">
               <Mail className="w-3 h-3 text-white/40" />
               <span>{emailText}</span>
-              <motion.span 
-                animate={{ opacity: [1, 0, 1] }} 
+              <motion.span
+                animate={{ opacity: [1, 0, 1] }}
                 transition={{ repeat: Infinity, duration: 0.8 }}
                 className="w-1 h-3 bg-[#E8A969]"
               />
             </div>
-            <motion.div 
-              animate={{ 
+            <motion.div
+              animate={{
                 borderColor: hovered ? "rgba(232, 169, 105, 0.4)" : "rgba(255, 255, 255, 0.1)",
-                boxShadow: hovered ? "0 0 10px rgba(232, 169, 105, 0.15)" : "none"
+                boxShadow: hovered ? "0 0 10px rgba(232, 169, 105, 0.15)" : "none",
               }}
               className="flex items-center gap-0.5 text-[9px] font-mono text-[#E8A969] border border-white/10 px-1.5 py-0.5 rounded bg-white/5 select-none"
             >
@@ -53,7 +53,7 @@ export default function DevouringDetailsCard({ minimal = false }: { minimal?: bo
   }
 
   return (
-    <div 
+    <div
       className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -77,16 +77,16 @@ export default function DevouringDetailsCard({ minimal = false }: { minimal?: bo
           <div className="flex items-center gap-1.5 font-mono text-[11px] text-white/90">
             <Mail className="w-3 h-3 text-white/40" />
             <span>{emailText}</span>
-            <motion.span 
-              animate={{ opacity: [1, 0, 1] }} 
+            <motion.span
+              animate={{ opacity: [1, 0, 1] }}
               transition={{ repeat: Infinity, duration: 0.8 }}
               className="w-1 h-3 bg-[#E8A969]"
             />
           </div>
-          <motion.div 
-            animate={{ 
+          <motion.div
+            animate={{
               borderColor: hovered ? "rgba(232, 169, 105, 0.4)" : "rgba(255, 255, 255, 0.1)",
-              boxShadow: hovered ? "0 0 10px rgba(232, 169, 105, 0.15)" : "none"
+              boxShadow: hovered ? "0 0 10px rgba(232, 169, 105, 0.15)" : "none",
             }}
             className="flex items-center gap-0.5 text-[9px] font-mono text-[#E8A969] border border-white/10 px-1.5 py-0.5 rounded bg-white/5 select-none"
           >
