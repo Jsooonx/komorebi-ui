@@ -180,19 +180,13 @@ function ComponentDetail() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button 
-              onClick={() => {
-                if (window.history.length > 1) {
-                  window.history.back();
-                } else {
-                  navigate({ to: "/" });
-                }
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 text-xs text-white/60 hover:text-white transition-all cursor-pointer bg-transparent border-0"
+            <Link 
+              to="/"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 text-xs text-white/60 hover:text-white transition-all"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back</span>
-            </button>
+              <span>Back to Home</span>
+            </Link>
           </div>
         </header>
       )}
@@ -304,10 +298,9 @@ function ComponentDetail() {
           <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative p-4 gap-4">
             
             {/* The main workspace container card with thin border */}
-            <motion.div 
-              layoutId={`card-container-${id}`}
-              transition={{ type: "spring", stiffness: 350, damping: 32 }}
-              className="flex-1 rounded-2xl border border-white/5 bg-[#090909] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace"
+            <div 
+              key={reloadKey}
+              className="flex-1 rounded-2xl border border-white/5 bg-[#090909] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace animate-fade-in"
             >
               {/* Control floating tools pill */}
               <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1 bg-black/60 border border-white/5 backdrop-blur-md rounded-xl shadow-lg opacity-80 hover:opacity-100 transition-opacity">
@@ -349,13 +342,10 @@ function ComponentDetail() {
               </div>
 
               {/* Dynamic Component Element Render (Maximized) */}
-              <div 
-                key={reloadKey}
-                className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full"
-              >
+              <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
                 <PreviewComponent minimal={true} />
               </div>
-            </motion.div>
+            </div>
 
             {/* Dynamic details description & dependencies tags (Static, below the bordered workspace) */}
             {!isFullscreen && (

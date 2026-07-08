@@ -110,24 +110,21 @@ function ComponentCard({ item }: { item: ComponentItem }) {
   };
 
   return (
-    <div className={item.gridClass || ""}>
-      <motion.div
-        layoutId={`card-container-${item.id}`}
-        transition={{ type: "spring", stiffness: 350, damping: 32 }}
+    <motion.div variants={itemVariants} className={item.gridClass || ""}>
+      <div
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         className="group flex flex-col bg-[#0c0c0e] border border-white/[0.04] hover:border-white/10 rounded-2xl overflow-hidden p-4 select-none cursor-pointer relative transition-all duration-300 h-full"
       >
         {/* Main Viewport Area */}
-        <div 
-          className={`relative w-full rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center transition-colors ${item.viewportHeightClass || "h-[180px]"}`}
-        >
+        <div className={`relative w-full rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center transition-colors ${item.viewportHeightClass || "h-[180px]"}`}>
           {/* Mock Browser Dots */}
           <div className="absolute top-2.5 left-3 flex gap-1 z-15">
             <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
             <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
             <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
           </div>
+
 
 
           {/* Actual component preview rendering */}
@@ -149,8 +146,8 @@ function ComponentCard({ item }: { item: ComponentItem }) {
             <span className="text-white/40 group-hover:translate-x-0.5 transition-transform ml-1">↗</span>
           </div>
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -189,6 +186,11 @@ function ComponentsIndex() {
       toast.error("Failed to copy CLI command.");
     }
   };
+
+  // Scroll to top on load
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#090909] text-white flex flex-col select-none antialiased">
@@ -350,9 +352,10 @@ function ComponentsIndex() {
                         <span className="text-[10px] text-white/30 font-heading">Latest components [Hover to preview]</span>
                       </div>
                       <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.35, ease: "easeOut" }}
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
                         className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
                       >
                         {filteredComponents.filter(c => c.isNew).map((item) => (
@@ -373,9 +376,10 @@ function ComponentsIndex() {
                         <span className="text-[10px] text-white/30 font-heading">Collection of components [Hover to preview]</span>
                       </div>
                       <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.35, ease: "easeOut" }}
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
                         className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
                       >
                         {filteredComponents.filter(c => !c.isNew).map((item) => (
