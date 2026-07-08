@@ -7,6 +7,15 @@ export default function DevouringDetailsCard({ minimal = false }: { minimal?: bo
   const [emailText, setEmailText] = useState("");
   const fullEmail = "guri@gmail.com";
 
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setEmailText(fullEmail.slice(0, index));
+      index = (index + 1) % (fullEmail.length + 3); // pause a bit at the end
+    }, 180);
+    return () => clearInterval(interval);
+  }, []);
+
   if (minimal) {
     return (
       <div
@@ -42,15 +51,6 @@ export default function DevouringDetailsCard({ minimal = false }: { minimal?: bo
       </div>
     );
   }
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      setEmailText(fullEmail.slice(0, index));
-      index = (index + 1) % (fullEmail.length + 3); // pause a bit at the end
-    }, 180);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div 
