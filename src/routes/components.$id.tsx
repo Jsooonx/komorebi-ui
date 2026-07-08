@@ -269,35 +269,41 @@ function ComponentDetail() {
         <main className={`flex-1 grid ${codeOpen && !isFullscreen ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1"} h-full overflow-hidden transition-all duration-300`}>
           
           {/* CODE EDITOR CONTAINER (LEFT PANE) */}
-          {codeOpen && !isFullscreen && (
-            <section 
-              id="code-pane-container"
-              className="h-full border-r border-white/5 bg-[#07070a] flex flex-col overflow-hidden relative"
-            >
-              {/* Code pane header bar */}
-              <div className="h-10 border-b border-white/5 flex items-center justify-between px-6 bg-[#07070a] shrink-0">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/30" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/30" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/30" />
-                  <span className="text-[10px] font-mono text-white/40 ml-3">{comp.id}.tsx</span>
+          <AnimatePresence mode="popLayout">
+            {codeOpen && !isFullscreen && (
+              <motion.section 
+                id="code-pane-container"
+                initial={{ x: -120, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -120, opacity: 0 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="h-full border-r border-white/5 bg-[#07070a] flex flex-col overflow-hidden relative"
+              >
+                {/* Code pane header bar */}
+                <div className="h-10 border-b border-white/5 flex items-center justify-between px-6 bg-[#07070a] shrink-0">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/30" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/30" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/30" />
+                    <span className="text-[10px] font-mono text-white/40 ml-3">{comp.id}.tsx</span>
+                  </div>
+                  <button
+                    onClick={handleCopyCode}
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] font-medium text-white/80 hover:text-white cursor-pointer transition-all active:scale-[0.98]"
+                    title="Copy Component Code"
+                  >
+                    {copiedCode ? <Check className="w-3 h-3 text-[#00f5a0]" /> : <Copy className="w-3 h-3" />}
+                    <span>{copiedCode ? "Copied" : "Copy Code"}</span>
+                  </button>
                 </div>
-                <button
-                  onClick={handleCopyCode}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] font-medium text-white/80 hover:text-white cursor-pointer transition-all active:scale-[0.98]"
-                  title="Copy Component Code"
-                >
-                  {copiedCode ? <Check className="w-3 h-3 text-[#00f5a0]" /> : <Copy className="w-3 h-3" />}
-                  <span>{copiedCode ? "Copied" : "Copy Code"}</span>
-                </button>
-              </div>
 
-              {/* Code display block */}
-              <div className="flex-1 overflow-auto">
-                <SimpleHighlighter code={comp.code} />
-              </div>
-            </section>
-          )}
+                {/* Code display block */}
+                <div className="flex-1 overflow-auto">
+                  <SimpleHighlighter code={comp.code} />
+                </div>
+              </motion.section>
+            )}
+          </AnimatePresence>
 
           {/* INTERACTIVE CANVAS VIEWPORT (RIGHT PANE) */}
           <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative px-6 md:px-12 pb-6 pt-2 gap-6">
