@@ -24,9 +24,6 @@ export default function PixelShimmerCard({ minimal = false }: { minimal?: boolea
               <h3 className="font-serif text-2xl sm:text-3xl text-white/90 font-light tracking-tight group-hover/bento:text-white transition-colors duration-300">
                 KOMOREBI
               </h3>
-              <span className="text-[10px] font-mono tracking-widest text-[#E8A969]/80 uppercase block group-hover/bento:text-[#E8A969] transition-colors duration-300">
-                Interactive Surface
-              </span>
             </div>
           </div>
 
@@ -65,9 +62,6 @@ export default function PixelShimmerCard({ minimal = false }: { minimal?: boolea
             <h3 className="font-serif text-3xl sm:text-4xl text-white/95 font-light tracking-tight group-hover/card:text-white transition-colors duration-300">
               KOMOREBI
             </h3>
-            <span className="text-[11px] font-mono tracking-widest text-[#E8A969]/85 uppercase block group-hover/card:text-[#E8A969] transition-colors duration-300">
-              Interactive Surface
-            </span>
           </div>
         </div>
 
