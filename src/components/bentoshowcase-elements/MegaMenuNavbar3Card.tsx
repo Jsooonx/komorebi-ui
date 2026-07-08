@@ -89,7 +89,7 @@ function NavbarContent({
   isMorphed: boolean;
 }) {
   return (
-    <div className="inline-flex items-center justify-center rounded-2xl bg-black/60 text-white shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/[0.08] backdrop-blur-xl px-4 py-2 mt-3 transition-all duration-300 ease-in-out overflow-hidden select-none">
+    <div className="inline-flex items-center justify-center rounded-2xl bg-black/60 text-white shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/[0.08] backdrop-blur-xl px-4 py-2 mt-3 transition-all duration-300 ease-in-out select-none">
       {/* Brand - CSS Grid 1fr to 0fr transition for exact intrinsic sizing and zero clipping */}
       <div
         className={`grid transition-all duration-300 ease-in-out shrink-0 ${
