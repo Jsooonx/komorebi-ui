@@ -308,7 +308,7 @@ function ComponentDetail() {
               className="flex-1 rounded-2xl border border-white/5 bg-[#090909] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace animate-fade-in"
             >
               {/* Control floating tools pill */}
-              <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1 bg-black/60 border border-white/5 backdrop-blur-md rounded-xl shadow-lg opacity-80 hover:opacity-100 transition-opacity">
+              <div className="absolute top-4 right-4 z-30 flex items-center gap-1.5 p-1 bg-black/60 border border-white/5 backdrop-blur-md rounded-xl shadow-lg opacity-80 hover:opacity-100 transition-opacity">
                 <button
                   onClick={() => setSidebarOpen(!sidebarOpen)}
                   className={`p-2 rounded-lg transition-all cursor-pointer ${
