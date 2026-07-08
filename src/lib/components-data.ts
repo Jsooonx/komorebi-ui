@@ -163,9 +163,9 @@ export const COMPONENTS_DATA: ComponentItem[] = [
   },
   {
     id: "morphing-blob",
-    name: "Fluid Morphing Blob",
-    category: "Canvas",
-    description: "Continuous morphing organic vector blob stepper control interface.",
+    name: "Pipeline Stepper",
+    category: "Controls",
+    description: "Interactive multi-step deployment pipeline stepper controller.",
     component: MorphingBlobCard,
     code: MorphingBlobCode,
     dependencies: ["framer-motion"],
