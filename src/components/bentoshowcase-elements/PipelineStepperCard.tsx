@@ -8,7 +8,7 @@ const steps = [
   { title: "Deployment", desc: "Pipeline verification" }
 ];
 
-export default function MorphingBlobCard({ minimal = false }: { minimal?: boolean }) {
+export default function PipelineStepperCard({ minimal = false }: { minimal?: boolean }) {
   const [activeStep, setActiveStep] = useState(0);
   const [params, setParams] = useState({ ssl: true, minify: false, cdn: true });
   const [projName, setProjName] = useState("my-awesome-app");

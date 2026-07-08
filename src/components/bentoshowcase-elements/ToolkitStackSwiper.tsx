@@ -22,7 +22,7 @@ const CARD_DATA = [
   }
 ];
 
-export default function ThingsDragAndScrollCard({ minimal = false }: { minimal?: boolean }) {
+export default function ToolkitStackSwiper({ minimal = false }: { minimal?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [stack, setStack] = useState([0, 1, 2]);

@@ -1,6 +1,6 @@
 import ImageRevealCard from "../components/bentoshowcase-elements/ImageRevealCard";
 import HoverMembersCard from "../components/bentoshowcase-elements/HoverMembersCard";
-import ThingsDragAndScrollCard from "../components/bentoshowcase-elements/ThingsDragAndScrollCard";
+import ToolkitStackSwiper from "../components/bentoshowcase-elements/ToolkitStackSwiper";
 import DevouringDetailsCard from "../components/bentoshowcase-elements/DevouringDetailsCard";
 import DynamicIslandCard from "../components/bentoshowcase-elements/DynamicIslandCard";
 import DitherCard from "../components/bentoshowcase-elements/DitherCard";
@@ -9,13 +9,13 @@ import BorderBeamCard from "../components/bentoshowcase-elements/BorderBeamCard"
 import InteractiveNavbarCard from "../components/bentoshowcase-elements/InteractiveNavbarCard";
 import InfiniteMarqueeCard from "../components/bentoshowcase-elements/InfiniteMarqueeCard";
 import AudioEqualizerCard from "../components/bentoshowcase-elements/AudioEqualizerCard";
-import MorphingBlobCard from "../components/bentoshowcase-elements/MorphingBlobCard";
+import PipelineStepperCard from "../components/bentoshowcase-elements/PipelineStepperCard";
 import HolographicTerminalCard from "../components/bentoshowcase-elements/HolographicTerminalCard";
 
 // Raw code text imports using Vite ?raw dynamic loader
 import ImageRevealCode from "../components/bentoshowcase-elements/ImageRevealCard.tsx?raw";
 import HoverMembersCode from "../components/bentoshowcase-elements/HoverMembersCard.tsx?raw";
-import ThingsDragAndScrollCode from "../components/bentoshowcase-elements/ThingsDragAndScrollCard.tsx?raw";
+import ToolkitStackSwiperCode from "../components/bentoshowcase-elements/ToolkitStackSwiper.tsx?raw";
 import DevouringDetailsCode from "../components/bentoshowcase-elements/DevouringDetailsCard.tsx?raw";
 import DynamicIslandCode from "../components/bentoshowcase-elements/DynamicIslandCard.tsx?raw";
 import DitherCode from "../components/bentoshowcase-elements/DitherCard.tsx?raw";
@@ -24,7 +24,7 @@ import BorderBeamCode from "../components/bentoshowcase-elements/BorderBeamCard.
 import InteractiveNavbarCode from "../components/bentoshowcase-elements/InteractiveNavbarCard.tsx?raw";
 import InfiniteMarqueeCode from "../components/bentoshowcase-elements/InfiniteMarqueeCard.tsx?raw";
 import AudioEqualizerCode from "../components/bentoshowcase-elements/AudioEqualizerCard.tsx?raw";
-import MorphingBlobCode from "../components/bentoshowcase-elements/MorphingBlobCard.tsx?raw";
+import PipelineStepperCode from "../components/bentoshowcase-elements/PipelineStepperCard.tsx?raw";
 import HolographicTerminalCode from "../components/bentoshowcase-elements/HolographicTerminalCard.tsx?raw";
 
 export interface ComponentItem {
@@ -65,14 +65,14 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     isNew: true
   },
   {
-    id: "things-drag-and-scroll",
+    id: "toolkit-stack-swiper",
     name: "Toolkit Stack Swiper",
     category: "Interactions",
     description: "A deck-style stack swiper with 3D tilt tracking and spring physics.",
-    component: ThingsDragAndScrollCard,
-    code: ThingsDragAndScrollCode,
+    component: ToolkitStackSwiper,
+    code: ToolkitStackSwiperCode,
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add things-drag-and-scroll",
+    cliCommand: "npx komorebi-ui add toolkit-stack-swiper",
     gridClass: "md:row-span-2",
     viewportHeightClass: "h-[380px]"
   },
@@ -162,14 +162,14 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     cliCommand: "npx komorebi-ui add audio-equalizer"
   },
   {
-    id: "morphing-blob",
+    id: "pipeline-stepper",
     name: "Pipeline Stepper",
     category: "Controls",
     description: "Interactive multi-step deployment pipeline stepper controller.",
-    component: MorphingBlobCard,
-    code: MorphingBlobCode,
+    component: PipelineStepperCard,
+    code: PipelineStepperCode,
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add morphing-blob",
+    cliCommand: "npx komorebi-ui add pipeline-stepper",
     gridClass: "md:row-span-2",
     viewportHeightClass: "h-[380px]"
   },

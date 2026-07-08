@@ -12,9 +12,9 @@ export default function Footer() {
       { name: "CLI Tooling", href: "#showcase" }
     ],
     components: [
-      { name: "Attractor Field", href: "/components/magnetic-cursor-field" },
+      { name: "Mac-Dock Navbar", href: "/components/interactive-navbar" },
       { name: "Audio Equalizer", href: "/components/audio-equalizer" },
-      { name: "Pipeline Stepper", href: "/components/morphing-blob" },
+      { name: "Pipeline Stepper", href: "/components/pipeline-stepper" },
       { name: "Holographic Terminal", href: "/components/holographic-terminal" }
     ],
     templates: [

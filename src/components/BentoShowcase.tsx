@@ -3,7 +3,7 @@ import { useState } from "react";
 import SplitText from "./ui/SplitText";
 import ImageRevealCard from "./bentoshowcase-elements/ImageRevealCard";
 import HoverMembersCard from "./bentoshowcase-elements/HoverMembersCard";
-import ThingsDragAndScrollCard from "./bentoshowcase-elements/ThingsDragAndScrollCard";
+import ToolkitStackSwiper from "./bentoshowcase-elements/ToolkitStackSwiper";
 import DevouringDetailsCard from "./bentoshowcase-elements/DevouringDetailsCard";
 import DynamicIslandCard from "./bentoshowcase-elements/DynamicIslandCard";
 import DitherCard from "./bentoshowcase-elements/DitherCard";
@@ -12,7 +12,7 @@ import BorderBeamCard from "./bentoshowcase-elements/BorderBeamCard";
 import InteractiveNavbarCard from "./bentoshowcase-elements/InteractiveNavbarCard";
 import InfiniteMarqueeCard from "./bentoshowcase-elements/InfiniteMarqueeCard";
 import AudioEqualizerCard from "./bentoshowcase-elements/AudioEqualizerCard";
-import MorphingBlobCard from "./bentoshowcase-elements/MorphingBlobCard";
+import PipelineStepperCard from "./bentoshowcase-elements/PipelineStepperCard";
 import HolographicTerminalCard from "./bentoshowcase-elements/HolographicTerminalCard";
 
 function BentoCell({ 
@@ -88,8 +88,8 @@ export default function BentoShowcase() {
         <BentoCell id="hover-members">
           <HoverMembersCard />
         </BentoCell>
-        <BentoCell id="things-drag-and-scroll" className="lg:row-span-2">
-          <ThingsDragAndScrollCard />
+        <BentoCell id="toolkit-stack-swiper" className="lg:row-span-2">
+          <ToolkitStackSwiper />
         </BentoCell>
         <BentoCell id="devouring-details">
           <DevouringDetailsCard />
@@ -115,8 +115,8 @@ export default function BentoShowcase() {
         <BentoCell id="audio-equalizer">
           <AudioEqualizerCard />
         </BentoCell>
-        <BentoCell id="morphing-blob" className="lg:row-span-2">
-          <MorphingBlobCard />
+        <BentoCell id="pipeline-stepper" className="lg:row-span-2">
+          <PipelineStepperCard />
         </BentoCell>
         <BentoCell id="holographic-terminal">
           <HolographicTerminalCard />
