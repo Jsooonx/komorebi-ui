@@ -68,6 +68,78 @@ const itemVariants = {
   }
 };
 
+function ComponentCard({ item }: { item: ComponentItem }) {
+  const [copiedCli, setCopiedCli] = useState(false);
+  const PreviewComp = item.component;
+
+  const handleCopyCli = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const cli = item.cliCommand || `npx komorebi-ui add ${item.id}`;
+    try {
+      await navigator.clipboard.writeText(cli);
+      setCopiedCli(true);
+      toast.success(`${item.name} CLI Command Copied!`);
+      setTimeout(() => setCopiedCli(false), 2000);
+    } catch (err) {
+      toast.error("Failed to copy CLI command.");
+    }
+  };
+
+  const getIdxStr = () => {
+    const idx = COMPONENTS_DATA.findIndex((c) => c.id === item.id);
+    return idx >= 0 ? `komorebi${String(idx + 1).padStart(2, '0')}` : item.id;
+  };
+
+  return (
+    <motion.div variants={itemVariants}>
+      <Link
+        to="/components/$id"
+        params={{ id: item.id }}
+        className="group flex flex-col bg-[#0c0c0e] border border-white/[0.04] hover:border-white/10 rounded-2xl overflow-hidden p-4 select-none cursor-pointer relative transition-all duration-300"
+      >
+        {/* Main Viewport Area */}
+        <div className="relative w-full h-[180px] rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center pointer-events-none transition-colors">
+          {/* Mock Browser Dots */}
+          <div className="absolute top-2.5 left-3 flex gap-1 z-15">
+            <span className="w-1 h-1 rounded-full bg-white/10" />
+            <span className="w-1 h-1 rounded-full bg-white/10" />
+            <span className="w-1 h-1 rounded-full bg-white/10" />
+          </div>
+
+          {/* Quick CLI Trigger button overlay (visible on card hover) */}
+          <button
+            onClick={handleCopyCli}
+            className="absolute top-2.5 right-3 z-20 flex items-center justify-center p-1.5 rounded-lg bg-black/60 border border-white/10 text-white/60 hover:text-white pointer-events-auto opacity-0 group-hover:opacity-100 transition-opacity"
+            title="Copy component add CLI command"
+          >
+            {copiedCli ? <Check className="w-3.5 h-3.5 text-[#00f5a0]" /> : <Terminal className="w-3.5 h-3.5 text-[#BECB6D]" />}
+          </button>
+
+          {/* Actual component preview rendering */}
+          <div className="scale-[0.8] origin-center w-full h-full flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity">
+            <PreviewComp />
+          </div>
+        </div>
+
+        {/* Footer text row */}
+        <div className="flex items-center justify-between mt-3.5 px-1 pb-1">
+          <span className="text-xs font-semibold text-white/90 group-hover:text-white transition-colors">
+            {item.name}
+          </span>
+          <div className="flex items-center gap-1.5 text-[10px] font-mono text-white/35 group-hover:text-white/60 transition-colors">
+            <span>{getIdxStr()}</span>
+            {item.isNew && (
+              <span className="text-[9px] uppercase tracking-wider bg-[#E8A969]/10 border border-[#E8A969]/20 px-1.5 py-0.5 rounded text-[#E8A969] ml-1">New</span>
+            )}
+            <span className="text-white/40 group-hover:translate-x-0.5 transition-transform ml-1">↗</span>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
 function ComponentsIndex() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -257,76 +329,57 @@ function ComponentsIndex() {
           <div className="flex-1">
             <AnimatePresence mode="wait">
               {filteredComponents.length > 0 ? (
-                <motion.div 
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-                >
-                  {filteredComponents.map((item) => {
-                    const PreviewComp = item.component;
-                    return (
-                      <motion.div
-                        key={item.id}
-                        variants={itemVariants}
+                <div className="space-y-12">
+                  
+                  {/* Section 1: New Releases */}
+                  {filteredComponents.filter(c => c.isNew).length > 0 && (
+                    <div>
+                      <div className="mb-6 text-left">
+                        <div className="flex items-center gap-2 text-sm text-white/40 font-mono">
+                          <span className="text-white/85 font-semibold text-base font-heading">New Releases</span>
+                          <span>[{filteredComponents.filter(c => c.isNew).length}]</span>
+                        </div>
+                        <span className="text-[10px] text-white/30 font-heading">Latest components [Hover to preview]</span>
+                      </div>
+                      <motion.div 
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
                       >
-                        <Link
-                          to="/components/$id"
-                          params={{ id: item.id }}
-                          className="group flex flex-col bg-[#0f0f12] border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 transition-all select-none p-5 text-left h-[340px] justify-between cursor-pointer"
-                        >
-                        {/* Card Hover Preview Viewport */}
-                        <div className="relative w-full h-[180px] rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center pointer-events-none group-hover:border-white/10 transition-colors">
-                          <div className="absolute top-2.5 left-3 flex gap-1 z-15">
-                            <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                            <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                            <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                          </div>
+                        {filteredComponents.filter(c => c.isNew).map((item) => (
+                          <ComponentCard key={item.id} item={item} />
+                        ))}
+                      </motion.div>
+                    </div>
+                  )}
 
-                          {/* Live rendered preview component */}
-                          <div className="scale-[0.8] origin-center w-full h-full flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity">
-                            <PreviewComp />
-                          </div>
+                  {/* Section 2: Out of the Box */}
+                  {filteredComponents.filter(c => !c.isNew).length > 0 && (
+                    <div>
+                      <div className="mb-6 text-left">
+                        <div className="flex items-center gap-2 text-sm text-white/40 font-mono">
+                          <span className="text-white/85 font-semibold text-base font-heading">Out of the box</span>
+                          <span>[{filteredComponents.filter(c => !c.isNew).length}]</span>
                         </div>
+                        <span className="text-[10px] text-white/30 font-heading">Collection of components [Hover to preview]</span>
+                      </div>
+                      <motion.div 
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+                      >
+                        {filteredComponents.filter(c => !c.isNew).map((item) => (
+                          <ComponentCard key={item.id} item={item} />
+                        ))}
+                      </motion.div>
+                    </div>
+                  )}
 
-                        {/* Title, description & Category badge */}
-                        <div className="flex flex-col gap-1.5 mt-2">
-                          <div className="flex items-center justify-between gap-3">
-                            <h3 className="text-sm font-semibold text-white/90 group-hover:text-white transition-colors">
-                              {item.name}
-                            </h3>
-                            <span className="text-[9px] font-mono font-medium text-white/40 uppercase tracking-widest bg-white/5 border border-white/5 px-2 py-0.5 rounded">
-                              {item.category}
-                            </span>
-                          </div>
-                          
-                          <p className="text-[11px] text-white/40 leading-relaxed line-clamp-2">
-                            {item.description}
-                          </p>
-                        </div>
-
-                        {/* Bottom Actions Bar */}
-                        <div className="flex items-center justify-between border-t border-white/5 pt-3.5 mt-2 text-[10px]">
-                          <span className="text-[#E8A969] hover:underline flex items-center gap-1 font-medium font-heading">
-                            <span>Open Sandbox</span>
-                            <ExternalLink className="w-2.5 h-2.5" />
-                          </span>
-
-                          <button
-                            onClick={(e) => handleCopyCli(e, item)}
-                            className="flex items-center gap-1.5 px-2 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 hover:text-white transition-all cursor-pointer"
-                            title="Copy component add CLI command"
-                          >
-                            {copiedCli === item.id ? <Check className="w-3 h-3 text-[#00f5a0]" /> : <Terminal className="w-3 h-3 text-[#BECB6D]" />}
-                            <span>{copiedCli === item.id ? "Copied" : "Copy CLI"}</span>
-                          </button>
-                        </div>
-                      </Link>
-                    </motion.div>
-                  );
-                  })}
-                </motion.div>
+                </div>
               ) : (
                 <motion.div 
                   initial={{ opacity: 0 }}

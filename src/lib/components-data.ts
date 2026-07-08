@@ -38,6 +38,7 @@ export interface ComponentItem {
   code: string;
   dependencies?: string[];
   cliCommand?: string;
+  isNew?: boolean;
 }
 
 export const COMPONENTS_DATA: ComponentItem[] = [
@@ -49,7 +50,8 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: ImageRevealCard,
     code: ImageRevealCode,
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add image-reveal"
+    cliCommand: "npx komorebi-ui add image-reveal",
+    isNew: true
   },
   {
     id: "hover-members",
@@ -59,7 +61,8 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: HoverMembersCard,
     code: HoverMembersCode,
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add hover-members"
+    cliCommand: "npx komorebi-ui add hover-members",
+    isNew: true
   },
   {
     id: "things-drag-and-scroll",
@@ -88,7 +91,8 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: DynamicIslandCard,
     code: DynamicIslandCode,
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add dynamic-island"
+    cliCommand: "npx komorebi-ui add dynamic-island",
+    isNew: true
   },
   {
     id: "dither-canvas",
@@ -128,7 +132,8 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: InteractiveNavbarCard,
     code: InteractiveNavbarCode,
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add interactive-navbar"
+    cliCommand: "npx komorebi-ui add interactive-navbar",
+    isNew: true
   },
   {
     id: "infinite-marquee",
