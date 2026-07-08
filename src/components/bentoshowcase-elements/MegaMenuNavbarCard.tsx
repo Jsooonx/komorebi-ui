@@ -10,6 +10,8 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
+import { SunlightLeafLogo } from "../DynamicIsland";
+
 // ── Types ──────────────────────────────────────────────────────────────────────
 
 interface FeatureItem {
@@ -83,9 +85,7 @@ function NavbarContent({
 
       {/* Brand */}
       <div className="flex items-center gap-2 shrink-0">
-        <div className="w-6 h-6 rounded-md bg-[#E8A969] flex items-center justify-center text-black font-bold text-[10px] select-none shadow">
-          K
-        </div>
+        <SunlightLeafLogo className="w-6 h-6" />
         <span className="text-xs font-semibold tracking-tight font-heading text-white">
           Komorebi
         </span>
