@@ -108,6 +108,16 @@ function ComponentDetail() {
   const [reloadKey, setReloadKey] = useState(0);
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedCli, setCopiedCli] = useState(false);
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsLargeScreen(window.innerWidth >= 1024);
+    };
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   // Reset scroll offsets on component load
   useEffect(() => {
@@ -266,18 +276,18 @@ function ComponentDetail() {
         </AnimatePresence>
 
         {/* 3. CORE PLAYROOM CONTENT SPLIT PANEL */}
-        <main className={`flex-1 grid ${codeOpen && !isFullscreen ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1"} h-full overflow-hidden transition-all duration-300`}>
+        <main className="flex-1 flex flex-col lg:flex-row h-full overflow-hidden">
           
           {/* CODE EDITOR CONTAINER (LEFT PANE) */}
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence>
             {codeOpen && !isFullscreen && (
               <motion.section 
                 id="code-pane-container"
-                initial={{ x: -120, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -120, opacity: 0 }}
+                initial={isLargeScreen ? { width: 0, opacity: 0 } : { height: 0, opacity: 0 }}
+                animate={isLargeScreen ? { width: "50%", opacity: 1 } : { height: "50%", opacity: 1 }}
+                exit={isLargeScreen ? { width: 0, opacity: 0 } : { height: 0, opacity: 0 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="h-full border-r border-white/5 bg-[#07070a] flex flex-col overflow-hidden relative"
+                className="w-full lg:w-1/2 h-1/2 lg:h-full border-b lg:border-b-0 lg:border-r border-white/5 bg-[#07070a] flex flex-col overflow-hidden relative"
               >
                 {/* Code pane header bar */}
                 <div className="h-10 border-b border-white/5 flex items-center justify-between px-6 bg-[#07070a] shrink-0">
@@ -306,7 +316,7 @@ function ComponentDetail() {
           </AnimatePresence>
 
           {/* INTERACTIVE CANVAS VIEWPORT (RIGHT PANE) */}
-          <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative px-6 md:px-12 pb-6 pt-2 gap-6">
+          <section className="h-full flex-1 flex flex-col bg-[#090909] overflow-hidden relative px-6 md:px-12 pb-6 pt-2 gap-6">
             
             {/* The main workspace container card with thin border */}
             <div 
