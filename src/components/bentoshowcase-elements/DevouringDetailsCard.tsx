@@ -5,7 +5,7 @@ import { Mail } from "lucide-react";
 export default function DevouringDetailsCard({ minimal = false }: { minimal?: boolean }) {
   const [hovered, setHovered] = useState(false);
   const [emailText, setEmailText] = useState("");
-  const fullEmail = "guri@gmail.com";
+  const fullEmail = "youremail@gmail.com";
 
   useEffect(() => {
     let index = 0;
