@@ -298,9 +298,11 @@ function ComponentDetail() {
           <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative p-4 gap-4">
             
             {/* The main workspace container card with thin border */}
-            <div 
-              key={reloadKey}
-              className="flex-1 rounded-2xl border border-white/5 bg-[#090909] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace animate-fade-in"
+            <motion.div 
+              layoutId={`card-container-${id}`}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              key={`${id}-${reloadKey}`}
+              className="flex-1 rounded-2xl border border-white/5 bg-[#090909] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace"
             >
               {/* Control floating tools pill */}
               <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1 bg-black/60 border border-white/5 backdrop-blur-md rounded-xl shadow-lg opacity-80 hover:opacity-100 transition-opacity">
@@ -342,10 +344,14 @@ function ComponentDetail() {
               </div>
 
               {/* Dynamic Component Element Render (Maximized) */}
-              <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
+              <motion.div 
+                layoutId={`card-viewport-${id}`}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full"
+              >
                 <PreviewComponent minimal={true} />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Dynamic details description & dependencies tags (Static, below the bordered workspace) */}
             {!isFullscreen && (

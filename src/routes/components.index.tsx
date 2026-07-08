@@ -111,13 +111,19 @@ function ComponentCard({ item }: { item: ComponentItem }) {
 
   return (
     <motion.div variants={itemVariants} className={item.gridClass || ""}>
-      <div
+      <motion.div
+        layoutId={`card-container-${item.id}`}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         className="group flex flex-col bg-[#0c0c0e] border border-white/[0.04] hover:border-white/10 rounded-2xl overflow-hidden p-4 select-none cursor-pointer relative transition-all duration-300 h-full"
       >
         {/* Main Viewport Area */}
-        <div className={`relative w-full rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center transition-colors ${item.viewportHeightClass || "h-[180px]"}`}>
+        <motion.div 
+          layoutId={`card-viewport-${item.id}`}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className={`relative w-full rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center transition-colors ${item.viewportHeightClass || "h-[180px]"}`}
+        >
           {/* Mock Browser Dots */}
           <div className="absolute top-2.5 left-3 flex gap-1 z-15">
             <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
@@ -126,12 +132,11 @@ function ComponentCard({ item }: { item: ComponentItem }) {
           </div>
 
 
-
           {/* Actual component preview rendering */}
           <div className="w-full h-full flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity overflow-hidden">
             <PreviewComp minimal={true} />
           </div>
-        </div>
+        </motion.div>
 
         {/* Footer text row */}
         <div className="flex items-center justify-between mt-3.5 px-1 pb-1">
@@ -146,7 +151,7 @@ function ComponentCard({ item }: { item: ComponentItem }) {
             <span className="text-white/40 group-hover:translate-x-0.5 transition-transform ml-1">↗</span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
