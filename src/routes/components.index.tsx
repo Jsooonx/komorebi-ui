@@ -110,7 +110,7 @@ function ComponentCard({ item }: { item: ComponentItem }) {
   };
 
   return (
-    <motion.div variants={itemVariants} className={item.gridClass || ""}>
+    <div className={item.gridClass || ""}>
       <motion.div
         layoutId={`card-container-${item.id}`}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -152,7 +152,7 @@ function ComponentCard({ item }: { item: ComponentItem }) {
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -357,10 +357,9 @@ function ComponentsIndex() {
                         <span className="text-[10px] text-white/30 font-heading">Latest components [Hover to preview]</span>
                       </div>
                       <motion.div 
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit="hidden"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.35, ease: "easeOut" }}
                         className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
                       >
                         {filteredComponents.filter(c => c.isNew).map((item) => (
@@ -381,10 +380,9 @@ function ComponentsIndex() {
                         <span className="text-[10px] text-white/30 font-heading">Collection of components [Hover to preview]</span>
                       </div>
                       <motion.div 
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit="hidden"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.35, ease: "easeOut" }}
                         className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
                       >
                         {filteredComponents.filter(c => !c.isNew).map((item) => (
