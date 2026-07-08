@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { JSX } from 'react';
+import { useCallback, useEffect, useRef } from "react";
+import { cn } from "../../lib/utils";
 
 class Pixel {
   width: number;
@@ -28,7 +28,7 @@ class Pixel {
     y: number,
     color: string,
     speed: number,
-    delay: number
+    delay: number,
   ) {
     this.width = canvas.width;
     this.height = canvas.height;
@@ -79,9 +79,9 @@ class Pixel {
     if (this.size <= 0) {
       this.isIdle = true;
       return;
-    } else {
-      this.size -= 0.1;
     }
+
+    this.size -= 0.1;
     this.draw();
   }
 
@@ -91,6 +91,7 @@ class Pixel {
     } else if (this.size <= this.minSize) {
       this.isReverse = false;
     }
+
     if (this.isReverse) {
       this.size -= this.speed;
     } else {
@@ -106,11 +107,13 @@ function getEffectiveSpeed(value: number, reducedMotion: boolean) {
 
   if (value <= min || reducedMotion) {
     return min;
-  } else if (value >= max) {
-    return max * throttle;
-  } else {
-    return value * throttle;
   }
+
+  if (value >= max) {
+    return max * throttle;
+  }
+
+  return value * throttle;
 }
 
 const VARIANTS = {
@@ -118,41 +121,41 @@ const VARIANTS = {
     activeColor: null,
     gap: 5,
     speed: 35,
-    colors: '#f8fafc,#f1f5f9,#cbd5e1',
-    noFocus: false
+    colors: "#f8fafc,#f1f5f9,#cbd5e1",
+    noFocus: false,
   },
   blue: {
-    activeColor: '#e0f2fe',
+    activeColor: "#e0f2fe",
     gap: 10,
     speed: 25,
-    colors: '#e0f2fe,#7dd3fc,#0ea5e9',
-    noFocus: false
+    colors: "#e0f2fe,#7dd3fc,#0ea5e9",
+    noFocus: false,
   },
   yellow: {
-    activeColor: '#fef08a',
+    activeColor: "#fef08a",
     gap: 3,
     speed: 20,
-    colors: '#fef08a,#fde047,#eab308',
-    noFocus: false
+    colors: "#fef08a,#fde047,#eab308",
+    noFocus: false,
   },
   pink: {
-    activeColor: '#fecdd3',
+    activeColor: "#fecdd3",
     gap: 6,
     speed: 80,
-    colors: '#fecdd3,#fda4af,#e11d48',
-    noFocus: true
+    colors: "#fecdd3,#fda4af,#e11d48",
+    noFocus: true,
   },
   gold: {
-    activeColor: '#E8A969',
+    activeColor: "#E8A969",
     gap: 6,
     speed: 35,
-    colors: '#E8A969,#BECB6D,#d99855,#ffffff',
-    noFocus: false
-  }
-};
+    colors: "#E8A969,#BECB6D,#d99855,#ffffff",
+    noFocus: false,
+  },
+} as const;
 
 interface PixelCardProps {
-  variant?: 'default' | 'blue' | 'yellow' | 'pink' | 'gold';
+  variant?: keyof typeof VARIANTS;
   gap?: number;
   speed?: number;
   colors?: string;
@@ -171,15 +174,15 @@ interface VariantConfig {
 }
 
 export default function PixelCard({
-  variant = 'default',
+  variant = "default",
   gap,
   speed,
   colors,
   noFocus,
-  className = '',
+  className = "",
   style = {},
-  children
-}: PixelCardProps): JSX.Element {
+  children,
+}: PixelCardProps): React.JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pixelsRef = useRef<Pixel[]>([]);
@@ -188,7 +191,7 @@ export default function PixelCard({
   const reducedMotion = useRef(false);
 
   useEffect(() => {
-    reducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    reducedMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }, []);
 
   const variantCfg: VariantConfig = VARIANTS[variant] || VARIANTS.default;
@@ -197,13 +200,13 @@ export default function PixelCard({
   const finalColors = colors ?? variantCfg.colors;
   const finalNoFocus = noFocus ?? variantCfg.noFocus;
 
-  const initPixels = () => {
+  const initPixels = useCallback(() => {
     if (!containerRef.current || !canvasRef.current) return;
 
     const rect = containerRef.current.getBoundingClientRect();
     const width = Math.floor(rect.width);
     const height = Math.floor(rect.height);
-    const ctx = canvasRef.current.getContext('2d');
+    const ctx = canvasRef.current.getContext("2d");
     if (!ctx) return;
 
     canvasRef.current.width = width;
@@ -211,7 +214,7 @@ export default function PixelCard({
     canvasRef.current.style.width = `${width}px`;
     canvasRef.current.style.height = `${height}px`;
 
-    const colorsArray = finalColors.split(',');
+    const colorsArray = finalColors.split(",");
     const colorsLen = colorsArray.length;
     const pxs: Pixel[] = [];
     const step = Math.max(2, parseInt(finalGap.toString(), 10));
@@ -232,27 +235,26 @@ export default function PixelCard({
       }
     }
     pixelsRef.current = pxs;
-  };
+  }, [finalColors, finalGap, finalSpeed]);
 
-  const doAnimate = (fnName: 'appear' | 'disappear') => {
+  const doAnimate = (fnName: "appear" | "disappear") => {
     animationRef.current = requestAnimationFrame(() => doAnimate(fnName));
     const timeNow = performance.now();
     const timePassed = timeNow - timePreviousRef.current;
-    const timeInterval = 1000 / 60; // Limit to 60fps max
+    const timeInterval = 1000 / 60;
 
     if (timePassed < timeInterval) return;
     timePreviousRef.current = timeNow - (timePassed % timeInterval);
 
-    const ctx = canvasRef.current?.getContext('2d');
+    const ctx = canvasRef.current?.getContext("2d");
     if (!ctx || !canvasRef.current) return;
 
     ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
     let allIdle = true;
-    const isAppear = fnName === 'appear';
+    const isAppear = fnName === "appear";
     const len = pixelsRef.current.length;
 
-    // Optimized hot-loop (no dynamic string method lookup)
     for (let i = 0; i < len; i++) {
       const pixel = pixelsRef.current[i];
       if (isAppear) {
@@ -264,29 +266,31 @@ export default function PixelCard({
         allIdle = false;
       }
     }
-    if (allIdle) {
+
+    if (allIdle && animationRef.current !== null) {
       cancelAnimationFrame(animationRef.current);
       animationRef.current = null;
     }
   };
 
-  const handleAnimation = (name: 'appear' | 'disappear') => {
+  const handleAnimation = (name: "appear" | "disappear") => {
     if (animationRef.current !== null) {
       cancelAnimationFrame(animationRef.current);
     }
     animationRef.current = requestAnimationFrame(() => doAnimate(name));
   };
 
-  const onMouseEnter = () => handleAnimation('appear');
-  const onMouseLeave = () => handleAnimation('disappear');
-  
-  const onFocus: React.FocusEventHandler<HTMLDivElement> = e => {
-    if (e.currentTarget.contains(e.relatedTarget as Node)) return;
-    handleAnimation('appear');
+  const onMouseEnter = () => handleAnimation("appear");
+  const onMouseLeave = () => handleAnimation("disappear");
+
+  const onFocus: React.FocusEventHandler<HTMLDivElement> = (event) => {
+    if (event.currentTarget.contains(event.relatedTarget as Node)) return;
+    handleAnimation("appear");
   };
-  const onBlur: React.FocusEventHandler<HTMLDivElement> = e => {
-    if (e.currentTarget.contains(e.relatedTarget as Node)) return;
-    handleAnimation('disappear');
+
+  const onBlur: React.FocusEventHandler<HTMLDivElement> = (event) => {
+    if (event.currentTarget.contains(event.relatedTarget as Node)) return;
+    handleAnimation("disappear");
   };
 
   useEffect(() => {
@@ -294,33 +298,38 @@ export default function PixelCard({
     const observer = new ResizeObserver(() => {
       initPixels();
     });
+
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
+
     return () => {
       observer.disconnect();
       if (animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [finalGap, finalSpeed, finalColors, finalNoFocus]);
+  }, [finalNoFocus, initPixels]);
 
   return (
     <div
       ref={containerRef}
       style={style}
-      className={`relative overflow-hidden w-full h-full border border-white/5 rounded-2xl bg-black/60 select-none ${className}`}
+      className={cn(
+        "relative overflow-hidden w-full h-full border border-white/5 rounded-2xl bg-black/60 select-none",
+        className
+      )}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onFocus={finalNoFocus ? undefined : onFocus}
       onBlur={finalNoFocus ? undefined : onBlur}
       tabIndex={finalNoFocus ? -1 : 0}
     >
-      <canvas className="absolute inset-0 w-full h-full block pointer-events-none z-0" ref={canvasRef} />
-      <div className="relative z-10 w-full h-full">
-        {children}
-      </div>
+      <canvas
+        className="absolute inset-0 w-full h-full block pointer-events-none z-0"
+        ref={canvasRef}
+      />
+      <div className="relative z-10 w-full h-full">{children}</div>
     </div>
   );
 }

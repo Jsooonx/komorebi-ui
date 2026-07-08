@@ -13,6 +13,7 @@ import PipelineStepperCard from "../components/bentoshowcase-elements/PipelineSt
 import HolographicTerminalCard from "../components/bentoshowcase-elements/HolographicTerminalCard";
 import MegaMenuNavbarCard from "../components/bentoshowcase-elements/MegaMenuNavbarCard";
 import MegaMenuNavbar2Card from "../components/bentoshowcase-elements/MegaMenuNavbar2Card";
+import PixelShimmerCard from "../components/bentoshowcase-elements/PixelShimmerCard";
 
 // Raw code text imports using Vite ?raw dynamic loader
 import ImageRevealCode from "../components/bentoshowcase-elements/ImageRevealCard.tsx?raw";
@@ -30,13 +31,19 @@ import PipelineStepperCode from "../components/bentoshowcase-elements/PipelineSt
 import HolographicTerminalCode from "../components/bentoshowcase-elements/HolographicTerminalCard.tsx?raw";
 import MegaMenuNavbarCode from "../components/bentoshowcase-elements/MegaMenuNavbarCard.tsx?raw";
 import MegaMenuNavbar2Code from "../components/bentoshowcase-elements/MegaMenuNavbar2Card.tsx?raw";
+import PixelShimmerCode from "../components/bentoshowcase-elements/PixelShimmerCard.tsx?raw";
+
+export interface ComponentPreviewProps {
+  minimal?: boolean;
+  activeState?: string;
+}
 
 export interface ComponentItem {
   id: string;
   name: string;
   category: string;
   description: string;
-  component: React.ComponentType<any>;
+  component: React.ComponentType<ComponentPreviewProps>;
   code: string;
   dependencies?: string[];
   cliCommand?: string;
@@ -55,7 +62,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     code: ImageRevealCode,
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add image-reveal",
-    isNew: true
+    isNew: true,
   },
   {
     id: "hover-members",
@@ -66,7 +73,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     code: HoverMembersCode,
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add hover-members",
-    isNew: true
+    isNew: true,
   },
   {
     id: "toolkit-stack-swiper",
@@ -78,7 +85,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add toolkit-stack-swiper",
     gridClass: "md:row-span-2",
-    viewportHeightClass: "h-[380px]"
+    viewportHeightClass: "h-[380px]",
   },
   {
     id: "devouring-details",
@@ -87,7 +94,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     description: "Expanding interactive list block with smooth element height transitions.",
     component: DevouringDetailsCard,
     code: DevouringDetailsCode,
-    cliCommand: "npx komorebi-ui add devouring-details"
+    cliCommand: "npx komorebi-ui add devouring-details",
   },
   {
     id: "dynamic-island",
@@ -98,7 +105,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     code: DynamicIslandCode,
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add dynamic-island",
-    isNew: true
+    isNew: true,
   },
   {
     id: "dither-canvas",
@@ -108,7 +115,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: DitherCard,
     code: DitherCode,
     dependencies: ["@react-three/fiber", "three"],
-    cliCommand: "npx komorebi-ui add dither-canvas"
+    cliCommand: "npx komorebi-ui add dither-canvas",
   },
   {
     id: "text-roll",
@@ -118,7 +125,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: TextRollCard,
     code: TextRollCode,
     dependencies: ["gsap"],
-    cliCommand: "npx komorebi-ui add text-roll"
+    cliCommand: "npx komorebi-ui add text-roll",
   },
   {
     id: "border-beam",
@@ -128,7 +135,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: BorderBeamCard,
     code: BorderBeamCode,
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add border-beam"
+    cliCommand: "npx komorebi-ui add border-beam",
   },
   {
     id: "interactive-navbar",
@@ -141,7 +148,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     cliCommand: "npx komorebi-ui add interactive-navbar",
     isNew: true,
     gridClass: "md:col-span-2",
-    viewportHeightClass: "h-[180px]"
+    viewportHeightClass: "h-[180px]",
   },
   {
     id: "infinite-marquee",
@@ -153,7 +160,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     dependencies: ["lucide-react"],
     cliCommand: "npx komorebi-ui add infinite-marquee",
     gridClass: "md:col-span-2",
-    viewportHeightClass: "h-[130px]"
+    viewportHeightClass: "h-[130px]",
   },
   {
     id: "audio-equalizer",
@@ -163,7 +170,18 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: AudioEqualizerCard,
     code: AudioEqualizerCode,
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add audio-equalizer"
+    cliCommand: "npx komorebi-ui add audio-equalizer",
+  },
+  {
+    id: "pixel-shimmer",
+    name: "Pixel Shimmer Card",
+    category: "Visuals",
+    description: "Interactive pixel-surface shimmer card with hover and focus-aware glow pulses.",
+    component: PixelShimmerCard,
+    code: PixelShimmerCode,
+    cliCommand: "npx komorebi-ui add pixel-shimmer",
+    dependencies: [],
+    viewportHeightClass: "h-[250px]",
   },
   {
     id: "pipeline-stepper",
@@ -175,7 +193,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add pipeline-stepper",
     gridClass: "md:row-span-2",
-    viewportHeightClass: "h-[380px]"
+    viewportHeightClass: "h-[380px]",
   },
   {
     id: "holographic-terminal",
@@ -184,7 +202,7 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     description: "Simulated console window outputting text strings dynamically.",
     component: HolographicTerminalCard,
     code: HolographicTerminalCode,
-    cliCommand: "npx komorebi-ui add holographic-terminal"
+    cliCommand: "npx komorebi-ui add holographic-terminal",
   },
   {
     id: "mega-menu-navbar",
@@ -197,19 +215,20 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     cliCommand: "npx komorebi-ui add mega-menu-navbar",
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
-    viewportHeightClass: "h-[380px]"
+    viewportHeightClass: "h-[380px]",
   },
   {
     id: "mega-menu-navbar-2",
     name: "Mega Menu Navbar 2",
     category: "Navigation",
-    description: "Scroll-responsive morphing navbar that transitions from a flat fixed header to a premium floating pill layout on scroll.",
+    description:
+      "Scroll-responsive morphing navbar that transitions from a flat fixed header to a premium floating pill layout on scroll.",
     component: MegaMenuNavbar2Card,
     code: MegaMenuNavbar2Code,
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
     cliCommand: "npx komorebi-ui add mega-menu-navbar-2",
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
-    viewportHeightClass: "h-[500px]"
-  }
+    viewportHeightClass: "h-[500px]",
+  },
 ];
