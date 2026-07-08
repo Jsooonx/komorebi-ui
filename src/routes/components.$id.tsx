@@ -309,8 +309,10 @@ function ComponentDetail() {
           <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative px-6 md:px-12 pb-6 pt-2 gap-6">
             
             {/* The main workspace container card with thin border */}
-            <div 
+            <motion.div 
               key={reloadKey}
+              layout
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               className="flex-1 rounded-2xl border border-white/5 bg-[#0c0c0e] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace animate-fade-in"
             >
               {/* Control floating tools pill */}
@@ -368,7 +370,7 @@ function ComponentDetail() {
               <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
                 <PreviewComponent minimal={true} />
               </div>
-            </div>
+            </motion.div>
 
             {/* Dynamic details description & dependencies tags (Static, below the bordered workspace) */}
             {!isFullscreen && (
