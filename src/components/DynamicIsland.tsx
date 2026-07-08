@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowLeft, Command, Search, CornerDownLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Command, Search, Sparkles } from "lucide-react";
 import TextRoll from "./ui/TextRoll";
 
 // Sunlight Leaf Logo
@@ -66,7 +66,7 @@ export default function DynamicIsland() {
   const location = useLocation();
   const navigate = useNavigate();
   const isDetailRoute = location.pathname.startsWith("/components/");
-  
+
   const [activeComponentId, setActiveComponentId] = useState<string | null>(null);
 
   // Parse active component ID from route if applicable
