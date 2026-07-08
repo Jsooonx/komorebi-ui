@@ -1,4 +1,5 @@
-import { Link } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 import SplitText from "./ui/SplitText";
 import ImageRevealCard from "./bentoshowcase-elements/ImageRevealCard";
 import HoverMembersCard from "./bentoshowcase-elements/HoverMembersCard";
@@ -13,6 +14,45 @@ import InfiniteMarqueeCard from "./bentoshowcase-elements/InfiniteMarqueeCard";
 import AudioEqualizerCard from "./bentoshowcase-elements/AudioEqualizerCard";
 import MorphingBlobCard from "./bentoshowcase-elements/MorphingBlobCard";
 import HolographicTerminalCard from "./bentoshowcase-elements/HolographicTerminalCard";
+
+function BentoCell({ 
+  id, 
+  className, 
+  children 
+}: { 
+  id: string; 
+  className?: string; 
+  children: React.ReactNode;
+}) {
+  const navigate = useNavigate();
+  const [pointerCoords, setPointerCoords] = useState({ x: 0, y: 0 });
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setPointerCoords({ x: e.clientX, y: e.clientY });
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    const diffX = Math.abs(e.clientX - pointerCoords.x);
+    const diffY = Math.abs(e.clientY - pointerCoords.y);
+    if (diffX < 6 && diffY < 6) {
+      const target = e.target as HTMLElement;
+      if (target.closest("button") || target.closest("input") || target.closest("a")) {
+        return;
+      }
+      navigate({ to: "/components/$id", params: { id } });
+    }
+  };
+
+  return (
+    <div
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      className={`block hover:opacity-95 transition-opacity cursor-pointer select-none ${className || ""}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function BentoShowcase() {
   return (
@@ -42,45 +82,45 @@ export default function BentoShowcase() {
 
       {/* ── BENTO GRID ── */}
       <div className="w-full max-w-[1200px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <Link to="/components/$id" params={{ id: "image-reveal" }} className="block hover:opacity-95 transition-opacity">
+        <BentoCell id="image-reveal">
           <ImageRevealCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "hover-members" }} className="block hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="hover-members">
           <HoverMembersCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "things-drag-and-scroll" }} className="block lg:row-span-2 hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="things-drag-and-scroll" className="lg:row-span-2">
           <ThingsDragAndScrollCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "devouring-details" }} className="block hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="devouring-details">
           <DevouringDetailsCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "dynamic-island" }} className="block hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="dynamic-island">
           <DynamicIslandCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "dither-canvas" }} className="block hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="dither-canvas">
           <DitherCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "text-roll" }} className="block hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="text-roll">
           <TextRollCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "border-beam" }} className="block hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="border-beam">
           <BorderBeamCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "interactive-navbar" }} className="block lg:col-span-2 hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="interactive-navbar" className="lg:col-span-2">
           <InteractiveNavbarCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "infinite-marquee" }} className="block hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="infinite-marquee">
           <InfiniteMarqueeCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "audio-equalizer" }} className="block hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="audio-equalizer">
           <AudioEqualizerCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "morphing-blob" }} className="block lg:row-span-2 hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="morphing-blob" className="lg:row-span-2">
           <MorphingBlobCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "holographic-terminal" }} className="block hover:opacity-95 transition-opacity">
+        </BentoCell>
+        <BentoCell id="holographic-terminal">
           <HolographicTerminalCard />
-        </Link>
+        </BentoCell>
       </div>
     </section>
   );

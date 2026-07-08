@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { 
@@ -71,6 +71,24 @@ const itemVariants = {
 function ComponentCard({ item }: { item: ComponentItem }) {
   const [copiedCli, setCopiedCli] = useState(false);
   const PreviewComp = item.component;
+  const navigate = useNavigate();
+  const [pointerCoords, setPointerCoords] = useState({ x: 0, y: 0 });
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setPointerCoords({ x: e.clientX, y: e.clientY });
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    const diffX = Math.abs(e.clientX - pointerCoords.x);
+    const diffY = Math.abs(e.clientY - pointerCoords.y);
+    if (diffX < 6 && diffY < 6) {
+      const target = e.target as HTMLElement;
+      if (target.closest("button") || target.closest("input") || target.closest("a")) {
+        return;
+      }
+      navigate({ to: "/components/$id", params: { id: item.id } });
+    }
+  };
 
   const handleCopyCli = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -93,9 +111,9 @@ function ComponentCard({ item }: { item: ComponentItem }) {
 
   return (
     <motion.div variants={itemVariants} className={item.gridClass || ""}>
-      <Link
-        to="/components/$id"
-        params={{ id: item.id }}
+      <div
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
         className="group flex flex-col bg-[#0c0c0e] border border-white/[0.04] hover:border-white/10 rounded-2xl overflow-hidden p-4 select-none cursor-pointer relative transition-all duration-300 h-full"
       >
         {/* Main Viewport Area */}
@@ -135,7 +153,7 @@ function ComponentCard({ item }: { item: ComponentItem }) {
             <span className="text-white/40 group-hover:translate-x-0.5 transition-transform ml-1">↗</span>
           </div>
         </div>
-      </Link>
+      </div>
     </motion.div>
   );
 }
