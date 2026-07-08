@@ -1,0 +1,332 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { SunlightLeafLogo } from "../DynamicIsland";
+
+// ── Types ──────────────────────────────────────────────────────────────────────
+
+interface FeatureItem {
+  title: string;
+  description: string;
+  color: string;
+}
+
+interface ResourceItem {
+  title: string;
+  description: string;
+}
+
+// ── Static data ────────────────────────────────────────────────────────────────
+
+const FEATURES: FeatureItem[] = [
+  {
+    title: "Global CDN",
+    description: "Deploy to 200+ edge locations worldwide.",
+    color: "#E8A969",
+  },
+  {
+    title: "Zero-Trust Security",
+    description: "End-to-end encryption by default.",
+    color: "#BECB6D",
+  },
+  { title: "Instant Deploys", description: "Push to live in under 30 seconds.", color: "#E8A969" },
+  {
+    title: "Live Analytics",
+    description: "Real-time performance metrics dashboard.",
+    color: "#BECB6D",
+  },
+];
+
+const RESOURCES: ResourceItem[] = [
+  { title: "Documentation", description: "Guides, API references, and examples." },
+  { title: "Changelog", description: "What's new in each release." },
+  { title: "Status Page", description: "Live uptime and incident reports." },
+];
+
+// ── Subcomponents ──────────────────────────────────────────────────────────────
+
+function FeatureCard({ item }: { item: FeatureItem }) {
+  return (
+    <div className="p-2.5 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
+      <p className="text-xs font-medium text-white/90 group-hover:text-white transition-colors">
+        {item.title}
+      </p>
+      <p className="text-[11px] text-white/45 leading-relaxed mt-0.5">{item.description}</p>
+    </div>
+  );
+}
+
+function ResourceRow({ item }: { item: ResourceItem }) {
+  return (
+    <div className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
+      <div>
+        <p className="text-xs font-medium text-white/80 group-hover:text-white transition-colors">
+          {item.title}
+        </p>
+        <p className="text-[10px] text-white/35 mt-0.5">{item.description}</p>
+      </div>
+    </div>
+  );
+}
+
+// ── Navbar Content ─────────────────────────────────────────────────────────────
+
+function NavbarContent({
+  activeTab,
+  onTabChange,
+  isMorphed,
+}: {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+  isMorphed: boolean;
+}) {
+  return (
+    <motion.div
+      layout
+      transition={{ type: "spring", stiffness: 300, damping: 28 }}
+      className={`flex items-center rounded-2xl bg-black/60 text-white shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/[0.08] backdrop-blur-xl transition-all duration-300 mt-3 ${
+        isMorphed
+          ? "px-3 py-2 gap-1 justify-center"
+          : "px-5 py-2.5 gap-4 w-full max-w-[92%] justify-between"
+      }`}
+    >
+      {/* Brand - morphs out when scrolled */}
+      <AnimatePresence mode="popLayout">
+        {!isMorphed && (
+          <motion.div
+            key="brand"
+            layout
+            initial={{ opacity: 0, width: 0, scale: 0.8 }}
+            animate={{ opacity: 1, width: "auto", scale: 1 }}
+            exit={{ opacity: 0, width: 0, scale: 0.8 }}
+            transition={{ duration: 0.22, ease: "easeInOut" }}
+            className="flex items-center gap-2 shrink-0 overflow-hidden pr-2"
+          >
+            <SunlightLeafLogo className="w-5 h-5 shrink-0" />
+            <span className="text-xs font-semibold tracking-tight font-heading text-white whitespace-nowrap">
+              Komorebi
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Nav - always visible in center */}
+      <motion.div layout className="flex items-center justify-center">
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+          .mega-menu-nav-3 [data-state="closed"] {
+            animation-duration: 200ms !important;
+            --tw-exit-scale: 0.9 !important;
+            --tw-exit-opacity: 0 !important;
+          }
+          .mega-menu-nav-3 [data-state="open"] {
+            animation-duration: 200ms !important;
+            --tw-enter-scale: 0.9 !important;
+          }
+        `,
+          }}
+        />
+        <NavigationMenu className="mega-menu-nav-3">
+          <NavigationMenuList className="gap-0">
+            {/* Home */}
+            <NavigationMenuItem>
+              <button
+                onClick={() => onTabChange("Home")}
+                className={[
+                  navigationMenuTriggerStyle(),
+                  "!bg-transparent !text-white/60 hover:!text-white hover:!bg-white/5",
+                  "!px-3 !py-1.5 !text-xs font-heading font-medium !h-auto transition-colors cursor-pointer",
+                  activeTab === "Home" ? "!text-white" : "",
+                ].join(" ")}
+              >
+                Home
+              </button>
+            </NavigationMenuItem>
+
+            {/* Features dropdown */}
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="!bg-transparent !text-white/60 hover:!text-white hover:!bg-white/5 !px-3 !py-1.5 !text-xs font-heading font-medium !h-auto transition-colors cursor-pointer">
+                Features
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="p-2 w-[360px] bg-[#0c0c0e] border border-white/10 rounded-xl shadow-2xl">
+                  <div className="grid grid-cols-2 gap-1">
+                    {FEATURES.map((f) => (
+                      <FeatureCard key={f.title} item={f} />
+                    ))}
+                  </div>
+                </div>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            {/* Resources dropdown */}
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="!bg-transparent !text-white/60 hover:!text-white hover:!bg-white/5 !px-3 !py-1.5 !text-xs font-heading font-medium !h-auto transition-colors cursor-pointer">
+                Resources
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="p-3 w-[260px] bg-[#0c0c0e] border border-white/10 rounded-xl shadow-2xl">
+                  <div className="flex flex-col gap-0.5">
+                    {RESOURCES.map((r) => (
+                      <ResourceRow key={r.title} item={r} />
+                    ))}
+                  </div>
+                </div>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            {/* Pricing */}
+            <NavigationMenuItem>
+              <button
+                onClick={() => onTabChange("Pricing")}
+                className={[
+                  navigationMenuTriggerStyle(),
+                  "!bg-transparent !text-white/60 hover:!text-white hover:!bg-white/5",
+                  "!px-3 !py-1.5 !text-xs font-heading font-medium !h-auto transition-colors cursor-pointer",
+                  activeTab === "Pricing" ? "!text-white" : "",
+                ].join(" ")}
+              >
+                Pricing
+              </button>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </motion.div>
+
+      {/* CTA - morphs out when scrolled */}
+      <AnimatePresence mode="popLayout">
+        {!isMorphed && (
+          <motion.div
+            key="cta"
+            layout
+            initial={{ opacity: 0, width: 0, scale: 0.8 }}
+            animate={{ opacity: 1, width: "auto", scale: 1 }}
+            exit={{ opacity: 0, width: 0, scale: 0.8 }}
+            transition={{ duration: 0.22, ease: "easeInOut" }}
+            className="hidden md:flex items-center overflow-hidden shrink-0 pl-2"
+          >
+            <motion.button
+              whileTap={{ scale: 0.97 }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-white text-xs font-heading font-medium hover:bg-white/20 transition-colors cursor-pointer whitespace-nowrap shrink-0"
+            >
+              Get Started
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+// ── Mock Website Body Content (Same as Navbar 2) ───────────────────────────────
+
+function MockContent() {
+  return (
+    <div className="px-6 py-8 space-y-8 select-none pointer-events-none">
+      {/* Hero */}
+      <div className="text-center py-6">
+        <h4 className="text-white text-lg font-semibold tracking-tight">Design the Future</h4>
+        <p className="text-[11px] text-white/40 mt-1 max-w-xs mx-auto">
+          High-performance primitives designed for the modern web applications.
+        </p>
+      </div>
+
+      {/* Section features */}
+      <div className="grid grid-cols-2 gap-3">
+        <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#E8A969] mb-1.5" />
+          <h5 className="text-[11px] text-white/80 font-medium">Ultra Fast</h5>
+          <p className="text-[9px] text-white/30 mt-0.5">
+            Sub-millisecond interactive response times.
+          </p>
+        </div>
+        <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#BECB6D] mb-1.5" />
+          <h5 className="text-[11px] text-white/80 font-medium">Safe By Default</h5>
+          <p className="text-[9px] text-white/30 mt-0.5">Zero-trust architecture configurations.</p>
+        </div>
+      </div>
+
+      {/* Dummy text lines to allow scrolling */}
+      <div className="space-y-2 pt-2">
+        <div className="h-1.5 w-1/3 bg-white/5 rounded" />
+        <div className="h-1.5 w-full bg-white/5 rounded" />
+        <div className="h-1.5 w-5/6 bg-white/5 rounded" />
+        <div className="h-1.5 w-2/3 bg-white/5 rounded" />
+      </div>
+
+      <div className="space-y-2 pt-2">
+        <div className="h-1.5 w-1/4 bg-white/5 rounded" />
+        <div className="h-1.5 w-11/12 bg-white/5 rounded" />
+        <div className="h-1.5 w-3/4 bg-white/5 rounded" />
+      </div>
+    </div>
+  );
+}
+
+// ── Card Wrapper ───────────────────────────────────────────────────────────────
+
+export default function MegaMenuNavbar3Card({ minimal = false }: { minimal?: boolean }) {
+  const [activeTab, setActiveTab] = useState("Home");
+  const [isMorphed, setIsMorphed] = useState(false);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const scrollTop = e.currentTarget.scrollTop;
+    setIsMorphed(scrollTop > 24);
+  };
+
+  const cssVariables = {
+    "--popover": "#0c0c0e",
+    "--popover-foreground": "#ffffff",
+    "--border": "rgba(255, 255, 255, 0.1)",
+  } as React.CSSProperties;
+
+  if (minimal) {
+    return (
+      <div
+        onScroll={handleScroll}
+        className="w-full h-[400px] bg-[#050506] border border-white/10 rounded-xl overflow-y-auto scrollbar-none select-none relative"
+        style={cssVariables}
+      >
+        <div className="sticky top-0 z-20 w-full flex justify-center">
+          <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} isMorphed={isMorphed} />
+        </div>
+        <MockContent />
+        <div className="py-20 text-center text-[10px] text-white/20">End of Page Preview</div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      onScroll={handleScroll}
+      className="relative w-full h-[440px] rounded-2xl bg-[#050506] border border-white/10 overflow-y-auto scrollbar-none flex flex-col select-none group"
+      style={cssVariables}
+    >
+      {/* Sticky morphing header */}
+      <div className="sticky top-0 z-20 w-full flex justify-center">
+        <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} isMorphed={isMorphed} />
+      </div>
+
+      {/* Main scrolling dummy area */}
+      <div className="flex-1">
+        <MockContent />
+
+        {/* Footer indicator inside bento to remind scroll action */}
+        <div className="px-6 pb-6 pt-16 flex items-center justify-between text-[10px] text-white/30 border-t border-white/[0.02] mt-8 bg-black/10">
+          <span>Scroll down inside this card to morph navbar</span>
+          <span>Interactive</span>
+        </div>
+      </div>
+    </div>
+  );
+}

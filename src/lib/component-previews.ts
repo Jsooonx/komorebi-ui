@@ -15,6 +15,7 @@ import PipelineStepperCard from "../components/bentoshowcase-elements/PipelineSt
 import HolographicTerminalCard from "../components/bentoshowcase-elements/HolographicTerminalCard";
 import MegaMenuNavbarCard from "../components/bentoshowcase-elements/MegaMenuNavbarCard";
 import MegaMenuNavbar2Card from "../components/bentoshowcase-elements/MegaMenuNavbar2Card";
+import MegaMenuNavbar3Card from "../components/bentoshowcase-elements/MegaMenuNavbar3Card";
 import type { ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>> = {
@@ -34,6 +35,7 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewPr
   "holographic-terminal": HolographicTerminalCard,
   "mega-menu-navbar": MegaMenuNavbarCard,
   "mega-menu-navbar-2": MegaMenuNavbar2Card,
+  "mega-menu-navbar-3": MegaMenuNavbar3Card,
 };
 
 export function getComponentPreview(id: string) {

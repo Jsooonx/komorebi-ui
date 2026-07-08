@@ -165,6 +165,18 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "mega-menu-navbar-3",
+    name: "Mega Menu Navbar 3",
+    category: "Navigation",
+    description:
+      "Floating mega menu navbar where logo and CTA dynamically morph inside on scroll, leaving only clean core navigation.",
+    dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
+    cliCommand: "npx komorebi-ui add mega-menu-navbar-3",
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getComponentManifestItem(id: string) {
