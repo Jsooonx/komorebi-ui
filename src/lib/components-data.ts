@@ -11,7 +11,6 @@ import InfiniteMarqueeCard from "../components/bentoshowcase-elements/InfiniteMa
 import AudioEqualizerCard from "../components/bentoshowcase-elements/AudioEqualizerCard";
 import PipelineStepperCard from "../components/bentoshowcase-elements/PipelineStepperCard";
 import HolographicTerminalCard from "../components/bentoshowcase-elements/HolographicTerminalCard";
-import MegaMenuNavbarCard from "../components/bentoshowcase-elements/MegaMenuNavbarCard";
 
 // Raw code text imports using Vite ?raw dynamic loader
 import ImageRevealCode from "../components/bentoshowcase-elements/ImageRevealCard.tsx?raw";
@@ -27,7 +26,6 @@ import InfiniteMarqueeCode from "../components/bentoshowcase-elements/InfiniteMa
 import AudioEqualizerCode from "../components/bentoshowcase-elements/AudioEqualizerCard.tsx?raw";
 import PipelineStepperCode from "../components/bentoshowcase-elements/PipelineStepperCard.tsx?raw";
 import HolographicTerminalCode from "../components/bentoshowcase-elements/HolographicTerminalCard.tsx?raw";
-import MegaMenuNavbarCode from "../components/bentoshowcase-elements/MegaMenuNavbarCard.tsx?raw";
 
 export interface ComponentItem {
   id: string;
@@ -183,18 +181,11 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: HolographicTerminalCard,
     code: HolographicTerminalCode,
     cliCommand: "npx komorebi-ui add holographic-terminal"
-  },
-  {
-    id: "mega-menu-navbar",
-    name: "Mega Menu Navbar",
-    category: "Navigation",
-    description: "Shadcn-based floating navbar with premium animated mega menu dropdown panels.",
-    component: MegaMenuNavbarCard,
-    code: MegaMenuNavbarCode,
-    dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
-    cliCommand: "npx komorebi-ui add mega-menu-navbar",
-    isNew: true,
-    gridClass: "md:col-span-2 md:row-span-2",
-    viewportHeightClass: "h-[380px]"
   }
 ];
+
+export const COMPONENTS_DB = COMPONENTS_DATA;
+
+export function getComponentInfo(id: string) {
+  return COMPONENTS_DB.find((c) => c.id === id);
+}

@@ -1,11 +1,12 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useState, lazy, Suspense } from "react";
+import { useState } from "react";
 import SplitText from "./ui/SplitText";
 import ImageRevealCard from "./bentoshowcase-elements/ImageRevealCard";
 import HoverMembersCard from "./bentoshowcase-elements/HoverMembersCard";
 import ToolkitStackSwiper from "./bentoshowcase-elements/ToolkitStackSwiper";
 import DevouringDetailsCard from "./bentoshowcase-elements/DevouringDetailsCard";
 import DynamicIslandCard from "./bentoshowcase-elements/DynamicIslandCard";
+import DitherCard from "./bentoshowcase-elements/DitherCard";
 import TextRollCard from "./bentoshowcase-elements/TextRollCard";
 import BorderBeamCard from "./bentoshowcase-elements/BorderBeamCard";
 import InteractiveNavbarCard from "./bentoshowcase-elements/InteractiveNavbarCard";
@@ -13,10 +14,6 @@ import InfiniteMarqueeCard from "./bentoshowcase-elements/InfiniteMarqueeCard";
 import AudioEqualizerCard from "./bentoshowcase-elements/AudioEqualizerCard";
 import PipelineStepperCard from "./bentoshowcase-elements/PipelineStepperCard";
 import HolographicTerminalCard from "./bentoshowcase-elements/HolographicTerminalCard";
-import MegaMenuNavbarCard from "./bentoshowcase-elements/MegaMenuNavbarCard";
-
-// Lazy-load the heavy WebGL/Three.js DitherCard to keep initial bundle lean
-const DitherCard = lazy(() => import("./bentoshowcase-elements/DitherCard"));
 
 function BentoCell({ 
   id, 
@@ -101,9 +98,7 @@ export default function BentoShowcase() {
           <DynamicIslandCard />
         </BentoCell>
         <BentoCell id="dither-canvas">
-          <Suspense fallback={<div className="w-full h-full bg-[#0a0a0a] rounded-2xl animate-pulse" />}>
-            <DitherCard />
-          </Suspense>
+          <DitherCard />
         </BentoCell>
         <BentoCell id="text-roll">
           <TextRollCard />
@@ -125,9 +120,6 @@ export default function BentoShowcase() {
         </BentoCell>
         <BentoCell id="holographic-terminal">
           <HolographicTerminalCard />
-        </BentoCell>
-        <BentoCell id="mega-menu-navbar" className="lg:col-span-2 lg:row-span-2">
-          <MegaMenuNavbarCard />
         </BentoCell>
       </div>
     </section>
