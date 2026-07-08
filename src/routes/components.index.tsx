@@ -45,6 +45,29 @@ const getCategoryIcon = (category: string) => {
   }
 };
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 18, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
+
 function ComponentsIndex() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -235,21 +258,24 @@ function ComponentsIndex() {
             <AnimatePresence mode="wait">
               {filteredComponents.length > 0 ? (
                 <motion.div 
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
                   className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
                 >
                   {filteredComponents.map((item) => {
                     const PreviewComp = item.component;
                     return (
-                      <Link
+                      <motion.div
                         key={item.id}
-                        to="/components/$id"
-                        params={{ id: item.id }}
-                        className="group flex flex-col bg-[#0f0f12] border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 transition-all select-none p-5 text-left h-[340px] justify-between cursor-pointer"
+                        variants={itemVariants}
                       >
+                        <Link
+                          to="/components/$id"
+                          params={{ id: item.id }}
+                          className="group flex flex-col bg-[#0f0f12] border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 transition-all select-none p-5 text-left h-[340px] justify-between cursor-pointer"
+                        >
                         {/* Card Hover Preview Viewport */}
                         <div className="relative w-full h-[180px] rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center pointer-events-none group-hover:border-white/10 transition-colors">
                           <div className="absolute top-2.5 left-3 flex gap-1 z-15">
@@ -297,7 +323,8 @@ function ComponentsIndex() {
                           </button>
                         </div>
                       </Link>
-                    );
+                    </motion.div>
+                  );
                   })}
                 </motion.div>
               ) : (
