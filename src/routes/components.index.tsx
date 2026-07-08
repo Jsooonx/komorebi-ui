@@ -239,7 +239,7 @@ function ComponentsIndex() {
       </header>
 
       <div className="flex-1 flex pt-16 relative w-full gap-0">
-        <aside className="hidden lg:flex w-64 shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex-col justify-between border-r border-white/5 overflow-hidden pl-6 md:pl-12 pr-6">
+        <aside className="hidden lg:flex w-72 shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex-col justify-between border-r border-white/5 overflow-hidden px-8">
           <div className="space-y-8 min-w-[200px]">
             <div className="flex items-center gap-2 px-1">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-white/80">
@@ -307,7 +307,7 @@ function ComponentsIndex() {
           </div>
         </aside>
 
-        <main className="flex-1 pt-10 pb-24 overflow-hidden flex flex-col px-6 md:px-12 lg:pl-8 lg:pr-12">
+        <main className="flex-1 pt-10 pb-24 overflow-hidden flex flex-col px-6 md:px-12 lg:pl-12 lg:pr-12">
           <div className="mb-10 text-left">
             <h1 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white mb-4">
               Explore Components
