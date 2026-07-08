@@ -371,7 +371,7 @@ function ComponentDetail() {
               key={reloadKey}
               className="flex-1 rounded-2xl border border-white/5 bg-[#0c0c0e] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace animate-fade-in"
             >
-              <div className="absolute top-6 right-6 md:right-12 lg:right-20 z-30 flex items-center gap-1.5 p-1 bg-[#222225]/80 border border-white/10 backdrop-blur-md rounded-xl shadow-lg opacity-80 hover:opacity-100 transition-opacity">
+              <div className="absolute top-4 right-4 z-30 flex items-center gap-1.5 p-1 bg-[#222225]/80 border border-white/10 backdrop-blur-md rounded-xl shadow-lg opacity-80 hover:opacity-100 transition-opacity">
                 <button
                   onClick={() => setSidebarOpen(!sidebarOpen)}
                   className={`p-2 rounded-lg transition-all cursor-pointer ${
@@ -434,7 +434,7 @@ function ComponentDetail() {
               </div>
 
               {comp.id === "dynamic-island" && (
-                <div className="absolute top-20 right-6 md:right-12 lg:right-20 xl:right-28 z-30 w-72 bg-[#0c0c0e]/95 border border-white/10 rounded-2xl p-4 shadow-2xl flex flex-col gap-3.5 animate-fade-in select-none">
+                <div className="absolute top-16 right-4 z-30 w-72 bg-[#0c0c0e]/95 border border-white/10 rounded-2xl p-4 shadow-2xl flex flex-col gap-3.5 animate-fade-in select-none">
                   <div className="flex items-center justify-between text-white/40">
                     <div className="flex items-center gap-1.5">
                       <div className="grid grid-cols-3 gap-0.5 w-3 h-3 opacity-60">
@@ -521,7 +521,7 @@ function ComponentDetail() {
 
               <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
                 <PreviewComponent
-                  minimal={comp.id === "dynamic-island" || comp.id === "pixel-shimmer" ? false : true}
+                  minimal={comp.id === "pixel-shimmer" ? false : true}
                   activeState={comp.id === "dynamic-island" ? dynamicIslandState : undefined}
                 />
               </div>
