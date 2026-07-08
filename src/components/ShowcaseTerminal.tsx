@@ -1,19 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FolderOpen, Play, RotateCcw } from "lucide-react";
+import { FolderOpen, RotateCcw } from "lucide-react";
 import StoryCard from "./StoryCard";
 import Analytics from "./Analytics";
-import RotatingText from "./ui/RotatingText";
 import AuraHeroPreview from "./terminal-elements/AuraHeroPreview";
 
 const TABS = [
   { id: "hero", label: "Hero Sections" },
-  { id: "features", label: "Features", disabled: true },
   { id: "bento", label: "Bento Grids" },
-  { id: "parallax", label: "Parallax Blocks", disabled: true },
-  { id: "keyboard", label: "Keyboard", disabled: true },
   { id: "canvas", label: "Canvas Card" },
-  { id: "text-reveal", label: "Text Reveal", disabled: true },
 ];
 
 export default function ShowcaseTerminal() {
@@ -40,13 +35,10 @@ export default function ShowcaseTerminal() {
             return (
               <button
                 key={tab.id}
-                onClick={() => !tab.disabled && setActiveTab(tab.id)}
-                disabled={tab.disabled}
+                onClick={() => setActiveTab(tab.id)}
                 className={`relative flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-mono tracking-wide transition-colors shrink-0 select-none ${
                   isActive
                     ? "text-white cursor-pointer"
-                    : tab.disabled
-                    ? "text-white/20 cursor-not-allowed"
                     : "text-white/45 hover:text-white/70 cursor-pointer"
                 }`}
               >
@@ -61,7 +53,7 @@ export default function ShowcaseTerminal() {
                 
                 {/* Content Layer (elevated above sliding capsule) */}
                 <span className="relative z-10 flex items-center gap-1.5">
-                  <FolderOpen className={`w-3.5 h-3.5 transition-colors ${isActive ? "text-sun-gold" : tab.disabled ? "text-white/10" : "text-white/25"}`} />
+                  <FolderOpen className={`w-3.5 h-3.5 transition-colors ${isActive ? "text-sun-gold" : "text-white/25"}`} />
                   <span>{tab.label}</span>
                 </span>
               </button>

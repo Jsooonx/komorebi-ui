@@ -5,7 +5,7 @@ import DynamicIsland from "@/components/DynamicIsland";
 import Hero from "@/components/Hero";
 import ShowcaseTerminal from "@/components/ShowcaseTerminal";
 import SplitText from "@/components/ui/SplitText";
-import BentoShowcase from "@/components/BentoShowcase";
+import Highlights from "@/components/Highlights";
 import TemplateShowcase from "@/components/TemplateShowcase";
 import Footer from "@/components/Footer";
 
@@ -89,7 +89,7 @@ function Index() {
       </motion.section>
 
       {/* ── SECTION 3: BENTO COMPONENTS GRID SHOWCASE ── */}
-      <BentoShowcase />
+      <Highlights />
 
       {/* ── SECTION 4: WEBSITE TEMPLATE SHOWCASE (PROMPT LIBRARY) ── */}
       <TemplateShowcase />

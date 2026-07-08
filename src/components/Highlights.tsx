@@ -13,7 +13,6 @@ import InfiniteMarqueeCard from "./bentoshowcase-elements/InfiniteMarqueeCard";
 import AudioEqualizerCard from "./bentoshowcase-elements/AudioEqualizerCard";
 import PipelineStepperCard from "./bentoshowcase-elements/PipelineStepperCard";
 import HolographicTerminalCard from "./bentoshowcase-elements/HolographicTerminalCard";
-import MegaMenuNavbarCard from "./bentoshowcase-elements/MegaMenuNavbarCard";
 
 // Lazy-load the heavy WebGL/Three.js DitherCard to keep initial bundle lean
 const DitherCard = lazy(() => import("./bentoshowcase-elements/DitherCard"));
@@ -57,16 +56,16 @@ function BentoCell({
   );
 }
 
-export default function BentoShowcase() {
+export default function Highlights() {
   return (
     <section 
-      id="bento-showcase" 
+      id="highlights" 
       className="relative z-10 bg-[#090909] py-24 sm:py-32 px-6 md:px-12 flex flex-col items-center select-none"
     >
       {/* ── HEADER ── */}
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center mb-20 w-full">
         <SplitText
-          text="17+ Creative components"
+          text="Component highlights"
           className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white mb-6 leading-tight inline-block"
           tag="h2"
           splitType="words"
@@ -125,9 +124,6 @@ export default function BentoShowcase() {
         </BentoCell>
         <BentoCell id="holographic-terminal">
           <HolographicTerminalCard />
-        </BentoCell>
-        <BentoCell id="mega-menu-navbar" className="lg:col-span-2 lg:row-span-2">
-          <MegaMenuNavbarCard />
         </BentoCell>
       </div>
     </section>

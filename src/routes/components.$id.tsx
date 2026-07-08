@@ -16,7 +16,7 @@ import {
   ChevronRight,
   Sparkles
 } from "lucide-react";
-import { COMPONENTS_DATA, getComponentInfo } from "../lib/components-data";
+import { COMPONENTS_DATA } from "../lib/components-data";
 
 // Helper function to resolve component by ID
 const getComponent = (id: string) => {

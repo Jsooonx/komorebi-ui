@@ -12,6 +12,7 @@ import AudioEqualizerCard from "../components/bentoshowcase-elements/AudioEquali
 import PipelineStepperCard from "../components/bentoshowcase-elements/PipelineStepperCard";
 import HolographicTerminalCard from "../components/bentoshowcase-elements/HolographicTerminalCard";
 import MegaMenuNavbarCard from "../components/bentoshowcase-elements/MegaMenuNavbarCard";
+import MegaMenuNavbar2Card from "../components/bentoshowcase-elements/MegaMenuNavbar2Card";
 
 // Raw code text imports using Vite ?raw dynamic loader
 import ImageRevealCode from "../components/bentoshowcase-elements/ImageRevealCard.tsx?raw";
@@ -28,6 +29,7 @@ import AudioEqualizerCode from "../components/bentoshowcase-elements/AudioEquali
 import PipelineStepperCode from "../components/bentoshowcase-elements/PipelineStepperCard.tsx?raw";
 import HolographicTerminalCode from "../components/bentoshowcase-elements/HolographicTerminalCard.tsx?raw";
 import MegaMenuNavbarCode from "../components/bentoshowcase-elements/MegaMenuNavbarCard.tsx?raw";
+import MegaMenuNavbar2Code from "../components/bentoshowcase-elements/MegaMenuNavbar2Card.tsx?raw";
 
 export interface ComponentItem {
   id: string;
@@ -196,5 +198,18 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[380px]"
+  },
+  {
+    id: "mega-menu-navbar-2",
+    name: "Mega Menu Navbar 2",
+    category: "Navigation",
+    description: "Scroll-responsive morphing navbar that transitions from a flat fixed header to a premium floating pill layout on scroll.",
+    component: MegaMenuNavbar2Card,
+    code: MegaMenuNavbar2Code,
+    dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
+    cliCommand: "npx komorebi-ui add mega-menu-navbar-2",
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[400px]"
   }
 ];

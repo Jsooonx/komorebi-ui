@@ -23,20 +23,19 @@ export default function Footer() {
       { name: "Coming Soon", href: "#templates" }
     ],
     resources: [
-      { name: "Documentation", href: "#" },
-      { name: "Status Page", href: "#" },
       { name: "GitHub Repository", href: "https://github.com/Jsooonx/komorebi-ui" },
-      { name: "Component Code", href: "#" }
+      { name: "Components Catalog", href: "/components" },
+      { name: "Documentation", href: "https://github.com/Jsooonx/komorebi-ui#readme" },
+      { name: "Report an Issue", href: "https://github.com/Jsooonx/komorebi-ui/issues" }
     ],
     company: [
-      { name: "Overview", href: "#" },
-      { name: "Design System", href: "#" },
-      { name: "Brand Identity", href: "#" },
-      { name: "Contact Team", href: "#" }
+      { name: "Overview", href: "#showcase" },
+      { name: "Bento Components", href: "#bento-showcase" },
+      { name: "Template Library", href: "#templates" },
+      { name: "GitHub", href: "https://github.com/Jsooonx/komorebi-ui" }
     ],
     social: [
-      { name: "X (Twitter)", href: "#" },
-      { name: "LinkedIn", href: "#" },
+      { name: "X (Twitter)", href: "https://x.com/Jsooonx" },
       { name: "GitHub", href: "https://github.com/Jsooonx/komorebi-ui" }
     ]
   };

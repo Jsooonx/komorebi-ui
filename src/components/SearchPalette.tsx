@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Sparkles, Terminal, X, CornerDownLeft } from "lucide-react";
-import { COMPONENTS_DB, ComponentItem } from "@/lib/components-data";
+import { COMPONENTS_DATA, ComponentItem } from "@/lib/components-data";
 
 export default function SearchPalette() {
   const navigate = useNavigate();
@@ -11,7 +11,6 @@ export default function SearchPalette() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   
   const inputRef = useRef<HTMLInputElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
 
   // Listen for Cmd+K / Ctrl+K and custom event
   useEffect(() => {
@@ -38,7 +37,7 @@ export default function SearchPalette() {
   }, []);
 
   // Filter components based on search query
-  const filtered = COMPONENTS_DB.filter((item) => {
+  const filtered = COMPONENTS_DATA.filter((item) => {
     const term = query.toLowerCase();
     return (
       item.name.toLowerCase().includes(term) ||
@@ -82,25 +81,6 @@ export default function SearchPalette() {
     setIsOpen(false);
     navigate({ to: `/components/${item.id}` });
   };
-
-  // Scroll active item into view
-  useEffect(() => {
-    if (listRef.current) {
-      const activeEl = listRef.current.children[selectedIndex] as HTMLElement;
-      if (activeEl) {
-        const listHeight = listRef.current.clientHeight;
-        const itemTop = activeEl.offsetTop;
-        const itemHeight = activeEl.clientHeight;
-        const scrollTop = listRef.current.scrollTop;
-
-        if (itemTop + itemHeight > scrollTop + listHeight) {
-          listRef.current.scrollTop = itemTop + itemHeight - listHeight;
-        } else if (itemTop < scrollTop) {
-          listRef.current.scrollTop = itemTop;
-        }
-      }
-    }
-  }, [selectedIndex]);
 
   return (
     <AnimatePresence>
@@ -147,7 +127,6 @@ export default function SearchPalette() {
 
             {/* Results Pane */}
             <div 
-              ref={listRef}
               className="flex-grow overflow-y-auto p-4 flex flex-col gap-1 max-h-[40vh] custom-scrollbar"
             >
               {filtered.length > 0 ? (
@@ -207,7 +186,7 @@ export default function SearchPalette() {
                     No components found matching "{query}"
                   </span>
                   <p className="text-xs text-moss-green/45 mt-1 max-w-xs">
-                    Try searching for terms like "slider", "tree", "layout", or "progress".
+                    Try searching for terms like "marquee", "dither", "border beam", or "equalizer".
                   </p>
                 </div>
               )}
@@ -226,6 +205,7 @@ export default function SearchPalette() {
             </div>
 
           </motion.div>
+          
         </div>
       )}
     </AnimatePresence>
