@@ -120,6 +120,8 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "Interactive pixel-surface shimmer card with hover and focus-aware glow pulses.",
     cliCommand: "npx komorebi-ui add pixel-shimmer",
     dependencies: [],
+    gridClass: "md:row-span-2",
+    viewportHeightClass: "h-[380px]",
   },
   {
     id: "pipeline-stepper",
