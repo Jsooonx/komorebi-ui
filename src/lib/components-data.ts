@@ -8,7 +8,6 @@ import TextRollCard from "../components/bentoshowcase-elements/TextRollCard";
 import BorderBeamCard from "../components/bentoshowcase-elements/BorderBeamCard";
 import InteractiveNavbarCard from "../components/bentoshowcase-elements/InteractiveNavbarCard";
 import InfiniteMarqueeCard from "../components/bentoshowcase-elements/InfiniteMarqueeCard";
-import MagneticCursorFieldCard from "../components/bentoshowcase-elements/MagneticCursorFieldCard";
 import AudioEqualizerCard from "../components/bentoshowcase-elements/AudioEqualizerCard";
 import MorphingBlobCard from "../components/bentoshowcase-elements/MorphingBlobCard";
 import HolographicTerminalCard from "../components/bentoshowcase-elements/HolographicTerminalCard";
@@ -24,7 +23,6 @@ import TextRollCode from "../components/bentoshowcase-elements/TextRollCard.tsx?
 import BorderBeamCode from "../components/bentoshowcase-elements/BorderBeamCard.tsx?raw";
 import InteractiveNavbarCode from "../components/bentoshowcase-elements/InteractiveNavbarCard.tsx?raw";
 import InfiniteMarqueeCode from "../components/bentoshowcase-elements/InfiniteMarqueeCard.tsx?raw";
-import MagneticCursorFieldCode from "../components/bentoshowcase-elements/MagneticCursorFieldCard.tsx?raw";
 import AudioEqualizerCode from "../components/bentoshowcase-elements/AudioEqualizerCard.tsx?raw";
 import MorphingBlobCode from "../components/bentoshowcase-elements/MorphingBlobCard.tsx?raw";
 import HolographicTerminalCode from "../components/bentoshowcase-elements/HolographicTerminalCard.tsx?raw";
@@ -68,15 +66,15 @@ export const COMPONENTS_DATA: ComponentItem[] = [
   },
   {
     id: "things-drag-and-scroll",
-    name: "Things Drag & Scroll",
+    name: "Toolkit Stack Swiper",
     category: "Interactions",
-    description: "A drag and scroll interaction workspace panel with smooth inertia.",
+    description: "A deck-style stack swiper with 3D tilt tracking and spring physics.",
     component: ThingsDragAndScrollCard,
     code: ThingsDragAndScrollCode,
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add things-drag-and-scroll",
-    gridClass: "md:col-span-2",
-    viewportHeightClass: "h-[240px]"
+    gridClass: "md:row-span-2",
+    viewportHeightClass: "h-[380px]"
   },
   {
     id: "devouring-details",
@@ -154,17 +152,6 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     viewportHeightClass: "h-[130px]"
   },
   {
-    id: "magnetic-cursor-field",
-    name: "Magnetic Pixel Grid",
-    category: "Canvas",
-    description: "Hover reactive magnetic grid selector with coordinate tracking.",
-    component: MagneticCursorFieldCard,
-    code: MagneticCursorFieldCode,
-    cliCommand: "npx komorebi-ui add magnetic-cursor-field",
-    gridClass: "md:col-span-2",
-    viewportHeightClass: "h-[280px]"
-  },
-  {
     id: "audio-equalizer",
     name: "Audio Reactive Equalizer",
     category: "Visuals",
@@ -183,8 +170,8 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     code: MorphingBlobCode,
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add morphing-blob",
-    gridClass: "md:col-span-1",
-    viewportHeightClass: "h-[260px]"
+    gridClass: "md:row-span-2",
+    viewportHeightClass: "h-[380px]"
   },
   {
     id: "holographic-terminal",

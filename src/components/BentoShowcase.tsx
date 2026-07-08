@@ -10,7 +10,6 @@ import TextRollCard from "./bentoshowcase-elements/TextRollCard";
 import BorderBeamCard from "./bentoshowcase-elements/BorderBeamCard";
 import InteractiveNavbarCard from "./bentoshowcase-elements/InteractiveNavbarCard";
 import InfiniteMarqueeCard from "./bentoshowcase-elements/InfiniteMarqueeCard";
-import MagneticCursorFieldCard from "./bentoshowcase-elements/MagneticCursorFieldCard";
 import AudioEqualizerCard from "./bentoshowcase-elements/AudioEqualizerCard";
 import MorphingBlobCard from "./bentoshowcase-elements/MorphingBlobCard";
 import HolographicTerminalCard from "./bentoshowcase-elements/HolographicTerminalCard";
@@ -72,9 +71,6 @@ export default function BentoShowcase() {
         </Link>
         <Link to="/components/$id" params={{ id: "infinite-marquee" }} className="block hover:opacity-95 transition-opacity">
           <InfiniteMarqueeCard />
-        </Link>
-        <Link to="/components/$id" params={{ id: "magnetic-cursor-field" }} className="block lg:row-span-2 hover:opacity-95 transition-opacity">
-          <MagneticCursorFieldCard />
         </Link>
         <Link to="/components/$id" params={{ id: "audio-equalizer" }} className="block hover:opacity-95 transition-opacity">
           <AudioEqualizerCard />

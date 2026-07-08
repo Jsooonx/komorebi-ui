@@ -1,9 +1,41 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function TextRollCard() {
+export default function TextRollCard({ minimal = false }: { minimal?: boolean }) {
   const [hovered, setHovered] = useState(false);
   const word = "KOMOREBI";
+
+  if (minimal) {
+    return (
+      <div
+        className="w-full h-full flex items-center justify-center select-none"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <div className="flex overflow-hidden py-1">
+          {word.split("").map((letter, index) => (
+            <div key={index} className="relative h-8 w-5 sm:w-6 overflow-hidden flex justify-center">
+              <motion.span
+                animate={{ y: hovered ? "-100%" : "0%" }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
+                className="absolute text-xl sm:text-2xl font-heading font-bold text-white/60 tracking-wider"
+              >
+                {letter}
+              </motion.span>
+              <motion.span
+                initial={{ y: "100%" }}
+                animate={{ y: hovered ? "0%" : "100%" }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
+                className="absolute text-xl sm:text-2xl font-heading font-bold text-sun-gold tracking-wider"
+              >
+                {letter}
+              </motion.span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
   
   return (
     <div 
