@@ -1,8 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowLeft, Command, Search, CornerDownLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Command, Search, CornerDownLeft, Sparkles, ChevronDown } from "lucide-react";
 import TextRoll from "./ui/TextRoll";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
 // Sunlight Leaf Logo
 export function SunlightLeafLogo({ className = "w-6 h-6" }: { className?: string }) {
@@ -120,8 +129,146 @@ export default function DynamicIsland() {
         {/* MIDDLE/RIGHT SIDE: Navigation & Actions */}
         <div className="flex items-center gap-6">
           
-          {/* Navigation Links (Hidden on small screens) */}
-          <nav className="hidden sm:flex items-center gap-5 text-xs font-heading font-medium text-moss-green/75">
+          {/* Navigation Menu (Hidden on small screens) */}
+          <div className="hidden lg:block text-moss-green">
+            <NavigationMenu>
+              <NavigationMenuList className="gap-0.5">
+                
+                {/* Home (Static Link) */}
+                <NavigationMenuItem>
+                  <Link to="/" className={`${navigationMenuTriggerStyle()} !bg-transparent text-moss-green/75 hover:text-moss-green hover:bg-white/5 !px-3 !py-1.5 text-xs font-heading font-medium transition-colors cursor-pointer`}>
+                    Home
+                  </Link>
+                </NavigationMenuItem>
+
+                {/* Components (Dropdown) */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="!bg-transparent text-moss-green/75 hover:text-moss-green hover:bg-white/5 !px-3 !py-1.5 text-xs font-heading font-medium transition-colors gap-1 cursor-pointer">
+                    Components
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="p-4 w-[420px] bg-[#0c0c0e]/95 border border-white/10 rounded-xl shadow-2xl backdrop-blur-xl">
+                    <div className="grid grid-cols-2 gap-3 select-none">
+                      <div className="col-span-2 pb-1 border-b border-white/5">
+                        <span className="text-[9px] font-mono font-bold text-white/40 tracking-wider uppercase">Featured Library</span>
+                      </div>
+                      
+                      <Link 
+                        to="/components" 
+                        className="group/item flex flex-col gap-1 p-2 rounded-lg hover:bg-white/5 transition-all text-left"
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-semibold text-white group-hover/item:text-[#E8A969] transition-colors">Hover Members</span>
+                          <span className="text-[8px] bg-[#E8A969]/10 text-[#E8A969] px-1.5 py-0.5 rounded-full font-mono uppercase">Pop</span>
+                        </div>
+                        <span className="text-[10px] text-white/50 leading-normal">
+                          Staggered member avatar stack with tooltip titles.
+                        </span>
+                      </Link>
+
+                      <Link 
+                        to="/components" 
+                        className="group/item flex flex-col gap-1 p-2 rounded-lg hover:bg-white/5 transition-all text-left"
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-semibold text-white group-hover/item:text-[#E8A969] transition-colors">Dynamic Island</span>
+                          <span className="text-[8px] bg-blue-500/10 text-blue-400 px-1.5 py-0.5 rounded-full font-mono uppercase">Morph</span>
+                        </div>
+                        <span className="text-[10px] text-white/50 leading-normal">
+                          Interactive Apple-style notification pill with 11 states.
+                        </span>
+                      </Link>
+
+                      <Link 
+                        to="/components" 
+                        className="group/item flex flex-col gap-1 p-2 rounded-lg hover:bg-white/5 transition-all text-left"
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-semibold text-white group-hover/item:text-[#E8A969] transition-colors">WebGL Dither</span>
+                          <span className="text-[8px] bg-purple-500/10 text-purple-400 px-1.5 py-0.5 rounded-full font-mono uppercase">Shader</span>
+                        </div>
+                        <span className="text-[10px] text-white/50 leading-normal">
+                          Retro-dithered image visualizer running in WebGL.
+                        </span>
+                      </Link>
+
+                      <Link 
+                        to="/components" 
+                        className="group/item flex flex-col gap-1 p-2 rounded-lg hover:bg-white/5 transition-all text-left"
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-semibold text-white group-hover/item:text-[#E8A969] transition-colors">View Gallery</span>
+                          <Sparkles className="w-3 h-3 text-[#BECB6D] animate-pulse" />
+                        </div>
+                        <span className="text-[10px] text-white/50 leading-normal">
+                          Explore our full library of interactive workspace widgets.
+                        </span>
+                      </Link>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Templates (Dropdown) */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="!bg-transparent text-moss-green/75 hover:text-moss-green hover:bg-white/5 !px-3 !py-1.5 text-xs font-heading font-medium transition-colors gap-1 cursor-pointer">
+                    Templates
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="p-4 w-[320px] bg-[#0c0c0e]/95 border border-white/10 rounded-xl shadow-2xl backdrop-blur-xl">
+                    <div className="flex flex-col gap-3 select-none">
+                      <div className="pb-1 border-b border-white/5">
+                        <span className="text-[9px] font-mono font-bold text-white/40 tracking-wider uppercase">Pre-Built Layouts</span>
+                      </div>
+
+                      <a 
+                        href="#templates" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          document.getElementById("templates")?.scrollIntoView({ behavior: "smooth" });
+                        }}
+                        className="group/item flex flex-col gap-1 p-2 rounded-lg hover:bg-white/5 transition-all text-left"
+                      >
+                        <span className="text-xs font-semibold text-white group-hover/item:text-[#BECB6D] transition-colors">JPlus e-Commerce</span>
+                        <span className="text-[10px] text-white/50 leading-normal">
+                          Dark luxury dashboard layout and categories sidebar.
+                        </span>
+                      </a>
+
+                      <a 
+                        href="#templates" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          document.getElementById("templates")?.scrollIntoView({ behavior: "smooth" });
+                        }}
+                        className="group/item flex flex-col gap-1 p-2 rounded-lg hover:bg-white/5 transition-all text-left"
+                      >
+                        <span className="text-xs font-semibold text-white group-hover/item:text-[#BECB6D] transition-colors">Aura AI Obsidian</span>
+                        <span className="text-[10px] text-white/50 leading-normal">
+                          High-end B2B AI chat interface with organic glossy sphere.
+                        </span>
+                      </a>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Playground (Scroll Link) */}
+                <NavigationMenuItem>
+                  <a 
+                    href="#showcase" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById("showcase")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className={`${navigationMenuTriggerStyle()} !bg-transparent text-moss-green/75 hover:text-moss-green hover:bg-white/5 !px-3 !py-1.5 text-xs font-heading font-medium transition-colors cursor-pointer`}
+                  >
+                    Playground
+                  </a>
+                </NavigationMenuItem>
+
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+          
+          {/* Fallback Simple Navigation Links (Shown on medium screens, hidden on large desktop) */}
+          <nav className="hidden sm:flex lg:hidden items-center gap-5 text-xs font-heading font-medium text-moss-green/75">
             <NavLink href="#">Home</NavLink>
             <NavLink href="#showcase">Playground</NavLink>
             <NavLink to="/components">Components</NavLink>
