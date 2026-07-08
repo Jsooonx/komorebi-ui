@@ -295,12 +295,12 @@ function ComponentDetail() {
           )}
 
           {/* INTERACTIVE CANVAS VIEWPORT (RIGHT PANE) */}
-          <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative p-4">
+          <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative p-4 gap-4">
             
             {/* The main workspace container card with thin border */}
             <div 
               key={reloadKey}
-              className="flex-1 rounded-2xl border border-white/5 bg-[#090909] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace"
+              className="flex-1 rounded-2xl border border-white/5 bg-[#090909] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace animate-fade-in"
             >
               {/* Control floating tools pill */}
               <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1 bg-black/60 border border-white/5 backdrop-blur-md rounded-xl shadow-lg opacity-80 hover:opacity-100 transition-opacity">
@@ -345,30 +345,30 @@ function ComponentDetail() {
               <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
                 <PreviewComponent minimal={true} />
               </div>
-
-              {/* Dynamic details description & dependencies tags (Anchored bottom-left) */}
-              {!isFullscreen && (
-                <div className="absolute bottom-6 left-6 max-w-md text-left z-10 space-y-2 pointer-events-none select-none">
-                  <div className="pointer-events-auto select-text">
-                    <h2 className="text-sm font-semibold tracking-tight text-white/90">{comp.name}</h2>
-                    <p className="text-[11px] text-white/45 leading-relaxed max-w-sm mt-1">{comp.description}</p>
-                  </div>
-                  
-                  {comp.dependencies && comp.dependencies.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                      {comp.dependencies.map((dep) => (
-                        <span 
-                          key={dep} 
-                          className="text-[8px] font-mono text-white/30 px-1.5 py-0.5 rounded bg-white/5 border border-white/10"
-                        >
-                          {dep}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
             </div>
+
+            {/* Dynamic details description & dependencies tags (Static, below the bordered workspace) */}
+            {!isFullscreen && (
+              <div className="text-left space-y-2.5 px-2 pb-2 shrink-0 select-text">
+                <div>
+                  <h2 className="text-sm font-semibold tracking-tight text-white/95">{comp.name}</h2>
+                  <p className="text-[11px] text-white/45 leading-relaxed max-w-2xl mt-1">{comp.description}</p>
+                </div>
+                
+                {comp.dependencies && comp.dependencies.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {comp.dependencies.map((dep) => (
+                      <span 
+                        key={dep} 
+                        className="text-[8px] font-mono text-white/30 px-1.5 py-0.5 rounded bg-white/5 border border-white/10"
+                      >
+                        {dep}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Exit fullscreen floating button */}
             {isFullscreen && (
