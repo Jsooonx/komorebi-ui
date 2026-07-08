@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import SplitText from "./ui/SplitText";
 import ImageRevealCard from "./bentoshowcase-elements/ImageRevealCard";
 import HoverMembersCard from "./bentoshowcase-elements/HoverMembersCard";
@@ -42,20 +43,48 @@ export default function BentoShowcase() {
 
       {/* ── BENTO GRID ── */}
       <div className="w-full max-w-[1200px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <ImageRevealCard />
-        <HoverMembersCard />
-        <ThingsDragAndScrollCard />
-        <DevouringDetailsCard />
-        <DynamicIslandCard />
-        <DitherCard />
-        <TextRollCard />
-        <BorderBeamCard />
-        <InteractiveNavbarCard />
-        <InfiniteMarqueeCard />
-        <MagneticCursorFieldCard />
-        <AudioEqualizerCard />
-        <MorphingBlobCard />
-        <HolographicTerminalCard />
+        <Link to="/components/$id" params={{ id: "image-reveal" }} className="block hover:opacity-95 transition-opacity">
+          <ImageRevealCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "hover-members" }} className="block hover:opacity-95 transition-opacity">
+          <HoverMembersCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "things-drag-and-scroll" }} className="block lg:row-span-2 hover:opacity-95 transition-opacity">
+          <ThingsDragAndScrollCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "devouring-details" }} className="block hover:opacity-95 transition-opacity">
+          <DevouringDetailsCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "dynamic-island" }} className="block hover:opacity-95 transition-opacity">
+          <DynamicIslandCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "dither-canvas" }} className="block hover:opacity-95 transition-opacity">
+          <DitherCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "text-roll" }} className="block hover:opacity-95 transition-opacity">
+          <TextRollCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "border-beam" }} className="block hover:opacity-95 transition-opacity">
+          <BorderBeamCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "interactive-navbar" }} className="block lg:col-span-2 hover:opacity-95 transition-opacity">
+          <InteractiveNavbarCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "infinite-marquee" }} className="block hover:opacity-95 transition-opacity">
+          <InfiniteMarqueeCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "magnetic-cursor-field" }} className="block lg:row-span-2 hover:opacity-95 transition-opacity">
+          <MagneticCursorFieldCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "audio-equalizer" }} className="block hover:opacity-95 transition-opacity">
+          <AudioEqualizerCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "morphing-blob" }} className="block lg:row-span-2 hover:opacity-95 transition-opacity">
+          <MorphingBlobCard />
+        </Link>
+        <Link to="/components/$id" params={{ id: "holographic-terminal" }} className="block hover:opacity-95 transition-opacity">
+          <HolographicTerminalCard />
+        </Link>
       </div>
     </section>
   );

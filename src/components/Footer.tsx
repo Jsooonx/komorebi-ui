@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Contrast } from "lucide-react";
 import { toast } from "sonner";
@@ -11,15 +12,15 @@ export default function Footer() {
       { name: "CLI Tooling", href: "#showcase" }
     ],
     components: [
-      { name: "Attractor Field", href: "#bento-showcase" },
-      { name: "Audio Equalizer", href: "#bento-showcase" },
-      { name: "Pipeline Stepper", href: "#bento-showcase" },
-      { name: "Holographic Terminal", href: "#bento-showcase" }
+      { name: "Attractor Field", href: "/components/magnetic-cursor-field" },
+      { name: "Audio Equalizer", href: "/components/audio-equalizer" },
+      { name: "Pipeline Stepper", href: "/components/morphing-blob" },
+      { name: "Holographic Terminal", href: "/components/holographic-terminal" }
     ],
     templates: [
-      { name: "Aura AI Website", href: "#template-showcase" },
-      { name: "Showcase Queue", href: "#template-showcase" },
-      { name: "Coming Soon", href: "#template-showcase" }
+      { name: "Aura AI Website", href: "#templates" },
+      { name: "Showcase Queue", href: "#templates" },
+      { name: "Coming Soon", href: "#templates" }
     ],
     resources: [
       { name: "Documentation", href: "#" },
@@ -61,6 +62,29 @@ export default function Footer() {
     }
   };
 
+  function FooterLink({ item }: { item: { name: string; href: string } }) {
+    const isLocalRoute = item.href.startsWith("/");
+    const baseClass = "text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block";
+
+    if (isLocalRoute) {
+      return (
+        <Link to={item.href} className={baseClass}>
+          {item.name}
+        </Link>
+      );
+    }
+
+    return (
+      <a 
+        href={item.href}
+        onClick={(e) => handleScroll(e, item.href)}
+        className={baseClass}
+      >
+        {item.name}
+      </a>
+    );
+  }
+
   return (
     <footer className="relative z-10 bg-[#000] border-t border-white/5 py-24 px-6 md:px-12 flex flex-col items-center select-none antialiased">
       <div className="w-full max-w-[1200px]">
@@ -74,13 +98,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {footerNavigation.explore.map((item) => (
                 <li key={item.name}>
-                  <a 
-                    href={item.href}
-                    onClick={(e) => handleScroll(e, item.href)}
-                    className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
-                  >
-                    {item.name}
-                  </a>
+                  <FooterLink item={item} />
                 </li>
               ))}
             </ul>
@@ -94,13 +112,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {footerNavigation.components.map((item) => (
                 <li key={item.name}>
-                  <a 
-                    href={item.href}
-                    onClick={(e) => handleScroll(e, item.href)}
-                    className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
-                  >
-                    {item.name}
-                  </a>
+                  <FooterLink item={item} />
                 </li>
               ))}
             </ul>
@@ -114,13 +126,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {footerNavigation.templates.map((item) => (
                 <li key={item.name}>
-                  <a 
-                    href={item.href}
-                    onClick={(e) => handleScroll(e, item.href)}
-                    className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
-                  >
-                    {item.name}
-                  </a>
+                  <FooterLink item={item} />
                 </li>
               ))}
             </ul>
@@ -134,13 +140,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {footerNavigation.resources.map((item) => (
                 <li key={item.name}>
-                  <a 
-                    href={item.href}
-                    onClick={(e) => handleScroll(e, item.href)}
-                    className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
-                  >
-                    {item.name}
-                  </a>
+                  <FooterLink item={item} />
                 </li>
               ))}
             </ul>
@@ -154,13 +154,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {footerNavigation.company.map((item) => (
                 <li key={item.name}>
-                  <a 
-                    href={item.href}
-                    onClick={(e) => handleScroll(e, item.href)}
-                    className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
-                  >
-                    {item.name}
-                  </a>
+                  <FooterLink item={item} />
                 </li>
               ))}
             </ul>
@@ -174,13 +168,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {footerNavigation.social.map((item) => (
                 <li key={item.name}>
-                  <a 
-                    href={item.href}
-                    onClick={(e) => handleScroll(e, item.href)}
-                    className="text-[11px] font-sans text-white/50 hover:text-white transition-colors duration-150 block"
-                  >
-                    {item.name}
-                  </a>
+                  <FooterLink item={item} />
                 </li>
               ))}
             </ul>
