@@ -295,81 +295,71 @@ function ComponentDetail() {
           )}
 
           {/* INTERACTIVE CANVAS VIEWPORT (RIGHT PANE) */}
-          <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative">
+          <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative p-4">
             
-            {/* Control floating tools pill */}
-            <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1 bg-black/60 border border-white/5 backdrop-blur-md rounded-xl shadow-lg">
-              <button
-                onClick={() => setReloadKey(k => k + 1)}
-                className="p-2 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
-                title="Reset Animation"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-              </button>
+            {/* The main workspace container card with thin border */}
+            <div 
+              key={reloadKey}
+              className="flex-1 rounded-2xl border border-white/5 bg-[#090909] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace"
+            >
+              {/* Control floating tools pill */}
+              <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1 bg-black/60 border border-white/5 backdrop-blur-md rounded-xl shadow-lg opacity-80 hover:opacity-100 transition-opacity">
+                <button
+                  onClick={() => setReloadKey(k => k + 1)}
+                  className="p-2 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
+                  title="Reset Animation"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                </button>
 
-              <button
-                onClick={() => setCodeOpen(!codeOpen)}
-                className={`p-2 rounded-lg transition-all cursor-pointer ${
-                  codeOpen && !isFullscreen ? "bg-[#E8A969]/15 text-[#E8A969]" : "text-white/60 hover:text-white hover:bg-white/5"
-                }`}
-                title="Toggle Code Editor Split Pane"
-              >
-                <Code2 className="w-3.5 h-3.5" />
-              </button>
+                <button
+                  onClick={() => setCodeOpen(!codeOpen)}
+                  className={`p-2 rounded-lg transition-all cursor-pointer ${
+                    codeOpen && !isFullscreen ? "bg-[#E8A969]/15 text-[#E8A969]" : "text-white/60 hover:text-white hover:bg-white/5"
+                  }`}
+                  title="Toggle Code Editor Split Pane"
+                >
+                  <Code2 className="w-3.5 h-3.5" />
+                </button>
 
-              <button
-                onClick={handleCopyCli}
-                className="p-2 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors relative cursor-pointer"
-                title="Copy Command CLI Line"
-              >
-                {copiedCli ? <Check className="w-3.5 h-3.5 text-[#00f5a0]" /> : <Terminal className="w-3.5 h-3.5" />}
-              </button>
+                <button
+                  onClick={handleCopyCli}
+                  className="p-2 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors relative cursor-pointer"
+                  title="Copy Command CLI Line"
+                >
+                  {copiedCli ? <Check className="w-3.5 h-3.5 text-[#00f5a0]" /> : <Terminal className="w-3.5 h-3.5" />}
+                </button>
 
-              <div className="w-[1px] h-4 bg-white/10 mx-0.5" />
+                <div className="w-[1px] h-4 bg-white/10 mx-0.5" />
 
-              <button
-                onClick={() => setIsFullscreen(!isFullscreen)}
-                className="p-2 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
-                title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
-              >
-                {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
-              </button>
-            </div>
-
-            {/* Viewport canvas center container */}
-            <div className="flex-1 flex flex-col items-center justify-center p-8 overflow-auto relative">
-              <div 
-                key={reloadKey}
-                className="relative w-full max-w-xl aspect-video rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center shadow-[0_24px_50px_rgba(0,0,0,0.6)]"
-              >
-                {/* Visual browser dot controls */}
-                <div className="absolute top-3 left-4 flex gap-1.5 z-15">
-                  <span className="w-2 h-2 rounded-full bg-white/10" />
-                  <span className="w-2 h-2 rounded-full bg-white/10" />
-                  <span className="w-2 h-2 rounded-full bg-white/10" />
-                </div>
-                
-                {/* Dynamic Component Element Render */}
-                <div className="w-full h-full flex items-center justify-center pointer-events-auto">
-                  <PreviewComponent minimal={true} />
-                </div>
+                <button
+                  onClick={() => setIsFullscreen(!isFullscreen)}
+                  className="p-2 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
+                  title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                >
+                  {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
+                </button>
               </div>
 
-              {/* Dynamic details description & dependencies tags */}
+              {/* Dynamic Component Element Render (Maximized) */}
+              <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
+                <PreviewComponent minimal={true} />
+              </div>
+
+              {/* Dynamic details description & dependencies tags (Anchored bottom-left) */}
               {!isFullscreen && (
-                <div className="mt-8 max-w-xl w-full text-left space-y-4 px-2">
-                  <div>
-                    <h2 className="text-lg font-semibold text-white/90">{comp.name}</h2>
-                    <p className="text-xs text-white/50 leading-relaxed mt-1">{comp.description}</p>
+                <div className="absolute bottom-6 left-6 max-w-md text-left z-10 space-y-2 pointer-events-none select-none">
+                  <div className="pointer-events-auto select-text">
+                    <h2 className="text-sm font-semibold tracking-tight text-white/90">{comp.name}</h2>
+                    <p className="text-[11px] text-white/45 leading-relaxed max-w-sm mt-1">{comp.description}</p>
                   </div>
                   
                   {comp.dependencies && comp.dependencies.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-2 pt-2">
-                      <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider mr-1">Dependencies:</span>
+                    <div className="flex flex-wrap items-center gap-1.5 pt-1">
                       {comp.dependencies.map((dep) => (
                         <span 
                           key={dep} 
-                          className="text-[9px] font-mono text-[#E8A969]/80 px-2 py-0.5 rounded bg-[#E8A969]/5 border border-[#E8A969]/10"
+                          className="text-[8px] font-mono text-white/30 px-1.5 py-0.5 rounded bg-white/5 border border-white/10"
                         >
                           {dep}
                         </span>
@@ -384,7 +374,7 @@ function ComponentDetail() {
             {isFullscreen && (
               <button
                 onClick={() => setIsFullscreen(false)}
-                className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/60 hover:bg-black/80 border border-white/10 backdrop-blur-md text-xs text-white/80 hover:text-white transition-all cursor-pointer shadow-lg"
+                className="absolute top-8 left-8 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/60 hover:bg-black/80 border border-white/10 backdrop-blur-md text-xs text-white/80 hover:text-white transition-all cursor-pointer shadow-lg"
               >
                 <Minimize2 className="w-3.5 h-3.5" />
                 <span>Exit Fullscreen</span>
