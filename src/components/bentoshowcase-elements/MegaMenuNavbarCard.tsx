@@ -14,6 +14,13 @@ import {
 export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: boolean }) {
   const [activeTab, setActiveTab] = useState("Home");
 
+  // Local overrides for shadcn css variables to theme the dropdown viewport
+  const cssVariables = {
+    "--popover": "#0c0c0e",
+    "--popover-foreground": "#ffffff",
+    "--border": "rgba(255, 255, 255, 0.1)",
+  } as React.CSSProperties;
+
   const content = (
     <div className="w-full max-w-4xl mx-auto px-4">
       {/* Floating Pill Style Navigation Bar */}
@@ -51,7 +58,7 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
                 <NavigationMenuTrigger className="!bg-transparent text-white/60 hover:text-white hover:bg-white/5 !px-3 !py-1.5 text-xs font-heading font-medium transition-colors gap-1 cursor-pointer">
                   Features
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="p-4 w-[420px] bg-[#0c0c0e]/95 border border-white/10 rounded-xl shadow-2xl backdrop-blur-xl">
+                <NavigationMenuContent className="p-4 w-[420px] bg-transparent border-0 shadow-none">
                   <div className="grid grid-cols-2 gap-3 select-none">
                     <div className="col-span-2 pb-1 border-b border-white/5 flex items-center justify-between">
                       <span className="text-[9px] font-mono font-bold text-white/40 tracking-wider uppercase">Products & Services</span>
@@ -114,7 +121,7 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
                 <NavigationMenuTrigger className="!bg-transparent text-white/60 hover:text-white hover:bg-white/5 !px-3 !py-1.5 text-xs font-heading font-medium transition-colors gap-1 cursor-pointer">
                   Developers
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="p-4 w-[320px] bg-[#0c0c0e]/95 border border-white/10 rounded-xl shadow-2xl backdrop-blur-xl">
+                <NavigationMenuContent className="p-4 w-[320px] bg-transparent border-0 shadow-none">
                   <div className="flex flex-col gap-3.5 select-none">
                     <div className="pb-1 border-b border-white/5 flex items-center gap-2">
                       <Terminal className="w-3.5 h-3.5 text-[#BECB6D]" />
@@ -172,7 +179,10 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
 
   if (minimal) {
     return (
-      <div className="w-full h-full flex items-center justify-center p-4 select-none">
+      <div 
+        className="w-full h-full flex items-center justify-center p-4 select-none"
+        style={cssVariables}
+      >
         {content}
       </div>
     );
@@ -181,6 +191,7 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
   return (
     <div 
       className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      style={cssVariables}
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-[#E8A969]/5 to-[#121212] opacity-60" />
 
