@@ -170,6 +170,13 @@ export default function Hero() {
           {/* Browse Components Button */}
           <motion.a
             href="#showcase"
+            onClick={(e) => {
+              e.preventDefault();
+              const showcase = document.getElementById("showcase");
+              if (showcase) {
+                showcase.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
             onMouseEnter={() => setBtnHovered(true)}
             onMouseLeave={() => setBtnHovered(false)}
             className="flex items-center justify-center gap-1.5 px-6 py-3 rounded-full bg-moss-green hover:bg-moss-green/90 text-warm-cream border border-moss-green/10 font-sans font-medium text-sm transition-colors w-full sm:w-auto max-w-[310px] shadow-sm active:scale-[0.98] cursor-pointer"

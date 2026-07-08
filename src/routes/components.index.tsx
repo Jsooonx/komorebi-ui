@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, useRouter } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { 
@@ -86,6 +86,8 @@ function ComponentCard({ item }: { item: ComponentItem }) {
       if (target.closest("button") || target.closest("input") || target.closest("a")) {
         return;
       }
+      // Set flag to skip entrance staggers on return/back navigation
+      sessionStorage.setItem("komorebi_from_catalog", "true");
       navigate({ to: "/components/$id", params: { id: item.id } });
     }
   };
@@ -152,6 +154,17 @@ function ComponentCard({ item }: { item: ComponentItem }) {
 }
 
 function ComponentsIndex() {
+  const [isBackNavigation] = useState(() => {
+    if (typeof window !== "undefined") {
+      const fromCatalog = sessionStorage.getItem("komorebi_from_catalog");
+      if (fromCatalog === "true") {
+        sessionStorage.removeItem("komorebi_from_catalog");
+        return true;
+      }
+    }
+    return false;
+  });
+
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [copiedCli, setCopiedCli] = useState<string | null>(null);
@@ -187,9 +200,8 @@ function ComponentsIndex() {
     }
   };
 
-  // Scroll to top on load
   useEffect(() => {
-    window.scrollTo({ top: 0 });
+    sessionStorage.setItem("komorebi_visited_index", "true");
   }, []);
 
   return (
@@ -209,7 +221,7 @@ function ComponentsIndex() {
             </span>
           </Link>
           <ChevronRight className="w-4 h-4 text-white/20" />
-          <span className="text-xs font-medium text-white/40 font-mono">Components Index</span>
+          <span className="text-xs font-medium text-white/40 font-mono">Components</span>
         </div>
 
         <nav className="flex items-center gap-6">
@@ -353,7 +365,7 @@ function ComponentsIndex() {
                       </div>
                       <motion.div 
                         variants={containerVariants}
-                        initial="hidden"
+                        initial={isBackNavigation ? "visible" : "hidden"}
                         animate="visible"
                         exit="hidden"
                         className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
@@ -377,7 +389,7 @@ function ComponentsIndex() {
                       </div>
                       <motion.div 
                         variants={containerVariants}
-                        initial="hidden"
+                        initial={isBackNavigation ? "visible" : "hidden"}
                         animate="visible"
                         exit="hidden"
                         className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"

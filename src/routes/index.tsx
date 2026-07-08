@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import DynamicIsland from "@/components/DynamicIsland";
@@ -36,6 +37,10 @@ const itemVariants = {
 };
 
 function Index() {
+  useEffect(() => {
+    sessionStorage.setItem("komorebi_visited_index", "true");
+  }, []);
+
   return (
     <main className="bg-warm-cream min-h-screen">
       <DynamicIsland />

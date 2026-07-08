@@ -40,5 +40,6 @@ To keep the URL clean without cluttering browser routing history:
       }
     };
     ```
-2.  **Smooth scrolling animation** is enabled globally via CSS in `src/styles.css` using `html { scroll-behavior: smooth; }`.
-3.  **Result:** The browser smoothly glides to the target section (Playground, Components, Templates, or page top) while keeping the URL bar clean (e.g. `komorebi-ui.vercel.app/` without trailing `#showcase` hash tags).
+2.  **Instant Scroll Restorations (No Scroll Animations):** Global CSS `scroll-behavior: smooth` has been removed from `html` in `src/styles.css`. This ensures that when a user navigates back (via browser back buttons or contextual back triggers), the browser instantly restores their previous scroll position without performing a distracting scroll animation.
+3.  **Programmatic Smooth Scrolling:** Anchor links on the homepage (like navbar anchors in `DynamicIsland.tsx` and the Hero's "Browse Components" button) explicitly trigger smooth scrolling programmatically using `{ behavior: "smooth" }` in JavaScript, ensuring smooth scroll animations still work where they are intended.
+4.  **Contextual Scroll Restoration on Return:** When navigating back from a component detail view to the catalog index or homepage, the app triggers a `window.history.back()` transition if the user has navigated from within the app (tracked via a `komorebi_visited_index` flag in `sessionStorage`). This enables instant scroll restoration. Additionally, the entry card stagger animations on the catalog page are bypassed (`isBackNavigation`) on POP events to make the returning viewport load instantaneously.

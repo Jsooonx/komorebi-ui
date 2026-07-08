@@ -34,3 +34,13 @@ The playground is managed by `src/components/ShowcaseTerminal.tsx` and split int
 
 ## 🔄 Typing Simulator & CLI Output
 Inside Panel 3, terminal command executions are logged in macOS-style window mockups. Lines of commands are generated through a custom typing simulator (`ShowcaseTerminal.tsx`'s logger logic) that renders characters sequentially, outputting standard status check logs on execution.
+
+---
+
+## 🛠️ Canvas Controls & Menu Drawer
+In the component playroom detail page (`src/routes/components.$id.tsx`), all page actions are consolidated in the floating canvas tools pill in the top-right corner of the preview area:
+*   **Menu Drawer Toggle (Menu/X):** Slides out the left sidebar menu to select other elements from the library. Moving it here keeps the top header navigation layout clean and static.
+*   **Reset Animation:** Re-runs the component loading state and restarts GSAP/Framer animations.
+*   **Toggle Code Editor:** Opens or closes the split-screen code code pane in real time.
+*   **Copy CLI Command:** Copies the target `npx komorebi-ui add <component>` installer string.
+*   **Fullscreen Mode:** Maximizes the workspace preview container to fill the screen.

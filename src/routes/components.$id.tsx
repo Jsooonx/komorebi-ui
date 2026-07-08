@@ -151,43 +151,48 @@ function ComponentDetail() {
       
       {/* 1. TOP HEADER NAVIGATION BAR */}
       {!isFullscreen && (
-        <header className="h-14 border-b border-white/5 flex items-center justify-between px-6 z-30 bg-[#090909]/90 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-1.5 hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all cursor-pointer text-white/70 hover:text-white"
-              title="Toggle Menu Drawer"
-            >
-              {sidebarOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-            </button>
-            <div className="w-[1px] h-4 bg-white/15" />
+        <header className="h-16 border-b border-white/5 flex items-center justify-between px-6 md:px-12 z-30 bg-[#090909]/85 backdrop-blur-xl shrink-0">
+          <div className="flex items-center gap-3">
             <Link 
               to="/" 
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-2.5 hover:opacity-90 transition-opacity"
             >
               <img 
                 src="/KomorebiLogoUpdate1_transparent.png" 
                 alt="Komorebi UI" 
-                className="w-5 h-5 object-contain"
+                className="w-6 h-6 object-contain rounded"
               />
-              <span className="text-xs font-semibold tracking-tight text-white/90">Komorebi UI</span>
+              <span className="text-sm font-semibold tracking-tight font-heading">Komorebi UI</span>
             </Link>
-            <ChevronRight className="w-3.5 h-3.5 text-white/20" />
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-medium text-white/70">
-              <span className="text-white/40 font-mono text-[9px]">#{String(activeIndex + 1).padStart(2, '0')}</span>
+            <ChevronRight className="w-4 h-4 text-white/20" />
+            <Link 
+              to="/components" 
+              className="text-xs font-medium text-white/40 hover:text-white/85 transition-colors font-mono"
+            >
+              Components
+            </Link>
+            <ChevronRight className="w-4 h-4 text-white/20" />
+            <div className="flex items-center gap-2 px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-xs font-medium text-white/70">
+              <span className="text-white/40 font-mono text-[10px] mr-1">#{String(activeIndex + 1).padStart(2, '0')}</span>
               <span>{comp.name}</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Link 
-              to="/"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 text-xs text-white/60 hover:text-white transition-all"
+          <nav className="flex items-center gap-6">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                if (sessionStorage.getItem("komorebi_visited_index") === "true") {
+                  window.history.back();
+                } else {
+                  navigate({ to: "/" });
+                }
+              }}
+              className="text-xs font-medium text-white/60 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer border-none bg-transparent p-0"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Home</span>
-            </Link>
-          </div>
+              Back to Components
+            </button>
+          </nav>
         </header>
       )}
 
@@ -295,7 +300,7 @@ function ComponentDetail() {
           )}
 
           {/* INTERACTIVE CANVAS VIEWPORT (RIGHT PANE) */}
-          <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative p-4 gap-4">
+          <section className="h-full flex flex-col bg-[#090909] overflow-hidden relative px-6 md:px-12 pb-6 pt-2 gap-6">
             
             {/* The main workspace container card with thin border */}
             <div 
@@ -304,6 +309,18 @@ function ComponentDetail() {
             >
               {/* Control floating tools pill */}
               <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1 bg-black/60 border border-white/5 backdrop-blur-md rounded-xl shadow-lg opacity-80 hover:opacity-100 transition-opacity">
+                <button
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                  className={`p-2 rounded-lg transition-all cursor-pointer ${
+                    sidebarOpen ? "bg-[#E8A969]/15 text-[#E8A969]" : "text-white/60 hover:text-white hover:bg-white/5"
+                  }`}
+                  title="Toggle Menu Drawer"
+                >
+                  {sidebarOpen ? <X className="w-3.5 h-3.5" /> : <Menu className="w-3.5 h-3.5" />}
+                </button>
+
+                <div className="w-[1px] h-4 bg-white/10 mx-0.5" />
+
                 <button
                   onClick={() => setReloadKey(k => k + 1)}
                   className="p-2 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
@@ -349,7 +366,7 @@ function ComponentDetail() {
 
             {/* Dynamic details description & dependencies tags (Static, below the bordered workspace) */}
             {!isFullscreen && (
-              <div className="text-left space-y-2.5 px-2 pb-2 shrink-0 select-text">
+              <div className="text-left space-y-2.5 pb-2 shrink-0 select-text">
                 <div>
                   <h2 className="text-sm font-semibold tracking-tight text-white/95">{comp.name}</h2>
                   <p className="text-[11px] text-white/45 leading-relaxed max-w-2xl mt-1">{comp.description}</p>
