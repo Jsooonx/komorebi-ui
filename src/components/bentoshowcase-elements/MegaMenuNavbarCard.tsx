@@ -182,9 +182,8 @@ function NavbarContent({
 
       {/* CTA */}
       <motion.button
-        whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
-        className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#E8A969]/15 border border-[#E8A969]/25 text-[#E8A969] text-xs font-heading font-medium hover:bg-[#E8A969]/25 transition-colors cursor-pointer shrink-0"
+        className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-white text-xs font-heading font-medium hover:bg-white/20 transition-colors cursor-pointer shrink-0"
       >
         Get Started
       </motion.button>
