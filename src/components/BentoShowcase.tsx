@@ -47,7 +47,7 @@ function BentoCell({
   return (
     <motion.div
       layoutId={`card-container-${id}`}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      transition={{ type: "spring", stiffness: 350, damping: 32 }}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       className={`block hover:opacity-95 transition-opacity cursor-pointer select-none ${className || ""}`}

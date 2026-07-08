@@ -306,8 +306,7 @@ function ComponentDetail() {
             {/* The main workspace container card with thin border */}
             <motion.div 
               layoutId={`card-container-${id}`}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              key={`${id}-${reloadKey}`}
+              transition={{ type: "spring", stiffness: 350, damping: 32 }}
               className="flex-1 rounded-2xl border border-white/5 bg-[#090909] flex flex-col items-center justify-center p-8 relative overflow-hidden group/workspace"
             >
               {/* Control floating tools pill */}
@@ -350,13 +349,12 @@ function ComponentDetail() {
               </div>
 
               {/* Dynamic Component Element Render (Maximized) */}
-              <motion.div 
-                layoutId={`card-viewport-${id}`}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              <div 
+                key={reloadKey}
                 className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full"
               >
                 <PreviewComponent minimal={true} />
-              </motion.div>
+              </div>
             </motion.div>
 
             {/* Dynamic details description & dependencies tags (Static, below the bordered workspace) */}

@@ -113,15 +113,13 @@ function ComponentCard({ item }: { item: ComponentItem }) {
     <div className={item.gridClass || ""}>
       <motion.div
         layoutId={`card-container-${item.id}`}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        transition={{ type: "spring", stiffness: 350, damping: 32 }}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         className="group flex flex-col bg-[#0c0c0e] border border-white/[0.04] hover:border-white/10 rounded-2xl overflow-hidden p-4 select-none cursor-pointer relative transition-all duration-300 h-full"
       >
         {/* Main Viewport Area */}
-        <motion.div 
-          layoutId={`card-viewport-${item.id}`}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        <div 
           className={`relative w-full rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center transition-colors ${item.viewportHeightClass || "h-[180px]"}`}
         >
           {/* Mock Browser Dots */}
@@ -136,7 +134,7 @@ function ComponentCard({ item }: { item: ComponentItem }) {
           <div className="w-full h-full flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity overflow-hidden">
             <PreviewComp minimal={true} />
           </div>
-        </motion.div>
+        </div>
 
         {/* Footer text row */}
         <div className="flex items-center justify-between mt-3.5 px-1 pb-1">
@@ -191,11 +189,6 @@ function ComponentsIndex() {
       toast.error("Failed to copy CLI command.");
     }
   };
-
-  // Scroll to top on load
-  useEffect(() => {
-    window.scrollTo({ top: 0 });
-  }, []);
 
   return (
     <div className="min-h-screen bg-[#090909] text-white flex flex-col select-none antialiased">
