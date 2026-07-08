@@ -15,16 +15,10 @@ export default function PixelShimmerCard({ minimal = false }: { minimal?: boolea
           <span className="text-[10px] font-mono uppercase tracking-[0.24em] text-white/45">
             PIXEL SHIMMER
           </span>
-          <div className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[9px] font-mono text-[#E8A969]">
-            hover
-          </div>
         </div>
 
         <div className="flex flex-1 items-center justify-center">
           <div className="space-y-2 text-center">
-            <div className="text-[10px] font-mono uppercase tracking-[0.35em] text-white/35">
-              Reactive Surface
-            </div>
             <h3 className="font-serif text-2xl text-white/92">KOMOREBI</h3>
           </div>
         </div>
@@ -56,16 +50,10 @@ export default function PixelShimmerCard({ minimal = false }: { minimal?: boolea
             <span className="text-[9px] font-mono uppercase tracking-[0.24em] text-white/40">
               PIXEL SHIMMER
             </span>
-            <div className="rounded-full border border-white/10 bg-white/5 px-1.5 py-0.5 text-[8px] font-mono text-[#E8A969]">
-              hover
-            </div>
           </div>
 
           <div className="flex flex-1 items-center justify-center py-1">
             <div className="space-y-1 text-center">
-              <div className="text-[8px] font-mono uppercase tracking-[0.35em] text-white/30">
-                Reactive Surface
-              </div>
               <h3 className="font-serif text-lg sm:text-xl text-white/90">KOMOREBI</h3>
             </div>
           </div>
