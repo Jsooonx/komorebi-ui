@@ -13,8 +13,8 @@ export default function ImageRevealCard({ minimal = false }: { minimal?: boolean
       >
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img 
-            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" 
-            alt="Abstract Background" 
+            src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" 
+            alt="Nature Scenery" 
             className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 ease-out"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
@@ -42,8 +42,8 @@ export default function ImageRevealCard({ minimal = false }: { minimal?: boolean
       <div className="absolute inset-0 z-0 overflow-hidden">
         {/* Underneath: Premium image reveal */}
         <img 
-          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" 
-          alt="Abstract Background" 
+          src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" 
+          alt="Nature Scenery" 
           className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 ease-out"
         />
         {/* Color overlay */}
