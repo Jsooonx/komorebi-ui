@@ -109,6 +109,7 @@ function ComponentDetail() {
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedCli, setCopiedCli] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
+  const [dynamicIslandState, setDynamicIslandState] = useState<string>("idle");
 
   useEffect(() => {
     const checkScreen = () => {
@@ -374,9 +375,109 @@ function ComponentDetail() {
                 </button>
               </div>
 
+              {/* Options card specifically for Dynamic Island */}
+              {comp.id === "dynamic-island" && (
+                <div className="absolute top-16 right-4 z-30 w-72 bg-[#0c0c0e]/95 border border-white/10 rounded-2xl p-4 shadow-2xl flex flex-col gap-3.5 animate-fade-in select-none">
+                  <div className="flex items-center justify-between text-white/40">
+                    <div className="flex items-center gap-1.5">
+                      {/* Grid icon ::: */}
+                      <div className="grid grid-cols-3 gap-0.5 w-3 h-3 opacity-60">
+                        <span className="w-0.5 h-0.5 bg-current rounded-full" />
+                        <span className="w-0.5 h-0.5 bg-current rounded-full" />
+                        <span className="w-0.5 h-0.5 bg-current rounded-full" />
+                        <span className="w-0.5 h-0.5 bg-current rounded-full" />
+                        <span className="w-0.5 h-0.5 bg-current rounded-full" />
+                        <span className="w-0.5 h-0.5 bg-current rounded-full" />
+                        <span className="w-0.5 h-0.5 bg-current rounded-full" />
+                        <span className="w-0.5 h-0.5 bg-current rounded-full" />
+                        <span className="w-0.5 h-0.5 bg-current rounded-full" />
+                      </div>
+                      <span className="text-[10px] font-semibold tracking-wider uppercase font-mono">Options</span>
+                    </div>
+                    
+                    {/* Reset/Reload icon */}
+                    <button 
+                      onClick={() => setDynamicIslandState("idle")}
+                      className="p-1 hover:bg-white/5 rounded text-white/50 hover:text-white transition-colors cursor-pointer"
+                      title="Reset to Idle"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    {/* Row 1: idle, ring, timer, record */}
+                    <div className="grid grid-cols-4 gap-1.5">
+                      {["idle", "ring", "timer", "record"].map((state) => (
+                        <button
+                          key={state}
+                          onClick={() => setDynamicIslandState(state)}
+                          className={`py-1.5 rounded-lg text-[10px] font-medium border transition-all cursor-pointer ${
+                            dynamicIslandState === state
+                              ? "bg-[#E8A969]/15 border-[#E8A969]/40 text-[#E8A969]"
+                              : "bg-white/[0.02] border-white/5 hover:bg-white/5 text-white/60 hover:text-white"
+                          }`}
+                        >
+                          {state}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Row 2: music, airdrop, airdropMini */}
+                    <div className="grid grid-cols-3 gap-1.5">
+                      {["music", "airdrop", "airdropMini"].map((state) => (
+                        <button
+                          key={state}
+                          onClick={() => setDynamicIslandState(state)}
+                          className={`py-1.5 rounded-lg text-[10px] font-medium border transition-all cursor-pointer ${
+                            dynamicIslandState === state
+                              ? "bg-[#E8A969]/15 border-[#E8A969]/40 text-[#E8A969]"
+                              : "bg-white/[0.02] border-white/5 hover:bg-white/5 text-white/60 hover:text-white"
+                          }`}
+                        >
+                          {state}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Row 3: lowBattery, phone, findmy */}
+                    <div className="grid grid-cols-3 gap-1.5">
+                      {["lowBattery", "phone", "findmy"].map((state) => (
+                        <button
+                          key={state}
+                          onClick={() => setDynamicIslandState(state)}
+                          className={`py-1.5 rounded-lg text-[10px] font-medium border transition-all cursor-pointer ${
+                            dynamicIslandState === state
+                              ? "bg-[#E8A969]/15 border-[#E8A969]/40 text-[#E8A969]"
+                              : "bg-[#090909] border-white/5 hover:bg-white/5 text-white/60 hover:text-white"
+                          }`}
+                        >
+                          {state}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Row 4: screenRecord */}
+                    <button
+                      onClick={() => setDynamicIslandState("screenRecord")}
+                      className={`w-full py-1.5 rounded-lg text-[10px] font-medium border transition-all cursor-pointer ${
+                        dynamicIslandState === "screenRecord"
+                          ? "bg-[#E8A969]/15 border-[#E8A969]/40 text-[#E8A969]"
+                          : "bg-white/[0.02] border-white/5 hover:bg-white/5 text-white/60 hover:text-white"
+                      }`}
+                    >
+                      screenRecord
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {/* Dynamic Component Element Render (Maximized) */}
               <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
-                <PreviewComponent minimal={true} />
+                <PreviewComponent 
+                  minimal={true} 
+                  activeState={comp.id === "dynamic-island" ? dynamicIslandState : undefined}
+                />
               </div>
             </div>
 
