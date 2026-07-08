@@ -351,7 +351,7 @@ function ComponentDetail() {
                 
                 {/* Dynamic Component Element Render */}
                 <div className="w-full h-full flex items-center justify-center pointer-events-auto">
-                  <PreviewComponent />
+                  <PreviewComponent minimal={true} />
                 </div>
               </div>
 

@@ -49,7 +49,7 @@ function DockIcon({
   );
 }
 
-export default function InteractiveNavbarCard() {
+export default function InteractiveNavbarCard({ minimal = false }: { minimal?: boolean }) {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [tooltipText, setTooltipText] = useState("");
   const mouseX = useMotionValue(Infinity);
@@ -59,6 +59,48 @@ export default function InteractiveNavbarCard() {
       setTooltipText(DOCK_ITEMS[hoveredIdx].label);
     }
   }, [hoveredIdx]);
+
+  const content = (
+    <div className="relative z-10 w-full flex flex-col items-center justify-center h-full gap-4">
+      {/* Tooltip display */}
+      <div className="h-6 flex items-center justify-center">
+        <div
+          className={`px-2.5 py-0.5 rounded bg-black/80 border border-white/10 text-[9px] font-mono font-semibold text-[#E8A969] tracking-wider uppercase shadow-xl transition-all duration-200 ease-out ${
+            hoveredIdx !== null 
+              ? "opacity-100 translate-y-0 scale-100" 
+              : "opacity-0 translate-y-1.5 scale-90"
+          }`}
+        >
+          {tooltipText}
+        </div>
+      </div>
+
+      {/* Dock Bar */}
+      <div 
+        onMouseMove={(e) => mouseX.set(e.clientX)}
+        onMouseLeave={() => {
+          mouseX.set(Infinity);
+          setHoveredIdx(null);
+        }}
+        className="flex items-end justify-center gap-3.5 bg-black/35 border border-white/5 rounded-lg px-5 h-16 pb-2.5 backdrop-blur-md shadow-2xl"
+      >
+        {DOCK_ITEMS.map((item, idx) => (
+          <DockIcon
+            key={idx}
+            mouseX={mouseX}
+            label={item.label}
+            icon={item.icon}
+            idx={idx}
+            setHoveredIdx={setHoveredIdx}
+          />
+        ))}
+      </div>
+    </div>
+  );
+
+  if (minimal) {
+    return content;
+  }
 
   return (
     <div 
@@ -76,39 +118,7 @@ export default function InteractiveNavbarCard() {
 
       {/* Center Dock Container */}
       <div className="relative z-10 w-full flex flex-col items-center justify-center h-28 gap-4">
-        {/* Tooltip display */}
-        <div className="h-6 flex items-center justify-center">
-          <div
-            className={`px-2.5 py-0.5 rounded bg-black/80 border border-white/10 text-[9px] font-mono font-semibold text-[#E8A969] tracking-wider uppercase shadow-xl transition-all duration-200 ease-out ${
-              hoveredIdx !== null 
-                ? "opacity-100 translate-y-0 scale-100" 
-                : "opacity-0 translate-y-1.5 scale-90"
-            }`}
-          >
-            {tooltipText}
-          </div>
-        </div>
-
-        {/* Dock Bar */}
-        <div 
-          onMouseMove={(e) => mouseX.set(e.clientX)}
-          onMouseLeave={() => {
-            mouseX.set(Infinity);
-            setHoveredIdx(null);
-          }}
-          className="flex items-end justify-center gap-3.5 bg-black/35 border border-white/5 rounded-lg px-5 h-16 pb-2.5 backdrop-blur-md shadow-2xl"
-        >
-          {DOCK_ITEMS.map((item, idx) => (
-            <DockIcon
-              key={idx}
-              mouseX={mouseX}
-              label={item.label}
-              icon={item.icon}
-              idx={idx}
-              setHoveredIdx={setHoveredIdx}
-            />
-          ))}
-        </div>
+        {content}
       </div>
 
       <div className="relative z-10">

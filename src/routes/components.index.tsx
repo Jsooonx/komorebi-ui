@@ -118,7 +118,7 @@ function ComponentCard({ item }: { item: ComponentItem }) {
 
           {/* Actual component preview rendering */}
           <div className="scale-[0.8] origin-center w-full h-full flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity">
-            <PreviewComp />
+            <PreviewComp minimal={true} />
           </div>
         </div>
 

@@ -9,8 +9,42 @@ const MEMBERS = [
   { name: "David L.", avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=120&h=120&q=80" }
 ];
 
-export default function HoverMembersCard() {
+export default function HoverMembersCard({ minimal = false }: { minimal?: boolean }) {
   const [hovered, setHovered] = useState(false);
+
+  const content = (
+    <div className="relative z-10 flex justify-center items-center h-full w-full">
+      <div className="flex -space-x-4">
+        {MEMBERS.map((member, i) => (
+          <motion.div
+            key={i}
+            animate={{ 
+              x: hovered ? (i - 2) * 16 : 0,
+              rotate: hovered ? (i - 2) * 4 : 0
+            }}
+            transition={{ type: "spring", damping: 18, stiffness: 220 }}
+            className="relative w-12 h-12 rounded-full border-2 border-[#121212] overflow-hidden"
+            style={{ zIndex: hovered ? 10 + i : 1 }}
+          >
+            <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+
+  if (minimal) {
+    return (
+      <div 
+        className="w-full h-full flex items-center justify-center cursor-pointer select-none"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {content}
+      </div>
+    );
+  }
+
   return (
     <div 
       className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
