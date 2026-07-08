@@ -57,11 +57,7 @@ export default function ToolkitStackSwiper({ minimal = false }: { minimal?: bool
     >
       <span 
         style={{ transform: "translateZ(40px)" }}
-        className={`absolute font-mono uppercase tracking-widest select-none pointer-events-none z-30 transition-all duration-300 ${
-          minimal 
-            ? "top-6 text-[10px] text-white/65 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full" 
-            : "top-4 text-[9px] text-white/30"
-        }`}
+        className="absolute top-4 text-[9px] font-mono text-white/30 uppercase tracking-widest select-none pointer-events-none z-30"
       >
         Swipe cards left or right
       </span>
