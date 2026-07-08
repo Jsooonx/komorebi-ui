@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { createFileRoute, Link, useNavigate, useRouter } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
@@ -87,7 +87,8 @@ function ComponentCard({ item, isBackNavigation }: { item: ComponentItem; isBack
       if (target.closest("button") || target.closest("input") || target.closest("a")) {
         return;
       }
-      // Set flag to skip entrance staggers on return/back navigation
+      // Save scroll position & flag before navigating to detail
+      sessionStorage.setItem("komorebi_scroll_y", String(window.scrollY));
       sessionStorage.setItem("komorebi_from_catalog", "true");
       navigate({ to: "/components/$id", params: { id: item.id } });
     }
@@ -169,6 +170,22 @@ function ComponentsIndex() {
     return false;
   });
 
+  // Hide page on back navigation until scroll is restored to prevent blink
+  const pageRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    if (isBackNavigation && typeof window !== "undefined") {
+      const savedY = sessionStorage.getItem("komorebi_scroll_y");
+      if (savedY) {
+        window.scrollTo(0, parseInt(savedY, 10));
+        sessionStorage.removeItem("komorebi_scroll_y");
+      }
+      // Reveal immediately after scroll is set (same frame, before paint)
+      if (pageRef.current) {
+        pageRef.current.style.opacity = "1";
+      }
+    }
+  }, [isBackNavigation]);
+
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [copiedCli, setCopiedCli] = useState<string | null>(null);
@@ -209,7 +226,11 @@ function ComponentsIndex() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#090909] text-white flex flex-col select-none antialiased">
+    <div
+      ref={pageRef}
+      className="min-h-screen bg-[#090909] text-white flex flex-col select-none antialiased"
+      style={{ opacity: isBackNavigation ? 0 : 1 }}
+    >
       
       {/* ── TOP HEADER / NAV BAR ── */}
       <header className="fixed top-0 left-0 right-0 h-16 border-b border-white/5 flex items-center justify-between px-6 md:px-12 z-40 bg-[#090909]/85 backdrop-blur-xl">
