@@ -220,7 +220,7 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
   if (minimal) {
     return (
       <div 
-        className="w-full flex items-center justify-center p-4 select-none"
+        className="w-full h-full flex items-start justify-center pt-5 px-4 select-none"
         style={cssVariables}
       >
         <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
