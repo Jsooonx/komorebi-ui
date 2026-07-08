@@ -235,16 +235,17 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-[#E8A969]/5 to-[#121212] opacity-60 pointer-events-none" />
 
-      <div className="relative z-10 w-full flex items-center justify-between mb-4">
-        <span className="text-[10px] font-mono text-white/40 tracking-widest uppercase">Navigation Menu</span>
-        <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
-      </div>
-
-      <div className="relative z-10 w-full flex flex-col items-center justify-start pt-4 flex-1">
+      {/* Top: label + navbar stacked right at the top */}
+      <div className="relative z-10 w-full flex flex-col gap-3">
+        <div className="w-full flex items-center justify-between">
+          <span className="text-[10px] font-mono text-white/40 tracking-widest uppercase">Navigation Menu</span>
+          <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
+        </div>
         <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 
-      <div className="relative z-10 mt-4">
+      {/* Bottom: title */}
+      <div className="relative z-10">
         <span className="text-xs text-white/40 tracking-wider uppercase block mb-0.5">Interactive navigation</span>
         <h3 className="font-sans text-base font-medium tracking-tight text-white">Mega menu navbar</h3>
       </div>
