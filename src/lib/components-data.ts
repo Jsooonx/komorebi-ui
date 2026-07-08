@@ -39,6 +39,8 @@ export interface ComponentItem {
   dependencies?: string[];
   cliCommand?: string;
   isNew?: boolean;
+  gridClass?: string;
+  viewportHeightClass?: string;
 }
 
 export const COMPONENTS_DATA: ComponentItem[] = [
@@ -72,7 +74,9 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: ThingsDragAndScrollCard,
     code: ThingsDragAndScrollCode,
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add things-drag-and-scroll"
+    cliCommand: "npx komorebi-ui add things-drag-and-scroll",
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[240px]"
   },
   {
     id: "devouring-details",
@@ -133,7 +137,9 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     code: InteractiveNavbarCode,
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add interactive-navbar",
-    isNew: true
+    isNew: true,
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[180px]"
   },
   {
     id: "infinite-marquee",
@@ -143,7 +149,9 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: InfiniteMarqueeCard,
     code: InfiniteMarqueeCode,
     dependencies: ["lucide-react"],
-    cliCommand: "npx komorebi-ui add infinite-marquee"
+    cliCommand: "npx komorebi-ui add infinite-marquee",
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[130px]"
   },
   {
     id: "magnetic-cursor-field",
@@ -152,7 +160,9 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     description: "Hover reactive magnetic grid selector with coordinate tracking.",
     component: MagneticCursorFieldCard,
     code: MagneticCursorFieldCode,
-    cliCommand: "npx komorebi-ui add magnetic-cursor-field"
+    cliCommand: "npx komorebi-ui add magnetic-cursor-field",
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[280px]"
   },
   {
     id: "audio-equalizer",
@@ -172,7 +182,9 @@ export const COMPONENTS_DATA: ComponentItem[] = [
     component: MorphingBlobCard,
     code: MorphingBlobCode,
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add morphing-blob"
+    cliCommand: "npx komorebi-ui add morphing-blob",
+    gridClass: "md:col-span-1",
+    viewportHeightClass: "h-[260px]"
   },
   {
     id: "holographic-terminal",

@@ -22,7 +22,7 @@ const CARD_DATA = [
   }
 ];
 
-export default function ThingsDragAndScrollCard() {
+export default function ThingsDragAndScrollCard({ minimal = false }: { minimal?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [stack, setStack] = useState([0, 1, 2]);
@@ -48,6 +48,82 @@ export default function ThingsDragAndScrollCard() {
     });
   };
 
+  const content = (
+    <motion.div
+      animate={{ rotateY: tilt.x, rotateX: tilt.y }}
+      transition={{ type: "spring", stiffness: 180, damping: 22 }}
+      style={{ transformStyle: "preserve-3d" }}
+      className="relative z-20 w-full h-full flex items-center justify-center"
+    >
+      <span 
+        style={{ transform: "translateZ(40px)" }}
+        className="absolute top-2 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none z-30"
+      >
+        Swipe cards left or right
+      </span>
+
+      {/* Card Pile */}
+      <div className="relative w-[150px] h-[190px] flex items-center justify-center">
+        {stack.map((cardId, index) => {
+          const card = CARD_DATA.find((c) => c.id === cardId)!;
+          const isTop = index === 0;
+
+          return (
+            <motion.div
+              key={card.id}
+              drag={isTop ? "x" : false}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.8}
+              onDragEnd={(e, info) => {
+                if (Math.abs(info.offset.x) > 85) {
+                  handleSwipe();
+                }
+              }}
+              animate={{
+                scale: 1 - index * 0.06,
+                y: index * 12,
+                z: (3 - index) * 10,
+                opacity: 1 - index * 0.25
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 24
+              }}
+              style={{
+                zIndex: 3 - index,
+                boxShadow: `0 20px 45px -15px ${card.glow}`
+              }}
+              whileDrag={{ scale: 1.05, cursor: "grabbing" }}
+              className="absolute w-full h-full rounded-lg border border-white/10 bg-black flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
+            >
+              <img 
+                src={card.src} 
+                alt={card.title} 
+                draggable={false}
+                className="w-full h-full object-cover select-none pointer-events-none" 
+              />
+            </motion.div>
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+
+  if (minimal) {
+    return (
+      <div 
+        ref={containerRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="w-full h-full flex items-center justify-center select-none relative overflow-hidden"
+        style={{ perspective: 1000 }}
+      >
+        {content}
+      </div>
+    );
+  }
+
   return (
     <div 
       ref={containerRef}
@@ -67,65 +143,9 @@ export default function ThingsDragAndScrollCard() {
       </div>
 
       {/* 3D Tilt Sandbox */}
-      <motion.div
-        animate={{ rotateY: tilt.x, rotateX: tilt.y }}
-        transition={{ type: "spring", stiffness: 180, damping: 22 }}
-        style={{ transformStyle: "preserve-3d" }}
-        className="relative z-20 w-full h-[340px] flex items-center justify-center"
-      >
-        <span 
-          style={{ transform: "translateZ(40px)" }}
-          className="absolute top-0 text-[8px] font-mono text-white/20 uppercase tracking-widest select-none pointer-events-none z-30"
-        >
-          Swipe cards left or right
-        </span>
-
-        {/* Card Pile */}
-        <div className="relative w-[230px] h-[290px] flex items-center justify-center">
-          {stack.map((cardId, index) => {
-            const card = CARD_DATA.find((c) => c.id === cardId)!;
-            const isTop = index === 0;
-
-            return (
-              <motion.div
-                key={card.id}
-                drag={isTop ? "x" : false}
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.8}
-                onDragEnd={(e, info) => {
-                  if (Math.abs(info.offset.x) > 85) {
-                    handleSwipe();
-                  }
-                }}
-                animate={{
-                  scale: 1 - index * 0.06,
-                  y: index * 16,
-                  z: (3 - index) * 10,
-                  opacity: 1 - index * 0.25
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 24
-                }}
-                style={{
-                  zIndex: 3 - index,
-                  boxShadow: `0 20px 45px -15px ${card.glow}`
-                }}
-                whileDrag={{ scale: 1.05, cursor: "grabbing" }}
-                className="absolute w-full h-full rounded-lg border border-white/10 bg-black flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
-              >
-                <img 
-                  src={card.src} 
-                  alt={card.title} 
-                  draggable={false}
-                  className="w-full h-full object-cover select-none pointer-events-none" 
-                />
-              </motion.div>
-            );
-          })}
-        </div>
-      </motion.div>
+      <div className="relative z-20 w-full h-[340px] flex items-center justify-center">
+        {content}
+      </div>
 
       <div className="relative z-10">
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">

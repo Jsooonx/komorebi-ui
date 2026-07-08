@@ -92,19 +92,19 @@ function ComponentCard({ item }: { item: ComponentItem }) {
   };
 
   return (
-    <motion.div variants={itemVariants}>
+    <motion.div variants={itemVariants} className={item.gridClass || ""}>
       <Link
         to="/components/$id"
         params={{ id: item.id }}
-        className="group flex flex-col bg-[#0c0c0e] border border-white/[0.04] hover:border-white/10 rounded-2xl overflow-hidden p-4 select-none cursor-pointer relative transition-all duration-300"
+        className="group flex flex-col bg-[#0c0c0e] border border-white/[0.04] hover:border-white/10 rounded-2xl overflow-hidden p-4 select-none cursor-pointer relative transition-all duration-300 h-full"
       >
         {/* Main Viewport Area */}
-        <div className="relative w-full h-[180px] rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center pointer-events-none transition-colors">
+        <div className={`relative w-full rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center pointer-events-none transition-colors ${item.viewportHeightClass || "h-[180px]"}`}>
           {/* Mock Browser Dots */}
           <div className="absolute top-2.5 left-3 flex gap-1 z-15">
-            <span className="w-1 h-1 rounded-full bg-white/10" />
-            <span className="w-1 h-1 rounded-full bg-white/10" />
-            <span className="w-1 h-1 rounded-full bg-white/10" />
+            <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
+            <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
+            <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
           </div>
 
           {/* Quick CLI Trigger button overlay (visible on card hover) */}

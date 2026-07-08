@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import PixelCard from "../ui/PixelCard";
 
-export default function MagneticCursorFieldCard() {
+export default function MagneticCursorFieldCard({ minimal = false }: { minimal?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
@@ -17,6 +17,14 @@ export default function MagneticCursorFieldCard() {
   const handleMouseLeave = () => {
     setTilt({ x: 0, y: 0 });
   };
+
+  if (minimal) {
+    return (
+      <div className="w-full h-full select-none bg-transparent">
+        <PixelCard variant="gold" className="w-full h-full border-none bg-transparent" />
+      </div>
+    );
+  }
 
   return (
     <motion.div
