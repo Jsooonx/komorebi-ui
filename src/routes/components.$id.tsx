@@ -103,7 +103,7 @@ function ComponentDetail() {
   }
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [codeOpen, setCodeOpen] = useState(true);
+  const [codeOpen, setCodeOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [reloadKey, setReloadKey] = useState(0);
   const [copiedCode, setCopiedCode] = useState(false);
