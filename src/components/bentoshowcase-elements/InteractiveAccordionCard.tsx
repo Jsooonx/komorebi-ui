@@ -45,80 +45,56 @@ export default function InteractiveAccordionCard({ minimal = false }: { minimal?
   } as React.CSSProperties;
 
   const content = (
-    <div className="w-full flex flex-col h-full justify-between p-6">
-      {/* Title */}
-      <div>
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-white/30 font-mono">
-          Platform Capabilities
-        </span>
-        <h3 className="text-lg font-semibold text-white tracking-tight mt-1">
-          System Specifications
-        </h3>
-        <p className="text-[11px] text-white/40 mt-0.5">
-          Expand a module to inspect runtime configurations.
-        </p>
-      </div>
+    <div className="w-full flex flex-col justify-center p-6 h-full">
+      <Accordion
+        type="single"
+        collapsible
+        value={activeItem}
+        onValueChange={setActiveItem}
+        className="space-y-2.5 border-none"
+      >
+        {accordionItems.map((item) => {
+          const isOpen = activeItem === item.id;
 
-      {/* Accordion container */}
-      <div className="my-5 flex-1 flex flex-col justify-center">
-        <Accordion
-          type="single"
-          collapsible
-          value={activeItem}
-          onValueChange={setActiveItem}
-          className="space-y-2.5 border-none"
-        >
-          {accordionItems.map((item) => {
-            const isOpen = activeItem === item.id;
-
-            return (
-              <AccordionItem
-                key={item.id}
-                value={item.id}
-                className={`border rounded-xl transition-all duration-200 bg-transparent ${
-                  isOpen 
-                    ? "border-white/10 bg-white/[0.01]"
-                    : "border-white/[0.03] hover:border-white/10"
-                }`}
-              >
-                <AccordionTrigger className="px-4 py-3 hover:no-underline select-none text-xs font-semibold text-white/90">
-                  {item.title}
-                </AccordionTrigger>
-                <AccordionContent className="px-4 pb-3">
-                  <motion.div
-                    initial={{ opacity: 0, y: -2 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.15 }}
-                    className="space-y-2.5"
-                  >
-                    <p className="text-[11px] text-white/50 leading-relaxed">
-                      {item.desc}
-                    </p>
-                    
-                    {/* Bullet details */}
-                    <div className="grid grid-cols-1 gap-1 pl-1">
-                      {item.details.map((detail, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-[10px] text-white/30">
-                          <span className="w-1 h-1 rounded-full bg-white/20" />
-                          <span>{detail}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                </AccordionContent>
-              </AccordionItem>
-            );
-          })}
-        </Accordion>
-      </div>
-
-      {/* Footer status bar */}
-      <div className="flex items-center justify-between border-t border-white/[0.04] pt-3 text-[10px] text-white/30 font-mono select-none">
-        <span>All nodes operational</span>
-        <span className="hover:text-white/60 transition-colors cursor-pointer">
-          Logs & Metrics &rarr;
-        </span>
-      </div>
+          return (
+            <AccordionItem
+              key={item.id}
+              value={item.id}
+              className={`border rounded-xl transition-all duration-200 bg-transparent ${
+                isOpen 
+                  ? "border-white/10 bg-white/[0.01]"
+                  : "border-white/[0.03] hover:border-white/10"
+              }`}
+            >
+              <AccordionTrigger className="px-4 py-3 hover:no-underline select-none text-xs font-semibold text-white/90">
+                {item.title}
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pb-3">
+                <motion.div
+                  initial={{ opacity: 0, y: -2 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.15 }}
+                  className="space-y-2.5"
+                >
+                  <p className="text-[11px] text-white/50 leading-relaxed">
+                    {item.desc}
+                  </p>
+                  
+                  {/* Bullet details */}
+                  <div className="grid grid-cols-1 gap-1 pl-1">
+                    {item.details.map((detail, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-[10px] text-white/30">
+                        <span className="w-1 h-1 rounded-full bg-white/20" />
+                        <span>{detail}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </AccordionContent>
+            </AccordionItem>
+          );
+        })}
+      </Accordion>
     </div>
   );
 
