@@ -398,7 +398,7 @@ function ComponentsIndex() {
                 )}
               </div>
 
-              <div className="flex flex-wrap gap-1.5 max-h-[280px] overflow-y-auto pr-1 select-none custom-scrollbar">
+              <div className="flex flex-wrap gap-1.5 select-none">
                 {categories.filter(c => c !== "All").map((cat) => {
                   const isActive = activeCategory === cat && viewMode === "category";
                   const count = getCategoryCount(cat);
