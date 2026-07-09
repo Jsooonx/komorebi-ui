@@ -98,30 +98,32 @@ export default function NestedAccordionCard({ minimal = false }: { minimal?: boo
                 {mainItem.title}
               </AccordionTrigger>
               <AccordionContent className="pb-4 pt-1">
-                {/* Nested Accordion containing 2 sub-accordions */}
-                <Accordion type="multiple" className="w-full space-y-2 mt-1">
-                  {mainItem.subs.map((subItem) => (
-                    <AccordionItem
-                      key={subItem.id}
-                      value={subItem.id}
-                      className="border border-white/[0.03] rounded-md bg-black/20 overflow-hidden"
-                    >
-                      <AccordionTrigger className="px-3 py-2 text-left hover:no-underline select-none text-[11px] font-medium text-white/70">
-                        {subItem.title}
-                      </AccordionTrigger>
-                      <AccordionContent className="px-3 pb-2.5 pt-0.5 text-[10px] text-white/40 leading-relaxed">
-                        <div className="space-y-1.5 pl-1">
-                          {subItem.details.map((detail, idx) => (
-                            <div key={idx} className="flex items-center gap-2">
-                              <span className="w-1 h-1 rounded-full bg-white/20" />
-                              <span>{detail}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
+                {/* Nested Accordion containing 2 sub-accordions inside a single inner container */}
+                <div className="border border-white/5 bg-black/20 rounded-md overflow-hidden divide-y divide-white/5 w-full mt-1.5">
+                  <Accordion type="multiple" className="w-full">
+                    {mainItem.subs.map((subItem) => (
+                      <AccordionItem
+                        key={subItem.id}
+                        value={subItem.id}
+                        className="border-none"
+                      >
+                        <AccordionTrigger className="px-3 py-2 text-left hover:no-underline select-none text-[11px] font-medium text-white/70">
+                          {subItem.title}
+                        </AccordionTrigger>
+                        <AccordionContent className="px-3 pb-2.5 pt-0.5 text-[10px] text-white/40 leading-relaxed">
+                          <div className="space-y-1.5 pl-1">
+                            {subItem.details.map((detail, idx) => (
+                              <div key={idx} className="flex items-center gap-2">
+                                <span className="w-1 h-1 rounded-full bg-white/20" />
+                                <span>{detail}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </div>
               </AccordionContent>
             </AccordionItem>
           ))}
