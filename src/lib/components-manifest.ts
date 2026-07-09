@@ -216,7 +216,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "Clean minimalist 3-column features grid block with centered pattern design backdrops and outline icons.",
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
-    viewportHeightClass: "h-[500px]",
+    viewportHeightClass: "h-[580px]",
   },
 ];
 
