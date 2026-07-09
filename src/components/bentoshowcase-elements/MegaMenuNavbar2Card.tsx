@@ -268,10 +268,10 @@ export default function MegaMenuNavbar2Card({ minimal = false }: { minimal?: boo
     return (
       <div
         onScroll={handleScroll}
-        className="w-full h-[400px] bg-[#050506] border border-white/10 rounded-xl overflow-y-auto scrollbar-none select-none relative"
+        className="w-full h-[400px] bg-[#0c0c0e] border border-white/10 rounded-xl overflow-y-auto scrollbar-none select-none relative pt-4"
         style={cssVariables}
       >
-        <div className="sticky top-0 z-20 w-full flex justify-center">
+        <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">
           <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} isMorphed={isMorphed} />
         </div>
         <MockContent />
@@ -283,11 +283,11 @@ export default function MegaMenuNavbar2Card({ minimal = false }: { minimal?: boo
   return (
     <div
       onScroll={handleScroll}
-      className="relative w-full h-[440px] rounded-2xl bg-[#050506] border border-white/10 overflow-y-auto scrollbar-none flex flex-col select-none group"
+      className="relative w-full h-[440px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-y-auto scrollbar-none flex flex-col select-none group pt-4"
       style={cssVariables}
     >
       {/* Sticky morphing header */}
-      <div className="sticky top-0 z-20 w-full flex justify-center">
+      <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">
         <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} isMorphed={isMorphed} />
       </div>
 
