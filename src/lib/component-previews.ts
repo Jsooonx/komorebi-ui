@@ -23,7 +23,6 @@ import LogoCloud2Card from "../components/bentoshowcase-elements/LogoCloud2Card"
 import LogoCloud3Card from "../components/bentoshowcase-elements/LogoCloud3Card";
 import Features1Card from "../components/bentoshowcase-elements/Features1Card";
 import Features2Card from "../components/bentoshowcase-elements/Features2Card";
-import Features3Card from "../components/bentoshowcase-elements/Features3Card";
 import type { ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>> = {
@@ -51,7 +50,6 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewPr
   "logo-cloud-3": LogoCloud3Card,
   "features-1": Features1Card,
   "features-2": Features2Card,
-  "features-3": Features3Card,
 };
 
 export function getComponentPreview(id: string) {

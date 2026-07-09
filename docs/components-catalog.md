@@ -45,5 +45,4 @@ The Blocks view (at `/blocks`) renders full layouts instead of individual button
 ### 1. Features
 - **Features 1 (`features-1`):** Clean minimalist 3-column features grid block with centered pattern design backdrops, standard white outline icons, and rebranded modern copy.
 - **Features 2 (`features-2`):** Premium asymmetric Bento Grid features showcase with dynamic interactive mockups, including spring physics curve controllers, preset speed switchers, and typing CLI terminal simulators.
-- **Features 3 (`features-3`):** Spotlight feature list with a left pillar column and a right live-preview panel. Auto-rotates through pillars, pauses on hover, softens the active indicator to avoid edge artifacts, and swaps a matching monochrome telemetry/detail stack alongside each feature preview.
 
