@@ -375,8 +375,8 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
                 onClick={() => setActiveIndex(i)}
                 className={`group relative text-left p-4 rounded-2xl border transition-all duration-300 overflow-hidden w-full ${
                   isActive
-                    ? "bg-white/[0.03] border-white/10"
-                    : "bg-transparent border-transparent hover:bg-white/[0.02] hover:border-white/[0.06]"
+                    ? "border-transparent bg-transparent"
+                    : "border-transparent bg-transparent hover:bg-white/[0.02] hover:border-white/[0.06]"
                 }`}
               >
                 {isActive && (
@@ -431,7 +431,7 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
             </div>
           </div>
 
-          <div className="relative w-full h-[220px] md:h-[260px] rounded-lg bg-black/20 overflow-hidden">
+          <div className="relative w-full h-[140px] md:h-[150px] rounded-lg bg-black/20 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
@@ -447,37 +447,37 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
             </AnimatePresence>
           </div>
 
-          <div className="mt-4 pt-4 border-t border-white/5">
+          <div className="mt-3.5 pt-3.5 border-t border-white/5">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`meta-${activeIndex}`}
-                initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-4"
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-3"
               >
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-xl border border-white/6 bg-white/[0.02] p-3">
+                  <div className="rounded-xl border border-white/6 bg-white/[0.02] p-2.5">
                     <div className="text-[9px] font-mono uppercase tracking-[0.22em] text-white/30">
                       {activeFeature.metricLabel}
                     </div>
-                    <div className="mt-2 text-xl font-semibold tracking-tight text-white/90">
+                    <div className="mt-1 text-base font-semibold tracking-tight text-white/90">
                       {activeFeature.metricValue}
                     </div>
                   </div>
-                  <div className="rounded-xl border border-white/6 bg-white/[0.02] p-3">
+                  <div className="rounded-xl border border-white/6 bg-white/[0.02] p-2.5">
                     <div className="text-[9px] font-mono uppercase tracking-[0.22em] text-white/30">
                       {activeFeature.supportLabel}
                     </div>
-                    <div className="mt-2 text-sm font-semibold tracking-tight text-white/82">
+                    <div className="mt-1 text-[11px] font-semibold tracking-tight text-white/82">
                       {activeFeature.supportValue}
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-3.5">
-                  <div className="flex items-center justify-between gap-3 mb-3">
+                <div className="rounded-xl border border-white/6 bg-white/[0.02] p-2.5">
+                  <div className="flex items-center justify-between gap-3 mb-2">
                     <span className="text-[9px] font-mono uppercase tracking-[0.22em] text-white/28">
                       Active composition
                     </span>
@@ -485,17 +485,17 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
                       {String(activeIndex + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <div className="space-y-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {activeFeature.bullets.map((bullet, index) => (
                       <motion.div
                         key={`${activeFeature.title}-${bullet}`}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.28, delay: index * 0.06, ease: "easeOut" }}
-                        className="flex items-center gap-2.5 rounded-xl border border-white/[0.04] bg-black/20 px-3 py-2.5"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.22, delay: index * 0.04 }}
+                        className="flex items-center gap-1.5 rounded-lg border border-white/[0.04] bg-black/20 px-2.5 py-1 text-[10px] text-white/56 leading-none"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-white/55 shrink-0" />
-                        <span className="text-[11px] text-white/56 leading-relaxed">{bullet}</span>
+                        <span className="w-1 h-1 rounded-full bg-white/40 shrink-0" />
+                        <span>{bullet}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -521,7 +521,7 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
 
   return (
     <div
-      className="relative w-full h-[640px] rounded-lg bg-[#09090b] border border-white/5 overflow-y-auto scrollbar-none select-none group"
+      className="relative w-full h-[610px] rounded-lg bg-[#09090b] border border-white/5 overflow-y-auto scrollbar-none select-none group"
       style={cssVariables}
     >
       {content}

@@ -235,7 +235,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     dependencies: ["framer-motion"],
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
-    viewportHeightClass: "h-[640px]",
+    viewportHeightClass: "h-[610px]",
   },
 ];
 
