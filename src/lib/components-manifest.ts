@@ -189,6 +189,16 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:row-span-1",
     viewportHeightClass: "h-[320px]",
   },
+  {
+    id: "logo-cloud-2",
+    name: "Logo Cloud 2",
+    category: "Logo Cloud",
+    description: "Infinite scrolling loop slider of brand lockups with smooth progressive edge blurs.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-1",
+    viewportHeightClass: "h-[320px]",
+  },
 ];
 
 export function getComponentManifestItem(id: string) {

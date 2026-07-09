@@ -19,6 +19,7 @@ import MegaMenuNavbar3Card from "../components/bentoshowcase-elements/MegaMenuNa
 import InteractiveAccordionCard from "../components/bentoshowcase-elements/InteractiveAccordionCard";
 import NestedAccordionCard from "../components/bentoshowcase-elements/NestedAccordionCard";
 import LogoCloudCard from "../components/bentoshowcase-elements/LogoCloudCard";
+import LogoCloud2Card from "../components/bentoshowcase-elements/LogoCloud2Card";
 import type { ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>> = {
@@ -42,6 +43,7 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewPr
   "interactive-accordion": InteractiveAccordionCard,
   "nested-accordion": NestedAccordionCard,
   "logo-cloud-1": LogoCloudCard,
+  "logo-cloud-2": LogoCloud2Card,
 };
 
 export function getComponentPreview(id: string) {
