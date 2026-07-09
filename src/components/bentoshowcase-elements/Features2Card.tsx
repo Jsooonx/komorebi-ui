@@ -151,63 +151,78 @@ function PresetSwitcher() {
 
 // ── CARD 4: MOCK CLI TERMINAL ENGINE ──
 function MockCLIEngine() {
-  const [step, setStep] = useState(0);
-  const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
-  const command = "npx komorebi-ui add features-2";
+  const [typedCommand, setTypedCommand] = useState("");
+  const [logs, setLogs] = useState<string[]>([]);
+  const [showCursor, setShowCursor] = useState(true);
+  const fullCommand = "npx komorebi-ui add features-2";
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    
-    const runSimulation = () => {
-      // Step 0: Initial clean state
-      setStep(0);
-      setTerminalLogs([]);
+    let active = true;
+    let cursorInterval: NodeJS.Timeout;
 
-      // Step 1: Type command
-      timer = setTimeout(() => {
-        setStep(1);
-        setTerminalLogs([`$ ${command}`]);
-      }, 1000);
+    // Cursor blink effect
+    cursorInterval = setInterval(() => {
+      setShowCursor((v) => !v);
+    }, 500);
 
-      // Step 2: Fetch manifest
-      timer = setTimeout(() => {
-        setStep(2);
-        setTerminalLogs((prev) => [...prev, "⠋ Fetching block manifest..."]);
-      }, 2500);
+    const runLoop = async () => {
+      if (!active) return;
+      
+      // Reset
+      setTypedCommand("");
+      setLogs([]);
 
-      // Step 3: Copying component
-      timer = setTimeout(() => {
-        setStep(3);
-        setTerminalLogs((prev) => [
-          ...prev.slice(0, -1),
-          "✔ Block manifest verified.",
-          "⠋ Copying Features2Card.tsx to components/..."
-        ]);
-      }, 4200);
+      // 1. Type the command char by char
+      for (let i = 0; i <= fullCommand.length; i++) {
+        if (!active) return;
+        setTypedCommand(fullCommand.slice(0, i));
+        // Wait random time per character for realistic typing speed
+        await new Promise((r) => setTimeout(r, 50 + Math.random() * 40));
+      }
 
-      // Step 4: Successfully installed
-      timer = setTimeout(() => {
-        setStep(4);
-        setTerminalLogs((prev) => [
-          ...prev.slice(0, -1),
-          "✔ Component code cloned successfully.",
-          "",
-          "SUCCESS: Block Features 2 added to components/motion-primitives!"
-        ]);
-      }, 6000);
+      // Pause after typing completes
+      await new Promise((r) => setTimeout(r, 800));
 
-      // Restart Loop
-      timer = setTimeout(() => {
-        runSimulation();
-      }, 9500);
+      // 2. Fetch manifest
+      if (!active) return;
+      setLogs(["⠋ Fetching block manifest..."]);
+      await new Promise((r) => setTimeout(r, 1200));
+
+      // 3. Verify and Copy
+      if (!active) return;
+      setLogs([
+        "✔ Block manifest verified.",
+        "⠋ Copying Features2Card.tsx to components/..."
+      ]);
+      await new Promise((r) => setTimeout(r, 1500));
+
+      // 4. Success
+      if (!active) return;
+      setLogs([
+        "✔ Block manifest verified.",
+        "✔ Component code cloned successfully.",
+        "",
+        "SUCCESS: Block Features 2 added to workspace!"
+      ]);
+
+      // Pause at the end before restarting the loop
+      await new Promise((r) => setTimeout(r, 4500));
+      
+      if (active) {
+        runLoop();
+      }
     };
 
-    runSimulation();
-    return () => clearTimeout(timer);
+    runLoop();
+
+    return () => {
+      active = false;
+      clearInterval(cursorInterval);
+    };
   }, []);
 
   return (
-    <div className="w-full h-full bg-[#050507] border border-white/5 rounded-xl flex flex-col font-mono text-[10px] text-white/70 overflow-hidden text-left relative shadow-lg">
+    <div className="w-full h-36 bg-[#050507] border border-white/5 rounded-xl flex flex-col font-mono text-[10px] text-white/70 overflow-hidden text-left relative shadow-lg shrink-0">
       {/* Terminal Titlebar */}
       <div className="h-7 bg-white/[0.02] border-b border-white/5 flex items-center justify-between px-3.5 shrink-0 select-none">
         <div className="flex items-center gap-1.5">
@@ -219,19 +234,29 @@ function MockCLIEngine() {
         <div className="w-6" />
       </div>
 
-      {/* Terminal Window Body */}
-      <div className="p-4 flex-grow space-y-2 overflow-y-auto scrollbar-none min-h-[120px] select-text">
-        {terminalLogs.map((log, index) => {
-          const isSuccess = log.startsWith("SUCCESS") || log.startsWith("✔");
-          const isCommand = log.startsWith("$");
+      {/* Terminal Window Body (Fixed Height to prevent layout shift) */}
+      <div className="p-4 flex-grow space-y-1.5 overflow-hidden select-text h-[100px] max-h-[100px]">
+        {/* Command line */}
+        <div className="flex items-center gap-1">
+          <span className="text-white/60">$</span>
+          <span className="text-white font-medium">{typedCommand}</span>
+          {typedCommand.length < fullCommand.length && showCursor && (
+            <span className="w-1.5 h-3 bg-white/75 shrink-0" />
+          )}
+        </div>
+        
+        {/* Output lines */}
+        {logs.map((log, index) => {
+          const isSuccess = log.startsWith("SUCCESS");
+          const isCheck = log.startsWith("✔");
           return (
             <div 
               key={index}
               className={`leading-relaxed ${
                 isSuccess 
                   ? "text-emerald-400 font-semibold" 
-                  : isCommand 
-                    ? "text-white" 
+                  : isCheck 
+                    ? "text-emerald-400/90" 
                     : "text-white/55"
               }`}
             >
@@ -239,12 +264,6 @@ function MockCLIEngine() {
             </div>
           );
         })}
-        {step === 0 && (
-          <div className="flex items-center gap-1">
-            <span className="text-white">$</span>
-            <span className="w-1.5 h-3 bg-white/60 animate-pulse" />
-          </div>
-        )}
       </div>
     </div>
   );
