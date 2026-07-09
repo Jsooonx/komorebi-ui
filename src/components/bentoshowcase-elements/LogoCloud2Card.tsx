@@ -57,7 +57,11 @@ function InfiniteSlider({ children, speed = 40, gap = 112, speedOnHover = 80 }: 
       <motion.div
         ref={containerRef}
         className="flex w-max"
-        style={{ x }}
+        style={{ 
+          x, 
+          willChange: "transform",
+          transform: "translateZ(0)"
+        }}
       >
         {/* First Set */}
         {items.map((child, idx) => (

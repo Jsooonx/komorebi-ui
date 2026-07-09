@@ -71,7 +71,11 @@ function VerticalSlider({
       <motion.div
         ref={containerRef}
         className="flex flex-col w-full"
-        style={{ y }}
+        style={{ 
+          y, 
+          willChange: "transform",
+          transform: "translateZ(0)" 
+        }}
       >
         {/* First Set */}
         {items.map((child, idx) => (
