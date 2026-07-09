@@ -284,20 +284,20 @@ function BlocksIndex() {
     { id: "header", label: "Header", icon: Layout },
     { id: "hero", label: "Hero Section", icon: Layers, locked: true },
     { id: "secondary-hero", label: "Secondary Hero", icon: Layers, locked: true },
-    { id: "logo-cloud", label: "Logo Cloud", icon: Compass, locked: true },
+    { id: "logo-cloud", label: "Logo Cloud", icon: Compass },
     { id: "features", label: "Features", icon: Cpu, locked: true },
   ];
 
   const [activeCategory, setActiveCategory] = useState("header");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  // Manifest items that are Blocks (currently the three Mega Menu Navbars)
+  // Manifest items that are Blocks (currently headers and logo clouds)
   const blockItems: BlockItem[] = COMPONENTS_MANIFEST.map((item) => ({
     ...item,
     component: getComponentPreview(item.id),
   }))
     .filter((item): item is BlockItem => Boolean(item.component))
-    .filter((item) => ["mega-menu-navbar", "mega-menu-navbar-2", "mega-menu-navbar-3"].includes(item.id));
+    .filter((item) => ["mega-menu-navbar", "mega-menu-navbar-2", "mega-menu-navbar-3", "logo-cloud-1"].includes(item.id));
 
   return (
     <div className="min-h-screen bg-[#090909] text-white flex flex-col select-none antialiased">
@@ -457,14 +457,22 @@ function BlocksIndex() {
                   </motion.h1>
                 </div>
                 <p className="text-sm text-white/50 leading-relaxed font-heading max-w-2xl mt-1">
-                  Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells.
+                  {activeCategory === "header"
+                    ? "Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells."
+                    : "Clean minimalist layout presenting partner brand logos with monochromatic white filters and hover highlight states."}
                 </p>
               </div>
 
               {/* Stacked Preview List */}
               <div className="space-y-12">
                 {activeCategory === "header" &&
-                  blockItems.map((item) => <BlockRow key={item.id} item={item} />)}
+                  blockItems
+                    .filter((item) => item.category === "Headers & Menus")
+                    .map((item) => <BlockRow key={item.id} item={item} />)}
+                {activeCategory === "logo-cloud" &&
+                  blockItems
+                    .filter((item) => item.category === "Logo Cloud")
+                    .map((item) => <BlockRow key={item.id} item={item} />)}
               </div>
             </div>
 

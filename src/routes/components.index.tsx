@@ -186,7 +186,7 @@ function ComponentsIndex() {
     ...item,
     component: getComponentPreview(item.id),
   })).filter((item): item is CatalogComponentItem => Boolean(item.component))
-     .filter((item) => !["mega-menu-navbar", "mega-menu-navbar-2", "mega-menu-navbar-3"].includes(item.id));
+     .filter((item) => !["mega-menu-navbar", "mega-menu-navbar-2", "mega-menu-navbar-3", "logo-cloud-1"].includes(item.id));
 
   const [isBackNavigation, setIsBackNavigation] = useState(() => {
     if (typeof window !== "undefined") {

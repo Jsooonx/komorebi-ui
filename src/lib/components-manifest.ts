@@ -199,6 +199,17 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:row-span-2",
     viewportHeightClass: "h-[400px]",
   },
+  {
+    id: "logo-cloud-1",
+    name: "Logo Cloud 1",
+    category: "Logo Cloud",
+    description: "Clean minimalist layout presenting partner brands with monochromatic white filters and hover highlight states.",
+    dependencies: [],
+    cliCommand: "npx komorebi-ui add logo-cloud-1",
+    isNew: true,
+    gridClass: "md:row-span-1",
+    viewportHeightClass: "h-[320px]",
+  },
 ];
 
 export function getComponentManifestItem(id: string) {
