@@ -136,7 +136,13 @@ function PixelCraftPreview() {
 interface Feature {
   icon: React.ReactNode;
   title: string;
+  eyebrow: string;
   description: string;
+  metricLabel: string;
+  metricValue: string;
+  supportLabel: string;
+  supportValue: string;
+  bullets: string[];
   preview: React.ReactNode;
 }
 
@@ -144,28 +150,52 @@ const FEATURES: Feature[] = [
   {
     icon: <Wind className="w-5 h-5 text-white/80 stroke-[1.5]" />,
     title: "Living Interfaces",
+    eyebrow: "Presence systems",
     description:
       "Surfaces that respond to presence with magnetic fields, cursor trails, and organic drift.",
+    metricLabel: "Response field",
+    metricValue: "24ms",
+    supportLabel: "Motion layer",
+    supportValue: "Cursor-aware",
+    bullets: ["Magnetic hover zones", "Ambient trail echoes", "Breathing idle states"],
     preview: <LivingInterfacesPreview />,
   },
   {
     icon: <BarChart3 className="w-5 h-5 text-white/80 stroke-[1.5]" />,
     title: "Data in Motion",
+    eyebrow: "Narrated telemetry",
     description:
       "Animate graphs, counters, and progress rings with scroll-linked reveal sequences.",
+    metricLabel: "Signal cadence",
+    metricValue: "6 tracks",
+    supportLabel: "Sync mode",
+    supportValue: "Scroll-linked",
+    bullets: ["Staggered chart reveals", "Narrated counters", "Adaptive progress rails"],
     preview: <DataInMotionPreview />,
   },
   {
     icon: <Shuffle className="w-5 h-5 text-white/80 stroke-[1.5]" />,
     title: "Seamless Transitions",
+    eyebrow: "Shared-element flow",
     description: "Layout morphs, shared-element handoffs, and route-aware page choreography.",
+    metricLabel: "Handoff depth",
+    metricValue: "3 layers",
+    supportLabel: "Swap mode",
+    supportValue: "Layout-driven",
+    bullets: ["Shared-layout capsules", "Page-to-page choreography", "Soft state handoffs"],
     preview: <SeamlessTransitionsPreview />,
   },
   {
     icon: <Sparkles className="w-5 h-5 text-white/80 stroke-[1.5]" />,
     title: "Pixel Craft",
+    eyebrow: "Surface illusion",
     description:
       "Shader-grade visuals achieved with lightweight CSS masks and clip-path illusions.",
+    metricLabel: "Render stack",
+    metricValue: "CSS only",
+    supportLabel: "Surface pass",
+    supportValue: "Masked glow",
+    bullets: ["Clip-path reveals", "Soft shimmer sweeps", "Low-cost glossy depth"],
     preview: <PixelCraftPreview />,
   },
 ];
@@ -193,6 +223,7 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
     "--popover-foreground": "#ffffff",
     "--border": "rgba(255, 255, 255, 0.05)",
   } as React.CSSProperties;
+  const activeFeature = FEATURES[activeIndex];
 
   const content = (
     <div className="w-full max-w-6xl mx-auto px-6 py-12 md:py-16 select-none flex flex-col justify-center items-center">
@@ -232,15 +263,25 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
                 {isActive && (
                   <motion.div
                     layoutId="f3-active-bar"
-                    className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full bg-white/80"
+                    className="absolute left-2 top-4 bottom-4 w-px rounded-full bg-gradient-to-b from-transparent via-white/70 to-transparent"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-                <div className="flex items-start gap-3 pl-1.5">
+                {isActive && (
+                  <motion.div
+                    layoutId="f3-active-surface"
+                    className="absolute inset-0 rounded-2xl border border-white/10 bg-white/[0.03]"
+                    transition={{ type: "spring", stiffness: 320, damping: 28 }}
+                  />
+                )}
+                <div className="relative z-10 flex items-start gap-3 pl-3">
                   <div className="w-10 h-10 rounded-lg border border-white/10 bg-[#09090b]/80 backdrop-blur flex items-center justify-center shrink-0 shadow-sm transition-all duration-300 group-hover:border-white/20">
                     {feat.icon}
                   </div>
                   <div className="min-w-0">
+                    <span className="block text-[9px] font-mono uppercase tracking-[0.24em] text-white/28 mb-1.5">
+                      {feat.eyebrow}
+                    </span>
                     <h4 className="text-sm sm:text-base font-sans font-semibold text-white/90 tracking-tight transition-colors">
                       {feat.title}
                     </h4>
@@ -259,26 +300,96 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
           <div className="absolute top-3 right-4 text-[10px] font-mono text-white/30 tracking-widest select-none">
             {String(activeIndex + 1).padStart(2, "0")} / {String(FEATURES.length).padStart(2, "0")}
           </div>
+          <div className="mb-3 flex items-center justify-between gap-3 pr-12">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-9 h-9 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center shrink-0">
+                {activeFeature.icon}
+              </div>
+              <div className="min-w-0">
+                <div className="text-[9px] font-mono uppercase tracking-[0.24em] text-white/28">
+                  {activeFeature.eyebrow}
+                </div>
+                <div className="text-sm font-sans font-semibold text-white/88 truncate">
+                  {activeFeature.title}
+                </div>
+              </div>
+            </div>
+            <div className="px-2.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-[9px] font-mono uppercase tracking-[0.22em] text-white/42">
+              Live preview
+            </div>
+          </div>
+
           <div className="relative w-full h-[220px] md:h-[260px] rounded-lg bg-black/20 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
+                initial={{ opacity: 0, y: 18, scale: 0.985 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -14, scale: 0.985 }}
+                transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
                 className="absolute inset-0"
                 style={{ willChange: "transform, opacity" }}
               >
-                {FEATURES[activeIndex].preview}
+                {activeFeature.preview}
               </motion.div>
             </AnimatePresence>
           </div>
-          <div className="mt-3 flex items-center gap-2 text-white/60">
-            {FEATURES[activeIndex].icon}
-            <span className="text-[11px] font-mono uppercase tracking-widest">
-              {FEATURES[activeIndex].title}
-            </span>
+
+          <div className="mt-4 pt-4 border-t border-white/5">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`meta-${activeIndex}`}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-4"
+              >
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-xl border border-white/6 bg-white/[0.02] p-3">
+                    <div className="text-[9px] font-mono uppercase tracking-[0.22em] text-white/30">
+                      {activeFeature.metricLabel}
+                    </div>
+                    <div className="mt-2 text-xl font-semibold tracking-tight text-white/90">
+                      {activeFeature.metricValue}
+                    </div>
+                  </div>
+                  <div className="rounded-xl border border-white/6 bg-white/[0.02] p-3">
+                    <div className="text-[9px] font-mono uppercase tracking-[0.22em] text-white/30">
+                      {activeFeature.supportLabel}
+                    </div>
+                    <div className="mt-2 text-sm font-semibold tracking-tight text-white/82">
+                      {activeFeature.supportValue}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-3.5">
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <span className="text-[9px] font-mono uppercase tracking-[0.22em] text-white/28">
+                      Active composition
+                    </span>
+                    <span className="text-[9px] font-mono uppercase tracking-[0.22em] text-white/38">
+                      {String(activeIndex + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    {activeFeature.bullets.map((bullet, index) => (
+                      <motion.div
+                        key={`${activeFeature.title}-${bullet}`}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.28, delay: index * 0.06, ease: "easeOut" }}
+                        className="flex items-center gap-2.5 rounded-xl border border-white/[0.04] bg-black/20 px-3 py-2.5"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-white/55 shrink-0" />
+                        <span className="text-[11px] text-white/56 leading-relaxed">{bullet}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
