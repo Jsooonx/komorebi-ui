@@ -22,112 +22,231 @@ function GridBackdrop({ opacity = 20, size = "16px" }: { opacity?: number; size?
   );
 }
 
-// PREVIEW 1: Living Interfaces (magnetic pulse)
+// PREVIEW 1: Living Interfaces (magnetic hover tracking)
 function LivingInterfacesPreview() {
-  return (
-    <div className="relative w-full h-full flex items-center justify-center rounded-lg bg-black/40 border border-white/5 overflow-hidden">
-      <GridBackdrop />
-      {[0, 1, 2].map((i) => (
-        <motion.div
-          key={i}
-          className="absolute w-[130px] h-[130px] rounded-full border border-white/20"
-          initial={{ scale: 0.15, opacity: 0.55 }}
-          animate={{ scale: 1, opacity: 0 }}
-          transition={{ duration: 2.6, delay: i * 0.7, ease: "easeOut" }}
-          style={{ willChange: "transform, opacity" }}
-        />
-      ))}
-      <motion.div
-        className="relative z-10 w-3 h-3 rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.55)]"
-        initial={{ scale: 0 }}
-        animate={{ scale: [0, 1.3, 1] }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      />
-      <span className="absolute bottom-2.5 right-3 text-[8px] font-mono text-white/30 uppercase tracking-widest">
-        magnetic
-      </span>
-    </div>
-  );
-}
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [hovering, setHovering] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-// PREVIEW 2: Data in Motion (scroll-linked bars)
-function DataInMotionPreview() {
-  const bars = [42, 68, 52, 92, 64];
-  return (
-    <div className="relative w-full h-full rounded-lg bg-black/40 border border-white/5 overflow-hidden p-5 flex items-end justify-center gap-3">
-      <GridBackdrop />
-      {bars.map((h, i) => (
-        <motion.div
-          key={i}
-          className="w-7 rounded-md bg-gradient-to-t from-white/10 to-white/65 border border-white/10 origin-bottom"
-          style={{ height: `${h}%`, willChange: "transform, opacity" }}
-          initial={{ scaleY: 0, opacity: 0 }}
-          animate={{ scaleY: 1, opacity: 1 }}
-          transition={{ duration: 0.6, delay: i * 0.12, ease: "easeOut" }}
-        />
-      ))}
-      <span className="absolute bottom-2.5 right-3 text-[8px] font-mono text-white/30 uppercase tracking-widest">
-        scroll-linked
-      </span>
-    </div>
-  );
-}
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    setMouse({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
 
-// PREVIEW 3: Seamless Transitions (shared layout swap)
-function SeamlessTransitionsPreview() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center rounded-lg bg-black/40 border border-white/5 overflow-hidden">
+    <div 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+      className="relative w-full h-full flex items-center justify-center rounded-lg bg-black/40 border border-white/5 overflow-hidden cursor-crosshair"
+    >
       <GridBackdrop />
-      <motion.div
-        className="absolute w-28 h-20 rounded-xl bg-white/[0.04] border border-white/10"
-        initial={{ x: -36, y: 22, rotate: -6, opacity: 0 }}
-        animate={{ x: -14, y: 12, rotate: -6, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        style={{ willChange: "transform, opacity" }}
-      />
-      <motion.div
-        className="absolute w-28 h-20 rounded-xl bg-white/[0.06] border border-white/15 shadow-lg flex items-center justify-center"
-        initial={{ x: 36, y: -22, rotate: 6, opacity: 0, scale: 0.92 }}
-        animate={{ x: 14, y: -12, rotate: 6, opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-        style={{ willChange: "transform, opacity" }}
-      >
-        <Shuffle className="w-5 h-5 text-white/70 stroke-[1.5]" />
-      </motion.div>
-      <span className="absolute bottom-2.5 right-3 text-[8px] font-mono text-white/30 uppercase tracking-widest">
-        shared layout
-      </span>
-    </div>
-  );
-}
-
-// PREVIEW 4: Pixel Craft (clip-path reveal + shimmer)
-function PixelCraftPreview() {
-  return (
-    <div className="relative w-full h-full flex items-center justify-center rounded-lg bg-black/40 border border-white/5 overflow-hidden">
-      <GridBackdrop />
-      <div className="relative w-40 h-28 rounded-xl overflow-hidden border border-white/10 bg-[#0b0b0d]">
+      
+      {/* Interactive hover magnetic pulse */}
+      {hovering && (
         <motion.div
-          className="absolute inset-0"
+          className="absolute w-20 h-20 rounded-full border border-white/20 bg-white/[0.02] pointer-events-none"
           style={{
-            background:
-              "linear-gradient(120deg, rgba(255,255,255,0.04), rgba(255,255,255,0.22), rgba(255,255,255,0.04))",
+            left: mouse.x - 40,
+            top: mouse.y - 40,
           }}
-          initial={{ clipPath: "inset(0 100% 0 0)" }}
-          animate={{ clipPath: "inset(0 0% 0 0)" }}
-          transition={{ duration: 1.1, ease: "easeInOut" }}
+          transition={{ type: "spring", stiffness: 180, damping: 20 }}
         />
-        <motion.div
-          className="absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-          initial={{ x: "-120%" }}
-          animate={{ x: "360%" }}
-          transition={{ duration: 1.2, delay: 0.45, ease: "easeInOut" }}
-          style={{ willChange: "transform" }}
-        />
-        <span className="absolute bottom-2 left-3 text-[8px] font-mono text-white/40 uppercase tracking-widest">
-          clip-path
-        </span>
+      )}
+      
+      {/* Center magnetic point */}
+      <motion.div
+        animate={hovering ? {
+          x: (mouse.x - 120) * 0.25, // magnetic attract towards cursor
+          y: (mouse.y - 100) * 0.25,
+        } : { x: 0, y: 0 }}
+        transition={{ type: "spring", stiffness: 120, damping: 15 }}
+        className="relative z-10 w-4 h-4 rounded-full bg-white shadow-[0_0_20px_rgba(255,255,255,0.7)] flex items-center justify-center"
+      >
+        <div className="w-1.5 h-1.5 rounded-full bg-black" />
+      </motion.div>
+
+      <span className="absolute bottom-2.5 right-3 text-[8px] font-mono text-white/30 uppercase tracking-widest select-none">
+        {hovering ? "Hover Active - Magnetized" : "Ambient State"}
+      </span>
+    </div>
+  );
+}
+
+// PREVIEW 2: Data in Motion (scroll-linked spline telemetry)
+function DataInMotionPreview() {
+  const [fps, setFps] = useState(60);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Simulate varying refresh rate telemetry
+      setFps(Math.floor(138 + Math.random() * 6));
+    }, 800);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative w-full h-full rounded-lg bg-black/40 border border-white/5 overflow-hidden p-6 flex flex-col justify-between">
+      <GridBackdrop />
+      
+      {/* Metrics telemetry row */}
+      <div className="flex justify-between items-start z-10">
+        <div className="text-left">
+          <span className="text-[8px] font-mono text-white/30 uppercase tracking-widest block">TELEMETRY</span>
+          <span className="text-sm font-sans font-bold text-white tracking-tight">Active FPS</span>
+        </div>
+        <div className="text-right font-mono">
+          <motion.span 
+            key={fps}
+            initial={{ opacity: 0.5, y: -2 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-xl font-bold text-white tracking-tight"
+          >
+            {fps}
+          </motion.span>
+          <span className="text-[9px] text-white/40 ml-1">Hz</span>
+        </div>
       </div>
+
+      {/* Telemetry spline graph path */}
+      <div className="h-16 w-full relative z-10 flex items-end">
+        <svg className="w-full h-full text-white/40" viewBox="0 0 100 30" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="white" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="white" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          {/* Spline area */}
+          <motion.path
+            d="M 0 25 Q 20 5 40 18 T 80 8 T 100 15 L 100 30 L 0 30 Z"
+            fill="url(#chart-grad)"
+          />
+          {/* Spline line */}
+          <motion.path
+            d="M 0 25 Q 20 5 40 18 T 80 8 T 100 15"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          />
+        </svg>
+      </div>
+
+      <span className="absolute bottom-2.5 right-3 text-[8px] font-mono text-white/30 uppercase tracking-widest select-none">
+        Telemetry Spline
+      </span>
+    </div>
+  );
+}
+
+// PREVIEW 3: Seamless Transitions (shared layout switcher tabs)
+function SeamlessTransitionsPreview() {
+  const [activeTab, setActiveTab] = useState(0);
+  return (
+    <div className="relative w-full h-full flex flex-col items-center justify-center gap-4 rounded-lg bg-black/40 border border-white/5 overflow-hidden p-4">
+      <GridBackdrop />
+      
+      {/* Tab selector menu */}
+      <div className="flex bg-[#0f0f11] border border-white/5 rounded-full p-1 z-10">
+        {["Tab 1", "Tab 2", "Tab 3"].map((tab, idx) => (
+          <button
+            key={idx}
+            onClick={() => setActiveTab(idx)}
+            className="relative px-3.5 py-1 text-[10px] font-sans font-medium text-white/60 hover:text-white transition-colors rounded-full"
+          >
+            {activeTab === idx && (
+              <motion.div
+                layoutId="transition-pill"
+                className="absolute inset-0 bg-white/10 border border-white/10 rounded-full"
+                transition={{ type: "spring", stiffness: 220, damping: 20 }}
+              />
+            )}
+            <span className="relative z-10">{tab}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Content card morph */}
+      <div className="w-40 h-16 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-center p-3 relative z-10">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="text-[10px] font-mono text-white/50"
+          >
+            {activeTab === 0 && "📁 Render Module: Alpha"}
+            {activeTab === 1 && "⚡ Speed Index: 98.2"}
+            {activeTab === 2 && "🔒 Security: Encrypted"}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      <span className="absolute bottom-2.5 right-3 text-[8px] font-mono text-white/30 uppercase tracking-widest select-none">
+        Shared Layout
+      </span>
+    </div>
+  );
+}
+
+// PREVIEW 4: Pixel Craft (clip-path wireframe reveal slider)
+function PixelCraftPreview() {
+  const [slideX, setSlideX] = useState(50);
+  
+  useEffect(() => {
+    let start = 0;
+    const interval = setInterval(() => {
+      start += 0.03;
+      setSlideX(50 + Math.sin(start) * 35); // oscillates between 15% and 85%
+    }, 30);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center rounded-lg bg-black/40 border border-white/5 overflow-hidden">
+      <GridBackdrop />
+      
+      <div className="relative w-44 h-28 rounded-xl overflow-hidden border border-white/10 bg-[#0b0b0d] flex items-center justify-center shadow-lg">
+        {/* Left side: Wireframe / Skeleton */}
+        <div className="absolute inset-0 flex items-center justify-center text-white/20 select-none">
+          <div className="w-16 h-16 rounded-full border border-dashed border-white/20 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full border border-dashed border-white/10" />
+          </div>
+        </div>
+
+        {/* Right side: Finished glow card, revealed via clipPath */}
+        <div 
+          className="absolute inset-0 bg-[#16161a] flex items-center justify-center text-white"
+          style={{
+            clipPath: `polygon(0 0, ${slideX}% 0, ${slideX}% 100%, 0 100%)`
+          }}
+        >
+          {/* Glowing grid and circles */}
+          <div className="absolute inset-0 bg-radial from-white/10 to-transparent pointer-events-none" />
+          <div className="w-16 h-16 rounded-full border border-white/30 bg-white/[0.04] shadow-[0_0_20px_rgba(255,255,255,0.15)] flex items-center justify-center">
+            <Sparkles className="w-6 h-6 text-white/90" />
+          </div>
+        </div>
+
+        {/* Slide divider line */}
+        <div 
+          className="absolute inset-y-0 w-px bg-white/40 shadow-[0_0_8px_white]"
+          style={{ left: `${slideX}%` }}
+        />
+      </div>
+
+      <span className="absolute bottom-2.5 right-3 text-[8px] font-mono text-white/30 uppercase tracking-widest select-none">
+        Clip Path
+      </span>
     </div>
   );
 }
@@ -260,13 +379,6 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
                     : "bg-transparent border-transparent hover:bg-white/[0.02] hover:border-white/[0.06]"
                 }`}
               >
-                {isActive && (
-                  <motion.div
-                    layoutId="f3-active-bar"
-                    className="absolute left-2 top-4 bottom-4 w-px rounded-full bg-gradient-to-b from-transparent via-white/70 to-transparent"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
                 {isActive && (
                   <motion.div
                     layoutId="f3-active-surface"
