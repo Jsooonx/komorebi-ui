@@ -9,7 +9,7 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, title, description }: FeatureCardProps) {
   return (
-    <div className="group relative flex flex-col items-center text-center py-10 px-8 rounded-2xl bg-[#0b0b0d] border border-white/[0.04] hover:border-white/[0.08] transition-all duration-300 overflow-hidden w-full h-full select-none">
+    <div className="group relative flex flex-col items-center text-center py-8 px-6 rounded-2xl bg-[#0b0b0d] border border-white/[0.04] hover:border-white/[0.08] transition-all duration-300 overflow-hidden w-full h-full select-none">
       {/* Dynamic Grid Background with fade-out radial mask */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500" 
@@ -26,18 +26,18 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
       />
 
       {/* Grid Center Icon Container */}
-      <div className="relative w-32 h-32 flex items-center justify-center mb-4 shrink-0">
+      <div className="relative w-24 h-24 flex items-center justify-center mb-3 shrink-0">
         <div className="w-10 h-10 rounded-lg border border-white/10 bg-[#09090b]/80 backdrop-blur flex items-center justify-center relative z-10 shadow-sm group-hover:border-white/20 group-hover:shadow-md transition-all duration-300">
           {icon}
         </div>
       </div>
 
       {/* Text Contents */}
-      <h4 className="text-base sm:text-lg font-sans font-semibold text-white/90 tracking-tight transition-colors group-hover:text-white duration-300 shrink-0 mt-2">
+      <h4 className="text-base sm:text-lg font-sans font-semibold text-white/90 tracking-tight transition-colors group-hover:text-white duration-300 shrink-0 mt-1">
         {title}
       </h4>
       
-      <p className="text-xs sm:text-sm text-white/45 mt-4 font-sans leading-relaxed max-w-[270px] select-text">
+      <p className="text-xs sm:text-sm text-white/45 mt-3 font-sans leading-relaxed max-w-[270px] select-text">
         {description}
       </p>
     </div>
@@ -70,9 +70,9 @@ export default function Features1Card({ minimal = false }: { minimal?: boolean }
   } as React.CSSProperties;
 
   const content = (
-    <div className="w-full max-w-6xl mx-auto px-6 py-10 md:py-16 select-none flex flex-col justify-center items-center h-full">
+    <div className="w-full max-w-6xl mx-auto px-6 py-6 md:py-8 select-none flex flex-col justify-center items-center h-full">
       {/* Block Header */}
-      <div className="text-center mb-10 md:mb-14 shrink-0">
+      <div className="text-center mb-6 md:mb-8 shrink-0">
         <h3 className="font-serif text-3xl sm:text-4xl font-normal leading-tight text-white tracking-tight">
           Engineered for fluid motion
         </h3>
