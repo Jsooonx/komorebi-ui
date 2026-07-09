@@ -522,7 +522,7 @@ function ComponentDetail() {
               <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
                 <PreviewComponent
                   minimal={
-                    ["pixel-shimmer", "mega-menu-navbar-1", "mega-menu-navbar-2", "mega-menu-navbar-3"].includes(comp.id)
+                    ["pixel-shimmer", "mega-menu-navbar-1", "mega-menu-navbar-2", "mega-menu-navbar-3", "features-1"].includes(comp.id)
                       ? false
                       : true
                   }

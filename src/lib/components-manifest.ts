@@ -209,6 +209,15 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-1",
     viewportHeightClass: "h-[320px]",
   },
+  {
+    id: "features-1",
+    name: "Features 1",
+    category: "Features",
+    description: "Clean minimalist 3-column features grid block with centered pattern design backdrops and outline icons.",
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getComponentManifestItem(id: string) {

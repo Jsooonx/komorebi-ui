@@ -21,6 +21,7 @@ import NestedAccordionCard from "../components/bentoshowcase-elements/NestedAcco
 import LogoCloudCard from "../components/bentoshowcase-elements/LogoCloudCard";
 import LogoCloud2Card from "../components/bentoshowcase-elements/LogoCloud2Card";
 import LogoCloud3Card from "../components/bentoshowcase-elements/LogoCloud3Card";
+import Features1Card from "../components/bentoshowcase-elements/Features1Card";
 import type { ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>> = {
@@ -46,6 +47,7 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewPr
   "logo-cloud-1": LogoCloudCard,
   "logo-cloud-2": LogoCloud2Card,
   "logo-cloud-3": LogoCloud3Card,
+  "features-1": Features1Card,
 };
 
 export function getComponentPreview(id: string) {

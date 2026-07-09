@@ -285,7 +285,7 @@ function BlocksIndex() {
     { id: "hero", label: "Hero Section", icon: Layers, locked: true },
     { id: "secondary-hero", label: "Secondary Hero", icon: Layers, locked: true },
     { id: "logo-cloud", label: "Logo Cloud", icon: Compass },
-    { id: "features", label: "Features", icon: Cpu, locked: true },
+    { id: "features", label: "Features", icon: Cpu },
   ];
 
   const [activeCategory, setActiveCategory] = useState("header");
@@ -302,13 +302,13 @@ function BlocksIndex() {
     localStorage.setItem("komorebi_blocks_sidebar_open", String(isSidebarOpen));
   }, [isSidebarOpen]);
 
-  // Manifest items that are Blocks (currently headers and logo clouds)
+  // Manifest items that are Blocks (currently headers, logo clouds, and features)
   const blockItems: BlockItem[] = COMPONENTS_MANIFEST.map((item) => ({
     ...item,
     component: getComponentPreview(item.id),
   }))
     .filter((item): item is BlockItem => Boolean(item.component))
-    .filter((item) => ["mega-menu-navbar-1", "mega-menu-navbar-2", "mega-menu-navbar-3", "logo-cloud-1", "logo-cloud-2", "logo-cloud-3"].includes(item.id));
+    .filter((item) => ["mega-menu-navbar-1", "mega-menu-navbar-2", "mega-menu-navbar-3", "logo-cloud-1", "logo-cloud-2", "logo-cloud-3", "features-1"].includes(item.id));
 
   return (
     <div className="min-h-screen bg-[#090909] text-white flex flex-col select-none antialiased">
