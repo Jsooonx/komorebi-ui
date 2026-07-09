@@ -47,19 +47,19 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
 export default function Features1Card({ minimal = false }: { minimal?: boolean }) {
   const features = [
     {
-      icon: <Zap className="w-5 h-5 text-white/80 stroke-[1.5]" />,
-      title: "Customizable",
-      description: "Extensive customization options, allowing you to tailor every aspect to meet your specific needs."
+      icon: <Zap className="w-5 h-5 text-[#BECB6D] stroke-[1.5]" />,
+      title: "Fluid Animations",
+      description: "Supercharged with Framer Motion, GSAP, and WebGL shaders for buttery-smooth 60fps organic animations."
     },
     {
-      icon: <SlidersHorizontal className="w-5 h-5 text-white/80 stroke-[1.5]" />,
-      title: "You have full control",
-      description: "From design elements to functionality, you have complete control to create a unique and personalized experience."
+      icon: <SlidersHorizontal className="w-5 h-5 text-[#BECB6D] stroke-[1.5]" />,
+      title: "Developer Centric",
+      description: "Integrate cleanly in seconds using our interactive CLI. Pure React and Tailwind code directly in your workspace."
     },
     {
-      icon: <Sparkles className="w-5 h-5 text-white/80 stroke-[1.5]" />,
-      title: "Powered By AI",
-      description: "Elements to functionality, you have complete control to create a unique experience."
+      icon: <Sparkles className="w-5 h-5 text-[#BECB6D] stroke-[1.5]" />,
+      title: "Production Ready",
+      description: "Fully optimized for speed, responsive layouts, hardware-accelerated rendering, and maximum SEO practices."
     }
   ];
 
@@ -74,10 +74,10 @@ export default function Features1Card({ minimal = false }: { minimal?: boolean }
       {/* Block Header */}
       <div className="text-center mb-10 md:mb-14 shrink-0">
         <h3 className="font-serif text-3xl sm:text-4xl font-normal leading-tight text-white tracking-tight">
-          Built to cover your needs
+          Engineered for fluid motion
         </h3>
-        <p className="text-xs sm:text-sm text-white/45 mt-3 font-sans max-w-md mx-auto leading-relaxed select-text">
-          Libero sapiente aliquam quibusdam aspernatur, praesentium iusto repellendus.
+        <p className="text-xs sm:text-sm text-white/45 mt-3 font-sans max-w-lg mx-auto leading-relaxed select-text">
+          Experience design-engineer quality components crafted with organic motion, smooth layouts, and physics-based interactions.
         </p>
       </div>
 
