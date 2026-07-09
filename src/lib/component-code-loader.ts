@@ -38,7 +38,7 @@ export async function loadComponentCode(id: string) {
     case "holographic-terminal":
       return (await import("../components/bentoshowcase-elements/HolographicTerminalCard.tsx?raw"))
         .default;
-    case "mega-menu-navbar":
+    case "mega-menu-navbar-1":
       return (await import("../components/bentoshowcase-elements/MegaMenuNavbarCard.tsx?raw"))
         .default;
     case "mega-menu-navbar-2":

@@ -128,7 +128,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "Simulated console window outputting text strings dynamically.",
   },
   {
-    id: "mega-menu-navbar",
+    id: "mega-menu-navbar-1",
     name: "Mega Menu Navbar 1",
     category: "Headers & Menus",
     description: "Shadcn-based floating navbar with premium animated mega menu dropdown panels.",

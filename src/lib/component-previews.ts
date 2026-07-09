@@ -36,7 +36,7 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewPr
   "pixel-shimmer": PixelShimmerCard,
   "pipeline-stepper": PipelineStepperCard,
   "holographic-terminal": HolographicTerminalCard,
-  "mega-menu-navbar": MegaMenuNavbarCard,
+  "mega-menu-navbar-1": MegaMenuNavbarCard,
   "mega-menu-navbar-2": MegaMenuNavbar2Card,
   "mega-menu-navbar-3": MegaMenuNavbar3Card,
   "interactive-accordion": InteractiveAccordionCard,
