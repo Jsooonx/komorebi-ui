@@ -13,6 +13,7 @@ import {
   Compass,
   Layout,
   BookOpen,
+  Sidebar,
 } from "lucide-react";
 import {
   COMPONENTS_MANIFEST,
@@ -154,17 +155,40 @@ function ComponentCard({
   );
 }
 
+const getCategoryDescription = (cat: string, mode: string) => {
+  if (mode === "all" || cat === "All") {
+    return "Explore the complete library of custom, high-fidelity components [Hover to preview]";
+  }
+  switch (cat.toLowerCase()) {
+    case "visuals":
+      return "Creative graphics, surface effects, and text animations [Hover to preview]";
+    case "interactions":
+      return "Rich 3D tilt tracking, swipers, and cursor elements [Hover to preview]";
+    case "reveal":
+      return "Expanding interactive blocks with smooth height changes [Hover to preview]";
+    case "floating ui":
+      return "App-style dynamic notifications and custom floating docks [Hover to preview]";
+    case "canvas":
+      return "Interactive WebGL shaders and three.js canvas components [Hover to preview]";
+    case "controls":
+      return "Typewriter CLI consoles and stepper controllers [Hover to preview]";
+    case "header":
+      return "Premium top-of-page navbars and morphing scroll menus [Hover to preview]";
+    default:
+      return "Hover component cards to preview animation states";
+  }
+};
+
 function ComponentsIndex() {
   const catalogItems: CatalogComponentItem[] = COMPONENTS_MANIFEST.map((item) => ({
     ...item,
     component: getComponentPreview(item.id),
   })).filter((item): item is CatalogComponentItem => Boolean(item.component));
 
-  const [isBackNavigation] = useState(() => {
+  const [isBackNavigation, setIsBackNavigation] = useState(() => {
     if (typeof window !== "undefined") {
       const fromCatalog = sessionStorage.getItem("komorebi_from_catalog");
       if (fromCatalog === "true") {
-        sessionStorage.removeItem("komorebi_from_catalog");
         return true;
       }
     }
@@ -179,14 +203,54 @@ function ComponentsIndex() {
         window.scrollTo(0, parseInt(savedY, 10));
         sessionStorage.removeItem("komorebi_scroll_y");
       }
-      if (pageRef.current) {
-        pageRef.current.style.opacity = "1";
-      }
+      sessionStorage.removeItem("komorebi_from_catalog");
     }
   }, [isBackNavigation]);
 
-  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [activeCategory, setActiveCategory] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const fromCatalog = sessionStorage.getItem("komorebi_from_catalog");
+      if (fromCatalog === "true") {
+        return sessionStorage.getItem("komorebi_active_category") || "All";
+      }
+    }
+    return "All";
+  });
+
   const [searchQuery, setSearchQuery] = useState<string>("");
+  
+  const [viewMode, setViewMode] = useState<"category" | "all">(( ) => {
+    if (typeof window !== "undefined") {
+      const fromCatalog = sessionStorage.getItem("komorebi_from_catalog");
+      if (fromCatalog === "true") {
+        return (sessionStorage.getItem("komorebi_view_mode") as "category" | "all") || "all";
+      }
+    }
+    return "all";
+  });
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const fromCatalog = sessionStorage.getItem("komorebi_from_catalog");
+      if (fromCatalog === "true") {
+        const saved = sessionStorage.getItem("komorebi_sidebar_open");
+        return saved === null ? true : saved === "true";
+      }
+    }
+    return true;
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem("komorebi_active_category", activeCategory);
+  }, [activeCategory]);
+
+  useEffect(() => {
+    sessionStorage.setItem("komorebi_view_mode", viewMode);
+  }, [viewMode]);
+
+  useEffect(() => {
+    sessionStorage.setItem("komorebi_sidebar_open", String(isSidebarOpen));
+  }, [isSidebarOpen]);
 
   const categories = ["All", ...Array.from(new Set(catalogItems.map((c) => c.category)))];
 
@@ -196,7 +260,7 @@ function ComponentsIndex() {
   };
 
   const filteredComponents = catalogItems.filter((item) => {
-    const matchesCategory = activeCategory === "All" || item.category === activeCategory;
+    const matchesCategory = viewMode === "all" || activeCategory === "All" || item.category === activeCategory;
     const matchesSearch =
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -206,13 +270,17 @@ function ComponentsIndex() {
 
   useEffect(() => {
     sessionStorage.setItem("komorebi_visited_index", "true");
-  }, []);
+    if (isBackNavigation) {
+      // Clear the back navigation flag after mount to allow future animations to play normally
+      setIsBackNavigation(false);
+    }
+  }, [isBackNavigation]);
 
   return (
     <div
       ref={pageRef}
       className="min-h-screen bg-[#090909] text-white flex flex-col select-none antialiased"
-      style={{ opacity: isBackNavigation ? 0 : 1 }}
+      style={{ opacity: 1 }}
     >
       <header className="fixed top-0 left-0 right-0 h-16 border-b border-white/5 flex items-center justify-between px-6 md:px-12 z-40 bg-[#090909]/85 backdrop-blur-xl">
         <div className="flex items-center gap-3">
@@ -239,85 +307,148 @@ function ComponentsIndex() {
       </header>
 
       <div className="flex-1 flex pt-16 relative w-full gap-0">
-        <aside className="hidden lg:flex w-72 shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex-col justify-between border-r border-white/5 overflow-hidden px-8">
-          <div className="space-y-8 min-w-[200px]">
-            <div className="flex items-center gap-2 px-1">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-white/80">
-                Filter Categories
+        <motion.aside
+          initial={isBackNavigation ? {
+            width: 288,
+            opacity: 1,
+            paddingLeft: isSidebarOpen ? 24 : 0,
+            paddingRight: isSidebarOpen ? 24 : 0,
+            borderRightWidth: isSidebarOpen ? 1 : 0,
+          } : { width: 288, opacity: 1 }}
+          animate={{
+            width: isSidebarOpen ? 288 : 0,
+            opacity: isSidebarOpen ? 1 : 0,
+            paddingLeft: isSidebarOpen ? 24 : 0,
+            paddingRight: isSidebarOpen ? 24 : 0,
+            borderRightWidth: isSidebarOpen ? 1 : 0,
+          }}
+          transition={isBackNavigation ? { duration: 0 } : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="hidden lg:flex shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex-col justify-between border-white/5 overflow-hidden"
+        >
+          <div className="space-y-6 min-w-[220px]">
+            {/* Header: Filters */}
+            <div className="flex items-center justify-between pb-4 border-b border-white/5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-white/70">
+                Filters
               </h3>
-            </div>
-
-            <nav className="space-y-1.5">
-              {categories.map((cat) => {
-                const isActive = activeCategory === cat;
-                const count = getCategoryCount(cat);
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl border text-left transition-all group cursor-pointer ${
-                      isActive
-                        ? "bg-[#E8A969]/10 border-[#E8A969]/30 text-[#E8A969]"
-                        : "bg-white/[0.01] border-white/5 hover:bg-white/[0.03] hover:border-white/10 text-white/60 hover:text-white"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span
-                        className={`${isActive ? "text-[#E8A969]" : "text-white/40 group-hover:text-white/60"}`}
-                      >
-                        {getCategoryIcon(cat)}
-                      </span>
-                      <span className="text-xs font-medium">{cat}</span>
-                    </div>
-                    <span
-                      className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded-full ${
-                        isActive ? "bg-[#E8A969]/20 text-[#E8A969]" : "bg-white/5 text-white/40"
-                      }`}
-                    >
-                      {count}
-                    </span>
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3 min-w-[200px]">
-            <div className="flex items-center gap-2">
-              <Terminal className="w-3.5 h-3.5 text-[#BECB6D]" />
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-white/60">
-                Developer CLI
-              </span>
-            </div>
-            <p className="text-[11px] text-white/40 leading-relaxed">
-              Initialize the styling system and dependencies in one step:
-            </p>
-            <div className="flex items-center justify-between gap-2 bg-black/60 border border-white/5 rounded-lg px-3 py-1.5 font-mono text-[9px] text-[#BECB6D]">
-              <span>npx komorebi-ui init</span>
               <button
-                onClick={async () => {
-                  await navigator.clipboard.writeText("npx komorebi-ui init");
-                  toast.success("Init command copied!");
-                }}
-                className="hover:text-white transition-colors cursor-pointer"
+                onClick={() => setIsSidebarOpen(false)}
+                className="p-1 hover:bg-white/5 rounded-lg text-white/40 hover:text-white transition-all cursor-pointer flex items-center justify-center"
+                title="Collapse Sidebar"
               >
-                <Copy className="w-3 h-3" />
+                <Sidebar className="w-4 h-4" />
               </button>
             </div>
+
+            {/* Section: View */}
+            <div className="space-y-2.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-white/35 block">
+                View
+              </span>
+              <div className="flex bg-white/[0.02] border border-white/5 p-1 rounded-xl gap-1">
+                <button
+                  onClick={() => {
+                    setViewMode("category");
+                    if (activeCategory === "All") {
+                      setActiveCategory(categories[1] || "All");
+                    }
+                  }}
+                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-[11px] font-semibold cursor-pointer transition-all ${
+                    viewMode === "category"
+                      ? "bg-white/10 text-white border border-white/5"
+                      : "text-white/40 hover:text-white/70 border border-transparent"
+                  }`}
+                >
+                  By category
+                </button>
+                <button
+                  onClick={() => {
+                    setViewMode("all");
+                    setActiveCategory("All");
+                  }}
+                  className={`flex-1 py-1.5 rounded-lg text-[11px] font-semibold cursor-pointer transition-all ${
+                    viewMode === "all"
+                      ? "bg-white/10 text-white border border-white/5"
+                      : "text-white/40 hover:text-white/70 border border-transparent"
+                  }`}
+                >
+                  All components
+                </button>
+              </div>
+            </div>
+
+            {/* Section: Categories */}
+            <div className="space-y-3 pt-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white/35">
+                  Categories
+                </span>
+                {activeCategory !== "All" && (
+                  <button
+                    onClick={() => {
+                      setActiveCategory("All");
+                      setViewMode("all");
+                    }}
+                    className="text-[10px] font-semibold text-[#E8A969] hover:underline transition-colors cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+
+              <div className="flex flex-wrap gap-1.5 max-h-[280px] overflow-y-auto pr-1 select-none custom-scrollbar">
+                {categories.filter(c => c !== "All").map((cat) => {
+                  const isActive = activeCategory === cat && viewMode === "category";
+                  const count = getCategoryCount(cat);
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => {
+                        setActiveCategory(cat);
+                        setViewMode("category");
+                      }}
+                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-medium transition-all cursor-pointer ${
+                        isActive
+                          ? "bg-white/10 border-white/30 text-white"
+                          : "bg-white/[0.02] border-white/5 hover:border-white/10 hover:bg-white/[0.04] text-white/60 hover:text-white"
+                      }`}
+                    >
+                      <span>{cat}</span>
+                      <span className={`text-[10px] font-mono ${isActive ? "text-white/60" : "text-white/30"}`}>
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        </aside>
+
+        </motion.aside>
 
         <main className="flex-1 pt-10 pb-24 overflow-hidden flex flex-col px-6 md:px-12 lg:pl-12 lg:pr-12">
           <div className="mb-10 text-left">
-            <h1 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white mb-4">
-              Explore Components
-            </h1>
+            <div className="flex items-center gap-4 mb-4">
+              {!isSidebarOpen && (
+                <button
+                  onClick={() => setIsSidebarOpen(true)}
+                  className="p-2 bg-white/[0.03] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 rounded-xl text-white/50 hover:text-white transition-all cursor-pointer flex items-center justify-center"
+                  title="Expand Sidebar"
+                >
+                  <Sidebar className="w-4.5 h-4.5" />
+                </button>
+              )}
+              <h1 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white">
+                Explore Components
+              </h1>
+            </div>
             <p className="text-sm text-white/50 leading-relaxed max-w-2xl font-heading">
-              A curated catalog of premium animations, interactive workspaces, and dithered shaders.
+              Curated catalog of premium animations, interactive workspaces, and dithered shaders.
               Built with Framer Motion, GSAP, and ThreeJS. Copy the codebase parameters or deploy
               directly with the developer CLI.
             </p>
           </div>
+
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8 items-stretch sm:items-center">
             <div className="relative flex-1">
@@ -333,14 +464,22 @@ function ComponentsIndex() {
 
             <div className="lg:hidden flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar select-none shrink-0">
               {categories.map((cat) => {
-                const isActive = activeCategory === cat;
+                const isActive = (cat === "All" && viewMode === "all") || (cat === activeCategory && viewMode === "category");
                 return (
                   <button
                     key={cat}
-                    onClick={() => setActiveCategory(cat)}
+                    onClick={() => {
+                      if (cat === "All") {
+                        setViewMode("all");
+                        setActiveCategory("All");
+                      } else {
+                        setViewMode("category");
+                        setActiveCategory(cat);
+                      }
+                    }}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium cursor-pointer shrink-0 transition-all ${
                       isActive
-                        ? "bg-[#E8A969]/10 border-[#E8A969]/30 text-[#E8A969]"
+                        ? "bg-white text-black border-white"
                         : "bg-white/[0.01] border-white/5 text-white/60 hover:text-white"
                     }`}
                   >
@@ -354,53 +493,56 @@ function ComponentsIndex() {
           <div className="flex-1">
             <AnimatePresence mode="wait">
               {filteredComponents.length > 0 ? (
-                <div className="space-y-12">
-                  {filteredComponents.filter((c) => c.isNew).length > 0 && (
-                    <div>
-                      <div className="mb-6 text-left">
-                        <div className="flex items-center gap-2 text-sm text-white/40 font-mono">
-                          <span className="text-white/85 font-semibold text-base font-heading">
-                            New Releases
-                          </span>
-                          <span>[{filteredComponents.filter((c) => c.isNew).length}]</span>
-                        </div>
-                        <span className="text-[10px] text-white/30 font-heading">
-                          Latest components [Hover to preview]
+                <div className="space-y-6">
+                  <div>
+                    <div className="mb-6 text-left">
+                      <div className="flex items-center gap-2 text-sm text-white/40 font-mono">
+                        <span className="text-white/85 font-semibold text-base font-heading">
+                          {viewMode === "all" ? "All Components" : activeCategory}
                         </span>
+                        <span>[{filteredComponents.length}]</span>
                       </div>
-                      <motion.div
-                        variants={containerVariants}
-                        initial={isBackNavigation ? "visible" : "hidden"}
-                        animate="visible"
-                        exit="hidden"
-                        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-                      >
-                        {filteredComponents
-                          .filter((c) => c.isNew)
-                          .map((item) => (
-                            <ComponentCard
-                              key={item.id}
-                              item={item}
-                              isBackNavigation={isBackNavigation}
-                            />
-                          ))}
-                      </motion.div>
+                      <span className="text-[10px] text-white/30 font-heading">
+                        {getCategoryDescription(activeCategory, viewMode)}
+                      </span>
                     </div>
-                  )}
 
-                  {filteredComponents.filter((c) => !c.isNew).length > 0 && (
-                    <div>
-                      <div className="mb-6 text-left">
-                        <div className="flex items-center gap-2 text-sm text-white/40 font-mono">
-                          <span className="text-white/85 font-semibold text-base font-heading">
-                            Out of the box
-                          </span>
-                          <span>[{filteredComponents.filter((c) => !c.isNew).length}]</span>
-                        </div>
-                        <span className="text-[10px] text-white/30 font-heading">
-                          Collection of components [Hover to preview]
-                        </span>
+                    {viewMode === "all" ? (
+                      <div className="space-y-12">
+                        {categories.filter(c => c !== "All").map((cat) => {
+                          const categoryComponents = filteredComponents.filter(c => c.category === cat);
+                          if (categoryComponents.length === 0) return null;
+
+                          return (
+                            <div key={cat} className="space-y-4">
+                              <div className="pb-2 border-b border-white/5 flex items-center justify-between">
+                                <h4 className="text-xs font-bold tracking-wider text-white/60 uppercase font-mono">
+                                  {cat} <span className="text-[9px] text-white/35 ml-1">[{categoryComponents.length}]</span>
+                                </h4>
+                                <span className="text-[9px] text-white/30 font-heading">
+                                  {getCategoryDescription(cat, "category").replace(" [Hover to preview]", "")}
+                                </span>
+                              </div>
+                              <motion.div
+                                variants={containerVariants}
+                                initial={isBackNavigation ? "visible" : "hidden"}
+                                animate="visible"
+                                exit="hidden"
+                                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+                              >
+                                {categoryComponents.map((item) => (
+                                  <ComponentCard
+                                    key={item.id}
+                                    item={item}
+                                    isBackNavigation={isBackNavigation}
+                                  />
+                                ))}
+                              </motion.div>
+                            </div>
+                          );
+                        })}
                       </div>
+                    ) : (
                       <motion.div
                         variants={containerVariants}
                         initial={isBackNavigation ? "visible" : "hidden"}
@@ -408,18 +550,16 @@ function ComponentsIndex() {
                         exit="hidden"
                         className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
                       >
-                        {filteredComponents
-                          .filter((c) => !c.isNew)
-                          .map((item) => (
-                            <ComponentCard
-                              key={item.id}
-                              item={item}
-                              isBackNavigation={isBackNavigation}
-                            />
-                          ))}
+                        {filteredComponents.map((item) => (
+                          <ComponentCard
+                            key={item.id}
+                            item={item}
+                            isBackNavigation={isBackNavigation}
+                          />
+                        ))}
                       </motion.div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               ) : (
                 <motion.div

@@ -54,7 +54,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "dynamic-island",
     name: "Dynamic Island Nav Card",
-    category: "Navigation",
+    category: "Floating UI",
     description: "Apple-style Dynamic Island expanding notification controller card.",
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add dynamic-island",
@@ -89,7 +89,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "interactive-navbar",
     name: "Mac-Dock Navbar",
-    category: "Navigation",
+    category: "Floating UI",
     description: "Smooth layout-scale magnifying glass Mac-dock navigator element.",
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add interactive-navbar",
@@ -145,7 +145,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "mega-menu-navbar",
     name: "Mega Menu Navbar",
-    category: "Navigation",
+    category: "Header",
     description: "Shadcn-based floating navbar with premium animated mega menu dropdown panels.",
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
     cliCommand: "npx komorebi-ui add mega-menu-navbar",
@@ -156,7 +156,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "mega-menu-navbar-2",
     name: "Mega Menu Navbar 2",
-    category: "Navigation",
+    category: "Header",
     description:
       "Scroll-responsive morphing navbar that transitions from a flat fixed header to a premium floating pill layout on scroll.",
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
@@ -168,7 +168,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "mega-menu-navbar-3",
     name: "Mega Menu Navbar 3",
-    category: "Navigation",
+    category: "Header",
     description:
       "Floating mega menu navbar where logo and CTA dynamically morph inside on scroll, leaving only clean core navigation.",
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
