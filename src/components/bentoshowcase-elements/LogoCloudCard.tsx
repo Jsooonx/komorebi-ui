@@ -2,17 +2,68 @@ import React from "react";
 
 export default function LogoCloudCard({ minimal = false }: { minimal?: boolean }) {
   // Brand listings to retrieve tech logos using local assets or logo.dev
+  // Tailored with custom displayName casing and inline styles matching their real brand font weights and families
   const brands = [
-    { name: "Vercel", path: "/logos/vercel.com-logo.webp" },
-    { name: "Supabase", path: "/logos/supabase.com-logo.webp" },
-    { name: "Stripe", path: "/logos/stripe.com-logo.webp" },
-    { name: "Claude", path: "/logos/claude.com-logo.webp" },
-    { name: "Figma", domain: "figma.com" },
-    { name: "Spotify", path: "/logos/spotify.com-logo.webp" },
-    { name: "Slack", domain: "slack.com" },
-    { name: "Hulu", path: "/logos/hulu.jp-logo.webp" },
-    { name: "Netflix", path: "/logos/netflix.com-logo.webp" },
-    { name: "Cisco", path: "/logos/cisco.com-logo.webp" }
+    { 
+      name: "Vercel", 
+      displayName: "Vercel",
+      style: { fontFamily: "var(--font-sans), sans-serif", fontWeight: "600", letterSpacing: "-0.03em" },
+      path: "/logos/vercel.com-logo.webp" 
+    },
+    { 
+      name: "Supabase", 
+      displayName: "Supabase",
+      style: { fontFamily: "var(--font-sans), sans-serif", fontWeight: "700", letterSpacing: "-0.01em" },
+      path: "/logos/supabase.com-logo.webp" 
+    },
+    { 
+      name: "Stripe", 
+      displayName: "stripe",
+      style: { fontFamily: "var(--font-sans), sans-serif", fontWeight: "600", letterSpacing: "-0.04em" },
+      path: "/logos/stripe.com-logo.webp" 
+    },
+    { 
+      name: "Claude", 
+      displayName: "Claude",
+      style: { fontFamily: "var(--font-serif), Georgia, serif", fontWeight: "500", fontSize: "0.85rem", letterSpacing: "0.01em" },
+      path: "/logos/claude.com-logo.webp" 
+    },
+    { 
+      name: "Figma", 
+      displayName: "figma",
+      style: { fontFamily: "var(--font-sans), sans-serif", fontWeight: "700", letterSpacing: "-0.03em" },
+      domain: "figma.com" 
+    },
+    { 
+      name: "Spotify", 
+      displayName: "Spotify",
+      style: { fontFamily: "var(--font-sans), sans-serif", fontWeight: "700", letterSpacing: "-0.03em" },
+      path: "/logos/spotify.com-logo.webp" 
+    },
+    { 
+      name: "Slack", 
+      displayName: "slack",
+      style: { fontFamily: "var(--font-sans), sans-serif", fontWeight: "700", letterSpacing: "-0.02em" },
+      domain: "slack.com" 
+    },
+    { 
+      name: "Hulu", 
+      displayName: "hulu",
+      style: { fontFamily: "var(--font-sans), sans-serif", fontWeight: "800", letterSpacing: "-0.03em" },
+      path: "/logos/hulu.jp-logo.webp" 
+    },
+    { 
+      name: "Netflix", 
+      displayName: "NETFLIX",
+      style: { fontFamily: "var(--font-sans), sans-serif", fontWeight: "800", letterSpacing: "0.04em" },
+      path: "/logos/netflix.com-logo.webp" 
+    },
+    { 
+      name: "Cisco", 
+      displayName: "CISCO",
+      style: { fontFamily: "var(--font-sans), sans-serif", fontWeight: "700", letterSpacing: "0.02em" },
+      path: "/logos/cisco.com-logo.webp" 
+    }
   ];
 
   const cssVariables = {
@@ -25,7 +76,7 @@ export default function LogoCloudCard({ minimal = false }: { minimal?: boolean }
     <div className="w-full flex flex-col justify-center items-center px-6 py-16 h-full select-none">
       <div className="max-w-4xl mx-auto w-full text-center">
         {/* Caption */}
-        <p className="text-[11px] font-sans font-medium tracking-wider text-white/45 uppercase mb-10">
+        <p className="text-xs font-heading font-medium text-white/75 mb-10 tracking-wide">
           Trusted by high-performance engineering teams worldwide
         </p>
 
@@ -48,8 +99,11 @@ export default function LogoCloudCard({ minimal = false }: { minimal?: boolean }
                     brand.name === "Vercel" || brand.name === "Supabase" ? "h-4" : ""
                   }`}
                 />
-                <span className="font-heading text-xs font-semibold text-white/55 group-hover:text-white transition-colors tracking-wide select-none">
-                  {brand.name}
+                <span 
+                  style={brand.style}
+                  className="text-xs text-white/60 group-hover:text-white transition-colors select-none"
+                >
+                  {brand.displayName}
                 </span>
               </div>
             );
