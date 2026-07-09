@@ -160,20 +160,22 @@ const getCategoryDescription = (cat: string, mode: string) => {
     return "Explore the complete library of custom, high-fidelity components [Hover to preview]";
   }
   switch (cat.toLowerCase()) {
-    case "visuals":
-      return "Creative graphics, surface effects, and text animations [Hover to preview]";
-    case "interactions":
-      return "Rich 3D tilt tracking, swipers, and cursor elements [Hover to preview]";
-    case "reveal":
-      return "Expanding interactive blocks with smooth height changes [Hover to preview]";
-    case "floating ui":
-      return "App-style dynamic notifications and custom floating docks [Hover to preview]";
-    case "canvas":
-      return "Interactive WebGL shaders and three.js canvas components [Hover to preview]";
-    case "controls":
-      return "Typewriter CLI consoles and stepper controllers [Hover to preview]";
-    case "header":
-      return "Premium top-of-page navbars and morphing scroll menus [Hover to preview]";
+    case "card & border effects":
+      return "Dynamic borders, pixel shimmers, and interactive hover cards [Hover to preview]";
+    case "typography & tickers":
+      return "Word rolls, infinite marquee tickers, and text animations [Hover to preview]";
+    case "masking & accordions":
+      return "Organic clipping path image masks and height expanding accordion lists [Hover to preview]";
+    case "3d & swipers":
+      return "Deck-style card swipers with 3D cursor tilt tracking [Hover to preview]";
+    case "cli & stepper controls":
+      return "Typewriter CLI terminals, deployment steppers, and audio frequency visualizers [Hover to preview]";
+    case "webgl & shaders":
+      return "Retro dithered image shaders running in a ThreeJS canvas [Hover to preview]";
+    case "headers & menus":
+      return "Fixed-to-pill morphing headers, logo shrink scroll navbars, and mega menus [Hover to preview]";
+    case "floating ui & docks":
+      return "Apple-style dynamic island nav cards and interactive macOS-style magnifying docks [Hover to preview]";
     default:
       return "Hover component cards to preview animation states";
   }
