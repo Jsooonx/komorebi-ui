@@ -19,7 +19,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "image-reveal",
     name: "Image Reveal",
-    category: "Image Reveal",
+    category: "Visuals",
     description: "Hover reactive image clipping path mask overlay with organic animations.",
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add image-reveal",
@@ -28,7 +28,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "hover-members",
     name: "Hover Members",
-    category: "Hover Members",
+    category: "Visuals",
     description: "Card list stagger scale animations on cursor enter events.",
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add hover-members",
@@ -37,7 +37,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "toolkit-stack-swiper",
     name: "Toolkit Stack Swiper",
-    category: "Stack Swiper",
+    category: "Interactions",
     description: "A deck-style stack swiper with 3D tilt tracking and spring physics.",
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add toolkit-stack-swiper",
@@ -47,14 +47,14 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "devouring-details",
     name: "Devouring Details",
-    category: "Devouring Details",
+    category: "Reveal",
     description: "Expanding interactive list block with smooth element height transitions.",
     cliCommand: "npx komorebi-ui add devouring-details",
   },
   {
     id: "dynamic-island",
     name: "Dynamic Island Nav Card",
-    category: "Dynamic Island",
+    category: "Floating UI",
     description: "Apple-style Dynamic Island expanding notification controller card.",
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add dynamic-island",
@@ -65,7 +65,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "dither-canvas",
     name: "WebGL Dither Shader",
-    category: "WebGL Dither",
+    category: "Canvas",
     description: "Retro dithered image shader visualizer card running in WebGL canvas.",
     dependencies: ["@react-three/fiber", "three"],
     cliCommand: "npx komorebi-ui add dither-canvas",
@@ -73,7 +73,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "text-roll",
     name: "Text Roll Animator",
-    category: "Text Roll",
+    category: "Visuals",
     description: "Smooth 3D keyframe text roll effect on word hover events.",
     dependencies: ["gsap"],
     cliCommand: "npx komorebi-ui add text-roll",
@@ -81,7 +81,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "border-beam",
     name: "SVG Border Beam",
-    category: "Border Beam",
+    category: "Visuals",
     description: "Outline path SVG glowing animation border runner card.",
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add border-beam",
@@ -89,7 +89,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "interactive-navbar",
     name: "Mac-Dock Navbar",
-    category: "Mac-Dock",
+    category: "Floating UI",
     description: "Smooth layout-scale magnifying glass Mac-dock navigator element.",
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add interactive-navbar",
@@ -100,7 +100,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "infinite-marquee",
     name: "Infinite Icon Marquee",
-    category: "Icon Marquee",
+    category: "Visuals",
     description: "Continuous horizontal marquee ticker animation showcasing brand elements.",
     dependencies: ["lucide-react"],
     cliCommand: "npx komorebi-ui add infinite-marquee",
@@ -110,7 +110,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "audio-equalizer",
     name: "Audio Reactive Equalizer",
-    category: "Audio Equalizer",
+    category: "Visuals",
     description: "Simulated audio frequency bar graph visualizer reacting to hover coordinates.",
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add audio-equalizer",
@@ -118,7 +118,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "pixel-shimmer",
     name: "Pixel Shimmer Card",
-    category: "Pixel Shimmer",
+    category: "Visuals",
     description: "Interactive pixel-surface shimmer card with hover and focus-aware glow pulses.",
     cliCommand: "npx komorebi-ui add pixel-shimmer",
     dependencies: [],
@@ -128,7 +128,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "pipeline-stepper",
     name: "Pipeline Stepper",
-    category: "Pipeline Stepper",
+    category: "Controls",
     description: "Interactive multi-step deployment pipeline stepper controller.",
     dependencies: ["framer-motion"],
     cliCommand: "npx komorebi-ui add pipeline-stepper",
@@ -138,14 +138,14 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "holographic-terminal",
     name: "Typewriter CLI Terminal",
-    category: "CLI Terminal",
+    category: "Controls",
     description: "Simulated console window outputting text strings dynamically.",
     cliCommand: "npx komorebi-ui add holographic-terminal",
   },
   {
     id: "mega-menu-navbar",
     name: "Mega Menu Navbar",
-    category: "Mega Menu 1",
+    category: "Header",
     description: "Shadcn-based floating navbar with premium animated mega menu dropdown panels.",
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
     cliCommand: "npx komorebi-ui add mega-menu-navbar",
@@ -156,7 +156,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "mega-menu-navbar-2",
     name: "Mega Menu Navbar 2",
-    category: "Mega Menu 2",
+    category: "Header",
     description:
       "Scroll-responsive morphing navbar that transitions from a flat fixed header to a premium floating pill layout on scroll.",
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
@@ -168,7 +168,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "mega-menu-navbar-3",
     name: "Mega Menu Navbar 3",
-    category: "Mega Menu 3",
+    category: "Header",
     description:
       "Floating mega menu navbar where logo and CTA dynamically morph inside on scroll, leaving only clean core navigation.",
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
