@@ -249,13 +249,6 @@ function BlockRow({ item }: { item: BlockItem }) {
               key={reloadKey}
               className={`w-full ${isFullscreen ? "h-[calc(100vh-64px)]" : "h-[500px]"} relative`}
             >
-              {/* Scaled browser overlay mock dots */}
-              <div className="absolute top-4 left-4 flex gap-1 z-20">
-                <span className="w-2 h-2 rounded-full bg-white/15" />
-                <span className="w-2 h-2 rounded-full bg-white/15" />
-                <span className="w-2 h-2 rounded-full bg-white/15" />
-              </div>
-
               <PreviewComp minimal={true} />
             </div>
           ) : (
