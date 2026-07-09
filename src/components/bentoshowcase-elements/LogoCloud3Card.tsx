@@ -1,81 +1,26 @@
-import React, { useRef, useEffect, useState } from "react";
-import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
+import React from "react";
 
 // Helper Component: VerticalSlider
-// Renders children in an infinite vertical marquee using useAnimationFrame for dynamic speed scaling
+// Renders children in an infinite vertical marquee using pure CSS animations for hardware-accelerated smoothness
 interface VerticalSliderProps {
   children: React.ReactNode;
-  speed?: number; // duration of one full cycle in seconds
   gap?: number; // gap between items in pixels
-  speedOnHover?: number; // duration of one full cycle when hovered (higher = slower)
   direction?: "up" | "down";
 }
 
 function VerticalSlider({
   children,
-  speed = 25,
-  gap = 16,
-  speedOnHover = 60,
+  gap = 12,
   direction = "up",
 }: VerticalSliderProps) {
   const items = React.Children.toArray(children);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const y = useMotionValue(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const [halfHeight, setHalfHeight] = useState(0);
-
-  // Measure the height of one loop cycle (exactly half of scrollHeight)
-  useEffect(() => {
-    if (containerRef.current) {
-      setHalfHeight(containerRef.current.scrollHeight / 2);
-    }
-    const handleResize = () => {
-      if (containerRef.current) {
-        setHalfHeight(containerRef.current.scrollHeight / 2);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [children]);
-
-  // Frame-by-frame animation to allow smooth, non-snapping speed change when hovering
-  useAnimationFrame((time, delta) => {
-    if (!halfHeight) return;
-
-    // Convert duration (seconds per cycle) to velocity (pixels per millisecond)
-    const activeDuration = isHovered ? speedOnHover : speed;
-    const pixelsPerMs = halfHeight / (activeDuration * 1000);
-
-    const step = pixelsPerMs * delta;
-    let nextY = direction === "up" ? y.get() - step : y.get() + step;
-
-    // Wrap around once we've slid past one full cycle
-    if (direction === "up") {
-      if (nextY <= -halfHeight) {
-        nextY = nextY + halfHeight;
-      }
-    } else {
-      if (nextY >= 0) {
-        nextY = nextY - halfHeight;
-      }
-    }
-    y.set(nextY);
-  });
+  const marqueeClass = direction === "up" ? "animate-marquee-up" : "animate-marquee-down";
 
   return (
-    <div
-      className="relative h-full overflow-hidden flex flex-col"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <motion.div
-        ref={containerRef}
-        className="flex flex-col w-full"
-        style={{ 
-          y, 
-          willChange: "transform",
-          transform: "translateZ(0)" 
-        }}
+    <div className="relative h-full overflow-hidden flex flex-col w-full">
+      <div 
+        className={`flex flex-col w-full ${marqueeClass} hover:[animation-play-state:paused] cursor-pointer`}
+        style={{ willChange: "transform" }}
       >
         {/* First Set */}
         {items.map((child, idx) => (
@@ -97,7 +42,7 @@ function VerticalSlider({
             {child}
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -160,7 +105,7 @@ export default function LogoCloud3Card({ minimal = false }: { minimal?: boolean 
         <div className="md:col-span-7 relative h-[250px] overflow-hidden bg-black/20 rounded-2xl border border-white/5 p-4 flex gap-4 w-full">
           {/* Column 1 (Scrolls Up) */}
           <div className="flex-1 h-full overflow-hidden">
-            <VerticalSlider speed={22} speedOnHover={60} direction="up" gap={12}>
+            <VerticalSlider direction="up" gap={12}>
               {col1Brands.map((brand, idx) => {
                 const imgSrc = brand.path
                   ? brand.path
@@ -189,7 +134,7 @@ export default function LogoCloud3Card({ minimal = false }: { minimal?: boolean 
 
           {/* Column 2 (Scrolls Down) */}
           <div className="flex-1 h-full overflow-hidden">
-            <VerticalSlider speed={26} speedOnHover={65} direction="down" gap={12}>
+            <VerticalSlider direction="down" gap={12}>
               {col2Brands.map((brand, idx) => {
                 const imgSrc = brand.path
                   ? brand.path

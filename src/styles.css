@@ -27,6 +27,30 @@
   animation: marquee 14s linear infinite;
 }
 
+@keyframes marquee-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+.animate-marquee-up {
+  animation: marquee-up 22s linear infinite;
+}
+
+@keyframes marquee-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.animate-marquee-down {
+  animation: marquee-down 22s linear infinite;
+}
+
 @keyframes story-fill-1 {
   0% {
     transform: scaleX(0);
