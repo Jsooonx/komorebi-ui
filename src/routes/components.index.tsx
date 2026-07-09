@@ -55,6 +55,61 @@ const getCategoryIcon = (category: string) => {
   }
 };
 
+const CATEGORY_ORDER = [
+  "Header",
+  "Floating UI",
+  "Visuals",
+  "Interactions",
+  "Controls",
+  "Reveal",
+  "Canvas",
+] as const;
+
+const getCategoryMeta = (category: string) => {
+  switch (category.toLowerCase()) {
+    case "header":
+      return {
+        eyebrow: "Navigation systems",
+        shortDescription: "Navbars, mega menus, and scroll morph patterns.",
+      };
+    case "floating ui":
+      return {
+        eyebrow: "Overlay patterns",
+        shortDescription: "Dock-style controls, floating islands, and ambient chrome.",
+      };
+    case "visuals":
+      return {
+        eyebrow: "Surface motion",
+        shortDescription: "Shaders, shimmer, marquees, and expressive visual treatments.",
+      };
+    case "interactions":
+      return {
+        eyebrow: "Direct manipulation",
+        shortDescription: "Hover, drag, and pointer-reactive motion systems.",
+      };
+    case "controls":
+      return {
+        eyebrow: "Operator UI",
+        shortDescription: "Steppers, terminals, and command-driven control patterns.",
+      };
+    case "reveal":
+      return {
+        eyebrow: "Disclosure motion",
+        shortDescription: "Expand, unveil, and progressive content reveal behaviors.",
+      };
+    case "canvas":
+      return {
+        eyebrow: "Render layers",
+        shortDescription: "WebGL, shader, and canvas-based visual engines.",
+      };
+    default:
+      return {
+        eyebrow: "Component family",
+        shortDescription: "Catalog building blocks grouped by behavior and intent.",
+      };
+  }
+};
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -218,8 +273,8 @@ function ComponentsIndex() {
   });
 
   const [searchQuery, setSearchQuery] = useState<string>("");
-  
-  const [viewMode, setViewMode] = useState<"category" | "all">(( ) => {
+
+  const [viewMode, setViewMode] = useState<"category" | "all">(() => {
     if (typeof window !== "undefined") {
       const fromCatalog = sessionStorage.getItem("komorebi_from_catalog");
       if (fromCatalog === "true") {
@@ -252,15 +307,30 @@ function ComponentsIndex() {
     sessionStorage.setItem("komorebi_sidebar_open", String(isSidebarOpen));
   }, [isSidebarOpen]);
 
-  const categories = ["All", ...Array.from(new Set(catalogItems.map((c) => c.category)))];
+  const discoveredCategories = Array.from(new Set(catalogItems.map((c) => c.category)));
+  const orderedCategories = [
+    ...CATEGORY_ORDER.filter((category) => discoveredCategories.includes(category)),
+    ...discoveredCategories.filter(
+      (category) => !CATEGORY_ORDER.includes(category as (typeof CATEGORY_ORDER)[number]),
+    ),
+  ];
+  const categories = ["All", ...orderedCategories];
 
   const getCategoryCount = (cat: string) => {
     if (cat === "All") return catalogItems.length;
     return catalogItems.filter((c) => c.category === cat).length;
   };
 
+  const activeCategoryLabel = viewMode === "all" ? "All components" : activeCategory;
+  const activeCategoryCount =
+    viewMode === "all" || activeCategory === "All"
+      ? catalogItems.length
+      : getCategoryCount(activeCategory);
+  const hasActiveFilter = viewMode === "category" && activeCategory !== "All";
+
   const filteredComponents = catalogItems.filter((item) => {
-    const matchesCategory = viewMode === "all" || activeCategory === "All" || item.category === activeCategory;
+    const matchesCategory =
+      viewMode === "all" || activeCategory === "All" || item.category === activeCategory;
     const matchesSearch =
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -308,13 +378,17 @@ function ComponentsIndex() {
 
       <div className="flex-1 flex pt-16 relative w-full gap-0">
         <motion.aside
-          initial={isBackNavigation ? {
-            width: 288,
-            opacity: 1,
-            paddingLeft: isSidebarOpen ? 24 : 0,
-            paddingRight: isSidebarOpen ? 24 : 0,
-            borderRightWidth: isSidebarOpen ? 1 : 0,
-          } : { width: 288, opacity: 1 }}
+          initial={
+            isBackNavigation
+              ? {
+                  width: 288,
+                  opacity: 1,
+                  paddingLeft: isSidebarOpen ? 24 : 0,
+                  paddingRight: isSidebarOpen ? 24 : 0,
+                  borderRightWidth: isSidebarOpen ? 1 : 0,
+                }
+              : { width: 288, opacity: 1 }
+          }
           animate={{
             width: isSidebarOpen ? 288 : 0,
             opacity: isSidebarOpen ? 1 : 0,
@@ -322,15 +396,15 @@ function ComponentsIndex() {
             paddingRight: isSidebarOpen ? 24 : 0,
             borderRightWidth: isSidebarOpen ? 1 : 0,
           }}
-          transition={isBackNavigation ? { duration: 0 } : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          transition={
+            isBackNavigation ? { duration: 0 } : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+          }
           className="hidden lg:flex shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex-col justify-between border-white/5 overflow-hidden"
         >
           <div className="space-y-6 min-w-[220px]">
             {/* Header: Filters */}
             <div className="flex items-center justify-between pb-4 border-b border-white/5">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-white/70">
-                Filters
-              </h3>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-white/70">Filters</h3>
               <button
                 onClick={() => setIsSidebarOpen(false)}
                 className="p-1 hover:bg-white/5 rounded-lg text-white/40 hover:text-white transition-all cursor-pointer flex items-center justify-center"
@@ -380,50 +454,95 @@ function ComponentsIndex() {
             {/* Section: Categories */}
             <div className="space-y-3 pt-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-white/35">
-                  Categories
-                </span>
-                {activeCategory !== "All" && (
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-white/35">
+                    Filter by category
+                  </span>
+                  <div className="flex items-center gap-2 text-[11px] text-white/45">
+                    <span className="font-medium text-white/80">{activeCategoryLabel}</span>
+                    <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 font-mono text-[10px] text-white/50">
+                      {activeCategoryCount}
+                    </span>
+                  </div>
+                </div>
+                {hasActiveFilter && (
                   <button
                     onClick={() => {
                       setActiveCategory("All");
                       setViewMode("all");
                     }}
-                    className="text-[10px] font-semibold text-[#E8A969] hover:underline transition-colors cursor-pointer"
+                    className="rounded-full border border-[#E8A969]/20 bg-[#E8A969]/8 px-2.5 py-1 text-[10px] font-semibold text-[#E8A969] transition-colors hover:bg-[#E8A969]/14 cursor-pointer"
                   >
-                    Clear
+                    Reset filters
                   </button>
                 )}
               </div>
 
-              <div className="flex flex-wrap gap-1.5 max-h-[280px] overflow-y-auto pr-1 select-none custom-scrollbar">
-                {categories.filter(c => c !== "All").map((cat) => {
-                  const isActive = activeCategory === cat && viewMode === "category";
-                  const count = getCategoryCount(cat);
-                  return (
-                    <button
-                      key={cat}
-                      onClick={() => {
-                        setActiveCategory(cat);
-                        setViewMode("category");
-                      }}
-                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-medium transition-all cursor-pointer ${
-                        isActive
-                          ? "bg-white/10 border-white/30 text-white"
-                          : "bg-white/[0.02] border-white/5 hover:border-white/10 hover:bg-white/[0.04] text-white/60 hover:text-white"
-                      }`}
-                    >
-                      <span>{cat}</span>
-                      <span className={`text-[10px] font-mono ${isActive ? "text-white/60" : "text-white/30"}`}>
-                        {count}
-                      </span>
-                    </button>
-                  );
-                })}
+              <p className="text-[11px] leading-relaxed text-white/32">
+                Browse by interaction pattern instead of treating every tag like the same tier.
+              </p>
+
+              <div className="flex flex-col gap-2 max-h-[360px] overflow-y-auto pr-1 select-none custom-scrollbar">
+                {categories
+                  .filter((c) => c !== "All")
+                  .map((cat) => {
+                    const isActive = activeCategory === cat && viewMode === "category";
+                    const count = getCategoryCount(cat);
+                    const meta = getCategoryMeta(cat);
+                    return (
+                      <button
+                        key={cat}
+                        onClick={() => {
+                          setActiveCategory(cat);
+                          setViewMode("category");
+                        }}
+                        className={`group flex items-center gap-3 rounded-2xl border px-3.5 py-3 text-left transition-all cursor-pointer ${
+                          isActive
+                            ? "bg-[linear-gradient(135deg,rgba(232,169,105,0.16),rgba(255,255,255,0.08))] border-[#E8A969]/35 text-white shadow-[0_0_0_1px_rgba(232,169,105,0.08)_inset]"
+                            : "bg-white/[0.02] border-white/6 text-white/65 hover:border-white/12 hover:bg-white/[0.04] hover:text-white"
+                        }`}
+                      >
+                        <div
+                          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-colors ${
+                            isActive
+                              ? "border-[#E8A969]/30 bg-[#E8A969]/14 text-[#F1C08E]"
+                              : "border-white/8 bg-white/[0.03] text-white/40 group-hover:text-white/75"
+                          }`}
+                        >
+                          {getCategoryIcon(cat)}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-semibold tracking-tight text-inherit">
+                              {cat}
+                            </span>
+                            <span className="text-[9px] uppercase tracking-[0.18em] text-white/28">
+                              {meta.eyebrow}
+                            </span>
+                          </div>
+                          <p
+                            className={`mt-1 text-[11px] leading-relaxed ${
+                              isActive ? "text-white/68" : "text-white/34 group-hover:text-white/50"
+                            }`}
+                          >
+                            {meta.shortDescription}
+                          </p>
+                        </div>
+                        <span
+                          className={`shrink-0 rounded-full border px-2 py-1 font-mono text-[10px] ${
+                            isActive
+                              ? "border-white/14 bg-white/[0.08] text-white/78"
+                              : "border-white/8 bg-white/[0.03] text-white/38 group-hover:text-white/58"
+                          }`}
+                        >
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
               </div>
             </div>
           </div>
-
         </motion.aside>
 
         <main className="flex-1 pt-10 pb-24 overflow-hidden flex flex-col px-6 md:px-12 lg:pl-12 lg:pr-12">
@@ -449,7 +568,6 @@ function ComponentsIndex() {
             </p>
           </div>
 
-
           <div className="flex flex-col sm:flex-row gap-4 mb-8 items-stretch sm:items-center">
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
@@ -463,8 +581,22 @@ function ComponentsIndex() {
             </div>
 
             <div className="lg:hidden flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar select-none shrink-0">
+              {hasActiveFilter && (
+                <button
+                  onClick={() => {
+                    setViewMode("all");
+                    setActiveCategory("All");
+                  }}
+                  className="flex items-center gap-1.5 rounded-full border border-[#E8A969]/25 bg-[#E8A969]/10 px-3 py-1.5 text-[11px] font-semibold text-[#E8A969] shrink-0"
+                >
+                  Reset
+                </button>
+              )}
               {categories.map((cat) => {
-                const isActive = (cat === "All" && viewMode === "all") || (cat === activeCategory && viewMode === "category");
+                const isActive =
+                  (cat === "All" && viewMode === "all") ||
+                  (cat === activeCategory && viewMode === "category");
+                const count = getCategoryCount(cat);
                 return (
                   <button
                     key={cat}
@@ -477,13 +609,25 @@ function ComponentsIndex() {
                         setActiveCategory(cat);
                       }
                     }}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium cursor-pointer shrink-0 transition-all ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium cursor-pointer shrink-0 transition-all ${
                       isActive
-                        ? "bg-white text-black border-white"
-                        : "bg-white/[0.01] border-white/5 text-white/60 hover:text-white"
+                        ? "bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(232,169,105,0.92))] text-black border-white/80"
+                        : "bg-white/[0.02] border-white/6 text-white/60 hover:text-white hover:border-white/12"
                     }`}
                   >
-                    {cat}
+                    {cat !== "All" && (
+                      <span className={isActive ? "text-black/70" : "text-white/35"}>
+                        {getCategoryIcon(cat)}
+                      </span>
+                    )}
+                    <span>{cat}</span>
+                    <span
+                      className={`rounded-full px-1.5 py-0.5 font-mono text-[10px] ${
+                        isActive ? "bg-black/10 text-black/70" : "bg-white/[0.04] text-white/35"
+                      }`}
+                    >
+                      {count}
+                    </span>
                   </button>
                 );
               })}
@@ -498,7 +642,7 @@ function ComponentsIndex() {
                     <div className="mb-6 text-left">
                       <div className="flex items-center gap-2 text-sm text-white/40 font-mono">
                         <span className="text-white/85 font-semibold text-base font-heading">
-                          {viewMode === "all" ? "All Components" : activeCategory}
+                          {activeCategoryLabel}
                         </span>
                         <span>[{filteredComponents.length}]</span>
                       </div>
@@ -509,38 +653,48 @@ function ComponentsIndex() {
 
                     {viewMode === "all" ? (
                       <div className="space-y-12">
-                        {categories.filter(c => c !== "All").map((cat) => {
-                          const categoryComponents = filteredComponents.filter(c => c.category === cat);
-                          if (categoryComponents.length === 0) return null;
+                        {categories
+                          .filter((c) => c !== "All")
+                          .map((cat) => {
+                            const categoryComponents = filteredComponents.filter(
+                              (c) => c.category === cat,
+                            );
+                            if (categoryComponents.length === 0) return null;
 
-                          return (
-                            <div key={cat} className="space-y-4">
-                              <div className="pb-2 border-b border-white/5 flex items-center justify-between">
-                                <h4 className="text-xs font-bold tracking-wider text-white/60 uppercase font-mono">
-                                  {cat} <span className="text-[9px] text-white/35 ml-1">[{categoryComponents.length}]</span>
-                                </h4>
-                                <span className="text-[9px] text-white/30 font-heading">
-                                  {getCategoryDescription(cat, "category").replace(" [Hover to preview]", "")}
-                                </span>
+                            return (
+                              <div key={cat} className="space-y-4">
+                                <div className="pb-2 border-b border-white/5 flex items-center justify-between">
+                                  <h4 className="text-xs font-bold tracking-wider text-white/60 uppercase font-mono">
+                                    {cat}{" "}
+                                    <span className="text-[9px] text-white/35 ml-1">
+                                      [{categoryComponents.length}]
+                                    </span>
+                                  </h4>
+                                  <span className="text-[9px] text-white/30 font-heading">
+                                    {getCategoryDescription(cat, "category").replace(
+                                      " [Hover to preview]",
+                                      "",
+                                    )}
+                                  </span>
+                                </div>
+                                <motion.div
+                                  variants={containerVariants}
+                                  initial={isBackNavigation ? "visible" : "hidden"}
+                                  animate="visible"
+                                  exit="hidden"
+                                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+                                >
+                                  {categoryComponents.map((item) => (
+                                    <ComponentCard
+                                      key={item.id}
+                                      item={item}
+                                      isBackNavigation={isBackNavigation}
+                                    />
+                                  ))}
+                                </motion.div>
                               </div>
-                              <motion.div
-                                variants={containerVariants}
-                                initial={isBackNavigation ? "visible" : "hidden"}
-                                animate="visible"
-                                exit="hidden"
-                                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-                              >
-                                {categoryComponents.map((item) => (
-                                  <ComponentCard
-                                    key={item.id}
-                                    item={item}
-                                    isBackNavigation={isBackNavigation}
-                                  />
-                                ))}
-                              </motion.div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
                       </div>
                     ) : (
                       <motion.div
