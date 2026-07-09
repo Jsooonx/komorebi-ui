@@ -188,6 +188,17 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:row-span-2",
     viewportHeightClass: "h-[400px]",
   },
+  {
+    id: "nested-accordion",
+    name: "Nested Accordion",
+    category: "Masking & Accordions",
+    description: "Hierarchical accordion design showcasing nested sub-menu dropdown panels inside a unified wrapper.",
+    dependencies: ["@radix-ui/react-accordion", "framer-motion"],
+    cliCommand: "npx komorebi-ui add nested-accordion",
+    isNew: true,
+    gridClass: "md:row-span-2",
+    viewportHeightClass: "h-[400px]",
+  },
 ];
 
 export function getComponentManifestItem(id: string) {
