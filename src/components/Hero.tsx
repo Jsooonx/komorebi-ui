@@ -199,9 +199,13 @@ export default function Hero() {
             {/* Right Edge Overlay */}
             <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-warm-cream to-transparent pointer-events-none z-10" />
 
-            <div className="flex items-center animate-marquee gap-10 w-max shrink-0 h-12">
+            <div className="flex items-center animate-marquee w-max shrink-0 h-12">
               {COMPAT_BRANDS.concat(COMPAT_BRANDS).map((brand, idx) => (
-                <div key={idx} className="flex items-center gap-2.5 shrink-0 cursor-pointer group">
+                <div 
+                  key={idx} 
+                  className="flex items-center gap-2.5 shrink-0 cursor-pointer group"
+                  style={{ marginRight: "40px" }}
+                >
                   <img
                     src={`https://img.logo.dev/${brand.domain}?token=pk_FklYVGBwT-mKrXMQ7yPyqQ&format=png`}
                     alt={brand.name}
