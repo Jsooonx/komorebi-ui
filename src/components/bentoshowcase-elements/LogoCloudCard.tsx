@@ -44,7 +44,7 @@ export default function LogoCloudCard({ minimal = false }: { minimal?: boolean }
                 <img
                   src={imgSrc}
                   alt={brand.name}
-                  className={`h-5 w-auto object-contain brightness-0 invert opacity-45 group-hover:opacity-100 transition-all duration-300 shrink-0 select-none ${
+                  className={`h-5 w-auto object-contain rounded opacity-85 group-hover:opacity-100 transition-all duration-300 shrink-0 select-none ${
                     brand.name === "Vercel" || brand.name === "Supabase" ? "h-4" : ""
                   }`}
                 />
