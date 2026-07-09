@@ -227,6 +227,16 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[720px]",
   },
+  {
+    id: "features-3",
+    name: "Features 3",
+    category: "Features",
+    description: "Spotlight feature list with auto-rotating, hover-synced live preview panels and a shared-layout active indicator.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[640px]",
+  },
 ];
 
 export function getComponentManifestItem(id: string) {
