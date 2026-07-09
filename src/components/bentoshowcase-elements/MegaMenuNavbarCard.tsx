@@ -249,7 +249,7 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
         className="w-full h-[400px] bg-[#0c0c0e] border border-white/10 rounded-xl overflow-y-auto scrollbar-none select-none relative"
         style={cssVariables}
       >
-        <div className="sticky top-0 z-20 w-full flex justify-center pt-4 px-4 bg-[#0c0c0e]/80 backdrop-blur-md pb-2">
+        <div className="sticky top-0 z-20 w-full flex justify-center pt-4 px-4 pb-2">
           <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
         </div>
         <MockContent />
@@ -260,24 +260,26 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
 
   return (
     <div
-      className="relative w-full h-[440px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-y-auto scrollbar-none flex flex-col select-none group"
+      className="relative w-full h-[440px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-y-auto scrollbar-none flex flex-col select-none group animate-in fade-in duration-500"
       style={cssVariables}
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-[#E8A969]/5 to-[#121212] opacity-60 pointer-events-none" />
 
-      {/* Top: label + navbar stacked right at the top */}
-      <div className="sticky top-0 z-20 w-full flex flex-col gap-3 bg-[#0e0e0e]/80 backdrop-blur-md p-6 pb-2">
-        <div className="w-full flex items-center justify-between">
+      {/* Sticky floating navbar wrapper (completely transparent backdrop) */}
+      <div className="sticky top-0 z-20 w-full flex justify-center pt-4 px-4 pb-2">
+        <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
+      </div>
+
+      {/* Scrollable body content */}
+      <div className="flex-1">
+        {/* Top static label/logo (scrolls away) */}
+        <div className="px-6 pt-2 flex items-center justify-between">
           <span className="text-[10px] font-mono text-white/40 tracking-widest uppercase">
             Navigation Menu
           </span>
           <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
         </div>
-        <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
-      </div>
 
-      {/* Scrolling mock page body */}
-      <div className="flex-1">
         <MockContent />
 
         {/* Bottom indicator + title inside scroll area */}
