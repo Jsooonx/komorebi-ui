@@ -15,10 +15,9 @@ function InfiniteSlider({ children, speed = 40, gap = 112 }: InfiniteSliderProps
   const items = React.Children.toArray(children);
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden flex">
       <motion.div
         className="flex w-max"
-        style={{ gap: `${gap}px` }}
         animate={{ x: ["0%", "-50%"] }}
         transition={{
           ease: "linear",
@@ -28,13 +27,21 @@ function InfiniteSlider({ children, speed = 40, gap = 112 }: InfiniteSliderProps
       >
         {/* First Set */}
         {items.map((child, idx) => (
-          <div key={`first-${idx}`} className="flex items-center shrink-0">
+          <div 
+            key={`first-${idx}`} 
+            className="flex items-center shrink-0"
+            style={{ paddingRight: `${gap}px` }}
+          >
             {child}
           </div>
         ))}
         {/* Second Set (identical duplicate for seamless transition) */}
         {items.map((child, idx) => (
-          <div key={`second-${idx}`} className="flex items-center shrink-0">
+          <div 
+            key={`second-${idx}`} 
+            className="flex items-center shrink-0"
+            style={{ paddingRight: `${gap}px` }}
+          >
             {child}
           </div>
         ))}
