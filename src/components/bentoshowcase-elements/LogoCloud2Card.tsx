@@ -93,7 +93,7 @@ export default function LogoCloud2Card({ minimal = false }: { minimal?: boolean 
           {/* Caption / Left Label */}
           <div className="md:max-w-44 md:border-r border-white/10 md:pr-8 text-center md:text-right shrink-0">
             <p className="text-sm font-sans font-medium text-white/75 leading-snug">
-              Powering the best teams
+              Trusted by the best teams
             </p>
           </div>
 
@@ -108,16 +108,16 @@ export default function LogoCloud2Card({ minimal = false }: { minimal?: boolean 
                 return (
                   <div
                     key={idx}
-                    className="flex items-center gap-2.5 group transition-all duration-300 w-fit cursor-pointer select-none"
+                    className="flex items-center gap-3 group transition-all duration-300 w-fit cursor-pointer select-none"
                   >
                     <img
                       src={imgSrc}
                       alt={brand.name}
-                      className={`h-5 w-auto object-contain rounded opacity-85 group-hover:opacity-100 transition-all duration-300 shrink-0 select-none ${
-                        brand.name === "Vercel" || brand.name === "Supabase" ? "h-4" : ""
+                      className={`h-6.5 w-auto object-contain rounded opacity-85 group-hover:opacity-100 transition-all duration-300 shrink-0 select-none ${
+                        brand.name === "Vercel" || brand.name === "Supabase" ? "h-5.5" : ""
                       }`}
                     />
-                    <span className="font-heading text-xs font-semibold text-white/55 group-hover:text-white transition-colors tracking-wide select-none">
+                    <span className="font-heading text-sm font-semibold text-white/55 group-hover:text-white transition-colors tracking-wide select-none">
                       {brand.name}
                     </span>
                   </div>
