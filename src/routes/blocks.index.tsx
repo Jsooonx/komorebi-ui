@@ -16,6 +16,7 @@ import {
   MousePointer,
   Compass,
   Cpu,
+  Sidebar,
 } from "lucide-react";
 import {
   COMPONENTS_MANIFEST,
@@ -358,9 +359,18 @@ function BlocksIndex() {
                   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
                 }}
               >
-                <h3 className="text-[10px] font-semibold tracking-widest text-white/20 uppercase font-mono mb-3">
-                  Categories
-                </h3>
+                <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
+                  <h3 className="text-[10px] font-semibold tracking-widest text-white/20 uppercase font-mono">
+                    Categories
+                  </h3>
+                  <button
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="p-1 hover:bg-white/5 rounded-lg text-white/40 hover:text-white transition-all cursor-pointer flex items-center justify-center"
+                    title="Collapse Sidebar"
+                  >
+                    <Sidebar className="w-4 h-4" />
+                  </button>
+                </div>
                 <div className="space-y-1">
                   {categories.map((cat) => {
                     const Icon = cat.icon;
@@ -417,9 +427,20 @@ function BlocksIndex() {
                 <span className="text-[10px] font-semibold tracking-widest text-white/30 uppercase font-mono">
                   Layout Blocks
                 </span>
-                <h1 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white mt-1">
-                  {categories.find((c) => c.id === activeCategory)?.label || "Header"}
-                </h1>
+                <div className="flex items-center gap-4 mt-1">
+                  {!isSidebarOpen && (
+                    <button
+                      onClick={() => setIsSidebarOpen(true)}
+                      className="p-2 bg-white/[0.03] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 rounded-xl text-white/50 hover:text-white transition-all cursor-pointer flex items-center justify-center"
+                      title="Expand Sidebar"
+                    >
+                      <Sidebar className="w-4.5 h-4.5" />
+                    </button>
+                  )}
+                  <h1 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white">
+                    {categories.find((c) => c.id === activeCategory)?.label || "Header"}
+                  </h1>
+                </div>
                 <p className="text-sm text-white/50 leading-relaxed font-heading max-w-2xl mt-1">
                   Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells.
                 </p>
