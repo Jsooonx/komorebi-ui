@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
-import { Home, Layers, Code2, Sparkles, BookOpen, CreditCard } from "lucide-react";
+import { Home, Folder, Terminal, Settings, Mail, User } from "lucide-react";
 
 const DOCK_ITEMS = [
   { label: "Home", icon: <Home className="w-5 h-5 text-[#E8A969]" /> },
-  { label: "Components", icon: <Layers className="w-5 h-5 text-[#E8A969]" /> },
-  { label: "Playground", icon: <Code2 className="w-5 h-5 text-[#E8A969]" /> },
-  { label: "Templates", icon: <Sparkles className="w-5 h-5 text-[#E8A969]" /> },
-  { label: "Pricing", icon: <CreditCard className="w-5 h-5 text-[#E8A969]" /> },
-  { label: "Docs", icon: <BookOpen className="w-5 h-5 text-[#E8A969]" /> },
+  { label: "Files", icon: <Folder className="w-5 h-5 text-[#E8A969]" /> },
+  { label: "Terminal", icon: <Terminal className="w-5 h-5 text-[#E8A969]" /> },
+  { label: "Settings", icon: <Settings className="w-5 h-5 text-[#E8A969]" /> },
+  { label: "Mail", icon: <Mail className="w-5 h-5 text-[#E8A969]" /> },
+  { label: "Profile", icon: <User className="w-5 h-5 text-[#E8A969]" /> },
 ];
 
 function DockIcon({
