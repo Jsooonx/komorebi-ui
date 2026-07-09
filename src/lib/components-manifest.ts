@@ -144,7 +144,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   },
   {
     id: "mega-menu-navbar",
-    name: "Mega Menu Navbar",
+    name: "Mega Menu Navbar 1",
     category: "Headers & Menus",
     description: "Shadcn-based floating navbar with premium animated mega menu dropdown panels.",
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
