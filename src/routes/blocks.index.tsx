@@ -468,13 +468,13 @@ function BlocksIndex() {
                     </motion.h1>
                   </div>
                   <p className="text-sm text-white/50 leading-relaxed font-heading max-w-2xl mt-1">
-                    {activeCategory === "header"
-                      ? "Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells."
-                      : "Clean minimalist layout presenting partner brand logos with monochromatic white filters and hover highlight states."}
+                    {activeCategory === "header" && "Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells."}
+                    {activeCategory === "logo-cloud" && "Clean layout presenting partner brand logos with monochromatic filters, scrolling sliders, and vertical marquee columns."}
+                    {activeCategory === "features" && "Premium feature section layouts with grids, inline outline animations, and interactive hover highlights."}
                   </p>
                 </div>
               </LayoutGroup>
-
+ 
               {/* Stacked Preview List */}
               <div className="space-y-12">
                 {activeCategory === "header" &&
@@ -484,6 +484,10 @@ function BlocksIndex() {
                 {activeCategory === "logo-cloud" &&
                   blockItems
                     .filter((item) => item.category === "Logo Cloud")
+                    .map((item) => <BlockRow key={item.id} item={item} />)}
+                {activeCategory === "features" &&
+                  blockItems
+                    .filter((item) => item.category === "Features")
                     .map((item) => <BlockRow key={item.id} item={item} />)}
               </div>
             </div>
