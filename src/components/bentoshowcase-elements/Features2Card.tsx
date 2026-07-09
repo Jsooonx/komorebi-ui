@@ -281,7 +281,7 @@ export default function Features2Card({ minimal = false }: { minimal?: boolean }
     <div className="w-full max-w-6xl mx-auto px-6 py-12 md:py-16 select-none flex flex-col justify-center items-center">
       {/* Block Header */}
       <div className="text-center mb-8 shrink-0">
-        <h3 className="font-serif text-3xl sm:text-4xl font-normal leading-tight text-white tracking-tight">
+        <h3 className="font-sans text-3xl sm:text-4xl font-semibold leading-tight text-white tracking-tight">
           Aesthetics meet performance
         </h3>
         <p className="text-xs sm:text-sm text-white/45 mt-3 font-sans max-w-lg mx-auto leading-relaxed select-text">

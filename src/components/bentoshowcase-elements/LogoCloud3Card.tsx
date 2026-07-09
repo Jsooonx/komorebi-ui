@@ -93,7 +93,7 @@ export default function LogoCloud3Card({ minimal = false }: { minimal?: boolean 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
         {/* Left Side: Static Text */}
         <div className="md:col-span-5 text-left">
-          <h3 className="font-serif text-3xl sm:text-4xl font-normal leading-tight text-white tracking-normal">
+          <h3 className="font-sans text-3xl sm:text-4xl font-semibold leading-tight text-white tracking-tight">
             Trusted by industry leaders worldwide.
           </h3>
           <p className="text-xs sm:text-sm text-white/50 mt-3 font-sans leading-relaxed">
