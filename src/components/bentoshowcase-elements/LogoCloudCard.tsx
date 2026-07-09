@@ -1,18 +1,18 @@
 import React from "react";
 
 export default function LogoCloudCard({ minimal = false }: { minimal?: boolean }) {
-  // Brand domain listings to retrieve tech logos using logo.dev
+  // Brand listings to retrieve tech logos using local assets or logo.dev
   const brands = [
-    { name: "Vercel", domain: "vercel.com" },
-    { name: "Supabase", domain: "supabase.com" },
-    { name: "Stripe", domain: "stripe.com" },
-    { name: "Claude", domain: "anthropic.com" },
+    { name: "Vercel", path: "/logos/vercel.com-logo.webp" },
+    { name: "Supabase", path: "/logos/supabase.com-logo.webp" },
+    { name: "Stripe", path: "/logos/stripe.com-logo.webp" },
+    { name: "Claude", path: "/logos/claude.com-logo.webp" },
     { name: "Figma", domain: "figma.com" },
-    { name: "Spotify", domain: "spotify.com" },
+    { name: "Spotify", path: "/logos/spotify.com-logo.webp" },
     { name: "Slack", domain: "slack.com" },
-    { name: "Hulu", domain: "hulu.com" },
-    { name: "Netflix", domain: "netflix.com" },
-    { name: "Cisco", domain: "cisco.com" }
+    { name: "Hulu", path: "/logos/hulu.jp-logo.webp" },
+    { name: "Netflix", path: "/logos/netflix.com-logo.webp" },
+    { name: "Cisco", path: "/logos/cisco.com-logo.webp" }
   ];
 
   const cssVariables = {
@@ -31,23 +31,29 @@ export default function LogoCloudCard({ minimal = false }: { minimal?: boolean }
 
         {/* Logo Rows grid */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-y-12 gap-x-8 items-center justify-items-center">
-          {brands.map((brand, idx) => (
-            <div
-              key={idx}
-              className="flex items-center gap-2.5 h-8 group transition-all duration-300 w-fit cursor-pointer"
-            >
-              <img
-                src={`https://img.logo.dev/${brand.domain}?token=pk_FklYVGBwT-mKrXMQ7yPyqQ&format=png`}
-                alt={brand.name}
-                className={`h-5 w-auto object-contain brightness-0 invert opacity-45 group-hover:opacity-100 transition-all duration-300 shrink-0 select-none ${
-                  brand.name === "Vercel" || brand.name === "Supabase" ? "h-4" : ""
-                }`}
-              />
-              <span className="font-heading text-xs font-semibold text-white/55 group-hover:text-white transition-colors tracking-wide select-none">
-                {brand.name}
-              </span>
-            </div>
-          ))}
+          {brands.map((brand, idx) => {
+            const imgSrc = brand.path
+              ? brand.path
+              : `https://img.logo.dev/${brand.domain}?token=pk_FklYVGBwT-mKrXMQ7yPyqQ&format=png`;
+
+            return (
+              <div
+                key={idx}
+                className="flex items-center gap-2.5 h-8 group transition-all duration-300 w-fit cursor-pointer"
+              >
+                <img
+                  src={imgSrc}
+                  alt={brand.name}
+                  className={`h-5 w-auto object-contain brightness-0 invert opacity-45 group-hover:opacity-100 transition-all duration-300 shrink-0 select-none ${
+                    brand.name === "Vercel" || brand.name === "Supabase" ? "h-4" : ""
+                  }`}
+                />
+                <span className="font-heading text-xs font-semibold text-white/55 group-hover:text-white transition-colors tracking-wide select-none">
+                  {brand.name}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
