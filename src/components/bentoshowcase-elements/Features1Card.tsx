@@ -70,7 +70,7 @@ export default function Features1Card({ minimal = false }: { minimal?: boolean }
   } as React.CSSProperties;
 
   const content = (
-    <div className="w-full max-w-6xl mx-auto px-6 py-6 md:py-8 select-none flex flex-col justify-center items-center h-full">
+    <div className="w-full max-w-6xl mx-auto px-6 py-12 md:py-16 select-none flex flex-col justify-center items-center">
       {/* Block Header */}
       <div className="text-center mb-6 md:mb-8 shrink-0">
         <h3 className="font-serif text-3xl sm:text-4xl font-normal leading-tight text-white tracking-tight">
@@ -98,7 +98,7 @@ export default function Features1Card({ minimal = false }: { minimal?: boolean }
   if (minimal) {
     return (
       <div
-        className="w-full h-full overflow-y-auto scrollbar-none select-none relative bg-[#09090b] flex items-center justify-center"
+        className="w-full h-full overflow-y-auto scrollbar-none select-none relative bg-[#09090b]"
         style={cssVariables}
       >
         {content}
@@ -108,7 +108,7 @@ export default function Features1Card({ minimal = false }: { minimal?: boolean }
 
   return (
     <div
-      className="relative w-full h-[580px] rounded-lg bg-[#09090b] border border-white/5 overflow-y-auto md:overflow-hidden flex flex-col items-center justify-center select-none group scrollbar-none"
+      className="relative w-full h-[580px] rounded-lg bg-[#09090b] border border-white/5 overflow-y-auto scrollbar-none select-none group"
       style={cssVariables}
     >
       {content}
