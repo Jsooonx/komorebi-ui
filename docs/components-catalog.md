@@ -1,48 +1,44 @@
 # Components Catalog
 
-The `Components` surface lives at `/components` and is powered by `src/routes/components.index.tsx` plus a split registry:
+The Components surface lives at `/components`. It contains reusable interaction, animation, visual, and utility components—not complete page sections.
 
-- `src/lib/components-manifest.ts` for metadata
-- `src/lib/component-previews.ts` for preview components
-- `src/lib/component-code-loader.ts` for on-demand source loading
+## Current component entries
 
-## Responsibilities
+The catalog currently contains 16 components:
 
-- list every component that should appear in the catalog
-- provide search and category filtering
-- drive the detail sandbox at `/components/$id`
-- allow catalog-only components that are not featured on the landing-page Bento-Showcase
+- Image Reveal
+- Hover Members
+- Toolkit Stack Swiper
+- Devouring Details
+- Dynamic Island Nav Card
+- WebGL Dither Shader
+- Text Roll Animator
+- SVG Border Beam
+- Mac-Dock Navbar
+- Infinite Icon Marquee
+- Audio Reactive Equalizer
+- Pixel Shimmer Card
+- Pipeline Stepper
+- Typewriter CLI Terminal
+- Accordion
+- Nested Accordion
 
-## Registry Notes
+The source of truth is `src/lib/components-manifest.ts` through `COMPONENTS_MANIFEST`. Preview components are mapped in `src/lib/component-previews.ts`, and source code is loaded on demand by `src/lib/component-code-loader.ts`.
 
-Every catalog entry should register:
+## Catalog behavior
 
-- `id`
-- `name`
-- `category`
-- `description`
-- preview component mapping
-- on-demand source loader entry
+- Search and filtering use component metadata only.
+- Component previews use the registered preview map.
+- Opening an entry loads its source code lazily in the detail sandbox at `/components/$id`.
+- The landing-page `Highlights` section is a curated subset of these entries.
+- The command palette searches only `COMPONENTS_MANIFEST`.
 
-Optional metadata includes CLI command, dependency tags, `isNew`, and layout hints for the catalog card grid.
+## Components versus Blocks
 
-## Performance Notes
+Full layout sections are intentionally excluded from this catalog. They belong to `/blocks` and are stored in `BLOCKS_MANIFEST`:
 
-- Search and filtering now depend only on the manifest metadata.
-- Component source code is loaded only when a user opens a specific detail sandbox.
-- This split keeps the catalog and command palette lighter than a single all-in-one registry.
+- Mega Menu Navbar 1, 2, and 3
+- Logo Cloud 1, 2, and 3
+- Features 1 and 2
 
-## Current Special Cases
-
-- `pixel-shimmer` is intentionally included in the catalog even though it is not rendered in the landing-page Bento-Showcase.
-
----
-
-## 🏗️ Blocks Catalog Sections
-
-The Blocks view (at `/blocks`) renders full layouts instead of individual buttons/cards. The newly unlocked categories include:
-
-### 1. Features
-- **Features 1 (`features-1`):** Clean minimalist 3-column features grid block with centered pattern design backdrops, standard white outline icons, and rebranded modern copy.
-- **Features 2 (`features-2`):** Premium asymmetric Bento Grid features showcase with dynamic interactive mockups, including spring physics curve controllers, preset speed switchers, and typing CLI terminal simulators.
-
+This keeps reusable pieces separate from ready-made page/layout sections.

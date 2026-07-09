@@ -19,7 +19,7 @@ import {
   Sidebar,
 } from "lucide-react";
 import {
-  COMPONENTS_MANIFEST,
+  BLOCKS_MANIFEST,
   type ComponentManifestItem,
   type ComponentPreviewProps,
 } from "../lib/components-manifest";
@@ -37,7 +37,7 @@ export const Route = createFileRoute("/blocks/")({
     {
       name: "description",
       content:
-        "Browse the complete library of custom header and navigation blocks built for modern web applications.",
+        "Browse the complete library of reusable layout blocks built for modern web applications.",
     },
   ],
 });
@@ -206,7 +206,11 @@ function BlockRow({ item }: { item: BlockItem }) {
             className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
             title="Copy Source Code"
           >
-            {copiedCode ? <Check className="w-3.5 h-3.5 text-[#00f5a0]" /> : <Copy className="w-3.5 h-3.5" />}
+            {copiedCode ? (
+              <Check className="w-3.5 h-3.5 text-[#00f5a0]" />
+            ) : (
+              <Copy className="w-3.5 h-3.5" />
+            )}
           </button>
 
           {/* Reset Preview */}
@@ -226,13 +230,19 @@ function BlockRow({ item }: { item: BlockItem }) {
             className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
             title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
           >
-            {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
+            {isFullscreen ? (
+              <Minimize2 className="w-3.5 h-3.5" />
+            ) : (
+              <Maximize2 className="w-3.5 h-3.5" />
+            )}
           </button>
         </div>
       </div>
 
       {/* Main Viewport Content Area */}
-      <div className={`relative w-full ${isFullscreen ? "fixed inset-0 z-50 bg-[#09090b] flex flex-col pt-16" : ""}`}>
+      <div
+        className={`relative w-full ${isFullscreen ? "fixed inset-0 z-50 bg-[#09090b] flex flex-col pt-16" : ""}`}
+      >
         {isFullscreen && (
           <div className="absolute top-4 right-6 z-50 flex items-center gap-3">
             <button
@@ -253,7 +263,9 @@ function BlockRow({ item }: { item: BlockItem }) {
               <PreviewComp minimal={true} />
             </div>
           ) : (
-            <div className={`w-full ${isFullscreen ? "h-[calc(100vh-64px)]" : "h-[500px]"} overflow-auto`}>
+            <div
+              className={`w-full ${isFullscreen ? "h-[calc(100vh-64px)]" : "h-[500px]"} overflow-auto`}
+            >
               {isCodeLoading ? (
                 <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-white/40">
                   <div className="w-4 h-4 border-2 border-t-white/80 border-white/20 rounded-full animate-spin" />
@@ -302,13 +314,11 @@ function BlocksIndex() {
     localStorage.setItem("komorebi_blocks_sidebar_open", String(isSidebarOpen));
   }, [isSidebarOpen]);
 
-  // Manifest items that are Blocks (currently headers, logo clouds, and features)
-  const blockItems: BlockItem[] = COMPONENTS_MANIFEST.map((item) => ({
+  // Blocks are full layout sections; reusable interaction components live at /components.
+  const blockItems: BlockItem[] = BLOCKS_MANIFEST.map((item) => ({
     ...item,
     component: getComponentPreview(item.id),
-  }))
-    .filter((item): item is BlockItem => Boolean(item.component))
-    .filter((item) => ["mega-menu-navbar-1", "mega-menu-navbar-2", "mega-menu-navbar-3", "logo-cloud-1", "logo-cloud-2", "logo-cloud-3", "features-1", "features-2"].includes(item.id));
+  })).filter((item): item is BlockItem => Boolean(item.component));
 
   return (
     <div className="min-h-screen bg-[#090909] text-white flex flex-col select-none antialiased">
@@ -355,9 +365,9 @@ function BlocksIndex() {
                 opacity: 1,
                 transition: {
                   staggerChildren: 0.06,
-                  delayChildren: 0.05
-                }
-              }
+                  delayChildren: 0.05,
+                },
+              },
             }}
             initial="hidden"
             animate="visible"
@@ -367,7 +377,11 @@ function BlocksIndex() {
               <motion.div
                 variants={{
                   hidden: { opacity: 0, y: 10 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+                  },
                 }}
               >
                 <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
@@ -420,11 +434,16 @@ function BlocksIndex() {
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+                },
               }}
               className="pt-6 border-t border-white/5 text-[10px] text-white/35 leading-relaxed font-sans"
             >
-              Blocks are ready-made full-page layout sections (Headers, Heros, Bentos) designed to drop directly into your routes.
+              Blocks are ready-made layout sections such as headers, logo clouds, and feature grids,
+              designed to drop directly into your routes.
             </motion.div>
           </motion.div>
         </motion.aside>
@@ -468,13 +487,16 @@ function BlocksIndex() {
                     </motion.h1>
                   </div>
                   <p className="text-sm text-white/50 leading-relaxed font-heading max-w-2xl mt-1">
-                    {activeCategory === "header" && "Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells."}
-                    {activeCategory === "logo-cloud" && "Clean layout presenting partner brand logos with monochromatic filters, scrolling sliders, and vertical marquee columns."}
-                    {activeCategory === "features" && "Premium feature section layouts with grids, inline outline animations, and interactive hover highlights."}
+                    {activeCategory === "header" &&
+                      "Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells."}
+                    {activeCategory === "logo-cloud" &&
+                      "Clean layout presenting partner brand logos with monochromatic filters, scrolling sliders, and vertical marquee columns."}
+                    {activeCategory === "features" &&
+                      "Premium feature section layouts with grids, inline outline animations, and interactive hover highlights."}
                   </p>
                 </div>
               </LayoutGroup>
- 
+
               {/* Stacked Preview List */}
               <div className="space-y-12">
                 {activeCategory === "header" &&

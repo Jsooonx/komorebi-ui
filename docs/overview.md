@@ -1,58 +1,62 @@
 # Komorebi UI - Project Overview & Architecture
 
-Komorebi UI is a premium, high-fidelity website animation library with two main user-facing surfaces:
+Komorebi UI is a premium, high-fidelity website animation library with three distinct user-facing surfaces:
 
-- the landing page at `/`, which includes the Bento-Showcase and template/prompt showcase
-- the Components catalog at `/components`, which lists and previews the reusable component collection
+- `/`: landing page with Hero, interactive playground, Highlights, templates, and footer
+- `/components`: reusable component catalog
+- `/blocks`: full layout/block catalog
 
-The `Components` catalog and the landing-page `Bento-Showcase` are intentionally separate surfaces. A component can exist in the catalog without being featured inside the Bento-Showcase.
+The terminology is intentional:
 
-## Technology Stack
+- **Components** are reusable interaction and animation pieces.
+- **Blocks** are complete layout sections such as headers, logo clouds, and feature grids.
+- **Highlights** are a curated selection of components shown on the landing page.
 
-- **Framework:** [React](https://react.dev) + [Vite](https://vitejs.dev)
-- **Routing:** [TanStack Start / TanStack Router](https://tanstack.com/router)
-- **Animations:** [Framer Motion](https://www.framer.com/motion/) + [GSAP](https://gsap.com/)
-- **Styling:** Tailwind CSS + `src/styles.css`
-- **Icons:** [Lucide React](https://lucide.dev)
-- **WebGL / shader previews:** React Three Fiber + OGL
+## Technology stack
 
-## Current Directory Layout
+- React 19 + TypeScript
+- Vite
+- TanStack Start / TanStack Router
+- Framer Motion and GSAP
+- Tailwind CSS
+- Lucide React
+- React Three Fiber, Three.js, OGL, and postprocessing for WebGL previews
+
+## Runtime layout
 
 ```text
-.
-|- docs/                       # feature and architecture notes
-|- obsidian_memory_vault/      # private local memory vault (gitignored)
-|- public/                     # runtime static assets used by the app
-|- references/                 # design references, templates, source media, archives
-|- scripts/                    # private local automation helpers such as Gemini/Codex memory sync
-|- src/
-|  |- components/
-|  |  |- bentoshowcase-elements/
-|  |  |- terminal-elements/
-|  |  `- ui/
-|  |- lib/
-|  `- routes/
-|- AGENTS.md
-|- eslint.config.js
-|- package.json
-|- tsconfig.json
-`- vite.config.ts
+docs/                         # Architecture, design, and workflow notes
+public/                       # Runtime assets
+references/                   # Non-runtime templates, media, and design references
+scripts/                      # Private memory synchronization helpers
+src/
+|- components/
+|  |- bentoshowcase-elements/  # Reusable previews used by Highlights, Components, or Blocks
+|  |- terminal-elements/       # Large playground previews
+|  `- ui/                      # Shared UI/animation primitives
+|- lib/
+|  |- components-manifest.ts   # COMPONENTS_MANIFEST and BLOCKS_MANIFEST
+|  |- component-previews.ts    # Preview registry for both catalogs
+|  `- component-code-loader.ts # On-demand source loader
+`- routes/
+   |- index.tsx                # Landing page
+   |- components.index.tsx     # Components catalog
+   |- components.$id.tsx       # Shared detail/playground route
+   `- blocks.index.tsx          # Blocks catalog
 ```
 
-## Runtime Boundaries
+## Registry boundaries
 
-- **Landing page:** `src/routes/index.tsx`
-- **Components catalog:** `src/routes/components.index.tsx`
-- **Component detail sandbox:** `src/routes/components.$id.tsx`
-- **Catalog manifest:** `src/lib/components-manifest.ts`
-- **Preview registry:** `src/lib/component-previews.ts`
-- **On-demand source loader:** `src/lib/component-code-loader.ts`
-- **Catalog-only component examples:** `pixel-shimmer` is registered in the Components catalog but is not part of the landing-page Bento-Showcase
+`COMPONENTS_MANIFEST` contains the 16 reusable components shown in `/components`.
 
-## Audit Notes
+`BLOCKS_MANIFEST` contains the 8 layout blocks shown in `/blocks`.
 
-- `references/` is intentionally excluded from root linting because it stores non-runtime material.
-- `obsidian_memory_vault/`, `scripts/sync_memory.py`, and `scripts/sync_codex_memory.py` are private workflow assets and should stay out of public pushes.
-- The global command palette is lazy-loaded on user intent so the landing page does not pay that cost up front.
-- Below-the-fold homepage sections are deferred so heavy showcase code does not need to ship before the user reaches it.
-- Runtime assets live in `public/`; non-runtime source media and design explorations should live under `references/`.
+Both registries share preview and source-code infrastructure, while the catalog routes consume only their own manifest. The shared detail route can resolve entries from either registry.
+
+## Performance notes
+
+- The command palette is lazy-loaded.
+- Below-the-fold landing sections are deferred.
+- The WebGL dither preview is lazy-loaded.
+- Vite separates heavy animation and Three.js-related dependencies into dedicated chunks.
+- Runtime assets stay in `public/`; references and experiments stay under `references/`.

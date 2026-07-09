@@ -40,16 +40,20 @@ export const Route = createFileRoute("/components/")({
 
 const getCategoryIcon = (category: string) => {
   switch (category.toLowerCase()) {
-    case "visuals":
+    case "webgl & shaders":
       return <Cpu className="w-4 h-4" />;
-    case "interactions":
+    case "card & border effects":
       return <MousePointer className="w-4 h-4" />;
-    case "canvas":
+    case "3d & swipers":
       return <Layers className="w-4 h-4" />;
-    case "navigation":
+    case "floating ui & docks":
       return <Compass className="w-4 h-4" />;
-    case "reveal":
+    case "masking & accordions":
       return <Layout className="w-4 h-4" />;
+    case "typography & tickers":
+      return <BookOpen className="w-4 h-4" />;
+    case "cli & stepper controls":
+      return <Terminal className="w-4 h-4" />;
     default:
       return <BookOpen className="w-4 h-4" />;
   }
@@ -185,8 +189,7 @@ function ComponentsIndex() {
   const catalogItems: CatalogComponentItem[] = COMPONENTS_MANIFEST.map((item) => ({
     ...item,
     component: getComponentPreview(item.id),
-  })).filter((item): item is CatalogComponentItem => Boolean(item.component))
-     .filter((item) => !["mega-menu-navbar-1", "mega-menu-navbar-2", "mega-menu-navbar-3", "logo-cloud-1", "logo-cloud-2", "logo-cloud-3", "features-1", "features-2"].includes(item.id));
+  })).filter((item): item is CatalogComponentItem => Boolean(item.component));
 
   const [isBackNavigation, setIsBackNavigation] = useState(() => {
     if (typeof window !== "undefined") {
@@ -221,8 +224,8 @@ function ComponentsIndex() {
   });
 
   const [searchQuery, setSearchQuery] = useState<string>("");
-  
-  const [viewMode, setViewMode] = useState<"category" | "all">(( ) => {
+
+  const [viewMode, setViewMode] = useState<"category" | "all">(() => {
     if (typeof window !== "undefined") {
       const fromCatalog = sessionStorage.getItem("komorebi_from_catalog");
       if (fromCatalog === "true") {
@@ -263,7 +266,8 @@ function ComponentsIndex() {
   };
 
   const filteredComponents = catalogItems.filter((item) => {
-    const matchesCategory = viewMode === "all" || activeCategory === "All" || item.category === activeCategory;
+    const matchesCategory =
+      viewMode === "all" || activeCategory === "All" || item.category === activeCategory;
     const matchesSearch =
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -319,7 +323,9 @@ function ComponentsIndex() {
             paddingRight: isSidebarOpen ? 24 : 0,
             borderRightWidth: isSidebarOpen ? 1 : 0,
           }}
-          transition={isBackNavigation ? { duration: 0 } : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          transition={
+            isBackNavigation ? { duration: 0 } : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+          }
           className="hidden lg:flex shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex-col justify-between border-white/5 overflow-hidden"
         >
           <motion.div
@@ -329,9 +335,9 @@ function ComponentsIndex() {
                 opacity: 1,
                 transition: {
                   staggerChildren: 0.06,
-                  delayChildren: 0.05
-                }
-              }
+                  delayChildren: 0.05,
+                },
+              },
             }}
             initial="hidden"
             animate="visible"
@@ -341,13 +347,15 @@ function ComponentsIndex() {
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+                },
               }}
               className="flex items-center justify-between pb-4 border-b border-white/5"
             >
-              <h3 className="text-xs font-bold uppercase tracking-wider text-white/70">
-                Filters
-              </h3>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-white/70">Filters</h3>
               <button
                 onClick={() => setIsSidebarOpen(false)}
                 className="p-1 hover:bg-white/5 rounded-lg text-white/40 hover:text-white transition-all cursor-pointer flex items-center justify-center"
@@ -361,7 +369,11 @@ function ComponentsIndex() {
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+                },
               }}
               className="space-y-2.5"
             >
@@ -404,7 +416,11 @@ function ComponentsIndex() {
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+                },
               }}
               className="space-y-3 pt-2"
             >
@@ -426,33 +442,36 @@ function ComponentsIndex() {
               </div>
 
               <div className="flex flex-wrap gap-1.5 select-none">
-                {categories.filter(c => c !== "All").map((cat) => {
-                  const isActive = activeCategory === cat && viewMode === "category";
-                  const count = getCategoryCount(cat);
-                  return (
-                    <button
-                      key={cat}
-                      onClick={() => {
-                        setActiveCategory(cat);
-                        setViewMode("category");
-                      }}
-                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-medium transition-all cursor-pointer ${
-                        isActive
-                          ? "bg-white/10 border-white/30 text-white"
-                          : "bg-white/[0.02] border-white/5 hover:border-white/10 hover:bg-white/[0.04] text-white/60 hover:text-white"
-                      }`}
-                    >
-                      <span>{cat}</span>
-                      <span className={`text-[10px] font-mono ${isActive ? "text-white/60" : "text-white/30"}`}>
-                        {count}
-                      </span>
-                    </button>
-                  );
-                })}
+                {categories
+                  .filter((c) => c !== "All")
+                  .map((cat) => {
+                    const isActive = activeCategory === cat && viewMode === "category";
+                    const count = getCategoryCount(cat);
+                    return (
+                      <button
+                        key={cat}
+                        onClick={() => {
+                          setActiveCategory(cat);
+                          setViewMode("category");
+                        }}
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-medium transition-all cursor-pointer ${
+                          isActive
+                            ? "bg-white/10 border-white/30 text-white"
+                            : "bg-white/[0.02] border-white/5 hover:border-white/10 hover:bg-white/[0.04] text-white/60 hover:text-white"
+                        }`}
+                      >
+                        <span>{cat}</span>
+                        <span
+                          className={`text-[10px] font-mono ${isActive ? "text-white/60" : "text-white/30"}`}
+                        >
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
               </div>
             </motion.div>
           </motion.div>
-
         </motion.aside>
 
         <main className="flex-1 pt-10 pb-24 overflow-hidden flex flex-col px-6 md:px-12 lg:pl-12 lg:pr-12">
@@ -495,7 +514,6 @@ function ComponentsIndex() {
             </div>
           </LayoutGroup>
 
-
           <div className="flex flex-col sm:flex-row gap-4 mb-8 items-stretch sm:items-center">
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
@@ -510,7 +528,9 @@ function ComponentsIndex() {
 
             <div className="lg:hidden flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar select-none shrink-0">
               {categories.map((cat) => {
-                const isActive = (cat === "All" && viewMode === "all") || (cat === activeCategory && viewMode === "category");
+                const isActive =
+                  (cat === "All" && viewMode === "all") ||
+                  (cat === activeCategory && viewMode === "category");
                 return (
                   <button
                     key={cat}
@@ -555,38 +575,48 @@ function ComponentsIndex() {
 
                     {viewMode === "all" ? (
                       <div className="space-y-12">
-                        {categories.filter(c => c !== "All").map((cat) => {
-                          const categoryComponents = filteredComponents.filter(c => c.category === cat);
-                          if (categoryComponents.length === 0) return null;
+                        {categories
+                          .filter((c) => c !== "All")
+                          .map((cat) => {
+                            const categoryComponents = filteredComponents.filter(
+                              (c) => c.category === cat,
+                            );
+                            if (categoryComponents.length === 0) return null;
 
-                          return (
-                            <div key={cat} className="space-y-4">
-                              <div className="pb-2 border-b border-white/5 flex items-center justify-between">
-                                <h4 className="text-xs font-bold tracking-wider text-white/60 uppercase font-mono">
-                                  {cat} <span className="text-[9px] text-white/35 ml-1">[{categoryComponents.length}]</span>
-                                </h4>
-                                <span className="text-[9px] text-white/30 font-heading">
-                                  {getCategoryDescription(cat, "category").replace(" [Hover to preview]", "")}
-                                </span>
+                            return (
+                              <div key={cat} className="space-y-4">
+                                <div className="pb-2 border-b border-white/5 flex items-center justify-between">
+                                  <h4 className="text-xs font-bold tracking-wider text-white/60 uppercase font-mono">
+                                    {cat}{" "}
+                                    <span className="text-[9px] text-white/35 ml-1">
+                                      [{categoryComponents.length}]
+                                    </span>
+                                  </h4>
+                                  <span className="text-[9px] text-white/30 font-heading">
+                                    {getCategoryDescription(cat, "category").replace(
+                                      " [Hover to preview]",
+                                      "",
+                                    )}
+                                  </span>
+                                </div>
+                                <motion.div
+                                  variants={containerVariants}
+                                  initial={isBackNavigation ? "visible" : "hidden"}
+                                  animate="visible"
+                                  exit="hidden"
+                                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+                                >
+                                  {categoryComponents.map((item) => (
+                                    <ComponentCard
+                                      key={item.id}
+                                      item={item}
+                                      isBackNavigation={isBackNavigation}
+                                    />
+                                  ))}
+                                </motion.div>
                               </div>
-                              <motion.div
-                                variants={containerVariants}
-                                initial={isBackNavigation ? "visible" : "hidden"}
-                                animate="visible"
-                                exit="hidden"
-                                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-                              >
-                                {categoryComponents.map((item) => (
-                                  <ComponentCard
-                                    key={item.id}
-                                    item={item}
-                                    isBackNavigation={isBackNavigation}
-                                  />
-                                ))}
-                              </motion.div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
                       </div>
                     ) : (
                       <motion.div

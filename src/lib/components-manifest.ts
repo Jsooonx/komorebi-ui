@@ -127,6 +127,9 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "CLI & Stepper Controls",
     description: "Simulated console window outputting text strings dynamically.",
   },
+];
+
+export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
   {
     id: "mega-menu-navbar-1",
     name: "Mega Menu Navbar 1",
@@ -160,30 +163,11 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     viewportHeightClass: "h-[500px]",
   },
   {
-    id: "interactive-accordion",
-    name: "Accordion",
-    category: "Masking & Accordions",
-    description: "Ambient glowing feature details accordion with responsive badge state highlights.",
-    dependencies: ["@radix-ui/react-accordion", "framer-motion"],
-    isNew: true,
-    gridClass: "md:row-span-2",
-    viewportHeightClass: "h-[400px]",
-  },
-  {
-    id: "nested-accordion",
-    name: "Nested Accordion",
-    category: "Masking & Accordions",
-    description: "Hierarchical accordion design showcasing nested sub-menu dropdown panels inside a unified wrapper.",
-    dependencies: ["@radix-ui/react-accordion", "framer-motion"],
-    isNew: true,
-    gridClass: "md:row-span-2",
-    viewportHeightClass: "h-[400px]",
-  },
-  {
     id: "logo-cloud-1",
     name: "Logo Cloud 1",
     category: "Logo Cloud",
-    description: "Clean minimalist layout presenting partner brands with monochromatic white filters and hover highlight states.",
+    description:
+      "Clean minimalist layout presenting partner brands with monochromatic white filters and hover highlight states.",
     dependencies: [],
     isNew: true,
     gridClass: "md:row-span-1",
@@ -193,7 +177,8 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     id: "logo-cloud-2",
     name: "Logo Cloud 2",
     category: "Logo Cloud",
-    description: "Infinite scrolling loop slider of brand lockups with smooth progressive edge blurs.",
+    description:
+      "Infinite scrolling loop slider of brand lockups with smooth progressive edge blurs.",
     dependencies: ["framer-motion"],
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-1",
@@ -203,7 +188,8 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     id: "logo-cloud-3",
     name: "Logo Cloud 3",
     category: "Logo Cloud",
-    description: "Split layout presenting static copy on the left and double opposing vertical infinite scrolling marquees on the right.",
+    description:
+      "Split layout presenting static copy on the left and double opposing vertical infinite scrolling marquees on the right.",
     dependencies: ["framer-motion"],
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-1",
@@ -213,7 +199,8 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     id: "features-1",
     name: "Features 1",
     category: "Features",
-    description: "Clean minimalist 3-column features grid block with centered pattern design backdrops and outline icons.",
+    description:
+      "Clean minimalist 3-column features grid block with centered pattern design backdrops and outline icons.",
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[580px]",
@@ -222,13 +209,14 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     id: "features-2",
     name: "Features 2",
     category: "Features",
-    description: "Premium asymmetric Bento Grid features showcase with dynamic interactive mockups, including spring controllers and real-time terminal CLI simulator.",
+    description:
+      "Premium asymmetric Bento Grid features showcase with dynamic interactive mockups, including spring controllers and real-time terminal CLI simulator.",
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[720px]",
   },
 ];
 
-export function getComponentManifestItem(id: string) {
-  return COMPONENTS_MANIFEST.find((item) => item.id === id);
+export function getManifestItem(id: string) {
+  return [...COMPONENTS_MANIFEST, ...BLOCKS_MANIFEST].find((item) => item.id === id);
 }
