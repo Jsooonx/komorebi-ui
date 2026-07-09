@@ -140,7 +140,7 @@ export default function LogoCloud2Card({ minimal = false }: { minimal?: boolean 
 
           {/* Slider Container */}
           <div className="relative py-4 md:w-[calc(100%-13rem)] w-full overflow-hidden">
-            <InfiniteSlider speed={35} speedOnHover={85} gap={96}>
+            <InfiniteSlider speed={35} speedOnHover={85} gap={56}>
               {brands.map((brand, idx) => {
                 const imgSrc = brand.path
                   ? brand.path
