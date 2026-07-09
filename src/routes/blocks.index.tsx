@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, type ComponentType } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { toast } from "sonner";
 import {
   ChevronRight,
@@ -442,46 +442,47 @@ function BlocksIndex() {
         <main className="flex-1 min-h-[calc(100vh-64px)] flex flex-col p-6 md:p-12 overflow-x-hidden">
           <div className="max-w-5xl w-full mx-auto flex-1 flex flex-col justify-between">
             <div className="space-y-8">
-              {/* Category Page Title */}
-              <div className="flex flex-col items-start gap-1.5">
-                <span className="text-[10px] font-semibold tracking-widest text-white/30 uppercase font-mono">
-                  Layout Blocks
-                </span>
-                <div className="flex items-center gap-4 mt-1">
-                  <AnimatePresence mode="popLayout">
-                    {!isSidebarOpen && (
-                      <motion.div
-                        key="expand-btn-blocks"
-                        initial={{ opacity: 0, scale: 0.8, x: -20, width: 0 }}
-                        animate={{ opacity: 1, scale: 1, x: 0, width: "auto" }}
-                        exit={{ opacity: 0, scale: 0.8, x: -20, width: 0 }}
-                        transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                        className="overflow-hidden flex items-center shrink-0 pr-1"
-                      >
-                        <button
-                          onClick={() => setIsSidebarOpen(true)}
-                          className="p-2 bg-white/[0.03] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 rounded-xl text-white/50 hover:text-white transition-all cursor-pointer flex items-center justify-center"
-                          title="Expand Sidebar"
+              <LayoutGroup id="blocks-header">
+                <div className="flex flex-col items-start gap-1.5">
+                  <span className="text-[10px] font-semibold tracking-widest text-white/30 uppercase font-mono">
+                    Layout Blocks
+                  </span>
+                  <div className="flex items-center gap-4 mt-1">
+                    <AnimatePresence mode="popLayout">
+                      {!isSidebarOpen && (
+                        <motion.div
+                          key="expand-btn-blocks"
+                          initial={{ opacity: 0, scale: 0.8, x: -20, width: 0 }}
+                          animate={{ opacity: 1, scale: 1, x: 0, width: "auto" }}
+                          exit={{ opacity: 0, scale: 0.8, x: -20, width: 0 }}
+                          transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                          className="overflow-hidden flex items-center shrink-0 pr-1"
                         >
-                          <Sidebar className="w-4.5 h-4.5" />
-                        </button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  <motion.h1
-                    layout="position"
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                    className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white"
-                  >
-                    {categories.find((c) => c.id === activeCategory)?.label || "Header"}
-                  </motion.h1>
+                          <button
+                            onClick={() => setIsSidebarOpen(true)}
+                            className="p-2 bg-white/[0.03] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 rounded-xl text-white/50 hover:text-white transition-all cursor-pointer flex items-center justify-center"
+                            title="Expand Sidebar"
+                          >
+                            <Sidebar className="w-4.5 h-4.5" />
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                    <motion.h1
+                      layout="position"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                      className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white"
+                    >
+                      {categories.find((c) => c.id === activeCategory)?.label || "Header"}
+                    </motion.h1>
+                  </div>
+                  <p className="text-sm text-white/50 leading-relaxed font-heading max-w-2xl mt-1">
+                    {activeCategory === "header"
+                      ? "Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells."
+                      : "Clean minimalist layout presenting partner brand logos with monochromatic white filters and hover highlight states."}
+                  </p>
                 </div>
-                <p className="text-sm text-white/50 leading-relaxed font-heading max-w-2xl mt-1">
-                  {activeCategory === "header"
-                    ? "Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells."
-                    : "Clean minimalist layout presenting partner brand logos with monochromatic white filters and hover highlight states."}
-                </p>
-              </div>
+              </LayoutGroup>
 
               {/* Stacked Preview List */}
               <div className="space-y-12">

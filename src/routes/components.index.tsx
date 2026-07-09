@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useRef, type ComponentType } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { toast } from "sonner";
 import {
   Search,
@@ -456,42 +456,44 @@ function ComponentsIndex() {
         </motion.aside>
 
         <main className="flex-1 pt-10 pb-24 overflow-hidden flex flex-col px-6 md:px-12 lg:pl-12 lg:pr-12">
-          <div className="mb-10 text-left">
-            <div className="flex items-center gap-4 mb-4">
-              <AnimatePresence mode="popLayout">
-                {!isSidebarOpen && (
-                  <motion.div
-                    key="expand-btn-components"
-                    initial={{ opacity: 0, scale: 0.8, x: -20, width: 0 }}
-                    animate={{ opacity: 1, scale: 1, x: 0, width: "auto" }}
-                    exit={{ opacity: 0, scale: 0.8, x: -20, width: 0 }}
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                    className="overflow-hidden flex items-center shrink-0 pr-1"
-                  >
-                    <button
-                      onClick={() => setIsSidebarOpen(true)}
-                      className="p-2 bg-white/[0.03] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 rounded-xl text-white/50 hover:text-white transition-all cursor-pointer flex items-center justify-center"
-                      title="Expand Sidebar"
+          <LayoutGroup id="components-header">
+            <div className="mb-10 text-left">
+              <div className="flex items-center gap-4 mb-4">
+                <AnimatePresence mode="popLayout">
+                  {!isSidebarOpen && (
+                    <motion.div
+                      key="expand-btn-components"
+                      initial={{ opacity: 0, scale: 0.8, x: -20, width: 0 }}
+                      animate={{ opacity: 1, scale: 1, x: 0, width: "auto" }}
+                      exit={{ opacity: 0, scale: 0.8, x: -20, width: 0 }}
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                      className="overflow-hidden flex items-center shrink-0 pr-1"
                     >
-                      <Sidebar className="w-4.5 h-4.5" />
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              <motion.h1
-                layout="position"
-                transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white"
-              >
-                Explore Components
-              </motion.h1>
+                      <button
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="p-2 bg-white/[0.03] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 rounded-xl text-white/50 hover:text-white transition-all cursor-pointer flex items-center justify-center"
+                        title="Expand Sidebar"
+                      >
+                        <Sidebar className="w-4.5 h-4.5" />
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <motion.h1
+                  layout="position"
+                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white"
+                >
+                  Explore Components
+                </motion.h1>
+              </div>
+              <p className="text-sm text-white/50 leading-relaxed max-w-2xl font-heading">
+                Curated catalog of premium animations, interactive workspaces, and dithered shaders.
+                Built with Framer Motion, GSAP, and ThreeJS. Copy the codebase parameters or deploy
+                directly with the developer CLI.
+              </p>
             </div>
-            <p className="text-sm text-white/50 leading-relaxed max-w-2xl font-heading">
-              Curated catalog of premium animations, interactive workspaces, and dithered shaders.
-              Built with Framer Motion, GSAP, and ThreeJS. Copy the codebase parameters or deploy
-              directly with the developer CLI.
-            </p>
-          </div>
+          </LayoutGroup>
 
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8 items-stretch sm:items-center">
