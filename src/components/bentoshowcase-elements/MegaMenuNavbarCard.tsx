@@ -192,6 +192,46 @@ function NavbarContent({
   );
 }
 
+// ── Mock Website Body Content ──────────────────────────────────────────────────
+
+function MockContent() {
+  return (
+    <div className="px-6 py-8 space-y-8 select-none pointer-events-none">
+      {/* Hero */}
+      <div className="text-center py-6">
+        <h4 className="text-white text-lg font-semibold tracking-tight">Design the Future</h4>
+        <p className="text-[11px] text-white/40 mt-1 max-w-xs mx-auto">
+          High-performance primitives designed for the modern web applications.
+        </p>
+      </div>
+
+      {/* Section features */}
+      <div className="grid grid-cols-2 gap-3">
+        <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#E8A969] mb-1.5" />
+          <h5 className="text-[11px] text-white/80 font-medium">Ultra Fast</h5>
+          <p className="text-[9px] text-white/30 mt-0.5">
+            Sub-millisecond interactive response times.
+          </p>
+        </div>
+        <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#BECB6D] mb-1.5" />
+          <h5 className="text-[11px] text-white/80 font-medium">Safe By Default</h5>
+          <p className="text-[9px] text-white/30 mt-0.5">Zero-trust architecture configurations.</p>
+        </div>
+      </div>
+
+      {/* Dummy text lines to allow scrolling */}
+      <div className="space-y-2 pt-2">
+        <div className="h-1.5 w-1/3 bg-white/5 rounded" />
+        <div className="h-1.5 w-full bg-white/5 rounded" />
+        <div className="h-1.5 w-5/6 bg-white/5 rounded" />
+        <div className="h-1.5 w-2/3 bg-white/5 rounded" />
+      </div>
+    </div>
+  );
+}
+
 // ── Card Wrapper ───────────────────────────────────────────────────────────────
 
 export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: boolean }) {
@@ -206,23 +246,27 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
   if (minimal) {
     return (
       <div
-        className="w-full h-full flex items-start justify-center pt-5 px-4 select-none"
+        className="w-full h-[400px] bg-[#0c0c0e] border border-white/10 rounded-xl overflow-y-auto scrollbar-none select-none relative"
         style={cssVariables}
       >
-        <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
+        <div className="sticky top-0 z-20 w-full flex justify-center pt-4 px-4 bg-[#0c0c0e]/80 backdrop-blur-md pb-2">
+          <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
+        </div>
+        <MockContent />
+        <div className="py-20 text-center text-[10px] text-white/20">End of Page Preview</div>
       </div>
     );
   }
 
   return (
     <div
-      className="relative w-full h-[440px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group"
+      className="relative w-full h-[440px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-y-auto scrollbar-none flex flex-col select-none group"
       style={cssVariables}
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-[#E8A969]/5 to-[#121212] opacity-60 pointer-events-none" />
 
       {/* Top: label + navbar stacked right at the top */}
-      <div className="relative z-10 w-full flex flex-col gap-3">
+      <div className="sticky top-0 z-20 w-full flex flex-col gap-3 bg-[#0e0e0e]/80 backdrop-blur-md p-6 pb-2">
         <div className="w-full flex items-center justify-between">
           <span className="text-[10px] font-mono text-white/40 tracking-widest uppercase">
             Navigation Menu
@@ -232,14 +276,22 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
         <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 
-      {/* Bottom: title */}
-      <div className="relative z-10">
-        <span className="text-xs text-white/40 tracking-wider uppercase block mb-0.5">
-          Interactive navigation
-        </span>
-        <h3 className="font-sans text-base font-medium tracking-tight text-white">
-          Mega menu navbar
-        </h3>
+      {/* Scrolling mock page body */}
+      <div className="flex-1">
+        <MockContent />
+
+        {/* Bottom indicator + title inside scroll area */}
+        <div className="px-6 pb-6 pt-16 flex items-center justify-between text-[10px] text-white/30 border-t border-white/[0.02] mt-8 bg-black/10">
+          <div>
+            <span className="text-[10px] text-white/40 tracking-wider uppercase block mb-0.5">
+              Interactive navigation
+            </span>
+            <h3 className="font-sans text-xs font-medium tracking-tight text-white">
+              Mega menu navbar
+            </h3>
+          </div>
+          <span>Scroll down inside this card to explore page</span>
+        </div>
       </div>
     </div>
   );
