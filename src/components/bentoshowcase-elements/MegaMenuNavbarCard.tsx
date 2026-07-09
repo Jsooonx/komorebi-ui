@@ -246,10 +246,10 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
   if (minimal) {
     return (
       <div
-        className="w-full h-[400px] bg-[#0c0c0e] border border-white/10 rounded-xl overflow-y-auto scrollbar-none select-none relative"
+        className="w-full h-[400px] bg-[#0c0c0e] border border-white/10 rounded-xl overflow-y-auto scrollbar-none select-none relative pt-4"
         style={cssVariables}
       >
-        <div className="sticky top-0 z-20 w-full flex justify-center pt-4 px-4 pb-2">
+        <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">
           <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
         </div>
         <MockContent />
@@ -260,13 +260,13 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
 
   return (
     <div
-      className="relative w-full h-[440px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-y-auto scrollbar-none flex flex-col select-none group animate-in fade-in duration-500"
+      className="relative w-full h-[440px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-y-auto scrollbar-none flex flex-col select-none group animate-in fade-in duration-500 pt-4"
       style={cssVariables}
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-[#E8A969]/5 to-[#121212] opacity-60 pointer-events-none" />
 
       {/* Sticky floating navbar wrapper (completely transparent backdrop) */}
-      <div className="sticky top-0 z-20 w-full flex justify-center pt-4 px-4 pb-2">
+      <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">
         <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 
