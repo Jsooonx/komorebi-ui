@@ -45,3 +45,8 @@ AGENTS.md
 Komorebi-Brand-Identity.md
 .prettierrc
 .prettierignore
+
+# Memory Sync & Obsidian Vault (Private)
+obsidian_memory_vault/
+scripts/sync_memory.py
+
