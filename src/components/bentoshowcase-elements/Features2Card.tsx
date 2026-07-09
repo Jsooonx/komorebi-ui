@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal as TerminalIcon, Play, RefreshCw, Zap, Layers, Sparkles } from "lucide-react";
+import { Terminal as TerminalIcon, Play, RefreshCw, Zap, Layers, Sparkles, Copy, Check } from "lucide-react";
 
 // ── CARD 1: DYNAMIC SPRING PLAYGROUND ──
 function SpringPlayground() {
@@ -90,6 +90,18 @@ function SpringPlayground() {
           />
         </div>
       </div>
+
+      {/* Real Usage Code Snippet */}
+      <div className="mt-4 p-2.5 rounded-lg bg-black/60 border border-white/5 font-mono text-[9px] text-white/50 text-left select-text relative">
+        <div className="absolute top-1 right-2 text-[8px] opacity-35 uppercase tracking-wider select-none">React Code</div>
+        <span className="text-white/35">&lt;</span><span className="text-white/80">motion.div</span><span className="text-white/35">&gt;</span> <br />
+        &nbsp;&nbsp;<span className="text-[#BECB6D]">transition</span>={"{{"} <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;type: <span className="text-white/80">"spring"</span>,<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;stiffness: <span className="text-white">{stiffness}</span>,<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;damping: <span className="text-white">{damping}</span><br />
+        &nbsp;&nbsp;{"}}"} <br />
+        <span className="text-white/35">&lt;/</span><span className="text-white/80">motion.div</span><span className="text-white/35">&gt;</span>
+      </div>
     </div>
   );
 }
@@ -102,6 +114,12 @@ function PresetSwitcher() {
     { id: "snappy", label: "Snappy Snap", timing: "0.20s" },
     { id: "fluid", label: "Slow Ease", timing: "0.85s" },
   ];
+
+  const codeSnippet = activePreset === "natural" 
+    ? 'import { springNatural } from "@/lib/presets";'
+    : activePreset === "snappy"
+      ? 'import { springSnappy } from "@/lib/presets";'
+      : 'import { springFluid } from "@/lib/presets";';
 
   return (
     <div className="flex flex-col h-full justify-between">
@@ -145,6 +163,12 @@ function PresetSwitcher() {
           Timeline Active
         </span>
       </div>
+
+      {/* Real Usage Preset Import Snippet */}
+      <div className="mt-3.5 p-2.5 rounded-lg bg-black/60 border border-white/5 font-mono text-[9px] text-white/50 text-left select-text relative">
+        <div className="absolute top-1 right-2 text-[8px] opacity-35 uppercase tracking-wider select-none">Preset Import</div>
+        <span className="text-white/85">{codeSnippet}</span>
+      </div>
     </div>
   );
 }
@@ -154,7 +178,14 @@ function MockCLIEngine() {
   const [typedCommand, setTypedCommand] = useState("");
   const [logs, setLogs] = useState<string[]>([]);
   const [showCursor, setShowCursor] = useState(true);
+  const [copied, setCopied] = useState(false);
   const fullCommand = "npx komorebi-ui add features-2";
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(fullCommand);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     let active = true;
@@ -230,7 +261,21 @@ function MockCLIEngine() {
           <div className="w-2 h-2 rounded-full bg-white/10" />
           <div className="w-2 h-2 rounded-full bg-white/10" />
         </div>
-        <span className="text-[9px] text-white/30 uppercase tracking-widest font-sans font-medium">bash</span>
+        <div className="flex items-center gap-2">
+          <span className="text-[9px] text-white/30 uppercase tracking-widest font-sans font-medium">bash</span>
+          <button
+            onClick={handleCopy}
+            className="p-1 rounded hover:bg-white/5 active:scale-95 transition-all text-white/30 hover:text-white/70 flex items-center gap-1 text-[8px] font-sans"
+            title="Copy Command"
+          >
+            {copied ? (
+              <Check className="w-2.5 h-2.5 text-emerald-400" />
+            ) : (
+              <Copy className="w-2.5 h-2.5" />
+            )}
+            <span>{copied ? "Copied" : "Copy"}</span>
+          </button>
+        </div>
         <div className="w-6" />
       </div>
 
@@ -357,6 +402,15 @@ export default function Features2Card({ minimal = false }: { minimal?: boolean }
               60Hz - 144Hz
             </span>
           </div>
+
+          {/* Real Usage Hook Snippet */}
+          <div className="mt-4 p-2.5 rounded-lg bg-black/60 border border-white/5 font-mono text-[9px] text-white/50 text-left select-text relative">
+            <div className="absolute top-1 right-2 text-[8px] opacity-35 uppercase tracking-wider select-none">Hook API</div>
+            <span className="text-[#BECB6D]">useFrameRateSync</span>{"((state) => {"} <br />
+            &nbsp;&nbsp;<span className="text-white/35">const</span> delta = state.delta;<br />
+            &nbsp;&nbsp;updateParticles(delta);<br />
+            {"});"}
+          </div>
         </div>
 
         {/* CARD 4: CLI Terminal Engine (Large - md:col-span-2) */}
@@ -389,7 +443,7 @@ export default function Features2Card({ minimal = false }: { minimal?: boolean }
 
   return (
     <div
-      className="relative w-full h-[650px] rounded-lg bg-[#09090b] border border-white/5 overflow-y-auto scrollbar-none select-none group"
+      className="relative w-full h-[720px] rounded-lg bg-[#09090b] border border-white/5 overflow-y-auto scrollbar-none select-none group"
       style={cssVariables}
     >
       {content}

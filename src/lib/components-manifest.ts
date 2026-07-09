@@ -225,7 +225,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "Premium asymmetric Bento Grid features showcase with dynamic interactive mockups, including spring controllers and real-time terminal CLI simulator.",
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
-    viewportHeightClass: "h-[650px]",
+    viewportHeightClass: "h-[720px]",
   },
 ];
 
