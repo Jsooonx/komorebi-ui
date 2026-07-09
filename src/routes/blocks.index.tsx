@@ -288,8 +288,28 @@ function BlocksIndex() {
     { id: "features", label: "Features", icon: Cpu, locked: true },
   ];
 
-  const [activeCategory, setActiveCategory] = useState("header");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [activeCategory, setActiveCategory] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("komorebi_blocks_active_category") || "header";
+    }
+    return "header";
+  });
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("komorebi_blocks_sidebar_open");
+      return saved === null ? true : saved === "true";
+    }
+    return true;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("komorebi_blocks_active_category", activeCategory);
+  }, [activeCategory]);
+
+  useEffect(() => {
+    localStorage.setItem("komorebi_blocks_sidebar_open", String(isSidebarOpen));
+  }, [isSidebarOpen]);
 
   // Manifest items that are Blocks (currently headers and logo clouds)
   const blockItems: BlockItem[] = COMPONENTS_MANIFEST.map((item) => ({
