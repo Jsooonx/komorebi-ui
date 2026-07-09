@@ -89,25 +89,30 @@ function NavbarContent({
   isMorphed: boolean;
 }) {
   return (
-    <div className="inline-flex items-center justify-center rounded-2xl bg-black/60 text-white shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/[0.08] backdrop-blur-xl px-4 py-2 mt-3 transition-all duration-300 ease-in-out select-none">
-      {/* Brand - CSS Grid 1fr to 0fr transition for exact intrinsic sizing and zero clipping */}
-      <div
-        className={`grid transition-all duration-300 ease-in-out shrink-0 ${
-          isMorphed
-            ? "grid-cols-[0fr] opacity-0 pr-0 mr-0 border-r-0 border-transparent pointer-events-none"
-            : "grid-cols-[1fr] opacity-100 pr-3.5 mr-1 border-r border-white/10"
-        }`}
+    <motion.div
+      initial={false}
+      animate={{ width: isMorphed ? 310 : 580 }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      className="relative h-11 flex items-center justify-between rounded-2xl bg-black/60 text-white shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/[0.08] backdrop-blur-xl px-4 mt-3 select-none"
+    >
+      {/* Brand - exactly synchronized width transition with no scale projection conflict */}
+      <motion.div
+        initial={false}
+        animate={{ 
+          width: isMorphed ? 0 : 110, 
+          opacity: isMorphed ? 0 : 1 
+        }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center gap-2 shrink-0 overflow-hidden pr-3 border-r border-white/10"
       >
-        <div className="overflow-hidden flex items-center gap-2 shrink-0 pr-0.5">
-          <SunlightLeafLogo className="w-5 h-5 shrink-0" />
-          <span className="text-xs font-semibold tracking-tight font-heading text-white whitespace-nowrap">
-            Komorebi
-          </span>
-        </div>
-      </div>
+        <SunlightLeafLogo className="w-5 h-5 shrink-0" />
+        <span className="text-xs font-semibold tracking-tight font-heading text-white whitespace-nowrap">
+          Komorebi
+        </span>
+      </motion.div>
 
-      {/* Center Navigation - Anchored right in exact center, never clipped or moved */}
-      <div className="flex items-center justify-center shrink-0">
+      {/* Center Navigation - Positioned absolute-center to remain 100% motionless */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shrink-0">
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -190,24 +195,24 @@ function NavbarContent({
         </NavigationMenu>
       </div>
 
-      {/* CTA - CSS Grid 1fr to 0fr transition so Get Started is full width and never clipped */}
-      <div
-        className={`grid transition-all duration-300 ease-in-out shrink-0 ${
-          isMorphed
-            ? "grid-cols-[0fr] opacity-0 pl-0 ml-0 border-l-0 border-transparent pointer-events-none"
-            : "grid-cols-[1fr] opacity-100 pl-3.5 ml-1 border-l border-white/10"
-        }`}
+      {/* CTA - exactly synchronized width transition without clipping */}
+      <motion.div
+        initial={false}
+        animate={{ 
+          width: isMorphed ? 0 : 120, 
+          opacity: isMorphed ? 0 : 1 
+        }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center justify-end shrink-0 overflow-hidden pl-3 border-l border-white/10"
       >
-        <div className="overflow-hidden flex items-center justify-end shrink-0 pl-0.5">
-          <motion.button
-            whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-white text-xs font-heading font-medium hover:bg-white/20 transition-colors cursor-pointer whitespace-nowrap shrink-0"
-          >
-            Get Started
-          </motion.button>
-        </div>
-      </div>
-    </div>
+        <motion.button
+          whileTap={{ scale: 0.97 }}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-white text-xs font-heading font-medium hover:bg-white/20 transition-colors cursor-pointer whitespace-nowrap shrink-0"
+        >
+          Get Started
+        </motion.button>
+      </motion.div>
+    </motion.div>
   );
 }
 
