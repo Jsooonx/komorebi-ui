@@ -328,6 +328,7 @@ function BlocksIndex() {
       {/* Main Content Layout with Sidebar */}
       <div className="flex-1 flex pt-16 relative w-full gap-0">
         <motion.aside
+          initial={false}
           animate={{
             width: isSidebarOpen ? 288 : 0,
             opacity: isSidebarOpen ? 1 : 0,
@@ -335,9 +336,28 @@ function BlocksIndex() {
           transition={{ duration: 0.25, ease: "easeInOut" }}
           className="h-[calc(100vh-64px)] shrink-0 border-r border-white/5 bg-[#090909] sticky top-16 overflow-y-auto hidden md:flex flex-col p-6 scrollbar-none z-10"
         >
-          <div className="flex flex-col h-full justify-between">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.06,
+                  delayChildren: 0.05
+                }
+              }
+            }}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col h-full justify-between"
+          >
             <div className="space-y-6">
-              <div>
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+                }}
+              >
                 <h3 className="text-[10px] font-semibold tracking-widest text-white/20 uppercase font-mono mb-3">
                   Categories
                 </h3>
@@ -372,14 +392,20 @@ function BlocksIndex() {
                     );
                   })}
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* Sidebar bottom guide */}
-            <div className="pt-6 border-t border-white/5 text-[10px] text-white/35 leading-relaxed font-sans">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+              }}
+              className="pt-6 border-t border-white/5 text-[10px] text-white/35 leading-relaxed font-sans"
+            >
               Blocks are ready-made full-page layout sections (Headers, Heros, Bentos) designed to drop directly into your routes.
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </motion.aside>
 
         {/* Catalog Main Scrollable Section */}

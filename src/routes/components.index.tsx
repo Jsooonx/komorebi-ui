@@ -311,13 +311,7 @@ function ComponentsIndex() {
 
       <div className="flex-1 flex pt-16 relative w-full gap-0">
         <motion.aside
-          initial={isBackNavigation ? {
-            width: 288,
-            opacity: 1,
-            paddingLeft: isSidebarOpen ? 24 : 0,
-            paddingRight: isSidebarOpen ? 24 : 0,
-            borderRightWidth: isSidebarOpen ? 1 : 0,
-          } : { width: 288, opacity: 1 }}
+          initial={false}
           animate={{
             width: isSidebarOpen ? 288 : 0,
             opacity: isSidebarOpen ? 1 : 0,
@@ -328,9 +322,29 @@ function ComponentsIndex() {
           transition={isBackNavigation ? { duration: 0 } : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="hidden lg:flex shrink-0 h-[calc(100vh-4rem)] sticky top-16 pt-10 pb-8 flex-col justify-between border-white/5 overflow-hidden"
         >
-          <div className="space-y-6 min-w-[220px]">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.06,
+                  delayChildren: 0.05
+                }
+              }
+            }}
+            initial="hidden"
+            animate="visible"
+            className="space-y-6 min-w-[220px]"
+          >
             {/* Header: Filters */}
-            <div className="flex items-center justify-between pb-4 border-b border-white/5">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+              }}
+              className="flex items-center justify-between pb-4 border-b border-white/5"
+            >
               <h3 className="text-xs font-bold uppercase tracking-wider text-white/70">
                 Filters
               </h3>
@@ -341,10 +355,16 @@ function ComponentsIndex() {
               >
                 <Sidebar className="w-4 h-4" />
               </button>
-            </div>
+            </motion.div>
 
             {/* Section: View */}
-            <div className="space-y-2.5">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+              }}
+              className="space-y-2.5"
+            >
               <span className="text-[10px] font-bold uppercase tracking-wider text-white/35 block">
                 View
               </span>
@@ -378,10 +398,16 @@ function ComponentsIndex() {
                   All components
                 </button>
               </div>
-            </div>
+            </motion.div>
 
             {/* Section: Categories */}
-            <div className="space-y-3 pt-2">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+              }}
+              className="space-y-3 pt-2"
+            >
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-white/35">
                   Categories
@@ -424,8 +450,8 @@ function ComponentsIndex() {
                   );
                 })}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
         </motion.aside>
 
