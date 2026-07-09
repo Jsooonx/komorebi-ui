@@ -246,10 +246,10 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
   if (minimal) {
     return (
       <div
-        className="w-full h-full overflow-y-auto scrollbar-none select-none relative pt-4"
+        className="w-full h-full overflow-y-auto scrollbar-none select-none relative"
         style={cssVariables}
       >
-        <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">
+        <div className="sticky top-0 z-20 w-full flex justify-center pb-2">
           <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
         </div>
         <MockContent />

@@ -268,10 +268,10 @@ export default function MegaMenuNavbar2Card({ minimal = false }: { minimal?: boo
     return (
       <div
         onScroll={handleScroll}
-        className="w-full h-full overflow-y-auto scrollbar-none select-none relative pt-4"
+        className="w-full h-full overflow-y-auto scrollbar-none select-none relative"
         style={cssVariables}
       >
-        <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">
+        <div className="sticky top-0 z-20 w-full flex justify-center pb-2">
           <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} isMorphed={isMorphed} />
         </div>
         <MockContent />
