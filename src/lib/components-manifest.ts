@@ -179,7 +179,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
   },
   {
     id: "interactive-accordion",
-    name: "Interactive Accordion",
+    name: "Accordion",
     category: "Masking & Accordions",
     description: "Ambient glowing feature details accordion with responsive badge state highlights.",
     dependencies: ["@radix-ui/react-accordion", "framer-motion"],
