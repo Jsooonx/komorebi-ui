@@ -283,7 +283,7 @@ export default function MegaMenuNavbar3Card({ minimal = false }: { minimal?: boo
     return (
       <div
         onScroll={handleScroll}
-        className="w-full h-[400px] bg-[#0c0c0e] border border-white/10 rounded-xl overflow-y-auto scrollbar-none select-none relative pt-4"
+        className="w-full h-full overflow-y-auto scrollbar-none select-none relative pt-4"
         style={cssVariables}
       >
         <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">

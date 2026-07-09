@@ -246,7 +246,7 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
   if (minimal) {
     return (
       <div
-        className="w-full h-[400px] bg-[#0c0c0e] border border-white/10 rounded-xl overflow-y-auto scrollbar-none select-none relative pt-4"
+        className="w-full h-full overflow-y-auto scrollbar-none select-none relative pt-4"
         style={cssVariables}
       >
         <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">
