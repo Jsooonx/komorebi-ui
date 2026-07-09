@@ -417,10 +417,10 @@ function BlocksIndex() {
                 <span className="text-[10px] font-semibold tracking-widest text-white/30 uppercase font-mono">
                   Layout Blocks
                 </span>
-                <h1 className="text-3xl font-bold text-white tracking-tight leading-tight">
-                  {categories.find((c) => c.id === activeCategory)?.label || "Header Blocks"}
+                <h1 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white mt-1">
+                  Explore {activeCategory === "header" ? "Header Blocks" : (categories.find((c) => c.id === activeCategory)?.label || "Blocks")}
                 </h1>
-                <p className="text-xs text-white/50 leading-relaxed font-heading max-w-xl">
+                <p className="text-sm text-white/50 leading-relaxed font-heading max-w-2xl mt-1">
                   Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells.
                 </p>
               </div>
