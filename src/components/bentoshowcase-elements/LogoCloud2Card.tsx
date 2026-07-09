@@ -1,29 +1,63 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 
 // Helper Component: InfiniteSlider
-// Renders children in an infinite horizontal marquee using Framer Motion
+// Renders children in an infinite horizontal marquee using useAnimationFrame for dynamic speed scaling
 interface InfiniteSliderProps {
   children: React.ReactNode;
   speed?: number; // duration of one full cycle in seconds
   gap?: number; // gap between items in pixels
-  speedOnHover?: number; // optional slower speed on hover, or set to active hover state
+  speedOnHover?: number; // duration of one full cycle when hovered (higher = slower)
 }
 
-function InfiniteSlider({ children, speed = 40, gap = 112 }: InfiniteSliderProps) {
-  // Duplicate children to ensure seamless infinite loop
+function InfiniteSlider({ children, speed = 40, gap = 112, speedOnHover = 80 }: InfiniteSliderProps) {
   const items = React.Children.toArray(children);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [halfWidth, setHalfWidth] = useState(0);
+
+  // Measure the width of one loop cycle (exactly half of scrollWidth)
+  useEffect(() => {
+    if (containerRef.current) {
+      setHalfWidth(containerRef.current.scrollWidth / 2);
+    }
+    const handleResize = () => {
+      if (containerRef.current) {
+        setHalfWidth(containerRef.current.scrollWidth / 2);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [children]);
+
+  // Frame-by-frame animation to allow smooth, non-snapping speed change when hovering
+  useAnimationFrame((time, delta) => {
+    if (!halfWidth) return;
+
+    // Convert duration (seconds per cycle) to velocity (pixels per millisecond)
+    const activeDuration = isHovered ? speedOnHover : speed;
+    const pixelsPerMs = halfWidth / (activeDuration * 1000);
+
+    let nextX = x.get() - (pixelsPerMs * delta);
+    
+    // Wrap around once we've slid past one full cycle
+    if (nextX <= -halfWidth) {
+      nextX = nextX + halfWidth;
+    }
+    x.set(nextX);
+  });
 
   return (
-    <div className="relative w-full overflow-hidden flex">
+    <div 
+      className="relative w-full overflow-hidden flex"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <motion.div
+        ref={containerRef}
         className="flex w-max"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{
-          ease: "linear",
-          duration: speed,
-          repeat: Infinity,
-        }}
+        style={{ x }}
       >
         {/* First Set */}
         {items.map((child, idx) => (
@@ -106,7 +140,7 @@ export default function LogoCloud2Card({ minimal = false }: { minimal?: boolean 
 
           {/* Slider Container */}
           <div className="relative py-4 md:w-[calc(100%-13rem)] w-full overflow-hidden">
-            <InfiniteSlider speed={35} gap={96}>
+            <InfiniteSlider speed={35} speedOnHover={85} gap={96}>
               {brands.map((brand, idx) => {
                 const imgSrc = brand.path
                   ? brand.path
