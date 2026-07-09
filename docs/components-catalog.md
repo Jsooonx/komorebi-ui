@@ -35,3 +35,14 @@ Optional metadata includes CLI command, dependency tags, `isNew`, and layout hin
 ## Current Special Cases
 
 - `pixel-shimmer` is intentionally included in the catalog even though it is not rendered in the landing-page Bento-Showcase.
+
+---
+
+## 🏗️ Blocks Catalog Sections
+
+The Blocks view (at `/blocks`) renders full layouts instead of individual buttons/cards. The newly unlocked categories include:
+
+### 1. Features
+- **Features 1 (`features-1`):** Clean minimalist 3-column features grid block with centered pattern design backdrops, standard white outline icons, and rebranded modern copy.
+- **Features 2 (`features-2`):** Premium asymmetric Bento Grid features showcase with dynamic interactive mockups, including spring physics curve controllers, preset speed switchers, and typing CLI terminal simulators.
+
