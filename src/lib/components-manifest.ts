@@ -9,7 +9,6 @@ export interface ComponentManifestItem {
   category: string;
   description: string;
   dependencies?: string[];
-  cliCommand?: string;
   isNew?: boolean;
   gridClass?: string;
   viewportHeightClass?: string;
@@ -22,7 +21,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Masking & Accordions",
     description: "Hover reactive image clipping path mask overlay with organic animations.",
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add image-reveal",
     isNew: true,
   },
   {
@@ -31,7 +29,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Card & Border Effects",
     description: "Card list stagger scale animations on cursor enter events.",
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add hover-members",
     isNew: true,
   },
   {
@@ -40,7 +37,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "3D & Swipers",
     description: "A deck-style stack swiper with 3D tilt tracking and spring physics.",
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add toolkit-stack-swiper",
     gridClass: "md:row-span-2",
     viewportHeightClass: "h-[380px]",
   },
@@ -49,7 +45,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     name: "Devouring Details",
     category: "Masking & Accordions",
     description: "Expanding interactive list block with smooth element height transitions.",
-    cliCommand: "npx komorebi-ui add devouring-details",
   },
   {
     id: "dynamic-island",
@@ -57,7 +52,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Floating UI & Docks",
     description: "Apple-style Dynamic Island expanding notification controller card.",
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add dynamic-island",
     isNew: true,
     gridClass: "md:col-span-2",
     viewportHeightClass: "h-[240px]",
@@ -68,7 +62,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "WebGL & Shaders",
     description: "Retro dithered image shader visualizer card running in WebGL canvas.",
     dependencies: ["@react-three/fiber", "three"],
-    cliCommand: "npx komorebi-ui add dither-canvas",
   },
   {
     id: "text-roll",
@@ -76,7 +69,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Typography & Tickers",
     description: "Smooth 3D keyframe text roll effect on word hover events.",
     dependencies: ["gsap"],
-    cliCommand: "npx komorebi-ui add text-roll",
   },
   {
     id: "border-beam",
@@ -84,7 +76,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Card & Border Effects",
     description: "Outline path SVG glowing animation border runner card.",
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add border-beam",
   },
   {
     id: "interactive-navbar",
@@ -92,7 +83,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Floating UI & Docks",
     description: "Smooth layout-scale magnifying glass Mac-dock navigator element.",
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add interactive-navbar",
     isNew: true,
     gridClass: "md:col-span-2",
     viewportHeightClass: "h-[180px]",
@@ -103,7 +93,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Typography & Tickers",
     description: "Continuous horizontal marquee ticker animation showcasing brand elements.",
     dependencies: ["lucide-react"],
-    cliCommand: "npx komorebi-ui add infinite-marquee",
     gridClass: "md:col-span-2",
     viewportHeightClass: "h-[130px]",
   },
@@ -113,14 +102,12 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "CLI & Stepper Controls",
     description: "Simulated audio frequency bar graph visualizer reacting to hover coordinates.",
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add audio-equalizer",
   },
   {
     id: "pixel-shimmer",
     name: "Pixel Shimmer Card",
     category: "Card & Border Effects",
     description: "Interactive pixel-surface shimmer card with hover and focus-aware glow pulses.",
-    cliCommand: "npx komorebi-ui add pixel-shimmer",
     dependencies: [],
     gridClass: "md:row-span-2",
     viewportHeightClass: "h-[380px]",
@@ -131,7 +118,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "CLI & Stepper Controls",
     description: "Interactive multi-step deployment pipeline stepper controller.",
     dependencies: ["framer-motion"],
-    cliCommand: "npx komorebi-ui add pipeline-stepper",
     gridClass: "md:row-span-2",
     viewportHeightClass: "h-[380px]",
   },
@@ -140,7 +126,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     name: "Typewriter CLI Terminal",
     category: "CLI & Stepper Controls",
     description: "Simulated console window outputting text strings dynamically.",
-    cliCommand: "npx komorebi-ui add holographic-terminal",
   },
   {
     id: "mega-menu-navbar",
@@ -148,7 +133,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Headers & Menus",
     description: "Shadcn-based floating navbar with premium animated mega menu dropdown panels.",
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
-    cliCommand: "npx komorebi-ui add mega-menu-navbar",
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[380px]",
@@ -160,7 +144,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description:
       "Scroll-responsive morphing navbar that transitions from a flat fixed header to a premium floating pill layout on scroll.",
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
-    cliCommand: "npx komorebi-ui add mega-menu-navbar-2",
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
@@ -172,7 +155,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description:
       "Floating mega menu navbar where logo and CTA dynamically morph inside on scroll, leaving only clean core navigation.",
     dependencies: ["@radix-ui/react-navigation-menu", "framer-motion"],
-    cliCommand: "npx komorebi-ui add mega-menu-navbar-3",
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
@@ -183,7 +165,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Masking & Accordions",
     description: "Ambient glowing feature details accordion with responsive badge state highlights.",
     dependencies: ["@radix-ui/react-accordion", "framer-motion"],
-    cliCommand: "npx komorebi-ui add interactive-accordion",
     isNew: true,
     gridClass: "md:row-span-2",
     viewportHeightClass: "h-[400px]",
@@ -194,7 +175,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Masking & Accordions",
     description: "Hierarchical accordion design showcasing nested sub-menu dropdown panels inside a unified wrapper.",
     dependencies: ["@radix-ui/react-accordion", "framer-motion"],
-    cliCommand: "npx komorebi-ui add nested-accordion",
     isNew: true,
     gridClass: "md:row-span-2",
     viewportHeightClass: "h-[400px]",
@@ -205,7 +185,6 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Logo Cloud",
     description: "Clean minimalist layout presenting partner brands with monochromatic white filters and hover highlight states.",
     dependencies: [],
-    cliCommand: "npx komorebi-ui add logo-cloud-1",
     isNew: true,
     gridClass: "md:row-span-1",
     viewportHeightClass: "h-[320px]",
