@@ -418,7 +418,7 @@ function BlocksIndex() {
                   Layout Blocks
                 </span>
                 <h1 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-white mt-1">
-                  Explore {activeCategory === "header" ? "Header Blocks" : (categories.find((c) => c.id === activeCategory)?.label || "Blocks")}
+                  {categories.find((c) => c.id === activeCategory)?.label || "Header"}
                 </h1>
                 <p className="text-sm text-white/50 leading-relaxed font-heading max-w-2xl mt-1">
                   Scroll-responsive dynamic headers, logo scaling navigators, and full drop-down mega menu designs built for modern shells.
