@@ -34,13 +34,18 @@ export default function LogoCloudCard({ minimal = false }: { minimal?: boolean }
           {brands.map((brand, idx) => (
             <div
               key={idx}
-              className="flex items-center justify-center h-8 group transition-all duration-300 w-fit cursor-pointer"
+              className="flex items-center gap-2.5 h-8 group transition-all duration-300 w-fit cursor-pointer"
             >
               <img
                 src={`https://img.logo.dev/${brand.domain}?token=pk_FklYVGBwT-mKrXMQ7yPyqQ&format=png`}
                 alt={brand.name}
-                className="h-6 w-auto object-contain brightness-0 invert opacity-35 group-hover:opacity-100 transition-all duration-300 shrink-0 select-none"
+                className={`h-5 w-auto object-contain brightness-0 invert opacity-45 group-hover:opacity-100 transition-all duration-300 shrink-0 select-none ${
+                  brand.name === "Vercel" || brand.name === "Supabase" ? "h-4" : ""
+                }`}
               />
+              <span className="font-heading text-xs font-semibold text-white/55 group-hover:text-white transition-colors tracking-wide select-none">
+                {brand.name}
+              </span>
             </div>
           ))}
         </div>
