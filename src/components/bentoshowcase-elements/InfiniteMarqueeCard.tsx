@@ -16,12 +16,13 @@ export default function InfiniteMarqueeCard({ minimal = false }: { minimal?: boo
   const content = (
     <div className="relative z-10 w-full flex items-center h-16 overflow-hidden">
       {/* Double-wrapper for seamless loop */}
-      <div className="flex gap-4 w-max animate-[marquee_20s_linear_infinite] whitespace-nowrap">
+      <div className="flex w-max animate-[marquee_20s_linear_infinite] whitespace-nowrap">
         {/* First loop */}
         {TECH_TAGS.map((tech, idx) => (
           <div
             key={`tech1-${idx}`}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/45 border border-white/5"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/45 border border-white/5 shrink-0"
+            style={{ marginRight: "16px" }}
           >
             {idx % 4 === 0 && <Cpu className="w-3.5 h-3.5 text-[#BECB6D]" />}
             {idx % 4 === 1 && <Zap className="w-3.5 h-3.5 text-[#BECB6D]" />}
@@ -36,7 +37,8 @@ export default function InfiniteMarqueeCard({ minimal = false }: { minimal?: boo
         {TECH_TAGS.map((tech, idx) => (
           <div
             key={`tech2-${idx}`}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/45 border border-white/5"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/45 border border-white/5 shrink-0"
+            style={{ marginRight: "16px" }}
           >
             {idx % 4 === 0 && <Cpu className="w-3.5 h-3.5 text-[#BECB6D]" />}
             {idx % 4 === 1 && <Zap className="w-3.5 h-3.5 text-[#BECB6D]" />}
