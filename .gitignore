@@ -49,4 +49,5 @@ Komorebi-Brand-Identity.md
 # Memory Sync & Obsidian Vault (Private)
 obsidian_memory_vault/
 scripts/sync_memory.py
-
+scripts/sync_codex_memory.py
+scripts/sync_codex.bat

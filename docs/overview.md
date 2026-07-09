@@ -24,7 +24,7 @@ The `Components` catalog and the landing-page `Bento-Showcase` are intentionally
 |- obsidian_memory_vault/      # private local memory vault (gitignored)
 |- public/                     # runtime static assets used by the app
 |- references/                 # design references, templates, source media, archives
-|- scripts/                    # local automation helpers such as memory sync
+|- scripts/                    # private local automation helpers such as Gemini/Codex memory sync
 |- src/
 |  |- components/
 |  |  |- bentoshowcase-elements/
@@ -52,7 +52,7 @@ The `Components` catalog and the landing-page `Bento-Showcase` are intentionally
 ## Audit Notes
 
 - `references/` is intentionally excluded from root linting because it stores non-runtime material.
-- `obsidian_memory_vault/` and `scripts/sync_memory.py` are private workflow assets and should stay out of public pushes.
+- `obsidian_memory_vault/`, `scripts/sync_memory.py`, and `scripts/sync_codex_memory.py` are private workflow assets and should stay out of public pushes.
 - The global command palette is lazy-loaded on user intent so the landing page does not pay that cost up front.
 - Below-the-fold homepage sections are deferred so heavy showcase code does not need to ship before the user reaches it.
 - Runtime assets live in `public/`; non-runtime source media and design explorations should live under `references/`.
