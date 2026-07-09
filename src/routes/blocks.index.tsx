@@ -285,8 +285,6 @@ function BlockRow({ item }: { item: BlockItem }) {
 }
 
 function BlocksIndex() {
-  const navigate = useNavigate();
-
   // Selected nav block categories (matches screenshot)
   const categories = [
     { id: "header", label: "Header", icon: Layout },
