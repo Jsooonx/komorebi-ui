@@ -199,6 +199,16 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-1",
     viewportHeightClass: "h-[320px]",
   },
+  {
+    id: "logo-cloud-3",
+    name: "Logo Cloud 3",
+    category: "Logo Cloud",
+    description: "Split layout presenting static copy on the left and double opposing vertical infinite scrolling marquees on the right.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-1",
+    viewportHeightClass: "h-[320px]",
+  },
 ];
 
 export function getComponentManifestItem(id: string) {

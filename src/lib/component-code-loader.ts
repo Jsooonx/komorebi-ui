@@ -59,6 +59,9 @@ export async function loadComponentCode(id: string) {
     case "logo-cloud-2":
       return (await import("../components/bentoshowcase-elements/LogoCloud2Card.tsx?raw"))
         .default;
+    case "logo-cloud-3":
+      return (await import("../components/bentoshowcase-elements/LogoCloud3Card.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }
