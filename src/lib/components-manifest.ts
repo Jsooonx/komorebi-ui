@@ -177,6 +177,17 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "interactive-accordion",
+    name: "Interactive Accordion",
+    category: "Masking & Accordions",
+    description: "Ambient glowing feature details accordion with responsive badge state highlights.",
+    dependencies: ["@radix-ui/react-accordion", "framer-motion"],
+    cliCommand: "npx komorebi-ui add interactive-accordion",
+    isNew: true,
+    gridClass: "md:row-span-2",
+    viewportHeightClass: "h-[400px]",
+  },
 ];
 
 export function getComponentManifestItem(id: string) {

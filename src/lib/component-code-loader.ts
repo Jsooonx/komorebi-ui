@@ -47,6 +47,9 @@ export async function loadComponentCode(id: string) {
     case "mega-menu-navbar-3":
       return (await import("../components/bentoshowcase-elements/MegaMenuNavbar3Card.tsx?raw"))
         .default;
+    case "interactive-accordion":
+      return (await import("../components/bentoshowcase-elements/InteractiveAccordionCard.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }
