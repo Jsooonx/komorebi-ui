@@ -378,26 +378,26 @@ export default function Features2Card({ minimal = false }: { minimal?: boolean }
           
           {/* Sine Wave SVG Animation */}
           <div className="h-28 w-full rounded-lg bg-black/40 border border-white/5 flex items-center justify-center overflow-hidden relative">
-            <svg className="w-[85%] h-12 text-white/20" viewBox="0 0 100 20">
-              <motion.path
-                d="M 0 10 Q 12.5 0 25 10 T 50 10 T 75 10 T 100 10"
-                fill="none"
-                stroke="rgba(255,255,255,0.7)"
-                strokeWidth="1.2"
-                animate={{
-                  d: [
-                    "M 0 10 Q 12.5 0 25 10 T 50 10 T 75 10 T 100 10",
-                    "M 0 10 Q 12.5 20 25 10 T 50 10 T 75 10 T 100 10",
-                    "M 0 10 Q 12.5 0 25 10 T 50 10 T 75 10 T 100 10"
-                  ]
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 2.2,
-                  ease: "easeInOut"
-                }}
-              />
-            </svg>
+            <div className="w-[85%] overflow-hidden flex items-center h-12 relative">
+              <div className="w-[200%] flex shrink-0 animate-marquee select-none pointer-events-none">
+                <svg className="w-1/2 h-full text-white/70" viewBox="0 0 100 20" fill="none">
+                  <path
+                    d="M 0 10 Q 12.5 0 25 10 T 50 10 T 75 10 T 100 10"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg className="w-1/2 h-full text-white/70" viewBox="0 0 100 20" fill="none">
+                  <path
+                    d="M 0 10 Q 12.5 0 25 10 T 50 10 T 75 10 T 100 10"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
             <span className="absolute bottom-2 right-3 text-[8px] font-mono text-white/30 uppercase tracking-widest">
               60Hz - 144Hz
             </span>
