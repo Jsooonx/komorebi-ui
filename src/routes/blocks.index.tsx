@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useRef, type ComponentType } from "react";
+import { useState, useEffect, useRef, type ComponentType } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { toast } from "sonner";
@@ -288,25 +288,33 @@ function BlocksIndex() {
     { id: "features", label: "Features", icon: Cpu, locked: true },
   ];
 
-  // Initialize with placeholder — useLayoutEffect will apply the real localStorage values
-  // before the browser paints, preventing the Header→LogoCloud flash on refresh.
-  const [activeCategory, setActiveCategory] = useState("header");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  // The blocking inline script in __root.tsx has already stamped
+  // data-blocks-category and data-blocks-sidebar on <html> before React ran,
+  // so reading those attributes here gives us the correct initial value
+  // with zero flash — no SSR/hydration mismatch possible.
+  const [activeCategory, setActiveCategory] = useState(() => {
+    if (typeof document !== "undefined") {
+      return document.documentElement.getAttribute("data-blocks-category") || "header";
+    }
+    return "header";
+  });
 
-  useLayoutEffect(() => {
-    const savedCategory = localStorage.getItem("komorebi_blocks_active_category");
-    if (savedCategory) setActiveCategory(savedCategory);
-
-    const savedSidebar = localStorage.getItem("komorebi_blocks_sidebar_open");
-    if (savedSidebar !== null) setIsSidebarOpen(savedSidebar === "true");
-  }, []);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
+    if (typeof document !== "undefined") {
+      const val = document.documentElement.getAttribute("data-blocks-sidebar");
+      return val === null ? true : val === "true";
+    }
+    return true;
+  });
 
   useEffect(() => {
     localStorage.setItem("komorebi_blocks_active_category", activeCategory);
+    document.documentElement.setAttribute("data-blocks-category", activeCategory);
   }, [activeCategory]);
 
   useEffect(() => {
     localStorage.setItem("komorebi_blocks_sidebar_open", String(isSidebarOpen));
+    document.documentElement.setAttribute("data-blocks-sidebar", String(isSidebarOpen));
   }, [isSidebarOpen]);
 
   // Manifest items that are Blocks (currently headers and logo clouds)
