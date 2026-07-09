@@ -65,6 +65,9 @@ export async function loadComponentCode(id: string) {
     case "features-1":
       return (await import("../components/bentoshowcase-elements/Features1Card.tsx?raw"))
         .default;
+    case "features-2":
+      return (await import("../components/bentoshowcase-elements/Features2Card.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }

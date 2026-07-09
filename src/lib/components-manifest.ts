@@ -218,6 +218,15 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[580px]",
   },
+  {
+    id: "features-2",
+    name: "Features 2",
+    category: "Features",
+    description: "Premium asymmetric Bento Grid features showcase with dynamic interactive mockups, including spring controllers and real-time terminal CLI simulator.",
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[650px]",
+  },
 ];
 
 export function getComponentManifestItem(id: string) {

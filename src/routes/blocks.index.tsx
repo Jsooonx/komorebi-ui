@@ -308,7 +308,7 @@ function BlocksIndex() {
     component: getComponentPreview(item.id),
   }))
     .filter((item): item is BlockItem => Boolean(item.component))
-    .filter((item) => ["mega-menu-navbar-1", "mega-menu-navbar-2", "mega-menu-navbar-3", "logo-cloud-1", "logo-cloud-2", "logo-cloud-3", "features-1"].includes(item.id));
+    .filter((item) => ["mega-menu-navbar-1", "mega-menu-navbar-2", "mega-menu-navbar-3", "logo-cloud-1", "logo-cloud-2", "logo-cloud-3", "features-1", "features-2"].includes(item.id));
 
   return (
     <div className="min-h-screen bg-[#090909] text-white flex flex-col select-none antialiased">
