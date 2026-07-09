@@ -358,32 +358,9 @@ function BlocksIndex() {
           transition={{ duration: 0.25, ease: "easeInOut" }}
           className="h-[calc(100vh-64px)] shrink-0 border-r border-white/5 bg-[#090909] sticky top-16 overflow-y-auto hidden md:flex flex-col p-6 scrollbar-none z-10"
         >
-          <motion.div
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: {
-                  staggerChildren: 0.06,
-                  delayChildren: 0.05,
-                },
-              },
-            }}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-col h-full justify-between"
-          >
+          <div className="flex flex-col h-full justify-between">
             <div className="space-y-6">
-              <motion.div
-                variants={{
-                  hidden: { opacity: 0, y: 10 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
-                  },
-                }}
-              >
+              <div>
                 <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
                   <h3 className="text-[10px] font-semibold tracking-widest text-white/20 uppercase font-mono">
                     Categories
@@ -427,25 +404,15 @@ function BlocksIndex() {
                     );
                   })}
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Sidebar bottom guide */}
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 10 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
-                },
-              }}
-              className="pt-6 border-t border-white/5 text-[10px] text-white/35 leading-relaxed font-sans"
-            >
+            <div className="pt-6 border-t border-white/5 text-[10px] text-white/35 leading-relaxed font-sans">
               Blocks are ready-made layout sections such as headers, logo clouds, and feature grids,
               designed to drop directly into your routes.
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </motion.aside>
 
         {/* Catalog Main Scrollable Section */}
