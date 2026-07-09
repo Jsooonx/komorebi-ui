@@ -288,12 +288,7 @@ function BlocksIndex() {
     { id: "features", label: "Features", icon: Cpu, locked: true },
   ];
 
-  const [activeCategory, setActiveCategory] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("komorebi_blocks_active_category") || "header";
-    }
-    return "header";
-  });
+  const [activeCategory, setActiveCategory] = useState("header");
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
     if (typeof window !== "undefined") {
@@ -302,10 +297,6 @@ function BlocksIndex() {
     }
     return true;
   });
-
-  useEffect(() => {
-    localStorage.setItem("komorebi_blocks_active_category", activeCategory);
-  }, [activeCategory]);
 
   useEffect(() => {
     localStorage.setItem("komorebi_blocks_sidebar_open", String(isSidebarOpen));
