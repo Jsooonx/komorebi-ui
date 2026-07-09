@@ -60,7 +60,7 @@ export default function InteractiveAccordionCard({ minimal = false }: { minimal?
             <AccordionItem
               key={item.id}
               value={item.id}
-              className={`border rounded-xl transition-all duration-200 bg-transparent ${
+              className={`border rounded-md transition-all duration-200 bg-transparent ${
                 isOpen 
                   ? "border-white/10 bg-white/[0.01]"
                   : "border-white/[0.03] hover:border-white/10"
@@ -111,7 +111,7 @@ export default function InteractiveAccordionCard({ minimal = false }: { minimal?
 
   return (
     <div
-      className="relative w-full h-[400px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-hidden flex flex-col select-none group"
+      className="relative w-full h-[400px] rounded-lg bg-[#0e0e0e] border border-white/5 overflow-hidden flex flex-col select-none group"
       style={cssVariables}
     >
       {content}
