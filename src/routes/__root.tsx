@@ -114,23 +114,6 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
-        {/* Blocking inline script — runs before React and before browser paint.
-            Reads komorebi localStorage keys and stamps data-* attrs on <html>
-            so SSR-rendered pages show the correct state without any flash. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var cat = localStorage.getItem('komorebi_blocks_active_category');
-                  if (cat) document.documentElement.setAttribute('data-blocks-category', cat);
-                  var sidebar = localStorage.getItem('komorebi_blocks_sidebar_open');
-                  if (sidebar !== null) document.documentElement.setAttribute('data-blocks-sidebar', sidebar);
-                } catch(e) {}
-              })();
-            `,
-          }}
-        />
       </head>
       <body>
         {children}

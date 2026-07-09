@@ -288,33 +288,27 @@ function BlocksIndex() {
     { id: "features", label: "Features", icon: Cpu, locked: true },
   ];
 
-  // The blocking inline script in __root.tsx has already stamped
-  // data-blocks-category and data-blocks-sidebar on <html> before React ran,
-  // so reading those attributes here gives us the correct initial value
-  // with zero flash — no SSR/hydration mismatch possible.
   const [activeCategory, setActiveCategory] = useState(() => {
-    if (typeof document !== "undefined") {
-      return document.documentElement.getAttribute("data-blocks-category") || "header";
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("komorebi_blocks_active_category") || "header";
     }
     return "header";
   });
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
-    if (typeof document !== "undefined") {
-      const val = document.documentElement.getAttribute("data-blocks-sidebar");
-      return val === null ? true : val === "true";
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("komorebi_blocks_sidebar_open");
+      return saved === null ? true : saved === "true";
     }
     return true;
   });
 
   useEffect(() => {
     localStorage.setItem("komorebi_blocks_active_category", activeCategory);
-    document.documentElement.setAttribute("data-blocks-category", activeCategory);
   }, [activeCategory]);
 
   useEffect(() => {
     localStorage.setItem("komorebi_blocks_sidebar_open", String(isSidebarOpen));
-    document.documentElement.setAttribute("data-blocks-sidebar", String(isSidebarOpen));
   }, [isSidebarOpen]);
 
   // Manifest items that are Blocks (currently headers and logo clouds)
