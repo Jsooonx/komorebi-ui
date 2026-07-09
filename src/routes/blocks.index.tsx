@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type ComponentType } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, type ComponentType } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { toast } from "sonner";
@@ -288,20 +288,18 @@ function BlocksIndex() {
     { id: "features", label: "Features", icon: Cpu, locked: true },
   ];
 
-  const [activeCategory, setActiveCategory] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("komorebi_blocks_active_category") || "header";
-    }
-    return "header";
-  });
+  // Initialize with placeholder — useLayoutEffect will apply the real localStorage values
+  // before the browser paints, preventing the Header→LogoCloud flash on refresh.
+  const [activeCategory, setActiveCategory] = useState("header");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("komorebi_blocks_sidebar_open");
-      return saved === null ? true : saved === "true";
-    }
-    return true;
-  });
+  useLayoutEffect(() => {
+    const savedCategory = localStorage.getItem("komorebi_blocks_active_category");
+    if (savedCategory) setActiveCategory(savedCategory);
+
+    const savedSidebar = localStorage.getItem("komorebi_blocks_sidebar_open");
+    if (savedSidebar !== null) setIsSidebarOpen(savedSidebar === "true");
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("komorebi_blocks_active_category", activeCategory);
