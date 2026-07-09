@@ -13,13 +13,6 @@ The `Components` surface lives at `/components` and is powered by `src/routes/co
 - drive the detail sandbox at `/components/$id`
 - allow catalog-only components that are not featured on the landing-page Bento-Showcase
 
-## Filter UX Notes
-
-- The desktop category filter is intentionally presented as a curated taxonomy list, not a generic chip cloud.
-- Categories should feel behavior-led and readable at a glance: icon, label, short descriptor, and count badge all matter.
-- Category ordering is curated in the route so high-signal families like `Header`, `Floating UI`, and `Visuals` appear first.
-- The active state should be obvious, and reset controls should only appear when the user is actually filtering.
-
 ## Registry Notes
 
 Every catalog entry should register:
