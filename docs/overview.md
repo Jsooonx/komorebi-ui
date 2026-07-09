@@ -53,3 +53,4 @@ The `Components` catalog and the landing-page `Bento-Showcase` are intentionally
 - The global command palette is lazy-loaded on user intent so the landing page does not pay that cost up front.
 - Below-the-fold homepage sections are deferred so heavy showcase code does not need to ship before the user reaches it.
 - Runtime assets live in `public/`; non-runtime source media and design explorations should live under `references/`.
+
