@@ -8,6 +8,7 @@ export default function Footer() {
     explore: [
       { name: "Terminal Playground", href: "#showcase" },
       { name: "Bento Components", href: "#bento-showcase" },
+      { name: "Blocks Showcase", href: "/blocks" },
       { name: "Template Showcase", href: "#templates" },
       { name: "CLI Tooling", href: "#showcase" },
     ],
@@ -25,6 +26,7 @@ export default function Footer() {
     resources: [
       { name: "GitHub Repository", href: "https://github.com/Jsooonx/komorebi-ui" },
       { name: "Components Catalog", href: "/components" },
+      { name: "Blocks Catalog", href: "/blocks" },
       { name: "Documentation", href: "https://github.com/Jsooonx/komorebi-ui#readme" },
       { name: "Report an Issue", href: "https://github.com/Jsooonx/komorebi-ui/issues" },
     ],

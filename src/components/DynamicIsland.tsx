@@ -124,6 +124,7 @@ export default function DynamicIsland() {
             <NavLink href="#">Home</NavLink>
             <NavLink href="#showcase">Playground</NavLink>
             <NavLink to="/components">Components</NavLink>
+            <NavLink to="/blocks">Blocks</NavLink>
             <NavLink href="#templates">Templates</NavLink>
           </nav>
 

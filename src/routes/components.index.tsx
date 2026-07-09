@@ -185,7 +185,8 @@ function ComponentsIndex() {
   const catalogItems: CatalogComponentItem[] = COMPONENTS_MANIFEST.map((item) => ({
     ...item,
     component: getComponentPreview(item.id),
-  })).filter((item): item is CatalogComponentItem => Boolean(item.component));
+  })).filter((item): item is CatalogComponentItem => Boolean(item.component))
+     .filter((item) => !["mega-menu-navbar", "mega-menu-navbar-2", "mega-menu-navbar-3"].includes(item.id));
 
   const [isBackNavigation, setIsBackNavigation] = useState(() => {
     if (typeof window !== "undefined") {
