@@ -1,10 +1,10 @@
 import BlockPage from "./BlockPage";
-import SienaParallaxCard from "../blocks-preview-elements/SienaParallaxCard";
+import SienaParallaxElement from "./SienaParallaxElement";
 
 export default function SienaParallaxBlock() {
   return (
     <BlockPage>
-      <SienaParallaxCard minimal />
+      <SienaParallaxElement minimal />
     </BlockPage>
   );
 }

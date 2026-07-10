@@ -1,0 +1,121 @@
+import React from "react";
+import { Zap, SlidersHorizontal, Sparkles } from "lucide-react";
+
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+function FeatureCard({ icon, title, description }: FeatureCardProps) {
+  return (
+    <div className="group relative flex flex-col items-center text-center py-8 px-6 rounded-2xl bg-[#0b0b0d] border border-white/[0.04] hover:border-white/[0.08] transition-all duration-300 overflow-hidden w-full h-full select-none">
+      {/* Dynamic Grid Background with fade-out radial mask */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), 
+            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: "16px 16px",
+          backgroundPosition: "center",
+          maskImage: "radial-gradient(circle at center, black 25%, transparent 65%)",
+          WebkitMaskImage: "radial-gradient(circle at center, black 25%, transparent 65%)",
+        }}
+      />
+
+      {/* Grid Center Icon Container */}
+      <div className="relative w-24 h-24 flex items-center justify-center mb-3 shrink-0">
+        <div className="w-10 h-10 rounded-lg border border-white/10 bg-[#09090b]/80 backdrop-blur flex items-center justify-center relative z-10 shadow-sm group-hover:border-white/20 group-hover:shadow-md transition-all duration-300">
+          {icon}
+        </div>
+      </div>
+
+      {/* Text Contents */}
+      <h4 className="text-base sm:text-lg font-sans font-semibold text-white/90 tracking-tight transition-colors group-hover:text-white duration-300 shrink-0 mt-1">
+        {title}
+      </h4>
+
+      <p className="text-xs sm:text-sm text-white/45 mt-3 font-sans leading-relaxed max-w-[270px] select-text">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+export default function Features1Card({ minimal = false }: { minimal?: boolean }) {
+  const features = [
+    {
+      icon: <Zap className="w-5 h-5 text-white/80 stroke-[1.5]" />,
+      title: "Fluid Animations",
+      description:
+        "Supercharged with Framer Motion, GSAP, and WebGL shaders for buttery-smooth 60fps organic animations.",
+    },
+    {
+      icon: <SlidersHorizontal className="w-5 h-5 text-white/80 stroke-[1.5]" />,
+      title: "Developer Centric",
+      description:
+        "Integrate cleanly in seconds using our interactive CLI. Pure React and Tailwind code directly in your workspace.",
+    },
+    {
+      icon: <Sparkles className="w-5 h-5 text-white/80 stroke-[1.5]" />,
+      title: "Production Ready",
+      description:
+        "Fully optimized for speed, responsive layouts, hardware-accelerated rendering, and maximum SEO practices.",
+    },
+  ];
+
+  const cssVariables = {
+    "--popover": "#0c0c0e",
+    "--popover-foreground": "#ffffff",
+    "--border": "rgba(255, 255, 255, 0.05)",
+  } as React.CSSProperties;
+
+  const content = (
+    <div className="w-full max-w-6xl mx-auto px-6 py-12 md:py-16 select-none flex flex-col justify-center items-center">
+      {/* Block Header */}
+      <div className="text-center mb-6 md:mb-8 shrink-0">
+        <h3 className="font-sans text-3xl sm:text-4xl font-semibold leading-tight text-white tracking-tight">
+          Engineered for fluid motion
+        </h3>
+        <p className="text-xs sm:text-sm text-white/45 mt-3 font-sans max-w-lg mx-auto leading-relaxed select-text">
+          Experience design-engineer quality components crafted with organic motion, smooth layouts,
+          and physics-based interactions.
+        </p>
+      </div>
+
+      {/* Features Grid Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full items-stretch">
+        {features.map((feat, idx) => (
+          <FeatureCard
+            key={idx}
+            icon={feat.icon}
+            title={feat.title}
+            description={feat.description}
+          />
+        ))}
+      </div>
+    </div>
+  );
+
+  if (minimal) {
+    return (
+      <div
+        className="w-full h-full overflow-y-auto scrollbar-none select-none relative bg-[#09090b]"
+        style={cssVariables}
+      >
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="relative w-full h-[580px] rounded-lg bg-[#09090b] border border-white/5 overflow-y-auto scrollbar-none select-none group"
+      style={cssVariables}
+    >
+      {content}
+    </div>
+  );
+}

@@ -1,10 +1,10 @@
 import BlockPage from "./BlockPage";
-import Features4Card from "../blocks-preview-elements/Features4Card";
+import Features4Element from "./Features4Element";
 
 export default function Features4Block() {
   return (
     <BlockPage>
-      <Features4Card minimal />
+      <Features4Element minimal />
     </BlockPage>
   );
 }

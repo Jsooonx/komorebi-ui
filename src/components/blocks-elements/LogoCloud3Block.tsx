@@ -1,10 +1,10 @@
 import BlockPage from "./BlockPage";
-import LogoCloud3Card from "../blocks-preview-elements/LogoCloud3Card";
+import LogoCloud3Element from "./LogoCloud3Element";
 
 export default function LogoCloud3Block() {
   return (
     <BlockPage>
-      <LogoCloud3Card minimal />
+      <LogoCloud3Element minimal />
     </BlockPage>
   );
 }

@@ -1,10 +1,10 @@
 import BlockPage from "./BlockPage";
-import MegaMenuNavbar3Card from "../blocks-preview-elements/MegaMenuNavbar3Card";
+import MegaMenuNavbar3Element from "./MegaMenuNavbar3Element";
 
 export default function MegaMenuNavbar3Block() {
   return (
     <BlockPage>
-      <MegaMenuNavbar3Card minimal previewMode="fullscreen" />
+      <MegaMenuNavbar3Element minimal previewMode="fullscreen" />
     </BlockPage>
   );
 }
