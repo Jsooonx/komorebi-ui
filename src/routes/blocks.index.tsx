@@ -500,12 +500,7 @@ function BlocksIndex() {
           <div className="max-w-5xl w-full mx-auto flex-1 flex flex-col justify-between">
             <div className="space-y-8">
               <LayoutGroup id="blocks-header">
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col items-start gap-1.5"
-                >
+                <div className="flex flex-col items-start gap-1.5">
                   <span className="text-[10px] font-semibold tracking-widest text-white/30 uppercase font-mono">
                     Layout Blocks
                   </span>
@@ -546,7 +541,7 @@ function BlocksIndex() {
                     {activeCategory === "features" &&
                       "Premium feature section layouts with grids, inline outline animations, and interactive hover highlights."}
                   </p>
-                </motion.div>
+                </div>
               </LayoutGroup>
 
               {/* Stacked Preview List */}
