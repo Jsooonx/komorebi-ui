@@ -1,16 +1,14 @@
-import { lazy, Suspense, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import DeferredSection from "@/components/DeferredSection";
 import DynamicIsland from "@/components/DynamicIsland";
 import Hero from "@/components/Hero";
 import SplitText from "@/components/ui/SplitText";
 import Footer from "@/components/Footer";
+import ShowcaseTerminal from "@/components/ShowcaseTerminal";
+import Highlights from "@/components/Highlights";
+import TemplateShowcase from "@/components/TemplateShowcase";
 import { clearNavigationOrigin } from "@/lib/navigation-state";
-
-const ShowcaseTerminal = lazy(() => import("@/components/ShowcaseTerminal"));
-const Highlights = lazy(() => import("@/components/Highlights"));
-const TemplateShowcase = lazy(() => import("@/components/TemplateShowcase"));
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -91,39 +89,12 @@ function Index() {
         </div>
 
         <motion.div variants={itemVariants} className="w-full max-w-[1500px]">
-          <DeferredSection
-            fallback={
-              <div className="h-[820px] w-full rounded-3xl border border-white/10 bg-[#080B09] shadow-[0_24px_64px_rgba(0,0,0,0.6)]" />
-            }
-          >
-            <Suspense
-              fallback={
-                <div className="h-[820px] w-full rounded-3xl border border-white/10 bg-[#080B09] shadow-[0_24px_64px_rgba(0,0,0,0.6)]" />
-              }
-            >
-              <ShowcaseTerminal />
-            </Suspense>
-          </DeferredSection>
+          <ShowcaseTerminal />
         </motion.div>
       </motion.section>
 
-      <DeferredSection
-        fallback={<div className="min-h-[1200px] bg-[#090909]" aria-hidden="true" />}
-        rootMargin="420px 0px"
-      >
-        <Suspense fallback={<div className="min-h-[1200px] bg-[#090909]" aria-hidden="true" />}>
-          <Highlights />
-        </Suspense>
-      </DeferredSection>
-
-      <DeferredSection
-        fallback={<div className="min-h-[920px] bg-[#090909]" aria-hidden="true" />}
-        rootMargin="420px 0px"
-      >
-        <Suspense fallback={<div className="min-h-[920px] bg-[#090909]" aria-hidden="true" />}>
-          <TemplateShowcase />
-        </Suspense>
-      </DeferredSection>
+      <Highlights />
+      <TemplateShowcase />
 
       <Footer />
     </main>

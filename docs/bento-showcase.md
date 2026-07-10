@@ -22,6 +22,6 @@ The section currently presents 13 reusable components:
 
 Each card is wrapped in `BentoCell`. Clicking a card opens its reusable component detail view at `/components/$id`.
 
-`DitherCard` is lazy-loaded because it pulls in the Three.js/WebGL stack. The whole Highlights section is also deferred below the fold from the landing route.
+`DitherCard` remains lazy-loaded because it pulls in the Three.js/WebGL stack. The Highlights section itself is loaded directly from the landing route so navigation and scroll restoration can be tested without deferred page sections.
 
 The highlight selection is intentionally curated. A component can be available in the Components catalog without appearing here, and a layout block must never be treated as a highlight component unless it is deliberately added to this list.

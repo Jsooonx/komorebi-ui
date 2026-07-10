@@ -56,7 +56,7 @@ Both registries share preview and source-code infrastructure, while the catalog 
 ## Performance notes
 
 - The command palette is lazy-loaded.
-- Below-the-fold landing sections are deferred.
-- The WebGL dither preview is lazy-loaded.
+- The main landing sections are currently loaded directly for navigation/re-entry testing.
+- The WebGL dither preview remains lazy-loaded because it pulls in the heavy Three.js/WebGL stack.
 - Vite separates heavy animation and Three.js-related dependencies into dedicated chunks.
 - Runtime assets stay in `public/`; references and experiments stay under `references/`.
