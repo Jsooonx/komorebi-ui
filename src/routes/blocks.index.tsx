@@ -51,9 +51,8 @@ const blockListVariants = {
 };
 
 const blockItemVariants = {
-  hidden: { opacity: 0, y: 18, scale: 0.98 },
+  hidden: { y: 18, scale: 0.98 },
   visible: {
-    opacity: 1,
     y: 0,
     scale: 1,
     transition: {
