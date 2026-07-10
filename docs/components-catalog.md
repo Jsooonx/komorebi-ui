@@ -39,8 +39,9 @@ Full layout sections are intentionally excluded from this catalog. They belong t
 
 - Mega Menu Navbar 1, 2, and 3
 - Logo Cloud 1, 2, and 3
-- Features 1 and 2
+- Features 1, 2, and 3
 
 Features 2 keeps its interactive CLI terminal engine, while its decorative inline code snippets have been removed from the visual block preview.
+Features 3 is a minimal six-cell foundation layout with centered typography, thin dividers, and restrained icons.
 
 This keeps reusable pieces separate from ready-made page/layout sections.

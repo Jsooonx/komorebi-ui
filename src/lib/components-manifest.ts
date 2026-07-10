@@ -215,6 +215,16 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[720px]",
   },
+  {
+    id: "features-3",
+    name: "Features 3",
+    category: "Features",
+    description:
+      "Minimal six-cell feature foundation block with centered typography, thin dividers, and restrained outline icons.",
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[650px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

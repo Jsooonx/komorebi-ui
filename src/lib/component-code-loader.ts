@@ -54,20 +54,17 @@ export async function loadComponentCode(id: string) {
       return (await import("../components/bentoshowcase-elements/NestedAccordionCard.tsx?raw"))
         .default;
     case "logo-cloud-1":
-      return (await import("../components/bentoshowcase-elements/LogoCloudCard.tsx?raw"))
-        .default;
+      return (await import("../components/bentoshowcase-elements/LogoCloudCard.tsx?raw")).default;
     case "logo-cloud-2":
-      return (await import("../components/bentoshowcase-elements/LogoCloud2Card.tsx?raw"))
-        .default;
+      return (await import("../components/bentoshowcase-elements/LogoCloud2Card.tsx?raw")).default;
     case "logo-cloud-3":
-      return (await import("../components/bentoshowcase-elements/LogoCloud3Card.tsx?raw"))
-        .default;
+      return (await import("../components/bentoshowcase-elements/LogoCloud3Card.tsx?raw")).default;
     case "features-1":
-      return (await import("../components/bentoshowcase-elements/Features1Card.tsx?raw"))
-        .default;
+      return (await import("../components/bentoshowcase-elements/Features1Card.tsx?raw")).default;
     case "features-2":
-      return (await import("../components/bentoshowcase-elements/Features2Card.tsx?raw"))
-        .default;
+      return (await import("../components/bentoshowcase-elements/Features2Card.tsx?raw")).default;
+    case "features-3":
+      return (await import("../components/bentoshowcase-elements/Features3Card.tsx?raw")).default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }
