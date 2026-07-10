@@ -49,7 +49,7 @@ src/
 
 `COMPONENTS_MANIFEST` contains the 16 reusable components shown in `/components`.
 
-`BLOCKS_MANIFEST` contains the 10 layout blocks shown in `/blocks`.
+`BLOCKS_MANIFEST` contains the 11 layout blocks shown in `/blocks`.
 
 Both registries share preview and source-code infrastructure, while the catalog routes consume only their own manifest. The shared detail route can resolve entries from either registry.
 

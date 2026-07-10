@@ -235,6 +235,16 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[720px]",
   },
+  {
+    id: "features-5",
+    name: "Features 5",
+    category: "Features",
+    description:
+      "Premium SaaS workflow block with paired operations and scheduling visuals plus a compact orchestration panel.",
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[720px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

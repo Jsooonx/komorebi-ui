@@ -25,6 +25,7 @@ import Features1Card from "../components/bentoshowcase-elements/Features1Card";
 import Features2Card from "../components/bentoshowcase-elements/Features2Card";
 import Features3Card from "../components/bentoshowcase-elements/Features3Card";
 import Features4Card from "../components/bentoshowcase-elements/Features4Card";
+import Features5Card from "../components/bentoshowcase-elements/Features5Card";
 import type { ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>> = {
@@ -54,6 +55,7 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewPr
   "features-2": Features2Card,
   "features-3": Features3Card,
   "features-4": Features4Card,
+  "features-5": Features5Card,
 };
 
 export function getComponentPreview(id: string) {
