@@ -163,6 +163,35 @@ function BlockRow({ item }: { item: BlockItem }) {
     }
   }, [activeTab]);
 
+  useEffect(() => {
+    if (!isFullscreen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsFullscreen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isFullscreen]);
+
+  if (isFullscreen) {
+    return (
+      <div className="group fixed inset-0 z-[100] h-dvh w-screen overflow-hidden bg-[#070709]">
+        <PreviewComp minimal={true} />
+        <button
+          onClick={() => setIsFullscreen(false)}
+          className="absolute right-5 top-5 z-50 rounded-full border border-white/10 bg-black/60 p-2 text-white/65 opacity-0 shadow-lg transition-all hover:bg-black/90 hover:text-white group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          title="Exit Fullscreen"
+          aria-label="Exit Fullscreen"
+        >
+          <Minimize2 className="h-4 w-4" />
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="block-enter flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden">
       {/* Top Toolbar */}
@@ -235,47 +264,27 @@ function BlockRow({ item }: { item: BlockItem }) {
           )}
 
           {/* Expand Fullscreen */}
-          <button
-            onClick={() => setIsFullscreen(!isFullscreen)}
-            className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
-            title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
-          >
-            {isFullscreen ? (
-              <Minimize2 className="w-3.5 h-3.5" />
-            ) : (
+          {activeTab === "preview" && (
+            <button
+              onClick={() => setIsFullscreen(true)}
+              className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
+              title="Enter Fullscreen"
+            >
               <Maximize2 className="w-3.5 h-3.5" />
-            )}
-          </button>
+            </button>
+          )}
         </div>
       </div>
 
       {/* Main Viewport Content Area */}
-      <div
-        className={`relative w-full ${isFullscreen ? "fixed inset-0 z-50 bg-[#09090b] flex flex-col pt-16" : ""}`}
-      >
-        {isFullscreen && (
-          <div className="absolute top-4 right-6 z-50 flex items-center gap-3">
-            <button
-              onClick={() => setIsFullscreen(false)}
-              className="p-2 bg-black/60 hover:bg-black/95 border border-white/10 rounded-full text-white/80 hover:text-white transition-all cursor-pointer shadow-lg"
-            >
-              <Minimize2 className="w-4 h-4" />
-            </button>
-          </div>
-        )}
-
+      <div className="relative w-full">
         <div className="w-full flex-grow relative overflow-hidden bg-[#070709]">
           {activeTab === "preview" ? (
-            <div
-              key={reloadKey}
-              className={`w-full ${isFullscreen ? "h-[calc(100vh-64px)]" : "h-[500px]"} relative`}
-            >
+            <div key={reloadKey} className="relative h-[500px] w-full">
               <PreviewComp minimal={true} />
             </div>
           ) : (
-            <div
-              className={`w-full ${isFullscreen ? "h-[calc(100vh-64px)]" : "h-[500px]"} overflow-auto`}
-            >
+            <div className="h-[500px] w-full overflow-auto">
               {isCodeLoading ? (
                 <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-white/40">
                   <div className="w-4 h-4 border-2 border-t-white/80 border-white/20 rounded-full animate-spin" />

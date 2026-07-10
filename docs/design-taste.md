@@ -68,6 +68,7 @@ To achieve butter-smooth 60fps/144fps animations without layout jitter:
 - Animate only the sidebar container when opening or collapsing it; do not replay child entrance animations on category selection.
 - Block preview rows render statically without entrance animation so embedded previews do not blink. The Blocks sidebar may use one grouped entrance on mount, but must remain static when the active category changes.
 - Changing a Blocks category resets the page scroll position to the top so every category starts from a consistent viewport.
+- Fullscreen preview mode must cover the entire viewport with only a hover-revealed close icon. Do not keep the catalog toolbar, metadata, header, or sidebar visible inside fullscreen.
 
 ### 2. CSS Keyframe Animations vs JS Loops
 
