@@ -32,7 +32,7 @@ Different header/navbar blocks have specific top-docking behaviors in minimal pr
 | `mega-menu-navbar-2` | Mega Menu Navbar 2 | **Docked** - Touches the top/sides of the preview container. | `sticky top-0 pb-2`      |
 | `mega-menu-navbar-3` | Mega Menu Navbar 3 | **Docked** - Touches the top/sides of the preview container. | `sticky top-0 pb-2`      |
 
-- Layout block headers (like the titles inside **Features 1**, **Features 2**, **Features 3**, and **Logo Cloud 3**) are static and scroll away naturally with the layout.
+- Layout block headers (like the titles inside **Features 1**, **Features 2**, **Features 3**, and **Logo Cloud 3**) are static, use the established sans-serif weight treatment, and scroll away naturally with the layout.
 
 ---
 
