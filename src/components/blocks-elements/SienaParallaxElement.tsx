@@ -29,7 +29,9 @@ function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) 
   const imageHeight = useTransform(
     progress,
     [0, 0.25, 0.58, 0.82, 1],
-    ["50%", "39%", "39%", "39%", "39%"],
+    previewMode === "fullscreen"
+      ? ["50%", "39%", "39%", "39%", "39%"]
+      : ["38%", "35%", "35%", "35%", "35%"],
   );
   const imageRadius = useTransform(
     progress,
@@ -53,8 +55,8 @@ function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) 
         className={`relative min-h-full ${previewMode === "fullscreen" ? "h-[150dvh]" : "h-[1480px]"}`}
       >
         <div
-          className={`sticky top-0 min-h-[620px] overflow-hidden ${
-            previewMode === "fullscreen" ? "h-dvh" : "h-[720px]"
+          className={`sticky top-0 overflow-hidden ${
+            previewMode === "fullscreen" ? "h-dvh min-h-[620px]" : "h-[500px]"
           }`}
         >
           <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-5 py-5 text-[9px] font-medium uppercase tracking-[0.18em] sm:px-8">
@@ -94,7 +96,9 @@ function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) 
 
           <motion.div
             style={{ opacity: openingOpacity, y: openingY }}
-            className="absolute inset-x-0 top-[64%] z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center"
+            className={`absolute inset-x-0 z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center ${
+              previewMode === "fullscreen" ? "top-[64%]" : "top-[56%]"
+            }`}
           >
             <span className="text-[9px] font-medium uppercase tracking-[0.26em] text-black/45">
               Field notes / 2026
@@ -106,7 +110,9 @@ function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) 
 
           <motion.div
             style={{ opacity: closingOpacity, y: closingY }}
-            className="absolute inset-x-0 top-[64%] z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center"
+            className={`absolute inset-x-0 z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center ${
+              previewMode === "fullscreen" ? "top-1/2" : "top-[56%]"
+            }`}
           >
             <span className="text-[9px] font-medium uppercase tracking-[0.26em] text-black/45">
               A quieter operating system
