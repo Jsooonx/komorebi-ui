@@ -1,5 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useState, lazy, Suspense } from "react";
+import { setNavigationOrigin } from "@/lib/navigation-state";
 import SplitText from "./ui/SplitText";
 import ImageRevealCard from "./bentoshowcase-elements/ImageRevealCard";
 import HoverMembersCard from "./bentoshowcase-elements/HoverMembersCard";
@@ -41,6 +42,7 @@ function BentoCell({
       if (target.closest("button") || target.closest("input") || target.closest("a")) {
         return;
       }
+      setNavigationOrigin("/", window.scrollY);
       navigate({ to: "/components/$id", params: { id } });
     }
   };

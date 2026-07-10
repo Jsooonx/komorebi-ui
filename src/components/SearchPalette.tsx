@@ -3,6 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Sparkles, Terminal, X, CornerDownLeft } from "lucide-react";
 import { COMPONENTS_MANIFEST, type ComponentManifestItem } from "@/lib/components-manifest";
+import { setNavigationOrigin } from "@/lib/navigation-state";
 
 export default function SearchPalette({
   initialOpen = false,
@@ -94,6 +95,13 @@ export default function SearchPalette({
 
   const handleSelect = (item: ComponentManifestItem) => {
     setIsOpen(false);
+    const fromCatalog =
+      window.location.pathname === "/components" || window.location.pathname === "/components/";
+    if (fromCatalog) {
+      sessionStorage.setItem("komorebi_scroll_y", String(window.scrollY));
+      sessionStorage.setItem("komorebi_from_catalog", "true");
+    }
+    setNavigationOrigin(fromCatalog ? "/components" : "/", window.scrollY);
     navigate({ to: `/components/${item.id}` });
   };
 

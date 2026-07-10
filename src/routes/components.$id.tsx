@@ -18,6 +18,7 @@ import {
 import { loadComponentCode } from "../lib/component-code-loader";
 import { getComponentPreview } from "../lib/component-previews";
 import { COMPONENTS_MANIFEST, getManifestItem } from "../lib/components-manifest";
+import { clearNavigationOrigin, getNavigationOrigin } from "../lib/navigation-state";
 
 const getComponent = (id: string) => {
   const manifestItem = getManifestItem(id);
@@ -202,6 +203,7 @@ function ComponentDetail() {
   };
 
   const activeIndex = COMPONENTS_MANIFEST.findIndex((c) => c.id === id);
+  const navigationOrigin = getNavigationOrigin();
 
   if (!comp) {
     return null;
@@ -242,11 +244,15 @@ function ComponentDetail() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                if (sessionStorage.getItem("komorebi_visited_index") === "true") {
-                  window.history.back();
-                } else {
-                  navigate({ to: "/" });
+                const destination = navigationOrigin?.path || "/";
+                if (destination === "/" && navigationOrigin) {
+                  sessionStorage.setItem(
+                    "komorebi_home_scroll_y",
+                    String(navigationOrigin.scrollY),
+                  );
                 }
+                clearNavigationOrigin();
+                navigate({ to: destination });
               }}
               className="text-xs font-medium text-white/60 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer border-none bg-transparent p-0"
             >

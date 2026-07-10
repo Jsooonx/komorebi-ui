@@ -21,6 +21,7 @@ import {
   type ComponentPreviewProps,
 } from "../lib/components-manifest";
 import { getComponentPreview } from "../lib/component-previews";
+import { setNavigationOrigin } from "../lib/navigation-state";
 
 type CatalogComponentItem = ComponentManifestItem & {
   component: ComponentType<ComponentPreviewProps>;
@@ -108,6 +109,7 @@ function ComponentCard({
 
       sessionStorage.setItem("komorebi_scroll_y", String(window.scrollY));
       sessionStorage.setItem("komorebi_from_catalog", "true");
+      setNavigationOrigin("/components");
       navigate({ to: "/components/$id", params: { id: item.id } });
     }
   };
@@ -276,7 +278,6 @@ function ComponentsIndex() {
   });
 
   useEffect(() => {
-    sessionStorage.setItem("komorebi_visited_index", "true");
     if (isBackNavigation) {
       // Clear the back navigation flag after mount to allow future animations to play normally
       setIsBackNavigation(false);

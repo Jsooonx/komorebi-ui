@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useLayoutEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import DeferredSection from "@/components/DeferredSection";
@@ -6,6 +6,7 @@ import DynamicIsland from "@/components/DynamicIsland";
 import Hero from "@/components/Hero";
 import SplitText from "@/components/ui/SplitText";
 import Footer from "@/components/Footer";
+import { clearNavigationOrigin } from "@/lib/navigation-state";
 
 const ShowcaseTerminal = lazy(() => import("@/components/ShowcaseTerminal"));
 const Highlights = lazy(() => import("@/components/Highlights"));
@@ -39,8 +40,16 @@ const itemVariants = {
 };
 
 function Index() {
-  useEffect(() => {
-    sessionStorage.setItem("komorebi_visited_index", "true");
+  useLayoutEffect(() => {
+    const savedY = sessionStorage.getItem("komorebi_home_scroll_y");
+    if (savedY) {
+      const scrollY = Number.parseInt(savedY, 10);
+      sessionStorage.removeItem("komorebi_home_scroll_y");
+      clearNavigationOrigin();
+      if (Number.isFinite(scrollY)) {
+        window.scrollTo({ top: scrollY, behavior: "auto" });
+      }
+    }
   }, []);
 
   return (
