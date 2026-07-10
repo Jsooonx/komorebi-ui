@@ -104,7 +104,7 @@ export default function Features5Card({ minimal = false }: { minimal?: boolean }
 
   return (
     <div
-      className="relative h-[720px] w-full overflow-y-auto rounded-lg border border-white/5 bg-[#09090b] scrollbar-none"
+      className="relative h-[720px] w-full overflow-y-auto border border-white/5 bg-[#09090b] scrollbar-none"
       style={cssVariables}
     >
       {content}

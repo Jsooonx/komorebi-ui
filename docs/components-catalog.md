@@ -44,6 +44,6 @@ Full layout sections are intentionally excluded from this catalog. They belong t
 Features 2 keeps its interactive CLI terminal engine, while its decorative inline code snippets have been removed from the visual block preview.
 Features 3 is a minimal six-cell Komorebi feature layout with original product-focused copy, centered typography, tight heading-to-description spacing matching Features 2’s scale, thin dividers, and restrained icons.
 Features 4 is a dashboard-led SaaS layout with original Komorebi copy, a generated workspace visual, and four workflow pillars with restrained hover feedback.
-Features 5 is a premium SaaS workflow layout with generated operations and scheduling visuals, plus a compact orchestration panel.
+Features 5 is a premium SaaS workflow layout with generated operations and scheduling visuals, plus a compact orchestration panel. Its outer preview container uses sharp corners to preserve the structured dashboard framing.
 
 This keeps reusable pieces separate from ready-made page/layout sections.
