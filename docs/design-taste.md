@@ -34,6 +34,7 @@ Different header/navbar blocks have specific top-docking behaviors in minimal pr
 
 - The Header catalog previews use their normal compact document height. Fullscreen uses a complete but short dummy landing page, so navbar morphing can be tested with a natural page scroll instead of an empty extended canvas.
 - Logo Cloud fullscreen pages are static (`overflow-hidden`): the content is centered within one viewport and should not expose a vertical scrollbar. Each logo has a deliberate hover hit area that brightens its mark and label.
+- The fullscreen host locks document-level scrolling while open, so the underlying `/blocks` catalog never leaks a browser scrollbar into the fullscreen experience.
 - Layout block headers (like the titles inside **Features 1**, **Features 2**, **Features 3**, **Features 4**, **Features 5**, **Siena Parallax**, and **Logo Cloud 3**) are static, use the established sans-serif weight treatment, and scroll away naturally with the layout. Siena Parallax is the exception for motion behavior: its image starts flush at the top edge at half-scene height, then its image and copy are intentionally tied to the preview scroll progress.
 
 ---
