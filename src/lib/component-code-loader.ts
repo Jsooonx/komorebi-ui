@@ -69,6 +69,9 @@ export async function loadComponentCode(id: string) {
       return (await import("../components/bentoshowcase-elements/Features4Card.tsx?raw")).default;
     case "features-5":
       return (await import("../components/bentoshowcase-elements/Features5Card.tsx?raw")).default;
+    case "siena-parallax":
+      return (await import("../components/bentoshowcase-elements/SienaParallaxCard.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }

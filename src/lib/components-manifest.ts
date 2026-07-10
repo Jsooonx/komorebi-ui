@@ -245,6 +245,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[720px]",
   },
+  {
+    id: "siena-parallax",
+    name: "Siena Parallax",
+    category: "Parallax",
+    description:
+      "Editorial scroll-driven block that transitions a full-bleed image into a floating media card before revealing a quiet closing statement.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[720px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

@@ -26,6 +26,7 @@ import Features2Card from "../components/bentoshowcase-elements/Features2Card";
 import Features3Card from "../components/bentoshowcase-elements/Features3Card";
 import Features4Card from "../components/bentoshowcase-elements/Features4Card";
 import Features5Card from "../components/bentoshowcase-elements/Features5Card";
+import SienaParallaxCard from "../components/bentoshowcase-elements/SienaParallaxCard";
 import type { ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>> = {
@@ -56,6 +57,7 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewPr
   "features-3": Features3Card,
   "features-4": Features4Card,
   "features-5": Features5Card,
+  "siena-parallax": SienaParallaxCard,
 };
 
 export function getComponentPreview(id: string) {

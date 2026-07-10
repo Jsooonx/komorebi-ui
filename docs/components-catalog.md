@@ -40,10 +40,12 @@ Full layout sections are intentionally excluded from this catalog. They belong t
 - Mega Menu Navbar 1, 2, and 3
 - Logo Cloud 1, 2, and 3
 - Features 1, 2, 3, 4, and 5
+- Siena Parallax
 
 Features 2 keeps its interactive CLI terminal engine, while its decorative inline code snippets have been removed from the visual block preview.
 Features 3 is a minimal six-cell Komorebi feature layout with original product-focused copy, centered typography, tight heading-to-description spacing matching Features 2’s scale, thin dividers, and restrained icons.
 Features 4 is a dashboard-led SaaS layout with original Komorebi copy, a generated workspace visual, and four workflow pillars with restrained hover feedback. Its feature icons brighten to white on hover.
 Features 5 is a premium SaaS workflow layout with generated operations and scheduling visuals, plus a compact orchestration panel. Its internal feature containers use sharp corners with subtle corner brackets to preserve the structured dashboard framing, while small controls retain subtle rounding and bright white icon hover states.
+Siena Parallax is a Parallax-category block with a scroll-driven editorial image transition: the visual starts full-bleed, becomes a floating card, and gives way to a closing statement. It uses a generated monochrome editorial asset and spring-smoothed Framer Motion transforms.
 
 This keeps reusable pieces separate from ready-made page/layout sections.

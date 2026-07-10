@@ -16,6 +16,7 @@ import {
   MousePointer,
   Compass,
   Cpu,
+  Sparkles,
   Sidebar,
 } from "lucide-react";
 import {
@@ -50,8 +51,6 @@ const sidebarEntranceVariants = {
     transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
   },
 };
-
-
 
 function SimpleHighlighter({ code }: { code: string }) {
   const tokenize = (txt: string) => {
@@ -165,9 +164,7 @@ function BlockRow({ item }: { item: BlockItem }) {
   }, [activeTab]);
 
   return (
-    <div
-      className="block-enter flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden"
-    >
+    <div className="block-enter flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden">
       {/* Top Toolbar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-4 py-3 bg-[#0d0d0f] border-b border-white/5">
         {/* Left: Tab options */}
@@ -311,6 +308,7 @@ function BlocksIndex() {
     { id: "secondary-hero", label: "Secondary Hero", icon: Layers, locked: true },
     { id: "logo-cloud", label: "Logo Cloud", icon: Compass },
     { id: "features", label: "Features", icon: Cpu },
+    { id: "parallax", label: "Parallax", icon: Sparkles },
   ];
 
   const [activeCategory, setActiveCategory] = useState("header");
@@ -341,6 +339,7 @@ function BlocksIndex() {
     if (activeCategory === "header") return item.category === "Headers & Menus";
     if (activeCategory === "logo-cloud") return item.category === "Logo Cloud";
     if (activeCategory === "features") return item.category === "Features";
+    if (activeCategory === "parallax") return item.category === "Parallax";
     return false;
   });
 
