@@ -43,7 +43,7 @@ export const Route = createFileRoute("/blocks/")({
 });
 
 const blockListVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: { staggerChildren: 0.05 },
