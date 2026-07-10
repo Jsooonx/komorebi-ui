@@ -66,7 +66,7 @@ To achieve butter-smooth 60fps/144fps animations without layout jitter:
 
 - Sidebar labels, category buttons, icons, and helper text must remain static while the active category changes.
 - Animate only the sidebar container when opening or collapsing it; do not replay child entrance animations on category selection.
-- Block preview rows may use a short staggered entrance when a category is opened; this animation belongs to the content list, never the sidebar controls.
+- Block preview rows use the same short staggered entrance as the Components catalog. The Blocks sidebar may use one grouped entrance on mount, but must remain static when the active category changes.
 
 ### 2. CSS Keyframe Animations vs JS Loops
 
