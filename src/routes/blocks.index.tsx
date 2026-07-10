@@ -51,6 +51,29 @@ const sidebarEntranceVariants = {
   },
 };
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 18, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
 function SimpleHighlighter({ code }: { code: string }) {
   const tokenize = (txt: string) => {
     let html = txt.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -163,7 +186,10 @@ function BlockRow({ item }: { item: BlockItem }) {
   }, [activeTab]);
 
   return (
-    <div className="flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden transition-all duration-300">
+    <motion.div
+      variants={itemVariants}
+      className="flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden transition-all duration-300"
+    >
       {/* Top Toolbar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-4 py-3 bg-[#0d0d0f] border-b border-white/5">
         {/* Left: Tab options */}
@@ -295,7 +321,7 @@ function BlockRow({ item }: { item: BlockItem }) {
           {item.description}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -379,12 +405,31 @@ function BlocksIndex() {
           className="h-[calc(100vh-64px)] shrink-0 border-r border-white/5 bg-[#090909] sticky top-16 overflow-y-auto hidden md:flex flex-col p-6 scrollbar-none z-10"
         >
           <motion.div
-            variants={sidebarEntranceVariants}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.08,
+                  delayChildren: 0.05,
+                },
+              },
+            }}
             initial="hidden"
             animate="visible"
             className="flex flex-col h-full justify-between"
           >
-            <div className="space-y-6">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+                },
+              }}
+              className="space-y-6"
+            >
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
                   <h3 className="text-[10px] font-semibold tracking-widest text-white/20 uppercase font-mono">
@@ -430,13 +475,23 @@ function BlocksIndex() {
                   })}
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Sidebar bottom guide */}
-            <div className="pt-6 border-t border-white/5 text-[10px] text-white/35 leading-relaxed font-sans">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+                },
+              }}
+              className="pt-6 border-t border-white/5 text-[10px] text-white/35 leading-relaxed font-sans"
+            >
               Blocks are ready-made layout sections such as headers, logo clouds, and feature grids,
               designed to drop directly into your routes.
-            </div>
+            </motion.div>
           </motion.div>
         </motion.aside>
 
@@ -445,7 +500,12 @@ function BlocksIndex() {
           <div className="max-w-5xl w-full mx-auto flex-1 flex flex-col justify-between">
             <div className="space-y-8">
               <LayoutGroup id="blocks-header">
-                <div className="flex flex-col items-start gap-1.5">
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col items-start gap-1.5"
+                >
                   <span className="text-[10px] font-semibold tracking-widest text-white/30 uppercase font-mono">
                     Layout Blocks
                   </span>
@@ -486,15 +546,24 @@ function BlocksIndex() {
                     {activeCategory === "features" &&
                       "Premium feature section layouts with grids, inline outline animations, and interactive hover highlights."}
                   </p>
-                </div>
+                </motion.div>
               </LayoutGroup>
 
               {/* Stacked Preview List */}
-              <div className="space-y-12">
-                {activeBlocks.map((item) => (
-                  <BlockRow key={item.id} item={item} />
-                ))}
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCategory}
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  className="space-y-12"
+                >
+                  {activeBlocks.map((item) => (
+                    <BlockRow key={item.id} item={item} />
+                  ))}
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Catalog Sub-Footer */}
