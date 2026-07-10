@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal as TerminalIcon, Play, RefreshCw, Zap, Layers, Sparkles, Copy, Check } from "lucide-react";
+import {
+  Terminal as TerminalIcon,
+  Play,
+  RefreshCw,
+  Zap,
+  Layers,
+  Sparkles,
+  Copy,
+  Check,
+} from "lucide-react";
 
 // ── CARD 1: DYNAMIC SPRING PLAYGROUND ──
 function SpringPlayground() {
@@ -17,18 +26,18 @@ function SpringPlayground() {
       {/* Visual Canvas Area */}
       <div className="relative h-28 w-full rounded-lg bg-black/40 border border-white/5 flex items-center justify-center overflow-hidden">
         {/* Dynamic Grid backdrop */}
-        <div 
-          className="absolute inset-0 pointer-events-none opacity-20" 
+        <div
+          className="absolute inset-0 pointer-events-none opacity-20"
           style={{
             backgroundImage: `
               linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), 
               linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
             `,
-            backgroundSize: '12px 12px',
-            backgroundPosition: 'center',
-          }} 
+            backgroundSize: "12px 12px",
+            backgroundPosition: "center",
+          }}
         />
-        
+
         {/* Spring Ball */}
         <motion.div
           animate={{
@@ -90,18 +99,6 @@ function SpringPlayground() {
           />
         </div>
       </div>
-
-      {/* Real Usage Code Snippet */}
-      <div className="mt-4 p-2.5 rounded-lg bg-black/60 border border-white/5 font-mono text-[9px] text-white/50 text-left select-text relative">
-        <div className="absolute top-1 right-2 text-[8px] opacity-35 uppercase tracking-wider select-none">React Code</div>
-        <span className="text-white/35">&lt;</span><span className="text-white/80">motion.div</span><span className="text-white/35">&gt;</span> <br />
-        &nbsp;&nbsp;<span className="text-[#BECB6D]">transition</span>={"{{"} <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;type: <span className="text-white/80">"spring"</span>,<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;stiffness: <span className="text-white">{stiffness}</span>,<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;damping: <span className="text-white">{damping}</span><br />
-        &nbsp;&nbsp;{"}}"} <br />
-        <span className="text-white/35">&lt;/</span><span className="text-white/80">motion.div</span><span className="text-white/35">&gt;</span>
-      </div>
     </div>
   );
 }
@@ -114,12 +111,6 @@ function PresetSwitcher() {
     { id: "snappy", label: "Snappy Snap", timing: "0.20s" },
     { id: "fluid", label: "Slow Ease", timing: "0.85s" },
   ];
-
-  const codeSnippet = activePreset === "natural" 
-    ? 'import { springNatural } from "@/lib/presets";'
-    : activePreset === "snappy"
-      ? 'import { springSnappy } from "@/lib/presets";'
-      : 'import { springFluid } from "@/lib/presets";';
 
   return (
     <div className="flex flex-col h-full justify-between">
@@ -136,9 +127,11 @@ function PresetSwitcher() {
             }`}
           >
             <div className="flex items-center gap-2">
-              <div className={`w-1.5 h-1.5 rounded-full transition-all ${
-                activePreset === preset.id ? "bg-white scale-120" : "bg-white/10"
-              }`} />
+              <div
+                className={`w-1.5 h-1.5 rounded-full transition-all ${
+                  activePreset === preset.id ? "bg-white scale-120" : "bg-white/10"
+                }`}
+              />
               <span>{preset.label}</span>
             </div>
             <span className="font-mono text-[9px] opacity-40">{preset.timing}</span>
@@ -163,12 +156,6 @@ function PresetSwitcher() {
           Timeline Active
         </span>
       </div>
-
-      {/* Real Usage Preset Import Snippet */}
-      <div className="mt-3.5 p-2.5 rounded-lg bg-black/60 border border-white/5 font-mono text-[9px] text-white/50 text-left select-text relative">
-        <div className="absolute top-1 right-2 text-[8px] opacity-35 uppercase tracking-wider select-none">Preset Import</div>
-        <span className="text-white/85">{codeSnippet}</span>
-      </div>
     </div>
   );
 }
@@ -189,16 +176,14 @@ function MockCLIEngine() {
 
   useEffect(() => {
     let active = true;
-    let cursorInterval: NodeJS.Timeout;
-
     // Cursor blink effect
-    cursorInterval = setInterval(() => {
+    const cursorInterval = setInterval(() => {
       setShowCursor((v) => !v);
     }, 500);
 
     const runLoop = async () => {
       if (!active) return;
-      
+
       // Reset
       setTypedCommand("");
       setLogs([]);
@@ -221,10 +206,7 @@ function MockCLIEngine() {
 
       // 3. Verify and Copy
       if (!active) return;
-      setLogs([
-        "✔ Block manifest verified.",
-        "⠋ Copying Features2Card.tsx to components/..."
-      ]);
+      setLogs(["✔ Block manifest verified.", "⠋ Copying Features2Card.tsx to components/..."]);
       await new Promise((r) => setTimeout(r, 1500));
 
       // 4. Success
@@ -233,12 +215,12 @@ function MockCLIEngine() {
         "✔ Block manifest verified.",
         "✔ Component code cloned successfully.",
         "",
-        "SUCCESS: Block Features 2 added to workspace!"
+        "SUCCESS: Block Features 2 added to workspace!",
       ]);
 
       // Pause at the end before restarting the loop
       await new Promise((r) => setTimeout(r, 4500));
-      
+
       if (active) {
         runLoop();
       }
@@ -262,7 +244,9 @@ function MockCLIEngine() {
           <div className="w-2 h-2 rounded-full bg-white/10" />
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[9px] text-white/30 uppercase tracking-widest font-sans font-medium">bash</span>
+          <span className="text-[9px] text-white/30 uppercase tracking-widest font-sans font-medium">
+            bash
+          </span>
           <button
             onClick={handleCopy}
             className="p-1 rounded hover:bg-white/5 active:scale-95 transition-all text-white/30 hover:text-white/70 flex items-center gap-1 text-[8px] font-sans"
@@ -289,19 +273,19 @@ function MockCLIEngine() {
             <span className="w-1.5 h-3 bg-white/75 shrink-0" />
           )}
         </div>
-        
+
         {/* Output lines */}
         {logs.map((log, index) => {
           const isSuccess = log.startsWith("SUCCESS");
           const isCheck = log.startsWith("✔");
           return (
-            <div 
+            <div
               key={index}
               className={`leading-relaxed ${
-                isSuccess 
-                  ? "text-emerald-400 font-semibold" 
-                  : isCheck 
-                    ? "text-emerald-400/90" 
+                isSuccess
+                  ? "text-emerald-400 font-semibold"
+                  : isCheck
+                    ? "text-emerald-400/90"
                     : "text-white/55"
               }`}
             >
@@ -330,7 +314,8 @@ export default function Features2Card({ minimal = false }: { minimal?: boolean }
           Aesthetics meet performance
         </h3>
         <p className="text-xs sm:text-sm text-white/45 mt-3 font-sans max-w-lg mx-auto leading-relaxed select-text">
-          Fine-tune every curve, load preset motion matrices, and fetch modular blocks seamlessly with zero overhead.
+          Fine-tune every curve, load preset motion matrices, and fetch modular blocks seamlessly
+          with zero overhead.
         </p>
       </div>
 
@@ -341,10 +326,13 @@ export default function Features2Card({ minimal = false }: { minimal?: boolean }
           <div className="flex flex-col text-left mb-6 relative z-10">
             <div className="flex items-center gap-2 text-white/90">
               <Zap className="w-4 h-4 text-white/80 stroke-[1.5]" />
-              <h4 className="text-sm font-sans font-semibold tracking-tight">Spring Curve Playground</h4>
+              <h4 className="text-sm font-sans font-semibold tracking-tight">
+                Spring Curve Playground
+              </h4>
             </div>
             <p className="text-[11px] text-white/40 mt-1 font-sans leading-relaxed max-w-md select-text">
-              Fine-tune kinetic curves in real-time. Slide stiffness and damping to adjust elasticity on the fly.
+              Fine-tune kinetic curves in real-time. Slide stiffness and damping to adjust
+              elasticity on the fly.
             </p>
           </div>
           <SpringPlayground />
@@ -375,7 +363,7 @@ export default function Features2Card({ minimal = false }: { minimal?: boolean }
               Render at display rates (60Hz to 144Hz) with hardware acceleration.
             </p>
           </div>
-          
+
           {/* Sine Wave SVG Animation */}
           <div className="h-28 w-full rounded-lg bg-black/40 border border-white/5 flex items-center justify-center overflow-hidden relative">
             <div className="w-[85%] overflow-hidden flex items-center h-12 relative">
@@ -402,15 +390,6 @@ export default function Features2Card({ minimal = false }: { minimal?: boolean }
               60Hz - 144Hz
             </span>
           </div>
-
-          {/* Real Usage Hook Snippet */}
-          <div className="mt-4 p-2.5 rounded-lg bg-black/60 border border-white/5 font-mono text-[9px] text-white/50 text-left select-text relative">
-            <div className="absolute top-1 right-2 text-[8px] opacity-35 uppercase tracking-wider select-none">Hook API</div>
-            <span className="text-[#BECB6D]">useFrameRateSync</span>{"((state) => {"} <br />
-            &nbsp;&nbsp;<span className="text-white/35">const</span> delta = state.delta;<br />
-            &nbsp;&nbsp;updateParticles(delta);<br />
-            {"});"}
-          </div>
         </div>
 
         {/* CARD 4: CLI Terminal Engine (Large - md:col-span-2) */}
@@ -418,10 +397,13 @@ export default function Features2Card({ minimal = false }: { minimal?: boolean }
           <div className="flex flex-col text-left mb-6 relative z-10">
             <div className="flex items-center gap-2 text-white/90">
               <TerminalIcon className="w-4 h-4 text-white/80 stroke-[1.5]" />
-              <h4 className="text-sm font-sans font-semibold tracking-tight">CLI Terminal Engine</h4>
+              <h4 className="text-sm font-sans font-semibold tracking-tight">
+                CLI Terminal Engine
+              </h4>
             </div>
             <p className="text-[11px] text-white/40 mt-1 font-sans leading-relaxed max-w-md select-text">
-              Install UI blocks directly into your workspace. No bloated library, just clean, native React and Tailwind code.
+              Install UI blocks directly into your workspace. No bloated library, just clean, native
+              React and Tailwind code.
             </p>
           </div>
           <MockCLIEngine />
