@@ -299,7 +299,13 @@ function MockCLIEngine() {
 }
 
 // ── MAIN COMPONENT ──
-export default function Features2Card({ minimal = false }: { minimal?: boolean }) {
+export default function Features2Card({
+  minimal = false,
+  previewMode = "catalog",
+}: {
+  minimal?: boolean;
+  previewMode?: "catalog" | "fullscreen";
+}) {
   const cssVariables = {
     "--popover": "#0c0c0e",
     "--popover-foreground": "#ffffff",
@@ -415,7 +421,9 @@ export default function Features2Card({ minimal = false }: { minimal?: boolean }
   if (minimal) {
     return (
       <div
-        className="w-full h-full overflow-y-auto scrollbar-none select-none relative bg-[#09090b]"
+        className={`relative h-full w-full overflow-y-auto bg-[#09090b] select-none scrollbar-none ${
+          previewMode === "fullscreen" ? "flex items-center" : ""
+        }`}
         style={cssVariables}
       >
         {content}

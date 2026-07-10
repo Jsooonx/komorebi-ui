@@ -44,7 +44,13 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
   );
 }
 
-export default function Features1Card({ minimal = false }: { minimal?: boolean }) {
+export default function Features1Card({
+  minimal = false,
+  previewMode = "catalog",
+}: {
+  minimal?: boolean;
+  previewMode?: "catalog" | "fullscreen";
+}) {
   const features = [
     {
       icon: <Zap className="w-5 h-5 text-white/80 stroke-[1.5]" />,
@@ -102,7 +108,9 @@ export default function Features1Card({ minimal = false }: { minimal?: boolean }
   if (minimal) {
     return (
       <div
-        className="w-full h-full overflow-y-auto scrollbar-none select-none relative bg-[#09090b]"
+        className={`relative h-full w-full overflow-y-auto bg-[#09090b] select-none scrollbar-none ${
+          previewMode === "fullscreen" ? "flex items-center" : ""
+        }`}
         style={cssVariables}
       >
         {content}

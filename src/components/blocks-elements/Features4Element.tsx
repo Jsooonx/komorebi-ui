@@ -48,7 +48,13 @@ function FeatureItemRow({ icon, title, description }: FeatureItem) {
   );
 }
 
-export default function Features4Card({ minimal = false }: { minimal?: boolean }) {
+export default function Features4Card({
+  minimal = false,
+  previewMode = "catalog",
+}: {
+  minimal?: boolean;
+  previewMode?: "catalog" | "fullscreen";
+}) {
   const cssVariables = {
     "--popover": "#0c0c0e",
     "--popover-foreground": "#ffffff",
@@ -86,7 +92,9 @@ export default function Features4Card({ minimal = false }: { minimal?: boolean }
   if (minimal) {
     return (
       <div
-        className="relative h-full w-full overflow-y-auto bg-[#09090b] scrollbar-none"
+        className={`relative h-full w-full overflow-y-auto bg-[#09090b] scrollbar-none ${
+          previewMode === "fullscreen" ? "flex items-center" : ""
+        }`}
         style={cssVariables}
       >
         {content}
