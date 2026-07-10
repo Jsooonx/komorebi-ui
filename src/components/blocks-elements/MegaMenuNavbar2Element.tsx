@@ -10,6 +10,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { SunlightLeafLogo } from "../DynamicIsland";
+import HeaderPageContent from "./HeaderPageContent";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -280,12 +281,13 @@ export default function MegaMenuNavbar2Card({
         <div className="sticky top-0 z-20 w-full flex justify-center pb-2">
           <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} isMorphed={isMorphed} />
         </div>
-        <div className={previewMode === "fullscreen" ? "min-h-[1600px]" : "min-h-full"}>
-          <MockContent />
-          {previewMode === "fullscreen" && (
-            <div className="py-20 text-center text-[10px] text-white/20">End of Page Preview</div>
-          )}
-        </div>
+        {previewMode === "fullscreen" ? (
+          <HeaderPageContent />
+        ) : (
+          <div className="min-h-full">
+            <MockContent />
+          </div>
+        )}
       </div>
     );
   }

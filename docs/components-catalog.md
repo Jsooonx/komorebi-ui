@@ -54,5 +54,5 @@ This keeps reusable pieces separate from ready-made page/layout sections.
 
 - `src/components/blocks-preview-elements/` contains catalog-only wrappers used inside `/blocks` cards.
 - `src/components/blocks-elements/` contains the visual implementations and full-page entry components. Fullscreen resolves these entries directly, never the catalog registry or a preview wrapper.
-- Header catalog previews stay compact. Their extended scroll canvas exists only in the corresponding fullscreen page, where it can exercise the navbar’s scroll-responsive states.
+- Header catalog previews stay compact. Their fullscreen version uses a short, complete dummy landing page (about 1.25 viewport heights), enough to exercise scroll-responsive navbar states without an oversized empty canvas.
 - Every fullscreen block is rendered as a complete viewport page rather than a centered catalog card. The close control is supplied by the fullscreen host and is intentionally not part of the block implementation.
