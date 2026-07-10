@@ -1,6 +1,7 @@
 export interface ComponentPreviewProps {
   minimal?: boolean;
   activeState?: string;
+  previewMode?: "catalog" | "fullscreen";
 }
 
 export interface ComponentManifestItem {

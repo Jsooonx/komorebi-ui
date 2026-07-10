@@ -10,7 +10,7 @@ To maintain layout breathing room and avoid elements feeling cramped:
 
 ### 1. Scrollable Preview Blocks
 
-- Preview block containers (such as **Features 1**, **Features 2**, **Features 3**, **Features 4**, **Features 5**, **Siena Parallax**, and **Logo Clouds**) are displayed inside scrollable viewports (`h-[580px]`, `h-[650px]`, or `h-[720px]`) on the Blocks page.
+- Preview block containers (such as **Features 1**, **Features 2**, **Features 3**, **Features 4**, **Features 5**, **Siena Parallax**, and **Logo Clouds**) are displayed inside scrollable viewports (`h-[580px]`, `h-[650px]`, or `h-[720px]`) on the Blocks page. Fullscreen is a separate page-preview layer rather than an enlarged catalog card: it receives `previewMode="fullscreen"` and may use its own layout constraints.
 - **Scroll Padding Rule:** Never force `h-full` on the inner flex wrapper containing the block content. When `h-full` is combined with `overflow-y-auto`, browsers clip/ignore the bottom padding on scroll.
 - **Correct Padding:** Use `py-12 md:py-16 px-6` on the inner content wrapper and let the height grow naturally. This guarantees a consistent, beautiful gap at both the top and bottom of the container when scrolled to the limits.
 

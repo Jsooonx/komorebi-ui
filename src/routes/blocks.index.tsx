@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, type ComponentType } from "react";
+import { createPortal } from "react-dom";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { toast } from "sonner";
@@ -105,6 +106,53 @@ function SimpleHighlighter({ code }: { code: string }) {
   );
 }
 
+function FullscreenBlockPreview({ item, onClose }: { item: BlockItem; onClose: () => void }) {
+  const PreviewComp = item.component;
+  const isHeaderBlock = item.category === "Headers & Menus";
+  const isParallaxBlock = item.category === "Parallax";
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  const pagePreview = (
+    <div className="group fixed inset-0 z-[100] h-dvh w-screen bg-[#070709]">
+      <div
+        className={
+          isHeaderBlock || isParallaxBlock
+            ? "h-full w-full overflow-hidden"
+            : "flex h-full w-full items-center justify-center p-5 sm:p-8"
+        }
+      >
+        <div
+          className={
+            isHeaderBlock || isParallaxBlock
+              ? "h-full w-full"
+              : "h-[min(760px,calc(100dvh-2.5rem))] w-full max-w-[1440px] overflow-hidden sm:h-[min(820px,calc(100dvh-4rem))]"
+          }
+        >
+          <PreviewComp minimal={true} previewMode="fullscreen" />
+        </div>
+      </div>
+      <button
+        onClick={onClose}
+        className="absolute right-5 top-5 z-50 rounded-full border border-white/10 bg-black/60 p-2 text-white/65 opacity-0 shadow-lg transition-all hover:bg-black/90 hover:text-white group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+        title="Exit Fullscreen"
+        aria-label="Exit Fullscreen"
+      >
+        <Minimize2 className="h-4 w-4" />
+      </button>
+    </div>
+  );
+
+  return typeof document === "undefined" ? null : createPortal(pagePreview, document.body);
+}
+
 function BlockRow({ item }: { item: BlockItem }) {
   const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
   const [copiedCli, setCopiedCli] = useState(false);
@@ -115,7 +163,6 @@ function BlockRow({ item }: { item: BlockItem }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const PreviewComp = item.component;
-  const isHeaderBlock = item.category === "Headers & Menus";
 
   const handleCopyCli = async () => {
     try {
@@ -164,161 +211,125 @@ function BlockRow({ item }: { item: BlockItem }) {
     }
   }, [activeTab]);
 
-  useEffect(() => {
-    if (!isFullscreen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsFullscreen(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isFullscreen]);
-
-  if (isFullscreen) {
-    return (
-      <div
-        className={`group fixed inset-0 z-[100] h-dvh w-screen bg-[#070709] ${
-          isHeaderBlock ? "overflow-hidden" : "flex items-center justify-center p-6"
-        }`}
-      >
-        <div
-          className={
-            isHeaderBlock
-              ? "h-full w-full"
-              : "h-[min(720px,calc(100dvh-3rem))] max-h-full w-full max-w-[1400px]"
-          }
-        >
-          <PreviewComp minimal={true} />
-        </div>
-        <button
-          onClick={() => setIsFullscreen(false)}
-          className="absolute right-5 top-5 z-50 rounded-full border border-white/10 bg-black/60 p-2 text-white/65 opacity-0 shadow-lg transition-all hover:bg-black/90 hover:text-white group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-          title="Exit Fullscreen"
-          aria-label="Exit Fullscreen"
-        >
-          <Minimize2 className="h-4 w-4" />
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div className="block-enter flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden">
-      {/* Top Toolbar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-4 py-3 bg-[#0d0d0f] border-b border-white/5">
-        {/* Left: Tab options */}
-        <div className="flex items-center gap-1.5 bg-black/35 p-1 rounded-lg border border-white/5 w-fit">
-          <button
-            onClick={() => setActiveTab("preview")}
-            className={`px-3 py-1 rounded-md text-[10px] font-semibold transition-all cursor-pointer ${
-              activeTab === "preview"
-                ? "bg-white/10 text-white shadow-sm"
-                : "text-white/40 hover:text-white/70"
-            }`}
-          >
-            Preview
-          </button>
-          <button
-            onClick={() => setActiveTab("code")}
-            className={`px-3 py-1 rounded-md text-[10px] font-semibold transition-all cursor-pointer ${
-              activeTab === "code"
-                ? "bg-white/10 text-white shadow-sm"
-                : "text-white/40 hover:text-white/70"
-            }`}
-          >
-            Code
-          </button>
-        </div>
-
-        {/* Right: Actions */}
-        <div className="flex items-center flex-wrap gap-2.5">
-          {/* CLI code display */}
-          <div
-            onClick={handleCopyCli}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/45 border border-white/5 text-[10px] font-mono text-white/50 hover:text-white/90 cursor-pointer transition-colors"
-            title="Copy CLI command"
-          >
-            <Terminal className="w-3.5 h-3.5 text-white/30" />
-            <span>{item.cliCommand || `npx komorebi-ui add ${item.id}`}</span>
-            {copiedCli ? (
-              <Check className="w-3 h-3 text-[#00f5a0]" />
-            ) : (
-              <Copy className="w-3 h-3 text-white/20" />
-            )}
+    <>
+      <div className="block-enter flex flex-col overflow-hidden rounded-xl border border-white/5 bg-[#09090b]">
+        {/* Top Toolbar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-4 py-3 bg-[#0d0d0f] border-b border-white/5">
+          {/* Left: Tab options */}
+          <div className="flex items-center gap-1.5 bg-black/35 p-1 rounded-lg border border-white/5 w-fit">
+            <button
+              onClick={() => setActiveTab("preview")}
+              className={`px-3 py-1 rounded-md text-[10px] font-semibold transition-all cursor-pointer ${
+                activeTab === "preview"
+                  ? "bg-white/10 text-white shadow-sm"
+                  : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              Preview
+            </button>
+            <button
+              onClick={() => setActiveTab("code")}
+              className={`px-3 py-1 rounded-md text-[10px] font-semibold transition-all cursor-pointer ${
+                activeTab === "code"
+                  ? "bg-white/10 text-white shadow-sm"
+                  : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              Code
+            </button>
           </div>
 
-          <div className="w-[1px] h-4 bg-white/10 mx-0.5" />
-
-          {/* Copy code source */}
-          <button
-            onClick={handleCopyCode}
-            className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
-            title="Copy Source Code"
-          >
-            {copiedCode ? (
-              <Check className="w-3.5 h-3.5 text-[#00f5a0]" />
-            ) : (
-              <Copy className="w-3.5 h-3.5" />
-            )}
-          </button>
-
-          {/* Reset Preview */}
-          {activeTab === "preview" && (
-            <button
-              onClick={() => setReloadKey((k) => k + 1)}
-              className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
-              title="Reset Preview"
+          {/* Right: Actions */}
+          <div className="flex items-center flex-wrap gap-2.5">
+            {/* CLI code display */}
+            <div
+              onClick={handleCopyCli}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/45 border border-white/5 text-[10px] font-mono text-white/50 hover:text-white/90 cursor-pointer transition-colors"
+              title="Copy CLI command"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
-            </button>
-          )}
-
-          {/* Expand Fullscreen */}
-          {activeTab === "preview" && (
-            <button
-              onClick={() => setIsFullscreen(true)}
-              className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
-              title="Enter Fullscreen"
-            >
-              <Maximize2 className="w-3.5 h-3.5" />
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* Main Viewport Content Area */}
-      <div className="relative w-full">
-        <div className="w-full flex-grow relative overflow-hidden bg-[#070709]">
-          {activeTab === "preview" ? (
-            <div key={reloadKey} className="relative h-[500px] w-full">
-              <PreviewComp minimal={true} />
-            </div>
-          ) : (
-            <div className="h-[500px] w-full overflow-auto">
-              {isCodeLoading ? (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-white/40">
-                  <div className="w-4 h-4 border-2 border-t-white/80 border-white/20 rounded-full animate-spin" />
-                  <span className="text-[10px] font-mono">Loading Source Code...</span>
-                </div>
+              <Terminal className="w-3.5 h-3.5 text-white/30" />
+              <span>{item.cliCommand || `npx komorebi-ui add ${item.id}`}</span>
+              {copiedCli ? (
+                <Check className="w-3 h-3 text-[#00f5a0]" />
               ) : (
-                <SimpleHighlighter code={code} />
+                <Copy className="w-3 h-3 text-white/20" />
               )}
             </div>
-          )}
+
+            <div className="w-[1px] h-4 bg-white/10 mx-0.5" />
+
+            {/* Copy code source */}
+            <button
+              onClick={handleCopyCode}
+              className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
+              title="Copy Source Code"
+            >
+              {copiedCode ? (
+                <Check className="w-3.5 h-3.5 text-[#00f5a0]" />
+              ) : (
+                <Copy className="w-3.5 h-3.5" />
+              )}
+            </button>
+
+            {/* Reset Preview */}
+            {activeTab === "preview" && (
+              <button
+                onClick={() => setReloadKey((k) => k + 1)}
+                className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
+                title="Reset Preview"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
+            )}
+
+            {/* Expand Fullscreen */}
+            {activeTab === "preview" && (
+              <button
+                onClick={() => setIsFullscreen(true)}
+                className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
+                title="Enter Fullscreen"
+              >
+                <Maximize2 className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Main Viewport Content Area */}
+        <div className="relative w-full">
+          <div className="w-full flex-grow relative overflow-hidden bg-[#070709]">
+            {activeTab === "preview" ? (
+              <div key={reloadKey} className="relative h-[500px] w-full">
+                <PreviewComp minimal={true} previewMode="catalog" />
+              </div>
+            ) : (
+              <div className="h-[500px] w-full overflow-auto">
+                {isCodeLoading ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-white/40">
+                    <div className="w-4 h-4 border-2 border-t-white/80 border-white/20 rounded-full animate-spin" />
+                    <span className="text-[10px] font-mono">Loading Source Code...</span>
+                  </div>
+                ) : (
+                  <SimpleHighlighter code={code} />
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Block Information */}
+        <div className="px-5 py-4 border-t border-white/5 flex flex-col text-left">
+          <h4 className="text-xs font-semibold text-white/95">{item.name}</h4>
+          <p className="text-[10px] text-white/45 mt-1 leading-normal font-sans">
+            {item.description}
+          </p>
         </div>
       </div>
-
-      {/* Block Information */}
-      <div className="px-5 py-4 border-t border-white/5 flex flex-col text-left">
-        <h4 className="text-xs font-semibold text-white/95">{item.name}</h4>
-        <p className="text-[10px] text-white/45 mt-1 leading-normal font-sans">
-          {item.description}
-        </p>
-      </div>
-    </div>
+      {isFullscreen && (
+        <FullscreenBlockPreview item={item} onClose={() => setIsFullscreen(false)} />
+      )}
+    </>
   );
 }
 
