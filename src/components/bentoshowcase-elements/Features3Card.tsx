@@ -63,9 +63,10 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
 
   const content = (
     <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 py-14 text-center md:py-20">
-      <header className="max-w-2xl">
+      <header className="max-w-4xl">
         <h3 className="text-4xl font-sans font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl">
-          The foundation for creative teams management
+          The foundation for creative
+          <br className="hidden sm:block" /> teams management
         </h3>
         <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-white/60 sm:text-base">
           Build more than just interfaces. Give your teams a flexible foundation for creating,
