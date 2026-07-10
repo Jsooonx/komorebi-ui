@@ -68,7 +68,13 @@ function ProgressiveBlur({ className = "", direction }: ProgressiveBlurProps) {
   );
 }
 
-export default function LogoCloud2Card({ minimal = false }: { minimal?: boolean }) {
+export default function LogoCloud2Card({
+  minimal = false,
+  previewMode = "catalog",
+}: {
+  minimal?: boolean;
+  previewMode?: "catalog" | "fullscreen";
+}) {
   const brands = [
     { name: "Vercel", path: "/logos/vercel.com-logo.webp" },
     { name: "Supabase", path: "/logos/supabase.com-logo.webp" },
@@ -110,16 +116,16 @@ export default function LogoCloud2Card({ minimal = false }: { minimal?: boolean 
                 return (
                   <div
                     key={idx}
-                    className="flex items-center gap-3 group transition-all duration-300 w-fit cursor-pointer select-none"
+                    className="group/logo flex h-12 shrink-0 cursor-pointer items-center gap-3 rounded-lg px-3 transition-all duration-300 hover:bg-white/[0.04] select-none"
                   >
                     <img
                       src={imgSrc}
                       alt={brand.name}
-                      className={`h-6.5 w-auto object-contain rounded opacity-85 group-hover:opacity-100 transition-all duration-300 shrink-0 select-none ${
+                      className={`h-6.5 w-auto shrink-0 select-none rounded object-contain opacity-85 transition-all duration-300 group-hover/logo:opacity-100 ${
                         brand.name === "Vercel" || brand.name === "Supabase" ? "h-5.5" : ""
                       }`}
                     />
-                    <span className="font-heading text-sm font-semibold text-white/55 group-hover:text-white transition-colors tracking-wide select-none">
+                    <span className="select-none font-heading text-sm font-semibold tracking-wide text-white/55 transition-colors group-hover/logo:text-white">
                       {brand.name}
                     </span>
                   </div>
@@ -139,7 +145,9 @@ export default function LogoCloud2Card({ minimal = false }: { minimal?: boolean 
   if (minimal) {
     return (
       <div
-        className="w-full h-full overflow-y-auto scrollbar-none select-none relative bg-[#09090b] flex items-center justify-center"
+        className={`relative flex h-full w-full items-center justify-center bg-[#09090b] select-none scrollbar-none ${
+          previewMode === "fullscreen" ? "overflow-hidden" : "overflow-y-auto"
+        }`}
         style={cssVariables}
       >
         {content}

@@ -60,7 +60,13 @@ function VerticalProgressiveBlur({ direction }: { direction: "top" | "bottom" })
   );
 }
 
-export default function LogoCloud3Card({ minimal = false }: { minimal?: boolean }) {
+export default function LogoCloud3Card({
+  minimal = false,
+  previewMode = "catalog",
+}: {
+  minimal?: boolean;
+  previewMode?: "catalog" | "fullscreen";
+}) {
   // Brand listings split into two columns of 5 brands each
   const col1Brands = [
     { name: "Vercel", path: "/logos/vercel.com-logo.webp" },
@@ -110,16 +116,16 @@ export default function LogoCloud3Card({ minimal = false }: { minimal?: boolean 
                 return (
                   <div
                     key={idx}
-                    className="flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-white/[0.02] border border-white/5 w-full hover:bg-white/[0.05] hover:border-white/10 transition-all select-none cursor-pointer"
+                    className="group/logo flex w-full cursor-pointer items-center justify-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 transition-all hover:border-white/15 hover:bg-white/[0.06] select-none"
                   >
                     <img
                       src={imgSrc}
                       alt={brand.name}
-                      className={`h-5 w-auto object-contain rounded opacity-85 transition-all duration-300 shrink-0 select-none ${
+                      className={`h-5 w-auto shrink-0 select-none rounded object-contain opacity-85 transition-all duration-300 group-hover/logo:opacity-100 ${
                         brand.name === "Vercel" || brand.name === "Supabase" ? "h-4" : ""
                       }`}
                     />
-                    <span className="font-heading text-xs font-semibold text-white/55 transition-colors tracking-wide select-none">
+                    <span className="select-none font-heading text-xs font-semibold tracking-wide text-white/55 transition-colors group-hover/logo:text-white">
                       {brand.name}
                     </span>
                   </div>
@@ -139,16 +145,16 @@ export default function LogoCloud3Card({ minimal = false }: { minimal?: boolean 
                 return (
                   <div
                     key={idx}
-                    className="flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-white/[0.02] border border-white/5 w-full hover:bg-white/[0.05] hover:border-white/10 transition-all select-none cursor-pointer"
+                    className="group/logo flex w-full cursor-pointer items-center justify-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 transition-all hover:border-white/15 hover:bg-white/[0.06] select-none"
                   >
                     <img
                       src={imgSrc}
                       alt={brand.name}
-                      className={`h-5 w-auto object-contain rounded opacity-85 transition-all duration-300 shrink-0 select-none ${
+                      className={`h-5 w-auto shrink-0 select-none rounded object-contain opacity-85 transition-all duration-300 group-hover/logo:opacity-100 ${
                         brand.name === "Vercel" || brand.name === "Supabase" ? "h-4" : ""
                       }`}
                     />
-                    <span className="font-heading text-xs font-semibold text-white/55 transition-colors tracking-wide select-none">
+                    <span className="select-none font-heading text-xs font-semibold tracking-wide text-white/55 transition-colors group-hover/logo:text-white">
                       {brand.name}
                     </span>
                   </div>
@@ -168,7 +174,9 @@ export default function LogoCloud3Card({ minimal = false }: { minimal?: boolean 
   if (minimal) {
     return (
       <div
-        className="w-full h-full overflow-y-auto scrollbar-none select-none relative bg-[#09090b] flex items-center justify-center"
+        className={`relative flex h-full w-full items-center justify-center bg-[#09090b] select-none scrollbar-none ${
+          previewMode === "fullscreen" ? "overflow-hidden" : "overflow-y-auto"
+        }`}
         style={cssVariables}
       >
         {content}
