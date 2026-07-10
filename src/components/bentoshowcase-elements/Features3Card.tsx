@@ -10,33 +10,36 @@ interface FeatureItem {
 const features: FeatureItem[] = [
   {
     icon: <Zap className="h-4 w-4 stroke-[1.5]" />,
-    title: "Fast",
-    description: "Ship expressive interfaces quickly with carefully composed building blocks.",
+    title: "Fluid Motion",
+    description:
+      "Create responsive experiences with animation that feels natural from the first interaction.",
   },
   {
     icon: <Cpu className="h-4 w-4 stroke-[1.5]" />,
-    title: "Powerful",
-    description: "Compose polished motion systems without adding unnecessary complexity.",
+    title: "Composable",
+    description:
+      "Combine focused primitives into distinctive interfaces without unnecessary overhead.",
   },
   {
     icon: <Fingerprint className="h-4 w-4 stroke-[1.5]" />,
-    title: "Security",
-    description: "Keep every interaction predictable, contained, and ready for production.",
+    title: "Reliable",
+    description: "Build with deliberate states and dependable behavior across every viewport.",
   },
   {
     icon: <PenLine className="h-4 w-4 stroke-[1.5]" />,
-    title: "Customization",
-    description: "Shape the visual language around your product with clean native code.",
+    title: "Your Visual Language",
+    description: "Tune the details until every component feels native to your product and brand.",
   },
   {
     icon: <SlidersHorizontal className="h-4 w-4 stroke-[1.5]" />,
-    title: "Control",
-    description: "Tune timing, layout, and interaction details exactly where you need them.",
+    title: "Developer Control",
+    description: "Adjust timing, structure, and interaction logic directly in clean React code.",
   },
   {
     icon: <Sparkles className="h-4 w-4 stroke-[1.5]" />,
-    title: "Built for AI",
-    description: "Give your generated interfaces a considered foundation for real products.",
+    title: "Ready to Ship",
+    description:
+      "Start from a considered foundation and move from prototype to production with confidence.",
   },
 ];
 
@@ -65,12 +68,12 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
     <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 py-14 text-center md:py-20">
       <header className="max-w-4xl">
         <h3 className="text-3xl font-sans font-semibold leading-tight tracking-tight text-white sm:text-4xl">
-          The foundation for creative
-          <br className="hidden sm:block" /> teams management
+          Motion that gives your product
+          <br className="hidden sm:block" /> a distinct point of view
         </h3>
         <p className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-white/60 sm:text-sm">
-          Build more than just interfaces. Give your teams a flexible foundation for creating,
-          shipping, and evolving polished digital products.
+          A focused collection of expressive building blocks for teams who care about how their
+          interfaces feel, not only how they function.
         </p>
       </header>
 
