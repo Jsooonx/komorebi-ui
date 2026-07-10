@@ -19,7 +19,7 @@ function SienaScene() {
   const imageTop = useTransform(
     progress,
     [0, 0.25, 0.58, 0.82, 1],
-    ["6%", "16%", "18%", "-34%", "-42%"],
+    ["0%", "16%", "18%", "-34%", "-42%"],
   );
   const imageWidth = useTransform(
     progress,
@@ -29,7 +29,7 @@ function SienaScene() {
   const imageHeight = useTransform(
     progress,
     [0, 0.25, 0.58, 0.82, 1],
-    ["42%", "39%", "39%", "39%", "39%"],
+    ["50%", "39%", "39%", "39%", "39%"],
   );
   const imageRadius = useTransform(
     progress,

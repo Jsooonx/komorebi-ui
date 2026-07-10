@@ -32,7 +32,7 @@ Different header/navbar blocks have specific top-docking behaviors in minimal pr
 | `mega-menu-navbar-2` | Mega Menu Navbar 2 | **Docked** - Touches the top/sides of the preview container. | `sticky top-0 pb-2`      |
 | `mega-menu-navbar-3` | Mega Menu Navbar 3 | **Docked** - Touches the top/sides of the preview container. | `sticky top-0 pb-2`      |
 
-- Layout block headers (like the titles inside **Features 1**, **Features 2**, **Features 3**, **Features 4**, **Features 5**, **Siena Parallax**, and **Logo Cloud 3**) are static, use the established sans-serif weight treatment, and scroll away naturally with the layout. Siena Parallax is the exception for motion behavior: its image and copy are intentionally tied to the preview scroll progress.
+- Layout block headers (like the titles inside **Features 1**, **Features 2**, **Features 3**, **Features 4**, **Features 5**, **Siena Parallax**, and **Logo Cloud 3**) are static, use the established sans-serif weight treatment, and scroll away naturally with the layout. Siena Parallax is the exception for motion behavior: its image starts flush at the top edge at half-scene height, then its image and copy are intentionally tied to the preview scroll progress.
 
 ---
 
