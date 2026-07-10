@@ -68,7 +68,7 @@ export default function Features3Card({ minimal = false }: { minimal?: boolean }
           The foundation for creative
           <br className="hidden sm:block" /> teams management
         </h3>
-        <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-white/60 sm:text-base">
+        <p className="mx-auto mt-8 max-w-xl text-xs leading-relaxed text-white/60 sm:text-sm">
           Build more than just interfaces. Give your teams a flexible foundation for creating,
           shipping, and evolving polished digital products.
         </p>
