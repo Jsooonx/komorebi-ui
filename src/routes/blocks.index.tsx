@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, type ComponentType } from "react";
-import { createPortal } from "react-dom";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { toast } from "sonner";
 import {
@@ -11,7 +10,6 @@ import {
   Check,
   Copy,
   Maximize2,
-  Minimize2,
   Layout,
   Layers,
   MousePointer,
@@ -26,8 +24,8 @@ import {
   type ComponentPreviewProps,
 } from "../lib/components-manifest";
 import { getComponentPreview } from "../lib/component-previews";
-import { getBlockPage } from "../components/blocks-elements";
 import { loadComponentCode } from "../lib/component-code-loader";
+import { getBlockCategorySlug, type BlockCategorySlug } from "../lib/block-routing";
 
 type BlockItem = ComponentManifestItem & {
   component: ComponentType<ComponentPreviewProps>;
@@ -107,45 +105,6 @@ function SimpleHighlighter({ code }: { code: string }) {
   );
 }
 
-function FullscreenBlockPreview({ item, onClose }: { item: BlockItem; onClose: () => void }) {
-  const BlockPage = getBlockPage(item.id);
-
-  useEffect(() => {
-    const previousHtmlOverflow = document.documentElement.style.overflow;
-    const previousBodyOverflow = document.body.style.overflow;
-
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.documentElement.style.overflow = previousHtmlOverflow;
-      document.body.style.overflow = previousBodyOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [onClose]);
-
-  const pagePreview = (
-    <div className="group fixed inset-0 z-[100] h-dvh w-screen bg-[#070709]">
-      {BlockPage && <BlockPage />}
-      <button
-        onClick={onClose}
-        className="absolute right-5 top-5 z-50 rounded-full border border-white/10 bg-black/60 p-2 text-white/65 opacity-0 shadow-lg transition-all hover:bg-black/90 hover:text-white group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-        title="Exit Fullscreen"
-        aria-label="Exit Fullscreen"
-      >
-        <Minimize2 className="h-4 w-4" />
-      </button>
-    </div>
-  );
-
-  return typeof document === "undefined" ? null : createPortal(pagePreview, document.body);
-}
-
 function BlockRow({ item }: { item: BlockItem }) {
   const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
   const [copiedCli, setCopiedCli] = useState(false);
@@ -153,7 +112,7 @@ function BlockRow({ item }: { item: BlockItem }) {
   const [code, setCode] = useState("");
   const [isCodeLoading, setIsCodeLoading] = useState(false);
   const [reloadKey, setReloadKey] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const navigate = useNavigate();
 
   const PreviewComp = item.component;
 
@@ -279,7 +238,15 @@ function BlockRow({ item }: { item: BlockItem }) {
             {/* Expand Fullscreen */}
             {activeTab === "preview" && (
               <button
-                onClick={() => setIsFullscreen(true)}
+                onClick={() => {
+                  const category = getBlockCategorySlug(item.category);
+                  if (category) {
+                    navigate({
+                      to: "/blocks/$category/$block",
+                      params: { category, block: item.id },
+                    });
+                  }
+                }}
                 className="p-1.5 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
                 title="Enter Fullscreen"
               >
@@ -319,14 +286,15 @@ function BlockRow({ item }: { item: BlockItem }) {
           </p>
         </div>
       </div>
-      {isFullscreen && (
-        <FullscreenBlockPreview item={item} onClose={() => setIsFullscreen(false)} />
-      )}
     </>
   );
 }
 
-function BlocksIndex() {
+export function BlocksIndex({
+  initialCategory = "header",
+}: {
+  initialCategory?: BlockCategorySlug;
+}) {
   // Selected nav block categories (matches screenshot)
   const categories = [
     { id: "header", label: "Header", icon: Layout },
@@ -337,7 +305,12 @@ function BlocksIndex() {
     { id: "parallax", label: "Parallax", icon: Sparkles },
   ];
 
-  const [activeCategory, setActiveCategory] = useState("header");
+  const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState<BlockCategorySlug>(initialCategory);
+
+  useEffect(() => {
+    setActiveCategory(initialCategory);
+  }, [initialCategory]);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
     if (typeof window !== "undefined") {
@@ -429,7 +402,9 @@ function BlocksIndex() {
                       <button
                         key={cat.id}
                         onClick={() => {
-                          if (!cat.locked) setActiveCategory(cat.id);
+                          if (!cat.locked) {
+                            navigate({ to: "/blocks/$category", params: { category: cat.id } });
+                          }
                         }}
                         disabled={cat.locked}
                         className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group ${

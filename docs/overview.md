@@ -49,7 +49,7 @@ src/
 
 `COMPONENTS_MANIFEST` contains the 16 reusable components shown in `/components`.
 
-`BLOCKS_MANIFEST` contains the 12 layout blocks shown in `/blocks`, including Siena Parallax in the Parallax category.
+`BLOCKS_MANIFEST` contains the 12 layout blocks shown in `/blocks`, including Siena Parallax in the Parallax category. Blocks expose category routes such as `/blocks/parallax`, and each block has a fullscreen page route such as `/blocks/parallax/siena-parallax`.
 
 Block rendering is deliberately split by surface: `src/components/blocks-preview-elements/` serves the compact `/blocks` catalog, and `src/components/blocks-elements/` owns the full-page entries used by fullscreen preview. This prevents catalog viewport sizing from leaking into the full block page experience.
 

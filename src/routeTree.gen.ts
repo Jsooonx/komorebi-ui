@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComponentsIndexRouteImport } from './routes/components.index'
 import { Route as BlocksIndexRouteImport } from './routes/blocks.index'
 import { Route as ComponentsIdRouteImport } from './routes/components.$id'
+import { Route as BlocksCategoryRouteImport } from './routes/blocks.$category'
+import { Route as BlocksCategoryBlockRouteImport } from './routes/blocks.$category.$block'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,36 +36,72 @@ const ComponentsIdRoute = ComponentsIdRouteImport.update({
   path: '/components/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlocksCategoryRoute = BlocksCategoryRouteImport.update({
+  id: '/blocks/$category',
+  path: '/blocks/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlocksCategoryBlockRoute = BlocksCategoryBlockRouteImport.update({
+  id: '/$block',
+  path: '/$block',
+  getParentRoute: () => BlocksCategoryRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blocks/$category': typeof BlocksCategoryRouteWithChildren
   '/components/$id': typeof ComponentsIdRoute
   '/blocks/': typeof BlocksIndexRoute
   '/components/': typeof ComponentsIndexRoute
+  '/blocks/$category/$block': typeof BlocksCategoryBlockRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blocks/$category': typeof BlocksCategoryRouteWithChildren
   '/components/$id': typeof ComponentsIdRoute
   '/blocks': typeof BlocksIndexRoute
   '/components': typeof ComponentsIndexRoute
+  '/blocks/$category/$block': typeof BlocksCategoryBlockRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blocks/$category': typeof BlocksCategoryRouteWithChildren
   '/components/$id': typeof ComponentsIdRoute
   '/blocks/': typeof BlocksIndexRoute
   '/components/': typeof ComponentsIndexRoute
+  '/blocks/$category/$block': typeof BlocksCategoryBlockRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/components/$id' | '/blocks/' | '/components/'
+  fullPaths:
+    | '/'
+    | '/blocks/$category'
+    | '/components/$id'
+    | '/blocks/'
+    | '/components/'
+    | '/blocks/$category/$block'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/components/$id' | '/blocks' | '/components'
-  id: '__root__' | '/' | '/components/$id' | '/blocks/' | '/components/'
+  to:
+    | '/'
+    | '/blocks/$category'
+    | '/components/$id'
+    | '/blocks'
+    | '/components'
+    | '/blocks/$category/$block'
+  id:
+    | '__root__'
+    | '/'
+    | '/blocks/$category'
+    | '/components/$id'
+    | '/blocks/'
+    | '/components/'
+    | '/blocks/$category/$block'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlocksCategoryRoute: typeof BlocksCategoryRouteWithChildren
   ComponentsIdRoute: typeof ComponentsIdRoute
   BlocksIndexRoute: typeof BlocksIndexRoute
   ComponentsIndexRoute: typeof ComponentsIndexRoute
@@ -99,11 +137,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blocks/$category': {
+      id: '/blocks/$category'
+      path: '/blocks/$category'
+      fullPath: '/blocks/$category'
+      preLoaderRoute: typeof BlocksCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blocks/$category/$block': {
+      id: '/blocks/$category/$block'
+      path: '/$block'
+      fullPath: '/blocks/$category/$block'
+      preLoaderRoute: typeof BlocksCategoryBlockRouteImport
+      parentRoute: typeof BlocksCategoryRoute
+    }
   }
 }
 
+interface BlocksCategoryRouteChildren {
+  BlocksCategoryBlockRoute: typeof BlocksCategoryBlockRoute
+}
+
+const BlocksCategoryRouteChildren: BlocksCategoryRouteChildren = {
+  BlocksCategoryBlockRoute: BlocksCategoryBlockRoute,
+}
+
+const BlocksCategoryRouteWithChildren = BlocksCategoryRoute._addFileChildren(
+  BlocksCategoryRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlocksCategoryRoute: BlocksCategoryRouteWithChildren,
   ComponentsIdRoute: ComponentsIdRoute,
   BlocksIndexRoute: BlocksIndexRoute,
   ComponentsIndexRoute: ComponentsIndexRoute,
