@@ -7,7 +7,7 @@ function CornerMark({ className }: { className: string }) {
   );
 }
 
-function SienaScene() {
+function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ container: scrollRef });
   const progress = useSpring(scrollYProgress, {
@@ -49,8 +49,14 @@ function SienaScene() {
       ref={scrollRef}
       className="relative h-full w-full overflow-y-auto bg-[#f2f0e9] text-[#111111] scrollbar-none"
     >
-      <div className="relative h-[1480px] min-h-full">
-        <div className="sticky top-0 h-[720px] min-h-[620px] overflow-hidden">
+      <div
+        className={`relative min-h-full ${previewMode === "fullscreen" ? "h-[150dvh]" : "h-[1480px]"}`}
+      >
+        <div
+          className={`sticky top-0 min-h-[620px] overflow-hidden ${
+            previewMode === "fullscreen" ? "h-dvh" : "h-[720px]"
+          }`}
+        >
           <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-5 py-5 text-[9px] font-medium uppercase tracking-[0.18em] sm:px-8">
             <span className="rounded-full bg-[#111111] px-2 py-1 text-[#f2f0e9]">Siena / 01</span>
             <span className="text-black/45">Scroll to explore</span>
@@ -133,12 +139,18 @@ function SienaScene() {
   );
 }
 
-export default function SienaParallaxCard({ minimal = false }: { minimal?: boolean }) {
+export default function SienaParallaxCard({
+  minimal = false,
+  previewMode = "catalog",
+}: {
+  minimal?: boolean;
+  previewMode?: "catalog" | "fullscreen";
+}) {
   return (
     <div
       className={`${minimal ? "h-full" : "h-[720px]"} relative w-full overflow-hidden border border-white/5 bg-[#f2f0e9]`}
     >
-      <SienaScene />
+      <SienaScene previewMode={previewMode} />
     </div>
   );
 }

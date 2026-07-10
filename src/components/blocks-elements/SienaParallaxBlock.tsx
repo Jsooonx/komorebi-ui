@@ -4,7 +4,7 @@ import SienaParallaxElement from "./SienaParallaxElement";
 export default function SienaParallaxBlock() {
   return (
     <BlockPage>
-      <SienaParallaxElement minimal />
+      <SienaParallaxElement minimal previewMode="fullscreen" />
     </BlockPage>
   );
 }
