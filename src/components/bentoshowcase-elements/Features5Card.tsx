@@ -25,7 +25,7 @@ function FeatureVisualCard({
   alt: string;
 }) {
   return (
-    <article className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0b0b0d] transition-colors duration-300 hover:border-white/20">
+    <article className="group overflow-hidden border border-white/[0.08] bg-[#0b0b0d] transition-colors duration-300 hover:border-white/20">
       <div className="px-6 pb-5 pt-7 sm:px-8">
         <div className="flex items-center gap-2 text-xs text-white/50 sm:text-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-[#BECB6D] transition-transform duration-300 group-hover:scale-125" />
@@ -70,7 +70,7 @@ export default function Features5Card({ minimal = false }: { minimal?: boolean }
         />
       </div>
 
-      <section className="rounded-2xl border border-white/[0.08] bg-[#0b0b0d] px-6 py-10 text-center sm:px-8">
+      <section className="border border-white/[0.08] bg-[#0b0b0d] px-6 py-10 text-center sm:px-8">
         <h3 className="mx-auto max-w-xl text-2xl font-sans font-semibold leading-tight tracking-tight text-white sm:text-3xl">
           Turn complexity into a calmer way to build.
         </h3>
