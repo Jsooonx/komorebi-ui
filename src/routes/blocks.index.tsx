@@ -320,6 +320,10 @@ function BlocksIndex() {
   });
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [activeCategory]);
+
+  useEffect(() => {
     localStorage.setItem("komorebi_blocks_sidebar_open", String(isSidebarOpen));
   }, [isSidebarOpen]);
 
