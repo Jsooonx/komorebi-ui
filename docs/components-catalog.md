@@ -49,3 +49,4 @@ Features 5 is a premium SaaS workflow layout with generated operations and sched
 Siena Parallax is a Parallax-category block with a scroll-driven editorial image transition: the visual sits in the upper half of the scene, becomes a floating card, and gives way to a closing statement below it without overlapping the copy. It uses a generated monochrome editorial asset and spring-smoothed Framer Motion transforms.
 
 This keeps reusable pieces separate from ready-made page/layout sections.
+In fullscreen, header blocks remain top-aligned with an intentionally long internal page so their scroll-responsive navbar states can be tested. Other blocks are centered in the fullscreen viewport.

@@ -115,6 +115,7 @@ function BlockRow({ item }: { item: BlockItem }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const PreviewComp = item.component;
+  const isHeaderBlock = item.category === "Headers & Menus";
 
   const handleCopyCli = async () => {
     try {
@@ -178,8 +179,20 @@ function BlockRow({ item }: { item: BlockItem }) {
 
   if (isFullscreen) {
     return (
-      <div className="group fixed inset-0 z-[100] h-dvh w-screen overflow-hidden bg-[#070709]">
-        <PreviewComp minimal={true} />
+      <div
+        className={`group fixed inset-0 z-[100] h-dvh w-screen bg-[#070709] ${
+          isHeaderBlock ? "overflow-hidden" : "flex items-center justify-center p-6"
+        }`}
+      >
+        <div
+          className={
+            isHeaderBlock
+              ? "h-full w-full"
+              : "h-[min(720px,calc(100dvh-3rem))] max-h-full w-full max-w-[1400px]"
+          }
+        >
+          <PreviewComp minimal={true} />
+        </div>
         <button
           onClick={() => setIsFullscreen(false)}
           className="absolute right-5 top-5 z-50 rounded-full border border-white/10 bg-black/60 p-2 text-white/65 opacity-0 shadow-lg transition-all hover:bg-black/90 hover:text-white group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"

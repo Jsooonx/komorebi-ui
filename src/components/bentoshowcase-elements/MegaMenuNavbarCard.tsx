@@ -252,8 +252,10 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
         <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">
           <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
         </div>
-        <MockContent />
-        <div className="py-20 text-center text-[10px] text-white/20">End of Page Preview</div>
+        <div className="min-h-[1200px]">
+          <MockContent />
+          <div className="py-20 text-center text-[10px] text-white/20">End of Page Preview</div>
+        </div>
       </div>
     );
   }

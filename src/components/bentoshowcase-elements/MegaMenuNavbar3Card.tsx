@@ -98,9 +98,9 @@ function NavbarContent({
       {/* Brand - exactly synchronized width transition with no scale projection conflict */}
       <motion.div
         initial={false}
-        animate={{ 
-          width: isMorphed ? 0 : 110, 
-          opacity: isMorphed ? 0 : 1 
+        animate={{
+          width: isMorphed ? 0 : 110,
+          opacity: isMorphed ? 0 : 1,
         }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         className="flex items-center gap-2 shrink-0 overflow-hidden pr-3 border-r border-white/10"
@@ -198,9 +198,9 @@ function NavbarContent({
       {/* CTA - exactly synchronized width transition without clipping */}
       <motion.div
         initial={false}
-        animate={{ 
-          width: isMorphed ? 0 : 120, 
-          opacity: isMorphed ? 0 : 1 
+        animate={{
+          width: isMorphed ? 0 : 120,
+          opacity: isMorphed ? 0 : 1,
         }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         className="flex items-center justify-end shrink-0 overflow-hidden pl-3 border-l border-white/10"
@@ -289,8 +289,10 @@ export default function MegaMenuNavbar3Card({ minimal = false }: { minimal?: boo
         <div className="sticky top-0 z-20 w-full flex justify-center pb-2">
           <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} isMorphed={isMorphed} />
         </div>
-        <MockContent />
-        <div className="py-20 text-center text-[10px] text-white/20">End of Page Preview</div>
+        <div className="min-h-[1200px]">
+          <MockContent />
+          <div className="py-20 text-center text-[10px] text-white/20">End of Page Preview</div>
+        </div>
       </div>
     );
   }
