@@ -18,6 +18,11 @@ function BlockFullscreenPage() {
   const returnCategory = categorySlug || (isBlockCategorySlug(category) ? category : "header");
 
   useEffect(() => {
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         navigate({ to: "/blocks/$category", params: { category: returnCategory } });
@@ -25,7 +30,11 @@ function BlockFullscreenPage() {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [navigate, returnCategory]);
 
   if (!BlockPage) {
@@ -37,7 +46,7 @@ function BlockFullscreenPage() {
   }
 
   return (
-    <div className="group relative h-dvh w-screen overflow-hidden bg-[#070709]">
+    <div className="group fixed inset-0 z-[100] h-dvh w-screen overflow-hidden bg-[#070709]">
       <BlockPage />
       <button
         onClick={() => navigate({ to: "/blocks/$category", params: { category: returnCategory } })}

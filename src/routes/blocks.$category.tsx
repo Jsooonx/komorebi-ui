@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { BlocksIndex } from "./blocks.index";
 import { isBlockCategorySlug } from "../lib/block-routing";
 
@@ -8,5 +8,10 @@ export const Route = createFileRoute("/blocks/$category")({
 
 function BlocksCategory() {
   const { category } = Route.useParams();
-  return <BlocksIndex initialCategory={isBlockCategorySlug(category) ? category : "header"} />;
+  return (
+    <>
+      <BlocksIndex initialCategory={isBlockCategorySlug(category) ? category : "header"} />
+      <Outlet />
+    </>
+  );
 }
