@@ -51,28 +51,7 @@ const sidebarEntranceVariants = {
   },
 };
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 18, scale: 0.98 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.45,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
 
 function SimpleHighlighter({ code }: { code: string }) {
   const tokenize = (txt: string) => {
@@ -187,7 +166,10 @@ function BlockRow({ item }: { item: BlockItem }) {
 
   return (
     <motion.div
-      variants={itemVariants}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden transition-all duration-300"
     >
       {/* Top Toolbar */}
@@ -545,16 +527,11 @@ function BlocksIndex() {
               </LayoutGroup>
 
               {/* Stacked Preview List */}
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                className="space-y-12"
-              >
+              <div className="space-y-12">
                 {activeBlocks.map((item) => (
                   <BlockRow key={item.id} item={item} />
                 ))}
-              </motion.div>
+              </div>
             </div>
 
             {/* Catalog Sub-Footer */}
