@@ -42,26 +42,6 @@ export const Route = createFileRoute("/blocks/")({
   ],
 });
 
-const blockListVariants = {
-  hidden: { opacity: 1 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.05 },
-  },
-};
-
-const blockItemVariants = {
-  hidden: { y: 18, scale: 0.98 },
-  visible: {
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.45,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
-
 const sidebarEntranceVariants = {
   hidden: { opacity: 0, y: 10 },
   visible: {
@@ -183,10 +163,7 @@ function BlockRow({ item }: { item: BlockItem }) {
   }, [activeTab]);
 
   return (
-    <motion.div
-      variants={blockItemVariants}
-      className="flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden transition-all duration-300"
-    >
+    <div className="flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden transition-all duration-300">
       {/* Top Toolbar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-4 py-3 bg-[#0d0d0f] border-b border-white/5">
         {/* Left: Tab options */}
@@ -318,7 +295,7 @@ function BlockRow({ item }: { item: BlockItem }) {
           {item.description}
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -509,17 +486,11 @@ function BlocksIndex() {
               </LayoutGroup>
 
               {/* Stacked Preview List */}
-              <motion.div
-                key={activeCategory}
-                variants={blockListVariants}
-                initial="hidden"
-                animate="visible"
-                className="space-y-12"
-              >
+              <div className="space-y-12">
                 {activeBlocks.map((item) => (
                   <BlockRow key={item.id} item={item} />
                 ))}
-              </motion.div>
+              </div>
             </div>
 
             {/* Catalog Sub-Footer */}
