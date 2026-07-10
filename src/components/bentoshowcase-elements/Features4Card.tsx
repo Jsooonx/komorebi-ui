@@ -34,7 +34,7 @@ function FeatureItemRow({ icon, title, description }: FeatureItem) {
   return (
     <div className="group flex cursor-default flex-col gap-2 text-left transition-transform duration-300 hover:-translate-y-1">
       <div className="flex items-center gap-2.5 text-white/90">
-        <span className="text-white/60 transition-all duration-300 group-hover:scale-110 group-hover:text-[#E8A969]">
+        <span className="text-white/60 transition-all duration-300 group-hover:scale-110 group-hover:text-white">
           {icon}
         </span>
         <h4 className="text-xs font-medium tracking-tight text-white/75 transition-colors duration-300 group-hover:text-white sm:text-sm">
