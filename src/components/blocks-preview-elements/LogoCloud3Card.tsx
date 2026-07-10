@@ -8,17 +8,13 @@ interface VerticalSliderProps {
   direction?: "up" | "down";
 }
 
-function VerticalSlider({
-  children,
-  gap = 12,
-  direction = "up",
-}: VerticalSliderProps) {
+function VerticalSlider({ children, gap = 12, direction = "up" }: VerticalSliderProps) {
   const items = React.Children.toArray(children);
   const marqueeClass = direction === "up" ? "animate-marquee-up" : "animate-marquee-down";
 
   return (
     <div className="relative h-full overflow-hidden flex flex-col w-full">
-      <div 
+      <div
         className={`flex flex-col w-full ${marqueeClass} hover:[animation-play-state:paused] cursor-pointer`}
         style={{ willChange: "transform" }}
       >

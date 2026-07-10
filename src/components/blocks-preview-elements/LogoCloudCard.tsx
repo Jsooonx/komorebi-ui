@@ -12,7 +12,7 @@ export default function LogoCloudCard({ minimal = false }: { minimal?: boolean }
     { name: "Slack", domain: "slack.com" },
     { name: "Hulu", path: "/logos/hulu.jp-logo.webp" },
     { name: "Netflix", path: "/logos/netflix.com-logo.webp" },
-    { name: "Cisco", path: "/logos/cisco.com-logo.webp" }
+    { name: "Cisco", path: "/logos/cisco.com-logo.webp" },
   ];
 
   const cssVariables = {

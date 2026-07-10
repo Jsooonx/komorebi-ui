@@ -26,6 +26,7 @@ import {
   type ComponentPreviewProps,
 } from "../lib/components-manifest";
 import { getComponentPreview } from "../lib/component-previews";
+import { getBlockPage } from "../components/blocks-elements";
 import { loadComponentCode } from "../lib/component-code-loader";
 
 type BlockItem = ComponentManifestItem & {
@@ -107,9 +108,7 @@ function SimpleHighlighter({ code }: { code: string }) {
 }
 
 function FullscreenBlockPreview({ item, onClose }: { item: BlockItem; onClose: () => void }) {
-  const PreviewComp = item.component;
-  const isHeaderBlock = item.category === "Headers & Menus";
-  const isParallaxBlock = item.category === "Parallax";
+  const BlockPage = getBlockPage(item.id);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -122,23 +121,7 @@ function FullscreenBlockPreview({ item, onClose }: { item: BlockItem; onClose: (
 
   const pagePreview = (
     <div className="group fixed inset-0 z-[100] h-dvh w-screen bg-[#070709]">
-      <div
-        className={
-          isHeaderBlock || isParallaxBlock
-            ? "h-full w-full overflow-hidden"
-            : "flex h-full w-full items-center justify-center p-5 sm:p-8"
-        }
-      >
-        <div
-          className={
-            isHeaderBlock || isParallaxBlock
-              ? "h-full w-full"
-              : "h-[min(760px,calc(100dvh-2.5rem))] w-full max-w-[1440px] overflow-hidden sm:h-[min(820px,calc(100dvh-4rem))]"
-          }
-        >
-          <PreviewComp minimal={true} previewMode="fullscreen" />
-        </div>
-      </div>
+      {BlockPage && <BlockPage />}
       <button
         onClick={onClose}
         className="absolute right-5 top-5 z-50 rounded-full border border-white/10 bg-black/60 p-2 text-white/65 opacity-0 shadow-lg transition-all hover:bg-black/90 hover:text-white group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"

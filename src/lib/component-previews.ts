@@ -13,20 +13,20 @@ import AudioEqualizerCard from "../components/bentoshowcase-elements/AudioEquali
 import PixelShimmerCard from "../components/bentoshowcase-elements/PixelShimmerCard";
 import PipelineStepperCard from "../components/bentoshowcase-elements/PipelineStepperCard";
 import HolographicTerminalCard from "../components/bentoshowcase-elements/HolographicTerminalCard";
-import MegaMenuNavbarCard from "../components/bentoshowcase-elements/MegaMenuNavbarCard";
-import MegaMenuNavbar2Card from "../components/bentoshowcase-elements/MegaMenuNavbar2Card";
-import MegaMenuNavbar3Card from "../components/bentoshowcase-elements/MegaMenuNavbar3Card";
+import MegaMenuNavbarCard from "../components/blocks-preview-elements/MegaMenuNavbarCard";
+import MegaMenuNavbar2Card from "../components/blocks-preview-elements/MegaMenuNavbar2Card";
+import MegaMenuNavbar3Card from "../components/blocks-preview-elements/MegaMenuNavbar3Card";
 import InteractiveAccordionCard from "../components/bentoshowcase-elements/InteractiveAccordionCard";
 import NestedAccordionCard from "../components/bentoshowcase-elements/NestedAccordionCard";
-import LogoCloudCard from "../components/bentoshowcase-elements/LogoCloudCard";
-import LogoCloud2Card from "../components/bentoshowcase-elements/LogoCloud2Card";
-import LogoCloud3Card from "../components/bentoshowcase-elements/LogoCloud3Card";
-import Features1Card from "../components/bentoshowcase-elements/Features1Card";
-import Features2Card from "../components/bentoshowcase-elements/Features2Card";
-import Features3Card from "../components/bentoshowcase-elements/Features3Card";
-import Features4Card from "../components/bentoshowcase-elements/Features4Card";
-import Features5Card from "../components/bentoshowcase-elements/Features5Card";
-import SienaParallaxCard from "../components/bentoshowcase-elements/SienaParallaxCard";
+import LogoCloudCard from "../components/blocks-preview-elements/LogoCloudCard";
+import LogoCloud2Card from "../components/blocks-preview-elements/LogoCloud2Card";
+import LogoCloud3Card from "../components/blocks-preview-elements/LogoCloud3Card";
+import Features1Card from "../components/blocks-preview-elements/Features1Card";
+import Features2Card from "../components/blocks-preview-elements/Features2Card";
+import Features3Card from "../components/blocks-preview-elements/Features3Card";
+import Features4Card from "../components/blocks-preview-elements/Features4Card";
+import Features5Card from "../components/blocks-preview-elements/Features5Card";
+import SienaParallaxCard from "../components/blocks-preview-elements/SienaParallaxCard";
 import type { ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>> = {

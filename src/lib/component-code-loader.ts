@@ -39,13 +39,13 @@ export async function loadComponentCode(id: string) {
       return (await import("../components/bentoshowcase-elements/HolographicTerminalCard.tsx?raw"))
         .default;
     case "mega-menu-navbar-1":
-      return (await import("../components/bentoshowcase-elements/MegaMenuNavbarCard.tsx?raw"))
+      return (await import("../components/blocks-preview-elements/MegaMenuNavbarCard.tsx?raw"))
         .default;
     case "mega-menu-navbar-2":
-      return (await import("../components/bentoshowcase-elements/MegaMenuNavbar2Card.tsx?raw"))
+      return (await import("../components/blocks-preview-elements/MegaMenuNavbar2Card.tsx?raw"))
         .default;
     case "mega-menu-navbar-3":
-      return (await import("../components/bentoshowcase-elements/MegaMenuNavbar3Card.tsx?raw"))
+      return (await import("../components/blocks-preview-elements/MegaMenuNavbar3Card.tsx?raw"))
         .default;
     case "interactive-accordion":
       return (await import("../components/bentoshowcase-elements/InteractiveAccordionCard.tsx?raw"))
@@ -54,23 +54,23 @@ export async function loadComponentCode(id: string) {
       return (await import("../components/bentoshowcase-elements/NestedAccordionCard.tsx?raw"))
         .default;
     case "logo-cloud-1":
-      return (await import("../components/bentoshowcase-elements/LogoCloudCard.tsx?raw")).default;
+      return (await import("../components/blocks-preview-elements/LogoCloudCard.tsx?raw")).default;
     case "logo-cloud-2":
-      return (await import("../components/bentoshowcase-elements/LogoCloud2Card.tsx?raw")).default;
+      return (await import("../components/blocks-preview-elements/LogoCloud2Card.tsx?raw")).default;
     case "logo-cloud-3":
-      return (await import("../components/bentoshowcase-elements/LogoCloud3Card.tsx?raw")).default;
+      return (await import("../components/blocks-preview-elements/LogoCloud3Card.tsx?raw")).default;
     case "features-1":
-      return (await import("../components/bentoshowcase-elements/Features1Card.tsx?raw")).default;
+      return (await import("../components/blocks-preview-elements/Features1Card.tsx?raw")).default;
     case "features-2":
-      return (await import("../components/bentoshowcase-elements/Features2Card.tsx?raw")).default;
+      return (await import("../components/blocks-preview-elements/Features2Card.tsx?raw")).default;
     case "features-3":
-      return (await import("../components/bentoshowcase-elements/Features3Card.tsx?raw")).default;
+      return (await import("../components/blocks-preview-elements/Features3Card.tsx?raw")).default;
     case "features-4":
-      return (await import("../components/bentoshowcase-elements/Features4Card.tsx?raw")).default;
+      return (await import("../components/blocks-preview-elements/Features4Card.tsx?raw")).default;
     case "features-5":
-      return (await import("../components/bentoshowcase-elements/Features5Card.tsx?raw")).default;
+      return (await import("../components/blocks-preview-elements/Features5Card.tsx?raw")).default;
     case "siena-parallax":
-      return (await import("../components/bentoshowcase-elements/SienaParallaxCard.tsx?raw"))
+      return (await import("../components/blocks-preview-elements/SienaParallaxCard.tsx?raw"))
         .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);

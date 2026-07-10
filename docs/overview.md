@@ -51,6 +51,8 @@ src/
 
 `BLOCKS_MANIFEST` contains the 12 layout blocks shown in `/blocks`, including Siena Parallax in the Parallax category.
 
+Block rendering is deliberately split by surface: `src/components/blocks-preview-elements/` serves the compact `/blocks` catalog, and `src/components/blocks-elements/` owns the full-page entries used by fullscreen preview. This prevents catalog viewport sizing from leaking into the full block page experience.
+
 Both registries share preview and source-code infrastructure, while the catalog routes consume only their own manifest. The shared detail route can resolve entries from either registry.
 
 ## Performance notes

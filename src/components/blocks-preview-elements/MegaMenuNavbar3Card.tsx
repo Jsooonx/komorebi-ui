@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -9,7 +9,6 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-
 import { SunlightLeafLogo } from "../DynamicIsland";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
@@ -83,38 +82,53 @@ function ResourceRow({ item }: { item: ResourceItem }) {
 function NavbarContent({
   activeTab,
   onTabChange,
+  isMorphed,
 }: {
   activeTab: string;
   onTabChange: (tab: string) => void;
+  isMorphed: boolean;
 }) {
   return (
-    <div className="w-full flex items-center justify-between rounded-2xl bg-black/60 text-white shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/[0.08] backdrop-blur-xl px-5 py-2.5">
-      {/* Brand */}
-      <div className="flex items-center gap-2 shrink-0">
-        <SunlightLeafLogo className="w-6 h-6" />
-        <span className="text-xs font-semibold tracking-tight font-heading text-white">
+    <motion.div
+      initial={false}
+      animate={{ width: isMorphed ? 310 : 580 }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      className="relative h-11 flex items-center justify-between rounded-2xl bg-black/60 text-white shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/[0.08] backdrop-blur-xl px-4 mt-3 select-none"
+    >
+      {/* Brand - exactly synchronized width transition with no scale projection conflict */}
+      <motion.div
+        initial={false}
+        animate={{
+          width: isMorphed ? 0 : 110,
+          opacity: isMorphed ? 0 : 1,
+        }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center gap-2 shrink-0 overflow-hidden pr-3 border-r border-white/10"
+      >
+        <SunlightLeafLogo className="w-5 h-5 shrink-0" />
+        <span className="text-xs font-semibold tracking-tight font-heading text-white whitespace-nowrap">
           Komorebi
         </span>
-      </div>
+      </motion.div>
 
-      {/* Nav */}
-      <div className="hidden md:flex items-center">
+      {/* Center Navigation - Positioned absolute-center to remain 100% motionless */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shrink-0">
         <style
           dangerouslySetInnerHTML={{
             __html: `
-          .mega-menu-nav [data-state="closed"] {
+          .mega-menu-nav-3 [data-state="closed"] {
             animation-duration: 200ms !important;
             --tw-exit-scale: 0.9 !important;
             --tw-exit-opacity: 0 !important;
           }
-          .mega-menu-nav [data-state="open"] {
+          .mega-menu-nav-3 [data-state="open"] {
             animation-duration: 200ms !important;
             --tw-enter-scale: 0.9 !important;
           }
         `,
           }}
         />
-        <NavigationMenu className="mega-menu-nav">
+        <NavigationMenu className="mega-menu-nav-3">
           <NavigationMenuList className="gap-0">
             {/* Home */}
             <NavigationMenuItem>
@@ -181,18 +195,28 @@ function NavbarContent({
         </NavigationMenu>
       </div>
 
-      {/* CTA */}
-      <motion.button
-        whileTap={{ scale: 0.97 }}
-        className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-white text-xs font-heading font-medium hover:bg-white/20 transition-colors cursor-pointer shrink-0"
+      {/* CTA - exactly synchronized width transition without clipping */}
+      <motion.div
+        initial={false}
+        animate={{
+          width: isMorphed ? 0 : 120,
+          opacity: isMorphed ? 0 : 1,
+        }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center justify-end shrink-0 overflow-hidden pl-3 border-l border-white/10"
       >
-        Get Started
-      </motion.button>
-    </div>
+        <motion.button
+          whileTap={{ scale: 0.97 }}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-white text-xs font-heading font-medium hover:bg-white/20 transition-colors cursor-pointer whitespace-nowrap shrink-0"
+        >
+          Get Started
+        </motion.button>
+      </motion.div>
+    </motion.div>
   );
 }
 
-// ── Mock Website Body Content ──────────────────────────────────────────────────
+// ── Mock Website Body Content (Same as Navbar 2) ───────────────────────────────
 
 function MockContent() {
   return (
@@ -228,14 +252,32 @@ function MockContent() {
         <div className="h-1.5 w-5/6 bg-white/5 rounded" />
         <div className="h-1.5 w-2/3 bg-white/5 rounded" />
       </div>
+
+      <div className="space-y-2 pt-2">
+        <div className="h-1.5 w-1/4 bg-white/5 rounded" />
+        <div className="h-1.5 w-11/12 bg-white/5 rounded" />
+        <div className="h-1.5 w-3/4 bg-white/5 rounded" />
+      </div>
     </div>
   );
 }
 
 // ── Card Wrapper ───────────────────────────────────────────────────────────────
 
-export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: boolean }) {
+export default function MegaMenuNavbar3Card({
+  minimal = false,
+  previewMode = "catalog",
+}: {
+  minimal?: boolean;
+  previewMode?: "catalog" | "fullscreen";
+}) {
   const [activeTab, setActiveTab] = useState("Home");
+  const [isMorphed, setIsMorphed] = useState(false);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const scrollTop = e.currentTarget.scrollTop;
+    setIsMorphed(scrollTop > 24);
+  };
 
   const cssVariables = {
     "--popover": "#0c0c0e",
@@ -246,15 +288,18 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
   if (minimal) {
     return (
       <div
-        className="w-full h-full overflow-y-auto scrollbar-none select-none relative bg-[#09090b]"
+        onScroll={handleScroll}
+        className="w-full h-full overflow-y-auto scrollbar-none select-none relative"
         style={cssVariables}
       >
-        <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">
-          <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
+        <div className="sticky top-0 z-20 w-full flex justify-center pb-2">
+          <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} isMorphed={isMorphed} />
         </div>
-        <div className="min-h-[1200px]">
+        <div className={previewMode === "fullscreen" ? "min-h-[1600px]" : "min-h-full"}>
           <MockContent />
-          <div className="py-20 text-center text-[10px] text-white/20">End of Page Preview</div>
+          {previewMode === "fullscreen" && (
+            <div className="py-20 text-center text-[10px] text-white/20">End of Page Preview</div>
+          )}
         </div>
       </div>
     );
@@ -262,39 +307,23 @@ export default function MegaMenuNavbarCard({ minimal = false }: { minimal?: bool
 
   return (
     <div
-      className="relative w-full h-[440px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-y-auto scrollbar-none flex flex-col select-none group animate-in fade-in duration-500 pt-4"
+      onScroll={handleScroll}
+      className="relative w-full h-[440px] rounded-2xl bg-[#0e0e0e] border border-white/5 overflow-y-auto scrollbar-none flex flex-col select-none group pt-4"
       style={cssVariables}
     >
-      <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#121212] via-[#E8A969]/5 to-[#121212] opacity-60 pointer-events-none" />
-
-      {/* Sticky floating navbar wrapper (completely transparent backdrop) */}
+      {/* Sticky morphing header */}
       <div className="sticky top-4 z-20 w-full flex justify-center px-4 pb-2">
-        <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} />
+        <NavbarContent activeTab={activeTab} onTabChange={setActiveTab} isMorphed={isMorphed} />
       </div>
 
-      {/* Scrollable body content */}
+      {/* Main scrolling dummy area */}
       <div className="flex-1">
-        {/* Top static label/logo (scrolls away) */}
-        <div className="px-6 pt-2 flex items-center justify-between">
-          <span className="text-[10px] font-mono text-white/40 tracking-widest uppercase">
-            Navigation Menu
-          </span>
-          <div className="w-5 h-5 rounded-full bg-white/5 border border-white/10" />
-        </div>
-
         <MockContent />
 
-        {/* Bottom indicator + title inside scroll area */}
+        {/* Footer indicator inside bento to remind scroll action */}
         <div className="px-6 pb-6 pt-16 flex items-center justify-between text-[10px] text-white/30 border-t border-white/[0.02] mt-8 bg-black/10">
-          <div>
-            <span className="text-[10px] text-white/40 tracking-wider uppercase block mb-0.5">
-              Interactive navigation
-            </span>
-            <h3 className="font-sans text-xs font-medium tracking-tight text-white">
-              Mega menu navbar
-            </h3>
-          </div>
-          <span>Scroll down inside this card to explore page</span>
+          <span>Scroll down inside this card to morph navbar</span>
+          <span>Interactive</span>
         </div>
       </div>
     </div>

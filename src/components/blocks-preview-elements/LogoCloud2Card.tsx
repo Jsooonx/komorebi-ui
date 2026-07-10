@@ -13,17 +13,17 @@ function InfiniteSlider({ children, speed = 35, gap = 56 }: InfiniteSliderProps)
 
   return (
     <div className="relative w-full overflow-hidden flex w-full">
-      <div 
+      <div
         className="flex w-max animate-marquee hover:[animation-play-state:paused] cursor-pointer"
-        style={{ 
+        style={{
           animationDuration: `${speed}s`,
-          willChange: "transform" 
+          willChange: "transform",
         }}
       >
         {/* First Set */}
         {items.map((child, idx) => (
-          <div 
-            key={`first-${idx}`} 
+          <div
+            key={`first-${idx}`}
             className="flex items-center shrink-0"
             style={{ paddingRight: `${gap}px` }}
           >
@@ -32,8 +32,8 @@ function InfiniteSlider({ children, speed = 35, gap = 56 }: InfiniteSliderProps)
         ))}
         {/* Second Set (identical duplicate for seamless transition) */}
         {items.map((child, idx) => (
-          <div 
-            key={`second-${idx}`} 
+          <div
+            key={`second-${idx}`}
             className="flex items-center shrink-0"
             style={{ paddingRight: `${gap}px` }}
           >
@@ -55,9 +55,9 @@ interface ProgressiveBlurProps {
 
 function ProgressiveBlur({ className = "", direction }: ProgressiveBlurProps) {
   const isLeft = direction === "left";
-  
+
   return (
-    <div 
+    <div
       className={`absolute inset-y-0 w-24 pointer-events-none z-20 ${className}`}
       style={{
         left: isLeft ? 0 : "auto",
@@ -79,7 +79,7 @@ export default function LogoCloud2Card({ minimal = false }: { minimal?: boolean 
     { name: "Slack", domain: "slack.com" },
     { name: "Hulu", path: "/logos/hulu.jp-logo.webp" },
     { name: "Netflix", path: "/logos/netflix.com-logo.webp" },
-    { name: "Cisco", path: "/logos/cisco.com-logo.webp" }
+    { name: "Cisco", path: "/logos/cisco.com-logo.webp" },
   ];
 
   const cssVariables = {

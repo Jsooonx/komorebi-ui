@@ -49,4 +49,10 @@ Features 5 is a premium SaaS workflow layout with generated operations and sched
 Siena Parallax is a Parallax-category block with a scroll-driven editorial image transition: the visual starts flush at the top edge and fills the upper half of the scene, becomes a floating card, and gives way to a closing statement below it without overlapping the copy. It uses a generated monochrome editorial asset and spring-smoothed Framer Motion transforms.
 
 This keeps reusable pieces separate from ready-made page/layout sections.
-Fullscreen previews are rendered as a separate page-preview layer outside the Blocks catalog container. The catalog uses `previewMode="catalog"`, while fullscreen uses `previewMode="fullscreen"`, allowing every block to be optimized independently without inheriting catalog constraints. Header blocks remain top-aligned with an intentionally long internal page so their scroll-responsive navbar states can be tested; Parallax blocks occupy the complete viewport; other blocks are centered in the fullscreen page.
+
+## Blocks rendering boundaries
+
+- `src/components/blocks-preview-elements/` contains catalog-only block visuals used inside `/blocks` cards.
+- `src/components/blocks-elements/` contains the full-page entry components. Fullscreen resolves these entries, never the catalog registry directly.
+- Header catalog previews stay compact. Their extended scroll canvas exists only in the corresponding fullscreen page, where it can exercise the navbar’s scroll-responsive states.
+- Every fullscreen block is rendered as a complete viewport page rather than a centered catalog card. The close control is supplied by the fullscreen host and is intentionally not part of the block implementation.

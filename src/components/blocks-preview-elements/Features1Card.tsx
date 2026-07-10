@@ -11,18 +11,18 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
   return (
     <div className="group relative flex flex-col items-center text-center py-8 px-6 rounded-2xl bg-[#0b0b0d] border border-white/[0.04] hover:border-white/[0.08] transition-all duration-300 overflow-hidden w-full h-full select-none">
       {/* Dynamic Grid Background with fade-out radial mask */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500" 
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500"
         style={{
           backgroundImage: `
             linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), 
             linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
           `,
-          backgroundSize: '16px 16px',
-          backgroundPosition: 'center',
-          maskImage: 'radial-gradient(circle at center, black 25%, transparent 65%)',
-          WebkitMaskImage: 'radial-gradient(circle at center, black 25%, transparent 65%)',
-        }} 
+          backgroundSize: "16px 16px",
+          backgroundPosition: "center",
+          maskImage: "radial-gradient(circle at center, black 25%, transparent 65%)",
+          WebkitMaskImage: "radial-gradient(circle at center, black 25%, transparent 65%)",
+        }}
       />
 
       {/* Grid Center Icon Container */}
@@ -36,7 +36,7 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
       <h4 className="text-base sm:text-lg font-sans font-semibold text-white/90 tracking-tight transition-colors group-hover:text-white duration-300 shrink-0 mt-1">
         {title}
       </h4>
-      
+
       <p className="text-xs sm:text-sm text-white/45 mt-3 font-sans leading-relaxed max-w-[270px] select-text">
         {description}
       </p>
@@ -49,18 +49,21 @@ export default function Features1Card({ minimal = false }: { minimal?: boolean }
     {
       icon: <Zap className="w-5 h-5 text-white/80 stroke-[1.5]" />,
       title: "Fluid Animations",
-      description: "Supercharged with Framer Motion, GSAP, and WebGL shaders for buttery-smooth 60fps organic animations."
+      description:
+        "Supercharged with Framer Motion, GSAP, and WebGL shaders for buttery-smooth 60fps organic animations.",
     },
     {
       icon: <SlidersHorizontal className="w-5 h-5 text-white/80 stroke-[1.5]" />,
       title: "Developer Centric",
-      description: "Integrate cleanly in seconds using our interactive CLI. Pure React and Tailwind code directly in your workspace."
+      description:
+        "Integrate cleanly in seconds using our interactive CLI. Pure React and Tailwind code directly in your workspace.",
     },
     {
       icon: <Sparkles className="w-5 h-5 text-white/80 stroke-[1.5]" />,
       title: "Production Ready",
-      description: "Fully optimized for speed, responsive layouts, hardware-accelerated rendering, and maximum SEO practices."
-    }
+      description:
+        "Fully optimized for speed, responsive layouts, hardware-accelerated rendering, and maximum SEO practices.",
+    },
   ];
 
   const cssVariables = {
@@ -77,14 +80,15 @@ export default function Features1Card({ minimal = false }: { minimal?: boolean }
           Engineered for fluid motion
         </h3>
         <p className="text-xs sm:text-sm text-white/45 mt-3 font-sans max-w-lg mx-auto leading-relaxed select-text">
-          Experience design-engineer quality components crafted with organic motion, smooth layouts, and physics-based interactions.
+          Experience design-engineer quality components crafted with organic motion, smooth layouts,
+          and physics-based interactions.
         </p>
       </div>
 
       {/* Features Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full items-stretch">
         {features.map((feat, idx) => (
-          <FeatureCard 
+          <FeatureCard
             key={idx}
             icon={feat.icon}
             title={feat.title}
