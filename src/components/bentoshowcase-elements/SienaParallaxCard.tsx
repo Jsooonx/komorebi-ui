@@ -19,7 +19,7 @@ function SienaScene() {
   const imageTop = useTransform(
     progress,
     [0, 0.25, 0.58, 0.82, 1],
-    ["0%", "12%", "16%", "-34%", "-42%"],
+    ["6%", "16%", "18%", "-34%", "-42%"],
   );
   const imageWidth = useTransform(
     progress,
@@ -29,7 +29,7 @@ function SienaScene() {
   const imageHeight = useTransform(
     progress,
     [0, 0.25, 0.58, 0.82, 1],
-    ["43%", "39%", "39%", "39%", "39%"],
+    ["42%", "39%", "39%", "39%", "39%"],
   );
   const imageRadius = useTransform(
     progress,
@@ -88,7 +88,7 @@ function SienaScene() {
 
           <motion.div
             style={{ opacity: openingOpacity, y: openingY }}
-            className="absolute inset-x-0 top-[43%] z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center"
+            className="absolute inset-x-0 top-[64%] z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center"
           >
             <span className="text-[9px] font-medium uppercase tracking-[0.26em] text-black/45">
               Field notes / 2026
@@ -100,7 +100,7 @@ function SienaScene() {
 
           <motion.div
             style={{ opacity: closingOpacity, y: closingY }}
-            className="absolute inset-x-0 top-[54%] z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center"
+            className="absolute inset-x-0 top-[64%] z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center"
           >
             <span className="text-[9px] font-medium uppercase tracking-[0.26em] text-black/45">
               A quieter operating system
