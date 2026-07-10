@@ -42,6 +42,23 @@ export const Route = createFileRoute("/blocks/")({
   ],
 });
 
+const blockListVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
+const blockItemVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
 function SimpleHighlighter({ code }: { code: string }) {
   const tokenize = (txt: string) => {
     let html = txt.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -154,7 +171,10 @@ function BlockRow({ item }: { item: BlockItem }) {
   }, [activeTab]);
 
   return (
-    <div className="flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden transition-all duration-300">
+    <motion.div
+      variants={blockItemVariants}
+      className="flex flex-col border border-white/5 rounded-xl bg-[#09090b] overflow-hidden transition-all duration-300"
+    >
       {/* Top Toolbar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-4 py-3 bg-[#0d0d0f] border-b border-white/5">
         {/* Left: Tab options */}
@@ -286,7 +306,7 @@ function BlockRow({ item }: { item: BlockItem }) {
           {item.description}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -319,6 +339,13 @@ function BlocksIndex() {
     ...item,
     component: getComponentPreview(item.id),
   })).filter((item): item is BlockItem => Boolean(item.component));
+
+  const activeBlocks = blockItems.filter((item) => {
+    if (activeCategory === "header") return item.category === "Headers & Menus";
+    if (activeCategory === "logo-cloud") return item.category === "Logo Cloud";
+    if (activeCategory === "features") return item.category === "Features";
+    return false;
+  });
 
   return (
     <div className="min-h-screen bg-[#090909] text-white flex flex-col select-none antialiased">
@@ -465,20 +492,17 @@ function BlocksIndex() {
               </LayoutGroup>
 
               {/* Stacked Preview List */}
-              <div className="space-y-12">
-                {activeCategory === "header" &&
-                  blockItems
-                    .filter((item) => item.category === "Headers & Menus")
-                    .map((item) => <BlockRow key={item.id} item={item} />)}
-                {activeCategory === "logo-cloud" &&
-                  blockItems
-                    .filter((item) => item.category === "Logo Cloud")
-                    .map((item) => <BlockRow key={item.id} item={item} />)}
-                {activeCategory === "features" &&
-                  blockItems
-                    .filter((item) => item.category === "Features")
-                    .map((item) => <BlockRow key={item.id} item={item} />)}
-              </div>
+              <motion.div
+                key={activeCategory}
+                variants={blockListVariants}
+                initial="hidden"
+                animate="visible"
+                className="space-y-12"
+              >
+                {activeBlocks.map((item) => (
+                  <BlockRow key={item.id} item={item} />
+                ))}
+              </motion.div>
             </div>
 
             {/* Catalog Sub-Footer */}
