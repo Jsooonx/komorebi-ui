@@ -550,20 +550,16 @@ function BlocksIndex() {
               </LayoutGroup>
 
               {/* Stacked Preview List */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeCategory}
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="space-y-12"
-                >
-                  {activeBlocks.map((item) => (
-                    <BlockRow key={item.id} item={item} />
-                  ))}
-                </motion.div>
-              </AnimatePresence>
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="space-y-12"
+              >
+                {activeBlocks.map((item) => (
+                  <BlockRow key={item.id} item={item} />
+                ))}
+              </motion.div>
             </div>
 
             {/* Catalog Sub-Footer */}
