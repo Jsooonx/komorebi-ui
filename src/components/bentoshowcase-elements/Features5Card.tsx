@@ -93,7 +93,7 @@ export default function Features5Card({ minimal = false }: { minimal?: boolean }
               key={label}
               className="group flex items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-3 text-xs text-white/55 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.05] hover:text-white sm:text-sm"
             >
-              <span className="text-white/60 transition-colors duration-300 group-hover:text-[#E8A969]">
+              <span className="text-white/60 transition-colors duration-300 group-hover:text-white">
                 {icon}
               </span>
               {label}
