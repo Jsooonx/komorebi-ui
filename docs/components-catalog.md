@@ -39,9 +39,10 @@ Full layout sections are intentionally excluded from this catalog. They belong t
 
 - Mega Menu Navbar 1, 2, and 3
 - Logo Cloud 1, 2, and 3
-- Features 1, 2, and 3
+- Features 1, 2, 3, and 4
 
 Features 2 keeps its interactive CLI terminal engine, while its decorative inline code snippets have been removed from the visual block preview.
 Features 3 is a minimal six-cell Komorebi feature layout with original product-focused copy, centered typography, tight heading-to-description spacing matching Features 2’s scale, thin dividers, and restrained icons.
+Features 4 is a dashboard-led SaaS layout with original Komorebi copy, a generated workspace visual, and four workflow pillars.
 
 This keeps reusable pieces separate from ready-made page/layout sections.
