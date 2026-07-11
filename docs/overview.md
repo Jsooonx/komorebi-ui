@@ -32,7 +32,7 @@ scripts/                      # Private memory synchronization helpers
 src/
 |- components/
 |  |- components-elements/     # Canonical reusable component implementations
-|  |- components-preview-elements/ # Standalone previews used only by the Components catalog
+|  |- components-preview-elements/ # Compact sizing adapters used only by the Components catalog
 |  |- highlights-elements/     # Standalone Bento curation used only on the landing page
 |  |- blocks-elements/         # Canonical full-page block implementations
 |  |- blocks-preview-elements/ # Compact adapters used only by the Blocks catalog
@@ -56,7 +56,7 @@ src/
 
 `BLOCKS_MANIFEST` contains the 12 layout blocks shown in `/blocks`, including Siena Parallax in the Parallax category. Blocks expose category routes such as `/blocks/parallax`, and each block has a fullscreen page route such as `/blocks/parallax/siena-parallax`.
 
-Both catalogs are deliberately split by surface. `src/components/components-preview-elements/` serves compact standalone `/components` cards, while `src/components/components-elements/` owns the canonical reusable source used by the detail playground. `src/components/highlights-elements/` separately owns the landing-page Bento curation. `src/components/blocks-preview-elements/` serves the compact `/blocks` catalog, while `src/components/blocks-elements/` owns the full-page entries used by fullscreen preview. This prevents catalog viewport sizing from leaking into the canonical component or full block-page experience.
+Both catalogs are deliberately split by surface. `src/components/components-preview-elements/` serves compact `/components` sizing adapters, while `src/components/components-elements/` owns the canonical reusable source used by the detail playground. `src/components/highlights-elements/` separately owns the landing-page Bento curation. `src/components/blocks-preview-elements/` serves the compact `/blocks` catalog, while `src/components/blocks-elements/` owns the full-page entries used by fullscreen preview. This prevents catalog viewport sizing from leaking into the canonical component or full block-page experience.
 
 The Components detail route resolves canonical component elements and has no nested fullscreen state; the Blocks nested routes resolve full-page block implementations. Both catalog routes consume only their own manifest.
 
