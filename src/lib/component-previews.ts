@@ -15,6 +15,7 @@ import PipelineStepperPreview from "../components/components-preview-elements/Pi
 import HolographicTerminalPreview from "../components/components-preview-elements/HolographicTerminalPreview";
 import ExpandableTabDockPreview from "../components/components-preview-elements/ExpandableTabDockPreview";
 import HoverExpandAccordionPreview from "../components/components-preview-elements/HoverExpandAccordionPreview";
+import VercelTooltipPreview from "../components/components-preview-elements/VercelTooltipPreview";
 import MegaMenuNavbarCard from "../components/blocks-preview-elements/MegaMenuNavbarCard";
 import MegaMenuNavbar2Card from "../components/blocks-preview-elements/MegaMenuNavbar2Card";
 import MegaMenuNavbar3Card from "../components/blocks-preview-elements/MegaMenuNavbar3Card";
@@ -37,6 +38,7 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPr
   "hover-expand-accordion": HoverExpandAccordionPreview,
   "dynamic-island": DynamicIslandPreview,
   "expandable-tab-dock": ExpandableTabDockPreview,
+  "vercel-tooltip": VercelTooltipPreview,
   "dither-canvas": DitherPreview,
   "text-roll": TextRollPreview,
   "border-beam": BorderBeamPreview,

@@ -20,6 +20,9 @@ export async function loadComponentCode(id: string) {
     case "expandable-tab-dock":
       return (await import("../components/components-elements/ExpandableTabDockElement.tsx?raw"))
         .default;
+    case "vercel-tooltip":
+      return (await import("../components/components-elements/VercelTooltipElement.tsx?raw"))
+        .default;
     case "dither-canvas":
       return (await import("../components/components-elements/DitherElement.tsx?raw")).default;
     case "text-roll":

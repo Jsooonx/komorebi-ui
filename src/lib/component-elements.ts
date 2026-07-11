@@ -17,6 +17,7 @@ import InteractiveAccordionElement from "../components/components-elements/Inter
 import NestedAccordionElement from "../components/components-elements/NestedAccordionElement";
 import ExpandableTabDockElement from "../components/components-elements/ExpandableTabDockElement";
 import HoverExpandAccordionElement from "../components/components-elements/HoverExpandAccordionElement";
+import VercelTooltipElement from "../components/components-elements/VercelTooltipElement";
 import type { ComponentElementProps } from "./components-manifest";
 
 export const COMPONENT_ELEMENTS: Record<string, ComponentType<ComponentElementProps>> = {
@@ -27,6 +28,7 @@ export const COMPONENT_ELEMENTS: Record<string, ComponentType<ComponentElementPr
   "hover-expand-accordion": HoverExpandAccordionElement,
   "dynamic-island": DynamicIslandElement,
   "expandable-tab-dock": ExpandableTabDockElement,
+  "vercel-tooltip": VercelTooltipElement,
   "dither-canvas": DitherElement,
   "text-roll": TextRollElement,
   "border-beam": BorderBeamElement,

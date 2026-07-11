@@ -89,6 +89,16 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     viewportHeightClass: "h-[380px]",
   },
   {
+    id: "vercel-tooltip",
+    name: "Vercel Tooltip",
+    category: "Floating UI & Docks",
+    description: "Premium toolbar navigation with a shared sliding tooltip that morphs size and direction smoothly.",
+    dependencies: ["framer-motion", "lucide-react"],
+    isNew: true,
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[250px]",
+  },
+  {
     id: "dither-canvas",
     name: "WebGL Dither Shader",
     category: "WebGL & Shaders",
