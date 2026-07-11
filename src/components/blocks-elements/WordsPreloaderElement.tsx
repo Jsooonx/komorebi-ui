@@ -105,7 +105,7 @@ export default function WordsPreloaderElement() {
             {!isCompleted && (
               <motion.span
                 key={index}
-                initial={{ opacity: 0, y: index === 0 ? 40 : 25 }}
+                initial={{ opacity: 0, y: index === 0 ? 0 : 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ 
                   opacity: 0, 
