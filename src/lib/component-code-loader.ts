@@ -14,6 +14,9 @@ export async function loadComponentCode(id: string) {
     case "dynamic-island":
       return (await import("../components/components-elements/DynamicIslandElement.tsx?raw"))
         .default;
+    case "expandable-tab-dock":
+      return (await import("../components/components-elements/ExpandableTabDockElement.tsx?raw"))
+        .default;
     case "dither-canvas":
       return (await import("../components/components-elements/DitherElement.tsx?raw")).default;
     case "text-roll":

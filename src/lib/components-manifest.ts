@@ -68,6 +68,17 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     viewportHeightClass: "h-[210px]",
   },
   {
+    id: "expandable-tab-dock",
+    name: "Expandable Tab Dock",
+    category: "Floating UI & Docks",
+    description:
+      "Apple-style floating workspace dock with silky spring expansion and animated tab content transitions.",
+    dependencies: ["framer-motion", "lucide-react"],
+    isNew: true,
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[300px]",
+  },
+  {
     id: "dither-canvas",
     name: "WebGL Dither Shader",
     category: "WebGL & Shaders",

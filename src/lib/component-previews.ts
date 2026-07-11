@@ -13,6 +13,7 @@ import AudioEqualizerPreview from "../components/components-preview-elements/Aud
 import PixelShimmerPreview from "../components/components-preview-elements/PixelShimmerPreview";
 import PipelineStepperPreview from "../components/components-preview-elements/PipelineStepperPreview";
 import HolographicTerminalPreview from "../components/components-preview-elements/HolographicTerminalPreview";
+import ExpandableTabDockPreview from "../components/components-preview-elements/ExpandableTabDockPreview";
 import MegaMenuNavbarCard from "../components/blocks-preview-elements/MegaMenuNavbarCard";
 import MegaMenuNavbar2Card from "../components/blocks-preview-elements/MegaMenuNavbar2Card";
 import MegaMenuNavbar3Card from "../components/blocks-preview-elements/MegaMenuNavbar3Card";
@@ -33,6 +34,7 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPr
   "toolkit-stack-swiper": ToolkitStackSwiperPreview,
   "devouring-details": DevouringDetailsPreview,
   "dynamic-island": DynamicIslandPreview,
+  "expandable-tab-dock": ExpandableTabDockPreview,
   "dither-canvas": DitherPreview,
   "text-roll": TextRollPreview,
   "border-beam": BorderBeamPreview,

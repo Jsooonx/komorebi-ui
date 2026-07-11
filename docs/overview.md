@@ -52,7 +52,7 @@ src/
 
 ## Registry boundaries
 
-`COMPONENTS_MANIFEST` contains the 16 reusable components shown in `/components`.
+`COMPONENTS_MANIFEST` contains the 15 reusable components shown in `/components`.
 
 `BLOCKS_MANIFEST` contains the 12 layout blocks shown in `/blocks`, including Siena Parallax in the Parallax category. Blocks expose category routes such as `/blocks/parallax`, and each block has a fullscreen page route such as `/blocks/parallax/siena-parallax`.
 

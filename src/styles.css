@@ -31,8 +31,8 @@
 
 /* The catalog and detail playground supply the only visible shell. These scoped
    rules flatten the canonical component wrapper without changing its source. */
-.component-catalog-surface > :first-child,
-.component-playground-surface > :first-child {
+.component-catalog-surface > :first-child:not([data-preserve-shell]),
+.component-playground-surface > :first-child:not([data-preserve-shell]) {
   width: 100% !important;
   max-width: none !important;
   height: 100% !important;
@@ -46,16 +46,20 @@
   justify-content: center !important;
 }
 
-.component-catalog-surface > :first-child > :has(> .w-5.h-5),
-.component-catalog-surface > :first-child > :last-child:not(:only-child),
-.component-playground-surface > :first-child > :has(> .w-5.h-5),
-.component-playground-surface > :first-child > :last-child:not(:only-child) {
+.component-catalog-surface > :first-child:not([data-preserve-shell]) > :has(> .w-5.h-5),
+.component-catalog-surface > :first-child:not([data-preserve-shell]) > :last-child:not(:only-child),
+.component-playground-surface > :first-child:not([data-preserve-shell]) > :has(> .w-5.h-5),
+.component-playground-surface
+  > :first-child:not([data-preserve-shell])
+  > :last-child:not(:only-child) {
   display: none !important;
 }
 
-.component-catalog-surface > :first-child > :not(.absolute):not(:last-child):not(:has(> .w-5.h-5)),
+.component-catalog-surface
+  > :first-child:not([data-preserve-shell])
+  > :not(.absolute):not(:last-child):not(:has(> .w-5.h-5)),
 .component-playground-surface
-  > :first-child
+  > :first-child:not([data-preserve-shell])
   > :not(.absolute):not(:last-child):not(:has(> .w-5.h-5)) {
   width: 100% !important;
   max-width: none !important;
@@ -66,8 +70,12 @@
   justify-content: center !important;
 }
 
-.component-catalog-surface[data-variant="pixel"] > :first-child > :first-child,
-.component-playground-surface[data-variant="pixel"] > :first-child > :first-child {
+.component-catalog-surface[data-variant="pixel"]
+  > :first-child:not([data-preserve-shell])
+  > :first-child,
+.component-playground-surface[data-variant="pixel"]
+  > :first-child:not([data-preserve-shell])
+  > :first-child {
   width: 100% !important;
   max-width: none !important;
   height: 100% !important;

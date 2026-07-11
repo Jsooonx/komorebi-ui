@@ -15,6 +15,7 @@ import PipelineStepperElement from "../components/components-elements/PipelineSt
 import HolographicTerminalElement from "../components/components-elements/HolographicTerminalElement";
 import InteractiveAccordionElement from "../components/components-elements/InteractiveAccordionElement";
 import NestedAccordionElement from "../components/components-elements/NestedAccordionElement";
+import ExpandableTabDockElement from "../components/components-elements/ExpandableTabDockElement";
 import type { ComponentElementProps } from "./components-manifest";
 
 export const COMPONENT_ELEMENTS: Record<string, ComponentType<ComponentElementProps>> = {
@@ -23,6 +24,7 @@ export const COMPONENT_ELEMENTS: Record<string, ComponentType<ComponentElementPr
   "toolkit-stack-swiper": ToolkitStackSwiperElement,
   "devouring-details": DevouringDetailsElement,
   "dynamic-island": DynamicIslandElement,
+  "expandable-tab-dock": ExpandableTabDockElement,
   "dither-canvas": DitherElement,
   "text-roll": TextRollElement,
   "border-beam": BorderBeamElement,
