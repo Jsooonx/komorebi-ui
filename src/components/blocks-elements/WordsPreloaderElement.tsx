@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { RotateCcw } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const greetings = [
   "Hello",        // English
@@ -22,10 +22,20 @@ export default function WordsPreloaderElement() {
   const [index, setIndex] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isWiped, setIsWiped] = useState(false);
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    if (isInView && !hasStarted) {
+      setHasStarted(true);
+    }
+  }, [isInView, hasStarted]);
 
   // Recurse timeout loop for speed curve
   useEffect(() => {
-    if (isCompleted) return;
+    if (!hasStarted || isCompleted) return;
 
     if (index >= greetings.length - 1) {
       // Last word stays for its delay, then trigger slide up
@@ -42,7 +52,7 @@ export default function WordsPreloaderElement() {
     }, delays[index]);
 
     return () => clearTimeout(timer);
-  }, [index, isCompleted]);
+  }, [index, isCompleted, hasStarted]);
 
   const handleRestart = () => {
     setIsWiped(false);
@@ -51,7 +61,7 @@ export default function WordsPreloaderElement() {
   };
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-[#090909] flex flex-col items-center justify-center font-sans">
+    <div ref={containerRef} className="w-full h-full relative overflow-hidden bg-[#090909] flex flex-col items-center justify-center font-sans">
       
       {/* Mock Page Content Revealed Underneath */}
       <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center select-none z-10">
@@ -97,7 +107,7 @@ export default function WordsPreloaderElement() {
         {/* Typographic Greeting Text */}
         <div className="relative overflow-hidden h-24 sm:h-36 flex items-center justify-center px-6">
           <AnimatePresence mode="wait">
-            {!isCompleted && (
+            {hasStarted && !isCompleted && (
               <motion.span
                 key={index}
                 initial={{ opacity: 0, y: index === 0 ? 0 : 25 }}

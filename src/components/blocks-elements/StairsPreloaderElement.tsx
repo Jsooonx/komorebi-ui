@@ -1,14 +1,24 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { RotateCcw } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function StairsPreloaderElement() {
   const [textState, setTextState] = useState<"hidden" | "enter" | "shimmer" | "exit">("hidden");
   const [isWiped, setIsWiped] = useState(false);
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+  const [hasStarted, setHasStarted] = useState(false);
+
   useEffect(() => {
-    if (isAnimationFinished) return;
+    if (isInView && !hasStarted) {
+      setHasStarted(true);
+    }
+  }, [isInView, hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted || isAnimationFinished) return;
 
     // Sequence timing
     // 1. Enter text
@@ -43,7 +53,7 @@ export default function StairsPreloaderElement() {
       clearTimeout(wipeTimer);
       clearTimeout(finishTimer);
     };
-  }, [isAnimationFinished]);
+  }, [isAnimationFinished, hasStarted]);
 
   const handleRestart = () => {
     setIsAnimationFinished(false);
@@ -55,7 +65,7 @@ export default function StairsPreloaderElement() {
   const columnsCount = 5;
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-[#09090b] flex flex-col items-center justify-center font-sans">
+    <div ref={containerRef} className="w-full h-full relative overflow-hidden bg-[#09090b] flex flex-col items-center justify-center font-sans">
       
       {/* Mock Page Content Revealed Underneath */}
       <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center select-none z-10">
@@ -85,7 +95,7 @@ export default function StairsPreloaderElement() {
 
       {/* Main Preloader Screen Overlay (for text phase) */}
       <AnimatePresence>
-        {!isWiped && (
+        {hasStarted && !isWiped && (
           <motion.div
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
