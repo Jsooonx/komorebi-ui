@@ -48,7 +48,7 @@ function DockIcon({
   );
 }
 
-export default function InteractiveNavbarCard({ minimal = false }: { minimal?: boolean }) {
+export default function InteractiveNavbarElement() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [tooltipText, setTooltipText] = useState("");
   const mouseX = useMotionValue(Infinity);
@@ -95,10 +95,6 @@ export default function InteractiveNavbarCard({ minimal = false }: { minimal?: b
       </div>
     </div>
   );
-
-  if (minimal) {
-    return content;
-  }
 
   return (
     <div className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:col-span-2 md:col-span-2 group">

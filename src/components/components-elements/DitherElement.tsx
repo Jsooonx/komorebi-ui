@@ -3,7 +3,7 @@ import { useState, useEffect, Suspense, lazy } from "react";
 // Lazy load heavy WebGL dither canvas
 const Dither = lazy(() => import("../ui/dither"));
 
-export default function DitherCard({ minimal = false }: { minimal?: boolean }) {
+export default function DitherElement() {
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
@@ -26,10 +26,6 @@ export default function DitherCard({ minimal = false }: { minimal?: boolean }) {
       )}
     </div>
   );
-
-  if (minimal) {
-    return <div className="w-full h-full select-none">{content}</div>;
-  }
 
   return (
     <div className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group">

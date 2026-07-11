@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 
-export default function DevouringDetailsCard({ minimal = false }: { minimal?: boolean }) {
+export default function DevouringDetailsElement() {
   const [hovered, setHovered] = useState(false);
   const [emailText, setEmailText] = useState("");
   const fullEmail = "youremail@gmail.com";
@@ -15,42 +15,6 @@ export default function DevouringDetailsCard({ minimal = false }: { minimal?: bo
     }, 180);
     return () => clearInterval(interval);
   }, []);
-
-  if (minimal) {
-    return (
-      <div
-        className="w-full h-full flex items-center justify-center p-4 select-none"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        <div className="w-full bg-[#161616] border border-white/5 rounded-xl p-3 flex flex-col gap-1.5">
-          <span className="text-[8px] font-mono text-white/40 uppercase tracking-widest block">
-            Sign in command
-          </span>
-          <div className="flex items-center justify-between bg-black/45 border border-white/5 rounded-lg px-3 py-2 h-9">
-            <div className="flex items-center gap-1.5 font-mono text-[11px] text-white/90">
-              <Mail className="w-3 h-3 text-white/40" />
-              <span>{emailText}</span>
-              <motion.span
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ repeat: Infinity, duration: 0.8 }}
-                className="w-1 h-3 bg-[#E8A969]"
-              />
-            </div>
-            <motion.div
-              animate={{
-                borderColor: hovered ? "rgba(232, 169, 105, 0.4)" : "rgba(255, 255, 255, 0.1)",
-                boxShadow: hovered ? "0 0 10px rgba(232, 169, 105, 0.15)" : "none",
-              }}
-              className="flex items-center gap-0.5 text-[9px] font-mono text-[#E8A969] border border-white/10 px-1.5 py-0.5 rounded bg-white/5 select-none"
-            >
-              enter ↵
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div

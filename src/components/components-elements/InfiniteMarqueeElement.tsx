@@ -12,7 +12,7 @@ const TECH_TAGS = [
   "Vite",
 ];
 
-export default function InfiniteMarqueeCard({ minimal = false }: { minimal?: boolean }) {
+export default function InfiniteMarqueeElement() {
   const content = (
     <div className="relative z-10 w-full flex items-center h-16 overflow-hidden">
       {/* Double-wrapper for seamless loop */}
@@ -52,14 +52,6 @@ export default function InfiniteMarqueeCard({ minimal = false }: { minimal?: boo
       </div>
     </div>
   );
-
-  if (minimal) {
-    return (
-      <div className="w-full h-full flex items-center justify-center select-none relative overflow-hidden">
-        {content}
-      </div>
-    );
-  }
 
   return (
     <div className="relative w-full h-[260px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none group">

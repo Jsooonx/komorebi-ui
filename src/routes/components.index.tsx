@@ -18,13 +18,13 @@ import {
 import {
   COMPONENTS_MANIFEST,
   type ComponentManifestItem,
-  type ComponentPreviewProps,
+  type ComponentCatalogPreviewProps,
 } from "../lib/components-manifest";
 import { getComponentPreview } from "../lib/component-previews";
 import { setNavigationOrigin } from "../lib/navigation-state";
 
 type CatalogComponentItem = ComponentManifestItem & {
-  component: ComponentType<ComponentPreviewProps>;
+  component: ComponentType<ComponentCatalogPreviewProps>;
 };
 
 export const Route = createFileRoute("/components/")({
@@ -139,7 +139,7 @@ function ComponentCard({
           </div>
 
           <div className="w-full h-full flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity overflow-hidden">
-            <PreviewComp minimal={true} />
+            <PreviewComp />
           </div>
         </div>
 

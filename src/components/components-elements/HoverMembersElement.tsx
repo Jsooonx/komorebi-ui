@@ -29,7 +29,7 @@ const MEMBERS = [
   },
 ];
 
-export default function HoverMembersCard({ minimal = false }: { minimal?: boolean }) {
+export default function HoverMembersElement() {
   const [hovered, setHovered] = useState(false);
   const [activeMemberIdx, setActiveMemberIdx] = useState<number | null>(null);
 
@@ -81,18 +81,6 @@ export default function HoverMembersCard({ minimal = false }: { minimal?: boolea
       </div>
     </div>
   );
-
-  if (minimal) {
-    return (
-      <div
-        className="w-full h-full flex items-center justify-center cursor-pointer select-none"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        {content}
-      </div>
-    );
-  }
 
   return (
     <div

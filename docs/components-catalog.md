@@ -23,13 +23,14 @@ The catalog currently contains 16 components:
 - Accordion
 - Nested Accordion
 
-The source of truth is `src/lib/components-manifest.ts` through `COMPONENTS_MANIFEST`. Preview components are mapped in `src/lib/component-previews.ts`, and source code is loaded on demand by `src/lib/component-code-loader.ts`.
+The source of truth is `src/lib/components-manifest.ts` through `COMPONENTS_MANIFEST`. Catalog adapters are mapped in `src/lib/component-previews.ts`, canonical elements are mapped in `src/lib/component-elements.ts`, and source code is loaded on demand by `src/lib/component-code-loader.ts`.
 
 ## Catalog behavior
 
 - Search and filtering use component metadata only.
-- Component previews use the registered preview map.
-- Opening an entry loads its source code lazily in the detail sandbox at `/components/$id`.
+- Component cards use catalog-only adapters from `src/components/components-preview-elements/`. Those adapters own compact sizing and framing without adding catalog props to the reusable component API.
+- Opening an entry loads its canonical element and source code lazily in the detail playground at `/components/$id`.
+- The detail playground is the only component-level enlarged view. It intentionally has no second fullscreen mode or fullscreen controls.
 - The landing-page `Highlights` section is a curated subset of these entries.
 - The command palette searches only `COMPONENTS_MANIFEST`.
 
@@ -49,6 +50,13 @@ Features 5 is a premium SaaS workflow layout with generated operations and sched
 Siena Parallax is a Parallax-category block with a scroll-driven editorial image transition: the visual starts flush at the top edge, becomes a floating card, and gives way to a closing statement below it without overlapping the copy. The compact catalog starts with a smaller image so its opening copy is fully visible; fullscreen uses the real viewport height with an initial half-page image and vertically centered closing copy. It uses a generated monochrome editorial asset and spring-smoothed Framer Motion transforms.
 
 This keeps reusable pieces separate from ready-made page/layout sections.
+
+## Components rendering boundaries
+
+- `src/components/components-elements/` contains the canonical, reusable component implementations. Their public API must not include catalog-only flags such as `minimal` or `previewMode`.
+- `src/components/components-preview-elements/` contains compact catalog adapters. They may apply scale, clipping, and catalog framing, but do not become the source distributed or displayed in the detail playground.
+- `src/components/Highlights.tsx` renders canonical elements as a curated landing-page showcase.
+- Two retired accordion sources remain in the component element and preview folders for source continuity, but the active `/components` catalog follows the 14 entries in `COMPONENTS_MANIFEST`.
 
 ## Blocks rendering boundaries
 

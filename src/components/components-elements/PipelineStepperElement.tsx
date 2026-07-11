@@ -8,7 +8,7 @@ const steps = [
   { title: "Deployment", desc: "Pipeline verification" },
 ];
 
-export default function PipelineStepperCard({ minimal = false }: { minimal?: boolean }) {
+export default function PipelineStepperElement() {
   const [activeStep, setActiveStep] = useState(0);
   const [params, setParams] = useState({ ssl: true, minify: false, cdn: true });
   const [projName, setProjName] = useState("my-awesome-app");
@@ -227,20 +227,6 @@ export default function PipelineStepperCard({ minimal = false }: { minimal?: boo
       </div>
     </div>
   );
-
-  if (minimal) {
-    return (
-      <div
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="w-full h-full flex flex-col justify-center select-none relative p-2"
-        style={{ perspective: 1000, transformStyle: "preserve-3d" }}
-      >
-        {content}
-      </div>
-    );
-  }
 
   return (
     <div className="relative w-full h-[544px] bg-[#121212] rounded-lg border border-white/5 overflow-hidden flex flex-col justify-between p-6 cursor-pointer select-none lg:row-span-2 group antialiased">

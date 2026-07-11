@@ -2,21 +2,21 @@ import { useNavigate } from "@tanstack/react-router";
 import { useState, lazy, Suspense } from "react";
 import { setNavigationOrigin } from "@/lib/navigation-state";
 import SplitText from "./ui/SplitText";
-import ImageRevealCard from "./bentoshowcase-elements/ImageRevealCard";
-import HoverMembersCard from "./bentoshowcase-elements/HoverMembersCard";
-import ToolkitStackSwiper from "./bentoshowcase-elements/ToolkitStackSwiper";
-import DevouringDetailsCard from "./bentoshowcase-elements/DevouringDetailsCard";
-import DynamicIslandCard from "./bentoshowcase-elements/DynamicIslandCard";
-import TextRollCard from "./bentoshowcase-elements/TextRollCard";
-import BorderBeamCard from "./bentoshowcase-elements/BorderBeamCard";
-import InteractiveNavbarCard from "./bentoshowcase-elements/InteractiveNavbarCard";
-import InfiniteMarqueeCard from "./bentoshowcase-elements/InfiniteMarqueeCard";
-import AudioEqualizerCard from "./bentoshowcase-elements/AudioEqualizerCard";
-import PipelineStepperCard from "./bentoshowcase-elements/PipelineStepperCard";
-import HolographicTerminalCard from "./bentoshowcase-elements/HolographicTerminalCard";
+import ImageRevealCard from "./components-elements/ImageRevealElement";
+import HoverMembersCard from "./components-elements/HoverMembersElement";
+import ToolkitStackSwiper from "./components-elements/ToolkitStackSwiperElement";
+import DevouringDetailsCard from "./components-elements/DevouringDetailsElement";
+import DynamicIslandCard from "./components-elements/DynamicIslandElement";
+import TextRollCard from "./components-elements/TextRollElement";
+import BorderBeamCard from "./components-elements/BorderBeamElement";
+import InteractiveNavbarCard from "./components-elements/InteractiveNavbarElement";
+import InfiniteMarqueeCard from "./components-elements/InfiniteMarqueeElement";
+import AudioEqualizerCard from "./components-elements/AudioEqualizerElement";
+import PipelineStepperCard from "./components-elements/PipelineStepperElement";
+import HolographicTerminalCard from "./components-elements/HolographicTerminalElement";
 
 // Lazy-load the heavy WebGL/Three.js DitherCard to keep initial bundle lean
-const DitherCard = lazy(() => import("./bentoshowcase-elements/DitherCard"));
+const DitherCard = lazy(() => import("./components-elements/DitherElement"));
 
 function BentoCell({
   id,

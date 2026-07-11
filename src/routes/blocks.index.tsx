@@ -23,7 +23,7 @@ import {
   type ComponentManifestItem,
   type ComponentPreviewProps,
 } from "../lib/components-manifest";
-import { getComponentPreview } from "../lib/component-previews";
+import { getBlockPreview } from "../lib/component-previews";
 import { loadComponentCode } from "../lib/component-code-loader";
 import { getBlockCategorySlug, type BlockCategorySlug } from "../lib/block-routing";
 
@@ -331,7 +331,7 @@ export function BlocksIndex({
   // Blocks are full layout sections; reusable interaction components live at /components.
   const blockItems: BlockItem[] = BLOCKS_MANIFEST.map((item) => ({
     ...item,
-    component: getComponentPreview(item.id),
+    component: getBlockPreview(item.id),
   })).filter((item): item is BlockItem => Boolean(item.component));
 
   const activeBlocks = blockItems.filter((item) => {

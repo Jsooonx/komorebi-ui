@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function BorderBeamCard({ minimal = false }: { minimal?: boolean }) {
+export default function BorderBeamElement() {
   const [hovered, setHovered] = useState(false);
 
   const content = (
@@ -22,18 +22,6 @@ export default function BorderBeamCard({ minimal = false }: { minimal?: boolean 
       </div>
     </div>
   );
-
-  if (minimal) {
-    return (
-      <div
-        className="w-full h-full p-2 select-none group"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        {content}
-      </div>
-    );
-  }
 
   return (
     <div

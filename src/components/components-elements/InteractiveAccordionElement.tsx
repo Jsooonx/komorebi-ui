@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 
-export default function InteractiveAccordionCard({ minimal = false }: { minimal?: boolean }) {
+export default function InteractiveAccordionElement() {
   const [activeItem, setActiveItem] = useState<string | undefined>("security");
 
   const accordionItems = [
@@ -13,8 +18,8 @@ export default function InteractiveAccordionCard({ minimal = false }: { minimal?
       details: [
         "AES-256 GCM encryption at rest",
         "TLS 1.3 cryptographic protocols",
-        "Continuous vulnerability scanning"
-      ]
+        "Continuous vulnerability scanning",
+      ],
     },
     {
       id: "performance",
@@ -23,8 +28,8 @@ export default function InteractiveAccordionCard({ minimal = false }: { minimal?
       details: [
         "Multi-region master node replication",
         "Delta synchronization algorithms",
-        "Automatic network reconnection"
-      ]
+        "Automatic network reconnection",
+      ],
     },
     {
       id: "ai",
@@ -33,9 +38,9 @@ export default function InteractiveAccordionCard({ minimal = false }: { minimal?
       details: [
         "LLM context window optimizations",
         "Predictive scaling analytics",
-        "Natural language search translation"
-      ]
-    }
+        "Natural language search translation",
+      ],
+    },
   ];
 
   const cssVariables = {
@@ -61,7 +66,7 @@ export default function InteractiveAccordionCard({ minimal = false }: { minimal?
               key={item.id}
               value={item.id}
               className={`border rounded-md transition-all duration-200 bg-transparent ${
-                isOpen 
+                isOpen
                   ? "border-white/10 bg-white/[0.01]"
                   : "border-white/[0.03] hover:border-white/10"
               }`}
@@ -76,10 +81,8 @@ export default function InteractiveAccordionCard({ minimal = false }: { minimal?
                   transition={{ duration: 0.15 }}
                   className="space-y-2.5"
                 >
-                  <p className="text-[11px] text-white/50 leading-relaxed">
-                    {item.desc}
-                  </p>
-                  
+                  <p className="text-[11px] text-white/50 leading-relaxed">{item.desc}</p>
+
                   {/* Bullet details */}
                   <div className="grid grid-cols-1 gap-1 pl-1">
                     {item.details.map((detail, idx) => (
@@ -97,17 +100,6 @@ export default function InteractiveAccordionCard({ minimal = false }: { minimal?
       </Accordion>
     </div>
   );
-
-  if (minimal) {
-    return (
-      <div
-        className="w-full h-full overflow-y-auto scrollbar-none select-none relative bg-[#0e0e0e]"
-        style={cssVariables}
-      >
-        {content}
-      </div>
-    );
-  }
 
   return (
     <div

@@ -1,43 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function AudioEqualizerCard({ minimal = false }: { minimal?: boolean }) {
+export default function AudioEqualizerElement() {
   const [hovered, setHovered] = useState(false);
   const barCount = 14;
-
-  if (minimal) {
-    return (
-      <div
-        className="w-full h-full flex items-end justify-center gap-1.5 px-4 select-none overflow-hidden relative"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#E8A969]/10 to-transparent pointer-events-none" />
-        {Array.from({ length: barCount }).map((_, i) => {
-          const delay = i * 0.08;
-          const duration = 0.5 + Math.random() * 0.6;
-          return (
-            <motion.div
-              key={i}
-              className="w-1.5 rounded-t-full bg-gradient-to-t from-[#BECB6D] to-[#E8A969]"
-              animate={{
-                height: hovered
-                  ? [8, 48 + Math.random() * 40, 16, 72 + Math.random() * 20, 8]
-                  : [8, 20 + Math.sin(i) * 12, 8],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: hovered ? duration : 1.2,
-                delay: delay,
-                ease: "easeInOut",
-              }}
-              style={{ height: 8 }}
-            />
-          );
-        })}
-      </div>
-    );
-  }
 
   return (
     <div

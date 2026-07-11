@@ -1,7 +1,14 @@
 export interface ComponentPreviewProps {
   minimal?: boolean;
-  activeState?: string;
   previewMode?: "catalog" | "fullscreen";
+}
+
+export interface ComponentCatalogPreviewProps {
+  activeState?: string;
+}
+
+export interface ComponentElementProps {
+  activeState?: string;
 }
 
 export interface ComponentManifestItem {

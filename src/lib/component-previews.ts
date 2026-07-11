@@ -1,23 +1,23 @@
 import type { ComponentType } from "react";
-import ImageRevealCard from "../components/bentoshowcase-elements/ImageRevealCard";
-import HoverMembersCard from "../components/bentoshowcase-elements/HoverMembersCard";
-import ToolkitStackSwiper from "../components/bentoshowcase-elements/ToolkitStackSwiper";
-import DevouringDetailsCard from "../components/bentoshowcase-elements/DevouringDetailsCard";
-import DynamicIslandCard from "../components/bentoshowcase-elements/DynamicIslandCard";
-import DitherCard from "../components/bentoshowcase-elements/DitherCard";
-import TextRollCard from "../components/bentoshowcase-elements/TextRollCard";
-import BorderBeamCard from "../components/bentoshowcase-elements/BorderBeamCard";
-import InteractiveNavbarCard from "../components/bentoshowcase-elements/InteractiveNavbarCard";
-import InfiniteMarqueeCard from "../components/bentoshowcase-elements/InfiniteMarqueeCard";
-import AudioEqualizerCard from "../components/bentoshowcase-elements/AudioEqualizerCard";
-import PixelShimmerCard from "../components/bentoshowcase-elements/PixelShimmerCard";
-import PipelineStepperCard from "../components/bentoshowcase-elements/PipelineStepperCard";
-import HolographicTerminalCard from "../components/bentoshowcase-elements/HolographicTerminalCard";
+import ImageRevealPreview from "../components/components-preview-elements/ImageRevealPreview";
+import HoverMembersPreview from "../components/components-preview-elements/HoverMembersPreview";
+import ToolkitStackSwiperPreview from "../components/components-preview-elements/ToolkitStackSwiperPreview";
+import DevouringDetailsPreview from "../components/components-preview-elements/DevouringDetailsPreview";
+import DynamicIslandPreview from "../components/components-preview-elements/DynamicIslandPreview";
+import DitherPreview from "../components/components-preview-elements/DitherPreview";
+import TextRollPreview from "../components/components-preview-elements/TextRollPreview";
+import BorderBeamPreview from "../components/components-preview-elements/BorderBeamPreview";
+import InteractiveNavbarPreview from "../components/components-preview-elements/InteractiveNavbarPreview";
+import InfiniteMarqueePreview from "../components/components-preview-elements/InfiniteMarqueePreview";
+import AudioEqualizerPreview from "../components/components-preview-elements/AudioEqualizerPreview";
+import PixelShimmerPreview from "../components/components-preview-elements/PixelShimmerPreview";
+import PipelineStepperPreview from "../components/components-preview-elements/PipelineStepperPreview";
+import HolographicTerminalPreview from "../components/components-preview-elements/HolographicTerminalPreview";
 import MegaMenuNavbarCard from "../components/blocks-preview-elements/MegaMenuNavbarCard";
 import MegaMenuNavbar2Card from "../components/blocks-preview-elements/MegaMenuNavbar2Card";
 import MegaMenuNavbar3Card from "../components/blocks-preview-elements/MegaMenuNavbar3Card";
-import InteractiveAccordionCard from "../components/bentoshowcase-elements/InteractiveAccordionCard";
-import NestedAccordionCard from "../components/bentoshowcase-elements/NestedAccordionCard";
+import InteractiveAccordionPreview from "../components/components-preview-elements/InteractiveAccordionPreview";
+import NestedAccordionPreview from "../components/components-preview-elements/NestedAccordionPreview";
 import LogoCloudCard from "../components/blocks-preview-elements/LogoCloudCard";
 import LogoCloud2Card from "../components/blocks-preview-elements/LogoCloud2Card";
 import LogoCloud3Card from "../components/blocks-preview-elements/LogoCloud3Card";
@@ -27,28 +27,31 @@ import Features3Card from "../components/blocks-preview-elements/Features3Card";
 import Features4Card from "../components/blocks-preview-elements/Features4Card";
 import Features5Card from "../components/blocks-preview-elements/Features5Card";
 import SienaParallaxCard from "../components/blocks-preview-elements/SienaParallaxCard";
-import type { ComponentPreviewProps } from "./components-manifest";
+import type { ComponentCatalogPreviewProps, ComponentPreviewProps } from "./components-manifest";
 
-export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>> = {
-  "image-reveal": ImageRevealCard,
-  "hover-members": HoverMembersCard,
-  "toolkit-stack-swiper": ToolkitStackSwiper,
-  "devouring-details": DevouringDetailsCard,
-  "dynamic-island": DynamicIslandCard,
-  "dither-canvas": DitherCard,
-  "text-roll": TextRollCard,
-  "border-beam": BorderBeamCard,
-  "interactive-navbar": InteractiveNavbarCard,
-  "infinite-marquee": InfiniteMarqueeCard,
-  "audio-equalizer": AudioEqualizerCard,
-  "pixel-shimmer": PixelShimmerCard,
-  "pipeline-stepper": PipelineStepperCard,
-  "holographic-terminal": HolographicTerminalCard,
+export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPreviewProps>> = {
+  "image-reveal": ImageRevealPreview,
+  "hover-members": HoverMembersPreview,
+  "toolkit-stack-swiper": ToolkitStackSwiperPreview,
+  "devouring-details": DevouringDetailsPreview,
+  "dynamic-island": DynamicIslandPreview,
+  "dither-canvas": DitherPreview,
+  "text-roll": TextRollPreview,
+  "border-beam": BorderBeamPreview,
+  "interactive-navbar": InteractiveNavbarPreview,
+  "infinite-marquee": InfiniteMarqueePreview,
+  "audio-equalizer": AudioEqualizerPreview,
+  "pixel-shimmer": PixelShimmerPreview,
+  "pipeline-stepper": PipelineStepperPreview,
+  "holographic-terminal": HolographicTerminalPreview,
+  "interactive-accordion": InteractiveAccordionPreview,
+  "nested-accordion": NestedAccordionPreview,
+};
+
+export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>> = {
   "mega-menu-navbar-1": MegaMenuNavbarCard,
   "mega-menu-navbar-2": MegaMenuNavbar2Card,
   "mega-menu-navbar-3": MegaMenuNavbar3Card,
-  "interactive-accordion": InteractiveAccordionCard,
-  "nested-accordion": NestedAccordionCard,
   "logo-cloud-1": LogoCloudCard,
   "logo-cloud-2": LogoCloud2Card,
   "logo-cloud-3": LogoCloud3Card,
@@ -62,4 +65,8 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentPreviewPr
 
 export function getComponentPreview(id: string) {
   return COMPONENT_PREVIEWS[id];
+}
+
+export function getBlockPreview(id: string) {
+  return BLOCK_PREVIEWS[id];
 }

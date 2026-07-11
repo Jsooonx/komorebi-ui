@@ -31,12 +31,16 @@ references/                   # Non-runtime templates, media, and design referen
 scripts/                      # Private memory synchronization helpers
 src/
 |- components/
-|  |- bentoshowcase-elements/  # Reusable previews used by Highlights, Components, or Blocks
+|  |- components-elements/     # Canonical reusable component implementations
+|  |- components-preview-elements/ # Compact adapters used only by the Components catalog
+|  |- blocks-elements/         # Canonical full-page block implementations
+|  |- blocks-preview-elements/ # Compact adapters used only by the Blocks catalog
 |  |- terminal-elements/       # Large playground previews
 |  `- ui/                      # Shared UI/animation primitives
 |- lib/
 |  |- components-manifest.ts   # COMPONENTS_MANIFEST and BLOCKS_MANIFEST
-|  |- component-previews.ts    # Preview registry for both catalogs
+|  |- component-previews.ts    # Catalog adapter registries for Components and Blocks
+|  |- component-elements.ts    # Canonical Components registry for detail and Highlights
 |  `- component-code-loader.ts # On-demand source loader
 `- routes/
    |- index.tsx                # Landing page
@@ -51,9 +55,9 @@ src/
 
 `BLOCKS_MANIFEST` contains the 12 layout blocks shown in `/blocks`, including Siena Parallax in the Parallax category. Blocks expose category routes such as `/blocks/parallax`, and each block has a fullscreen page route such as `/blocks/parallax/siena-parallax`.
 
-Block rendering is deliberately split by surface: `src/components/blocks-preview-elements/` serves the compact `/blocks` catalog, and `src/components/blocks-elements/` owns the full-page entries used by fullscreen preview. This prevents catalog viewport sizing from leaking into the full block page experience.
+Both catalogs are deliberately split by surface. `src/components/components-preview-elements/` serves compact `/components` cards, while `src/components/components-elements/` owns the canonical reusable source used by the detail playground and Highlights. `src/components/blocks-preview-elements/` serves the compact `/blocks` catalog, while `src/components/blocks-elements/` owns the full-page entries used by fullscreen preview. This prevents catalog viewport sizing from leaking into the canonical component or full block-page experience.
 
-Both registries share preview and source-code infrastructure, while the catalog routes consume only their own manifest. The shared detail route can resolve entries from either registry.
+The Components detail route resolves canonical component elements and has no nested fullscreen state; the Blocks nested routes resolve full-page block implementations. Both catalog routes consume only their own manifest.
 
 ## Performance notes
 

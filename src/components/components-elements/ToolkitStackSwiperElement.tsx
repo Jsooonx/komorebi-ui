@@ -22,7 +22,7 @@ const CARD_DATA = [
   },
 ];
 
-export default function ToolkitStackSwiper({ minimal = false }: { minimal?: boolean }) {
+export default function ToolkitStackSwiperElement() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [stack, setStack] = useState([0, 1, 2]);
@@ -108,20 +108,6 @@ export default function ToolkitStackSwiper({ minimal = false }: { minimal?: bool
       </div>
     </motion.div>
   );
-
-  if (minimal) {
-    return (
-      <div
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="w-full h-full flex items-center justify-center select-none relative overflow-hidden"
-        style={{ perspective: 1000 }}
-      >
-        {content}
-      </div>
-    );
-  }
 
   return (
     <div

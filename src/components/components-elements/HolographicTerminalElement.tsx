@@ -9,7 +9,7 @@ const terminalContent = [
   "✔ Compiled successfully in 23ms",
 ];
 
-export default function HolographicTerminalCard({ minimal = false }: { minimal?: boolean }) {
+export default function HolographicTerminalElement() {
   const [lines, setLines] = useState<string[]>([]);
   const [activeLine, setActiveLine] = useState("");
   const [currentLineIdx, setCurrentLineIdx] = useState(0);
@@ -57,57 +57,6 @@ export default function HolographicTerminalCard({ minimal = false }: { minimal?:
       return () => clearTimeout(timer);
     }
   }, [currentLineIdx, charIdx, lines.length]);
-
-  if (minimal) {
-    return (
-      <div
-        className="w-full h-full flex flex-col justify-center p-3 select-none"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        {/* Title bar with macOS buttons */}
-        <div className="flex items-center justify-between px-3.5 py-2 bg-black/60 border border-white/5 border-b-0 w-full rounded-t-xl shrink-0">
-          <div className="flex gap-1.5 items-center">
-            <div className="w-2 h-2 rounded-full bg-[#ff5f56]" />
-            <div className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
-            <div className="w-2 h-2 rounded-full bg-[#27c93f]" />
-          </div>
-          <span className="text-[8px] font-mono text-white/35 uppercase tracking-widest">bash</span>
-          <div className="w-10" />
-        </div>
-
-        {/* Console logs output */}
-        <div className="relative w-full h-[105px] bg-black/85 border border-white/5 rounded-b-xl p-3 font-mono text-[9px] text-white/80 overflow-hidden flex flex-col justify-start gap-1">
-          {/* Scanline hologram shader */}
-          {hovered && (
-            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] via-transparent to-transparent bg-[size:100%_4px] animate-[pulse_1s_infinite] pointer-events-none z-20" />
-          )}
-
-          {lines.map((line, i) => (
-            <div key={i} className="flex items-center gap-1.5 leading-relaxed">
-              <span className={line.startsWith(">") ? "text-[#E8A969]" : "text-[#BECB6D]"}>
-                {line}
-              </span>
-            </div>
-          ))}
-
-          {activeLine && (
-            <div className="flex items-center gap-1.5 leading-relaxed">
-              <span className="text-[#E8A969]">{activeLine}</span>
-              <span className="inline-block w-[4px] h-[10px] bg-[#E8A969] animate-pulse" />
-            </div>
-          )}
-
-          {lines.length === 0 && !activeLine && (
-            <div className="flex items-center gap-1.5 leading-relaxed">
-              <span className="text-[#E8A969]">&gt;</span>
-              <span className="inline-block w-[4px] h-[10px] bg-[#E8A969] animate-pulse" />
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div

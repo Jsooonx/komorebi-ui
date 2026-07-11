@@ -1,7 +1,12 @@
 import React from "react";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 
-export default function NestedAccordionCard({ minimal = false }: { minimal?: boolean }) {
+export default function NestedAccordionElement() {
   const accordionData = [
     {
       id: "project-settings",
@@ -13,8 +18,8 @@ export default function NestedAccordionCard({ minimal = false }: { minimal?: boo
           details: [
             "Project Display Name: Production API Server",
             "Routing Domain: api-prod.komorebi.dev",
-            "Server Region: US-East (N. Virginia)"
-          ]
+            "Server Region: US-East (N. Virginia)",
+          ],
         },
         {
           id: "advanced-prop",
@@ -22,10 +27,10 @@ export default function NestedAccordionCard({ minimal = false }: { minimal?: boo
           details: [
             "Build Timeout: 1200 seconds",
             "Node Version Compatibility: >= 18.0.0",
-            "Environment Mode: production"
-          ]
-        }
-      ]
+            "Environment Mode: production",
+          ],
+        },
+      ],
     },
     {
       id: "user-access",
@@ -37,8 +42,8 @@ export default function NestedAccordionCard({ minimal = false }: { minimal?: boo
           details: [
             "Administrator: Unlimited read/write access",
             "Developer: Read/write on dev, read-only on production",
-            "Viewer: Read-only on all environments"
-          ]
+            "Viewer: Read-only on all environments",
+          ],
         },
         {
           id: "security-policies",
@@ -46,10 +51,10 @@ export default function NestedAccordionCard({ minimal = false }: { minimal?: boo
           details: [
             "Multi-Factor Authentication (MFA): Enforced",
             "IP Allowlist Filtering: Enabled",
-            "Session Inactivity Timeout: 15 minutes"
-          ]
-        }
-      ]
+            "Session Inactivity Timeout: 15 minutes",
+          ],
+        },
+      ],
     },
     {
       id: "api-credentials",
@@ -61,8 +66,8 @@ export default function NestedAccordionCard({ minimal = false }: { minimal?: boo
           details: [
             "Primary Secret Key: kms_live_...9f2a",
             "Token Lifespan Limit: 90 days rotation",
-            "Permissions Scope: read:analytics, write:deploy"
-          ]
+            "Permissions Scope: read:analytics, write:deploy",
+          ],
         },
         {
           id: "webhook-triggers",
@@ -70,11 +75,11 @@ export default function NestedAccordionCard({ minimal = false }: { minimal?: boo
           details: [
             "Deployment State Changes: active",
             "Database Migration Events: active",
-            "Authentication Failures: active"
-          ]
-        }
-      ]
-    }
+            "Authentication Failures: active",
+          ],
+        },
+      ],
+    },
   ];
 
   const cssVariables = {
@@ -89,11 +94,7 @@ export default function NestedAccordionCard({ minimal = false }: { minimal?: boo
       <div className="border border-white/5 bg-white/[0.01] rounded-lg overflow-hidden divide-y divide-white/5 w-full">
         <Accordion type="single" collapsible className="w-full">
           {accordionData.map((mainItem) => (
-            <AccordionItem
-              key={mainItem.id}
-              value={mainItem.id}
-              className="border-none px-4"
-            >
+            <AccordionItem key={mainItem.id} value={mainItem.id} className="border-none px-4">
               <AccordionTrigger className="hover:no-underline select-none text-xs font-semibold text-white/90 py-3.5">
                 {mainItem.title}
               </AccordionTrigger>
@@ -102,11 +103,7 @@ export default function NestedAccordionCard({ minimal = false }: { minimal?: boo
                 <div className="border border-white/5 bg-black/20 rounded-md overflow-hidden divide-y divide-white/5 w-full mt-1.5">
                   <Accordion type="multiple" className="w-full">
                     {mainItem.subs.map((subItem) => (
-                      <AccordionItem
-                        key={subItem.id}
-                        value={subItem.id}
-                        className="border-none"
-                      >
+                      <AccordionItem key={subItem.id} value={subItem.id} className="border-none">
                         <AccordionTrigger className="px-3 py-2 text-left hover:no-underline select-none text-[11px] font-medium text-white/70">
                           {subItem.title}
                         </AccordionTrigger>
@@ -131,17 +128,6 @@ export default function NestedAccordionCard({ minimal = false }: { minimal?: boo
       </div>
     </div>
   );
-
-  if (minimal) {
-    return (
-      <div
-        className="w-full h-full overflow-y-auto scrollbar-none select-none relative bg-[#0e0e0e]"
-        style={cssVariables}
-      >
-        {content}
-      </div>
-    );
-  }
 
   return (
     <div

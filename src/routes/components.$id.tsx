@@ -6,8 +6,6 @@ import {
   RotateCcw,
   Code2,
   Terminal,
-  Maximize2,
-  Minimize2,
   Menu,
   X,
   Check,
@@ -16,21 +14,21 @@ import {
   Sparkles,
 } from "lucide-react";
 import { loadComponentCode } from "../lib/component-code-loader";
-import { getComponentPreview } from "../lib/component-previews";
-import { COMPONENTS_MANIFEST, getManifestItem } from "../lib/components-manifest";
+import { getComponentElement } from "../lib/component-elements";
+import { COMPONENTS_MANIFEST } from "../lib/components-manifest";
 import { clearNavigationOrigin, getNavigationOrigin } from "../lib/navigation-state";
 
 const getComponent = (id: string) => {
-  const manifestItem = getManifestItem(id);
-  const preview = getComponentPreview(id);
+  const manifestItem = COMPONENTS_MANIFEST.find((item) => item.id === id);
+  const element = getComponentElement(id);
 
-  if (!manifestItem || !preview) {
+  if (!manifestItem || !element) {
     return null;
   }
 
   return {
     ...manifestItem,
-    component: preview,
+    component: element,
   };
 };
 
@@ -111,7 +109,6 @@ function ComponentDetail() {
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [codeOpen, setCodeOpen] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [reloadKey, setReloadKey] = useState(0);
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedCli, setCopiedCli] = useState(false);
@@ -213,54 +210,49 @@ function ComponentDetail() {
 
   return (
     <div className="relative w-screen h-screen bg-[#090909] text-white flex flex-col overflow-hidden font-sans select-none antialiased">
-      {!isFullscreen && (
-        <header className="h-16 border-b border-white/5 flex items-center justify-between px-6 md:px-12 z-30 bg-[#090909]/85 backdrop-blur-xl shrink-0">
-          <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity">
-              <img
-                src="/KomorebiLogoUpdate1_transparent.png"
-                alt="Komorebi UI"
-                className="w-6 h-6 object-contain rounded"
-              />
-              <span className="text-sm font-semibold tracking-tight font-heading">Komorebi UI</span>
-            </Link>
-            <ChevronRight className="w-4 h-4 text-white/20" />
-            <Link
-              to="/components"
-              className="text-xs font-medium text-white/40 hover:text-white/85 transition-colors font-mono"
-            >
-              Components
-            </Link>
-            <ChevronRight className="w-4 h-4 text-white/20" />
-            <div className="flex items-center gap-2 px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-xs font-medium text-white/70">
-              <span className="text-white/40 font-mono text-[10px] mr-1">
-                #{String(activeIndex + 1).padStart(2, "0")}
-              </span>
-              <span>{comp.name}</span>
-            </div>
+      <header className="h-16 border-b border-white/5 flex items-center justify-between px-6 md:px-12 z-30 bg-[#090909]/85 backdrop-blur-xl shrink-0">
+        <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity">
+            <img
+              src="/KomorebiLogoUpdate1_transparent.png"
+              alt="Komorebi UI"
+              className="w-6 h-6 object-contain rounded"
+            />
+            <span className="text-sm font-semibold tracking-tight font-heading">Komorebi UI</span>
+          </Link>
+          <ChevronRight className="w-4 h-4 text-white/20" />
+          <Link
+            to="/components"
+            className="text-xs font-medium text-white/40 hover:text-white/85 transition-colors font-mono"
+          >
+            Components
+          </Link>
+          <ChevronRight className="w-4 h-4 text-white/20" />
+          <div className="flex items-center gap-2 px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-xs font-medium text-white/70">
+            <span className="text-white/40 font-mono text-[10px] mr-1">
+              #{String(activeIndex + 1).padStart(2, "0")}
+            </span>
+            <span>{comp.name}</span>
           </div>
+        </div>
 
-          <nav className="flex items-center gap-6">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                const destination = navigationOrigin?.path || "/";
-                if (destination === "/" && navigationOrigin) {
-                  sessionStorage.setItem(
-                    "komorebi_home_scroll_y",
-                    String(navigationOrigin.scrollY),
-                  );
-                }
-                clearNavigationOrigin();
-                navigate({ to: destination });
-              }}
-              className="text-xs font-medium text-white/60 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer border-none bg-transparent p-0"
-            >
-              Back to Components
-            </button>
-          </nav>
-        </header>
-      )}
+        <nav className="flex items-center gap-6">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              const destination = navigationOrigin?.path || "/";
+              if (destination === "/" && navigationOrigin) {
+                sessionStorage.setItem("komorebi_home_scroll_y", String(navigationOrigin.scrollY));
+              }
+              clearNavigationOrigin();
+              navigate({ to: destination });
+            }}
+            className="text-xs font-medium text-white/60 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer border-none bg-transparent p-0"
+          >
+            Back to Components
+          </button>
+        </nav>
+      </header>
 
       <div className="flex-1 flex relative overflow-hidden">
         <AnimatePresence>
@@ -330,7 +322,7 @@ function ComponentDetail() {
 
         <main className="flex-1 flex flex-col lg:flex-row h-full overflow-hidden">
           <AnimatePresence>
-            {codeOpen && !isFullscreen && (
+            {codeOpen && (
               <motion.section
                 id="code-pane-container"
                 initial={isLargeScreen ? { width: 0, opacity: 0 } : { height: 0, opacity: 0 }}
@@ -403,7 +395,7 @@ function ComponentDetail() {
                 <button
                   onClick={() => setCodeOpen(!codeOpen)}
                   className={`p-2 rounded-lg transition-all cursor-pointer ${
-                    codeOpen && !isFullscreen
+                    codeOpen
                       ? "bg-[#E8A969]/15 text-[#E8A969]"
                       : "text-white/60 hover:text-white hover:bg-white/5"
                   }`}
@@ -421,20 +413,6 @@ function ComponentDetail() {
                     <Check className="w-3.5 h-3.5 text-[#00f5a0]" />
                   ) : (
                     <Terminal className="w-3.5 h-3.5" />
-                  )}
-                </button>
-
-                <div className="w-[1px] h-4 bg-white/10 mx-0.5" />
-
-                <button
-                  onClick={() => setIsFullscreen(!isFullscreen)}
-                  className="p-2 hover:bg-white/5 rounded-lg text-white/60 hover:text-white transition-colors cursor-pointer"
-                  title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
-                >
-                  {isFullscreen ? (
-                    <Minimize2 className="w-3.5 h-3.5" />
-                  ) : (
-                    <Maximize2 className="w-3.5 h-3.5" />
                   )}
                 </button>
               </div>
@@ -527,58 +505,32 @@ function ComponentDetail() {
 
               <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
                 <PreviewComponent
-                  minimal={
-                    [
-                      "pixel-shimmer",
-                      "mega-menu-navbar-1",
-                      "mega-menu-navbar-2",
-                      "mega-menu-navbar-3",
-                      "features-1",
-                      "features-2",
-                    ].includes(comp.id)
-                      ? false
-                      : true
-                  }
                   activeState={comp.id === "dynamic-island" ? dynamicIslandState : undefined}
                 />
               </div>
             </div>
 
-            {!isFullscreen && (
-              <div className="text-left space-y-2.5 pb-2 shrink-0 select-text">
-                <div>
-                  <h2 className="text-sm font-semibold tracking-tight text-white/95">
-                    {comp.name}
-                  </h2>
-                  <p className="text-[11px] text-white/45 leading-relaxed max-w-2xl mt-1">
-                    {comp.description}
-                  </p>
-                </div>
-
-                {comp.dependencies && comp.dependencies.length > 0 && (
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    {comp.dependencies.map((dep) => (
-                      <span
-                        key={dep}
-                        className="text-[8px] font-mono text-white/30 px-1.5 py-0.5 rounded bg-white/5 border border-white/10"
-                      >
-                        {dep}
-                      </span>
-                    ))}
-                  </div>
-                )}
+            <div className="text-left space-y-2.5 pb-2 shrink-0 select-text">
+              <div>
+                <h2 className="text-sm font-semibold tracking-tight text-white/95">{comp.name}</h2>
+                <p className="text-[11px] text-white/45 leading-relaxed max-w-2xl mt-1">
+                  {comp.description}
+                </p>
               </div>
-            )}
 
-            {isFullscreen && (
-              <button
-                onClick={() => setIsFullscreen(false)}
-                className="absolute top-8 left-8 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/60 hover:bg-black/80 border border-white/10 backdrop-blur-md text-xs text-white/80 hover:text-white transition-all cursor-pointer shadow-lg"
-              >
-                <Minimize2 className="w-3.5 h-3.5" />
-                <span>Exit Fullscreen</span>
-              </button>
-            )}
+              {comp.dependencies && comp.dependencies.length > 0 && (
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {comp.dependencies.map((dep) => (
+                    <span
+                      key={dep}
+                      className="text-[8px] font-mono text-white/30 px-1.5 py-0.5 rounded bg-white/5 border border-white/10"
+                    >
+                      {dep}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
           </section>
         </main>
       </div>

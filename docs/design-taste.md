@@ -93,3 +93,8 @@ To achieve butter-smooth 60fps/144fps animations without layout jitter:
 ### 5. Seamless Loops (alignment offset)
 
 - Avoid using `gap` classes on flex containers inside endless loops. Instead, apply inline `marginRight` styles to child elements. This eliminates sub-pixel rounding offsets and prevents visual "jumping" when the loop resets.
+
+### 6. Component Catalog Boundaries
+
+- Component fullscreen is intentionally unavailable. The regular `/components/$id` playground is the largest Components surface and must not expose a second fullscreen state, control, or exit overlay.
+- Compact catalog treatment belongs to `components-preview-elements/`. Canonical component source in `components-elements/` must not expose catalog-only flags such as `minimal` or `previewMode`.

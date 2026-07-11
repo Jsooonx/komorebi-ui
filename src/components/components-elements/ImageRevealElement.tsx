@@ -1,37 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function ImageRevealCard({ minimal = false }: { minimal?: boolean }) {
+export default function ImageRevealElement() {
   const [hovered, setHovered] = useState(false);
-
-  if (minimal) {
-    return (
-      <div
-        className="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer select-none group"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80"
-            alt="Nature Scenery"
-            className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 ease-out"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-        </div>
-
-        <motion.div
-          animate={{ y: hovered ? "-100%" : "0%" }}
-          transition={{ type: "spring", damping: 25, stiffness: 180 }}
-          className="absolute inset-0 bg-[#E11D48] z-20 flex items-center justify-center"
-        >
-          <span className="font-serif text-white text-[120px] font-bold select-none tracking-tight">
-            K
-          </span>
-        </motion.div>
-      </div>
-    );
-  }
 
   return (
     <div

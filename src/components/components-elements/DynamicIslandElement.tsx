@@ -1,26 +1,20 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Smartphone, 
-  Mail, 
-  Volume2, 
-  VolumeX, 
-  Sparkles, 
-  Phone, 
-  PhoneOff, 
-  CheckCircle2, 
-  Check, 
-  Trash2, 
-  Square 
+import {
+  Smartphone,
+  Mail,
+  Volume2,
+  VolumeX,
+  Sparkles,
+  Phone,
+  PhoneOff,
+  CheckCircle2,
+  Check,
+  Trash2,
+  Square,
 } from "lucide-react";
 
-export default function DynamicIslandCard({ 
-  minimal = false,
-  activeState 
-}: { 
-  minimal?: boolean;
-  activeState?: string;
-}) {
+export default function DynamicIslandElement({ activeState }: { activeState?: string }) {
   const [hovered, setHovered] = useState(false);
   const resolvedState = activeState || (hovered ? "findmy" : "idle");
 
@@ -43,7 +37,9 @@ export default function DynamicIslandCard({
   const [phoneSecs, setPhoneSecs] = useState(0);
 
   // Screen Record state ("recording" -> "saved" -> "deleted")
-  const [screenRecordAction, setScreenRecordAction] = useState<"recording" | "saved" | "deleted">("recording");
+  const [screenRecordAction, setScreenRecordAction] = useState<"recording" | "saved" | "deleted">(
+    "recording",
+  );
   const [screenRecSecs, setScreenRecSecs] = useState(0);
 
   // Reset or run interval for Timer
@@ -147,10 +143,12 @@ export default function DynamicIslandCard({
       case "ring":
         return { width: 250, height: 46, borderRadius: 23, bg: "#000000" };
       case "timer":
-        if (timerAction === "stopped") return { width: 270, height: 50, borderRadius: 25, bg: "#000000" };
+        if (timerAction === "stopped")
+          return { width: 270, height: 50, borderRadius: 25, bg: "#000000" };
         return { width: 260, height: 48, borderRadius: 24, bg: "#000000" };
       case "record":
-        if (recordAction === "stopped") return { width: 280, height: 50, borderRadius: 25, bg: "#000000" };
+        if (recordAction === "stopped")
+          return { width: 280, height: 50, borderRadius: 25, bg: "#000000" };
         return { width: 270, height: 48, borderRadius: 24, bg: "#000000" };
       case "music":
         return { width: 290, height: 76, borderRadius: 24, bg: "#0a0a0c" };
@@ -163,14 +161,18 @@ export default function DynamicIslandCard({
       case "lowBattery":
         return { width: 270, height: 64, borderRadius: 22, bg: "#0d0a0a" };
       case "phone":
-        if (phoneState === "active") return { width: 300, height: 72, borderRadius: 24, bg: "#000000" };
-        if (phoneState === "ended") return { width: 210, height: 48, borderRadius: 24, bg: "#000000" };
+        if (phoneState === "active")
+          return { width: 300, height: 72, borderRadius: 24, bg: "#000000" };
+        if (phoneState === "ended")
+          return { width: 210, height: 48, borderRadius: 24, bg: "#000000" };
         return { width: 300, height: 74, borderRadius: 24, bg: "#000000" };
       case "findmy":
         return { width: 280, height: 70, borderRadius: 24, bg: "#000000" };
       case "screenRecord":
-        if (screenRecordAction === "saved") return { width: 280, height: 52, borderRadius: 24, bg: "#000000" };
-        if (screenRecordAction === "deleted") return { width: 250, height: 52, borderRadius: 24, bg: "#000000" };
+        if (screenRecordAction === "saved")
+          return { width: 280, height: 52, borderRadius: 24, bg: "#000000" };
+        if (screenRecordAction === "deleted")
+          return { width: 250, height: 52, borderRadius: 24, bg: "#000000" };
         return { width: 330, height: 64, borderRadius: 26, bg: "#000000" };
       default:
         return { width: 92, height: 30, borderRadius: 15, bg: "#000000" };
@@ -183,18 +185,18 @@ export default function DynamicIslandCard({
     switch (resolvedState) {
       case "ring":
         return (
-          <motion.div 
-            key="ring" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            key="ring"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex items-center justify-between w-full px-4 py-1"
           >
-            <div 
+            <div
               onClick={() => setSilentMode(true)}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-full cursor-pointer transition-colors ${
-                silentMode 
-                  ? "bg-orange-500/25 text-orange-400 border border-orange-500/40" 
+                silentMode
+                  ? "bg-orange-500/25 text-orange-400 border border-orange-500/40"
                   : "text-white/45 hover:text-white/75"
               }`}
             >
@@ -202,11 +204,11 @@ export default function DynamicIslandCard({
               <span className="text-[11px] font-mono font-semibold">Silent</span>
             </div>
 
-            <div 
+            <div
               onClick={() => setSilentMode(false)}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-full cursor-pointer transition-colors ${
-                !silentMode 
-                  ? "bg-emerald-500/25 text-emerald-400 border border-emerald-500/40" 
+                !silentMode
+                  ? "bg-emerald-500/25 text-emerald-400 border border-emerald-500/40"
                   : "text-white/45 hover:text-white/75"
               }`}
             >
@@ -219,11 +221,11 @@ export default function DynamicIslandCard({
       case "timer":
         if (timerAction === "stopped") {
           return (
-            <motion.div 
-              key="timerStopped" 
-              initial={{ opacity: 0, scale: 0.95 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              exit={{ opacity: 0 }} 
+            <motion.div
+              key="timerStopped"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
               className="flex items-center justify-between w-full px-4 py-1.5"
             >
               <div className="flex items-center gap-2">
@@ -231,7 +233,9 @@ export default function DynamicIslandCard({
                 <span className="text-xs font-semibold text-white/95">Timer Stopped</span>
               </div>
               <div className="flex items-center gap-2.5 shrink-0">
-                <span className="text-xs font-mono font-bold text-orange-400">{formatTimer(timerTenths)}</span>
+                <span className="text-xs font-mono font-bold text-orange-400">
+                  {formatTimer(timerTenths)}
+                </span>
                 <div
                   onClick={() => {
                     setTimerAction("running");
@@ -247,11 +251,11 @@ export default function DynamicIslandCard({
         }
 
         return (
-          <motion.div 
-            key="timerActive" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            key="timerActive"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex items-center justify-between w-full px-4.5 py-1.5"
           >
             <span className="flex items-center gap-2.5">
@@ -280,11 +284,11 @@ export default function DynamicIslandCard({
       case "record":
         if (recordAction === "stopped") {
           return (
-            <motion.div 
-              key="recordStopped" 
-              initial={{ opacity: 0, scale: 0.95 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              exit={{ opacity: 0 }} 
+            <motion.div
+              key="recordStopped"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
               className="flex items-center justify-between w-full px-4 py-1.5"
             >
               <div className="flex items-center gap-2">
@@ -292,7 +296,9 @@ export default function DynamicIslandCard({
                 <span className="text-xs font-semibold text-white/95">Voice Memo Saved</span>
               </div>
               <div className="flex items-center gap-2.5 shrink-0">
-                <span className="text-xs font-mono font-bold text-white/85">{formatSecs(recordSecs)}</span>
+                <span className="text-xs font-mono font-bold text-white/85">
+                  {formatSecs(recordSecs)}
+                </span>
                 <div
                   onClick={() => {
                     setRecordAction("recording");
@@ -308,11 +314,11 @@ export default function DynamicIslandCard({
         }
 
         return (
-          <motion.div 
-            key="recordActive" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            key="recordActive"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex items-center justify-between w-full px-4.5 py-1.5"
           >
             <span className="flex items-center gap-2.5">
@@ -336,27 +342,54 @@ export default function DynamicIslandCard({
 
       case "music":
         return (
-          <motion.div 
-            key="music" 
-            initial={{ opacity: 0, scale: 0.95 }} 
-            animate={{ opacity: 1, scale: 1 }} 
-            exit={{ opacity: 0, scale: 0.95 }} 
+          <motion.div
+            key="music"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
             className="flex items-center gap-3.5 w-full px-4 py-2"
           >
             <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-indigo-600 flex items-center justify-center shrink-0 shadow-lg relative overflow-hidden group/art">
-              <Sparkles className="w-5 h-5 text-white/90 animate-spin" style={{ animationDuration: "10s" }} />
+              <Sparkles
+                className="w-5 h-5 text-white/90 animate-spin"
+                style={{ animationDuration: "10s" }}
+              />
             </div>
             <div className="flex-1 min-w-0 text-left">
-              <div className="text-xs font-semibold text-white/95 truncate">Midnight City Beats</div>
-              <div className="text-[10px] font-mono text-white/55 truncate mt-0.5">M83 & Komorebi Lab</div>
+              <div className="text-xs font-semibold text-white/95 truncate">
+                Midnight City Beats
+              </div>
+              <div className="text-[10px] font-mono text-white/55 truncate mt-0.5">
+                M83 & Komorebi Lab
+              </div>
             </div>
             {/* Organized, rhythmic audio bar animation instead of random bounce */}
             <div className="flex items-end gap-1 h-6 px-1 shrink-0 pb-1">
-              <motion.span animate={{ height: ["35%", "85%", "35%"] }} transition={{ repeat: Infinity, duration: 1.1, ease: "easeInOut", delay: 0 }} className="w-1 bg-sun-gold rounded-full" />
-              <motion.span animate={{ height: ["65%", "25%", "90%", "65%"] }} transition={{ repeat: Infinity, duration: 0.9, ease: "easeInOut", delay: 0.1 }} className="w-1 bg-sun-gold rounded-full" />
-              <motion.span animate={{ height: ["20%", "100%", "45%", "20%"] }} transition={{ repeat: Infinity, duration: 1.3, ease: "easeInOut", delay: 0.2 }} className="w-1 bg-sun-gold rounded-full" />
-              <motion.span animate={{ height: ["80%", "40%", "75%", "80%"] }} transition={{ repeat: Infinity, duration: 1.0, ease: "easeInOut", delay: 0.05 }} className="w-1 bg-sun-gold rounded-full" />
-              <motion.span animate={{ height: ["45%", "70%", "30%", "45%"] }} transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut", delay: 0.15 }} className="w-1 bg-sun-gold rounded-full" />
+              <motion.span
+                animate={{ height: ["35%", "85%", "35%"] }}
+                transition={{ repeat: Infinity, duration: 1.1, ease: "easeInOut", delay: 0 }}
+                className="w-1 bg-sun-gold rounded-full"
+              />
+              <motion.span
+                animate={{ height: ["65%", "25%", "90%", "65%"] }}
+                transition={{ repeat: Infinity, duration: 0.9, ease: "easeInOut", delay: 0.1 }}
+                className="w-1 bg-sun-gold rounded-full"
+              />
+              <motion.span
+                animate={{ height: ["20%", "100%", "45%", "20%"] }}
+                transition={{ repeat: Infinity, duration: 1.3, ease: "easeInOut", delay: 0.2 }}
+                className="w-1 bg-sun-gold rounded-full"
+              />
+              <motion.span
+                animate={{ height: ["80%", "40%", "75%", "80%"] }}
+                transition={{ repeat: Infinity, duration: 1.0, ease: "easeInOut", delay: 0.05 }}
+                className="w-1 bg-sun-gold rounded-full"
+              />
+              <motion.span
+                animate={{ height: ["45%", "70%", "30%", "45%"] }}
+                transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut", delay: 0.15 }}
+                className="w-1 bg-sun-gold rounded-full"
+              />
             </div>
           </motion.div>
         );
@@ -364,11 +397,11 @@ export default function DynamicIslandCard({
       case "airdrop":
         if (airdropProgress >= 100) {
           return (
-            <motion.div 
-              key="airdropSuccess" 
-              initial={{ opacity: 0, scale: 0.9 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              exit={{ opacity: 0 }} 
+            <motion.div
+              key="airdropSuccess"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
               className="flex items-center justify-center gap-2.5 w-full px-4 py-1.5"
             >
               <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
@@ -377,11 +410,11 @@ export default function DynamicIslandCard({
           );
         }
         return (
-          <motion.div 
-            key="airdropProgress" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            key="airdropProgress"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex flex-col justify-between w-full px-4 py-2 gap-2"
           >
             <div className="flex items-center justify-between w-full">
@@ -390,14 +423,20 @@ export default function DynamicIslandCard({
                   <Mail className="w-3.5 h-3.5 text-blue-400" />
                 </div>
                 <div className="text-left min-w-0">
-                  <div className="text-xs font-semibold text-white/95 leading-tight truncate">AirDrop File</div>
-                  <div className="text-[9px] font-mono text-white/50 mt-0.5 truncate">MacBook Pro (M3 Max)</div>
+                  <div className="text-xs font-semibold text-white/95 leading-tight truncate">
+                    AirDrop File
+                  </div>
+                  <div className="text-[9px] font-mono text-white/50 mt-0.5 truncate">
+                    MacBook Pro (M3 Max)
+                  </div>
                 </div>
               </div>
-              <span className="text-xs font-mono text-blue-400 font-bold shrink-0">{airdropProgress}%</span>
+              <span className="text-xs font-mono text-blue-400 font-bold shrink-0">
+                {airdropProgress}%
+              </span>
             </div>
             <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-              <div 
+              <div
                 className="h-full bg-blue-500 rounded-full transition-all duration-75"
                 style={{ width: `${airdropProgress}%` }}
               />
@@ -407,11 +446,11 @@ export default function DynamicIslandCard({
 
       case "airdropMini":
         return (
-          <motion.div 
-            key="airdropMini" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            key="airdropMini"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex items-center gap-2 px-3 py-1"
           >
             <Mail className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
@@ -421,15 +460,17 @@ export default function DynamicIslandCard({
 
       case "lowBattery":
         return (
-          <motion.div 
-            key="lowBattery" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            key="lowBattery"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex items-center justify-between w-full px-4 py-2"
           >
             <div className="text-left">
-              <div className="text-[9px] font-mono font-bold text-red-400 uppercase tracking-wider">BATTERY ALERT</div>
+              <div className="text-[9px] font-mono font-bold text-red-400 uppercase tracking-wider">
+                BATTERY ALERT
+              </div>
               <div className="text-xs text-white/95 font-medium mt-0.5">20% Remaining</div>
             </div>
             {/* Battery outline with thin bar on the left */}
@@ -445,11 +486,11 @@ export default function DynamicIslandCard({
       case "phone":
         if (phoneState === "active") {
           return (
-            <motion.div 
-              key="phoneActive" 
-              initial={{ opacity: 0, scale: 0.95 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              exit={{ opacity: 0 }} 
+            <motion.div
+              key="phoneActive"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
               className="flex items-center justify-between w-full px-4 py-2"
             >
               <div className="flex items-center gap-2.5 text-left">
@@ -457,12 +498,18 @@ export default function DynamicIslandCard({
                   <Phone className="w-4 h-4 text-emerald-400 animate-pulse" />
                 </div>
                 <div className="min-w-0">
-                  <div className="text-[9px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Active Call</div>
-                  <div className="text-xs font-semibold text-white/95 truncate max-w-[110px]">Alex Rivers</div>
+                  <div className="text-[9px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">
+                    Active Call
+                  </div>
+                  <div className="text-xs font-semibold text-white/95 truncate max-w-[110px]">
+                    Alex Rivers
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-3 shrink-0">
-                <span className="text-xs font-mono font-bold text-white/90">{formatSecs(phoneSecs)}</span>
+                <span className="text-xs font-mono font-bold text-white/90">
+                  {formatSecs(phoneSecs)}
+                </span>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -478,11 +525,11 @@ export default function DynamicIslandCard({
 
         if (phoneState === "ended") {
           return (
-            <motion.div 
-              key="phoneEnded" 
-              initial={{ opacity: 0, scale: 0.95 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              exit={{ opacity: 0 }} 
+            <motion.div
+              key="phoneEnded"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
               className="flex items-center justify-center gap-2 w-full px-4 py-1.5"
             >
               <PhoneOff className="w-4 h-4 text-red-400 shrink-0" />
@@ -492,11 +539,11 @@ export default function DynamicIslandCard({
         }
 
         return (
-          <motion.div 
-            key="phoneIncoming" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            key="phoneIncoming"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex items-center justify-between w-full px-4 py-2"
           >
             <div className="flex items-center gap-3 text-left">
@@ -504,8 +551,12 @@ export default function DynamicIslandCard({
                 A
               </div>
               <div className="min-w-0">
-                <div className="text-[9px] font-mono text-white/50 uppercase tracking-wider font-semibold">Incoming Call</div>
-                <div className="text-xs font-semibold text-white/95 truncate max-w-[110px]">Alex Rivers</div>
+                <div className="text-[9px] font-mono text-white/50 uppercase tracking-wider font-semibold">
+                  Incoming Call
+                </div>
+                <div className="text-xs font-semibold text-white/95 truncate max-w-[110px]">
+                  Alex Rivers
+                </div>
               </div>
             </div>
             <div className="flex gap-2.5 shrink-0">
@@ -534,12 +585,12 @@ export default function DynamicIslandCard({
 
       case "findmy":
         return (
-          <motion.div 
-            key="findmy" 
-            initial={{ opacity: 0, scale: 0.95 }} 
-            animate={{ opacity: 1, scale: 1 }} 
-            exit={{ opacity: 0, scale: 0.95 }} 
-            transition={{ duration: 0.15 }} 
+          <motion.div
+            key="findmy"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
             className="w-full flex flex-col justify-center gap-1.5 px-4.5 py-2"
           >
             <div className="w-full flex items-center justify-between">
@@ -552,9 +603,18 @@ export default function DynamicIslandCard({
             <div className="w-full flex items-center justify-between px-0.5">
               <span className="text-[11px] font-mono text-white/65">Precision Finding: Nearby</span>
               <div className="flex gap-1 items-center">
-                <span className="w-1 h-3 bg-sun-gold rounded-full animate-pulse" style={{ animationDelay: "0s" }} />
-                <span className="w-1 h-4 bg-sun-gold rounded-full animate-pulse" style={{ animationDelay: "0.15s" }} />
-                <span className="w-1 h-2 bg-sun-gold rounded-full animate-pulse" style={{ animationDelay: "0.3s" }} />
+                <span
+                  className="w-1 h-3 bg-sun-gold rounded-full animate-pulse"
+                  style={{ animationDelay: "0s" }}
+                />
+                <span
+                  className="w-1 h-4 bg-sun-gold rounded-full animate-pulse"
+                  style={{ animationDelay: "0.15s" }}
+                />
+                <span
+                  className="w-1 h-2 bg-sun-gold rounded-full animate-pulse"
+                  style={{ animationDelay: "0.3s" }}
+                />
               </div>
             </div>
           </motion.div>
@@ -563,11 +623,11 @@ export default function DynamicIslandCard({
       case "screenRecord":
         if (screenRecordAction === "saved") {
           return (
-            <motion.div 
-              key="screenRecSaved" 
-              initial={{ opacity: 0, scale: 0.95 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              exit={{ opacity: 0 }} 
+            <motion.div
+              key="screenRecSaved"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
               className="flex items-center justify-center gap-2.5 w-full px-4 py-1.5"
             >
               <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
@@ -578,11 +638,11 @@ export default function DynamicIslandCard({
 
         if (screenRecordAction === "deleted") {
           return (
-            <motion.div 
-              key="screenRecDeleted" 
-              initial={{ opacity: 0, scale: 0.95 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              exit={{ opacity: 0 }} 
+            <motion.div
+              key="screenRecDeleted"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
               className="flex items-center justify-center gap-2 w-full px-4 py-1.5"
             >
               <Trash2 className="w-4 h-4 text-red-400 shrink-0" />
@@ -592,11 +652,11 @@ export default function DynamicIslandCard({
         }
 
         return (
-          <motion.div 
-            key="screenRecActive" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            key="screenRecActive"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex items-center justify-between w-full px-4 py-1.5"
           >
             <span className="flex items-center gap-2.5">
@@ -627,11 +687,11 @@ export default function DynamicIslandCard({
       case "idle":
       default:
         return (
-          <motion.div 
-            key="idle" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            key="idle"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex items-center justify-center gap-3 w-full px-3 py-1"
           >
             <div className="w-3 h-3 rounded-full bg-black border border-white/10 shadow-inner flex items-center justify-center">
@@ -642,32 +702,6 @@ export default function DynamicIslandCard({
         );
     }
   };
-
-  // When previewed in Components catalog (minimal === true), keep ONLY the dynamic island capsule
-  if (minimal) {
-    return (
-      <div
-        className="w-full h-full min-h-[160px] flex items-center justify-center cursor-pointer select-none relative z-10 p-4"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        <motion.div
-          animate={{
-            width: config.width,
-            height: config.height,
-            borderRadius: config.borderRadius,
-            backgroundColor: config.bg,
-          }}
-          transition={{ type: "spring", damping: 20, stiffness: 240 }}
-          className="border border-white/10 flex items-center justify-center p-2 relative overflow-hidden shadow-2xl"
-        >
-          <AnimatePresence mode="wait">
-            {renderContent()}
-          </AnimatePresence>
-        </motion.div>
-      </div>
-    );
-  }
 
   // Bento-Showcase Highlight Card (Main Landing Page / Highlights.tsx)
   return (
@@ -698,9 +732,7 @@ export default function DynamicIslandCard({
           transition={{ type: "spring", damping: 20, stiffness: 240 }}
           className="border border-white/10 flex items-center justify-center p-2 relative overflow-hidden shadow-2xl"
         >
-          <AnimatePresence mode="wait">
-            {renderContent()}
-          </AnimatePresence>
+          <AnimatePresence mode="wait">{renderContent()}</AnimatePresence>
         </motion.div>
       </div>
 
@@ -709,7 +741,9 @@ export default function DynamicIslandCard({
         <span className="text-xs text-white/50 tracking-wider uppercase block mb-1">
           Interactive Notifications
         </span>
-        <h3 className="font-sans text-base font-medium tracking-tight text-white">Dynamic Island</h3>
+        <h3 className="font-sans text-base font-medium tracking-tight text-white">
+          Dynamic Island
+        </h3>
       </div>
     </div>
   );
