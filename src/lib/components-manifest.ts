@@ -76,7 +76,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     dependencies: ["framer-motion", "lucide-react"],
     isNew: true,
     gridClass: "md:col-span-2",
-    viewportHeightClass: "h-[300px]",
+    viewportHeightClass: "h-[380px]",
   },
   {
     id: "dither-canvas",

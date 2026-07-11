@@ -197,18 +197,21 @@ function TabPanel({ activeTab, direction }: { activeTab: TabId; direction: numbe
   return (
     <motion.div
       custom={direction}
-      layout
       variants={{
         enter: (travel: number) => ({
           opacity: 0,
-          x: travel * 28,
-          filter: "blur(5px)",
+          x: travel * 16,
+          filter: "blur(4px)",
         }),
         center: { opacity: 1, x: 0, filter: "blur(0px)" },
         exit: (travel: number) => ({
           opacity: 0,
-          x: travel * -28,
-          filter: "blur(5px)",
+          x: travel * -16,
+          filter: "blur(4px)",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
         }),
       }}
       initial="enter"
@@ -242,35 +245,27 @@ export default function ExpandableTabDockElement() {
   };
 
   return (
-    <div className="relative mx-auto h-full w-full max-w-[430px]">
-      <motion.div
-        layout="size"
-        data-preserve-shell="true"
-        transition={spring}
-        className="absolute bottom-[calc(50%-24px)] left-1/2 w-full -translate-x-1/2 overflow-hidden rounded-2xl border border-white/10 bg-[#0d0e10]/95 text-white shadow-[0_24px_80px_rgba(0,0,0,.38)] backdrop-blur-xl"
-      >
-        <AnimatePresence initial={false} mode="popLayout">
+    <div className="flex items-center justify-center w-full h-full min-h-[360px] select-none">
+      <div className="relative">
+        <AnimatePresence>
           {isExpanded && (
             <motion.div
               key="expanded-panel"
-              layout="size"
-              initial={{ opacity: 0, height: 0, y: 12, filter: "blur(5px)" }}
-              animate={{ opacity: 1, height: "auto", y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, height: 0, y: 10, filter: "blur(5px)" }}
+              layout
+              initial={{ opacity: 0, y: 15, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.96 }}
               transition={spring}
-              className="overflow-hidden px-4 pb-3 pt-4"
+              className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-[320px] sm:w-[360px] overflow-hidden rounded-2xl border border-white/10 bg-[#0d0e10]/95 text-white shadow-[0_24px_80px_rgba(0,0,0,.38)] backdrop-blur-xl px-4 pb-3 pt-4"
             >
               <div className="mb-3 flex items-center justify-between">
                 <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-white/35">
                   Workspace
                 </span>
-                <motion.span
-                  layout
-                  className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(165,243,252,.8)]"
-                />
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(165,243,252,.8)]" />
               </div>
-              <motion.div layout="size" transition={spring} className="overflow-hidden">
-                <AnimatePresence mode="wait" initial={false} custom={direction}>
+              <motion.div layout="size" transition={spring} className="overflow-hidden relative">
+                <AnimatePresence mode="popLayout" initial={false} custom={direction}>
                   <TabPanel key={activeTab} activeTab={activeTab} direction={direction} />
                 </AnimatePresence>
               </motion.div>
@@ -280,53 +275,58 @@ export default function ExpandableTabDockElement() {
 
         <motion.nav
           layout
-          className="flex items-center justify-center gap-1 border-t border-white/8 bg-white/[0.02] px-2 py-2"
+          transition={spring}
+          className="flex items-center justify-center gap-1 rounded-2xl border border-white/10 bg-[#0d0e10]/95 px-2 py-2 shadow-[0_12px_40px_rgba(0,0,0,.2)] backdrop-blur-xl"
         >
           {tabs.map(({ id, label, icon: Icon }) => {
             const active = activeTab === id;
+            const showText = isExpanded && active;
             return (
               <motion.button
                 key={id}
                 layout
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.94 }}
+                transition={spring}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => handleTabClick(id)}
-                className={`group relative flex min-w-0 items-center rounded-lg py-1.5 text-[8px] text-white/35 transition-colors ${isExpanded && active ? "flex-row gap-1.5 px-2.5" : "flex-col gap-1 px-2"}`}
+                className="group relative flex items-center justify-center rounded-xl py-2 px-3 text-white/40 hover:text-white transition-colors cursor-pointer"
               >
-                {active && (
+                {showText && (
                   <motion.span
                     layoutId="expandable-tab-active"
                     transition={spring}
-                    className="absolute inset-0 rounded-lg bg-white/[0.08]"
+                    className="absolute inset-0 rounded-xl bg-white/[0.08] border border-white/5"
                   />
                 )}
                 <motion.span
-                  whileHover={{ scale: 1.16 }}
-                  transition={softSpring}
-                  className="relative z-10"
+                  layout
+                  className="relative z-10 flex items-center justify-center"
                 >
                   <Icon
-                    className={`h-3.5 w-3.5 transition-colors ${active ? "text-white" : "text-white/35 group-hover:text-white/70"}`}
+                    className={`h-4 w-4 transition-all duration-300 ${
+                      active
+                        ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                        : "text-white/40 group-hover:text-white/80 group-hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.3)]"
+                    }`}
                   />
                 </motion.span>
-                <AnimatePresence initial={false}>
-                  {isExpanded && active && (
-                    <motion.span
-                      initial={{ opacity: 0, width: 0, x: direction * 6 }}
-                      animate={{ opacity: 1, width: "auto", x: 0 }}
-                      exit={{ opacity: 0, width: 0, x: direction * -6 }}
-                      transition={softSpring}
-                      className="relative z-10 overflow-hidden whitespace-nowrap text-white/85"
-                    >
-                      {label}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
+                <motion.span
+                  layout
+                  initial={false}
+                  animate={{
+                    width: showText ? "auto" : 0,
+                    opacity: showText ? 1 : 0,
+                    marginLeft: showText ? 6 : 0,
+                  }}
+                  transition={spring}
+                  className="relative z-10 overflow-hidden whitespace-nowrap text-[10px] font-semibold text-white/85 font-sans"
+                >
+                  {label}
+                </motion.span>
               </motion.button>
             );
           })}
         </motion.nav>
-      </motion.div>
+      </div>
     </div>
   );
 }
