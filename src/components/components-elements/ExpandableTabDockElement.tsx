@@ -251,7 +251,6 @@ export default function ExpandableTabDockElement({ className = "items-center" }:
           {isExpanded && (
             <motion.div
               key="expanded-panel"
-              layout="size"
               initial={{ opacity: 0, height: 0, y: 15, scale: 0.96 }}
               animate={{ opacity: 1, height: "auto", y: 0, scale: 1 }}
               exit={{ opacity: 0, height: 0, y: 10, scale: 0.96 }}
@@ -264,11 +263,11 @@ export default function ExpandableTabDockElement({ className = "items-center" }:
                 </span>
                 <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(165,243,252,.8)]" />
               </div>
-              <div className="overflow-hidden relative">
+              <motion.div layout="size" transition={spring} className="overflow-hidden relative">
                 <AnimatePresence mode="popLayout" initial={false} custom={direction}>
                   <TabPanel key={activeTab} activeTab={activeTab} direction={direction} />
                 </AnimatePresence>
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
