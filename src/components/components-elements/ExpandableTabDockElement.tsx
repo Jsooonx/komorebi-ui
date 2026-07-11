@@ -258,7 +258,10 @@ export default function ExpandableTabDockElement({ className = "items-center" }:
   };
 
   return (
-    <div className={`flex justify-center w-full h-full min-h-[360px] select-none ${className}`}>
+    <div
+      data-preserve-shell="true"
+      className={`flex justify-center w-full h-full min-h-[360px] select-none ${className}`}
+    >
       <div className="relative">
         <AnimatePresence>
           {isExpanded && (
