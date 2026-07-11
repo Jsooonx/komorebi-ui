@@ -79,6 +79,8 @@ export async function loadComponentCode(id: string) {
       return (await import("../components/blocks-elements/SienaParallaxElement.tsx?raw")).default;
     case "words-preloader":
       return (await import("../components/blocks-elements/WordsPreloaderElement.tsx?raw")).default;
+    case "stairs-preloader":
+      return (await import("../components/blocks-elements/StairsPreloaderElement.tsx?raw")).default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }

@@ -12,6 +12,7 @@ import Features4Block from "./Features4Block";
 import Features5Block from "./Features5Block";
 import SienaParallaxBlock from "./SienaParallaxBlock";
 import WordsPreloaderBlock from "./WordsPreloaderBlock";
+import StairsPreloaderBlock from "./StairsPreloaderBlock";
 
 const BLOCK_PAGES: Record<string, ComponentType> = {
   "mega-menu-navbar-1": MegaMenuNavbar1Block,
@@ -27,6 +28,7 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "features-5": Features5Block,
   "siena-parallax": SienaParallaxBlock,
   "words-preloader": WordsPreloaderBlock,
+  "stairs-preloader": StairsPreloaderBlock,
 };
 
 export function getBlockPage(id: string) {
