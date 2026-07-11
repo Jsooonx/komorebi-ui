@@ -59,33 +59,40 @@ export default function StairsPreloaderElement() {
       
       {/* Mock Page Content Revealed Underneath */}
       <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center select-none z-10">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={isWiped ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="space-y-6 max-w-md"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/5 bg-white/[0.03]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00e1d9]" />
-            <span className="text-[10px] font-mono uppercase tracking-widest text-white/50">Stairs Wipe Completed</span>
-          </div>
-
-          <h2 className="text-4xl font-serif tracking-tight text-white font-normal uppercase">
-            Aura Architecture
-          </h2>
-
-          <p className="text-xs text-white/40 leading-relaxed font-heading max-w-xs mx-auto">
-            A visual display of structural columns uncovered through a staggered stairs transition.
-          </p>
-
-          <button
-            onClick={handleRestart}
-            className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 hover:border-white/20 text-white font-semibold text-xs rounded-full hover:bg-white/5 active:scale-95 transition-all duration-200 cursor-pointer shadow-lg mx-auto"
+        <div className="space-y-6 max-w-md">
+          <motion.h2
+            initial={{ opacity: 0, y: 35 }}
+            animate={isWiped ? { opacity: 1, y: 0 } : { opacity: 0, y: 35 }}
+            transition={{ duration: 0.9, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-4xl font-serif tracking-tight text-white font-normal uppercase"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
-            Replay Stairs
-          </button>
-        </motion.div>
+            Aura Architecture
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 25 }}
+            animate={isWiped ? { opacity: 0.4, y: 0 } : { opacity: 0, y: 25 }}
+            transition={{ duration: 0.9, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
+            className="text-xs text-white leading-relaxed font-heading max-w-xs mx-auto"
+          >
+            A visual display of structural columns uncovered through a staggered stairs transition.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isWiped ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            className="flex justify-center"
+          >
+            <button
+              onClick={handleRestart}
+              className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 hover:border-white/20 text-white font-semibold text-xs rounded-full hover:bg-white/5 active:scale-95 transition-all duration-200 cursor-pointer shadow-lg mx-auto"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              Replay Stairs
+            </button>
+          </motion.div>
+        </div>
       </div>
 
       {/* Main Preloader Screen Overlay (for text phase) */}
