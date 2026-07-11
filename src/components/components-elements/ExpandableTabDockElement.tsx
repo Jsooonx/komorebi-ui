@@ -11,7 +11,7 @@ import {
   ShieldCheck,
   SlidersHorizontal,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type TabId = "dashboard" | "notifications" | "settings" | "changelog" | "security";
 
@@ -229,6 +229,19 @@ export default function ExpandableTabDockElement({ className = "items-center" }:
   const [activeTab, setActiveTab] = useState<TabId>("dashboard");
   const [isExpanded, setIsExpanded] = useState(false);
   const [direction, setDirection] = useState(1);
+  const [contentHeight, setContentHeight] = useState<number | "auto">("auto");
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!contentRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      if (entries[0]) {
+        setContentHeight(entries[0].target.getBoundingClientRect().height);
+      }
+    });
+    observer.observe(contentRef.current);
+    return () => observer.disconnect();
+  }, [activeTab, isExpanded]);
 
   const handleTabClick = (id: TabId) => {
     const currentIndex = tabs.findIndex((tab) => tab.id === activeTab);
@@ -252,22 +265,29 @@ export default function ExpandableTabDockElement({ className = "items-center" }:
             <motion.div
               key="expanded-panel"
               initial={{ opacity: 0, height: 0, y: 15, scale: 0.96 }}
-              animate={{ opacity: 1, height: "auto", y: 0, scale: 1 }}
+              animate={{ 
+                opacity: 1, 
+                height: contentHeight === "auto" ? "auto" : contentHeight, 
+                y: 0, 
+                scale: 1 
+              }}
               exit={{ opacity: 0, height: 0, y: 10, scale: 0.96 }}
               transition={spring}
-              className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-[320px] sm:w-[360px] overflow-hidden rounded-2xl border border-white/10 bg-[#0d0e10]/95 text-white shadow-[0_24px_80px_rgba(0,0,0,.38)] backdrop-blur-xl px-4 pb-3 pt-4"
+              className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-[320px] sm:w-[360px] overflow-hidden rounded-2xl border border-white/10 bg-[#0d0e10]/95 text-white shadow-[0_24px_80px_rgba(0,0,0,.38)] backdrop-blur-xl"
             >
-              <div className="mb-3 flex items-center justify-between">
-                <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-white/35">
-                  Workspace
-                </span>
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(165,243,252,.8)]" />
+              <div ref={contentRef} className="px-4 pb-3 pt-4">
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-white/35">
+                    Workspace
+                  </span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(165,243,252,.8)]" />
+                </div>
+                <div className="overflow-hidden relative">
+                  <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+                    <TabPanel key={activeTab} activeTab={activeTab} direction={direction} />
+                  </AnimatePresence>
+                </div>
               </div>
-              <motion.div layout="size" transition={spring} className="overflow-hidden relative">
-                <AnimatePresence mode="popLayout" initial={false} custom={direction}>
-                  <TabPanel key={activeTab} activeTab={activeTab} direction={direction} />
-                </AnimatePresence>
-              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
