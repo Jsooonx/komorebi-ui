@@ -111,17 +111,17 @@ export default function VercelTooltipElement() {
               <motion.div
                 layout
                 transition={springTransition}
-                className="relative bg-black border border-white/10 px-3 py-1.5 rounded-xl shadow-[0_12px_24px_rgba(0,0,0,0.6)] flex items-center gap-2"
+                className="relative bg-black border border-white/10 px-3 py-1.5 rounded-xl shadow-[0_12px_24px_rgba(0,0,0,0.6)] flex items-center gap-2 overflow-hidden"
               >
                 {/* Directional Slide & Fade Text Wrapper */}
                 <AnimatePresence mode="popLayout" initial={false}>
                   <motion.div
                     key={hoveredIndex}
-                    initial={{ opacity: 0, x: direction * 8 }}
+                    initial={{ opacity: 0, x: direction * 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -direction * 8 }}
-                    transition={{ duration: 0.18, ease: "easeInOut" }}
-                    className="flex items-center gap-2"
+                    exit={{ opacity: 0, x: -direction * 20 }}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="flex items-center gap-1.5 whitespace-nowrap shrink-0"
                   >
                     <span className="text-[11px] font-sans font-medium text-white/90 whitespace-nowrap">
                       {tooltips[hoveredIndex].text}
