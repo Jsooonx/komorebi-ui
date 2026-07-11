@@ -27,7 +27,7 @@ The source of truth is `src/lib/components-manifest.ts` through `COMPONENTS_MANI
 
 - Search and filtering use component metadata only.
 - Component cards use compact catalog adapters from `src/components/components-preview-elements/`. They render the canonical element unchanged, flatten its presentation wrapper, hide its internal card chrome, and expand the interaction area to the catalog viewport.
-- Opening an entry loads its canonical element and source code lazily in the detail playground at `/components/$id`.
+- Opening an entry loads its canonical element and source code lazily in the detail playground at `/components/$id`. The playground flattens the element's presentation shell so its main interaction is the focus.
 - The detail playground is the only component-level enlarged view. It intentionally has no second fullscreen mode or fullscreen controls.
 - The landing-page `Highlights` section is a curated subset of these entries.
 - The command palette searches only `COMPONENTS_MANIFEST`.
@@ -53,6 +53,7 @@ This keeps reusable pieces separate from ready-made page/layout sections.
 
 - `src/components/components-elements/` contains the canonical, reusable component implementations. Their public API must not include catalog-only flags such as `minimal` or `previewMode`.
 - `src/components/components-preview-elements/` contains compact catalog adapters. They may override presentation-only layout, sizing, border, background, and chrome around the canonical component, but must never change its implementation or recreate its interaction.
+- The detail playground applies the same presentation-only flattening around canonical elements. Its workspace is the visible large-format shell; it does not show a second Bento/card shell inside it.
 - `src/components/highlights-elements/` contains the separate 13-item Bento curation used only by `src/components/Highlights.tsx`. Highlights remain clickable links to their matching component details, but do not share implementation source with the catalog or detail playground.
 - Two retired accordion sources remain in `components-elements/` for source continuity, but the active `/components` catalog follows the 14 entries in `COMPONENTS_MANIFEST`.
 

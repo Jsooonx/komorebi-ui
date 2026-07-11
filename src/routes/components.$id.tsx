@@ -503,7 +503,10 @@ function ComponentDetail() {
                 </div>
               )}
 
-              <div className="w-full flex-1 flex items-center justify-center pointer-events-auto max-w-4xl h-full">
+              <div
+                className="component-playground-surface relative h-full w-full max-w-6xl flex-1 pointer-events-auto"
+                data-variant={comp.id === "pixel-shimmer" ? "pixel" : "default"}
+              >
                 <PreviewComponent
                   activeState={comp.id === "dynamic-island" ? dynamicIslandState : undefined}
                 />
