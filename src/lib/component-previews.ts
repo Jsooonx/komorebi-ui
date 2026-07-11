@@ -16,6 +16,7 @@ import HolographicTerminalPreview from "../components/components-preview-element
 import ExpandableTabDockPreview from "../components/components-preview-elements/ExpandableTabDockPreview";
 import HoverExpandAccordionPreview from "../components/components-preview-elements/HoverExpandAccordionPreview";
 import HoverExpandHorizontalPreview from "../components/components-preview-elements/HoverExpandHorizontalPreview";
+import HoverExpandVerticalPreview from "../components/components-preview-elements/HoverExpandVerticalPreview";
 import VercelTooltipPreview from "../components/components-preview-elements/VercelTooltipPreview";
 import MegaMenuNavbarCard from "../components/blocks-preview-elements/MegaMenuNavbarCard";
 import MegaMenuNavbar2Card from "../components/blocks-preview-elements/MegaMenuNavbar2Card";
@@ -41,6 +42,7 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPr
   "devouring-details": DevouringDetailsPreview,
   "hover-expand-accordion": HoverExpandAccordionPreview,
   "hover-expand-horizontal": HoverExpandHorizontalPreview,
+  "hover-expand-vertical": HoverExpandVerticalPreview,
   "dynamic-island": DynamicIslandPreview,
   "expandable-tab-dock": ExpandableTabDockPreview,
   "vercel-tooltip": VercelTooltipPreview,

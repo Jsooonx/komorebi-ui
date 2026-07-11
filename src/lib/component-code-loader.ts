@@ -17,6 +17,9 @@ export async function loadComponentCode(id: string) {
     case "hover-expand-horizontal":
       return (await import("../components/components-elements/HoverExpandHorizontalElement.tsx?raw"))
         .default;
+    case "hover-expand-vertical":
+      return (await import("../components/components-elements/HoverExpandVerticalElement.tsx?raw"))
+        .default;
     case "dynamic-island":
       return (await import("../components/components-elements/DynamicIslandElement.tsx?raw"))
         .default;
