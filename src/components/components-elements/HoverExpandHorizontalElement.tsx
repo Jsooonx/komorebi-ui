@@ -16,7 +16,7 @@ const springTransition = {
 };
 
 export default function HoverExpandHorizontalElement() {
-  const [hoveredId, setHoveredId] = useState<string | null>("velvet"); // Default expand first item like reference
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const items: AccordionItem[] = [
     {
@@ -248,7 +248,7 @@ export default function HoverExpandHorizontalElement() {
 
   return (
     <div 
-      onMouseLeave={() => setHoveredId("velvet")}
+      onMouseLeave={() => setHoveredId(null)}
       className="w-full h-full flex bg-[#0c0c0e] select-none overflow-hidden p-2 sm:p-3 border border-white/5 rounded-3xl relative"
     >
       <div className="flex w-full h-full gap-1.5 sm:gap-2.5 overflow-hidden">
@@ -262,7 +262,7 @@ export default function HoverExpandHorizontalElement() {
               onHoverStart={() => setHoveredId(item.id)}
               className="relative h-full flex cursor-pointer overflow-hidden rounded-2xl bg-[#141416] border border-white/5"
               animate={{
-                flexGrow: isExpanded ? 5.5 : 0.65,
+                flexGrow: hoveredId === null ? 1 : isExpanded ? 5.5 : 0.65,
               }}
               style={{ flexBasis: "0%" }}
             >
@@ -280,7 +280,7 @@ export default function HoverExpandHorizontalElement() {
                   className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-full transition-opacity duration-300"
                   style={{ 
                     width: "280px", 
-                    opacity: isExpanded ? 1 : 0.25 
+                    opacity: isExpanded ? 1 : 0 
                   }}
                 >
                   {item.renderOverlay(isExpanded)}
