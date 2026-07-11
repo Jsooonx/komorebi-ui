@@ -30,6 +30,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "Hover reactive image clipping path mask overlay with organic animations.",
     dependencies: ["framer-motion"],
     isNew: true,
+    viewportHeightClass: "h-[210px]",
   },
   {
     id: "hover-members",
@@ -38,6 +39,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "Card list stagger scale animations on cursor enter events.",
     dependencies: ["framer-motion"],
     isNew: true,
+    viewportHeightClass: "h-[210px]",
   },
   {
     id: "toolkit-stack-swiper",
@@ -46,13 +48,14 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "A deck-style stack swiper with 3D tilt tracking and spring physics.",
     dependencies: ["framer-motion"],
     gridClass: "md:row-span-2",
-    viewportHeightClass: "h-[380px]",
+    viewportHeightClass: "h-[330px]",
   },
   {
     id: "devouring-details",
     name: "Devouring Details",
     category: "Masking & Accordions",
     description: "Expanding interactive list block with smooth element height transitions.",
+    viewportHeightClass: "h-[190px]",
   },
   {
     id: "dynamic-island",
@@ -62,7 +65,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     dependencies: ["framer-motion"],
     isNew: true,
     gridClass: "md:col-span-2",
-    viewportHeightClass: "h-[240px]",
+    viewportHeightClass: "h-[210px]",
   },
   {
     id: "dither-canvas",
@@ -70,6 +73,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "WebGL & Shaders",
     description: "Retro dithered image shader visualizer card running in WebGL canvas.",
     dependencies: ["@react-three/fiber", "three"],
+    viewportHeightClass: "h-[200px]",
   },
   {
     id: "text-roll",
@@ -77,6 +81,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Typography & Tickers",
     description: "Smooth 3D keyframe text roll effect on word hover events.",
     dependencies: ["gsap"],
+    viewportHeightClass: "h-[160px]",
   },
   {
     id: "border-beam",
@@ -84,6 +89,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "Card & Border Effects",
     description: "Outline path SVG glowing animation border runner card.",
     dependencies: ["framer-motion"],
+    viewportHeightClass: "h-[180px]",
   },
   {
     id: "interactive-navbar",
@@ -93,7 +99,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     dependencies: ["framer-motion"],
     isNew: true,
     gridClass: "md:col-span-2",
-    viewportHeightClass: "h-[180px]",
+    viewportHeightClass: "h-[160px]",
   },
   {
     id: "infinite-marquee",
@@ -102,7 +108,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "Continuous horizontal marquee ticker animation showcasing brand elements.",
     dependencies: ["lucide-react"],
     gridClass: "md:col-span-2",
-    viewportHeightClass: "h-[130px]",
+    viewportHeightClass: "h-[120px]",
   },
   {
     id: "audio-equalizer",
@@ -110,6 +116,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     category: "CLI & Stepper Controls",
     description: "Simulated audio frequency bar graph visualizer reacting to hover coordinates.",
     dependencies: ["framer-motion"],
+    viewportHeightClass: "h-[190px]",
   },
   {
     id: "pixel-shimmer",
@@ -118,7 +125,7 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "Interactive pixel-surface shimmer card with hover and focus-aware glow pulses.",
     dependencies: [],
     gridClass: "md:row-span-2",
-    viewportHeightClass: "h-[380px]",
+    viewportHeightClass: "h-[320px]",
   },
   {
     id: "pipeline-stepper",
@@ -127,13 +134,14 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     description: "Interactive multi-step deployment pipeline stepper controller.",
     dependencies: ["framer-motion"],
     gridClass: "md:row-span-2",
-    viewportHeightClass: "h-[380px]",
+    viewportHeightClass: "h-[330px]",
   },
   {
     id: "holographic-terminal",
     name: "Typewriter CLI Terminal",
     category: "CLI & Stepper Controls",
     description: "Simulated console window outputting text strings dynamically.",
+    viewportHeightClass: "h-[190px]",
   },
 ];
 

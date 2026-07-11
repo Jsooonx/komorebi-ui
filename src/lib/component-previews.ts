@@ -16,8 +16,6 @@ import HolographicTerminalPreview from "../components/components-preview-element
 import MegaMenuNavbarCard from "../components/blocks-preview-elements/MegaMenuNavbarCard";
 import MegaMenuNavbar2Card from "../components/blocks-preview-elements/MegaMenuNavbar2Card";
 import MegaMenuNavbar3Card from "../components/blocks-preview-elements/MegaMenuNavbar3Card";
-import InteractiveAccordionPreview from "../components/components-preview-elements/InteractiveAccordionPreview";
-import NestedAccordionPreview from "../components/components-preview-elements/NestedAccordionPreview";
 import LogoCloudCard from "../components/blocks-preview-elements/LogoCloudCard";
 import LogoCloud2Card from "../components/blocks-preview-elements/LogoCloud2Card";
 import LogoCloud3Card from "../components/blocks-preview-elements/LogoCloud3Card";
@@ -44,8 +42,6 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPr
   "pixel-shimmer": PixelShimmerPreview,
   "pipeline-stepper": PipelineStepperPreview,
   "holographic-terminal": HolographicTerminalPreview,
-  "interactive-accordion": InteractiveAccordionPreview,
-  "nested-accordion": NestedAccordionPreview,
 };
 
 export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>> = {

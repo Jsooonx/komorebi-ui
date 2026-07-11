@@ -2,21 +2,21 @@ import { useNavigate } from "@tanstack/react-router";
 import { useState, lazy, Suspense } from "react";
 import { setNavigationOrigin } from "@/lib/navigation-state";
 import SplitText from "./ui/SplitText";
-import ImageRevealCard from "./components-elements/ImageRevealElement";
-import HoverMembersCard from "./components-elements/HoverMembersElement";
-import ToolkitStackSwiper from "./components-elements/ToolkitStackSwiperElement";
-import DevouringDetailsCard from "./components-elements/DevouringDetailsElement";
-import DynamicIslandCard from "./components-elements/DynamicIslandElement";
-import TextRollCard from "./components-elements/TextRollElement";
-import BorderBeamCard from "./components-elements/BorderBeamElement";
-import InteractiveNavbarCard from "./components-elements/InteractiveNavbarElement";
-import InfiniteMarqueeCard from "./components-elements/InfiniteMarqueeElement";
-import AudioEqualizerCard from "./components-elements/AudioEqualizerElement";
-import PipelineStepperCard from "./components-elements/PipelineStepperElement";
-import HolographicTerminalCard from "./components-elements/HolographicTerminalElement";
+import ImageRevealCard from "./highlights-elements/ImageRevealHighlight";
+import HoverMembersCard from "./highlights-elements/HoverMembersHighlight";
+import ToolkitStackSwiper from "./highlights-elements/ToolkitStackSwiperHighlight";
+import DevouringDetailsCard from "./highlights-elements/DevouringDetailsHighlight";
+import DynamicIslandCard from "./highlights-elements/DynamicIslandHighlight";
+import TextRollCard from "./highlights-elements/TextRollHighlight";
+import BorderBeamCard from "./highlights-elements/BorderBeamHighlight";
+import InteractiveNavbarCard from "./highlights-elements/InteractiveNavbarHighlight";
+import InfiniteMarqueeCard from "./highlights-elements/InfiniteMarqueeHighlight";
+import AudioEqualizerCard from "./highlights-elements/AudioEqualizerHighlight";
+import PipelineStepperCard from "./highlights-elements/PipelineStepperHighlight";
+import HolographicTerminalCard from "./highlights-elements/HolographicTerminalHighlight";
 
 // Lazy-load the heavy WebGL/Three.js DitherCard to keep initial bundle lean
-const DitherCard = lazy(() => import("./components-elements/DitherElement"));
+const DitherCard = lazy(() => import("./highlights-elements/DitherHighlight"));
 
 function BentoCell({
   id,

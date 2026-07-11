@@ -4,7 +4,7 @@ The Components surface lives at `/components`. It contains reusable interaction,
 
 ## Current component entries
 
-The catalog currently contains 16 components:
+The catalog currently contains 14 components:
 
 - Image Reveal
 - Hover Members
@@ -20,15 +20,13 @@ The catalog currently contains 16 components:
 - Pixel Shimmer Card
 - Pipeline Stepper
 - Typewriter CLI Terminal
-- Accordion
-- Nested Accordion
 
 The source of truth is `src/lib/components-manifest.ts` through `COMPONENTS_MANIFEST`. Catalog adapters are mapped in `src/lib/component-previews.ts`, canonical elements are mapped in `src/lib/component-elements.ts`, and source code is loaded on demand by `src/lib/component-code-loader.ts`.
 
 ## Catalog behavior
 
 - Search and filtering use component metadata only.
-- Component cards use catalog-only adapters from `src/components/components-preview-elements/`. Those adapters own compact sizing and framing without adding catalog props to the reusable component API.
+- Component cards use standalone catalog previews from `src/components/components-preview-elements/`. Each preview is purpose-built for its card viewport and does not import or scale the canonical source.
 - Opening an entry loads its canonical element and source code lazily in the detail playground at `/components/$id`.
 - The detail playground is the only component-level enlarged view. It intentionally has no second fullscreen mode or fullscreen controls.
 - The landing-page `Highlights` section is a curated subset of these entries.
@@ -54,9 +52,9 @@ This keeps reusable pieces separate from ready-made page/layout sections.
 ## Components rendering boundaries
 
 - `src/components/components-elements/` contains the canonical, reusable component implementations. Their public API must not include catalog-only flags such as `minimal` or `previewMode`.
-- `src/components/components-preview-elements/` contains compact catalog adapters. They may apply scale, clipping, and catalog framing, but do not become the source distributed or displayed in the detail playground.
-- `src/components/Highlights.tsx` renders canonical elements as a curated landing-page showcase.
-- Two retired accordion sources remain in the component element and preview folders for source continuity, but the active `/components` catalog follows the 14 entries in `COMPONENTS_MANIFEST`.
+- `src/components/components-preview-elements/` contains compact, standalone catalog previews. Their animation and sizing are purpose-built for the catalog and do not become the source distributed or displayed in the detail playground.
+- `src/components/highlights-elements/` contains the separate 13-item Bento curation used only by `src/components/Highlights.tsx`. Highlights remain clickable links to their matching component details, but do not share implementation source with the catalog or detail playground.
+- Two retired accordion sources remain in `components-elements/` for source continuity, but the active `/components` catalog and its preview folder follow the 14 entries in `COMPONENTS_MANIFEST`.
 
 ## Blocks rendering boundaries
 

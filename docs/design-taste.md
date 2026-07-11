@@ -98,3 +98,4 @@ To achieve butter-smooth 60fps/144fps animations without layout jitter:
 
 - Component fullscreen is intentionally unavailable. The regular `/components/$id` playground is the largest Components surface and must not expose a second fullscreen state, control, or exit overlay.
 - Compact catalog treatment belongs to `components-preview-elements/`. Canonical component source in `components-elements/` must not expose catalog-only flags such as `minimal` or `previewMode`.
+- Components Catalog previews and landing-page Highlights are separate visual surfaces. Catalog previews must be purpose-built for their manifest viewport and may not import, scale, or clip a canonical component or a Highlight implementation.
