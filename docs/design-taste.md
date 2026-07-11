@@ -94,6 +94,38 @@ To achieve butter-smooth 60fps/144fps animations without layout jitter:
 
 - Avoid using `gap` classes on flex containers inside endless loops. Instead, apply inline `marginRight` styles to child elements. This eliminates sub-pixel rounding offsets and prevents visual "jumping" when the loop resets.
 
+## Komorebi Motion Taste
+
+The preferred interaction language is minimal UI with high-quality morphing motion. The interface should look simple at rest and gain character through movement, continuity, and responsive state changes.
+
+### Core visual principles
+
+- Keep the visual surface simple: restrained dark containers, few decorative layers, clear hierarchy, and compact controls.
+- Let motion provide polish instead of adding visual noise, gradients, badges, or excessive decoration.
+- Preserve a stable anchor while related content expands, collapses, or changes around it.
+- Prefer adaptive layouts that follow the active content's natural height over fixed-height panels.
+- Treat catalog previews and detail playgrounds as focused interaction surfaces; remove redundant nested card shells when the host container already provides the frame.
+
+### Preferred motion patterns
+
+- Use spring-driven layout animation for expansion, collapse, reflow, and container resizing. Favor a responsive spring with controlled damping over a generic duration/easing transition.
+- Use Framer Motion `layout` or `layout="size"` so neighboring elements morph into their new positions instead of blinking or jumping.
+- Use `layoutId` for shared visual elements such as active indicators, selected backgrounds, and tab highlights so they travel continuously between states.
+- Use `AnimatePresence` for content replacement, combining opacity, a small directional translation, and a subtle blur/focus shift.
+- Make directional transitions follow user intent: moving from a left tab to a right tab should move the outgoing content left and incoming content from the right; reverse the directions when navigating back.
+- Measure dynamic content when necessary (for example with `ResizeObserver`) so expand/collapse height transitions animate to the actual content size.
+- Use small stagger delays only for child items entering a newly revealed panel. Keep them short and subordinate to the parent morph.
+- Use hover motion locally: the hovered icon or control may brighten, lift, scale slightly, or gain a restrained glow. Avoid lighting up an entire group when one item is hovered.
+- Use `whileTap` or a similarly subtle press response for controls, without making the interface feel bouncy or game-like.
+
+### Motion quality constraints
+
+- Avoid abrupt state swaps, hard fades, or content replacement that causes a visible blink.
+- Avoid animating unrelated siblings or moving a primary anchor when a secondary panel expands.
+- Avoid large travel distances, excessive blur, overshoot, and decorative motion that competes with the interaction.
+- Preserve continuity: the user should be able to understand that the new state is the same object transforming, not a different object appearing.
+- Prefer the smallest number of animated properties that produces a convincing morph: layout/size, position, opacity, focus, and a restrained scale when useful.
+
 ### 6. Component Catalog Boundaries
 
 - Component fullscreen is intentionally unavailable. The regular `/components/$id` playground is the largest Components surface and must not expose a second fullscreen state, control, or exit overlay.
