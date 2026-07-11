@@ -59,46 +59,38 @@ export default function StairsPreloaderElement() {
       
       {/* Mock Page Content Revealed Underneath */}
       <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center select-none z-10">
-        <div className="space-y-6 max-w-md">
-          <motion.h2
-            initial={{ opacity: 0, y: 35 }}
-            animate={isWiped ? { opacity: 1, y: 0 } : { opacity: 0, y: 35 }}
-            transition={{ duration: 0.9, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl font-serif tracking-tight text-white font-normal uppercase"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={isWiped ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+          transition={{ duration: 1.0, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="space-y-6 max-w-md"
+        >
+          <h2 className="text-4xl font-serif tracking-tight text-white font-normal uppercase">
             Aura Architecture
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 25 }}
-            animate={isWiped ? { opacity: 0.4, y: 0 } : { opacity: 0, y: 25 }}
-            transition={{ duration: 0.9, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
-            className="text-xs text-white leading-relaxed font-heading max-w-xs mx-auto"
-          >
+          <p className="text-xs text-white/40 leading-relaxed font-heading max-w-xs mx-auto">
             A visual display of structural columns uncovered through a staggered stairs transition.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isWiped ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
-            className="flex justify-center"
+          <button
+            onClick={handleRestart}
+            className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 hover:border-white/20 text-white font-semibold text-xs rounded-full hover:bg-white/5 active:scale-95 transition-all duration-200 cursor-pointer shadow-lg mx-auto"
           >
-            <button
-              onClick={handleRestart}
-              className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 hover:border-white/20 text-white font-semibold text-xs rounded-full hover:bg-white/5 active:scale-95 transition-all duration-200 cursor-pointer shadow-lg mx-auto"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              Replay Stairs
-            </button>
-          </motion.div>
-        </div>
+            <RotateCcw className="w-3.5 h-3.5" />
+            Replay Stairs
+          </button>
+        </motion.div>
       </div>
 
       {/* Main Preloader Screen Overlay (for text phase) */}
-      {!isAnimationFinished && (
-        <div className="absolute inset-0 z-40 bg-[#09090b] flex items-center justify-center pointer-events-none">
-          <AnimatePresence>
+      <AnimatePresence>
+        {!isWiped && (
+          <motion.div
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute inset-0 z-40 bg-[#09090b] flex items-center justify-center pointer-events-none"
+          >
             {textState !== "hidden" && textState !== "exit" && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -136,9 +128,9 @@ export default function StairsPreloaderElement() {
                 </motion.p>
               </motion.div>
             )}
-          </AnimatePresence>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Staggered Vertical Stair Columns Wipe */}
       {!isAnimationFinished && (
