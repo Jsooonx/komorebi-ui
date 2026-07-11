@@ -86,7 +86,7 @@ export default function WordsPreloaderElement() {
 
       {/* Slide up Preloader Screen Panel */}
       <motion.div
-        animate={isCompleted ? { y: "-100vh" } : { y: "0vh" }}
+        animate={isCompleted ? { y: "-120vh" } : { y: "0vh" }}
         transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
         style={{
           position: "absolute",
@@ -100,12 +100,12 @@ export default function WordsPreloaderElement() {
         }}
       >
         {/* Typographic Greeting Text */}
-        <div className="relative overflow-hidden h-16 sm:h-20 flex items-center justify-center px-6">
+        <div className="relative overflow-hidden h-24 sm:h-36 flex items-center justify-center px-6">
           <AnimatePresence mode="wait">
             {!isCompleted && (
               <motion.span
                 key={index}
-                initial={{ opacity: index === 0 ? 0 : 0.8, y: 25 }}
+                initial={{ opacity: 0, y: index === 0 ? 40 : 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ 
                   opacity: 0, 
@@ -113,21 +113,21 @@ export default function WordsPreloaderElement() {
                   transition: { duration: 0.15 } 
                 }}
                 transition={{ 
-                  duration: index === 0 ? 0.6 : 0.2, 
-                  ease: [0.16, 1, 0.3, 1] 
+                  duration: index === 0 ? 1.4 : 0.22, 
+                  ease: index === 0 ? [0.16, 1, 0.3, 1] : "easeOut" 
                 }}
-                className="flex items-center gap-3 sm:gap-4 select-none"
+                className="flex items-center gap-4 sm:gap-6 select-none"
               >
                 {/* Progress counter index */}
-                <span className="text-white/20 font-mono text-sm sm:text-base font-semibold tracking-wider">
+                <span className="text-white/20 font-mono text-base sm:text-2xl font-semibold tracking-wider">
                   {(index + 1).toString().padStart(2, "0")}
                 </span>
                 
                 {/* Glowing cyan dot divider */}
-                <span className="w-1.5 h-1.5 rounded-full bg-[#0091ff] shadow-[0_0_8px_rgba(0,145,255,0.8)]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#0091ff] shadow-[0_0_12px_rgba(0,145,255,0.8)]" />
                 
                 {/* Greeting text word */}
-                <span className="font-heading font-semibold text-2xl sm:text-4xl text-white tracking-tight">
+                <span className="font-heading font-bold text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-tighter">
                   {greetings[index]}
                 </span>
               </motion.span>
