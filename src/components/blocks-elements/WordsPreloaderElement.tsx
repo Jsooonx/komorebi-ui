@@ -113,7 +113,7 @@ export default function WordsPreloaderElement() {
                   transition: { duration: 0.15 } 
                 }}
                 transition={{ 
-                  duration: index === 0 ? 1.4 : 0.22, 
+                  duration: index === 0 ? 2.2 : 0.22, 
                   ease: index === 0 ? [0.16, 1, 0.3, 1] : "easeOut" 
                 }}
                 className="flex items-center gap-4 sm:gap-6 select-none"
