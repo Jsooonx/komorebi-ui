@@ -297,8 +297,7 @@ export default function ExpandableTabDockElement({ className = "items-center" }:
                     className="absolute inset-0 rounded-xl bg-white/[0.08] border border-white/5"
                   />
                 )}
-                <motion.span
-                  layout
+                <span
                   className="relative z-10 flex items-center justify-center"
                 >
                   <Icon
@@ -308,9 +307,8 @@ export default function ExpandableTabDockElement({ className = "items-center" }:
                         : "text-white/40 group-hover:text-white/80 group-hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.3)]"
                     }`}
                   />
-                </motion.span>
+                </span>
                 <motion.span
-                  layout
                   initial={false}
                   animate={{
                     width: showText ? "auto" : 0,
