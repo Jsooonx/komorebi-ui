@@ -61,8 +61,8 @@ export default function StairsPreloaderElement() {
       <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center select-none z-10">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
-          animate={isWiped ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-          transition={{ duration: 1.0, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          animate={isAnimationFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-6 max-w-md"
         >
           <h2 className="text-4xl font-serif tracking-tight text-white font-normal uppercase">
