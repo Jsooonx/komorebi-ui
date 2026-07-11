@@ -17,6 +17,7 @@ import InteractiveAccordionElement from "../components/components-elements/Inter
 import NestedAccordionElement from "../components/components-elements/NestedAccordionElement";
 import ExpandableTabDockElement from "../components/components-elements/ExpandableTabDockElement";
 import HoverExpandAccordionElement from "../components/components-elements/HoverExpandAccordionElement";
+import HoverExpandHorizontalElement from "../components/components-elements/HoverExpandHorizontalElement";
 import VercelTooltipElement from "../components/components-elements/VercelTooltipElement";
 import type { ComponentElementProps } from "./components-manifest";
 
@@ -26,6 +27,7 @@ export const COMPONENT_ELEMENTS: Record<string, ComponentType<ComponentElementPr
   "toolkit-stack-swiper": ToolkitStackSwiperElement,
   "devouring-details": DevouringDetailsElement,
   "hover-expand-accordion": HoverExpandAccordionElement,
+  "hover-expand-horizontal": HoverExpandHorizontalElement,
   "dynamic-island": DynamicIslandElement,
   "expandable-tab-dock": ExpandableTabDockElement,
   "vercel-tooltip": VercelTooltipElement,
