@@ -325,6 +325,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "double-stair-preloader",
+    name: "Double Stair Preloader",
+    category: "Preloader",
+    description:
+      "A gorgeous dual-stair preloading layout with silver cinematic shimmer text followed by top-and-bottom vertical column parting stair wipe transitions.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

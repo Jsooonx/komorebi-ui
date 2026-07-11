@@ -30,6 +30,7 @@ import Features5Card from "../components/blocks-preview-elements/Features5Card";
 import SienaParallaxCard from "../components/blocks-preview-elements/SienaParallaxCard";
 import WordsPreloaderCard from "../components/blocks-preview-elements/WordsPreloaderCard";
 import StairsPreloaderCard from "../components/blocks-preview-elements/StairsPreloaderCard";
+import DoubleStairPreloaderCard from "../components/blocks-preview-elements/DoubleStairPreloaderCard";
 import type { ComponentCatalogPreviewProps, ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPreviewProps>> = {
@@ -67,6 +68,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "siena-parallax": SienaParallaxCard,
   "words-preloader": WordsPreloaderCard,
   "stairs-preloader": StairsPreloaderCard,
+  "double-stair-preloader": DoubleStairPreloaderCard,
 };
 
 export function getComponentPreview(id: string) {
