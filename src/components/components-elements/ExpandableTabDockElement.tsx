@@ -321,7 +321,7 @@ export default function ExpandableTabDockElement({ className = "items-center" }:
                 >
                   <Icon
                     className={`h-4 w-4 transition-all duration-300 ${
-                      active
+                      showText
                         ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
                         : "text-white/40 group-hover/tab:text-white/80 group-hover/tab:drop-shadow-[0_0_4px_rgba(255,255,255,0.3)]"
                     }`}
