@@ -91,43 +91,45 @@ export default function StairsPreloaderElement() {
             transition={{ duration: 0.5, ease: "easeInOut" }}
             className="absolute inset-0 z-40 bg-[#09090b] flex items-center justify-center pointer-events-none"
           >
-            {textState !== "hidden" && textState !== "exit" && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ 
-                  opacity: 0,
-                  transition: { duration: 0.8, ease: "easeInOut" }
-                }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
-                className="px-6 flex flex-col items-center select-none"
-              >
-                {/* Thin shimmer text */}
-                <motion.h1
-                  className="font-serif text-3xl sm:text-5xl md:text-6xl font-normal uppercase tracking-[0.3em] text-center"
-                  style={{
-                    background: "linear-gradient(90deg, #555 0%, #fff 50%, #555 100%)",
-                    backgroundSize: "200% auto",
-                    backgroundClip: "text",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    textShadow: "0 0 30px rgba(255,255,255,0.05)",
+            <AnimatePresence>
+              {textState !== "hidden" && textState !== "exit" && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ 
+                    opacity: 0,
+                    transition: { duration: 0.8, ease: "easeInOut" }
                   }}
-                  animate={textState === "shimmer" ? { backgroundPosition: ["200% 0", "-200% 0"] } : {}}
-                  transition={{ duration: 2.2, ease: "easeInOut" }}
+                  transition={{ duration: 1.2, ease: "easeInOut" }}
+                  className="px-6 flex flex-col items-center select-none"
                 >
-                  Komorebi
-                </motion.h1>
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 0.4, y: 0 }}
-                  transition={{ delay: 0.8, duration: 1.0 }}
-                  className="text-[9px] sm:text-xs font-mono uppercase tracking-[0.4em] text-white mt-4"
-                >
-                  Creative Laboratory
-                </motion.p>
-              </motion.div>
-            )}
+                  {/* Thin shimmer text */}
+                  <motion.h1
+                    className="font-serif text-3xl sm:text-5xl md:text-6xl font-normal uppercase tracking-[0.3em] text-center"
+                    style={{
+                      background: "linear-gradient(90deg, #555 0%, #fff 50%, #555 100%)",
+                      backgroundSize: "200% auto",
+                      backgroundClip: "text",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      textShadow: "0 0 30px rgba(255,255,255,0.05)",
+                    }}
+                    animate={textState === "shimmer" ? { backgroundPosition: ["200% 0", "-200% 0"] } : {}}
+                    transition={{ duration: 2.2, ease: "easeInOut" }}
+                  >
+                    Komorebi
+                  </motion.h1>
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 0.4, y: 0 }}
+                    transition={{ delay: 0.8, duration: 1.0 }}
+                    className="text-[9px] sm:text-xs font-mono uppercase tracking-[0.4em] text-white mt-4"
+                  >
+                    Creative Laboratory
+                  </motion.p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
