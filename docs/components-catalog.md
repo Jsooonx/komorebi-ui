@@ -4,12 +4,13 @@ The Components surface lives at `/components`. It contains reusable interaction,
 
 ## Current component entries
 
-The catalog currently contains 15 components:
+The catalog currently contains 16 components:
 
 - Image Reveal
 - Hover Members
 - Toolkit Stack Swiper
 - Devouring Details
+- Hover Expand Accordion
 - Dynamic Island Nav Card
 - Expandable Tab Dock
 - WebGL Dither Shader
@@ -56,7 +57,7 @@ This keeps reusable pieces separate from ready-made page/layout sections.
 - `src/components/components-preview-elements/` contains compact catalog adapters. They may override presentation-only layout, sizing, border, background, and chrome around the canonical component, but must never change its implementation or recreate its interaction.
 - The detail playground applies the same presentation-only flattening around canonical elements. Its workspace is the visible large-format shell; it does not show a second Bento/card shell inside it.
 - `src/components/highlights-elements/` contains the separate 13-item Bento curation used only by `src/components/Highlights.tsx`. Highlights remain clickable links to their matching component details, but do not share implementation source with the catalog or detail playground.
-- Two retired accordion sources remain in `components-elements/` for source continuity, but the active `/components` catalog follows the 15 entries in `COMPONENTS_MANIFEST`.
+- Two retired accordion sources remain in `components-elements/` for source continuity, but the active `/components` catalog follows the 16 entries in `COMPONENTS_MANIFEST`.
 
 ## Blocks rendering boundaries
 

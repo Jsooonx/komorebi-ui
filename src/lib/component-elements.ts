@@ -16,6 +16,7 @@ import HolographicTerminalElement from "../components/components-elements/Hologr
 import InteractiveAccordionElement from "../components/components-elements/InteractiveAccordionElement";
 import NestedAccordionElement from "../components/components-elements/NestedAccordionElement";
 import ExpandableTabDockElement from "../components/components-elements/ExpandableTabDockElement";
+import HoverExpandAccordionElement from "../components/components-elements/HoverExpandAccordionElement";
 import type { ComponentElementProps } from "./components-manifest";
 
 export const COMPONENT_ELEMENTS: Record<string, ComponentType<ComponentElementProps>> = {
@@ -23,6 +24,7 @@ export const COMPONENT_ELEMENTS: Record<string, ComponentType<ComponentElementPr
   "hover-members": HoverMembersElement,
   "toolkit-stack-swiper": ToolkitStackSwiperElement,
   "devouring-details": DevouringDetailsElement,
+  "hover-expand-accordion": HoverExpandAccordionElement,
   "dynamic-island": DynamicIslandElement,
   "expandable-tab-dock": ExpandableTabDockElement,
   "dither-canvas": DitherElement,

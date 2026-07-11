@@ -14,6 +14,7 @@ import PixelShimmerPreview from "../components/components-preview-elements/Pixel
 import PipelineStepperPreview from "../components/components-preview-elements/PipelineStepperPreview";
 import HolographicTerminalPreview from "../components/components-preview-elements/HolographicTerminalPreview";
 import ExpandableTabDockPreview from "../components/components-preview-elements/ExpandableTabDockPreview";
+import HoverExpandAccordionPreview from "../components/components-preview-elements/HoverExpandAccordionPreview";
 import MegaMenuNavbarCard from "../components/blocks-preview-elements/MegaMenuNavbarCard";
 import MegaMenuNavbar2Card from "../components/blocks-preview-elements/MegaMenuNavbar2Card";
 import MegaMenuNavbar3Card from "../components/blocks-preview-elements/MegaMenuNavbar3Card";
@@ -33,6 +34,7 @@ export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPr
   "hover-members": HoverMembersPreview,
   "toolkit-stack-swiper": ToolkitStackSwiperPreview,
   "devouring-details": DevouringDetailsPreview,
+  "hover-expand-accordion": HoverExpandAccordionPreview,
   "dynamic-island": DynamicIslandPreview,
   "expandable-tab-dock": ExpandableTabDockPreview,
   "dither-canvas": DitherPreview,

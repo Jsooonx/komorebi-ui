@@ -58,6 +58,16 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     viewportHeightClass: "h-[190px]",
   },
   {
+    id: "hover-expand-accordion",
+    name: "Hover Expand Accordion",
+    category: "Masking & Accordions",
+    description: "Premium editorial horizontal image gallery that morphs open on hover with spring physics.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
+  {
     id: "dynamic-island",
     name: "Dynamic Island Nav Card",
     category: "Floating UI & Docks",

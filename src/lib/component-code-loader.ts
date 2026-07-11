@@ -11,6 +11,9 @@ export async function loadComponentCode(id: string) {
     case "devouring-details":
       return (await import("../components/components-elements/DevouringDetailsElement.tsx?raw"))
         .default;
+    case "hover-expand-accordion":
+      return (await import("../components/components-elements/HoverExpandAccordionElement.tsx?raw"))
+        .default;
     case "dynamic-island":
       return (await import("../components/components-elements/DynamicIslandElement.tsx?raw"))
         .default;
