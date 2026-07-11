@@ -68,6 +68,16 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     viewportHeightClass: "h-[500px]",
   },
   {
+    id: "hover-expand-horizontal",
+    name: "Hover Expand Horizontal",
+    category: "Masking & Accordions",
+    description: "High-fidelity pure image horizontal gallery with custom typographic overlays that expand on hover.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
+  {
     id: "dynamic-island",
     name: "Dynamic Island Nav Card",
     category: "Floating UI & Docks",

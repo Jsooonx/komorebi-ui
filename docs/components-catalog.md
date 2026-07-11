@@ -4,13 +4,14 @@ The Components surface lives at `/components`. It contains reusable interaction,
 
 ## Current component entries
 
-The catalog currently contains 17 components:
+The catalog currently contains 18 components:
 
 - Image Reveal
 - Hover Members
 - Toolkit Stack Swiper
 - Devouring Details
 - Hover Expand Accordion
+- Hover Expand Horizontal
 - Dynamic Island Nav Card
 - Expandable Tab Dock
 - Vercel Tooltip
