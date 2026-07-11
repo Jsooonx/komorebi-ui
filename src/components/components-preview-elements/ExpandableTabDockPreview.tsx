@@ -4,7 +4,7 @@ import { ComponentCatalogFrame } from "./ComponentCatalogFrame";
 export default function ExpandableTabDockPreview() {
   return (
     <ComponentCatalogFrame>
-      <ExpandableTabDockElement />
+      <ExpandableTabDockElement className="items-end pb-8" />
     </ComponentCatalogFrame>
   );
 }

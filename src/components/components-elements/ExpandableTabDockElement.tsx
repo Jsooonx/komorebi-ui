@@ -225,7 +225,7 @@ function TabPanel({ activeTab, direction }: { activeTab: TabId; direction: numbe
   );
 }
 
-export default function ExpandableTabDockElement() {
+export default function ExpandableTabDockElement({ className = "items-center" }: { className?: string }) {
   const [activeTab, setActiveTab] = useState<TabId>("dashboard");
   const [isExpanded, setIsExpanded] = useState(false);
   const [direction, setDirection] = useState(1);
@@ -245,7 +245,7 @@ export default function ExpandableTabDockElement() {
   };
 
   return (
-    <div className="flex items-center justify-center w-full h-full min-h-[360px] select-none">
+    <div className={`flex justify-center w-full h-full min-h-[360px] select-none ${className}`}>
       <div className="relative">
         <AnimatePresence>
           {isExpanded && (
