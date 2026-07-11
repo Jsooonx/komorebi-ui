@@ -61,11 +61,6 @@ export default function WordsPreloaderElement() {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="space-y-6 max-w-md"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#0091ff]" />
-            <span className="text-[10px] font-mono uppercase tracking-wider text-white/60">Loader Finished</span>
-          </div>
-          
           <h2 className="text-3xl font-serif tracking-tight text-white font-normal">
             Velvet Dreams Studio
           </h2>
