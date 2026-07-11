@@ -79,10 +79,13 @@ const springTransition = {
 };
 
 export default function HoverExpandAccordionElement() {
-  const [hoveredId, setHoveredId] = useState<string | null>("velvet");
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
-    <div className="w-full h-full flex bg-[#090909] select-none overflow-hidden p-1 sm:p-2 border border-white/5 rounded-2xl relative">
+    <div 
+      onMouseLeave={() => setHoveredId(null)}
+      className="w-full h-full flex bg-[#090909] select-none overflow-hidden p-1 sm:p-2 border border-white/5 rounded-2xl relative"
+    >
       <div className="flex w-full h-full gap-0.5 sm:gap-1.5 overflow-hidden">
         {items.map((item) => {
           const isExpanded = hoveredId === item.id;
