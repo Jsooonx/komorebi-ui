@@ -307,7 +307,7 @@ export default function ExpandableTabDockElement({ className = "items-center" }:
                 transition={spring}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleTabClick(id)}
-                className="group relative flex items-center justify-center rounded-xl py-2 px-3 text-white/40 hover:text-white transition-colors cursor-pointer"
+                className="group/tab relative flex items-center justify-center rounded-xl py-2 px-3 text-white/40 hover:text-white transition-colors cursor-pointer"
               >
                 {showText && (
                   <motion.span
@@ -323,7 +323,7 @@ export default function ExpandableTabDockElement({ className = "items-center" }:
                     className={`h-4 w-4 transition-all duration-300 ${
                       active
                         ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
-                        : "text-white/40 group-hover:text-white/80 group-hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.3)]"
+                        : "text-white/40 group-hover/tab:text-white/80 group-hover/tab:drop-shadow-[0_0_4px_rgba(255,255,255,0.3)]"
                     }`}
                   />
                 </span>
