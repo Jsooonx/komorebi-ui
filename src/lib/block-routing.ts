@@ -3,6 +3,7 @@ export const BLOCK_CATEGORY_SLUGS = {
   logoCloud: "logo-cloud",
   features: "features",
   parallax: "parallax",
+  preloader: "preloader",
 } as const;
 
 export type BlockCategorySlug = (typeof BLOCK_CATEGORY_SLUGS)[keyof typeof BLOCK_CATEGORY_SLUGS];
@@ -12,6 +13,7 @@ export function getBlockCategorySlug(category: string): BlockCategorySlug | unde
   if (category === "Logo Cloud") return BLOCK_CATEGORY_SLUGS.logoCloud;
   if (category === "Features") return BLOCK_CATEGORY_SLUGS.features;
   if (category === "Parallax") return BLOCK_CATEGORY_SLUGS.parallax;
+  if (category === "Preloader") return BLOCK_CATEGORY_SLUGS.preloader;
   return undefined;
 }
 

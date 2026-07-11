@@ -303,6 +303,7 @@ export function BlocksIndex({
     { id: "logo-cloud", label: "Logo Cloud", icon: Compass },
     { id: "features", label: "Features", icon: Cpu },
     { id: "parallax", label: "Parallax", icon: Sparkles },
+    { id: "preloader", label: "Preloader", icon: RotateCcw },
   ];
 
   const navigate = useNavigate();
@@ -339,6 +340,7 @@ export function BlocksIndex({
     if (activeCategory === "logo-cloud") return item.category === "Logo Cloud";
     if (activeCategory === "features") return item.category === "Features";
     if (activeCategory === "parallax") return item.category === "Parallax";
+    if (activeCategory === "preloader") return item.category === "Preloader";
     return false;
   });
 
@@ -484,6 +486,8 @@ export function BlocksIndex({
                       "Clean layout presenting partner brand logos with monochromatic filters, scrolling sliders, and vertical marquee columns."}
                     {activeCategory === "features" &&
                       "Premium feature section layouts with grids, inline outline animations, and interactive hover highlights."}
+                    {activeCategory === "preloader" &&
+                      "Premium full-screen preloading overlays, page wipe transitions, and typographic entry sequences."}
                   </p>
                 </div>
               </LayoutGroup>

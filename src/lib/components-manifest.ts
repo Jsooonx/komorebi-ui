@@ -303,6 +303,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[720px]",
   },
+  {
+    id: "words-preloader",
+    name: "Words Preloader",
+    category: "Preloader",
+    description:
+      "Typographic preloading layout that cycles through greetings in 10 languages with a custom speed curve and an elastic curved slide-up wipe.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {
