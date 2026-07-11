@@ -114,12 +114,27 @@ export default function VercelTooltipElement() {
                 className="relative bg-black border border-white/10 px-3 py-1.5 rounded-xl shadow-[0_12px_24px_rgba(0,0,0,0.6)] flex items-center gap-2 overflow-hidden"
               >
                 {/* Directional Slide & Fade Text Wrapper */}
-                <AnimatePresence mode="popLayout" initial={false}>
+                <AnimatePresence custom={direction} mode="popLayout" initial={false}>
                   <motion.div
                     key={hoveredIndex}
-                    initial={{ opacity: 0, x: direction * 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -direction * 20 }}
+                    custom={direction}
+                    variants={{
+                      initial: (dir: number) => ({
+                        opacity: 0,
+                        x: dir * 20,
+                      }),
+                      animate: {
+                        opacity: 1,
+                        x: 0,
+                      },
+                      exit: (dir: number) => ({
+                        opacity: 0,
+                        x: -dir * 20,
+                      }),
+                    }}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     className="flex items-center gap-1.5 whitespace-nowrap shrink-0"
                   >
