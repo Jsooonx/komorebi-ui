@@ -29,6 +29,46 @@
   animation: block-slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* The catalog supplies the only visible card shell. These scoped presentation
+   rules flatten the canonical component wrapper without changing its source. */
+.component-catalog-surface > :first-child {
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  justify-content: center !important;
+}
+
+.component-catalog-surface > :first-child > :has(> .w-5.h-5),
+.component-catalog-surface > :first-child > :last-child:not(:only-child) {
+  display: none !important;
+}
+
+.component-catalog-surface > :first-child > :not(.absolute):not(:last-child):not(:has(> .w-5.h-5)) {
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  flex: 1 1 auto !important;
+  justify-content: center !important;
+}
+
+.component-catalog-surface[data-variant="pixel"] > :first-child > :first-child {
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

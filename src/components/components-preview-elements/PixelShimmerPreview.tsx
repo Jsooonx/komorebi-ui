@@ -3,7 +3,7 @@ import { ComponentCatalogFrame } from "./ComponentCatalogFrame";
 
 export default function PixelShimmerPreview() {
   return (
-    <ComponentCatalogFrame>
+    <ComponentCatalogFrame variant="pixel">
       <PixelShimmerElement />
     </ComponentCatalogFrame>
   );
