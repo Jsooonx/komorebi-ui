@@ -171,7 +171,13 @@ export default function AtlasHorizontalParallaxElement({
         className="relative"
         style={{ height: previewMode === "fullscreen" ? "360dvh" : "1520px" }}
       >
-        <div className="sticky top-0 h-dvh min-h-[520px] overflow-hidden bg-[#09090b]">
+        <div 
+          className="sticky top-0 overflow-hidden bg-[#09090b]"
+          style={{ 
+            height: previewMode === "fullscreen" ? "100dvh" : "500px",
+            minHeight: previewMode === "fullscreen" ? "520px" : "auto"
+          }}
+        >
           <motion.div
             style={{ x: trackX }}
             className="absolute inset-y-0 left-0 flex w-[400%] will-change-transform"
