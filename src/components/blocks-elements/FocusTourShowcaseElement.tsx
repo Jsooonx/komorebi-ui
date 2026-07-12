@@ -390,7 +390,13 @@ export default function FocusTourShowcaseElement({
                           className="absolute inset-0 rounded-full bg-white/[0.08]"
                         />
                       )}
-                      <Icon className="relative z-10 h-3.5 w-3.5 shrink-0" />
+                      <motion.span
+                        layout="position"
+                        className="relative z-10 flex h-3.5 w-3.5 shrink-0 items-center justify-center"
+                        transition={reducedMotion ? { duration: 0.12 } : spring}
+                      >
+                        <Icon className="h-3.5 w-3.5" />
+                      </motion.span>
                       <span
                         className={`relative z-10 overflow-hidden whitespace-nowrap text-[9px] font-mono uppercase tracking-[0.12em] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                           isActive
