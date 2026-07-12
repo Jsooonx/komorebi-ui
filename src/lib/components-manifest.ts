@@ -335,6 +335,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     viewportHeightClass: "h-[720px]",
   },
   {
+    id: "atlas-horizontal-parallax",
+    name: "Atlas Horizontal Parallax",
+    category: "Parallax",
+    description:
+      "Pinned editorial chapter journey where natural vertical scroll drives a spring-smoothed horizontal story with layered depth.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[720px]",
+  },
+  {
     id: "words-preloader",
     name: "Words Preloader",
     category: "Preloader",
