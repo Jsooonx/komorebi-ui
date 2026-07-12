@@ -24,7 +24,6 @@ type TourStep = {
   title: string;
   description: string;
   icon: typeof Eye;
-  lens: { left: string; top: string; width: string; height: string };
 };
 
 const tourSteps: TourStep[] = [
@@ -35,7 +34,6 @@ const tourSteps: TourStep[] = [
     title: "See the system at a glance.",
     description: "One calm surface for the work that needs your attention now.",
     icon: Eye,
-    lens: { left: "5%", top: "9%", width: "40%", height: "31%" },
   },
   {
     id: "automations",
@@ -44,7 +42,6 @@ const tourSteps: TourStep[] = [
     title: "Shape the repeatable work.",
     description: "Turn the handoffs your team repeats into visible, reliable motion.",
     icon: Workflow,
-    lens: { left: "47%", top: "11%", width: "47%", height: "35%" },
   },
   {
     id: "review",
@@ -53,7 +50,6 @@ const tourSteps: TourStep[] = [
     title: "Review without losing context.",
     description: "Keep decisions close to the details that made them matter.",
     icon: Layers3,
-    lens: { left: "5%", top: "52%", width: "52%", height: "37%" },
   },
   {
     id: "launch",
@@ -62,7 +58,6 @@ const tourSteps: TourStep[] = [
     title: "Launch with the full picture.",
     description: "Move from ready to released with the right signals in view.",
     icon: Rocket,
-    lens: { left: "60%", top: "54%", width: "34%", height: "35%" },
   },
 ];
 
@@ -214,7 +209,6 @@ function ProductWorkspace({
     { id: "review", content: <ReviewPanel /> },
     { id: "launch", content: <LaunchPanel /> },
   ];
-  const activeLens = tourSteps[activeStep].lens;
 
   return (
     <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-[#101012]/95 shadow-[0_35px_100px_rgba(0,0,0,0.45)] backdrop-blur-xl">
@@ -245,10 +239,19 @@ function ProductWorkspace({
               return (
                 <div
                   key={step.id}
-                  className={`flex items-center gap-2 rounded-md px-2 py-2 text-[9px] ${activeStep === index ? "bg-white/[0.09] text-white" : "text-white/30"}`}
+                  className={`relative flex items-center gap-2 rounded-md px-2 py-2 text-[9px] transition-colors duration-300 ${activeStep === index ? "text-white" : "text-white/30"}`}
                 >
-                  <Icon className="h-3 w-3 shrink-0" />
-                  <span className="hidden truncate sm:inline">{step.label}</span>
+                  {activeStep === index && (
+                    <motion.div
+                      layoutId="focus-tour-sidebar-pill"
+                      className="absolute inset-0 rounded-md bg-white/[0.09] z-0"
+                      transition={spring}
+                    />
+                  )}
+                  <div className="relative z-10 flex w-full min-w-0 items-center gap-2">
+                    <Icon className="h-3 w-3 shrink-0" />
+                    <span className="hidden truncate sm:inline">{step.label}</span>
+                  </div>
                 </div>
               );
             })}
@@ -274,21 +277,19 @@ function ProductWorkspace({
             </span>
           </div>
 
-          <div className="relative grid min-h-[226px] grid-cols-2 gap-2.5 sm:min-h-[250px] sm:gap-3">
-            {panels.map(({ id, content }) => (
-              <div key={id} className="min-h-0">
+          <div className="relative grid min-h-[310px] grid-cols-2 gap-2.5 sm:min-h-[340px] sm:gap-3 overflow-hidden rounded-xl">
+            {panels.map(({ id, content }, index) => (
+              <div key={id} className="relative min-h-0">
                 {content}
+                {activeStep === index && (
+                  <motion.div
+                    layoutId="focus-tour-spotlight"
+                    transition={reducedMotion ? { duration: 0.12 } : spring}
+                    className="pointer-events-none absolute inset-0 z-20 rounded-xl border border-white/75 bg-white/[0.015] shadow-[0_0_0_999px_rgba(9,9,11,0.56),0_0_24px_rgba(255,255,255,0.06)]"
+                  />
+                )}
               </div>
             ))}
-            <LayoutGroup id="focus-tour-lens">
-              <motion.div
-                layoutId="focus-tour-spotlight"
-                transition={reducedMotion ? { duration: 0.12 } : spring}
-                initial={false}
-                animate={{ ...activeLens, opacity: 1 }}
-                className="pointer-events-none absolute z-20 rounded-xl border border-white/75 bg-white/[0.025] shadow-[0_0_0_999px_rgba(0,0,0,0.34),0_0_32px_rgba(255,255,255,0.1)]"
-              />
-            </LayoutGroup>
           </div>
         </div>
       </div>
@@ -326,7 +327,7 @@ export default function FocusTourShowcaseElement({
             <div className="mb-5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.24em] text-white/35">
               <span className="h-1.5 w-1.5 rounded-full bg-white/70" /> Guided product tour
             </div>
-            <div className="relative min-h-[108px] max-w-[300px]">
+            <div className="relative min-h-[152px] max-w-[300px] sm:min-h-[164px]">
               <AnimatePresence mode="popLayout" initial={false} custom={direction}>
                 <motion.div
                   key={currentStep.id}
