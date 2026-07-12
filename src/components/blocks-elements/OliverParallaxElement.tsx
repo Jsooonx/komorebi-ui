@@ -17,15 +17,15 @@ export default function OliverParallaxElement({ previewMode = "fullscreen" }: Ol
   });
 
   // 1. Intro Panel Wipe Y translation (slides up to hide)
-  const introY = useTransform(smoothProgress, [0, 0.28], ["0%", "-100%"]);
+  const introY = useTransform(smoothProgress, [0, 0.18], ["0%", "-100%"]);
 
   // 2. Outro Panel Wipe Y translation (slides up to cover)
-  const outroY = useTransform(smoothProgress, [0.72, 0.95], ["100%", "0%"]);
+  const outroY = useTransform(smoothProgress, [0.82, 0.98], ["100%", "0%"]);
 
   // 3. Staggered vertical translations for the 3 image columns
-  const col1Y = useTransform(smoothProgress, [0.1, 0.9], ["0%", "-28%"]);
-  const col2Y = useTransform(smoothProgress, [0.1, 0.9], ["-28%", "0%"]);
-  const col3Y = useTransform(smoothProgress, [0.1, 0.9], ["-5%", "-32%"]);
+  const col1Y = useTransform(smoothProgress, [0.12, 0.88], ["0%", "-38%"]);
+  const col2Y = useTransform(smoothProgress, [0.12, 0.88], ["-38%", "5%"]);
+  const col3Y = useTransform(smoothProgress, [0.12, 0.88], ["-5%", "-42%"]);
 
   // Group of images
   const col1Images = [
@@ -54,7 +54,7 @@ export default function OliverParallaxElement({ previewMode = "fullscreen" }: Ol
       {/* Scrollable canvas length */}
       <div 
         className="relative w-full"
-        style={{ height: previewMode === "fullscreen" ? "300dvh" : "240%" }}
+        style={{ height: previewMode === "fullscreen" ? "500dvh" : "400%" }}
       >
         {/* Sticky viewport window */}
         <div 
