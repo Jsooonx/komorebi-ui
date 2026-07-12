@@ -122,11 +122,6 @@ export default function MorphingLensPreloaderElement({
         <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(8,8,10,0.88),rgba(8,8,10,0.38)_50%,rgba(8,8,10,0.92))]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_8%,rgba(8,8,10,0.78)_78%)]" />
 
-        <div className="absolute left-6 right-6 top-6 flex items-center justify-between text-[9px] font-medium uppercase tracking-[0.28em] text-white/55 sm:left-8 sm:right-8">
-          <span>Field note / 04</span>
-          <span>Quiet entry</span>
-        </div>
-
         <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
           <motion.div
             animate={{ opacity: isRevealed ? 1 : 0.64, y: isRevealed ? 0 : 18 }}
@@ -143,11 +138,6 @@ export default function MorphingLensPreloaderElement({
               Thoughtful systems begin with enough space for the right details to surface.
             </p>
           </motion.div>
-        </div>
-
-        <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-[9px] font-medium uppercase tracking-[0.28em] text-white/45 sm:left-8 sm:right-8">
-          <span>Komorebi UI</span>
-          <span>2026 / Studio notes</span>
         </div>
       </motion.div>
 
