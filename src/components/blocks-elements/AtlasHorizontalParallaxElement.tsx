@@ -169,7 +169,7 @@ export default function AtlasHorizontalParallaxElement({
     >
       <div
         className="relative"
-        style={{ height: previewMode === "fullscreen" ? "360dvh" : "1520px" }}
+        style={{ height: previewMode === "fullscreen" ? "520dvh" : "2100px" }}
       >
         <div 
           className="sticky top-0 overflow-hidden bg-[#09090b]"
