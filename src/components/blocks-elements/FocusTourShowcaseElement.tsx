@@ -369,18 +369,16 @@ export default function FocusTourShowcaseElement({
                 const isActive = activeStep === index;
                 return (
                   <div key={step.id} className="flex shrink-0 items-center gap-1.5">
-                    <motion.button
-                      layout
+                    <button
                       type="button"
                       role="tab"
                       aria-selected={isActive}
                       aria-label={`Show ${step.label}`}
                       onClick={() => handleStepChange(index)}
-                      transition={reducedMotion ? { duration: 0.12 } : spring}
-                      className={`group relative flex h-8 items-center justify-center rounded-full border transition-colors shrink-0 ${
+                      className={`group relative flex h-8 items-center justify-center rounded-full border shrink-0 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                         isActive
-                          ? "border-white/30 text-white px-3 w-auto"
-                          : "border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 w-8 p-0"
+                          ? "border-white/30 text-white px-3 max-w-[140px]"
+                          : "border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 w-8 max-w-8 p-0"
                       }`}
                     >
                       {isActive && (
@@ -390,13 +388,7 @@ export default function FocusTourShowcaseElement({
                           className="absolute inset-0 rounded-full bg-white/[0.08]"
                         />
                       )}
-                      <motion.span
-                        layout="position"
-                        className="relative z-10 flex h-3.5 w-3.5 shrink-0 items-center justify-center"
-                        transition={reducedMotion ? { duration: 0.12 } : spring}
-                      >
-                        <Icon className="h-3.5 w-3.5" />
-                      </motion.span>
+                      <Icon className="relative z-10 h-3.5 w-3.5 shrink-0" />
                       <span
                         className={`relative z-10 overflow-hidden whitespace-nowrap text-[9px] font-mono uppercase tracking-[0.12em] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                           isActive
@@ -406,7 +398,7 @@ export default function FocusTourShowcaseElement({
                       >
                         {step.label}
                       </span>
-                    </motion.button>
+                    </button>
                     {index < tourSteps.length - 1 && (
                       <span className="h-px w-2 shrink-0 bg-white/10" />
                     )}
