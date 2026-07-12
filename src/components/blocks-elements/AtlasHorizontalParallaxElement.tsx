@@ -47,25 +47,24 @@ function Chapter({
   chapterIndex: number;
   progress: MotionValue<number>;
 }) {
-  const start = 0.16 + chapterIndex * 0.17;
-  const end = start + 0.17;
+  const focusProgress = 0.18 + chapterIndex * 0.2133;
   const imageScale = useTransform(
     progress,
-    [start - 0.08, start + 0.04, end + 0.08],
+    [focusProgress - 0.12, focusProgress, focusProgress + 0.12],
     [0.92, 1, 0.95],
   );
   const imageOpacity = useTransform(
     progress,
-    [start - 0.08, start + 0.03, end + 0.08],
+    [focusProgress - 0.12, focusProgress, focusProgress + 0.12],
     [0.38, 1, 0.62],
   );
   const imageClip = useTransform(
     progress,
-    [start - 0.08, start + 0.04, end + 0.08],
+    [focusProgress - 0.12, focusProgress, focusProgress + 0.12],
     ["inset(9% 10% 9% 10%)", "inset(0% 0% 0% 0%)", "inset(7% 9% 7% 9%)"],
   );
-  const numberX = useTransform(progress, [start - 0.1, end + 0.1], ["-7%", "8%"]);
-  const copyX = useTransform(progress, [start - 0.1, end + 0.1], ["10%", "-6%"]);
+  const numberX = useTransform(progress, [focusProgress - 0.15, focusProgress + 0.15], ["-7%", "8%"]);
+  const copyX = useTransform(progress, [focusProgress - 0.15, focusProgress + 0.15], ["10%", "-6%"]);
 
   return (
     <section className="relative flex h-full w-1/4 shrink-0 items-center overflow-hidden px-6 py-16 sm:px-10 lg:px-16">
@@ -118,12 +117,50 @@ export default function AtlasHorizontalParallaxElement({
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ container: scrollRef });
   const progress = useSpring(scrollYProgress, { stiffness: 108, damping: 28, mass: 0.32 });
-  const trackX = useTransform(progress, [0.14, 0.83], ["0%", "-75%"]);
-  const introOpacity = useTransform(progress, [0, 0.1, 0.19], [1, 1, 0]);
-  const introY = useTransform(progress, [0, 0.19], [0, -72]);
-  const outroOpacity = useTransform(progress, [0.8, 0.9, 1], [0, 0, 1]);
-  const outroY = useTransform(progress, [0.8, 1], [72, 0]);
-  const progressWidth = useTransform(progress, [0.14, 0.83], ["0%", "100%"]);
+  const trackX = useTransform(progress, [0.18, 0.82], ["0%", "-75%"]);
+  const introY = useTransform(progress, [0, 0.18], ["0%", "-100%"]);
+  const outroY = useTransform(progress, [0.82, 0.98], ["100%", "0%"]);
+  const progressWidth = useTransform(progress, [0.18, 0.82], ["0%", "100%"]);
+
+  // Color transitions to maintain high contrast as background wipes from off-white to dark and back
+  const labelColor = useTransform(
+    progress,
+    [0, 0.17, 0.18, 0.82, 0.83, 1],
+    [
+      "rgba(17,17,17,0.45)", 
+      "rgba(17,17,17,0.45)", 
+      "rgba(255,255,255,0.45)", 
+      "rgba(255,255,255,0.45)", 
+      "rgba(17,17,17,0.45)", 
+      "rgba(17,17,17,0.45)"
+    ]
+  );
+
+  const progressBgColor = useTransform(
+    progress,
+    [0, 0.17, 0.18, 0.82, 0.83, 1],
+    [
+      "rgba(17,17,17,0.1)", 
+      "rgba(17,17,17,0.1)", 
+      "rgba(255,255,255,0.15)", 
+      "rgba(255,255,255,0.15)", 
+      "rgba(17,17,17,0.1)", 
+      "rgba(17,17,17,0.1)"
+    ]
+  );
+
+  const progressFillColor = useTransform(
+    progress,
+    [0, 0.17, 0.18, 0.82, 0.83, 1],
+    [
+      "#111111", 
+      "#111111", 
+      "#f2f0e9", 
+      "#f2f0e9", 
+      "#111111", 
+      "#111111"
+    ]
+  );
 
   return (
     <div
@@ -149,8 +186,8 @@ export default function AtlasHorizontalParallaxElement({
             ))}
           </motion.div>
           <motion.div
-            style={{ opacity: introOpacity, y: introY }}
-            className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-[#f2f0e9] px-6 text-[#111111]"
+            style={{ y: introY }}
+            className="absolute inset-0 z-20 flex items-center justify-center bg-[#f2f0e9] px-6 text-[#111111]"
           >
             <div className="max-w-3xl text-center">
               <span className="text-[9px] font-medium uppercase tracking-[0.3em] text-black/45">
@@ -165,8 +202,8 @@ export default function AtlasHorizontalParallaxElement({
             </div>
           </motion.div>
           <motion.div
-            style={{ opacity: outroOpacity, y: outroY }}
-            className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center bg-[#f2f0e9] px-6 text-[#111111]"
+            style={{ y: outroY }}
+            className="absolute inset-0 z-30 flex items-center justify-center bg-[#f2f0e9] px-6 text-[#111111]"
           >
             <div className="max-w-2xl text-center">
               <span className="text-[9px] font-medium uppercase tracking-[0.3em] text-black/45">
@@ -177,13 +214,26 @@ export default function AtlasHorizontalParallaxElement({
               </h2>
             </div>
           </motion.div>
-          <div className="absolute left-6 right-6 top-6 z-40 flex items-center justify-between text-[9px] font-medium uppercase tracking-[0.22em] text-white/45 sm:left-8 sm:right-8">
+          
+          {/* Scroll-responsive color changing text labels */}
+          <motion.div 
+            style={{ color: labelColor }}
+            className="absolute left-6 right-6 top-6 z-40 flex items-center justify-between text-[9px] font-medium uppercase tracking-[0.22em] sm:left-8 sm:right-8"
+          >
             <span>Atlas / horizontal study</span>
             <span>Scroll to navigate</span>
-          </div>
-          <div className="absolute bottom-7 left-6 right-6 z-40 h-px bg-white/15 sm:left-8 sm:right-8">
-            <motion.div style={{ width: progressWidth }} className="h-full bg-[#f2f0e9]" />
-          </div>
+          </motion.div>
+          
+          {/* Scroll-responsive progress track */}
+          <motion.div 
+            style={{ backgroundColor: progressBgColor }}
+            className="absolute bottom-7 left-6 right-6 z-40 h-px sm:left-8 sm:right-8"
+          >
+            <motion.div 
+              style={{ width: progressWidth, backgroundColor: progressFillColor }} 
+              className="h-full" 
+            />
+          </motion.div>
         </div>
       </div>
     </div>
