@@ -97,6 +97,9 @@ export async function loadComponentCode(id: string) {
       return (await import("../components/blocks-elements/StairsPreloaderElement.tsx?raw")).default;
     case "double-stair-preloader":
       return (await import("../components/blocks-elements/DoubleStairPreloaderElement.tsx?raw")).default;
+    case "morphing-lens-preloader":
+      return (await import("../components/blocks-elements/MorphingLensPreloaderElement.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }

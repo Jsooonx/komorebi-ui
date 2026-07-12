@@ -36,6 +36,7 @@ import DepthLensParallaxCard from "../components/blocks-preview-elements/DepthLe
 import WordsPreloaderCard from "../components/blocks-preview-elements/WordsPreloaderCard";
 import StairsPreloaderCard from "../components/blocks-preview-elements/StairsPreloaderCard";
 import DoubleStairPreloaderCard from "../components/blocks-preview-elements/DoubleStairPreloaderCard";
+import MorphingLensPreloaderCard from "../components/blocks-preview-elements/MorphingLensPreloaderCard";
 import type { ComponentCatalogPreviewProps, ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPreviewProps>> = {
@@ -79,6 +80,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "words-preloader": WordsPreloaderCard,
   "stairs-preloader": StairsPreloaderCard,
   "double-stair-preloader": DoubleStairPreloaderCard,
+  "morphing-lens-preloader": MorphingLensPreloaderCard,
 };
 
 export function getComponentPreview(id: string) {

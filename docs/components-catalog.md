@@ -48,6 +48,7 @@ Full layout sections are intentionally excluded from this catalog. They belong t
 - Words Preloader
 - Stairs Preloader
 - Double Stair Preloader
+- Morphing Lens Preloader
 
 Features 2 keeps its interactive CLI terminal engine, while its decorative inline code snippets have been removed from the visual block preview.
 Features 3 is a minimal six-cell Komorebi feature layout with original product-focused copy, centered typography, tight heading-to-description spacing matching Features 2’s scale, thin dividers, and restrained icons.
@@ -60,6 +61,7 @@ Depth Lens Parallax is a Parallax-category block built as a layered cinematic sc
 Words Preloader is a Preloader-category block that functions as a full-screen loader. It cycles through greeting words in 10 languages with a custom speed curve (symmetric delay: slow-fast-slow). At the end, the preloader screen and final text slide up elastically, using an SVG wave path warp transition to reveal the main website screen.
 Stairs Preloader is a Preloader-category block that serves as a full-screen entry loader. It features deep dark background staging where a silver cinematic title fades in, shines with a horizontal sweep shimmer gradient, and fades out. The transition is then driven by five white vertical columns (stairs) sliding up staggeredly from bottom to top, revealing the mock landing page content.
 Double Stair Preloader is a Preloader-category block that operates as a full-screen entry loader. It stages a silver cinematic title that fades in, glows with a shimmer sweep, and fades out. When completed, the transition splits into 5 vertical columns, each hosting a top half (sliding down) and a bottom half (sliding up) that meet in the center, and then part away in staggered delay steps to reveal the mock portfolio page content.
+Morphing Lens Preloader is a Preloader-category showcase built around one persistent centered frame. The frame morphs from a compact capsule into a larger editorial lens, changes its label in place, and expands into a full-page reveal without hard remounts or repeated wipes. It uses one existing grayscale editorial image, Framer Motion layout springs, and a reduced-motion dissolve. It is a visual block only and does not act as the application's global loading gate.
 
 This keeps reusable pieces separate from ready-made page/layout sections.
 

@@ -118,6 +118,7 @@ The preferred interaction language is minimal UI with high-quality morphing moti
 - Use small stagger delays only for child items entering a newly revealed panel. Keep them short and subordinate to the parent morph.
 - Use hover motion locally: the hovered icon or control may brighten, lift, scale slightly, or gain a restrained glow. Avoid lighting up an entire group when one item is hovered.
 - Use `whileTap` or a similarly subtle press response for controls, without making the interface feel bouncy or game-like.
+- Preloader blocks should prefer one persistent visual anchor that morphs through its states. A frame, label, or progress mark may change size and context with spring continuity, but the transition must not rely on repeated hard wipes, blinking remounts, or an artificial global loading gate. Showcase preloaders should reveal a page layer underneath and use a short static/dissolve fallback when reduced motion is requested.
 
 ### Motion quality constraints
 

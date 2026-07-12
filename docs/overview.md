@@ -54,7 +54,7 @@ src/
 
 `COMPONENTS_MANIFEST` contains the 19 reusable components shown in `/components`.
 
-`BLOCKS_MANIFEST` contains the 18 layout blocks shown in `/blocks`, including Siena Parallax, Oliver Parallax, Atlas Horizontal Parallax, and Depth Lens Parallax in the Parallax category. Blocks expose category routes such as `/blocks/parallax`, and each block has a fullscreen page route such as `/blocks/parallax/siena-parallax`.
+`BLOCKS_MANIFEST` contains the 19 layout blocks shown in `/blocks`, including Siena Parallax, Oliver Parallax, Atlas Horizontal Parallax, and Depth Lens Parallax in the Parallax category, plus four Preloader blocks. Blocks expose category routes such as `/blocks/parallax` and `/blocks/preloader`, and each block has a fullscreen page route such as `/blocks/parallax/siena-parallax` or `/blocks/preloader/morphing-lens-preloader`.
 
 Both catalogs are deliberately split by surface. `src/components/components-preview-elements/` serves compact `/components` sizing adapters, while `src/components/components-elements/` owns the canonical reusable source used by the detail playground. `src/components/highlights-elements/` separately owns the landing-page Bento curation. `src/components/blocks-preview-elements/` serves the compact `/blocks` catalog, while `src/components/blocks-elements/` owns the full-page entries used by fullscreen preview. This prevents catalog viewport sizing from leaking into the canonical component or full block-page experience.
 

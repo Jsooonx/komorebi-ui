@@ -389,6 +389,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "morphing-lens-preloader",
+    name: "Morphing Lens Preloader",
+    category: "Preloader",
+    description:
+      "A centered preloader frame that morphs through three quiet states before expanding into a full-page reveal.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {
