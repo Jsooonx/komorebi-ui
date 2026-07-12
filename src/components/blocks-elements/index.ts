@@ -13,6 +13,7 @@ import Features5Block from "./Features5Block";
 import SienaParallaxBlock from "./SienaParallaxBlock";
 import OliverParallaxBlock from "./OliverParallaxBlock";
 import AtlasHorizontalParallaxBlock from "./AtlasHorizontalParallaxBlock";
+import DepthLensParallaxBlock from "./DepthLensParallaxBlock";
 import WordsPreloaderBlock from "./WordsPreloaderBlock";
 import StairsPreloaderBlock from "./StairsPreloaderBlock";
 import DoubleStairPreloaderBlock from "./DoubleStairPreloaderBlock";
@@ -32,6 +33,7 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "siena-parallax": SienaParallaxBlock,
   "oliver-parallax": OliverParallaxBlock,
   "atlas-horizontal-parallax": AtlasHorizontalParallaxBlock,
+  "depth-lens-parallax": DepthLensParallaxBlock,
   "words-preloader": WordsPreloaderBlock,
   "stairs-preloader": StairsPreloaderBlock,
   "double-stair-preloader": DoubleStairPreloaderBlock,

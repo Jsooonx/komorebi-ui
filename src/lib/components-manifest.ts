@@ -346,6 +346,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     viewportHeightClass: "h-[720px]",
   },
   {
+    id: "depth-lens-parallax",
+    name: "Depth Lens Parallax",
+    category: "Parallax",
+    description:
+      "Layered cinematic parallax scene combining atmospheric depth, a focal image, and a morphing foreground lens.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[720px]",
+  },
+  {
     id: "words-preloader",
     name: "Words Preloader",
     category: "Preloader",

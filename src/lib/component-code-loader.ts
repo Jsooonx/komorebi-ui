@@ -88,6 +88,9 @@ export async function loadComponentCode(id: string) {
     case "atlas-horizontal-parallax":
       return (await import("../components/blocks-elements/AtlasHorizontalParallaxElement.tsx?raw"))
         .default;
+    case "depth-lens-parallax":
+      return (await import("../components/blocks-elements/DepthLensParallaxElement.tsx?raw"))
+        .default;
     case "words-preloader":
       return (await import("../components/blocks-elements/WordsPreloaderElement.tsx?raw")).default;
     case "stairs-preloader":
