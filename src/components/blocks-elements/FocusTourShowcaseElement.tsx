@@ -61,7 +61,7 @@ const tourSteps: TourStep[] = [
   },
 ];
 
-const spring = { type: "spring" as const, stiffness: 360, damping: 32, mass: 0.72 };
+const spring = { type: "spring" as const, stiffness: 95, damping: 22, mass: 0.85 };
 
 function OverviewPanel() {
   return (
@@ -392,7 +392,7 @@ export default function FocusTourShowcaseElement({
                       )}
                       <Icon className="relative z-10 h-3.5 w-3.5 shrink-0" />
                       <span
-                        className={`relative z-10 overflow-hidden whitespace-nowrap text-[9px] font-mono uppercase tracking-[0.12em] transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                        className={`relative z-10 overflow-hidden whitespace-nowrap text-[9px] font-mono uppercase tracking-[0.12em] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                           isActive
                             ? "opacity-100 max-w-[100px] ml-1.5"
                             : "opacity-0 max-w-0 ml-0"
