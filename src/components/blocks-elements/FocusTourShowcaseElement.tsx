@@ -367,6 +367,12 @@ export default function FocusTourShowcaseElement({
               {tourSteps.map((step, index) => {
                 const Icon = step.icon;
                 const isActive = activeStep === index;
+                const stepWidths: Record<TourStepId, string> = {
+                  overview: "w-[108px]",
+                  automations: "w-[128px]",
+                  review: "w-[102px]",
+                  launch: "w-[102px]",
+                };
                 return (
                   <div key={step.id} className="flex shrink-0 items-center gap-1.5">
                     <button
@@ -377,8 +383,8 @@ export default function FocusTourShowcaseElement({
                       onClick={() => handleStepChange(index)}
                       className={`group relative flex h-8 items-center justify-center rounded-full border shrink-0 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                         isActive
-                          ? "border-white/30 text-white px-3 max-w-[140px]"
-                          : "border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 w-8 max-w-8 p-0"
+                          ? `border-white/30 text-white px-3 ${stepWidths[step.id]}`
+                          : "border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 w-8 p-0"
                       }`}
                     >
                       {isActive && (
