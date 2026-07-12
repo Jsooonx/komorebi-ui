@@ -61,7 +61,8 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     id: "hover-expand-accordion",
     name: "Hover Expand Accordion",
     category: "Masking & Accordions",
-    description: "Premium editorial horizontal image gallery that morphs open on hover with spring physics.",
+    description:
+      "Premium editorial horizontal image gallery that morphs open on hover with spring physics.",
     dependencies: ["framer-motion"],
     isNew: true,
     gridClass: "md:col-span-2",
@@ -71,7 +72,8 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     id: "hover-expand-horizontal",
     name: "Hover Expand Horizontal",
     category: "Masking & Accordions",
-    description: "High-fidelity pure image horizontal gallery with custom typographic overlays that expand on hover.",
+    description:
+      "High-fidelity pure image horizontal gallery with custom typographic overlays that expand on hover.",
     dependencies: ["framer-motion"],
     isNew: true,
     gridClass: "md:col-span-2",
@@ -81,7 +83,8 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     id: "hover-expand-vertical",
     name: "Hover Expand Vertical",
     category: "Masking & Accordions",
-    description: "High-fidelity pure image vertical gallery with custom typographic overlays that expand on hover.",
+    description:
+      "High-fidelity pure image vertical gallery with custom typographic overlays that expand on hover.",
     dependencies: ["framer-motion"],
     isNew: true,
     gridClass: "md:col-span-2",
@@ -112,7 +115,8 @@ export const COMPONENTS_MANIFEST: ComponentManifestItem[] = [
     id: "vercel-tooltip",
     name: "Vercel Tooltip",
     category: "Floating UI & Docks",
-    description: "Premium toolbar navigation with a shared sliding tooltip that morphs size and direction smoothly.",
+    description:
+      "Premium toolbar navigation with a shared sliding tooltip that morphs size and direction smoothly.",
     dependencies: ["framer-motion", "lucide-react"],
     isNew: true,
     gridClass: "md:col-span-2",
@@ -406,6 +410,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     category: "Product Showcase",
     description:
       "A scroll-led SaaS workspace that morphs through signal collection, decision shaping, and confident delivery.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
+  {
+    id: "focus-tour-showcase",
+    name: "Focus Tour Product Showcase",
+    category: "Product Showcase",
+    description:
+      "A click-driven guided product tour with a persistent workspace, morphing spotlight lens, and contextual annotations.",
     dependencies: ["framer-motion"],
     isNew: true,
     gridClass: "md:col-span-2 md:row-span-2",

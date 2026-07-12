@@ -38,6 +38,7 @@ import StairsPreloaderCard from "../components/blocks-preview-elements/StairsPre
 import DoubleStairPreloaderCard from "../components/blocks-preview-elements/DoubleStairPreloaderCard";
 import MorphingLensPreloaderCard from "../components/blocks-preview-elements/MorphingLensPreloaderCard";
 import SignalWorkflowShowcaseCard from "../components/blocks-preview-elements/SignalWorkflowShowcaseCard";
+import FocusTourShowcaseCard from "../components/blocks-preview-elements/FocusTourShowcaseCard";
 import type { ComponentCatalogPreviewProps, ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPreviewProps>> = {
@@ -83,6 +84,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "double-stair-preloader": DoubleStairPreloaderCard,
   "morphing-lens-preloader": MorphingLensPreloaderCard,
   "signal-workflow-showcase": SignalWorkflowShowcaseCard,
+  "focus-tour-showcase": FocusTourShowcaseCard,
 };
 
 export function getComponentPreview(id: string) {

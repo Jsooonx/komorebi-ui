@@ -15,8 +15,9 @@ export async function loadComponentCode(id: string) {
       return (await import("../components/components-elements/HoverExpandAccordionElement.tsx?raw"))
         .default;
     case "hover-expand-horizontal":
-      return (await import("../components/components-elements/HoverExpandHorizontalElement.tsx?raw"))
-        .default;
+      return (
+        await import("../components/components-elements/HoverExpandHorizontalElement.tsx?raw")
+      ).default;
     case "hover-expand-vertical":
       return (await import("../components/components-elements/HoverExpandVerticalElement.tsx?raw"))
         .default;
@@ -96,12 +97,16 @@ export async function loadComponentCode(id: string) {
     case "stairs-preloader":
       return (await import("../components/blocks-elements/StairsPreloaderElement.tsx?raw")).default;
     case "double-stair-preloader":
-      return (await import("../components/blocks-elements/DoubleStairPreloaderElement.tsx?raw")).default;
+      return (await import("../components/blocks-elements/DoubleStairPreloaderElement.tsx?raw"))
+        .default;
     case "morphing-lens-preloader":
       return (await import("../components/blocks-elements/MorphingLensPreloaderElement.tsx?raw"))
         .default;
     case "signal-workflow-showcase":
       return (await import("../components/blocks-elements/SignalWorkflowShowcaseElement.tsx?raw"))
+        .default;
+    case "focus-tour-showcase":
+      return (await import("../components/blocks-elements/FocusTourShowcaseElement.tsx?raw"))
         .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
