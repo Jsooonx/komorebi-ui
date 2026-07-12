@@ -151,6 +151,8 @@ export default function SignalWorkflowShowcaseElement({
   const workspaceY = useTransform(progress, [0, 0.5, 1], [10 * movement, 0, -8 * movement]);
   const workspaceScale = useTransform(progress, [0, 0.18, 0.82, 1], [0.97, 1, 1, 0.985]);
   const progressWidth = useTransform(progress, [0, 1], ["0%", "100%"]);
+  const line1ScaleX = useTransform(progress, [0.15, 0.45], [0, 1]);
+  const line2ScaleX = useTransform(progress, [0.5, 0.8], [0, 1]);
 
   return (
     <div
@@ -168,7 +170,7 @@ export default function SignalWorkflowShowcaseElement({
           <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_78%)]" />
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.035] blur-3xl" />
 
-          <div className="relative mx-auto grid h-full w-full max-w-6xl grid-cols-1 items-center gap-8 px-5 py-14 sm:px-8 lg:grid-cols-[minmax(210px,0.34fr)_minmax(0,1fr)] lg:gap-12 lg:px-12">
+          <div className={`relative mx-auto grid h-full w-full max-w-6xl grid-cols-1 items-center gap-8 px-5 sm:px-8 lg:grid-cols-[minmax(210px,0.34fr)_minmax(0,1fr)] lg:gap-12 lg:px-12 ${previewMode === "catalog" ? "py-6" : "py-14"}`}>
             <div className="relative z-10 flex min-h-[174px] flex-col justify-center">
               <div className="mb-5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.24em] text-white/35">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#c6d478]" />
@@ -208,7 +210,7 @@ export default function SignalWorkflowShowcaseElement({
                 </motion.div>
               </div>
 
-              <div className="mt-7 flex max-w-[310px] items-center gap-2">
+              <div className={`flex max-w-[310px] items-center gap-2 ${previewMode === "catalog" ? "mt-4" : "mt-7"}`}>
                 {workflowSteps.map((step, index) => {
                   const Icon = step.icon;
                   return (
@@ -219,7 +221,15 @@ export default function SignalWorkflowShowcaseElement({
                         <Icon className="h-3 w-3" />
                       </span>
                       {index < workflowSteps.length - 1 && (
-                        <span className="h-px w-4 bg-white/10 sm:w-7" />
+                        <div className="relative h-px w-4 sm:w-7 bg-white/10 overflow-hidden shrink-0">
+                          <motion.span
+                            style={{
+                              scaleX: index === 0 ? line1ScaleX : line2ScaleX,
+                              originX: 0,
+                            }}
+                            className="absolute inset-0 bg-[#c6d478]"
+                          />
+                        </div>
                       )}
                     </div>
                   );
@@ -259,12 +269,21 @@ export default function SignalWorkflowShowcaseElement({
                         return (
                           <div
                             key={step.label}
-                            className={`flex items-center gap-2 rounded-md px-2 py-2 text-[9px] ${activeStep === index ? "bg-white/[0.09] text-white" : "text-white/30"}`}
+                            className={`relative flex items-center gap-2 rounded-md px-2 py-2 text-[9px] transition-colors duration-300 ${activeStep === index ? "text-white" : "text-white/30"}`}
                           >
-                            <Icon className="h-3 w-3 shrink-0" />
-                            <span className="hidden truncate sm:inline">
-                              {step.label.split(" ")[0]}
-                            </span>
+                            {activeStep === index && (
+                              <motion.div
+                                layoutId="active-sidebar-pill"
+                                className="absolute inset-0 rounded-md bg-white/[0.09] z-0"
+                                transition={{ type: "spring", stiffness: 142, damping: 20 }}
+                              />
+                            )}
+                            <div className="relative z-10 flex w-full min-w-0 items-center gap-2">
+                              <Icon className="h-3 w-3 shrink-0" />
+                              <span className="hidden truncate sm:inline">
+                                {step.label.split(" ")[0]}
+                              </span>
+                            </div>
                           </div>
                         );
                       })}
