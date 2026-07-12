@@ -360,7 +360,7 @@ export default function FocusTourShowcaseElement({
             </div>
 
             <div
-              className="mt-7 flex max-w-[310px] items-center gap-1.5"
+              className="mt-7 flex items-center gap-1.5 overflow-x-auto scrollbar-none"
               role="tablist"
               aria-label="Product tour steps"
             >
@@ -368,14 +368,20 @@ export default function FocusTourShowcaseElement({
                 const Icon = step.icon;
                 const isActive = activeStep === index;
                 return (
-                  <div key={step.id} className="flex min-w-0 flex-1 items-center gap-1.5">
-                    <button
+                  <div key={step.id} className="flex shrink-0 items-center gap-1.5">
+                    <motion.button
+                      layout
                       type="button"
                       role="tab"
                       aria-selected={isActive}
                       aria-label={`Show ${step.label}`}
                       onClick={() => handleStepChange(index)}
-                      className={`group relative flex h-8 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full border px-2 transition-colors ${isActive ? "border-white/30 text-white" : "border-white/10 text-white/35 hover:border-white/25 hover:text-white/75"}`}
+                      transition={reducedMotion ? { duration: 0.12 } : spring}
+                      className={`group relative flex h-8 items-center justify-center rounded-full border transition-colors shrink-0 ${
+                        isActive
+                          ? "border-white/30 text-white px-3 w-auto gap-1.5"
+                          : "border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 w-8 p-0"
+                      }`}
                     >
                       {isActive && (
                         <motion.span
@@ -384,11 +390,21 @@ export default function FocusTourShowcaseElement({
                           className="absolute inset-0 rounded-full bg-white/[0.08]"
                         />
                       )}
-                      <Icon className="relative z-10 h-3 w-3 shrink-0" />
-                      <span className="relative z-10 hidden truncate text-[9px] sm:inline">
-                        {step.label}
-                      </span>
-                    </button>
+                      <Icon className="relative z-10 h-3.5 w-3.5 shrink-0" />
+                      <AnimatePresence initial={false} mode="wait">
+                        {isActive && (
+                          <motion.span
+                            initial={{ opacity: 0, width: 0 }}
+                            animate={{ opacity: 1, width: "auto" }}
+                            exit={{ opacity: 0, width: 0 }}
+                            transition={reducedMotion ? { duration: 0.1 } : spring}
+                            className="relative z-10 overflow-hidden whitespace-nowrap text-[9px] font-mono uppercase tracking-[0.12em]"
+                          >
+                            {step.label}
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    </motion.button>
                     {index < tourSteps.length - 1 && (
                       <span className="h-px w-2 shrink-0 bg-white/10" />
                     )}
