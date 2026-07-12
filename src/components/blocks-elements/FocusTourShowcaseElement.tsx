@@ -337,7 +337,7 @@ export default function FocusTourShowcaseElement({
             <div className={`flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.24em] text-white/35 ${isCatalog ? "mb-3" : "mb-5"}`}>
               <span className="h-1.5 w-1.5 rounded-full bg-white/70" /> Guided product tour
             </div>
-            <div className={`relative max-w-[300px] ${isCatalog ? "min-h-[128px] sm:min-h-[136px]" : "min-h-[152px] sm:min-h-[164px]"}`}>
+            <div className="relative min-h-[156px] max-w-[300px] sm:min-h-[168px]">
               <AnimatePresence mode="popLayout" initial={false} custom={direction}>
                 <motion.div
                   key={currentStep.id}
