@@ -324,6 +324,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     viewportHeightClass: "h-[720px]",
   },
   {
+    id: "oliver-parallax",
+    name: "Oliver Parallax",
+    category: "Parallax",
+    description:
+      "Awwwards-style multi-column scroll-driven image gallery featuring staggered parallax offsets and smooth wipe panels.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[720px]",
+  },
+  {
     id: "words-preloader",
     name: "Words Preloader",
     category: "Preloader",

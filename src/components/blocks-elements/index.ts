@@ -11,6 +11,7 @@ import Features3Block from "./Features3Block";
 import Features4Block from "./Features4Block";
 import Features5Block from "./Features5Block";
 import SienaParallaxBlock from "./SienaParallaxBlock";
+import OliverParallaxBlock from "./OliverParallaxBlock";
 import WordsPreloaderBlock from "./WordsPreloaderBlock";
 import StairsPreloaderBlock from "./StairsPreloaderBlock";
 import DoubleStairPreloaderBlock from "./DoubleStairPreloaderBlock";
@@ -28,6 +29,7 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "features-4": Features4Block,
   "features-5": Features5Block,
   "siena-parallax": SienaParallaxBlock,
+  "oliver-parallax": OliverParallaxBlock,
   "words-preloader": WordsPreloaderBlock,
   "stairs-preloader": StairsPreloaderBlock,
   "double-stair-preloader": DoubleStairPreloaderBlock,

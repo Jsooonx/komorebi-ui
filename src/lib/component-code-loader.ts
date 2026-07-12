@@ -83,6 +83,8 @@ export async function loadComponentCode(id: string) {
       return (await import("../components/blocks-elements/Features5Element.tsx?raw")).default;
     case "siena-parallax":
       return (await import("../components/blocks-elements/SienaParallaxElement.tsx?raw")).default;
+    case "oliver-parallax":
+      return (await import("../components/blocks-elements/OliverParallaxElement.tsx?raw")).default;
     case "words-preloader":
       return (await import("../components/blocks-elements/WordsPreloaderElement.tsx?raw")).default;
     case "stairs-preloader":
