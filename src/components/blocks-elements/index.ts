@@ -18,6 +18,7 @@ import WordsPreloaderBlock from "./WordsPreloaderBlock";
 import StairsPreloaderBlock from "./StairsPreloaderBlock";
 import DoubleStairPreloaderBlock from "./DoubleStairPreloaderBlock";
 import MorphingLensPreloaderBlock from "./MorphingLensPreloaderBlock";
+import SignalWorkflowShowcaseBlock from "./SignalWorkflowShowcaseBlock";
 
 const BLOCK_PAGES: Record<string, ComponentType> = {
   "mega-menu-navbar-1": MegaMenuNavbar1Block,
@@ -39,6 +40,7 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "stairs-preloader": StairsPreloaderBlock,
   "double-stair-preloader": DoubleStairPreloaderBlock,
   "morphing-lens-preloader": MorphingLensPreloaderBlock,
+  "signal-workflow-showcase": SignalWorkflowShowcaseBlock,
 };
 
 export function getBlockPage(id: string) {

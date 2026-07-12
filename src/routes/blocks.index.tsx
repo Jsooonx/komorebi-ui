@@ -17,6 +17,7 @@ import {
   Cpu,
   Sparkles,
   Sidebar,
+  Orbit,
 } from "lucide-react";
 import {
   BLOCKS_MANIFEST,
@@ -304,6 +305,7 @@ export function BlocksIndex({
     { id: "features", label: "Features", icon: Cpu },
     { id: "parallax", label: "Parallax", icon: Sparkles },
     { id: "preloader", label: "Preloader", icon: RotateCcw },
+    { id: "product-showcase", label: "Product Showcase", icon: Orbit },
   ];
 
   const navigate = useNavigate();
@@ -341,6 +343,7 @@ export function BlocksIndex({
     if (activeCategory === "features") return item.category === "Features";
     if (activeCategory === "parallax") return item.category === "Parallax";
     if (activeCategory === "preloader") return item.category === "Preloader";
+    if (activeCategory === "product-showcase") return item.category === "Product Showcase";
     return false;
   });
 
@@ -488,6 +491,8 @@ export function BlocksIndex({
                       "Premium feature section layouts with grids, inline outline animations, and interactive hover highlights."}
                     {activeCategory === "preloader" &&
                       "Premium full-screen preloading overlays, page wipe transitions, and typographic entry sequences."}
+                    {activeCategory === "product-showcase" &&
+                      "Product-in-action layouts that turn a single workspace into a calm, scroll-led story of progress."}
                   </p>
                 </div>
               </LayoutGroup>

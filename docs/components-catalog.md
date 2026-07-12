@@ -49,6 +49,7 @@ Full layout sections are intentionally excluded from this catalog. They belong t
 - Stairs Preloader
 - Double Stair Preloader
 - Morphing Lens Preloader
+- Signal Workflow Showcase
 
 Features 2 keeps its interactive CLI terminal engine, while its decorative inline code snippets have been removed from the visual block preview.
 Features 3 is a minimal six-cell Komorebi feature layout with original product-focused copy, centered typography, tight heading-to-description spacing matching Features 2’s scale, thin dividers, and restrained icons.
@@ -62,6 +63,7 @@ Words Preloader is a Preloader-category block that functions as a full-screen lo
 Stairs Preloader is a Preloader-category block that serves as a full-screen entry loader. It features deep dark background staging where a silver cinematic title fades in, shines with a horizontal sweep shimmer gradient, and fades out. The transition is then driven by five white vertical columns (stairs) sliding up staggeredly from bottom to top, revealing the mock landing page content.
 Double Stair Preloader is a Preloader-category block that operates as a full-screen entry loader. It stages a silver cinematic title that fades in, glows with a shimmer sweep, and fades out. When completed, the transition splits into 5 vertical columns, each hosting a top half (sliding down) and a bottom half (sliding up) that meet in the center, and then part away in staggered delay steps to reveal the mock portfolio page content.
 Morphing Lens Preloader is a Preloader-category showcase built around one persistent centered frame. The frame morphs from a compact capsule into a larger editorial lens, changes its label in place, and expands into a full-page reveal without hard remounts or repeated wipes. It uses one existing grayscale editorial image, Framer Motion layout springs, and a reduced-motion dissolve. It is a visual block only and does not act as the application's global loading gate.
+Signal Workflow Showcase is the first Product Showcase block. It keeps one DOM/CSS SaaS workspace anchored while natural vertical scroll moves through three product states: collecting signal, shaping the next move, and shipping with confidence. The catalog uses a compact internal scroll surface, while fullscreen uses a 300dvh sticky narrative. Its dashboard panels crossfade and translate in place with spring-smoothed scroll progress; it does not reuse Features 4/5 dashboard assets, add a nested Bento, or introduce a new dependency.
 
 This keeps reusable pieces separate from ready-made page/layout sections.
 

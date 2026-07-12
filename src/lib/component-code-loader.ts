@@ -100,6 +100,9 @@ export async function loadComponentCode(id: string) {
     case "morphing-lens-preloader":
       return (await import("../components/blocks-elements/MorphingLensPreloaderElement.tsx?raw"))
         .default;
+    case "signal-workflow-showcase":
+      return (await import("../components/blocks-elements/SignalWorkflowShowcaseElement.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }

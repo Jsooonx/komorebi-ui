@@ -400,6 +400,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "signal-workflow-showcase",
+    name: "Signal Workflow Showcase",
+    category: "Product Showcase",
+    description:
+      "A scroll-led SaaS workspace that morphs through signal collection, decision shaping, and confident delivery.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

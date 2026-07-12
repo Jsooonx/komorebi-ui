@@ -4,6 +4,7 @@ export const BLOCK_CATEGORY_SLUGS = {
   features: "features",
   parallax: "parallax",
   preloader: "preloader",
+  productShowcase: "product-showcase",
 } as const;
 
 export type BlockCategorySlug = (typeof BLOCK_CATEGORY_SLUGS)[keyof typeof BLOCK_CATEGORY_SLUGS];
@@ -14,6 +15,7 @@ export function getBlockCategorySlug(category: string): BlockCategorySlug | unde
   if (category === "Features") return BLOCK_CATEGORY_SLUGS.features;
   if (category === "Parallax") return BLOCK_CATEGORY_SLUGS.parallax;
   if (category === "Preloader") return BLOCK_CATEGORY_SLUGS.preloader;
+  if (category === "Product Showcase") return BLOCK_CATEGORY_SLUGS.productShowcase;
   return undefined;
 }
 
