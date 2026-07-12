@@ -172,10 +172,7 @@ export default function SignalWorkflowShowcaseElement({
 
           <div className={`relative mx-auto grid h-full w-full max-w-6xl grid-cols-1 items-center gap-8 px-5 sm:px-8 lg:grid-cols-[minmax(210px,0.34fr)_minmax(0,1fr)] lg:gap-12 lg:px-12 ${previewMode === "catalog" ? "py-6" : "py-14"}`}>
             <div className="relative z-10 flex min-h-[174px] flex-col justify-center">
-              <div className="mb-5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.24em] text-white/35">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#c6d478]" />
-                Signal desk / 01
-              </div>
+
 
               <div className="relative h-[156px] max-w-[310px] sm:h-[164px]">
                 <motion.div
