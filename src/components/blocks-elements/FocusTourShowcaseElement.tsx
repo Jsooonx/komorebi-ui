@@ -63,9 +63,9 @@ const tourSteps: TourStep[] = [
 
 const spring = { type: "spring" as const, stiffness: 95, damping: 22, mass: 0.85 };
 
-function OverviewPanel() {
+function OverviewPanel({ isCatalog }: { isCatalog: boolean }) {
   return (
-    <div className="h-full rounded-xl border border-white/[0.08] bg-white/[0.025] p-3.5 sm:p-4">
+    <div className={`h-full rounded-xl border border-white/[0.08] bg-white/[0.025] ${isCatalog ? "p-2.5" : "p-3.5 sm:p-4"}`}>
       <div className="flex items-start justify-between">
         <div>
           <div className="text-[9px] uppercase tracking-[0.18em] text-white/30">
@@ -77,7 +77,7 @@ function OverviewPanel() {
           <Gauge className="h-2.5 w-2.5 text-[#c6d478]" /> steady
         </span>
       </div>
-      <div className="mt-5 flex h-12 items-end gap-1">
+      <div className={`flex items-end gap-1 ${isCatalog ? "mt-2.5 h-8" : "mt-5 h-12"}`}>
         {[32, 45, 38, 61, 52, 68, 58, 76, 72, 88, 81, 94].map((height, index) => (
           <span
             key={index}
@@ -86,7 +86,7 @@ function OverviewPanel() {
           />
         ))}
       </div>
-      <div className="mt-3 grid grid-cols-2 gap-2 text-[9px]">
+      <div className={`grid grid-cols-2 gap-2 text-[9px] ${isCatalog ? "mt-2" : "mt-3"}`}>
         <div className="rounded-lg border border-white/[0.07] px-2.5 py-2 text-white/45">
           Active threads <span className="float-right text-white/75">24</span>
         </div>
@@ -98,9 +98,9 @@ function OverviewPanel() {
   );
 }
 
-function AutomationPanel() {
+function AutomationPanel({ isCatalog }: { isCatalog: boolean }) {
   return (
-    <div className="h-full rounded-xl border border-white/[0.08] bg-white/[0.025] p-3.5 sm:p-4">
+    <div className={`h-full rounded-xl border border-white/[0.08] bg-white/[0.025] ${isCatalog ? "p-2.5" : "p-3.5 sm:p-4"}`}>
       <div className="flex items-center justify-between">
         <div>
           <div className="text-[9px] uppercase tracking-[0.18em] text-white/30">Automation map</div>
@@ -108,14 +108,14 @@ function AutomationPanel() {
         </div>
         <Sparkles className="h-3.5 w-3.5 text-white/35" />
       </div>
-      <div className="mt-5 flex items-center gap-2 text-[9px]">
+      <div className={`flex items-center gap-2 text-[9px] ${isCatalog ? "mt-3" : "mt-5"}`}>
         {[
           ["Brief", "captured"],
           ["Review", "assigned"],
           ["Release", "queued"],
         ].map(([label, status], index) => (
           <div key={label} className="flex min-w-0 flex-1 items-center gap-2">
-            <div className="min-w-0 flex-1 rounded-lg border border-white/10 bg-black/20 px-2.5 py-2">
+            <div className={`min-w-0 flex-1 rounded-lg border border-white/10 bg-black/20 ${isCatalog ? "px-2 py-1.5" : "px-2.5 py-2"}`}>
               <div className="truncate text-white/70">{label}</div>
               <div className="mt-1 truncate font-mono text-[8px] text-white/30">{status}</div>
             </div>
@@ -123,34 +123,39 @@ function AutomationPanel() {
           </div>
         ))}
       </div>
-      <div className="mt-4 h-1 rounded-full bg-white/[0.07]">
+      <div className={`h-1 rounded-full bg-white/[0.07] ${isCatalog ? "mt-3" : "mt-4"}`}>
         <div className="h-full w-[68%] rounded-full bg-white/55" />
       </div>
     </div>
   );
 }
 
-function ReviewPanel() {
+function ReviewPanel({ isCatalog }: { isCatalog: boolean }) {
+  const items = isCatalog
+    ? ([
+        ["Navigation audit", "Ready to approve", true],
+        ["Content handoff", "Needs one note", false],
+      ] as const)
+    : ([
+        ["Navigation audit", "Ready to approve", true],
+        ["Content handoff", "Needs one note", false],
+        ["Launch checklist", "Assigned to you", false],
+      ] as const);
+
   return (
-    <div className="h-full rounded-xl border border-white/[0.08] bg-white/[0.025] p-3.5 sm:p-4">
+    <div className={`h-full rounded-xl border border-white/[0.08] bg-white/[0.025] ${isCatalog ? "p-2.5" : "p-3.5 sm:p-4"}`}>
       <div className="flex items-center justify-between">
         <div>
           <div className="text-[9px] uppercase tracking-[0.18em] text-white/30">Review queue</div>
           <div className="mt-1 text-xs font-medium text-white/75">Decisions in context</div>
         </div>
-        <span className="font-mono text-[8px] text-white/30">03 ITEMS</span>
+        <span className="font-mono text-[8px] text-white/30">{isCatalog ? "02" : "03"} ITEMS</span>
       </div>
-      <div className="mt-4 space-y-2">
-        {(
-          [
-            ["Navigation audit", "Ready to approve", true],
-            ["Content handoff", "Needs one note", false],
-            ["Launch checklist", "Assigned to you", false],
-          ] as const
-        ).map(([label, status, complete]) => (
+      <div className={`${isCatalog ? "mt-2.5 space-y-1.5" : "mt-4 space-y-2"}`}>
+        {items.map(([label, status, complete]) => (
           <div
             key={label}
-            className="flex items-center gap-2.5 rounded-lg border border-white/[0.07] px-2.5 py-2"
+            className={`flex items-center gap-2.5 rounded-lg border border-white/[0.07] ${isCatalog ? "px-2 py-1.5" : "px-2.5 py-2"}`}
           >
             <span
               className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${complete ? "bg-white text-black" : "border border-white/20 text-white/20"}`}
@@ -170,9 +175,9 @@ function ReviewPanel() {
   );
 }
 
-function LaunchPanel() {
+function LaunchPanel({ isCatalog }: { isCatalog: boolean }) {
   return (
-    <div className="h-full rounded-xl border border-white/[0.08] bg-white/[0.025] p-3.5 sm:p-4">
+    <div className={`h-full rounded-xl border border-white/[0.08] bg-white/[0.025] ${isCatalog ? "p-2.5" : "p-3.5 sm:p-4"}`}>
       <div className="flex items-start justify-between">
         <div>
           <div className="text-[9px] uppercase tracking-[0.18em] text-white/30">Release window</div>
@@ -180,7 +185,7 @@ function LaunchPanel() {
         </div>
         <LockKeyhole className="h-3.5 w-3.5 text-white/35" />
       </div>
-      <div className="mt-4 rounded-lg border border-white/10 bg-black/20 p-2.5">
+      <div className={`rounded-lg border border-white/10 bg-black/20 ${isCatalog ? "mt-2.5 p-2" : "mt-4 p-2.5"}`}>
         <div className="flex items-center justify-between text-[9px] text-white/55">
           <span>Launch confidence</span>
           <span className="text-white/80">94%</span>
@@ -189,7 +194,7 @@ function LaunchPanel() {
           <div className="h-full w-[94%] rounded-full bg-[#c6d478]" />
         </div>
       </div>
-      <button className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.08] px-3 py-2 text-[9px] font-medium text-white/80 transition-colors hover:bg-white/[0.14]">
+      <button className={`flex w-full items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.08] px-3 text-[9px] font-medium text-white/80 transition-colors hover:bg-white/[0.14] ${isCatalog ? "mt-2 py-1.5" : "mt-3 py-2"}`}>
         <Play className="h-3 w-3 fill-current" /> Open release view
       </button>
     </div>
@@ -199,15 +204,17 @@ function LaunchPanel() {
 function ProductWorkspace({
   activeStep,
   reducedMotion,
+  isCatalog,
 }: {
   activeStep: number;
   reducedMotion: boolean;
+  isCatalog: boolean;
 }) {
   const panels = [
-    { id: "overview", content: <OverviewPanel /> },
-    { id: "automations", content: <AutomationPanel /> },
-    { id: "review", content: <ReviewPanel /> },
-    { id: "launch", content: <LaunchPanel /> },
+    { id: "overview", content: <OverviewPanel isCatalog={isCatalog} /> },
+    { id: "automations", content: <AutomationPanel isCatalog={isCatalog} /> },
+    { id: "review", content: <ReviewPanel isCatalog={isCatalog} /> },
+    { id: "launch", content: <LaunchPanel isCatalog={isCatalog} /> },
   ];
 
   return (
@@ -227,9 +234,9 @@ function ProductWorkspace({
         </div>
       </div>
 
-      <div className="grid min-h-[300px] grid-cols-[62px_minmax(0,1fr)] sm:grid-cols-[92px_minmax(0,1fr)]">
-        <aside className="border-r border-white/[0.07] bg-black/10 p-2.5 sm:p-3.5">
-          <div className="mb-7 flex items-center gap-1.5 px-1 text-[9px] font-semibold text-white/65">
+      <div className={`grid grid-cols-[62px_minmax(0,1fr)] sm:grid-cols-[92px_minmax(0,1fr)] ${isCatalog ? "min-h-[220px]" : "min-h-[300px]"}`}>
+        <aside className={`border-r border-white/[0.07] bg-black/10 p-2.5 ${isCatalog ? "sm:p-2.5" : "sm:p-3.5"}`}>
+          <div className={`flex items-center gap-1.5 px-1 text-[9px] font-semibold text-white/65 ${isCatalog ? "mb-4" : "mb-7"}`}>
             <Sparkles className="h-3 w-3 text-white/70" />
             <span className="hidden sm:inline">Komorebi</span>
           </div>
@@ -256,14 +263,14 @@ function ProductWorkspace({
               );
             })}
           </div>
-          <div className="mt-10 hidden space-y-2 sm:block">
+          <div className={`hidden space-y-2 sm:block ${isCatalog ? "mt-6" : "mt-10"}`}>
             <div className="h-1.5 w-12 rounded-full bg-white/[0.06]" />
             <div className="h-1.5 w-8 rounded-full bg-white/[0.06]" />
           </div>
         </aside>
 
-        <div className="min-w-0 p-3.5 sm:p-5">
-          <div className="mb-4 flex items-end justify-between gap-3">
+        <div className={`min-w-0 ${isCatalog ? "p-3 sm:p-4" : "p-3.5 sm:p-5"}`}>
+          <div className={`flex items-end justify-between gap-3 ${isCatalog ? "mb-2.5" : "mb-4"}`}>
             <div>
               <div className="font-mono text-[8px] uppercase tracking-[0.18em] text-white/30">
                 Product tour / live workspace
@@ -277,7 +284,7 @@ function ProductWorkspace({
             </span>
           </div>
 
-          <div className="relative grid min-h-[310px] grid-cols-2 gap-2.5 sm:min-h-[340px] sm:gap-3 overflow-hidden rounded-xl">
+          <div className={`relative grid overflow-hidden rounded-xl grid-cols-2 ${isCatalog ? "min-h-[220px] gap-2 sm:min-h-[240px]" : "min-h-[310px] gap-2.5 sm:min-h-[340px] sm:gap-3"}`}>
             {panels.map(({ id, content }, index) => (
               <div key={id} className="relative min-h-0">
                 {content}
@@ -308,6 +315,7 @@ export default function FocusTourShowcaseElement({
   const [direction, setDirection] = useState(1);
   const currentStep = tourSteps[activeStep];
   const reducedMotion = Boolean(prefersReducedMotion);
+  const isCatalog = previewMode === "catalog";
 
   const handleStepChange = (nextStep: number) => {
     if (nextStep === activeStep) return;
@@ -318,16 +326,18 @@ export default function FocusTourShowcaseElement({
   return (
     <div className="h-full w-full overflow-hidden bg-[#09090b] text-white">
       <div
-        className="flex h-full min-h-[500px] w-full items-center overflow-hidden px-5 py-10 sm:px-8 lg:px-12"
+        className={`flex h-full w-full items-center overflow-hidden px-5 sm:px-8 lg:px-12 ${
+          isCatalog ? "py-4 min-h-[500px]" : "py-10 min-h-[500px] sm:py-14"
+        }`}
         style={{ height: previewMode === "fullscreen" ? "100dvh" : "500px" }}
       >
         <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-7 lg:grid-cols-[minmax(230px,0.32fr)_minmax(0,1fr)] lg:gap-12">
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.035] blur-3xl" />
           <div className="relative z-10 min-h-[170px]">
-            <div className="mb-5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.24em] text-white/35">
+            <div className={`flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.24em] text-white/35 ${isCatalog ? "mb-3" : "mb-5"}`}>
               <span className="h-1.5 w-1.5 rounded-full bg-white/70" /> Guided product tour
             </div>
-            <div className="relative min-h-[152px] max-w-[300px] sm:min-h-[164px]">
+            <div className={`relative max-w-[300px] ${isCatalog ? "min-h-[128px] sm:min-h-[136px]" : "min-h-[152px] sm:min-h-[164px]"}`}>
               <AnimatePresence mode="popLayout" initial={false} custom={direction}>
                 <motion.div
                   key={currentStep.id}
@@ -358,38 +368,58 @@ export default function FocusTourShowcaseElement({
                 </motion.div>
               </AnimatePresence>
             </div>
-
+ 
             <div
-              className="mt-7 flex items-center gap-1.5 overflow-x-auto scrollbar-none pr-4"
+              className={`flex items-center overflow-x-auto scrollbar-none pr-4 ${isCatalog ? "mt-4 gap-1" : "mt-7 gap-1.5"}`}
               role="tablist"
               aria-label="Product tour steps"
             >
               {tourSteps.map((step, index) => {
                 const Icon = step.icon;
                 const isActive = activeStep === index;
-                const stepWidths: Record<TourStepId, string> = {
-                  overview: "w-[108px]",
-                  automations: "w-[128px]",
-                  review: "w-[102px]",
-                  launch: "w-[102px]",
-                };
+                const stepWidths: Record<TourStepId, string> = isCatalog
+                  ? {
+                      overview: "w-[88px]",
+                      automations: "w-[104px]",
+                      review: "w-[82px]",
+                      launch: "w-[82px]",
+                    }
+                  : {
+                      overview: "w-[108px]",
+                      automations: "w-[128px]",
+                      review: "w-[102px]",
+                      launch: "w-[102px]",
+                    };
                 return (
-                  <div key={step.id} className="flex shrink-0 items-center gap-1.5">
+                  <div key={step.id} className={`flex shrink-0 items-center ${isCatalog ? "gap-1" : "gap-1.5"}`}>
                     <button
                       type="button"
                       role="tab"
                       aria-selected={isActive}
                       aria-label={`Show ${step.label}`}
                       onClick={() => handleStepChange(index)}
-                      className={`group relative flex h-8 items-center justify-center rounded-full border shrink-0 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
-                        isActive
-                          ? `border-white/30 text-white bg-white/[0.08] px-3 ${stepWidths[step.id]}`
-                          : "border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 bg-transparent w-8 p-0"
+                      className={`group relative flex items-center justify-center rounded-full border shrink-0 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                        isCatalog
+                          ? isActive
+                            ? `h-7 border-white/30 text-white px-2.5 ${stepWidths[step.id]}`
+                            : "h-7 border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 w-7 p-0"
+                          : isActive
+                            ? `h-8 border-white/30 text-white bg-white/[0.08] px-3 ${stepWidths[step.id]}`
+                            : "h-8 border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 bg-transparent w-8 p-0"
                       }`}
                     >
-                      <Icon className="relative z-10 h-3.5 w-3.5 shrink-0" />
+                      {!isCatalog && isActive && (
+                        <motion.span
+                          layoutId="focus-tour-active-step"
+                          transition={reducedMotion ? { duration: 0.12 } : spring}
+                          className="absolute inset-0 rounded-full bg-white/[0.08]"
+                        />
+                      )}
+                      <Icon className={`relative z-10 shrink-0 ${isCatalog ? "h-3 w-3" : "h-3.5 w-3.5"}`} />
                       <span
-                        className={`relative z-10 overflow-hidden whitespace-nowrap text-[9px] font-mono uppercase tracking-[0.12em] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                        className={`relative z-10 overflow-hidden whitespace-nowrap font-mono uppercase tracking-[0.12em] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                          isCatalog ? "text-[8px]" : "text-[9px]"
+                        } ${
                           isActive
                             ? "opacity-100 max-w-[100px] ml-1.5"
                             : "opacity-0 max-w-0 ml-0"
@@ -399,16 +429,16 @@ export default function FocusTourShowcaseElement({
                       </span>
                     </button>
                     {index < tourSteps.length - 1 && (
-                      <span className="h-px w-2 shrink-0 bg-white/10" />
+                      <span className={`h-px shrink-0 bg-white/10 ${isCatalog ? "w-1.5" : "w-2"}`} />
                     )}
                   </div>
                 );
               })}
             </div>
           </div>
-
+ 
           <div className="relative z-10 min-w-0">
-            <ProductWorkspace activeStep={activeStep} reducedMotion={reducedMotion} />
+            <ProductWorkspace activeStep={activeStep} reducedMotion={reducedMotion} isCatalog={isCatalog} />
             <AnimatePresence mode="popLayout" initial={false} custom={direction}>
               <motion.div
                 key={`annotation-${currentStep.id}`}
