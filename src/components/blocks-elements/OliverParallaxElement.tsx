@@ -63,20 +63,11 @@ export default function OliverParallaxElement({ previewMode = "fullscreen" }: Ol
         >
           
           {/* LAYER 1: Intro Panel (Off-white) */}
+          {/* LAYER 1: Intro Panel (Off-white) */}
           <motion.div
             style={{ y: introY }}
-            className="absolute inset-0 z-30 bg-[#f2f0e9] text-[#111111] flex flex-col justify-between p-6 sm:p-12 font-sans border-b border-black/5"
+            className="absolute inset-0 z-30 bg-[#f2f0e9] text-[#111111] flex items-center justify-center p-6 sm:p-12 font-sans border-b border-black/5"
           >
-            {/* Header branding */}
-            <div className="flex justify-between items-center w-full">
-              <span className="font-mono text-[9px] sm:text-xs uppercase tracking-[0.2em] font-semibold text-neutral-800">
-                Vertex © Archive
-              </span>
-              <span className="font-mono text-[9px] sm:text-xs uppercase tracking-[0.1em] text-neutral-500">
-                Index: 04/10
-              </span>
-            </div>
-
             {/* Centered Serif Titles */}
             <div className="text-center space-y-3 sm:space-y-4">
               <h1 className="font-serif text-4xl sm:text-7xl font-light tracking-tight text-neutral-900 leading-none">
@@ -86,12 +77,6 @@ export default function OliverParallaxElement({ previewMode = "fullscreen" }: Ol
               <p className="font-mono text-[8px] sm:text-[10px] tracking-[0.3em] uppercase text-neutral-500">
                 Scroll down to uncover gallery
               </p>
-            </div>
-
-            {/* Footer markers */}
-            <div className="flex justify-between items-center w-full text-[9px] sm:text-[10px] font-mono text-neutral-500">
-              <span>Scroll Direction: ↓</span>
-              <span>All rights reserved</span>
             </div>
           </motion.div>
 
@@ -157,18 +142,8 @@ export default function OliverParallaxElement({ previewMode = "fullscreen" }: Ol
           {/* LAYER 3: Outro Panel (Off-white) */}
           <motion.div
             style={{ y: outroY }}
-            className="absolute inset-0 z-20 bg-[#f2f0e9] text-[#111111] flex flex-col justify-between p-6 sm:p-12 font-sans border-t border-black/5"
+            className="absolute inset-0 z-20 bg-[#f2f0e9] text-[#111111] flex items-center justify-center p-6 sm:p-12 font-sans border-t border-black/5"
           >
-            {/* Header branding */}
-            <div className="flex justify-between items-center w-full">
-              <span className="font-mono text-[9px] sm:text-xs uppercase tracking-[0.2em] font-semibold text-neutral-800">
-                End of Gallery
-              </span>
-              <span className="font-mono text-[9px] sm:text-xs uppercase tracking-[0.1em] text-[#d97706] font-semibold">
-                ★ Awwwards-Inspirational
-              </span>
-            </div>
-
             {/* Outro serif content */}
             <div className="text-center space-y-4">
               <h2 className="font-serif text-3xl sm:text-6xl font-light tracking-tight text-neutral-900 leading-none">
@@ -176,14 +151,8 @@ export default function OliverParallaxElement({ previewMode = "fullscreen" }: Ol
               </h2>
               <div className="w-12 h-[1px] bg-neutral-900 mx-auto" />
               <p className="font-mono text-[8px] sm:text-[9px] tracking-[0.25em] uppercase text-neutral-500 max-w-xs mx-auto leading-relaxed">
-                Refined visual pacing through scroll offsets. Designed by Antigravity.
+                Refined pacing through scroll offsets. Inspired by Olivier Larose.
               </p>
-            </div>
-
-            {/* Footer copyright */}
-            <div className="flex justify-between items-center w-full text-[9px] sm:text-[10px] font-mono text-neutral-400">
-              <span>Vertex Studio © 2026</span>
-              <span>Credits: Olivier Larose</span>
             </div>
           </motion.div>
 
