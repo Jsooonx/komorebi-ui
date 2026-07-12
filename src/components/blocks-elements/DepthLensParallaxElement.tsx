@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform, useMotionTemplate } from "framer-motion";
 import { useRef } from "react";
 
 type PreviewMode = "catalog" | "fullscreen";
@@ -26,19 +26,10 @@ export default function DepthLensParallaxElement({
   const midgroundScale = useTransform(progress, [0.1, 0.76], [1.04, 1.1]);
   const focalY = useTransform(progress, [0.12, 0.78], [30 * intensity, -54 * intensity]);
   const focalScale = useTransform(progress, [0.12, 0.78], [0.94, 1.05]);
-  const lensY = useTransform(progress, [0.12, 0.8], [42 * intensity, -72 * intensity]);
-  const lensRotate = useTransform(progress, [0.12, 0.8], [-1 * intensity, 1 * intensity]);
-  const invLensY = useTransform(lensY, (y) => -y);
-  const invLensRotate = useTransform(lensRotate, (r) => -r);
-  const lensClip = useTransform(
-    progress,
-    [0.12, 0.5, 0.82],
-    [
-      "inset(16% 18% 16% 18% round 999px)",
-      "inset(4% 6% 4% 6% round 180px)",
-      "inset(12% 16% 12% 16% round 999px)",
-    ],
-  );
+  const focalGrayscale = useTransform(progress, [0.15, 0.45, 0.55, 0.8], ["100%", "0%", "0%", "100%"]);
+  const focalBrightness = useTransform(progress, [0.15, 0.45, 0.55, 0.8], [0.72, 1.04, 1.04, 0.72]);
+  const focalContrast = useTransform(progress, [0.15, 0.45, 0.55, 0.8], [1.18, 1.14, 1.14, 1.18]);
+  const focalFilter = useMotionTemplate`grayscale(${focalGrayscale}) brightness(${focalBrightness}) contrast(${focalContrast})`;
   const sceneLabelColor = useTransform(
     progress,
     [0, 0.17, 0.19, 0.82, 0.84, 1],
@@ -102,35 +93,13 @@ export default function DepthLensParallaxElement({
               style={{ y: focalY, scale: focalScale }}
               className="absolute left-1/2 top-1/2 aspect-[3/4] w-[min(48vw,360px)] -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-black shadow-[0_30px_90px_rgba(0,0,0,0.52)] will-change-transform sm:w-[min(34vw,420px)]"
             >
-              <img
+              <motion.img
                 src="/references/media/images/editorial_portrait_midnight.png"
                 alt=""
-                className="h-full w-full object-cover object-[center_34%] grayscale brightness-[0.72] contrast-[1.18]"
+                style={{ filter: focalFilter }}
+                className="h-full w-full object-cover object-[center_34%]"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/45" />
-            </motion.div>
-
-            <motion.div
-              style={{ y: lensY, rotate: lensRotate, clipPath: lensClip }}
-              className="absolute left-1/2 top-1/2 h-[66%] w-[min(64vw,560px)] -translate-x-1/2 -translate-y-1/2 border border-white/25 bg-white/[0.025] shadow-[0_0_80px_rgba(255,255,255,0.06)] backdrop-blur-[4px] will-change-transform overflow-hidden"
-            >
-              {/* MAGICAL LENS REVEAL: Aligned copy of portrait in full color & contrast */}
-              <motion.div
-                style={{ y: invLensY, rotate: invLensRotate }}
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-              >
-                <motion.div
-                  style={{ y: focalY, scale: focalScale }}
-                  className="aspect-[3/4] w-[min(48vw,360px)] overflow-hidden bg-black shadow-[0_30px_90px_rgba(0,0,0,0.52)] sm:w-[min(34vw,420px)]"
-                >
-                  <img
-                    src="/references/media/images/editorial_portrait_midnight.png"
-                    alt=""
-                    className="h-full w-full object-cover object-[center_34%] brightness-[1.04] contrast-[1.14]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
-                </motion.div>
-              </motion.div>
             </motion.div>
 
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.06),transparent_28%,transparent_72%,rgba(255,255,255,0.04))]" />
