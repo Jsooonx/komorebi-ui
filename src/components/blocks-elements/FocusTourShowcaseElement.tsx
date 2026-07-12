@@ -401,20 +401,13 @@ export default function FocusTourShowcaseElement({
                       className={`group relative flex items-center justify-center rounded-full border shrink-0 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                         isCatalog
                           ? isActive
-                            ? `h-7 border-white/30 text-white px-2.5 ${stepWidths[step.id]}`
-                            : "h-7 border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 w-7 p-0"
+                            ? `h-7 border-white/30 text-white bg-white/[0.08] px-2.5 ${stepWidths[step.id]}`
+                            : "h-7 border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 bg-transparent w-7 p-0"
                           : isActive
                             ? `h-8 border-white/30 text-white bg-white/[0.08] px-3 ${stepWidths[step.id]}`
                             : "h-8 border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 bg-transparent w-8 p-0"
                       }`}
                     >
-                      {!isCatalog && isActive && (
-                        <motion.span
-                          layoutId="focus-tour-active-step"
-                          transition={reducedMotion ? { duration: 0.12 } : spring}
-                          className="absolute inset-0 rounded-full bg-white/[0.08]"
-                        />
-                      )}
                       <Icon className={`relative z-10 shrink-0 ${isCatalog ? "h-3 w-3" : "h-3.5 w-3.5"}`} />
                       <span
                         className={`relative z-10 overflow-hidden whitespace-nowrap font-mono uppercase tracking-[0.12em] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
