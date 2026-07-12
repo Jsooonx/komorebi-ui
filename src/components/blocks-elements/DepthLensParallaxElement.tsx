@@ -131,13 +131,6 @@ export default function DepthLensParallaxElement({
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
                 </motion.div>
               </motion.div>
-
-              <span className="absolute left-5 top-5 text-[9px] font-medium uppercase tracking-[0.25em] text-white/65">
-                Depth study / 04
-              </span>
-              <span className="absolute bottom-5 right-5 text-[9px] font-medium uppercase tracking-[0.25em] text-white/45">
-                Focus / distance
-              </span>
             </motion.div>
 
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.06),transparent_28%,transparent_72%,rgba(255,255,255,0.04))]" />
@@ -148,10 +141,7 @@ export default function DepthLensParallaxElement({
             className="absolute inset-0 z-20 flex items-center justify-center bg-[#f2f0e9] px-6 text-[#111111]"
           >
             <div className="max-w-3xl text-center">
-              <span className="text-[9px] font-medium uppercase tracking-[0.3em] text-black/45">
-                Depth lens / 04
-              </span>
-              <h1 className="mt-5 text-5xl font-semibold leading-[0.9] tracking-[-0.08em] sm:text-7xl md:text-8xl">
+              <h1 className="text-5xl font-semibold leading-[0.9] tracking-[-0.08em] sm:text-7xl md:text-8xl">
                 Look closer at the quiet layers.
               </h1>
               <p className="mx-auto mt-6 max-w-xs text-sm leading-relaxed text-black/50">
@@ -165,22 +155,13 @@ export default function DepthLensParallaxElement({
             className="absolute inset-0 z-30 flex items-center justify-center bg-[#f2f0e9] px-6 text-[#111111]"
           >
             <div className="max-w-2xl text-center">
-              <span className="text-[9px] font-medium uppercase tracking-[0.3em] text-black/45">
-                End of the study
-              </span>
-              <h2 className="mt-5 text-5xl font-semibold leading-[0.9] tracking-[-0.08em] sm:text-7xl">
+              <h2 className="text-5xl font-semibold leading-[0.9] tracking-[-0.08em] sm:text-7xl">
                 The frame is never the whole story.
               </h2>
             </div>
           </motion.div>
 
-          <motion.div
-            style={{ color: sceneLabelColor }}
-            className="absolute left-6 right-6 top-6 z-40 flex items-center justify-between text-[9px] font-medium uppercase tracking-[0.22em] sm:left-8 sm:right-8"
-          >
-            <span>Depth lens / layered scene</span>
-            <span>Scroll to reveal</span>
-          </motion.div>
+
           <motion.div
             style={{ backgroundColor: progressTrackColor }}
             className="absolute bottom-7 left-6 right-6 z-40 h-px sm:left-8 sm:right-8"
