@@ -177,7 +177,7 @@ export default function SignalWorkflowShowcaseElement({
                 Signal desk / 01
               </div>
 
-              <div className="relative h-[108px] max-w-[310px] sm:h-[120px]">
+              <div className="relative h-[156px] max-w-[310px] sm:h-[164px]">
                 <motion.div
                   style={{ opacity: collectOpacity, y: collectY }}
                   className="absolute inset-0"
