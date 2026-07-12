@@ -379,7 +379,7 @@ export default function FocusTourShowcaseElement({
                       transition={reducedMotion ? { duration: 0.12 } : spring}
                       className={`group relative flex h-8 items-center justify-center rounded-full border transition-colors shrink-0 ${
                         isActive
-                          ? "border-white/30 text-white px-3 w-auto gap-1.5"
+                          ? "border-white/30 text-white px-3 w-auto"
                           : "border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 w-8 p-0"
                       }`}
                     >
@@ -391,19 +391,15 @@ export default function FocusTourShowcaseElement({
                         />
                       )}
                       <Icon className="relative z-10 h-3.5 w-3.5 shrink-0" />
-                      <AnimatePresence initial={false} mode="wait">
-                        {isActive && (
-                          <motion.span
-                            initial={{ opacity: 0, width: 0 }}
-                            animate={{ opacity: 1, width: "auto" }}
-                            exit={{ opacity: 0, width: 0 }}
-                            transition={reducedMotion ? { duration: 0.1 } : spring}
-                            className="relative z-10 overflow-hidden whitespace-nowrap text-[9px] font-mono uppercase tracking-[0.12em]"
-                          >
-                            {step.label}
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
+                      <span
+                        className={`relative z-10 overflow-hidden whitespace-nowrap text-[9px] font-mono uppercase tracking-[0.12em] transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                          isActive
+                            ? "opacity-100 max-w-[100px] ml-1.5"
+                            : "opacity-0 max-w-0 ml-0"
+                        }`}
+                      >
+                        {step.label}
+                      </span>
                     </motion.button>
                     {index < tourSteps.length - 1 && (
                       <span className="h-px w-2 shrink-0 bg-white/10" />
