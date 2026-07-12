@@ -103,7 +103,7 @@ function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) 
             <span className="text-[9px] font-medium uppercase tracking-[0.26em] text-black/45">
               Field notes / 2026
             </span>
-            <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-[0.92] tracking-[-0.07em] sm:text-6xl md:text-7xl">
+            <h1 className="font-serif font-light mt-4 max-w-3xl text-4xl leading-[0.92] tracking-tight sm:text-6xl md:text-7xl">
               Make space for the work that matters.
             </h1>
           </motion.div>
@@ -117,7 +117,7 @@ function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) 
             <span className="text-[9px] font-medium uppercase tracking-[0.26em] text-black/45">
               A quieter operating system
             </span>
-            <h2 className="mt-5 max-w-2xl text-4xl font-semibold leading-[0.94] tracking-[-0.07em] sm:text-6xl">
+            <h2 className="font-serif font-light mt-5 max-w-2xl text-4xl leading-[0.94] tracking-tight sm:text-6xl">
               Build with more intention.
             </h2>
           </motion.div>

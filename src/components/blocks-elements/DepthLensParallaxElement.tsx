@@ -110,7 +110,7 @@ export default function DepthLensParallaxElement({
             className="absolute inset-0 z-20 flex items-center justify-center bg-[#f2f0e9] px-6 text-[#111111]"
           >
             <div className="max-w-3xl text-center">
-              <h1 className="text-5xl font-semibold leading-[0.9] tracking-[-0.08em] sm:text-7xl md:text-8xl">
+              <h1 className="font-serif text-5xl font-light leading-[0.9] tracking-tight sm:text-7xl md:text-8xl">
                 Look closer at the quiet layers.
               </h1>
               <p className="mx-auto mt-6 max-w-xs text-sm leading-relaxed text-black/50">
@@ -124,7 +124,7 @@ export default function DepthLensParallaxElement({
             className="absolute inset-0 z-30 flex items-center justify-center bg-[#f2f0e9] px-6 text-[#111111]"
           >
             <div className="max-w-2xl text-center">
-              <h2 className="text-5xl font-semibold leading-[0.9] tracking-[-0.08em] sm:text-7xl">
+              <h2 className="font-serif text-5xl font-light leading-[0.9] tracking-tight sm:text-7xl">
                 The frame is never the whole story.
               </h2>
             </div>
