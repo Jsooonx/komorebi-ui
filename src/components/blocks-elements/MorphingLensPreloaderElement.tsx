@@ -176,13 +176,13 @@ export default function MorphingLensPreloaderElement({
         >
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),transparent_35%,rgba(255,255,255,0.03))]" />
           <div className="relative z-10 flex w-full max-w-md flex-col items-center text-center">
-            <div className="flex items-center gap-3 text-[9px] font-medium uppercase tracking-[0.3em] text-white/45">
+            <div className={`flex items-center gap-3 text-[9px] font-medium uppercase tracking-[0.3em] text-white/45 transition-all duration-300 ${phase === 0 || phase === 3 ? "opacity-0 h-0 overflow-hidden" : "opacity-100 h-auto"}`}>
               <span>{activeCopy.index}</span>
               <span className="h-px w-8 bg-white/25" />
               <span>Lens study</span>
             </div>
 
-            <div className="relative mt-5 min-h-[76px] w-full overflow-hidden">
+            <div className={`relative w-full overflow-hidden transition-all duration-300 ${phase === 0 ? "mt-0 min-h-[16px]" : "mt-5 min-h-[76px]"}`}>
               <AnimatePresence initial={false} mode="wait">
                 <motion.div
                   key={activeCopy.label}
@@ -192,17 +192,17 @@ export default function MorphingLensPreloaderElement({
                   transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
                   className="absolute inset-x-0 top-0"
                 >
-                  <p className="text-2xl font-semibold leading-none tracking-[-0.05em] sm:text-4xl">
+                  <p className={`font-semibold leading-none tracking-[-0.05em] transition-all duration-300 ${phase === 0 ? "text-[10px] tracking-[0.25em] uppercase text-white/80" : phase === 3 ? "opacity-0 text-3xl sm:text-5xl font-light" : "text-2xl sm:text-4xl"}`}>
                     {activeCopy.label}
                   </p>
-                  <p className="mx-auto mt-3 max-w-xs text-xs leading-relaxed text-white/45">
+                  <p className={`mx-auto max-w-xs text-xs leading-relaxed text-white/45 transition-all duration-300 ${phase === 0 || phase === 3 ? "opacity-0 h-0 overflow-hidden mt-0" : "opacity-100 h-auto mt-3"}`}>
                     {activeCopy.detail}
                   </p>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            <div className="mt-6 flex items-center gap-1.5">
+            <div className={`flex items-center gap-1.5 transition-all duration-300 ${phase === 0 || phase === 3 ? "opacity-0 h-0 overflow-hidden mt-0 pointer-events-none" : "opacity-100 h-auto mt-6"}`}>
               {copy.map((item, index) => (
                 <motion.span
                   key={item.index}
