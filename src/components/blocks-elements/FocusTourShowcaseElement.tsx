@@ -383,17 +383,10 @@ export default function FocusTourShowcaseElement({
                       onClick={() => handleStepChange(index)}
                       className={`group relative flex h-8 items-center justify-center rounded-full border shrink-0 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                         isActive
-                          ? `border-white/30 text-white px-3 ${stepWidths[step.id]}`
-                          : "border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 w-8 p-0"
+                          ? `border-white/30 text-white bg-white/[0.08] px-3 ${stepWidths[step.id]}`
+                          : "border-white/10 text-white/35 hover:border-white/25 hover:text-white/75 bg-transparent w-8 p-0"
                       }`}
                     >
-                      {isActive && (
-                        <motion.span
-                          layoutId="focus-tour-active-step"
-                          transition={reducedMotion ? { duration: 0.12 } : spring}
-                          className="absolute inset-0 rounded-full bg-white/[0.08]"
-                        />
-                      )}
                       <Icon className="relative z-10 h-3.5 w-3.5 shrink-0" />
                       <span
                         className={`relative z-10 overflow-hidden whitespace-nowrap text-[9px] font-mono uppercase tracking-[0.12em] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
