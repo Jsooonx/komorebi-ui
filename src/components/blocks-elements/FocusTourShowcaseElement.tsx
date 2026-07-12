@@ -321,7 +321,7 @@ export default function FocusTourShowcaseElement({
         className="flex h-full min-h-[500px] w-full items-center overflow-hidden px-5 py-10 sm:px-8 lg:px-12"
         style={{ height: previewMode === "fullscreen" ? "100dvh" : "500px" }}
       >
-        <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-7 lg:grid-cols-[minmax(190px,0.3fr)_minmax(0,1fr)] lg:gap-12">
+        <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-7 lg:grid-cols-[minmax(230px,0.32fr)_minmax(0,1fr)] lg:gap-12">
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.035] blur-3xl" />
           <div className="relative z-10 min-h-[170px]">
             <div className="mb-5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.24em] text-white/35">
@@ -360,7 +360,7 @@ export default function FocusTourShowcaseElement({
             </div>
 
             <div
-              className="mt-7 flex items-center gap-1.5 overflow-x-auto scrollbar-none"
+              className="mt-7 flex items-center gap-1.5 overflow-x-auto scrollbar-none pr-4"
               role="tablist"
               aria-label="Product tour steps"
             >
