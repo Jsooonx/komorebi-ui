@@ -28,6 +28,8 @@ export default function DepthLensParallaxElement({
   const focalScale = useTransform(progress, [0.12, 0.78], [0.94, 1.05]);
   const lensY = useTransform(progress, [0.12, 0.8], [42 * intensity, -72 * intensity]);
   const lensRotate = useTransform(progress, [0.12, 0.8], [-1 * intensity, 1 * intensity]);
+  const invLensY = useTransform(lensY, (y) => -y);
+  const invLensRotate = useTransform(lensRotate, (r) => -r);
   const lensClip = useTransform(
     progress,
     [0.12, 0.5, 0.82],
@@ -110,8 +112,26 @@ export default function DepthLensParallaxElement({
 
             <motion.div
               style={{ y: lensY, rotate: lensRotate, clipPath: lensClip }}
-              className="absolute left-1/2 top-1/2 h-[66%] w-[min(64vw,560px)] -translate-x-1/2 -translate-y-1/2 border border-white/55 bg-white/[0.035] shadow-[0_0_80px_rgba(255,255,255,0.08)] backdrop-blur-[1px] will-change-transform"
+              className="absolute left-1/2 top-1/2 h-[66%] w-[min(64vw,560px)] -translate-x-1/2 -translate-y-1/2 border border-white/25 bg-white/[0.025] shadow-[0_0_80px_rgba(255,255,255,0.06)] backdrop-blur-[4px] will-change-transform overflow-hidden"
             >
+              {/* MAGICAL LENS REVEAL: Aligned copy of portrait in full color & contrast */}
+              <motion.div
+                style={{ y: invLensY, rotate: invLensRotate }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                <motion.div
+                  style={{ y: focalY, scale: focalScale }}
+                  className="aspect-[3/4] w-[min(48vw,360px)] overflow-hidden bg-black shadow-[0_30px_90px_rgba(0,0,0,0.52)] sm:w-[min(34vw,420px)]"
+                >
+                  <img
+                    src="/references/media/images/editorial_portrait_midnight.png"
+                    alt=""
+                    className="h-full w-full object-cover object-[center_34%] brightness-[1.04] contrast-[1.14]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
+                </motion.div>
+              </motion.div>
+
               <span className="absolute left-5 top-5 text-[9px] font-medium uppercase tracking-[0.25em] text-white/65">
                 Depth study / 04
               </span>
