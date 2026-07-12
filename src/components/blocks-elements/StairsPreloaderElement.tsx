@@ -82,14 +82,6 @@ export default function StairsPreloaderElement() {
           <p className="text-xs text-white/40 leading-relaxed font-heading max-w-xs mx-auto">
             A visual display of structural columns uncovered through a staggered stairs transition.
           </p>
-
-          <button
-            onClick={handleRestart}
-            className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 hover:border-white/20 text-white font-semibold text-xs rounded-full hover:bg-white/5 active:scale-95 transition-all duration-200 cursor-pointer shadow-lg mx-auto"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            Replay Stairs
-          </button>
         </motion.div>
       </div>
 

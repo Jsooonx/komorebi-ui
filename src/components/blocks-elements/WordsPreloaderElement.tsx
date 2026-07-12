@@ -78,14 +78,6 @@ export default function WordsPreloaderElement() {
           <p className="text-xs text-white/50 leading-relaxed font-heading max-w-sm mx-auto">
             A premium architectural portfolio grid that was smoothly loaded behind the typographic greeting preloader.
           </p>
-
-          <button
-            onClick={handleRestart}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white text-black font-semibold text-xs rounded-full hover:bg-white/90 active:scale-95 transition-all duration-200 cursor-pointer shadow-lg mx-auto"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            Replay Preloader
-          </button>
         </motion.div>
       </div>
 
