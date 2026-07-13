@@ -52,7 +52,6 @@ Full layout sections are intentionally excluded from this catalog. They belong t
 - Signal Workflow Showcase
 - Focus Tour Product Showcase
 - Orbit Workspace Showcase
-- Proof Relay Testimonials
 
 Features 2 keeps its interactive CLI terminal engine, while its decorative inline code snippets have been removed from the visual block preview.
 Features 3 is a minimal six-cell Komorebi feature layout with original product-focused copy, centered typography, tight heading-to-description spacing matching Features 2’s scale, thin dividers, and restrained icons.
@@ -69,8 +68,6 @@ Morphing Lens Preloader is a Preloader-category showcase built around one persis
 Signal Workflow Showcase is the first Product Showcase block. It keeps one DOM/CSS SaaS workspace anchored while natural vertical scroll moves through three product states: collecting signal, shaping the next move, and shipping with confidence. The catalog uses a compact internal scroll surface, while fullscreen uses a 300dvh sticky narrative. Its dashboard panels crossfade and translate in place with spring-smoothed scroll progress; it does not reuse Features 4/5 dashboard assets, add a nested Bento, or introduce a new dependency.
 Focus Tour Product Showcase is the second Product Showcase block. It uses a persistent DOM/CSS workspace with four click-driven areas—Overview, Automations, Review, and Launch. A shared Framer Motion spotlight lens and active step indicator morph between targets while directional annotations change beside the workspace. It stays centered in fullscreen, uses the host container directly in the catalog, avoids forced autoplay and drag interaction, and keeps reduced-motion behavior to short fades.
 Orbit Workspace Showcase is the third Product Showcase block. It presents a centered product system with four persistent mini-surfaces—Context, Network, Decisions, and Delivery—that travel through a scroll-driven 2.5D orbit around the active workspace. The catalog uses a short compact scroll surface, while fullscreen uses a 360dvh sticky scene. Panels remain mounted throughout the sequence, local active-surface content morphs inside one stable frame, and hover feedback is limited to the panel under the pointer.
-Proof Relay Testimonials is the first block in the Testimonials & Social Proof category. It keeps one centered quote frame stable while four fictional customer voices relay through it using natural vertical scroll. Identity, company, outcome, and metric details transition locally without hard remounts, autoplay, drag, forced snap, or click-driven carousel controls. The catalog uses a compact internal scroll surface and fullscreen uses a 300dvh sticky scene.
-
 This keeps reusable pieces separate from ready-made page/layout sections.
 
 ## Components rendering boundaries

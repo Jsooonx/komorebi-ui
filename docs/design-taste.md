@@ -41,7 +41,6 @@ Different header/navbar blocks have specific top-docking behaviors in minimal pr
 - Product Showcase blocks should show one product workspace in action rather than another feature grid or decorative Bento. Signal Workflow Showcase uses a stable DOM/CSS workspace anchor and a natural vertical scroll narrative across three states; the UI panels morph in place, while copy and status details transition locally. Catalog and fullscreen share the interaction pattern but keep separate viewport surfaces, with no dashboard image reuse from Features 4/5.
 - Focus Tour Product Showcase extends this rule with a click-driven tour: the workspace remains stable while one shared spotlight lens, active indicator, and annotation move between product areas. It should borrow the project’s tooltip and expandable-tab motion language without importing Components source, using directional spring transitions, local hover feedback, no forced autoplay, and no nested Bento shell.
 - Orbit Workspace Showcase extends the Product Showcase family into a centered spatial system: one workspace remains the stable anchor while Context, Network, Decisions, and Delivery surfaces orbit around it through natural vertical scroll. Use DOM/CSS perspective and restrained `translateZ`, scale, opacity, and rotation to create 2.5D depth; keep every orbit panel mounted, avoid forced snap and drag controls, and let only the hovered panel receive a local light-up. The catalog uses reduced orbit amplitude, while fullscreen may use a longer sticky scene. Reduced motion should flatten the depth travel and preserve readable state changes.
-- Testimonials & Social Proof blocks should make customer evidence feel close to the work rather than present a passive quote carousel. Proof Relay Testimonials uses one centered quote frame, a persistent identity rail, local outcome metrics, and four original fictional voices. Natural vertical scroll relays the quote states; the frame and anchor remain stable, identity/metric details morph locally, and hover feedback stays limited to the item under the pointer. Do not add autoplay, drag, forced snap, or click-to-focus controls. Quote copy may use `font-serif font-light` as an editorial exception, while identity metadata, metrics, and controls remain sans-serif.
 
 ---
 
@@ -51,7 +50,7 @@ Headings within layout blocks must remain modern, generic, and clean. Use the fo
 
 - **Default Font:** Use generic modern sans-serif fonts (like Inter or site sans-serif) for block headers.
 - **Default Styling:** Standard layout blocks should use `font-sans font-semibold tracking-tight` with restrained leading and compact line length.
-- **Editorial Exceptions:** Cover and closing headlines in Siena, Oliver, Atlas, and Depth Lens may use `font-serif font-light tracking-tight`. Testimonial quote copy may use the same treatment when it is the primary editorial voice of the block. These exceptions should not spread to generic headings, dashboard copy, identity metadata, metrics, controls, feature grids, or spatial product UI.
+- **Editorial Exceptions:** Cover and closing headlines in Siena, Oliver, Atlas, and Depth Lens may use `font-serif font-light tracking-tight`. These exceptions should not spread to generic headings, dashboard copy, identity metadata, metrics, controls, feature grids, or spatial product UI.
 
 ---
 

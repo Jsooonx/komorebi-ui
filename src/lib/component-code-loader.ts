@@ -111,9 +111,6 @@ export async function loadComponentCode(id: string) {
     case "orbit-workspace-showcase":
       return (await import("../components/blocks-elements/OrbitWorkspaceShowcaseElement.tsx?raw"))
         .default;
-    case "proof-relay-testimonials":
-      return (await import("../components/blocks-elements/ProofRelayTestimonialsElement.tsx?raw"))
-        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }
