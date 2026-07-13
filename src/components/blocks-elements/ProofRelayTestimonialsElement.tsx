@@ -135,7 +135,7 @@ function QuoteLayer({
 
   return (
     <motion.div
-      style={{ opacity, y, scale, filter }}
+      style={{ opacity, y, scale, filter, willChange: "transform, opacity, filter" }}
       className="absolute inset-0 flex flex-col justify-between"
       aria-hidden={activeIndex !== index}
     >
@@ -174,14 +174,34 @@ function IdentityRail({ activeIndex, compact }: { activeIndex: number; compact: 
             key={testimonial.id}
             role="listitem"
             aria-current={isActive ? "true" : undefined}
-            className={`group relative overflow-hidden border transition-colors duration-500 ${compact ? "min-w-[104px] flex-1 rounded-lg px-2 py-2" : "rounded-xl px-3 py-3"} ${isActive ? "border-white/20 bg-white/[0.07]" : "border-white/[0.07] bg-white/[0.02] hover:border-white/15 hover:bg-white/[0.045]"}`}
+            className={`group relative overflow-hidden border transition-colors duration-300 ${compact ? "min-w-[104px] flex-1 rounded-lg px-2 py-2" : "rounded-xl px-3 py-3"} ${isActive ? "border-white/20" : "border-white/[0.07] bg-white/[0.02] hover:border-white/15 hover:bg-white/[0.045]"}`}
           >
-            <div className="pointer-events-none absolute inset-0 bg-white/[0.06] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            {isActive && (
+              <motion.div
+                layoutId="active-identity-bg"
+                className="absolute inset-0 bg-white/[0.07]"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                style={{ willChange: "transform" }}
+              />
+            )}
+            <div className="pointer-events-none absolute inset-0 bg-white/[0.06] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             <div className="relative z-10 flex items-start gap-2.5">
               <span
-                className={`flex shrink-0 items-center justify-center rounded-full border ${compact ? "h-5 w-5" : "h-6 w-6"} ${isActive ? "border-white/55 bg-white text-black" : "border-white/15 text-white/40"}`}
+                className={`flex shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${compact ? "h-5 w-5" : "h-6 w-6"} ${isActive ? "border-white/55 bg-white text-black" : "border-white/15 text-white/40"}`}
               >
-                {isActive ? <Check className="h-3 w-3" /> : <Icon className="h-3 w-3" />}
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={isActive ? "check" : "icon"}
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.6, opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                    className="flex items-center justify-center"
+                    style={{ willChange: "transform, opacity" }}
+                  >
+                    {isActive ? <Check className="h-3 w-3" /> : <Icon className="h-3 w-3" />}
+                  </motion.span>
+                </AnimatePresence>
               </span>
               <div className="min-w-0">
                 <div
@@ -223,6 +243,8 @@ function ProofFrame({
   );
   const metricOpacity = useTransform(progress, [0.68, 0.84, 1], [0.65, 1, 1]);
 
+  const quoteIconY = useTransform(progress, [0, 1], reducedMotion ? [0, 0] : [0, -32]);
+
   return (
     <div
       className={`relative z-10 overflow-hidden border border-white/15 bg-[#101013]/[0.96] shadow-[0_45px_120px_rgba(0,0,0,0.55)] backdrop-blur-2xl ${compact ? "rounded-2xl p-4" : "rounded-3xl p-5 sm:p-8"}`}
@@ -245,9 +267,14 @@ function ProofFrame({
       <div
         className={`relative ${compact ? "mt-4 min-h-[230px]" : "mt-7 min-h-[320px] sm:min-h-[360px]"}`}
       >
-        <Quote
-          className={`absolute right-0 top-0 text-white/[0.08] ${compact ? "h-8 w-8" : "h-12 w-12"}`}
-        />
+        <motion.div
+          style={{ y: quoteIconY, willChange: "transform" }}
+          className="absolute right-0 top-0 pointer-events-none"
+        >
+          <Quote
+            className={`text-white/[0.08] ${compact ? "h-8 w-8" : "h-12 w-12"}`}
+          />
+        </motion.div>
         {testimonials.map((testimonial, index) => (
           <QuoteLayer
             key={testimonial.id}
@@ -405,9 +432,21 @@ export default function ProofRelayTestimonialsElement({
           </motion.div>
 
           <div className="absolute bottom-5 left-5 right-5 z-40 flex items-center gap-3 sm:bottom-7 sm:left-8 sm:right-8">
-            <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-white/25">
-              0{activeIndex + 1}
-            </span>
+            <div className="overflow-hidden h-3.5 flex items-center relative w-5">
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.span
+                  key={activeIndex}
+                  initial={reducedMotion ? { opacity: 0 } : { y: 12, opacity: 0 }}
+                  animate={reducedMotion ? { opacity: 1 } : { y: 0, opacity: 1 }}
+                  exit={reducedMotion ? { opacity: 0 } : { y: -12, opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  className="font-mono text-[8px] uppercase tracking-[0.18em] text-white/25 absolute left-0"
+                  style={{ willChange: "transform, opacity" }}
+                >
+                  0{activeIndex + 1}
+                </motion.span>
+              </AnimatePresence>
+            </div>
             <div className="h-px flex-1 bg-white/10">
               <motion.div style={{ width: progressWidth }} className="h-full bg-white/60" />
             </div>
