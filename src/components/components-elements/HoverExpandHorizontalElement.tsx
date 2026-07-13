@@ -21,7 +21,7 @@ export default function HoverExpandHorizontalElement() {
   const items: AccordionItem[] = [
     {
       id: "velvet",
-      image: "/references/media/images/editorial_model_velvet.png",
+      image: "/images/pinterest/unraveling.jpg",
       bgClass: "brightness-[0.95] contrast-[1.05] grayscale",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4">
@@ -30,7 +30,7 @@ export default function HoverExpandHorizontalElement() {
             <span>BEYOND THE NEW PLAN</span>
             <span>BEYOND THE NEW PLAN</span>
           </div>
-          
+
           {/* Center Editorial Text */}
           <div className="text-center max-w-[180px] space-y-1 select-none">
             <p className="font-serif text-[11px] text-white/90 leading-tight uppercase tracking-wider">
@@ -40,8 +40,10 @@ export default function HoverExpandHorizontalElement() {
               THINGS
             </p>
             <p className="font-serif text-[8px] text-white/40 leading-relaxed uppercase tracking-normal">
-              BLACK AND THUNDERBOLT<br />
-              STATIONS IN PLACES WE HAD<br />
+              BLACK AND THUNDERBOLT
+              <br />
+              STATIONS IN PLACES WE HAD
+              <br />
               UNCOVERED
             </p>
           </div>
@@ -55,7 +57,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "neon",
-      image: "/references/media/images/editorial_painting_neon.png",
+      image: "/images/pinterest/shattered.jpg",
       bgClass: "brightness-[0.8] contrast-[1.1] hue-rotate-[200deg] saturate-[2]", // blue tone
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4 bg-blue-900/40 mix-blend-color-burn">
@@ -75,7 +77,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "midnight",
-      image: "/references/media/images/editorial_portrait_midnight.png",
+      image: "/images/pinterest/fightclub.jpg",
       bgClass: "brightness-[0.4] contrast-[1.2]",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4">
@@ -97,8 +99,9 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "echo",
-      image: "/references/media/images/editorial_portrait_echo.png",
-      bgClass: "brightness-[0.7] contrast-[1.3] saturate-[2.5] hue-rotate-[320deg] mix-blend-lighten", // bright red/orange tone
+      image: "/images/pinterest/mountain2.jpg",
+      bgClass:
+        "brightness-[0.7] contrast-[1.3] saturate-[2.5] hue-rotate-[320deg] mix-blend-lighten", // bright red/orange tone
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4 bg-[#ff2a00]/30">
           <div className="text-center select-none rotate-90">
@@ -114,25 +117,31 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "brutalist",
-      image: "/references/media/images/editorial_brutalist_architecture.png",
+      image: "/images/pinterest/random1.jpg",
       bgClass: "brightness-[0.4] contrast-[1.3] grayscale mix-blend-luminosity",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4 bg-emerald-950/60 mix-blend-color-burn">
           {/* Green typography grid */}
           <div className="grid grid-cols-2 gap-x-6 gap-y-1 font-serif text-lg md:text-xl text-[#e8ffd0]/85 uppercase font-medium tracking-widest text-center select-none">
-            <span>C</span><span>O</span>
-            <span>H</span><span>A</span>
-            <span>N</span><span>I</span>
-            <span>G</span><span>P</span>
-            <span>H</span><span>I</span>
-            <span>U</span><span>N</span>
+            <span>C</span>
+            <span>O</span>
+            <span>H</span>
+            <span>A</span>
+            <span>N</span>
+            <span>I</span>
+            <span>G</span>
+            <span>P</span>
+            <span>H</span>
+            <span>I</span>
+            <span>U</span>
+            <span>N</span>
           </div>
         </div>
       ),
     },
     {
       id: "cosmic",
-      image: "/references/media/images/editorial_design_cosmic.png",
+      image: "/images/pinterest/sunset.jpg",
       bgClass: "opacity-0", // hidden to reveal the white background card
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 bg-[#f4f4f4] flex flex-col items-center justify-center p-4">
@@ -153,7 +162,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "horizon",
-      image: "/references/media/images/editorial_sculpture_horizon.png",
+      image: "/images/pinterest/hestia.jpg",
       bgClass: "brightness-[0.8] contrast-[1.1] grayscale",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-white/5">
@@ -173,7 +182,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "waves",
-      image: "/references/media/images/editorial_nature_waves.png",
+      image: "/images/pinterest/dune.jpg",
       bgClass: "brightness-[0.7] grayscale contrast-[1.15]",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4">
@@ -195,22 +204,18 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "stellar",
-      image: "/references/media/images/editorial_interior_stellar.png",
+      image: "/images/pinterest/soul.jpg",
       bgClass: "brightness-[0.3] contrast-[1.2] grayscale",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex flex-col justify-between p-4 text-left select-none">
           <div className="space-y-1">
-            <span className="block text-[8px] font-mono text-white/40 tracking-wider">
-              (022.4)
-            </span>
+            <span className="block text-[8px] font-mono text-white/40 tracking-wider">(022.4)</span>
             <span className="block text-[9px] font-sans font-bold text-white/85 uppercase tracking-widest leading-tight">
               ESTABLISHED ALIGN
             </span>
-            <span className="block text-[7px] font-serif text-white/50">
-              by Morris Templeman
-            </span>
+            <span className="block text-[7px] font-serif text-white/50">by Morris Templeman</span>
           </div>
-          
+
           <div className="w-10 h-10 border border-white/10 rounded flex items-center justify-center bg-white/[0.02]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#ff3333] animate-pulse" />
           </div>
@@ -223,7 +228,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "prism",
-      image: "/references/media/images/editorial_still_life_prism.png",
+      image: "/images/pinterest/alexander.jpg",
       bgClass: "brightness-[0.7] grayscale",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex flex-col justify-between p-4 text-center select-none">
@@ -231,23 +236,17 @@ export default function HoverExpandHorizontalElement() {
             still life series
           </span>
           <div className="space-y-0.5">
-            <h5 className="font-serif italic text-sm text-white/90">
-              Prism & refraction
-            </h5>
-            <p className="text-[7px] font-mono text-white/30 uppercase">
-              plate # 12
-            </p>
+            <h5 className="font-serif italic text-sm text-white/90">Prism & refraction</h5>
+            <p className="text-[7px] font-mono text-white/30 uppercase">plate # 12</p>
           </div>
-          <span className="text-[7px] font-mono text-white/40">
-            © 2026
-          </span>
+          <span className="text-[7px] font-mono text-white/40">© 2026</span>
         </div>
       ),
     },
   ];
 
   return (
-    <div 
+    <div
       onMouseLeave={() => setHoveredId(null)}
       className="w-full h-full flex bg-[#0c0c0e] select-none overflow-hidden p-2 sm:p-3 border border-white/5 rounded-3xl relative"
     >
@@ -276,11 +275,11 @@ export default function HoverExpandHorizontalElement() {
               {/* Clip-masked Layout Overlay */}
               <div className="absolute inset-0 w-full h-full overflow-hidden">
                 {/* Wrap in a fixed-width container matching expanded size to prevent overlay elements from shrinking/squeezing */}
-                <div 
+                <div
                   className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-full transition-opacity duration-300"
-                  style={{ 
-                    width: "280px", 
-                    opacity: isExpanded ? 1 : 0 
+                  style={{
+                    width: "280px",
+                    opacity: isExpanded ? 1 : 0,
                   }}
                 >
                   {item.renderOverlay(isExpanded)}

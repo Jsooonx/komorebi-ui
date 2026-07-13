@@ -13,61 +13,61 @@ const items: AccordionItem[] = [
     id: "velvet",
     title: "Velvet ® Dreams Studio",
     year: "2024",
-    image: "/references/media/images/editorial_model_velvet.png",
+    image: "/images/pinterest/unraveling.jpg",
   },
   {
     id: "neon",
     title: "Neon Pulse ® Agency",
     year: "2024",
-    image: "/references/media/images/editorial_painting_neon.png",
+    image: "/images/pinterest/shattered.jpg",
   },
   {
     id: "midnight",
     title: "Midnight Canvas",
     year: "2024",
-    image: "/references/media/images/editorial_portrait_midnight.png",
+    image: "/images/pinterest/fightclub.jpg",
   },
   {
     id: "echo",
     title: "Echo Digital Lab",
     year: "2024",
-    image: "/references/media/images/editorial_portrait_echo.png",
+    image: "/images/pinterest/mountain2.jpg",
   },
   {
     id: "skiper",
     title: "Skiper Creative ® Co",
     year: "2024",
-    image: "/references/media/images/editorial_brutalist_architecture.png",
+    image: "/images/pinterest/random1.jpg",
   },
   {
     id: "cosmic",
     title: "Cosmic Brew Studios",
     year: "2024",
-    image: "/references/media/images/editorial_design_cosmic.png",
+    image: "/images/pinterest/sunset.jpg",
   },
   {
     id: "horizon",
     title: "Horizon Typography",
     year: "2024",
-    image: "/references/media/images/editorial_sculpture_horizon.png",
+    image: "/images/pinterest/hestia.jpg",
   },
   {
     id: "waves",
     title: "Waves & ® Motion",
     year: "2024",
-    image: "/references/media/images/editorial_nature_waves.png",
+    image: "/images/pinterest/dune.jpg",
   },
   {
     id: "stellar",
     title: "Stellar Workshop",
     year: "2024",
-    image: "/references/media/images/editorial_interior_stellar.png",
+    image: "/images/pinterest/soul.jpg",
   },
   {
     id: "prism",
     title: "Prism ® Media House",
     year: "2024",
-    image: "/references/media/images/editorial_still_life_prism.png",
+    image: "/images/pinterest/alexander.jpg",
   },
 ];
 
@@ -82,7 +82,7 @@ export default function HoverExpandAccordionElement() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
-    <div 
+    <div
       onMouseLeave={() => setHoveredId(null)}
       className="w-full h-full flex bg-[#090909] select-none overflow-hidden p-1 sm:p-2 border border-white/5 rounded-2xl relative"
     >

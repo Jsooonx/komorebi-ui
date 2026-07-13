@@ -1,4 +1,11 @@
-import { motion, useReducedMotion, useScroll, useSpring, useTransform, useMotionTemplate } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionTemplate,
+} from "framer-motion";
 import { useRef } from "react";
 
 type PreviewMode = "catalog" | "fullscreen";
@@ -26,7 +33,11 @@ export default function DepthLensParallaxElement({
   const midgroundScale = useTransform(progress, [0.1, 0.76], [1.04, 1.1]);
   const focalY = useTransform(progress, [0.12, 0.78], [30 * intensity, -54 * intensity]);
   const focalScale = useTransform(progress, [0.12, 0.78], [0.94, 1.05]);
-  const focalGrayscale = useTransform(progress, [0.15, 0.45, 0.55, 0.8], ["100%", "0%", "0%", "100%"]);
+  const focalGrayscale = useTransform(
+    progress,
+    [0.15, 0.45, 0.55, 0.8],
+    ["100%", "0%", "0%", "100%"],
+  );
   const focalBrightness = useTransform(progress, [0.15, 0.45, 0.55, 0.8], [0.72, 1.04, 1.04, 0.72]);
   const focalContrast = useTransform(progress, [0.15, 0.45, 0.55, 0.8], [1.18, 1.14, 1.14, 1.18]);
   const focalFilter = useMotionTemplate`grayscale(${focalGrayscale}) brightness(${focalBrightness}) contrast(${focalContrast})`;
@@ -76,13 +87,13 @@ export default function DepthLensParallaxElement({
         >
           <div className="absolute inset-0 overflow-hidden bg-[#09090b]">
             <motion.img
-              src="/references/media/images/editorial_interior_stellar.png"
+              src="/images/pinterest/soul.jpg"
               alt=""
               style={{ y: backgroundY, scale: 1.08 }}
               className="absolute inset-[-8%] h-[116%] w-[116%] object-cover object-center opacity-65 grayscale brightness-[0.42] contrast-[1.2] will-change-transform"
             />
             <motion.img
-              src="/references/media/images/editorial_design_cosmic.png"
+              src="/images/pinterest/sunset.jpg"
               alt=""
               style={{ y: midgroundY, scale: midgroundScale }}
               className="absolute inset-[8%] h-[84%] w-[84%] object-cover object-center opacity-35 mix-blend-screen grayscale brightness-[0.6] will-change-transform"
@@ -94,7 +105,7 @@ export default function DepthLensParallaxElement({
               className="absolute left-1/2 top-1/2 aspect-[3/4] w-[min(48vw,360px)] -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-black shadow-[0_30px_90px_rgba(0,0,0,0.52)] will-change-transform sm:w-[min(34vw,420px)]"
             >
               <motion.img
-                src="/references/media/images/editorial_portrait_midnight.png"
+                src="/images/pinterest/fightclub.jpg"
                 alt=""
                 style={{ filter: focalFilter }}
                 className="h-full w-full object-cover object-[center_34%]"
@@ -129,7 +140,6 @@ export default function DepthLensParallaxElement({
               </h2>
             </div>
           </motion.div>
-
 
           <motion.div
             style={{ backgroundColor: progressTrackColor }}

@@ -9,7 +9,7 @@ const chapters = [
     eyebrow: "Field study / north",
     title: "Move toward the signal.",
     copy: "A clear direction begins with the details closest to the work.",
-    image: "/references/media/images/editorial_model_velvet.png",
+    image: "/images/pinterest/unraveling.jpg",
     position: "object-[center_35%]",
   },
   {
@@ -17,7 +17,7 @@ const chapters = [
     eyebrow: "Field study / light",
     title: "Keep the frame open.",
     copy: "Make room for the ideas that need a little longer to arrive.",
-    image: "/references/media/images/editorial_painting_neon.png",
+    image: "/images/pinterest/shattered.jpg",
     position: "object-center",
   },
   {
@@ -25,7 +25,7 @@ const chapters = [
     eyebrow: "Field study / structure",
     title: "Build the quiet parts.",
     copy: "The strongest systems are often felt before they are noticed.",
-    image: "/references/media/images/editorial_brutalist_architecture.png",
+    image: "/images/pinterest/random1.jpg",
     position: "object-center",
   },
   {
@@ -33,7 +33,7 @@ const chapters = [
     eyebrow: "Field study / horizon",
     title: "Leave space to continue.",
     copy: "A useful ending should still invite the next considered step.",
-    image: "/references/media/images/editorial_sculpture_horizon.png",
+    image: "/images/pinterest/hestia.jpg",
     position: "object-[center_38%]",
   },
 ] as const;
@@ -63,8 +63,16 @@ function Chapter({
     [focusProgress - 0.12, focusProgress, focusProgress + 0.12],
     ["inset(9% 10% 9% 10%)", "inset(0% 0% 0% 0%)", "inset(7% 9% 7% 9%)"],
   );
-  const numberX = useTransform(progress, [focusProgress - 0.15, focusProgress + 0.15], ["-7%", "8%"]);
-  const copyX = useTransform(progress, [focusProgress - 0.15, focusProgress + 0.15], ["10%", "-6%"]);
+  const numberX = useTransform(
+    progress,
+    [focusProgress - 0.15, focusProgress + 0.15],
+    ["-7%", "8%"],
+  );
+  const copyX = useTransform(
+    progress,
+    [focusProgress - 0.15, focusProgress + 0.15],
+    ["10%", "-6%"],
+  );
 
   return (
     <section className="relative flex h-full w-1/4 shrink-0 items-center overflow-hidden px-6 py-16 sm:px-10 lg:px-16">
@@ -127,39 +135,32 @@ export default function AtlasHorizontalParallaxElement({
     progress,
     [0, 0.17, 0.18, 0.82, 0.83, 1],
     [
-      "rgba(17,17,17,0.45)", 
-      "rgba(17,17,17,0.45)", 
-      "rgba(255,255,255,0.45)", 
-      "rgba(255,255,255,0.45)", 
-      "rgba(17,17,17,0.45)", 
-      "rgba(17,17,17,0.45)"
-    ]
+      "rgba(17,17,17,0.45)",
+      "rgba(17,17,17,0.45)",
+      "rgba(255,255,255,0.45)",
+      "rgba(255,255,255,0.45)",
+      "rgba(17,17,17,0.45)",
+      "rgba(17,17,17,0.45)",
+    ],
   );
 
   const progressBgColor = useTransform(
     progress,
     [0, 0.17, 0.18, 0.82, 0.83, 1],
     [
-      "rgba(17,17,17,0.1)", 
-      "rgba(17,17,17,0.1)", 
-      "rgba(255,255,255,0.15)", 
-      "rgba(255,255,255,0.15)", 
-      "rgba(17,17,17,0.1)", 
-      "rgba(17,17,17,0.1)"
-    ]
+      "rgba(17,17,17,0.1)",
+      "rgba(17,17,17,0.1)",
+      "rgba(255,255,255,0.15)",
+      "rgba(255,255,255,0.15)",
+      "rgba(17,17,17,0.1)",
+      "rgba(17,17,17,0.1)",
+    ],
   );
 
   const progressFillColor = useTransform(
     progress,
     [0, 0.17, 0.18, 0.82, 0.83, 1],
-    [
-      "#111111", 
-      "#111111", 
-      "#f2f0e9", 
-      "#f2f0e9", 
-      "#111111", 
-      "#111111"
-    ]
+    ["#111111", "#111111", "#f2f0e9", "#f2f0e9", "#111111", "#111111"],
   );
 
   return (
@@ -171,11 +172,11 @@ export default function AtlasHorizontalParallaxElement({
         className="relative"
         style={{ height: previewMode === "fullscreen" ? "520dvh" : "2100px" }}
       >
-        <div 
+        <div
           className="sticky top-0 overflow-hidden bg-[#09090b]"
-          style={{ 
+          style={{
             height: previewMode === "fullscreen" ? "100dvh" : "500px",
-            minHeight: previewMode === "fullscreen" ? "520px" : "auto"
+            minHeight: previewMode === "fullscreen" ? "520px" : "auto",
           }}
         >
           <motion.div
@@ -214,17 +215,15 @@ export default function AtlasHorizontalParallaxElement({
               </h2>
             </div>
           </motion.div>
-          
 
-          
           {/* Scroll-responsive progress track */}
-          <motion.div 
+          <motion.div
             style={{ backgroundColor: progressBgColor }}
             className="absolute bottom-7 left-6 right-6 z-40 h-px sm:left-8 sm:right-8"
           >
-            <motion.div 
-              style={{ width: progressWidth, backgroundColor: progressFillColor }} 
-              className="h-full" 
+            <motion.div
+              style={{ width: progressWidth, backgroundColor: progressFillColor }}
+              className="h-full"
             />
           </motion.div>
         </div>

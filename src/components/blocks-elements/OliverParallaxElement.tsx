@@ -6,7 +6,9 @@ interface OliverParallaxElementProps {
   previewMode?: "catalog" | "fullscreen";
 }
 
-export default function OliverParallaxElement({ previewMode = "fullscreen" }: OliverParallaxElementProps) {
+export default function OliverParallaxElement({
+  previewMode = "fullscreen",
+}: OliverParallaxElementProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ container: scrollRef });
 
@@ -29,21 +31,21 @@ export default function OliverParallaxElement({ previewMode = "fullscreen" }: Ol
 
   // Group of images
   const col1Images = [
-    "/references/media/images/editorial_model_velvet.png",
-    "/references/media/images/editorial_painting_neon.png",
-    "/references/media/images/editorial_portrait_midnight.png",
+    "/images/pinterest/unraveling.jpg",
+    "/images/pinterest/shattered.jpg",
+    "/images/pinterest/fightclub.jpg",
   ];
 
   const col2Images = [
-    "/references/media/images/editorial_portrait_echo.png",
-    "/references/media/images/editorial_brutalist_architecture.png",
-    "/references/media/images/editorial_design_cosmic.png",
+    "/images/pinterest/mountain2.jpg",
+    "/images/pinterest/random1.jpg",
+    "/images/pinterest/sunset.jpg",
   ];
 
   const col3Images = [
-    "/references/media/images/editorial_sculpture_horizon.png",
-    "/references/media/images/editorial_nature_waves.png",
-    "/references/media/images/editorial_interior_stellar.png",
+    "/images/pinterest/hestia.jpg",
+    "/images/pinterest/dune.jpg",
+    "/images/pinterest/soul.jpg",
   ];
 
   return (
@@ -52,16 +54,15 @@ export default function OliverParallaxElement({ previewMode = "fullscreen" }: Ol
       className="relative h-full w-full overflow-y-auto bg-[#09090b] scrollbar-none select-none"
     >
       {/* Scrollable canvas length */}
-      <div 
+      <div
         className="relative w-full"
         style={{ height: previewMode === "fullscreen" ? "500dvh" : "400%" }}
       >
         {/* Sticky viewport window */}
-        <div 
+        <div
           className="sticky top-0 w-full overflow-hidden"
           style={{ height: previewMode === "fullscreen" ? "100dvh" : "500px" }}
         >
-          
           {/* LAYER 1: Intro Panel (Off-white) */}
           {/* LAYER 1: Intro Panel (Off-white) */}
           <motion.div
@@ -82,53 +83,60 @@ export default function OliverParallaxElement({ previewMode = "fullscreen" }: Ol
 
           {/* LAYER 2: Parallax Columns Gallery (Dark Theme) */}
           <div className="absolute inset-0 z-10 bg-[#09090b] flex items-center justify-center overflow-hidden">
-            
             {/* The 3-column container */}
             <div className="grid grid-cols-3 gap-3 sm:gap-6 w-full max-w-5xl h-full px-4 sm:px-8 py-10 relative">
-              
               {/* Column 1 */}
-              <motion.div 
+              <motion.div
                 style={{ y: col1Y }}
                 className="flex flex-col gap-3 sm:gap-6 w-full h-fit"
               >
                 {col1Images.map((src, idx) => (
-                  <div key={idx} className="relative w-full aspect-[2/3] sm:aspect-[3/4] overflow-hidden rounded-xl sm:rounded-2xl border border-white/5 shadow-2xl bg-neutral-950">
-                    <img 
-                      src={src} 
-                      alt={`col1-${idx}`} 
-                      className="w-full h-full object-cover pointer-events-none select-none brightness-[0.8] hover:brightness-100 transition-all duration-500" 
+                  <div
+                    key={idx}
+                    className="relative w-full aspect-[2/3] sm:aspect-[3/4] overflow-hidden rounded-xl sm:rounded-2xl border border-white/5 shadow-2xl bg-neutral-950"
+                  >
+                    <img
+                      src={src}
+                      alt={`col1-${idx}`}
+                      className="w-full h-full object-cover pointer-events-none select-none brightness-[0.8] hover:brightness-100 transition-all duration-500"
                     />
                   </div>
                 ))}
               </motion.div>
 
               {/* Column 2 */}
-              <motion.div 
+              <motion.div
                 style={{ y: col2Y }}
                 className="flex flex-col gap-3 sm:gap-6 w-full h-fit"
               >
                 {col2Images.map((src, idx) => (
-                  <div key={idx} className="relative w-full aspect-[2/3] sm:aspect-[3/4] overflow-hidden rounded-xl sm:rounded-2xl border border-white/5 shadow-2xl bg-neutral-950">
-                    <img 
-                      src={src} 
-                      alt={`col2-${idx}`} 
-                      className="w-full h-full object-cover pointer-events-none select-none brightness-[0.8] hover:brightness-100 transition-all duration-500" 
+                  <div
+                    key={idx}
+                    className="relative w-full aspect-[2/3] sm:aspect-[3/4] overflow-hidden rounded-xl sm:rounded-2xl border border-white/5 shadow-2xl bg-neutral-950"
+                  >
+                    <img
+                      src={src}
+                      alt={`col2-${idx}`}
+                      className="w-full h-full object-cover pointer-events-none select-none brightness-[0.8] hover:brightness-100 transition-all duration-500"
                     />
                   </div>
                 ))}
               </motion.div>
 
               {/* Column 3 */}
-              <motion.div 
+              <motion.div
                 style={{ y: col3Y }}
                 className="flex flex-col gap-3 sm:gap-6 w-full h-fit"
               >
                 {col3Images.map((src, idx) => (
-                  <div key={idx} className="relative w-full aspect-[2/3] sm:aspect-[3/4] overflow-hidden rounded-xl sm:rounded-2xl border border-white/5 shadow-2xl bg-neutral-950">
-                    <img 
-                      src={src} 
-                      alt={`col3-${idx}`} 
-                      className="w-full h-full object-cover pointer-events-none select-none brightness-[0.8] hover:brightness-100 transition-all duration-500" 
+                  <div
+                    key={idx}
+                    className="relative w-full aspect-[2/3] sm:aspect-[3/4] overflow-hidden rounded-xl sm:rounded-2xl border border-white/5 shadow-2xl bg-neutral-950"
+                  >
+                    <img
+                      src={src}
+                      alt={`col3-${idx}`}
+                      className="w-full h-full object-cover pointer-events-none select-none brightness-[0.8] hover:brightness-100 transition-all duration-500"
                     />
                   </div>
                 ))}
@@ -155,7 +163,6 @@ export default function OliverParallaxElement({ previewMode = "fullscreen" }: Ol
               </p>
             </div>
           </motion.div>
-
         </div>
       </div>
     </div>
