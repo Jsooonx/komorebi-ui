@@ -40,6 +40,7 @@ import MorphingLensPreloaderCard from "../components/blocks-preview-elements/Mor
 import SignalWorkflowShowcaseCard from "../components/blocks-preview-elements/SignalWorkflowShowcaseCard";
 import FocusTourShowcaseCard from "../components/blocks-preview-elements/FocusTourShowcaseCard";
 import OrbitWorkspaceShowcaseCard from "../components/blocks-preview-elements/OrbitWorkspaceShowcaseCard";
+import ProofRelayTestimonialsCard from "../components/blocks-preview-elements/ProofRelayTestimonialsCard";
 import type { ComponentCatalogPreviewProps, ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPreviewProps>> = {
@@ -87,6 +88,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "signal-workflow-showcase": SignalWorkflowShowcaseCard,
   "focus-tour-showcase": FocusTourShowcaseCard,
   "orbit-workspace-showcase": OrbitWorkspaceShowcaseCard,
+  "proof-relay-testimonials": ProofRelayTestimonialsCard,
 };
 
 export function getComponentPreview(id: string) {

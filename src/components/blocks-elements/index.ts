@@ -21,6 +21,7 @@ import MorphingLensPreloaderBlock from "./MorphingLensPreloaderBlock";
 import SignalWorkflowShowcaseBlock from "./SignalWorkflowShowcaseBlock";
 import FocusTourShowcaseBlock from "./FocusTourShowcaseBlock";
 import OrbitWorkspaceShowcaseBlock from "./OrbitWorkspaceShowcaseBlock";
+import ProofRelayTestimonialsBlock from "./ProofRelayTestimonialsBlock";
 
 const BLOCK_PAGES: Record<string, ComponentType> = {
   "mega-menu-navbar-1": MegaMenuNavbar1Block,
@@ -45,6 +46,7 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "signal-workflow-showcase": SignalWorkflowShowcaseBlock,
   "focus-tour-showcase": FocusTourShowcaseBlock,
   "orbit-workspace-showcase": OrbitWorkspaceShowcaseBlock,
+  "proof-relay-testimonials": ProofRelayTestimonialsBlock,
 };
 
 export function getBlockPage(id: string) {

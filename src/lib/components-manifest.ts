@@ -437,6 +437,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "proof-relay-testimonials",
+    name: "Proof Relay Testimonials",
+    category: "Testimonials & Social Proof",
+    description:
+      "A centered testimonial relay where customer voices, identities, and outcomes morph through one stable editorial frame.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {
