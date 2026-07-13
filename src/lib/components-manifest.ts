@@ -481,6 +481,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "usage-horizon-pricing",
+    name: "Usage Horizon Pricing",
+    category: "Pricing & Conversion",
+    description:
+      "A value-metric pricing explorer where visible team capacity updates a clear monthly forecast in place.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

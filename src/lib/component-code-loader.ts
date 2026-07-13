@@ -123,6 +123,9 @@ export async function loadComponentCode(id: string) {
       ).default;
     case "plan-lens-pricing":
       return (await import("../components/blocks-elements/PlanLensPricingElement.tsx?raw")).default;
+    case "usage-horizon-pricing":
+      return (await import("../components/blocks-elements/UsageHorizonPricingElement.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }
