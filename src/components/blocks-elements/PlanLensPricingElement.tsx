@@ -84,10 +84,7 @@ export default function PlanLensPricingElement({
   const compact = previewMode === "catalog";
 
   return (
-    <section
-      className="relative flex h-full min-h-[500px] w-full items-center overflow-hidden bg-[#0a0a0b] px-5 py-8 text-white sm:px-8 md:px-12"
-      onPointerLeave={() => setActiveIndex(1)}
-    >
+    <section className="relative flex h-full min-h-[500px] w-full items-center overflow-hidden bg-[#0a0a0b] px-5 py-8 text-white sm:px-8 md:px-12">
       <div className="pointer-events-none absolute inset-0 opacity-50 [background-image:linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(circle_at_center,black,transparent_76%)]" />
       <div className={`relative mx-auto w-full max-w-6xl ${compact ? "py-0" : "py-5"}`}>
         <header className="flex items-end justify-between gap-6 border-b border-white/10 pb-4">
@@ -106,7 +103,17 @@ export default function PlanLensPricingElement({
           </p>
         </header>
 
-        <div className="mt-6 flex flex-col gap-3 md:flex-row md:gap-4">
+        <motion.div
+          layout="size"
+          transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.68 }}
+          onPointerLeave={(event) => {
+            if (event.pointerType !== "touch") setActiveIndex(1);
+          }}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node)) setActiveIndex(1);
+          }}
+          className="mt-6 flex flex-col gap-3 md:flex-row md:gap-4"
+        >
           {plans.map((plan, index) => {
             const active = index === activeIndex;
 
@@ -114,7 +121,7 @@ export default function PlanLensPricingElement({
               <motion.button
                 key={plan.name}
                 type="button"
-                layout
+                layout="size"
                 aria-pressed={active}
                 onPointerEnter={() => setActiveIndex(index)}
                 onFocus={() => setActiveIndex(index)}
@@ -157,10 +164,11 @@ export default function PlanLensPricingElement({
                     </span>
                   </div>
 
-                  <AnimatePresence initial={false} mode="popLayout">
+                  <AnimatePresence initial={false}>
                     {active && (
                       <motion.div
                         key={`${plan.name}-detail`}
+                        layout="size"
                         initial={
                           reducedMotion ? { opacity: 0 } : { opacity: 0, y: 9, filter: "blur(3px)" }
                         }
@@ -203,7 +211,7 @@ export default function PlanLensPricingElement({
               </motion.button>
             );
           })}
-        </div>
+        </motion.div>
 
         <footer className="mt-5 flex justify-between border-t border-white/10 pt-4 font-mono text-[8px] uppercase tracking-[0.16em] text-white/28">
           <span>Transparent terms, clear next move</span>
