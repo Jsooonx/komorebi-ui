@@ -532,10 +532,11 @@ export default function OrbitWorkspaceShowcaseElement({
 
   const activeSurface = surfaceOrder[activeIndex];
   const titleOpacity = useTransform(progress, [0, 0.12, 0.82, 1], [1, 1, 0.72, 0.4]);
+  const travelDistance = isCatalog ? 170 : 240;
   const titleY = useTransform(
     progress,
     [0, 1],
-    ["0dvh", reducedMotion ? "0dvh" : "55dvh"],
+    [0, reducedMotion ? 0 : travelDistance],
   );
   const outroOpacity = useTransform(progress, [0.72, 0.9, 1], [0, 0.3, 1]);
   const outroY = useTransform(progress, [0.72, 1], [reducedMotion ? 0 : 20, 0]);
@@ -557,12 +558,27 @@ export default function OrbitWorkspaceShowcaseElement({
           <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_center,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_at_center,black_12%,transparent_76%)]" />
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[540px] w-[540px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.035] blur-3xl" />
 
-          {/* Upgraded Serif Title Info */}
+          {/* Mobile Title Info (hidden on desktop) */}
           <motion.div
-            style={{ opacity: titleOpacity, y: titleY }}
-            className="absolute left-5 top-5 z-40 sm:left-8 sm:top-8"
+            style={{ opacity: titleOpacity }}
+            className="absolute left-5 top-5 z-40 sm:left-8 sm:top-8 md:hidden"
           >
             <h1 className="font-serif text-2xl font-light leading-[0.98] tracking-tight sm:text-4xl max-w-[280px]">
+              Keep the whole system within reach.
+            </h1>
+            <p className="mt-3 max-w-[250px] text-[10px] leading-relaxed text-white/40 sm:text-xs">
+              Move through connected surfaces without losing the center of the work.
+            </p>
+          </motion.div>
+
+          {/* Desktop Title (aligned with screen edge horizontally, dashboard boundaries vertically) */}
+          <motion.div
+            style={{ opacity: titleOpacity, y: titleY }}
+            className={`absolute left-5 sm:left-8 z-40 text-left pointer-events-none hidden md:block ${
+              isCatalog ? "top-[calc(50%-138px)]" : "top-[calc(50%-184px)]"
+            }`}
+          >
+            <h1 className="font-serif text-3xl font-light leading-[0.98] tracking-tight max-w-[280px]">
               Keep the whole system within reach.
             </h1>
             <p className="mt-3 max-w-[250px] text-[10px] leading-relaxed text-white/40 sm:text-xs">
@@ -600,6 +616,8 @@ export default function OrbitWorkspaceShowcaseElement({
                 isCatalog ? "h-[420px]" : "h-[380px] sm:h-[540px]"
               }`}
             >
+
+
               {/* Holographic Guide Orbit Rings */}
               <svg className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.04] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] ${
                 isCatalog ? "h-[420px] w-[420px]" : "h-[540px] w-[540px]"
