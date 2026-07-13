@@ -16,8 +16,6 @@ import {
   ListChecks,
   Sparkles,
   Workflow,
-  Play,
-  Pause,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -478,7 +476,6 @@ export default function OrbitWorkspaceShowcaseElement({
   const scrollRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const isCatalog = previewMode === "catalog";
   
@@ -497,33 +494,9 @@ export default function OrbitWorkspaceShowcaseElement({
     setActiveIndex((current) => (current === nextIndex ? current : nextIndex));
   });
 
-  // Autoplay loop using container scroll
-  useEffect(() => {
-    if (!isPlaying) return;
-
-    const interval = setInterval(() => {
-      if (!scrollRef.current) return;
-      
-      const nextIndex = (activeIndex + 1) % surfaceOrder.length;
-      const scrollHeight = scrollRef.current.scrollHeight;
-      const clientHeight = scrollRef.current.clientHeight;
-      const maxScroll = scrollHeight - clientHeight;
-      
-      // Calculate target scroll location for this index
-      const targetScroll = (nextIndex / (surfaceOrder.length - 1)) * maxScroll;
-      
-      scrollRef.current.scrollTo({
-        top: targetScroll,
-        behavior: "smooth",
-      });
-    }, 4500);
-
-    return () => clearInterval(interval);
-  }, [isPlaying, activeIndex]);
 
   // Click handler to focus a specific index
   const handleFocusIndex = (index: number) => {
-    setIsPlaying(false); // Pause autoplay on user interaction
     if (!scrollRef.current) return;
 
     const scrollHeight = scrollRef.current.scrollHeight;
@@ -552,7 +525,7 @@ export default function OrbitWorkspaceShowcaseElement({
 
   const activeSurface = surfaceOrder[activeIndex];
   const titleOpacity = 1;
-  const travelDistance = isCatalog ? 170 : 240;
+  const travelDistance = isCatalog ? 80 : 240;
   const titleY = useTransform(
     progress,
     [0, 1],
@@ -618,23 +591,6 @@ export default function OrbitWorkspaceShowcaseElement({
             </p>
           </motion.div>
 
-          {/* Autoplay / Interactive Mode Controls */}
-          <div className="absolute right-5 top-5 z-40 flex items-center gap-2 sm:right-8 sm:top-8">
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="flex h-7 items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 font-mono text-[8px] uppercase tracking-wider text-white/60 transition-all hover:bg-white/[0.1] hover:text-white"
-            >
-              {isPlaying ? (
-                <>
-                  <Pause className="h-2.5 w-2.5" /> Playing
-                </>
-              ) : (
-                <>
-                  <Play className="h-2.5 w-2.5" /> Paused
-                </>
-              )}
-            </button>
-          </div>
 
           {/* The 3D Perspective Card Stage */}
           <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-8">
