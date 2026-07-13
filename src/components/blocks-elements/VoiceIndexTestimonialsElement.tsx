@@ -226,9 +226,11 @@ export default function VoiceIndexTestimonialsElement({
       className={`h-full w-full overflow-y-auto overflow-x-hidden bg-[#0a0a0b] text-white scrollbar-none ${compact ? "" : "overscroll-contain"}`}
     >
       <div ref={sceneRef} className={compact ? "relative h-[1040px]" : "relative h-[300dvh]"}>
-        <div className="sticky top-0 flex h-[100dvh] min-h-[500px] w-full items-center overflow-hidden px-5 py-8 md:px-12 md:py-12">
+        <div className="sticky top-0 flex h-[100dvh] min-h-[500px] w-full items-start overflow-hidden px-5 md:px-12">
           <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
-          <div className="relative mx-auto flex w-full max-w-6xl flex-col justify-between gap-8 md:gap-12">
+          <div
+            className={`relative mx-auto flex w-full max-w-6xl flex-col ${compact ? "gap-6 py-8" : "gap-10 pb-[6vh] pt-[10vh]"}`}
+          >
             <motion.div
               style={{ opacity: headerOpacity }}
               className="flex items-start justify-between border-b border-white/10 pb-4"
@@ -250,14 +252,14 @@ export default function VoiceIndexTestimonialsElement({
               </div>
             </motion.div>
 
-            <div className="grid items-center gap-10 md:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.65fr)] md:gap-16">
-              <div
-                className={`relative ${compact ? "min-h-[210px]" : "min-h-[300px] md:min-h-[360px]"}`}
-              >
-                <div className="absolute left-0 top-0 font-mono text-[9px] uppercase tracking-[0.2em] text-white/25">
+            <div className="grid items-start gap-10 md:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.65fr)] md:gap-16">
+              <div className="relative">
+                <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/25">
                   {String(activeIndex + 1).padStart(2, "0")} / testimony
                 </div>
-                <div className="relative h-full pt-8">
+                <div
+                  className={`relative mt-5 ${compact ? "h-[205px]" : "h-[355px] md:h-[380px]"}`}
+                >
                   {testimonials.map((item, index) => (
                     <QuoteLayer
                       key={item.name}
@@ -269,7 +271,9 @@ export default function VoiceIndexTestimonialsElement({
                   ))}
                 </div>
               </div>
-              <IdentityRail activeIndex={activeIndex} compact={compact} />
+              <div className={compact ? "" : "md:pt-14"}>
+                <IdentityRail activeIndex={activeIndex} compact={compact} />
+              </div>
             </div>
 
             <motion.div
