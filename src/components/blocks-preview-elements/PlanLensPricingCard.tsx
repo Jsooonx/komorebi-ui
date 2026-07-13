@@ -1,6 +1,17 @@
 import type { ComponentPreviewProps } from "../../lib/components-manifest";
-import PlanLensPricingElement from "../blocks-elements/PlanLensPricingElement";
-
 export default function PlanLensPricingCard({ minimal = false }: ComponentPreviewProps) {
-  return <PlanLensPricingElement minimal={minimal} previewMode="catalog" />;
+  return (
+    <div className="h-full w-full overflow-hidden bg-[#0a0a0b]">
+      <video
+        src="/Blocks-Pricing-PlanLens.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label="Plan Lens Pricing preview"
+        className="h-full w-full object-cover"
+      />
+    </div>
+  );
 }
