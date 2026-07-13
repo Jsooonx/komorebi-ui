@@ -534,8 +534,8 @@ export default function OrbitWorkspaceShowcaseElement({
   const titleOpacity = useTransform(progress, [0, 0.12, 0.82, 1], [1, 1, 0.72, 0.4]);
   const titleY = useTransform(
     progress,
-    [0, 0.4, 1],
-    [reducedMotion ? 0 : -48, 0, reducedMotion ? 0 : 48],
+    [0, 1],
+    [0, reducedMotion ? 0 : 200],
   );
   const outroOpacity = useTransform(progress, [0.72, 0.9, 1], [0, 0.3, 1]);
   const outroY = useTransform(progress, [0.72, 1], [reducedMotion ? 0 : 20, 0]);
