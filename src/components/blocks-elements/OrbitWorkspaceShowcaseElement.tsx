@@ -531,7 +531,7 @@ export default function OrbitWorkspaceShowcaseElement({
   };
 
   const activeSurface = surfaceOrder[activeIndex];
-  const titleOpacity = useTransform(progress, [0, 0.12, 0.82, 1], [1, 1, 0.72, 0.4]);
+  const titleOpacity = 1;
   const travelDistance = isCatalog ? 170 : 240;
   const titleY = useTransform(
     progress,
