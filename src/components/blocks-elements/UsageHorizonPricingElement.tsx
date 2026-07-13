@@ -133,8 +133,6 @@ export default function UsageHorizonPricingElement({
                     <button
                       key={step.seats}
                       type="button"
-                      onMouseEnter={() => select(index)}
-                      onFocus={() => select(index)}
                       onClick={() => select(index)}
                       aria-pressed={selected}
                       className="group relative flex flex-col items-center outline-none"

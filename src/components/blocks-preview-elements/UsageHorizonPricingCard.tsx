@@ -55,8 +55,6 @@ export default function UsageHorizonPricingCard(_: ComponentPreviewProps) {
                   <button
                     key={horizon.seats}
                     type="button"
-                    onMouseEnter={() => setActiveIndex(index)}
-                    onFocus={() => setActiveIndex(index)}
                     onClick={() => setActiveIndex(index)}
                     className="group relative flex flex-col items-center outline-none"
                   >
