@@ -514,6 +514,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "story-frame-cta",
+    name: "Story Frame CTA",
+    category: "Call to Action",
+    description:
+      "A split editorial call-to-action that pairs one clear next step with a responsive visual proof frame.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

@@ -28,6 +28,7 @@ import PlanLensPricingBlock from "./PlanLensPricingBlock";
 import UsageHorizonPricingBlock from "./UsageHorizonPricingBlock";
 import CommitmentWindowPricingBlock from "./CommitmentWindowPricingBlock";
 import FocusedConversionCtaBlock from "./FocusedConversionCtaBlock";
+import StoryFrameCtaBlock from "./StoryFrameCtaBlock";
 
 const BLOCK_PAGES: Record<string, ComponentType> = {
   "mega-menu-navbar-1": MegaMenuNavbar1Block,
@@ -59,6 +60,7 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "usage-horizon-pricing": UsageHorizonPricingBlock,
   "commitment-window-pricing": CommitmentWindowPricingBlock,
   "focused-conversion-cta": FocusedConversionCtaBlock,
+  "story-frame-cta": StoryFrameCtaBlock,
 };
 
 export function getBlockPage(id: string) {

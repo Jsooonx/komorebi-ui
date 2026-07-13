@@ -132,6 +132,8 @@ export async function loadComponentCode(id: string) {
     case "focused-conversion-cta":
       return (await import("../components/blocks-elements/FocusedConversionCtaElement.tsx?raw"))
         .default;
+    case "story-frame-cta":
+      return (await import("../components/blocks-elements/StoryFrameCtaElement.tsx?raw")).default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }
