@@ -22,6 +22,7 @@ import SignalWorkflowShowcaseBlock from "./SignalWorkflowShowcaseBlock";
 import FocusTourShowcaseBlock from "./FocusTourShowcaseBlock";
 import OrbitWorkspaceShowcaseBlock from "./OrbitWorkspaceShowcaseBlock";
 import VoiceIndexTestimonialsBlock from "./VoiceIndexTestimonialsBlock";
+import ProofLedgerTestimonialsBlock from "./ProofLedgerTestimonialsBlock";
 
 const BLOCK_PAGES: Record<string, ComponentType> = {
   "mega-menu-navbar-1": MegaMenuNavbar1Block,
@@ -47,6 +48,7 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "focus-tour-showcase": FocusTourShowcaseBlock,
   "orbit-workspace-showcase": OrbitWorkspaceShowcaseBlock,
   "voice-index-testimonials": VoiceIndexTestimonialsBlock,
+  "proof-ledger-testimonials": ProofLedgerTestimonialsBlock,
 };
 
 export function getBlockPage(id: string) {

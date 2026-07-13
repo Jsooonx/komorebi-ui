@@ -114,6 +114,9 @@ export async function loadComponentCode(id: string) {
     case "voice-index-testimonials":
       return (await import("../components/blocks-elements/VoiceIndexTestimonialsElement.tsx?raw"))
         .default;
+    case "proof-ledger-testimonials":
+      return (await import("../components/blocks-elements/ProofLedgerTestimonialsElement.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }
