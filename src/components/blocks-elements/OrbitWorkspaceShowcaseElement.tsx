@@ -295,16 +295,16 @@ function OrbitPanel({
   isActive: boolean;
   reducedMotion: boolean;
 }) {
-  const amplitude = isCatalog ? 0.62 : 1;
+  const amplitude = isCatalog ? 0.72 : 1;
   const xValues = reducedMotion
     ? orbitProgress.map(() => reducedOrbitX[index] * amplitude)
-    : orbitX[index].map((value) => value * amplitude);
+    : orbitX[index].map((value) => value * 1.25 * amplitude);
   const yValues = reducedMotion
     ? orbitProgress.map(() => reducedOrbitY[index] * amplitude)
-    : orbitY[index].map((value) => value * amplitude);
+    : orbitY[index].map((value) => value * 1.15 * amplitude);
   const zValues = reducedMotion
     ? orbitProgress.map(() => 0)
-    : orbitZ[index].map((value) => value * amplitude);
+    : orbitZ[index].map((value) => value * 1.15 * amplitude);
   const scaleValues = reducedMotion ? orbitProgress.map(() => 0.86) : orbitScale[index];
   const opacityValues = reducedMotion ? orbitProgress.map(() => 0.72) : orbitOpacity[index];
   const rotationValues = reducedMotion ? orbitProgress.map(() => 0) : orbitRotation[index];
@@ -320,7 +320,7 @@ function OrbitPanel({
   const filter = useTransform(zOffset, (val) => (reducedMotion ? "none" : `blur(${val}px)`));
 
   return (
-    <div className="absolute left-1/2 top-1/2 w-[172px] -translate-x-1/2 -translate-y-1/2 sm:w-[206px]">
+    <div className="absolute left-1/2 top-1/2 w-[192px] -translate-x-1/2 -translate-y-1/2 sm:w-[226px]">
       <motion.div
         style={{
           x,
@@ -596,14 +596,20 @@ export default function OrbitWorkspaceShowcaseElement({
                 rotateY: tilt.x,
                 transformStyle: "preserve-3d",
               }}
-              className="relative h-[380px] w-full max-w-5xl [perspective:1200px] sm:h-[500px] flex items-center justify-center transition-all duration-300 ease-out"
+              className={`relative w-full max-w-5xl [perspective:1200px] flex items-center justify-center transition-all duration-300 ease-out ${
+                isCatalog ? "h-[420px]" : "h-[380px] sm:h-[540px]"
+              }`}
             >
-              {/* Holographic Guide Orbit Ring */}
-              <svg className="absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.04] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)]">
-                <circle cx="240" cy="240" r="220" fill="none" stroke="white" strokeWidth="1" strokeDasharray="3 3" />
+              {/* Holographic Guide Orbit Rings */}
+              <svg className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.04] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] ${
+                isCatalog ? "h-[420px] w-[420px]" : "h-[540px] w-[540px]"
+              }`}>
+                <circle cx={isCatalog ? 210 : 270} cy={isCatalog ? 210 : 270} r={isCatalog ? 195 : 255} fill="none" stroke="white" strokeWidth="1" strokeDasharray="3 3" />
               </svg>
-              <svg className="absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.02] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)]">
-                <circle cx="240" cy="240" r="230" fill="none" stroke="white" strokeWidth="1" />
+              <svg className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.02] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] ${
+                isCatalog ? "h-[420px] w-[420px]" : "h-[540px] w-[540px]"
+              }`}>
+                <circle cx={isCatalog ? 210 : 270} cy={isCatalog ? 210 : 270} r={isCatalog ? 205 : 265} fill="none" stroke="white" strokeWidth="1" />
               </svg>
 
               <div className="absolute inset-0 [transform-style:preserve-3d]">
