@@ -26,6 +26,7 @@ import ProofLedgerTestimonialsBlock from "./ProofLedgerTestimonialsBlock";
 import CommunityMosaicTestimonialsBlock from "./CommunityMosaicTestimonialsBlock";
 import PlanLensPricingBlock from "./PlanLensPricingBlock";
 import UsageHorizonPricingBlock from "./UsageHorizonPricingBlock";
+import CommitmentWindowPricingBlock from "./CommitmentWindowPricingBlock";
 
 const BLOCK_PAGES: Record<string, ComponentType> = {
   "mega-menu-navbar-1": MegaMenuNavbar1Block,
@@ -55,6 +56,7 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "community-mosaic-testimonials": CommunityMosaicTestimonialsBlock,
   "plan-lens-pricing": PlanLensPricingBlock,
   "usage-horizon-pricing": UsageHorizonPricingBlock,
+  "commitment-window-pricing": CommitmentWindowPricingBlock,
 };
 
 export function getBlockPage(id: string) {

@@ -126,6 +126,9 @@ export async function loadComponentCode(id: string) {
     case "usage-horizon-pricing":
       return (await import("../components/blocks-elements/UsageHorizonPricingElement.tsx?raw"))
         .default;
+    case "commitment-window-pricing":
+      return (await import("../components/blocks-elements/CommitmentWindowPricingElement.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }

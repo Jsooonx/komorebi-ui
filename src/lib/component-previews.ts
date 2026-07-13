@@ -45,6 +45,7 @@ import ProofLedgerTestimonialsCard from "../components/blocks-preview-elements/P
 import CommunityMosaicTestimonialsCard from "../components/blocks-preview-elements/CommunityMosaicTestimonialsCard";
 import PlanLensPricingCard from "../components/blocks-preview-elements/PlanLensPricingCard";
 import UsageHorizonPricingCard from "../components/blocks-preview-elements/UsageHorizonPricingCard";
+import CommitmentWindowPricingCard from "../components/blocks-preview-elements/CommitmentWindowPricingCard";
 import type { ComponentCatalogPreviewProps, ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPreviewProps>> = {
@@ -97,6 +98,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "community-mosaic-testimonials": CommunityMosaicTestimonialsCard,
   "plan-lens-pricing": PlanLensPricingCard,
   "usage-horizon-pricing": UsageHorizonPricingCard,
+  "commitment-window-pricing": CommitmentWindowPricingCard,
 };
 
 export function getComponentPreview(id: string) {

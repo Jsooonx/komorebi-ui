@@ -492,6 +492,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "commitment-window-pricing",
+    name: "Commitment Window Pricing",
+    category: "Pricing & Conversion",
+    description:
+      "An editorial monthly-versus-annual commitment surface where the price, terms, and timeline resolve around the selected window.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {
