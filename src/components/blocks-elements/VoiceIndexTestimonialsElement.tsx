@@ -103,7 +103,7 @@ function IdentityRail({
   onActiveChange: (index: number) => void;
 }) {
   return (
-    <div className="border-y border-white/10">
+    <div className="border-y border-white/10" onPointerLeave={() => onActiveChange(0)}>
       {testimonials.map((item, index) => {
         const isActive = index === activeIndex;
 
@@ -182,10 +182,12 @@ export default function VoiceIndexTestimonialsElement({
   return (
     <div className="h-full min-h-[500px] w-full overflow-hidden bg-[#0a0a0b] text-white">
       <div className="relative h-full min-h-[500px]">
-        <div className="flex h-full min-h-[500px] w-full items-start overflow-hidden px-5 md:px-12">
+        <div
+          className={`flex h-full min-h-[500px] w-full overflow-hidden px-5 md:px-12 ${compact ? "items-start" : "items-center"}`}
+        >
           <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
           <div
-            className={`relative mx-auto flex w-full max-w-6xl flex-col ${compact ? "gap-6 py-8" : "gap-10 pb-[6vh] pt-[10vh]"}`}
+            className={`relative mx-auto flex w-full max-w-6xl flex-col ${compact ? "gap-6 py-8" : "gap-10"}`}
           >
             <div className="flex items-start justify-between border-b border-white/10 pb-4">
               <div>
