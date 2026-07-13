@@ -316,7 +316,7 @@ function OrbitPanel({
   const rotate = useTransform(progress, orbitProgress, rotationValues);
 
   // Dynamic CSS blur filter based on depth (Z position) to enhance 3D realism
-  const zOffset = useTransform(z, [-220, 220], [4, 0]);
+  const zOffset = useTransform(z, [-260, 260], [1.5, 0]);
   const filter = useTransform(zOffset, (val) => (reducedMotion ? "none" : `blur(${val}px)`));
 
   return (
