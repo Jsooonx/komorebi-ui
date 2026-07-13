@@ -25,7 +25,6 @@ import VoiceIndexTestimonialsBlock from "./VoiceIndexTestimonialsBlock";
 import ProofLedgerTestimonialsBlock from "./ProofLedgerTestimonialsBlock";
 import CommunityMosaicTestimonialsBlock from "./CommunityMosaicTestimonialsBlock";
 import PlanLensPricingBlock from "./PlanLensPricingBlock";
-import CheckoutConfidenceBlock from "./CheckoutConfidenceBlock";
 
 const BLOCK_PAGES: Record<string, ComponentType> = {
   "mega-menu-navbar-1": MegaMenuNavbar1Block,
@@ -54,7 +53,6 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "proof-ledger-testimonials": ProofLedgerTestimonialsBlock,
   "community-mosaic-testimonials": CommunityMosaicTestimonialsBlock,
   "plan-lens-pricing": PlanLensPricingBlock,
-  "checkout-confidence": CheckoutConfidenceBlock,
 };
 
 export function getBlockPage(id: string) {

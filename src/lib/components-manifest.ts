@@ -481,17 +481,6 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
-  {
-    id: "checkout-confidence",
-    name: "Checkout Confidence",
-    category: "Pricing & Conversion",
-    description:
-      "A transparent one-page checkout surface with local payment selection morphs and quiet trust cues.",
-    dependencies: ["framer-motion"],
-    isNew: true,
-    gridClass: "md:col-span-2 md:row-span-2",
-    viewportHeightClass: "h-[500px]",
-  },
 ];
 
 export function getManifestItem(id: string) {
