@@ -134,13 +134,13 @@ export default function PlanLensPricingElement({
                     : { flexGrow: active ? 1.48 : 0.76, opacity: active ? 1 : 0.62 }
                 }
                 transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.65 }}
-                className={`group relative h-[150px] flex-1 overflow-hidden border border-white/10 bg-white/[0.018] p-3 text-left outline-none transition-colors hover:border-white/25 focus-visible:border-white/50 ${compact ? "md:h-[310px] md:p-3.5" : "md:h-[400px] md:p-4"}`}
+                className={`group relative h-[150px] flex-1 overflow-hidden border border-white/10 bg-white/[0.018] p-3 text-left outline-none focus-visible:border-white/50 ${compact ? "md:h-[310px] md:p-3.5" : "md:h-[400px] md:p-4"}`}
               >
                 {active && (
                   <motion.div
                     layoutId="plan-lens-active"
                     className="absolute inset-0 border border-white/35 bg-white/[0.045]"
-                    transition={{ type: "spring", stiffness: 330, damping: 31, mass: 0.58 }}
+                    transition={{ duration: 0 }}
                   />
                 )}
                 <div className="relative flex h-full flex-col">
