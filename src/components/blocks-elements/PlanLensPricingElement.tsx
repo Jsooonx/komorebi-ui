@@ -86,14 +86,18 @@ export default function PlanLensPricingElement({
   return (
     <section className="relative flex h-full min-h-[500px] w-full items-center overflow-hidden bg-[#0a0a0b] px-5 py-8 text-white sm:px-8 md:px-12">
       <div className="pointer-events-none absolute inset-0 opacity-50 [background-image:linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(circle_at_center,black,transparent_76%)]" />
-      <div className={`relative mx-auto w-full max-w-6xl ${compact ? "py-0" : "py-5"}`}>
-        <header className="flex items-end justify-between gap-6 border-b border-white/10 pb-4">
+      <div
+        className={`relative mx-auto w-full ${compact ? "max-w-[860px] py-0" : "max-w-6xl py-5"}`}
+      >
+        <header
+          className={`flex items-end justify-between gap-6 border-b border-white/10 ${compact ? "pb-3" : "pb-4"}`}
+        >
           <div>
             <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/35">
               Plan lens / 01
             </p>
             <h2
-              className={`mt-3 font-sans font-semibold tracking-[-0.045em] ${compact ? "text-2xl" : "text-3xl md:text-4xl"}`}
+              className={`mt-2 font-sans font-semibold tracking-[-0.045em] ${compact ? "text-xl" : "mt-3 text-3xl md:text-4xl"}`}
             >
               Pick the shape that fits the work.
             </h2>
@@ -110,7 +114,7 @@ export default function PlanLensPricingElement({
           onBlur={(event) => {
             if (!event.currentTarget.contains(event.relatedTarget as Node)) setActiveIndex(1);
           }}
-          className="mt-6 flex flex-col gap-3 md:flex-row md:gap-4"
+          className={`${compact ? "mt-4 gap-2.5 md:gap-3" : "mt-6 gap-3 md:gap-4"} flex flex-col md:flex-row`}
         >
           {plans.map((plan, index) => {
             const active = index === activeIndex;
@@ -130,7 +134,7 @@ export default function PlanLensPricingElement({
                     : { flexGrow: active ? 1.48 : 0.76, opacity: active ? 1 : 0.62 }
                 }
                 transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.65 }}
-                className={`group relative h-[160px] flex-1 overflow-hidden border border-white/10 bg-white/[0.018] p-3 text-left outline-none transition-colors hover:border-white/25 focus-visible:border-white/50 md:p-4 ${compact ? "md:h-[350px]" : "md:h-[400px]"}`}
+                className={`group relative h-[150px] flex-1 overflow-hidden border border-white/10 bg-white/[0.018] p-3 text-left outline-none transition-colors hover:border-white/25 focus-visible:border-white/50 ${compact ? "md:h-[310px] md:p-3.5" : "md:h-[400px] md:p-4"}`}
               >
                 {active && (
                   <motion.div
@@ -210,7 +214,9 @@ export default function PlanLensPricingElement({
           })}
         </div>
 
-        <footer className="mt-5 flex justify-between border-t border-white/10 pt-4 font-mono text-[8px] uppercase tracking-[0.16em] text-white/28">
+        <footer
+          className={`${compact ? "mt-4 pt-3" : "mt-5 pt-4"} flex justify-between border-t border-white/10 font-mono text-[8px] uppercase tracking-[0.16em] text-white/28`}
+        >
           <span>Transparent terms, clear next move</span>
           <span className="hidden sm:block">Komorebi / plan lens</span>
         </footer>
