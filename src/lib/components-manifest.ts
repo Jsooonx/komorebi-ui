@@ -426,6 +426,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "orbit-workspace-showcase",
+    name: "Orbit Workspace Showcase",
+    category: "Product Showcase",
+    description:
+      "A centered product system where connected workspace surfaces orbit, deepen, and resolve into one active view.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

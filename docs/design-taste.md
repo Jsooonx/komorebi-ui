@@ -36,20 +36,22 @@ Different header/navbar blocks have specific top-docking behaviors in minimal pr
 - Logo Cloud fullscreen pages are static (`overflow-hidden`): the content is centered within one viewport and should not expose a vertical scrollbar. Each logo has a deliberate hover hit area that brightens its mark and label.
 - Features fullscreen pages center their content vertically in the viewport while preserving internal scroll for layouts that exceed the available height.
 - The fullscreen host locks document-level scrolling while open, so the underlying `/blocks` catalog never leaks a browser scrollbar into the fullscreen experience.
-- Layout block headers (like the titles inside **Features 1**, **Features 2**, **Features 3**, **Features 4**, **Features 5**, **Siena Parallax**, and **Logo Cloud 3**) are static, use the established sans-serif weight treatment, and scroll away naturally with the layout. Siena Parallax is the exception for motion behavior: its image starts flush at the top edge at half-scene height, then its image and copy are intentionally tied to the preview scroll progress.
+- Layout block headers inside **Features 1**, **Features 2**, **Features 3**, **Features 4**, **Features 5**, and **Logo Cloud 3** are static, use the established sans-serif weight treatment, and scroll away naturally with the layout. Editorial Parallax blocks are the typography exception: Siena, Atlas, and Depth Lens use light serif headlines for their cover/outro moments, while Oliver already uses the same editorial serif language. Siena Parallax is also distinct in motion behavior: its image starts flush at the top edge at half-scene height, then its image and copy are intentionally tied to the preview scroll progress.
 - Parallax blocks should remain distinct patterns: Siena focuses on image-to-card transformation, Oliver on staggered gallery depth, Atlas on a horizontally traveling chapter track, and Depth Lens on layered cinematic depth. Depth Lens uses a clipped atmospheric background, midground texture, focal image, and foreground frame with restrained spring-smoothed scroll offsets; it should stay DOM/Framer-based and avoid WebGL, drag controls, and forced snap points.
 - Product Showcase blocks should show one product workspace in action rather than another feature grid or decorative Bento. Signal Workflow Showcase uses a stable DOM/CSS workspace anchor and a natural vertical scroll narrative across three states; the UI panels morph in place, while copy and status details transition locally. Catalog and fullscreen share the interaction pattern but keep separate viewport surfaces, with no dashboard image reuse from Features 4/5.
 - Focus Tour Product Showcase extends this rule with a click-driven tour: the workspace remains stable while one shared spotlight lens, active indicator, and annotation move between product areas. It should borrow the project’s tooltip and expandable-tab motion language without importing Components source, using directional spring transitions, local hover feedback, no forced autoplay, and no nested Bento shell.
+- Orbit Workspace Showcase extends the Product Showcase family into a centered spatial system: one workspace remains the stable anchor while Context, Network, Decisions, and Delivery surfaces orbit around it through natural vertical scroll. Use DOM/CSS perspective and restrained `translateZ`, scale, opacity, and rotation to create 2.5D depth; keep every orbit panel mounted, avoid forced snap and drag controls, and let only the hovered panel receive a local light-up. The catalog uses reduced orbit amplitude, while fullscreen may use a longer sticky scene. Reduced motion should flatten the depth travel and preserve readable state changes.
 
 ---
 
 ## 🔠 Typography Constraints
 
-Headings within layout blocks must remain modern, generic, and clean:
+Headings within layout blocks must remain modern, generic, and clean. Use the following hierarchy:
 
 - **Default Font:** Use generic modern sans-serif fonts (like Inter or site sans-serif) for block headers.
-- **Font Styling:** Headings should be styled with `font-sans font-semibold tracking-tight` rather than `font-serif` or light font weights, unless explicitly requested.
-- Serif fonts (like `font-serif`) are reserved for core interactive cards (e.g. `PixelShimmerCard` or `ImageRevealCard` layout experiments) and should not be used for generic layout block headings.
+- **Default Styling:** Standard layout blocks should use `font-sans font-semibold tracking-tight` with restrained leading and compact line length.
+- **Editorial Parallax Exception:** Cover and closing headlines in Siena, Oliver, Atlas, and Depth Lens may use `font-serif font-light tracking-tight`. This lighter serif treatment is intentional: it separates the cinematic/editorial Parallax family from utility-oriented Features and Product Showcase blocks.
+- Do not use the serif treatment for generic block headings, dashboard copy, controls, feature grids, or spatial product UI unless the block is explicitly an editorial Parallax composition.
 
 ---
 
