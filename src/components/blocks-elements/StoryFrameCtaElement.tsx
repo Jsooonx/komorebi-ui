@@ -11,11 +11,14 @@ function EditorialVisual({ active }: { active: boolean }) {
       transition={{ type: "spring", stiffness: 220, damping: 28, mass: 0.9 }}
       className="relative h-full min-h-[280px] overflow-hidden bg-[#c6d0d9]"
     >
-      <motion.div
+      <motion.img
         animate={{ scale: active ? 1.08 : 1, x: active ? -12 : 0, y: active ? -8 : 0 }}
         transition={{ type: "spring", stiffness: 200, damping: 30 }}
-        className="absolute inset-0 bg-[radial-gradient(circle_at_23%_26%,rgba(255,255,255,.95)_0_5%,transparent_24%),radial-gradient(circle_at_74%_68%,rgba(29,53,74,.78)_0_18%,transparent_46%),linear-gradient(135deg,#e5e3dc_0%,#b4c3ce_46%,#2c4052_100%)]"
+        src="/images/story-frame-cta.png"
+        alt="Quiet architectural workspace"
+        className="absolute inset-0 h-full w-full object-cover"
       />
+      <div className="absolute inset-0 bg-[#1c3041]/20 mix-blend-multiply" />
       <div className="absolute inset-x-[13%] bottom-0 top-[13%] border border-white/55 bg-white/[0.07] backdrop-blur-[2px]" />
       <div className="absolute left-[21%] top-[17%] h-[68%] w-px bg-white/70" />
       <div className="absolute bottom-[22%] left-[13%] right-[13%] h-px bg-white/70" />

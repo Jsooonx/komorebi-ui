@@ -29,9 +29,12 @@ export default function StoryFrameCtaCard(_: ComponentPreviewProps) {
         <div
           className={`relative min-h-[260px] overflow-hidden bg-[#c6d0d9] transition-all duration-500 ${active ? "[clip-path:inset(0)]" : "[clip-path:inset(7%_8%)]"}`}
         >
-          <div
-            className={`absolute inset-0 bg-[radial-gradient(circle_at_23%_26%,rgba(255,255,255,.95)_0_5%,transparent_24%),radial-gradient(circle_at_74%_68%,rgba(29,53,74,.78)_0_18%,transparent_46%),linear-gradient(135deg,#e5e3dc_0%,#b4c3ce_46%,#2c4052_100%)] transition-transform duration-500 ${active ? "scale-110 -translate-x-2 -translate-y-2" : ""}`}
+          <img
+            src="/images/story-frame-cta.png"
+            alt="Quiet architectural workspace"
+            className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ${active ? "scale-110 -translate-x-2 -translate-y-2" : ""}`}
           />
+          <div className="absolute inset-0 bg-[#1c3041]/20 mix-blend-multiply" />
           <div className="absolute inset-x-[13%] bottom-0 top-[13%] border border-white/55 bg-white/[.07]" />
           <div
             className={`absolute right-[14%] top-[16%] h-20 w-20 rounded-full border border-white/75 bg-[#1e3447]/55 transition-transform duration-500 ${active ? "translate-x-4 -translate-y-2" : ""}`}
