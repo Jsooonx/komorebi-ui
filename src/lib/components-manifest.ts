@@ -470,6 +470,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[650px]",
   },
+  {
+    id: "plan-lens-pricing",
+    name: "Plan Lens Pricing",
+    category: "Pricing & Conversion",
+    description:
+      "A three-tier pricing surface where the selected plan expands through a shared lens and reveals its value in place.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

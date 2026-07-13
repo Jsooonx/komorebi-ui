@@ -19,6 +19,7 @@ import {
   Sidebar,
   Orbit,
   Quote,
+  BadgeDollarSign,
 } from "lucide-react";
 import {
   BLOCKS_MANIFEST,
@@ -308,6 +309,7 @@ export function BlocksIndex({
     { id: "preloader", label: "Preloader", icon: RotateCcw },
     { id: "product-showcase", label: "Product Showcase", icon: Orbit },
     { id: "testimonials", label: "Testimonials", icon: Quote },
+    { id: "pricing", label: "Pricing & Conversion", icon: BadgeDollarSign },
   ];
 
   const navigate = useNavigate();
@@ -347,6 +349,7 @@ export function BlocksIndex({
     if (activeCategory === "preloader") return item.category === "Preloader";
     if (activeCategory === "product-showcase") return item.category === "Product Showcase";
     if (activeCategory === "testimonials") return item.category === "Testimonials & Social Proof";
+    if (activeCategory === "pricing") return item.category === "Pricing & Conversion";
     return false;
   });
 
@@ -498,6 +501,8 @@ export function BlocksIndex({
                       "Product-in-action layouts that turn a single workspace into a calm, scroll-led story of progress."}
                     {activeCategory === "testimonials" &&
                       "Editorial social proof layouts that let customer voices, context, and outcomes carry the story."}
+                    {activeCategory === "pricing" &&
+                      "Focused pricing and conversion layouts that make a clear next step feel simple, transparent, and considered."}
                   </p>
                 </div>
               </LayoutGroup>

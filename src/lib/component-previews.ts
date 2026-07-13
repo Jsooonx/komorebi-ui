@@ -43,6 +43,7 @@ import OrbitWorkspaceShowcaseCard from "../components/blocks-preview-elements/Or
 import VoiceIndexTestimonialsCard from "../components/blocks-preview-elements/VoiceIndexTestimonialsCard";
 import ProofLedgerTestimonialsCard from "../components/blocks-preview-elements/ProofLedgerTestimonialsCard";
 import CommunityMosaicTestimonialsCard from "../components/blocks-preview-elements/CommunityMosaicTestimonialsCard";
+import PlanLensPricingCard from "../components/blocks-preview-elements/PlanLensPricingCard";
 import type { ComponentCatalogPreviewProps, ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPreviewProps>> = {
@@ -93,6 +94,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "voice-index-testimonials": VoiceIndexTestimonialsCard,
   "proof-ledger-testimonials": ProofLedgerTestimonialsCard,
   "community-mosaic-testimonials": CommunityMosaicTestimonialsCard,
+  "plan-lens-pricing": PlanLensPricingCard,
 };
 
 export function getComponentPreview(id: string) {
