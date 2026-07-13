@@ -459,6 +459,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "community-mosaic-testimonials",
+    name: "Community Mosaic Testimonials",
+    category: "Testimonials & Social Proof",
+    description:
+      "A three-column community wall of varied customer notes, profile portraits, and restrained local hover feedback.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[650px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

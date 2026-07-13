@@ -42,6 +42,7 @@ import FocusTourShowcaseCard from "../components/blocks-preview-elements/FocusTo
 import OrbitWorkspaceShowcaseCard from "../components/blocks-preview-elements/OrbitWorkspaceShowcaseCard";
 import VoiceIndexTestimonialsCard from "../components/blocks-preview-elements/VoiceIndexTestimonialsCard";
 import ProofLedgerTestimonialsCard from "../components/blocks-preview-elements/ProofLedgerTestimonialsCard";
+import CommunityMosaicTestimonialsCard from "../components/blocks-preview-elements/CommunityMosaicTestimonialsCard";
 import type { ComponentCatalogPreviewProps, ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPreviewProps>> = {
@@ -91,6 +92,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "orbit-workspace-showcase": OrbitWorkspaceShowcaseCard,
   "voice-index-testimonials": VoiceIndexTestimonialsCard,
   "proof-ledger-testimonials": ProofLedgerTestimonialsCard,
+  "community-mosaic-testimonials": CommunityMosaicTestimonialsCard,
 };
 
 export function getComponentPreview(id: string) {
