@@ -130,7 +130,7 @@ export default function PlanLensPricingElement({
                     : { flexGrow: active ? 1.48 : 0.76, opacity: active ? 1 : 0.62 }
                 }
                 transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.65 }}
-                className="group relative h-[160px] flex-1 overflow-hidden border border-white/10 bg-white/[0.018] p-3 text-left outline-none transition-colors hover:border-white/25 focus-visible:border-white/50 md:h-[350px] md:p-4"
+                className={`group relative h-[160px] flex-1 overflow-hidden border border-white/10 bg-white/[0.018] p-3 text-left outline-none transition-colors hover:border-white/25 focus-visible:border-white/50 md:p-4 ${compact ? "md:h-[350px]" : "md:h-[400px]"}`}
               >
                 {active && (
                   <motion.div
