@@ -50,6 +50,7 @@ Different header/navbar blocks have specific top-docking behaviors in minimal pr
 - Billing-cadence pricing may use a distinct editorial direction when it makes the trade-off clearer. Treat monthly versus annual as a visible commitment decision: keep the two terms click-selected, morph one stable price-and-terms document, and give time a simple tangible line. Do not reduce it to a generic toggle or hide the annual up-front cost behind a savings badge.
 - CTA blocks should have one primary thought and one primary action. The action may reveal a short local confirmation state, but must not become a fake signup form or a second hero. Keep supporting proof and decorative effects subordinate; the click target, message, and next step remain the stable visual anchor.
 - A split CTA may use one focused visual proof frame, but the visual must clarify the same promise as the copy rather than compete with it. Prefer an original generated composition or a carefully selected clean image; avoid borrowed in-image text, dashboard screenshots, or a second action inside the media panel.
+- Proof-backed CTAs may carry one outcome metric or short customer observation, but only as evidence for the primary action. Keep the proof singular and local; do not turn a conversion banner into a testimonial archive, logo wall, or rotating social-proof carousel.
 
 ---
 

@@ -48,6 +48,7 @@ import UsageHorizonPricingCard from "../components/blocks-preview-elements/Usage
 import CommitmentWindowPricingCard from "../components/blocks-preview-elements/CommitmentWindowPricingCard";
 import FocusedConversionCtaCard from "../components/blocks-preview-elements/FocusedConversionCtaCard";
 import StoryFrameCtaCard from "../components/blocks-preview-elements/StoryFrameCtaCard";
+import ProofSignalCtaCard from "../components/blocks-preview-elements/ProofSignalCtaCard";
 import type { ComponentCatalogPreviewProps, ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPreviewProps>> = {
@@ -103,6 +104,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "commitment-window-pricing": CommitmentWindowPricingCard,
   "focused-conversion-cta": FocusedConversionCtaCard,
   "story-frame-cta": StoryFrameCtaCard,
+  "proof-signal-cta": ProofSignalCtaCard,
 };
 
 export function getComponentPreview(id: string) {

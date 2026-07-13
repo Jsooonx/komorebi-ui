@@ -525,6 +525,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "proof-signal-cta",
+    name: "Proof Signal CTA",
+    category: "Call to Action",
+    description:
+      "A wide outcome-led CTA where one concise proof signal reinforces a single next step.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

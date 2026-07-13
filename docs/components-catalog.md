@@ -61,6 +61,7 @@ Full layout sections are intentionally excluded from this catalog. They belong t
 - Commitment Window Pricing
 - Focused Conversion CTA
 - Story Frame CTA
+- Proof Signal CTA
 
 Features 2 keeps its interactive CLI terminal engine, while its decorative inline code snippets have been removed from the visual block preview.
 Features 3 is a minimal six-cell Komorebi feature layout with original product-focused copy, centered typography, tight heading-to-description spacing matching Features 2’s scale, thin dividers, and restrained icons.
@@ -85,6 +86,7 @@ Usage Horizon Pricing is the second Pricing & Conversion block. It complements P
 Commitment Window Pricing is the third Pricing & Conversion block. It treats monthly versus annual billing as an editorial commitment decision rather than a generic toggle: two click-selected terms morph one stable price-and-terms document, while a twelve-month line makes the time horizon tangible. Its off-white contract direction intentionally differs from the dark tier and value-metric surfaces, but keeps the same principles of transparent trade-offs, local motion, and no checkout flow.
 Focused Conversion CTA is the first Call to Action block. It concentrates one original message, one action, and a quiet confirmation state inside a centered conversion surface. Clicking the CTA morphs the copy and button locally without navigation, form fields, autoplay, a nested Bento, or a generic hero treatment; catalog and fullscreen use separate surfaces with the same intentional interaction.
 Story Frame CTA is the second Call to Action block. It is a split editorial CTA: one concise message and action sit beside an original generated architectural visual frame that changes crop, depth, and caption locally when the action is pressed. The visual supports the promise without adding borrowed typography, a product dashboard, navigation, or a second conversion path.
+Proof Signal CTA is the third Call to Action block. It uses a wide outcome-led banner where one fictional result and one short customer observation reduce hesitation around a single action. Pressing the CTA locally morphs the outcome signal and its connecting line; it is not a testimonial carousel or archive, and the action remains visually dominant.
 This keeps reusable pieces separate from ready-made page/layout sections.
 
 ## Components rendering boundaries
