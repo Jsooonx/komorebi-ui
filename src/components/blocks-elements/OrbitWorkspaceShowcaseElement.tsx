@@ -371,7 +371,11 @@ function ActiveWorkspace({
     : { type: "spring" as const, stiffness: 180, damping: 24, mass: 0.5 };
 
   return (
-    <div className="relative z-20 w-[min(78vw,560px)] overflow-hidden rounded-2xl border border-white/15 bg-[#101013]/[0.96] shadow-[0_45px_120px_rgba(0,0,0,0.58)] backdrop-blur-2xl sm:w-[min(62vw,560px)]">
+    <motion.div
+      layout
+      transition={transition}
+      className="relative z-20 w-[min(78vw,560px)] overflow-hidden rounded-2xl border border-white/15 bg-[#101013]/[0.96] shadow-[0_45px_120px_rgba(0,0,0,0.58)] backdrop-blur-2xl sm:w-[min(62vw,560px)]"
+    >
       <div
         className={`flex items-center justify-between border-b border-white/[0.08] ${isCatalog ? "h-9 px-3" : "h-11 px-4 sm:px-5"}`}
       >
@@ -413,8 +417,10 @@ function ActiveWorkspace({
           </div>
         </div>
 
-        <div
-          className={`relative overflow-hidden rounded-xl border border-white/[0.08] bg-[#0b0b0d] transition-all duration-300 ${isCatalog ? "mt-3 min-h-[148px] p-3" : "mt-5 min-h-[190px] p-4 sm:min-h-[220px] sm:p-5"}`}
+        <motion.div
+          layout
+          transition={transition}
+          className={`relative overflow-hidden rounded-xl border border-white/[0.08] bg-[#0b0b0d] ${isCatalog ? "mt-3 p-3" : "mt-5 p-4 sm:p-5"}`}
         >
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.div
@@ -429,7 +435,7 @@ function ActiveWorkspace({
               <SurfaceContent surface={activeSurface} />
             </motion.div>
           </AnimatePresence>
-        </div>
+        </motion.div>
 
         <div className={`grid grid-cols-3 gap-2 ${isCatalog ? "mt-2" : "mt-3"}`}>
           {["Clarity", "Flow", "Confidence"].map((label, index) => (
@@ -445,7 +451,7 @@ function ActiveWorkspace({
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
