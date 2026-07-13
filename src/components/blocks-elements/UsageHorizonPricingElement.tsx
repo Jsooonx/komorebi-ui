@@ -56,11 +56,8 @@ export default function UsageHorizonPricingElement({
           className={`flex items-end justify-between gap-5 border-b border-white/10 ${compact ? "pb-3" : "pb-4"}`}
         >
           <div>
-            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/35">
-              Usage horizon / 02
-            </p>
             <h2
-              className={`mt-2 font-sans font-semibold tracking-[-0.045em] ${compact ? "text-xl" : "mt-3 text-3xl md:text-4xl"}`}
+              className={`font-sans font-semibold tracking-[-0.045em] ${compact ? "text-xl" : "text-3xl md:text-4xl"}`}
             >
               Price the pace, not the guesswork.
             </h2>

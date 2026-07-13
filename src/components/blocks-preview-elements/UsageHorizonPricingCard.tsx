@@ -17,10 +17,7 @@ export default function UsageHorizonPricingCard(_: ComponentPreviewProps) {
     <div className="relative flex h-full min-h-[500px] w-full items-center overflow-hidden bg-[#0a0a0b] p-5 text-white sm:p-7">
       <div className="pointer-events-none absolute inset-0 opacity-50 [background-image:linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:54px_54px]" />
       <div className="relative mx-auto w-full max-w-[760px]">
-        <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/35">
-          Usage horizon / 02
-        </p>
-        <h3 className="mt-2 text-xl font-semibold tracking-[-0.045em]">
+        <h3 className="text-xl font-semibold tracking-[-0.045em]">
           Price the pace, not the guesswork.
         </h3>
         <div className="mt-4 grid gap-3 border-t border-white/10 pt-4 sm:grid-cols-[1.08fr_0.92fr]">

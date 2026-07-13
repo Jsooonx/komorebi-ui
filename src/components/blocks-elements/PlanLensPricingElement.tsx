@@ -93,11 +93,8 @@ export default function PlanLensPricingElement({
           className={`flex items-end justify-between gap-6 border-b border-white/10 ${compact ? "pb-3" : "pb-4"}`}
         >
           <div>
-            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/35">
-              Plan lens / 01
-            </p>
             <h2
-              className={`mt-2 font-sans font-semibold tracking-[-0.045em] ${compact ? "text-xl" : "mt-3 text-3xl md:text-4xl"}`}
+              className={`font-sans font-semibold tracking-[-0.045em] ${compact ? "text-xl" : "text-3xl md:text-4xl"}`}
             >
               Pick the shape that fits the work.
             </h2>
