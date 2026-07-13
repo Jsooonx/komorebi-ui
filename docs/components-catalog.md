@@ -59,6 +59,7 @@ Full layout sections are intentionally excluded from this catalog. They belong t
 - Plan Lens Pricing
 - Usage Horizon Pricing
 - Commitment Window Pricing
+- Focused Conversion CTA
 
 Features 2 keeps its interactive CLI terminal engine, while its decorative inline code snippets have been removed from the visual block preview.
 Features 3 is a minimal six-cell Komorebi feature layout with original product-focused copy, centered typography, tight heading-to-description spacing matching Features 2’s scale, thin dividers, and restrained icons.
@@ -81,6 +82,7 @@ Community Mosaic Testimonials is the third Testimonials & Social Proof block. It
 Plan Lens Pricing is the first Pricing & Conversion block. It keeps three concise fictional tiers on one stable comparison surface: hovering, focusing, or tapping a tier moves a shared selection lens, widens the active plan locally, and reveals its outcome-led scope. Leaving the tier group restores the middle Studio plan; card height remains fixed so the interaction never resizes the overall composition, while fullscreen uses a taller fixed panel to protect the lower capability and CTA content. Its catalog uses the supplied short, muted looping video preview; fullscreen remains the live DOM/CSS interaction. It uses DOM/CSS capacity markers rather than decorative imagery; the catalog remains compact while fullscreen centers the complete, non-scrollable composition.
 Usage Horizon Pricing is the second Pricing & Conversion block. It complements Plan Lens rather than repeating it: instead of choosing a tier, people select a clear team-capacity value metric through four compact horizons. Click or tap moves the active marker along one stable track while only its local forecast, included capacity, and transparent monthly shape change; hovering never changes the selected horizon. It stays a pre-checkout pricing decision surface with no dashboard chrome, transaction form, decorative media, or autoplay; the catalog and fullscreen share the same direct DOM/CSS interaction.
 Commitment Window Pricing is the third Pricing & Conversion block. It treats monthly versus annual billing as an editorial commitment decision rather than a generic toggle: two click-selected terms morph one stable price-and-terms document, while a twelve-month line makes the time horizon tangible. Its off-white contract direction intentionally differs from the dark tier and value-metric surfaces, but keeps the same principles of transparent trade-offs, local motion, and no checkout flow.
+Focused Conversion CTA is the first Call to Action block. It concentrates one original message, one action, and a quiet confirmation state inside a centered conversion surface. Clicking the CTA morphs the copy and button locally without navigation, form fields, autoplay, a nested Bento, or a generic hero treatment; catalog and fullscreen use separate surfaces with the same intentional interaction.
 This keeps reusable pieces separate from ready-made page/layout sections.
 
 ## Components rendering boundaries

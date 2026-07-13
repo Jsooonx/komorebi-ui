@@ -503,6 +503,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "focused-conversion-cta",
+    name: "Focused Conversion CTA",
+    category: "Call to Action",
+    description:
+      "A centered call-to-action surface where one invitation resolves into a quiet confirmed next step.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {

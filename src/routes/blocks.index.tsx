@@ -314,6 +314,7 @@ export function BlocksIndex({
     { id: "product-showcase", label: "Product Showcase", icon: Orbit },
     { id: "testimonials", label: "Testimonials", icon: Quote },
     { id: "pricing", label: "Pricing & Conversion", icon: BadgeDollarSign },
+    { id: "cta", label: "Call to Action", icon: MousePointer },
   ];
 
   const navigate = useNavigate();
@@ -374,6 +375,7 @@ export function BlocksIndex({
     if (activeCategory === "product-showcase") return item.category === "Product Showcase";
     if (activeCategory === "testimonials") return item.category === "Testimonials & Social Proof";
     if (activeCategory === "pricing") return item.category === "Pricing & Conversion";
+    if (activeCategory === "cta") return item.category === "Call to Action";
     return false;
   });
 
@@ -527,6 +529,8 @@ export function BlocksIndex({
                       "Editorial social proof layouts that let customer voices, context, and outcomes carry the story."}
                     {activeCategory === "pricing" &&
                       "Focused pricing and conversion layouts that make a clear next step feel simple, transparent, and considered."}
+                    {activeCategory === "cta" &&
+                      "Focused conversion sections that turn a clear message and one action into a considered next step."}
                   </p>
                 </div>
               </LayoutGroup>

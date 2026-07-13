@@ -46,6 +46,7 @@ import CommunityMosaicTestimonialsCard from "../components/blocks-preview-elemen
 import PlanLensPricingCard from "../components/blocks-preview-elements/PlanLensPricingCard";
 import UsageHorizonPricingCard from "../components/blocks-preview-elements/UsageHorizonPricingCard";
 import CommitmentWindowPricingCard from "../components/blocks-preview-elements/CommitmentWindowPricingCard";
+import FocusedConversionCtaCard from "../components/blocks-preview-elements/FocusedConversionCtaCard";
 import type { ComponentCatalogPreviewProps, ComponentPreviewProps } from "./components-manifest";
 
 export const COMPONENT_PREVIEWS: Record<string, ComponentType<ComponentCatalogPreviewProps>> = {
@@ -99,6 +100,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "plan-lens-pricing": PlanLensPricingCard,
   "usage-horizon-pricing": UsageHorizonPricingCard,
   "commitment-window-pricing": CommitmentWindowPricingCard,
+  "focused-conversion-cta": FocusedConversionCtaCard,
 };
 
 export function getComponentPreview(id: string) {

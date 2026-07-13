@@ -48,6 +48,7 @@ Different header/navbar blocks have specific top-docking behaviors in minimal pr
 - Active-plan light-up is immediate: do not combine a generic hover-border transition with a delayed shared-lens spring. Keep the lens handoff instantaneous, while only the plan width and local content retain restrained motion.
 - Usage-based pricing should remain a calm value-metric explorer, not a billing calculator. Keep one visible capacity track, a small number of understandable horizons, a stable transparent total, and an explicit forecast/cap. Move the shared marker and only the adjacent details; do not turn the surface into a dense input form, dashboard, checkout, or animated chart.
 - Billing-cadence pricing may use a distinct editorial direction when it makes the trade-off clearer. Treat monthly versus annual as a visible commitment decision: keep the two terms click-selected, morph one stable price-and-terms document, and give time a simple tangible line. Do not reduce it to a generic toggle or hide the annual up-front cost behind a savings badge.
+- CTA blocks should have one primary thought and one primary action. The action may reveal a short local confirmation state, but must not become a fake signup form or a second hero. Keep supporting proof and decorative effects subordinate; the click target, message, and next step remain the stable visual anchor.
 
 ---
 

@@ -129,6 +129,9 @@ export async function loadComponentCode(id: string) {
     case "commitment-window-pricing":
       return (await import("../components/blocks-elements/CommitmentWindowPricingElement.tsx?raw"))
         .default;
+    case "focused-conversion-cta":
+      return (await import("../components/blocks-elements/FocusedConversionCtaElement.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }
