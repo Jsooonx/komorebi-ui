@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type ComponentType } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, type ComponentType } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { toast } from "sonner";
@@ -244,6 +244,10 @@ function BlockRow({ item }: { item: BlockItem }) {
                 onClick={() => {
                   const category = getBlockCategorySlug(item.category);
                   if (category) {
+                    sessionStorage.setItem(
+                      "komorebi_blocks_return_scroll",
+                      JSON.stringify({ category, y: window.scrollY }),
+                    );
                     navigate({
                       to: "/blocks/$category/$block",
                       params: { category, block: item.id },
@@ -314,6 +318,22 @@ export function BlocksIndex({
 
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<BlockCategorySlug>(initialCategory);
+  const shouldRestoreScrollRef = useRef(false);
+
+  useLayoutEffect(() => {
+    const saved = sessionStorage.getItem("komorebi_blocks_return_scroll");
+    if (!saved) return;
+
+    try {
+      const { category, y } = JSON.parse(saved) as { category?: string; y?: number };
+      if (category === initialCategory && typeof y === "number" && Number.isFinite(y)) {
+        shouldRestoreScrollRef.current = true;
+        window.scrollTo({ top: y, behavior: "auto" });
+      }
+    } finally {
+      sessionStorage.removeItem("komorebi_blocks_return_scroll");
+    }
+  }, [initialCategory]);
 
   useEffect(() => {
     setActiveCategory(initialCategory);
@@ -328,6 +348,10 @@ export function BlocksIndex({
   });
 
   useEffect(() => {
+    if (shouldRestoreScrollRef.current) {
+      shouldRestoreScrollRef.current = false;
+      return;
+    }
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [activeCategory]);
 

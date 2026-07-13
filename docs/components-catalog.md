@@ -95,5 +95,6 @@ This keeps reusable pieces separate from ready-made page/layout sections.
 - `src/components/blocks-elements/` contains the visual implementations and full-page entry components. Fullscreen resolves these entries directly, never the catalog registry or a preview wrapper.
 - Header catalog previews stay compact. Their fullscreen version uses a short, complete dummy landing page (about 1.25 viewport heights), enough to exercise scroll-responsive navbar states without an oversized empty canvas.
 - Every fullscreen block is rendered as a complete viewport page rather than a centered catalog card. The close control is supplied by the fullscreen host and is intentionally not part of the block implementation.
+- Opening a fullscreen block records the catalog scroll position for its category. Returning through the close control, Escape, or browser history restores that same position instead of resetting the catalog to the top.
 
 Blocks use nested routes: `/blocks/$category` renders a category catalog, while `/blocks/$category/$block` renders the block’s full-page implementation. Fullscreen navigation uses these routes so browser back, forward, refresh, and direct links preserve the selected category and block.
