@@ -18,6 +18,7 @@ import {
   Sparkles,
   Sidebar,
   Orbit,
+  Quote,
 } from "lucide-react";
 import {
   BLOCKS_MANIFEST,
@@ -306,6 +307,7 @@ export function BlocksIndex({
     { id: "parallax", label: "Parallax", icon: Sparkles },
     { id: "preloader", label: "Preloader", icon: RotateCcw },
     { id: "product-showcase", label: "Product Showcase", icon: Orbit },
+    { id: "testimonials", label: "Testimonials", icon: Quote },
   ];
 
   const navigate = useNavigate();
@@ -344,6 +346,7 @@ export function BlocksIndex({
     if (activeCategory === "parallax") return item.category === "Parallax";
     if (activeCategory === "preloader") return item.category === "Preloader";
     if (activeCategory === "product-showcase") return item.category === "Product Showcase";
+    if (activeCategory === "testimonials") return item.category === "Testimonials & Social Proof";
     return false;
   });
 
@@ -493,6 +496,8 @@ export function BlocksIndex({
                       "Premium full-screen preloading overlays, page wipe transitions, and typographic entry sequences."}
                     {activeCategory === "product-showcase" &&
                       "Product-in-action layouts that turn a single workspace into a calm, scroll-led story of progress."}
+                    {activeCategory === "testimonials" &&
+                      "Editorial social proof layouts that let customer voices, context, and outcomes carry the story."}
                   </p>
                 </div>
               </LayoutGroup>

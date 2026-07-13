@@ -437,6 +437,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     gridClass: "md:col-span-2 md:row-span-2",
     viewportHeightClass: "h-[500px]",
   },
+  {
+    id: "voice-index-testimonials",
+    name: "Voice Index Testimonials",
+    category: "Testimonials & Social Proof",
+    description:
+      "An editorial testimonial archive where four customer voices resolve through one quiet index instead of a product-style carousel.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
 ];
 
 export function getManifestItem(id: string) {
