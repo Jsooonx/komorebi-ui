@@ -578,15 +578,21 @@ export default function OrbitWorkspaceShowcaseElement({
           <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_center,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_at_center,black_12%,transparent_76%)]" />
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[540px] w-[540px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.035] blur-3xl" />
 
-          {/* Mobile Title Info (hidden on desktop / catalog) */}
+          {/* Mobile Title Info (hidden on desktop) */}
           <motion.div
             style={{ opacity: titleOpacity }}
-            className={`absolute left-5 top-5 z-40 sm:left-8 sm:top-8 md:hidden ${isCatalog ? "hidden" : ""}`}
+            className={`absolute left-5 top-5 z-40 sm:left-8 sm:top-8 md:hidden ${
+              isCatalog ? "max-w-[180px]" : "max-w-[280px]"
+            }`}
           >
-            <h1 className="font-serif text-2xl font-light leading-[0.98] tracking-tight sm:text-4xl max-w-[280px]">
+            <h1 className={`font-serif font-light leading-tight tracking-tight ${
+              isCatalog ? "text-sm" : "text-2xl leading-[0.98]"
+            }`}>
               Keep the whole system within reach.
             </h1>
-            <p className="mt-3 max-w-[250px] text-[10px] leading-relaxed text-white/40 sm:text-xs">
+            <p className={`text-white/40 ${
+              isCatalog ? "text-[8px] leading-snug mt-1.5" : "text-[10px] leading-relaxed mt-3 sm:text-xs"
+            }`}>
               Move through connected surfaces without losing the center of the work.
             </p>
           </motion.div>
@@ -594,14 +600,20 @@ export default function OrbitWorkspaceShowcaseElement({
           {/* Desktop Title (aligned with screen edge horizontally, dashboard boundaries vertically) */}
           <motion.div
             style={{ opacity: titleOpacity, y: titleY }}
-            className={`absolute left-5 sm:left-8 z-40 text-left pointer-events-none hidden ${
-              isCatalog ? "hidden" : "md:block top-[calc(50%-184px)]"
+            className={`absolute left-5 sm:left-8 z-40 text-left pointer-events-none hidden md:block ${
+              isCatalog 
+                ? "top-6 max-w-[160px]" 
+                : "top-[calc(50%-184px)] max-w-[280px]"
             }`}
           >
-            <h1 className="font-serif text-3xl font-light leading-[0.98] tracking-tight max-w-[280px]">
+            <h1 className={`font-serif font-light leading-tight tracking-tight ${
+              isCatalog ? "text-sm" : "text-3xl leading-[0.98]"
+            }`}>
               Keep the whole system within reach.
             </h1>
-            <p className="mt-3 max-w-[250px] text-[10px] leading-relaxed text-white/40 sm:text-xs">
+            <p className={`text-white/40 ${
+              isCatalog ? "text-[8px] leading-snug mt-1.5 max-w-[150px]" : "text-[10px] leading-relaxed mt-3 max-w-[250px] sm:text-xs"
+            }`}>
               Move through connected surfaces without losing the center of the work.
             </p>
           </motion.div>
@@ -639,16 +651,16 @@ export default function OrbitWorkspaceShowcaseElement({
 
 
               {/* Holographic Guide Orbit Rings */}
-              {!isCatalog && (
-                <>
-                  <svg className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.04] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] h-[540px] w-[540px]`}>
-                    <circle cx={270} cy={270} r={255} fill="none" stroke="white" strokeWidth="1" strokeDasharray="3 3" />
-                  </svg>
-                  <svg className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.02] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] h-[540px] w-[540px]`}>
-                    <circle cx={270} cy={270} r={265} fill="none" stroke="white" strokeWidth="1" />
-                  </svg>
-                </>
-              )}
+              <svg className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.04] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] ${
+                isCatalog ? "h-[360px] w-[360px]" : "h-[540px] w-[540px]"
+              }`}>
+                <circle cx={isCatalog ? 180 : 270} cy={isCatalog ? 180 : 270} r={isCatalog ? 170 : 255} fill="none" stroke="white" strokeWidth="1" strokeDasharray="3 3" />
+              </svg>
+              <svg className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.02] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] ${
+                isCatalog ? "h-[360px] w-[360px]" : "h-[540px] w-[540px]"
+              }`}>
+                <circle cx={isCatalog ? 180 : 270} cy={isCatalog ? 180 : 270} r={isCatalog ? 180 : 265} fill="none" stroke="white" strokeWidth="1" />
+              </svg>
 
               <div className="absolute inset-0 [transform-style:preserve-3d]">
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -676,11 +688,15 @@ export default function OrbitWorkspaceShowcaseElement({
           {/* Outro info overlay */}
           <motion.div
             style={{ opacity: outroOpacity, y: outroY }}
-            className={`pointer-events-none absolute bottom-16 left-1/2 z-30 w-[min(90vw,420px)] -translate-x-1/2 text-center sm:bottom-20 ${
-              isCatalog ? "hidden" : ""
+            className={`pointer-events-none absolute left-1/2 z-30 -translate-x-1/2 text-center ${
+              isCatalog 
+                ? "bottom-12 w-[240px]" 
+                : "bottom-16 sm:bottom-20 w-[min(90vw,420px)]"
             }`}
           >
-            <p className="font-serif text-lg font-light leading-tight tracking-tight text-white/75 sm:text-2xl">
+            <p className={`font-serif font-light tracking-tight text-white/75 ${
+              isCatalog ? "text-[10px] leading-tight" : "text-lg sm:text-2xl leading-tight"
+            }`}>
               Move through the system, not around it.
             </p>
           </motion.div>
