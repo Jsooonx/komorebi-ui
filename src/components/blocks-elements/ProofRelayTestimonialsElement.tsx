@@ -9,7 +9,6 @@ import {
 } from "framer-motion";
 import {
   Activity,
-  ArrowUpRight,
   Check,
   CircleDot,
   Layers3,
@@ -85,20 +84,21 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-const quoteProgress = [0, 0.2, 0.35, 0.52, 0.68, 0.84, 1];
+// 0..1 timeline mapping points for transitions between 4 states
+const quoteProgress = [0, 0.22, 0.25, 0.47, 0.5, 0.72, 0.75, 0.97, 1.0];
 
 const quoteOpacity = [
-  [1, 1, 1, 0.1, 0, 0, 0],
-  [0, 0, 0.2, 1, 1, 0.1, 0],
-  [0, 0, 0, 0.15, 1, 1, 0.1],
-  [0, 0, 0, 0, 0.1, 1, 1],
+  [1, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 1, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 1, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 1, 1, 1],
 ];
 
 const quoteY = [
-  [0, 0, -8, -18, -20, -20, -20],
-  [18, 18, 7, 0, -8, -16, -18],
-  [20, 20, 20, 10, 0, -8, -16],
-  [20, 20, 20, 20, 12, 0, 0],
+  [0, 0, -20, -20, -20, -20, -20, -20, -20],
+  [20, 20, 0, 0, -20, -20, -20, -20, -20],
+  [20, 20, 20, 20, 0, 0, -20, -20, -20],
+  [20, 20, 20, 20, 20, 20, 0, 0, 0],
 ];
 
 function QuoteLayer({
@@ -117,20 +117,21 @@ function QuoteLayer({
   activeIndex: number;
 }) {
   const opacityValues = reducedMotion
-    ? quoteOpacity[index].map((value) => Math.max(value, 0.05))
+    ? quoteOpacity[index].map((val) => Math.max(val, 0.05))
     : quoteOpacity[index];
   const yValues = reducedMotion ? quoteY[index].map(() => 0) : quoteY[index];
-  const scaleValues = reducedMotion
-    ? quoteProgress.map(() => 1)
-    : quoteProgress.map((_, step) => (step >= 2 ? 1 : 0.985));
-  const blurValues = reducedMotion
-    ? quoteProgress.map(() => 0)
-    : quoteOpacity[index].map((value) => (value > 0.8 ? 0 : 2));
+  const scaleValues = quoteProgress.map((_, step) =>
+    reducedMotion ? 1 : step === index * 2 || step === index * 2 + 1 ? 1 : 0.98
+  );
+  const blurValues = quoteOpacity[index].map((val) =>
+    reducedMotion ? 0 : val > 0.8 ? 0 : 4
+  );
+
   const opacity = useTransform(progress, quoteProgress, opacityValues);
   const y = useTransform(progress, quoteProgress, yValues);
   const scale = useTransform(progress, quoteProgress, scaleValues);
   const blur = useTransform(progress, quoteProgress, blurValues);
-  const filter = useTransform(blur, (value) => `blur(${value}px)`);
+  const filter = useTransform(blur, (val) => `blur(${val}px)`);
   const Icon = testimonial.icon;
 
   return (
@@ -145,12 +146,14 @@ function QuoteLayer({
           {testimonial.outcome}
         </div>
         <p
-          className={`mt-4 max-w-2xl font-serif font-light leading-[0.98] tracking-[-0.045em] text-white/90 ${compact ? "text-2xl sm:text-3xl" : "text-3xl sm:text-5xl lg:text-[4.2rem]"}`}
+          className={`mt-4 max-w-2xl font-serif font-light leading-[1.05] tracking-[-0.045em] text-white/95 ${
+            compact ? "text-2xl sm:text-3xl" : "text-3xl sm:text-5xl lg:text-[4.2rem]"
+          }`}
         >
           “{testimonial.quote}”
         </p>
       </div>
-      <div className="flex items-center gap-2 text-[9px] text-white/35">
+      <div className="flex items-center gap-2 text-[9px] text-white/35 font-sans">
         <CircleDot className="h-3 w-3 text-white/45" />
         {testimonial.company} / {testimonial.role}
       </div>
@@ -174,20 +177,30 @@ function IdentityRail({ activeIndex, compact }: { activeIndex: number; compact: 
             key={testimonial.id}
             role="listitem"
             aria-current={isActive ? "true" : undefined}
-            className={`group relative overflow-hidden border transition-colors duration-300 ${compact ? "min-w-[104px] flex-1 rounded-lg px-2 py-2" : "rounded-xl px-3 py-3"} ${isActive ? "border-white/20" : "border-white/[0.07] bg-white/[0.02] hover:border-white/15 hover:bg-white/[0.045]"}`}
+            className={`group relative overflow-hidden border transition-colors duration-300 ${
+              compact ? "min-w-[104px] flex-1 rounded-lg px-2 py-2" : "rounded-xl px-4 py-3.5"
+            } ${
+              isActive
+                ? "border-white/20"
+                : "border-white/[0.05] bg-white/[0.01] hover:border-white/10 hover:bg-white/[0.03]"
+            }`}
           >
             {isActive && (
               <motion.div
-                layoutId="active-identity-bg"
-                className="absolute inset-0 bg-white/[0.07]"
+                layoutId="active-rail-highlight"
+                className="absolute inset-0 bg-white/[0.05]"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 style={{ willChange: "transform" }}
               />
             )}
-            <div className="pointer-events-none absolute inset-0 bg-white/[0.06] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="pointer-events-none absolute inset-0 bg-white/[0.04] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             <div className="relative z-10 flex items-start gap-2.5">
               <span
-                className={`flex shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${compact ? "h-5 w-5" : "h-6 w-6"} ${isActive ? "border-white/55 bg-white text-black" : "border-white/15 text-white/40"}`}
+                className={`flex shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
+                  compact ? "h-5 w-5" : "h-6 w-6"
+                } ${
+                  isActive ? "border-white/55 bg-white text-black" : "border-white/15 text-white/40"
+                }`}
               >
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.span
@@ -205,7 +218,9 @@ function IdentityRail({ activeIndex, compact }: { activeIndex: number; compact: 
               </span>
               <div className="min-w-0">
                 <div
-                  className={`truncate font-medium text-white/75 ${compact ? "text-[9px]" : "text-[10px]"}`}
+                  className={`truncate font-medium text-white/80 ${
+                    compact ? "text-[9px]" : "text-[10px]"
+                  }`}
                 >
                   {testimonial.name}
                 </div>
@@ -214,7 +229,7 @@ function IdentityRail({ activeIndex, compact }: { activeIndex: number; compact: 
                 </div>
               </div>
               {!compact && (
-                <span className="ml-auto font-mono text-[8px] text-white/25">0{index + 1}</span>
+                <span className="ml-auto font-mono text-[8px] text-white/20">0{index + 1}</span>
               )}
             </div>
           </div>
@@ -239,23 +254,30 @@ function ProofFrame({
   const metricScale = useTransform(
     progress,
     [0.68, 0.86, 1],
-    reducedMotion ? [1, 1, 1] : [0.96, 1, 1],
+    reducedMotion ? [1, 1, 1] : [0.97, 1, 1]
   );
-  const metricOpacity = useTransform(progress, [0.68, 0.84, 1], [0.65, 1, 1]);
+  const metricOpacity = useTransform(progress, [0.68, 0.84, 1], [0.7, 1, 1]);
 
-  const quoteIconY = useTransform(progress, [0, 1], reducedMotion ? [0, 0] : [0, -32]);
+  const quoteIconY = useTransform(progress, [0, 1], reducedMotion ? [0, 0] : [0, -36]);
+
+  // Dynamic connection pointer height mapping
+  const trackHeight = compact ? 120 : 180;
+  const pointerY = useTransform(progress, [0, 1], [0, trackHeight]);
 
   return (
     <div
-      className={`relative z-10 overflow-hidden border border-white/15 bg-[#101013]/[0.96] shadow-[0_45px_120px_rgba(0,0,0,0.55)] backdrop-blur-2xl ${compact ? "rounded-2xl p-4" : "rounded-3xl p-5 sm:p-8"}`}
+      className={`relative z-10 overflow-hidden border border-white/10 bg-[#08080a]/90 shadow-[0_45px_120px_rgba(0,0,0,0.65)] backdrop-blur-2xl ${
+        compact ? "rounded-2xl p-5" : "rounded-3xl p-6 sm:p-9"
+      }`}
     >
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+      {/* Top bar info */}
+      <div className="flex items-center justify-between border-b border-white/[0.06] pb-3.5">
         <div className="flex items-center gap-2.5">
-          <div className="flex gap-1">
-            <span className="h-1.5 w-1.5 rounded-full bg-white/25" />
+          <div className="flex gap-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-white/30 animate-pulse" />
             <span className="h-1.5 w-1.5 rounded-full bg-white/10" />
           </div>
-          <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/35">
+          <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/40">
             proof / in practice
           </span>
         </div>
@@ -264,36 +286,53 @@ function ProofFrame({
         </span>
       </div>
 
-      <div
-        className={`relative ${compact ? "mt-4 min-h-[230px]" : "mt-7 min-h-[320px] sm:min-h-[360px]"}`}
-      >
-        <motion.div
-          style={{ y: quoteIconY, willChange: "transform" }}
-          className="absolute right-0 top-0 pointer-events-none"
+      {/* Quote viewport and pointer track layout */}
+      <div className="relative grid grid-cols-[1fr_auto] gap-5">
+        <div
+          className={`relative ${
+            compact ? "mt-4 min-h-[230px]" : "mt-7 min-h-[320px] sm:min-h-[360px]"
+          }`}
         >
-          <Quote
-            className={`text-white/[0.08] ${compact ? "h-8 w-8" : "h-12 w-12"}`}
-          />
-        </motion.div>
-        {testimonials.map((testimonial, index) => (
-          <QuoteLayer
-            key={testimonial.id}
-            testimonial={testimonial}
-            index={index}
-            progress={progress}
-            reducedMotion={reducedMotion}
-            compact={compact}
-            activeIndex={activeIndex}
-          />
-        ))}
+          <motion.div
+            style={{ y: quoteIconY, willChange: "transform" }}
+            className="absolute right-0 top-0 pointer-events-none opacity-80"
+          >
+            <Quote className={`text-white/[0.06] ${compact ? "h-8 w-8" : "h-14 w-14"}`} />
+          </motion.div>
+          {testimonials.map((testimonial, index) => (
+            <QuoteLayer
+              key={testimonial.id}
+              testimonial={testimonial}
+              index={index}
+              progress={progress}
+              reducedMotion={reducedMotion}
+              compact={compact}
+              activeIndex={activeIndex}
+            />
+          ))}
+        </div>
+
+        {/* Dynamic vertical connection indicator pointer */}
+        <div className="relative w-1 flex flex-col items-center justify-center self-stretch py-8 opacity-75">
+          <div className="absolute inset-y-8 w-[1px] bg-white/[0.06]" />
+          <div className="relative w-full h-[180px] self-start" style={{ height: `${trackHeight}px` }}>
+            <motion.div
+              style={{ y: pointerY, willChange: "transform" }}
+              className="absolute left-1/2 -translate-x-1/2 w-[3px] h-6 rounded-full bg-white/60 shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+            />
+          </div>
+        </div>
       </div>
 
+      {/* Metric layout */}
       <motion.div
         style={{ scale: metricScale, opacity: metricOpacity }}
-        className={`mt-5 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 border-t border-white/[0.08] pt-4 ${compact ? "mt-3" : "mt-5"}`}
+        className={`grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 border-t border-white/[0.06] pt-4 ${
+          compact ? "mt-4" : "mt-6"
+        }`}
       >
         <div>
-          <div className="font-mono text-[8px] uppercase tracking-[0.18em] text-white/25">
+          <div className="font-mono text-[8px] uppercase tracking-[0.18em] text-white/20">
             Observed outcome
           </div>
           <AnimatePresence mode="popLayout" initial={false}>
@@ -307,7 +346,7 @@ function ProofFrame({
                   ? { duration: 0.12 }
                   : { type: "spring", stiffness: 180, damping: 24, mass: 0.5 }
               }
-              className="mt-1 text-xs text-white/60"
+              className="mt-1 text-xs text-white/50 font-sans"
             >
               {activeTestimonial.metricLabel}
             </motion.div>
@@ -324,7 +363,9 @@ function ProofFrame({
                 ? { duration: 0.12 }
                 : { type: "spring", stiffness: 180, damping: 24, mass: 0.5 }
             }
-            className={`font-serif font-light leading-none tracking-[-0.06em] text-white/90 ${compact ? "text-3xl" : "text-5xl"}`}
+            className={`font-serif font-light leading-none tracking-[-0.06em] text-white/95 ${
+              compact ? "text-3xl" : "text-5xl"
+            }`}
           >
             {activeTestimonial.metric}
           </motion.div>
@@ -366,43 +407,56 @@ export default function ProofRelayTestimonialsElement({
   return (
     <div
       ref={scrollRef}
-      className="h-full w-full overflow-y-auto bg-[#09090b] text-white scrollbar-none"
+      className="h-full w-full overflow-y-auto bg-[#030303] text-white scrollbar-none antialiased"
     >
       <div className="relative" style={{ height: isCatalog ? "1020px" : "300dvh" }}>
         <section
-          className="sticky top-0 flex min-h-[500px] w-full items-center overflow-hidden bg-[#09090b]"
+          className="sticky top-0 flex min-h-[500px] w-full items-center overflow-hidden bg-[#030303]"
           style={{ height: isCatalog ? "500px" : "100dvh" }}
         >
-          <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_78%)]" />
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.035] blur-3xl" />
+          {/* Circular dot grid layout backdrop */}
+          <div className="pointer-events-none absolute inset-0 opacity-[0.25] bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]" />
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.02] blur-3xl" />
 
+          {/* Left panel header */}
           <motion.div
             style={{ opacity: introOpacity, y: introY }}
-            className={`absolute left-5 top-5 z-30 sm:left-8 sm:top-8 ${isCatalog ? "max-w-[180px]" : "max-w-[270px]"}`}
+            className={`absolute left-5 top-5 z-30 sm:left-8 sm:top-8 ${
+              isCatalog ? "max-w-[180px]" : "max-w-[270px]"
+            }`}
           >
             <div className="font-mono text-[8px] uppercase tracking-[0.22em] text-white/30">
               Testimonials / 01
             </div>
             <h1
-              className={`mt-2 font-serif font-light leading-[0.95] tracking-[-0.05em] ${isCatalog ? "text-xl" : "text-3xl sm:text-4xl"}`}
+              className={`mt-2 font-serif font-light leading-[0.98] tracking-[-0.05em] ${
+                isCatalog ? "text-xl" : "text-3xl sm:text-4xl"
+              }`}
             >
               Proof that stays close to the work.
             </h1>
             <p
-              className={`mt-3 leading-relaxed text-white/40 ${isCatalog ? "text-[9px]" : "text-xs"}`}
+              className={`mt-3 leading-relaxed text-white/40 font-sans ${
+                isCatalog ? "text-[9px]" : "text-xs"
+              }`}
             >
               Real outcomes, kept in context.
             </p>
           </motion.div>
 
+          {/* Middle quote frame and right identity rail */}
           <div
-            className={`relative mx-auto flex w-full max-w-7xl items-center justify-center px-5 sm:px-8 ${isCatalog ? "flex-col" : "grid md:grid-cols-[minmax(130px,0.35fr)_minmax(0,1.5fr)_minmax(180px,0.55fr)] md:gap-8 lg:gap-12"}`}
+            className={`relative mx-auto flex w-full max-w-7xl items-center justify-center px-5 sm:px-8 ${
+              isCatalog
+                ? "flex-col"
+                : "grid md:grid-cols-[minmax(130px,0.35fr)_minmax(0,1.5fr)_minmax(180px,0.55fr)] md:gap-8 lg:gap-12"
+            }`}
           >
             <div className={`${isCatalog ? "hidden" : "hidden md:block"}`}>
-              <div className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/25">
+              <div className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/20">
                 Observed / together
               </div>
-              <div className="mt-3 max-w-[120px] text-xs leading-relaxed text-white/40">
+              <div className="mt-3 max-w-[120px] text-xs leading-relaxed text-white/40 font-sans">
                 The strongest proof is specific enough to feel lived in.
               </div>
             </div>
@@ -417,20 +471,26 @@ export default function ProofRelayTestimonialsElement({
             <IdentityRail activeIndex={activeIndex} compact={isCatalog} />
           </div>
 
+          {/* Outro center header */}
           <motion.div
             style={{ opacity: outroOpacity, y: outroY }}
-            className={`pointer-events-none absolute left-1/2 z-30 -translate-x-1/2 text-center ${isCatalog ? "bottom-11 w-[220px]" : "bottom-16 w-[min(90vw,440px)] sm:bottom-20"}`}
+            className={`pointer-events-none absolute left-1/2 z-30 -translate-x-1/2 text-center ${
+              isCatalog ? "bottom-11 w-[220px]" : "bottom-16 w-[min(90vw,440px)] sm:bottom-20"
+            }`}
           >
-            <div className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/30">
+            <div className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/25">
               What the work becomes
             </div>
             <p
-              className={`mt-2 font-serif font-light leading-tight tracking-[-0.04em] text-white/75 ${isCatalog ? "text-sm" : "text-xl sm:text-3xl"}`}
+              className={`mt-2 font-serif font-light leading-tight tracking-[-0.04em] text-white/70 ${
+                isCatalog ? "text-sm" : "text-xl sm:text-3xl"
+              }`}
             >
               Good work leaves a trace.
             </p>
           </motion.div>
 
+          {/* Footer page indicators */}
           <div className="absolute bottom-5 left-5 right-5 z-40 flex items-center gap-3 sm:bottom-7 sm:left-8 sm:right-8">
             <div className="overflow-hidden h-3.5 flex items-center relative w-5">
               <AnimatePresence mode="popLayout" initial={false}>
