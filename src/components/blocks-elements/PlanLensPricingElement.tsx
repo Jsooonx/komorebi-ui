@@ -42,7 +42,7 @@ const plans: Plan[] = [
 
 function CapabilityField({ plan, active }: { plan: Plan; active: boolean }) {
   return (
-    <div className="relative mt-7 h-20 overflow-hidden border-y border-white/10 py-3">
+    <div className="relative mt-4 h-14 overflow-hidden border-y border-white/10 py-3">
       <div className="absolute inset-x-0 top-1/2 h-px bg-white/10" />
       <motion.div
         animate={{ opacity: active ? 1 : 0.38, scaleX: active ? 1 : 0.72 }}
@@ -103,9 +103,7 @@ export default function PlanLensPricingElement({
           </p>
         </header>
 
-        <motion.div
-          layout="size"
-          transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.68 }}
+        <div
           onPointerLeave={(event) => {
             if (event.pointerType !== "touch") setActiveIndex(1);
           }}
@@ -121,7 +119,7 @@ export default function PlanLensPricingElement({
               <motion.button
                 key={plan.name}
                 type="button"
-                layout="size"
+                layout="position"
                 aria-pressed={active}
                 onPointerEnter={() => setActiveIndex(index)}
                 onFocus={() => setActiveIndex(index)}
@@ -132,7 +130,7 @@ export default function PlanLensPricingElement({
                     : { flexGrow: active ? 1.48 : 0.76, opacity: active ? 1 : 0.62 }
                 }
                 transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.65 }}
-                className="group relative min-h-0 flex-1 overflow-hidden border border-white/10 bg-white/[0.018] p-3 text-left outline-none transition-colors hover:border-white/25 focus-visible:border-white/50 md:min-h-[350px] md:p-5"
+                className="group relative h-[160px] flex-1 overflow-hidden border border-white/10 bg-white/[0.018] p-3 text-left outline-none transition-colors hover:border-white/25 focus-visible:border-white/50 md:h-[350px] md:p-4"
               >
                 {active && (
                   <motion.div
@@ -157,7 +155,7 @@ export default function PlanLensPricingElement({
                     />
                   </div>
 
-                  <div className="mt-4 flex items-baseline gap-1 md:mt-8">
+                  <div className="mt-4 flex items-baseline gap-1 md:mt-5">
                     <span className="text-3xl font-semibold tracking-[-0.06em]">{plan.price}</span>
                     <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-white/35">
                       per month
@@ -168,7 +166,6 @@ export default function PlanLensPricingElement({
                     {active && (
                       <motion.div
                         key={`${plan.name}-detail`}
-                        layout="size"
                         initial={
                           reducedMotion ? { opacity: 0 } : { opacity: 0, y: 9, filter: "blur(3px)" }
                         }
@@ -180,10 +177,10 @@ export default function PlanLensPricingElement({
                         }
                         transition={{ type: "spring", stiffness: 300, damping: 29, mass: 0.55 }}
                       >
-                        <p className="mt-3 max-w-sm text-xs leading-relaxed text-white/64 md:mt-5 md:text-sm">
+                        <p className="mt-3 max-w-sm text-xs leading-relaxed text-white/64">
                           {plan.summary}
                         </p>
-                        <ul className="mt-5 hidden space-y-2 md:block">
+                        <ul className="mt-3 hidden space-y-1.5 md:block">
                           {plan.capabilities.map((capability) => (
                             <li
                               key={capability}
@@ -201,7 +198,7 @@ export default function PlanLensPricingElement({
                   <div className="mt-auto hidden md:block">
                     <CapabilityField plan={plan} active={active} />
                     <span
-                      className={`mt-4 inline-flex items-center gap-2 text-xs font-medium transition-colors ${active ? "text-white" : "text-white/38"}`}
+                      className={`mt-3 inline-flex items-center gap-2 text-xs font-medium transition-colors ${active ? "text-white" : "text-white/38"}`}
                     >
                       Start with {plan.name}
                       <ArrowUpRight className="h-3.5 w-3.5" />
@@ -211,7 +208,7 @@ export default function PlanLensPricingElement({
               </motion.button>
             );
           })}
-        </motion.div>
+        </div>
 
         <footer className="mt-5 flex justify-between border-t border-white/10 pt-4 font-mono text-[8px] uppercase tracking-[0.16em] text-white/28">
           <span>Transparent terms, clear next move</span>
