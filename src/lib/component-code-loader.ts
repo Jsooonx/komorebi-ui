@@ -114,6 +114,9 @@ export async function loadComponentCode(id: string) {
     case "version-fold-showcase":
       return (await import("../components/blocks-elements/VersionFoldShowcaseElement.tsx?raw"))
         .default;
+    case "dependency-weave-showcase":
+      return (await import("../components/blocks-elements/DependencyWeaveShowcaseElement.tsx?raw"))
+        .default;
     case "voice-index-testimonials":
       return (await import("../components/blocks-elements/VoiceIndexTestimonialsElement.tsx?raw"))
         .default;

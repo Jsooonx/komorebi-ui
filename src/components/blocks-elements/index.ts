@@ -22,6 +22,7 @@ import SignalWorkflowShowcaseBlock from "./SignalWorkflowShowcaseBlock";
 import FocusTourShowcaseBlock from "./FocusTourShowcaseBlock";
 import OrbitWorkspaceShowcaseBlock from "./OrbitWorkspaceShowcaseBlock";
 import VersionFoldShowcaseBlock from "./VersionFoldShowcaseBlock";
+import DependencyWeaveShowcaseBlock from "./DependencyWeaveShowcaseBlock";
 import VoiceIndexTestimonialsBlock from "./VoiceIndexTestimonialsBlock";
 import ProofLedgerTestimonialsBlock from "./ProofLedgerTestimonialsBlock";
 import CommunityMosaicTestimonialsBlock from "./CommunityMosaicTestimonialsBlock";
@@ -56,6 +57,7 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "focus-tour-showcase": FocusTourShowcaseBlock,
   "orbit-workspace-showcase": OrbitWorkspaceShowcaseBlock,
   "version-fold-showcase": VersionFoldShowcaseBlock,
+  "dependency-weave-showcase": DependencyWeaveShowcaseBlock,
   "voice-index-testimonials": VoiceIndexTestimonialsBlock,
   "proof-ledger-testimonials": ProofLedgerTestimonialsBlock,
   "community-mosaic-testimonials": CommunityMosaicTestimonialsBlock,

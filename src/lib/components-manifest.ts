@@ -449,6 +449,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     viewportHeightClass: "h-[500px]",
   },
   {
+    id: "dependency-weave-showcase",
+    name: "Dependency Weave Showcase",
+    category: "Product Showcase",
+    description:
+      "A click-driven dependency map where an active project reveals the work it is blocked by and the next move it unlocks.",
+    dependencies: ["framer-motion", "lucide-react"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
+  {
     id: "voice-index-testimonials",
     name: "Voice Index Testimonials",
     category: "Testimonials & Social Proof",

@@ -41,6 +41,7 @@ import SignalWorkflowShowcaseCard from "../components/blocks-preview-elements/Si
 import FocusTourShowcaseCard from "../components/blocks-preview-elements/FocusTourShowcaseCard";
 import OrbitWorkspaceShowcaseCard from "../components/blocks-preview-elements/OrbitWorkspaceShowcaseCard";
 import VersionFoldShowcaseCard from "../components/blocks-preview-elements/VersionFoldShowcaseCard";
+import DependencyWeaveShowcaseCard from "../components/blocks-preview-elements/DependencyWeaveShowcaseCard";
 import VoiceIndexTestimonialsCard from "../components/blocks-preview-elements/VoiceIndexTestimonialsCard";
 import ProofLedgerTestimonialsCard from "../components/blocks-preview-elements/ProofLedgerTestimonialsCard";
 import CommunityMosaicTestimonialsCard from "../components/blocks-preview-elements/CommunityMosaicTestimonialsCard";
@@ -98,6 +99,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "focus-tour-showcase": FocusTourShowcaseCard,
   "orbit-workspace-showcase": OrbitWorkspaceShowcaseCard,
   "version-fold-showcase": VersionFoldShowcaseCard,
+  "dependency-weave-showcase": DependencyWeaveShowcaseCard,
   "voice-index-testimonials": VoiceIndexTestimonialsCard,
   "proof-ledger-testimonials": ProofLedgerTestimonialsCard,
   "community-mosaic-testimonials": CommunityMosaicTestimonialsCard,
