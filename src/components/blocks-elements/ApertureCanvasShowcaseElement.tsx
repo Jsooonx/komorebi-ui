@@ -21,7 +21,7 @@ const phases = [
   {
     label: "Arrange",
     title: "Let the pattern find its own frame.",
-    copy: "The canvas groups what belongs together without flattening the context behind it.",
+    copy: "The canvas groups related context into one clear view.",
   },
   {
     label: "Commit",
