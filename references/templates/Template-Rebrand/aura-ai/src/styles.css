@@ -397,3 +397,31 @@ body:not(.is-ready) .scroll-down { animation-play-state: paused !important; }
   .resolution-relay__path { display:none; }
   .resolution-relay__outcome { grid-column:2; }
 }
+
+/* ============ SEAMLESS HANDOFF ============ */
+.seamless-handoff { position:relative; overflow:hidden; padding:clamp(96px,12vw,170px) var(--page-pad); color:#1b2a1c; background:#f4eedc; }
+.seamless-handoff::before { position:absolute; inset:0; background:radial-gradient(circle at 80% 12%, rgba(252,220,142,.7), transparent 25%), radial-gradient(circle at 16% 82%, rgba(124,186,145,.21), transparent 28%); content:""; pointer-events:none; }
+.seamless-handoff__header, .seamless-handoff__bottom, .seamless-handoff__scene { position:relative; z-index:1; max-width:1450px; margin-right:auto; margin-left:auto; }
+.seamless-handoff__header { display:grid; grid-template-columns:minmax(190px,.45fr) minmax(420px,1.2fr); gap:clamp(28px,5vw,90px); align-items:start; }
+.seamless-handoff__header p { padding-top:12px; color:rgba(36,53,34,.58); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
+.seamless-handoff__header h2 { max-width:760px; font-size:clamp(46px,5.4vw,88px); font-weight:400; letter-spacing:-.06em; line-height:.93; }
+.seamless-handoff__scene { margin-top:clamp(62px,7vw,104px); overflow:hidden; border:1px solid rgba(36,61,37,.24); background:#d9dfc5; box-shadow:0 30px 80px rgba(70,66,29,.16); }
+.seamless-handoff__scene img { width:100%; min-height:390px; max-height:610px; object-fit:cover; object-position:center; }
+.seamless-handoff__scene-wash { position:absolute; inset:0; background:linear-gradient(90deg, rgba(21,41,27,.22), transparent 43%, rgba(21,41,27,.17)); pointer-events:none; }
+.seamless-handoff__origin, .seamless-handoff__recipient, .seamless-handoff__bridge { position:absolute; color:#fff; }
+.seamless-handoff__origin, .seamless-handoff__recipient { bottom:clamp(25px,3vw,46px); display:flex; flex-direction:column; gap:7px; padding:15px 17px; border:1px solid rgba(255,255,255,.45); background:rgba(25,48,32,.19); backdrop-filter:blur(13px); }
+.seamless-handoff__origin { left:clamp(24px,3vw,46px); }
+.seamless-handoff__recipient { right:clamp(24px,3vw,46px); text-align:right; }
+.seamless-handoff__origin span, .seamless-handoff__recipient span, .seamless-handoff__bridge { font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
+.seamless-handoff__origin strong, .seamless-handoff__recipient strong { font-size:16px; font-weight:400; }
+.seamless-handoff__bridge { top:50%; left:50%; padding:10px 14px; border:1px solid rgba(255,255,255,.52); background:rgba(250,247,228,.19); transform:translate(-50%,-50%); white-space:nowrap; backdrop-filter:blur(10px); }
+.seamless-handoff__bottom { display:grid; grid-template-columns:minmax(280px,.9fr) minmax(350px,.7fr); gap:clamp(48px,12vw,190px); margin-top:clamp(38px,5vw,68px); align-items:start; }
+.seamless-handoff__copy { max-width:560px; color:rgba(29,46,28,.75); font-size:clamp(19px,1.65vw,26px); letter-spacing:-.028em; line-height:1.27; }
+.seamless-handoff__record { margin:0; padding:0; border-top:1px solid rgba(36,61,37,.24); list-style:none; }
+.seamless-handoff__record li { display:flex; gap:18px; padding:15px 0; border-bottom:1px solid rgba(36,61,37,.18); color:rgba(28,46,28,.76); font-size:14px; }
+.seamless-handoff__record span { width:26px; color:rgba(29,90,65,.68); font-size:11px; font-weight:600; letter-spacing:.08em; }
+@media (max-width: 900px) {
+  .seamless-handoff__header, .seamless-handoff__bottom { grid-template-columns:1fr; gap:25px; }
+  .seamless-handoff__header p { padding-top:0; }
+  .seamless-handoff__scene img { min-height:320px; }
+}

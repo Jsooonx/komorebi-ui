@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import ResolutionRelay from "../components/ResolutionRelay";
+import SeamlessHandoff from "../components/SeamlessHandoff";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -376,6 +377,7 @@ function Index() {
       </div>
     </div>
       <ResolutionRelay />
+      <SeamlessHandoff />
     </div>
   );
 }
