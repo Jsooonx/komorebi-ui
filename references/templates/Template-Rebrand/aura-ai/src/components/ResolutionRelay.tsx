@@ -106,9 +106,16 @@ export default function ResolutionRelay() {
         </div>
 
         <div className="resolution-relay__outcome">
-          <span>Outcome</span>
-          <strong>Resolved with continuity</strong>
-          <small>Or handed to the right person with the full record intact.</small>
+          <img
+            className="resolution-relay__outcome-art"
+            src="/aura-resolution-relay.png"
+            alt="An abstract Aura signal resolving into a luminous loop"
+          />
+          <div className="resolution-relay__outcome-copy">
+            <span>Outcome</span>
+            <strong>Resolved with continuity</strong>
+            <small>Or handed to the right person with the full record intact.</small>
+          </div>
         </div>
       </div>
     </section>
