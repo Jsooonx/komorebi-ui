@@ -89,19 +89,19 @@ function DecisionArtifact({ phase, compact = false }: { phase: number; compact?:
   ];
   return (
     <div
-      className={`relative overflow-hidden border border-[#18191d]/25 bg-[#faf8f2] text-[#18191d] shadow-[0_26px_70px_rgba(27,29,33,.2)] ${compact ? "h-[190px] p-3" : "h-[300px] p-5 sm:p-7"}`}
+      className={`relative overflow-hidden border border-[#18191d]/25 bg-[#faf8f2] text-[#18191d] shadow-[0_26px_70px_rgba(27,29,33,.2)] ${compact ? "h-[214px] p-3" : "h-[326px] p-5 sm:p-7"}`}
     >
       <div className="flex items-center justify-between border-b border-[#18191d]/12 pb-3 font-mono text-[7px] uppercase tracking-[.18em] text-[#18191d]/50">
         <span>Decision brief</span>
         <span>0{phase + 1} / 03</span>
       </div>
-      <div className={`relative ${compact ? "mt-4 h-[132px]" : "mt-6 h-[198px]"}`}>
+      <div className={`relative ${compact ? "mt-4 h-[150px]" : "mt-6 h-[218px]"}`}>
         <div className="absolute inset-0">
           <p className={`${compact ? "text-[9px]" : "text-xs"} text-[#18191d]/48`}>
             Northline / release review
           </p>
           <h2
-            className={`relative ${compact ? "mt-1 h-[50px] text-lg" : "mt-2 h-[112px] text-3xl sm:text-4xl"} max-w-sm font-serif leading-[.92] tracking-[-.06em]`}
+            className={`relative ${compact ? "mt-1 h-[66px] text-lg" : "mt-2 h-[128px] text-3xl sm:text-4xl"} max-w-sm font-serif leading-[1] tracking-[-.06em]`}
           >
             <AnimatePresence initial={false} mode="sync">
               <motion.span
