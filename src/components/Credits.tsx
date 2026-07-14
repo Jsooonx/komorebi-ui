@@ -16,31 +16,23 @@ const INSPIRATIONS: LogoItem[] = [
 ];
 
 const STACK: LogoItem[] = [
-  { name: "Tailwind CSS", src: "/logos/stripe.com-logo.webp", url: "https://tailwindcss.com" },
+  { name: "React.js", src: "/logos/react.svg", url: "https://react.dev" },
+  { name: "Tailwind CSS", src: "/logos/tailwindcss.svg", url: "https://tailwindcss.com" },
   { name: "Vercel", src: "/logos/vercel.com-logo.webp", url: "https://vercel.com" },
   { name: "Supabase", src: "/logos/supabase.com-logo.webp", url: "https://supabase.com" },
   { name: "Claude AI", src: "/logos/claude.com-logo.webp", url: "https://claude.ai" },
-];
-
-const LEGENDS = [
-  { name: "Emil Kowalski", url: "https://emilkowal.ski" },
-  { name: "Benji Taylor", url: "https://x.com/benjitaylor" },
-  { name: "Ben Holmes", url: "https://x.com/bholmesdev" },
-  { name: "Kunihiko Nanji", url: "https://x.com/nanji" },
-  { name: "Jakub", url: "https://x.com/jakub" },
-  { name: "Rauno Freiberg", url: "https://rauno.me" },
 ];
 
 export default function Credits() {
   return (
     <section
       id="credits"
-      className="relative z-10 bg-[#090909] border-t border-white/5 py-24 sm:py-32 px-6 md:px-12 flex flex-col items-center select-none"
+      className="relative z-10 bg-[#090909] border-t border-white/5 py-24 sm:py-32 px-6 md:px-12 flex flex-col items-center select-none animate-fade-in"
     >
       {/* ── HEADER ── */}
-      <div className="max-w-4xl mx-auto text-center flex flex-col items-center mb-16 w-full">
+      <div className="max-w-4xl mx-auto text-center flex flex-col items-center mb-12 w-full">
         <SplitText
-          text="Inspired by the finest"
+          text="Shaped by the open ecosystem"
           className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white mb-3 leading-tight inline-block"
           tag="h2"
           splitType="words"
@@ -53,7 +45,7 @@ export default function Credits() {
           rootMargin="-120px"
         />
         <SplitText
-          text="in the industry"
+          text="we respect & build upon"
           className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white/50 mb-6 leading-tight inline-block italic"
           tag="h2"
           splitType="words"
@@ -69,7 +61,7 @@ export default function Credits() {
 
       <div className="w-full max-w-[900px] flex flex-col items-center">
         {/* ── SECTION: RESOURCES & INSPIRATION ── */}
-        <div className="relative w-full flex items-center justify-center my-10">
+        <div className="relative w-full flex items-center justify-center my-8">
           <div className="absolute inset-0 flex items-center" aria-hidden="true">
             <div className="w-full border-t border-dashed border-white/10" />
           </div>
@@ -85,7 +77,7 @@ export default function Credits() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 w-full px-6"
+          className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 w-full px-6 py-4"
         >
           {INSPIRATIONS.map((item) => (
             <a
@@ -98,46 +90,14 @@ export default function Credits() {
               <img
                 src={item.src}
                 alt={item.name}
-                className="h-6 sm:h-7 w-auto object-contain brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                className="h-6 sm:h-7 w-auto object-contain transition-all duration-300 hover:scale-105 opacity-90 hover:opacity-100"
               />
             </a>
           ))}
         </motion.div>
 
-        {/* ── SECTION: INSPIRED LEGENDS ── */}
-        <div className="relative w-full flex items-center justify-center my-14">
-          <div className="absolute inset-0 flex items-center" aria-hidden="true">
-            <div className="w-full border-t border-dashed border-white/10" />
-          </div>
-          <div className="relative bg-[#090909] px-6">
-            <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-white/40">
-              Inspired & Legends
-            </span>
-          </div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-          className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 max-w-[800px] text-center"
-        >
-          {LEGENDS.map((legend) => (
-            <a
-              key={legend.name}
-              href={legend.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/35 hover:text-white/90 font-heading text-[15px] sm:text-base font-medium transition-colors duration-300"
-            >
-              {legend.name}
-            </a>
-          ))}
-        </motion.div>
-
         {/* ── SECTION: TOOLS & STACK ── */}
-        <div className="relative w-full flex items-center justify-center my-14">
+        <div className="relative w-full flex items-center justify-center my-12">
           <div className="absolute inset-0 flex items-center" aria-hidden="true">
             <div className="w-full border-t border-dashed border-white/10" />
           </div>
@@ -152,32 +112,10 @@ export default function Credits() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 w-full px-6"
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+          className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 w-full px-6 py-4"
         >
-          <a
-            href="https://tailwindcss.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity duration-300"
-          >
-            <span className="text-white font-mono text-[13px] tracking-widest font-semibold group-hover:scale-102 transition-transform duration-300">
-              tailwindcss
-            </span>
-          </a>
-
-          <a
-            href="https://react.dev"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity duration-300"
-          >
-            <span className="text-white font-mono text-[13px] tracking-widest font-semibold group-hover:scale-102 transition-transform duration-300">
-              React.js
-            </span>
-          </a>
-
-          {STACK.slice(1).map((item) => (
+          {STACK.map((item) => (
             <a
               key={item.name}
               href={item.url}
@@ -188,14 +126,14 @@ export default function Credits() {
               <img
                 src={item.src}
                 alt={item.name}
-                className="h-5 sm:h-5.5 w-auto object-contain brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                className="h-5.5 sm:h-6.5 w-auto object-contain transition-all duration-300 hover:scale-105 opacity-90 hover:opacity-100"
               />
             </a>
           ))}
         </motion.div>
 
         {/* ── FOOTER NOTE ── */}
-        <div className="w-full border-t border-dashed border-white/10 my-12" />
+        <div className="w-full border-t border-dashed border-white/10 my-10" />
 
         <div className="text-center font-heading text-xs text-white/30">
           Komorebi is made possible thanks to all mentioned above{" "}
