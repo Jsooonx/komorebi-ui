@@ -184,14 +184,6 @@ function TemplateCard({ item }: { item: TemplateItem }) {
           <span className="w-2 h-2 rounded-full bg-white/10" />
         </div>
 
-        {/* Live Preview Badge overlay */}
-        {item.id === "aura" && (
-          <div className="absolute bottom-3 left-4 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] font-mono font-semibold bg-sun-gold/15 border border-sun-gold/30 text-sun-gold shadow-sm backdrop-blur">
-            <span className="w-1.5 h-1.5 rounded-full bg-sun-gold animate-pulse" />
-            Live Preview
-          </div>
-        )}
-
         {/* CTA Button Badge inside Viewport */}
         <div className="absolute top-3 right-4 z-20">
           <button

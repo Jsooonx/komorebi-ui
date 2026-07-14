@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { SunlightLeafLogo } from "@/components/DynamicIsland";
 
 // Resolve Aura URL from environment variable, fallback to localhost standard dev port
@@ -44,13 +44,9 @@ function AuraTemplatePage() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="flex flex-col items-center gap-4"
+              className="flex flex-col items-center justify-center"
             >
               <SunlightLeafLogo className="w-12 h-12" />
-              <div className="flex items-center gap-2 text-sun-gold text-xs font-mono font-medium tracking-wider uppercase">
-                <Sparkles className="w-3.5 h-3.5 animate-pulse text-sun-gold" />
-                Loading Aura Demo...
-              </div>
             </motion.div>
           </motion.div>
         )}
