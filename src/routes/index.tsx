@@ -39,6 +39,18 @@ const itemVariants = {
 
 function Index() {
   useLayoutEffect(() => {
+    const scrollTarget = sessionStorage.getItem("komorebi_scroll_target");
+    if (scrollTarget) {
+      sessionStorage.removeItem("komorebi_scroll_target");
+      const element = document.getElementById(scrollTarget);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+        return;
+      }
+    }
+
     const savedY = sessionStorage.getItem("komorebi_home_scroll_y");
     if (savedY) {
       const scrollY = Number.parseInt(savedY, 10);

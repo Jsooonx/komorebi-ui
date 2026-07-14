@@ -136,46 +136,46 @@ export default function AuraHeroPreview() {
                 className="logo__circle"
                 cx="14.3"
                 cy="14.9"
-                r="7"
-                fill="none"
-                stroke="#fff"
-                strokeWidth="3"
+                r="4.5"
+                fill="#fff"
               />
               <path
                 className="logo__arc-1a"
                 pathLength="100"
                 stroke="#fff"
-                strokeWidth="3"
+                strokeWidth="2.2"
                 strokeLinecap="round"
                 fill="none"
-                d="M28.4955 14.6513C28.4346 12.2923 27.7563 9.99047 26.5284 7.9753C25.3005 5.96012 23.5657 4.30202 21.4972 3.1663C19.4287 2.03059 17.0985 1.45693 14.7392 1.50252C12.3798 1.54811 10.0736 2.21137 8.05047 3.42615"
+                d="M5.3 14.9C5.3 9.9 23.3 9.9 23.3 14.9"
               />
               <path
                 className="logo__arc-1b"
                 pathLength="100"
                 stroke="#fff"
-                strokeWidth="3"
+                strokeWidth="2.2"
                 strokeLinecap="round"
                 fill="none"
-                d="M28.4955 14.6513C28.5564 17.0104 27.998 19.3442 26.8757 21.4201C25.7535 23.496 24.1067 25.2414 22.0996 26.4824C20.0924 27.7234 17.795 28.4166 15.4365 28.4929C13.0779 28.5692 10.7405 28.026 8.65735 26.9173"
+                d="M23.3 14.9C23.3 19.9 5.3 19.9 5.3 14.9"
               />
               <path
                 className="logo__arc-2a"
                 pathLength="100"
                 stroke="#fff"
-                strokeWidth="3"
+                strokeWidth="2.2"
                 strokeLinecap="round"
+                strokeDasharray="2 2"
                 fill="none"
-                d="M37.4997 14.9144C37.4824 12.1783 36.634 9.51197 35.0671 7.26888C33.5001 5.02578 31.2885 3.31178 28.7254 2.35403"
+                d="M14.3 5.9C19.3 5.9 19.3 23.9 14.3 23.9"
               />
               <path
                 className="logo__arc-2b"
                 pathLength="100"
                 stroke="#fff"
-                strokeWidth="3"
+                strokeWidth="2.2"
                 strokeLinecap="round"
+                strokeDasharray="2 2"
                 fill="none"
-                d="M37.4997 14.9144C37.5171 17.6506 36.7026 20.3274 35.1642 22.5902C33.6258 24.853 31.4361 26.5949 28.8853 27.5851"
+                d="M14.3 23.9C9.3 23.9 9.3 5.9 14.3 5.9"
               />
               <g className="logo__text-group">
                 <text

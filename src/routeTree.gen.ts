@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComponentsIndexRouteImport } from './routes/components.index'
 import { Route as BlocksIndexRouteImport } from './routes/blocks.index'
+import { Route as TemplatesAuraRouteImport } from './routes/templates.aura'
 import { Route as ComponentsIdRouteImport } from './routes/components.$id'
 import { Route as BlocksCategoryRouteImport } from './routes/blocks.$category'
 import { Route as BlocksCategoryBlockRouteImport } from './routes/blocks.$category.$block'
@@ -29,6 +30,11 @@ const ComponentsIndexRoute = ComponentsIndexRouteImport.update({
 const BlocksIndexRoute = BlocksIndexRouteImport.update({
   id: '/blocks/',
   path: '/blocks/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TemplatesAuraRoute = TemplatesAuraRouteImport.update({
+  id: '/templates/aura',
+  path: '/templates/aura',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsIdRoute = ComponentsIdRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blocks/$category': typeof BlocksCategoryRouteWithChildren
   '/components/$id': typeof ComponentsIdRoute
+  '/templates/aura': typeof TemplatesAuraRoute
   '/blocks/': typeof BlocksIndexRoute
   '/components/': typeof ComponentsIndexRoute
   '/blocks/$category/$block': typeof BlocksCategoryBlockRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blocks/$category': typeof BlocksCategoryRouteWithChildren
   '/components/$id': typeof ComponentsIdRoute
+  '/templates/aura': typeof TemplatesAuraRoute
   '/blocks': typeof BlocksIndexRoute
   '/components': typeof ComponentsIndexRoute
   '/blocks/$category/$block': typeof BlocksCategoryBlockRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blocks/$category': typeof BlocksCategoryRouteWithChildren
   '/components/$id': typeof ComponentsIdRoute
+  '/templates/aura': typeof TemplatesAuraRoute
   '/blocks/': typeof BlocksIndexRoute
   '/components/': typeof ComponentsIndexRoute
   '/blocks/$category/$block': typeof BlocksCategoryBlockRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blocks/$category'
     | '/components/$id'
+    | '/templates/aura'
     | '/blocks/'
     | '/components/'
     | '/blocks/$category/$block'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blocks/$category'
     | '/components/$id'
+    | '/templates/aura'
     | '/blocks'
     | '/components'
     | '/blocks/$category/$block'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blocks/$category'
     | '/components/$id'
+    | '/templates/aura'
     | '/blocks/'
     | '/components/'
     | '/blocks/$category/$block'
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlocksCategoryRoute: typeof BlocksCategoryRouteWithChildren
   ComponentsIdRoute: typeof ComponentsIdRoute
+  TemplatesAuraRoute: typeof TemplatesAuraRoute
   BlocksIndexRoute: typeof BlocksIndexRoute
   ComponentsIndexRoute: typeof ComponentsIndexRoute
 }
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/blocks'
       fullPath: '/blocks/'
       preLoaderRoute: typeof BlocksIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/templates/aura': {
+      id: '/templates/aura'
+      path: '/templates/aura'
+      fullPath: '/templates/aura'
+      preLoaderRoute: typeof TemplatesAuraRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/$id': {
@@ -170,6 +190,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlocksCategoryRoute: BlocksCategoryRouteWithChildren,
   ComponentsIdRoute: ComponentsIdRoute,
+  TemplatesAuraRoute: TemplatesAuraRoute,
   BlocksIndexRoute: BlocksIndexRoute,
   ComponentsIndexRoute: ComponentsIndexRoute,
 }

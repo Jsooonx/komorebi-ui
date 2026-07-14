@@ -51,3 +51,8 @@ obsidian_memory_vault/
 scripts/sync_memory.py
 scripts/sync_codex_memory.py
 scripts/sync_codex.bat
+
+# Environment variables
+.env
+.env.*
+!.env.example
