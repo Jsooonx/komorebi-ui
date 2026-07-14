@@ -197,7 +197,7 @@ export default function ApertureCanvasShowcaseElement({
     >
       <div className="relative" style={{ height: isCatalog ? "1250px" : "320dvh" }}>
         <section
-          className={`${isCatalog ? "sticky top-0 h-[500px]" : "fixed inset-0 h-dvh"} min-h-[500px] w-full overflow-hidden bg-[#e7e2d8]`}
+          className={`${isCatalog ? "h-[500px]" : "h-dvh"} sticky top-0 min-h-[500px] w-full overflow-hidden bg-[#e7e2d8]`}
         >
           <div className="pointer-events-none absolute inset-0 opacity-55 [background-image:linear-gradient(rgba(24,25,29,.06)_1px,transparent_1px),linear-gradient(90deg,rgba(24,25,29,.06)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_at_center,black_24%,transparent_79%)]" />
           <div
