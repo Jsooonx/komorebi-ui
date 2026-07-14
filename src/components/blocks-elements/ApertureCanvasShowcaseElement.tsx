@@ -101,9 +101,20 @@ function DecisionArtifact({ phase, compact = false }: { phase: number; compact?:
             Northline / release review
           </p>
           <h2
-            className={`${compact ? "mt-1 text-lg" : "mt-2 text-3xl sm:text-4xl"} max-w-sm font-serif leading-[.92] tracking-[-.06em]`}
+            className={`relative ${compact ? "mt-1 h-[50px] text-lg" : "mt-2 h-[112px] text-3xl sm:text-4xl"} max-w-sm font-serif leading-[.92] tracking-[-.06em]`}
           >
-            {headlines[phase]}
+            <AnimatePresence initial={false} mode="sync">
+              <motion.span
+                key={phase}
+                initial={{ opacity: 0, y: 5, clipPath: "inset(100% 0 0 0)" }}
+                animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" }}
+                exit={{ opacity: 0, y: -5, clipPath: "inset(0 0 100% 0)" }}
+                transition={{ type: "spring", stiffness: 260, damping: 30, mass: 0.42 }}
+                className="absolute inset-x-0 top-0 block will-change-transform"
+              >
+                {headlines[phase]}
+              </motion.span>
+            </AnimatePresence>
           </h2>
           <div
             className={`${compact ? "mt-4 gap-2" : "mt-6 gap-3"} grid grid-cols-2 border-t border-[#18191d]/12 pt-3`}
