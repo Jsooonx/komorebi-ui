@@ -143,11 +143,8 @@ export default function VersionFoldShowcaseElement({
             className={`mb-4 flex items-end justify-between border-b border-white/10 ${compact ? "pb-3" : "mb-6 pb-4"}`}
           >
             <div>
-              <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/35">
-                Version fold / 04
-              </div>
               <h1
-                className={`mt-2 font-semibold tracking-[-0.05em] text-white ${compact ? "text-xl" : "text-3xl sm:text-4xl"}`}
+                className={`font-semibold tracking-[-0.05em] text-white ${compact ? "text-xl" : "text-3xl sm:text-4xl"}`}
               >
                 Let the release resolve in place.
               </h1>
