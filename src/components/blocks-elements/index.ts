@@ -30,7 +30,6 @@ import CommitmentWindowPricingBlock from "./CommitmentWindowPricingBlock";
 import FocusedConversionCtaBlock from "./FocusedConversionCtaBlock";
 import StoryFrameCtaBlock from "./StoryFrameCtaBlock";
 import ProofSignalCtaBlock from "./ProofSignalCtaBlock";
-import ApertureCanvasShowcaseBlock from "./ApertureCanvasShowcaseBlock";
 
 const BLOCK_PAGES: Record<string, ComponentType> = {
   "mega-menu-navbar-1": MegaMenuNavbar1Block,
@@ -64,7 +63,6 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "focused-conversion-cta": FocusedConversionCtaBlock,
   "story-frame-cta": StoryFrameCtaBlock,
   "proof-signal-cta": ProofSignalCtaBlock,
-  "aperture-canvas-showcase": ApertureCanvasShowcaseBlock,
 };
 
 export function getBlockPage(id: string) {
