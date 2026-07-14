@@ -4,7 +4,6 @@ import {
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
-  useSpring,
   useTransform,
 } from "framer-motion";
 import { Image } from "lucide-react";
@@ -148,36 +147,35 @@ export default function ApertureCanvasShowcaseElement({
   const [phase, setPhase] = useState(0);
   const isCatalog = previewMode === "catalog";
   const { scrollYProgress } = useScroll({ container: scrollRef });
-  const progress = useSpring(scrollYProgress, { stiffness: 110, damping: 28, mass: 0.35 });
   const movement = reducedMotion ? 0 : 1;
 
-  useMotionValueEvent(progress, "change", (value) => {
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
     const next = value < 0.35 ? 0 : value < 0.72 ? 1 : 2;
     setPhase((current) => (current === next ? current : next));
   });
 
   const noteX = useTransform(
-    progress,
+    scrollYProgress,
     [0, 0.48, 1],
     [-118 * movement, -36 * movement, -18 * movement],
   );
   const noteY = useTransform(
-    progress,
+    scrollYProgress,
     [0, 0.48, 1],
     [-88 * movement, -10 * movement, 22 * movement],
   );
   const sourceX = useTransform(
-    progress,
+    scrollYProgress,
     [0, 0.48, 1],
     [128 * movement, 42 * movement, 16 * movement],
   );
   const sourceY = useTransform(
-    progress,
+    scrollYProgress,
     [0, 0.48, 1],
     [-64 * movement, -12 * movement, 28 * movement],
   );
   const metricX = useTransform(
-    progress,
+    scrollYProgress,
     [0, 0.48, 1],
     [114 * movement, 26 * movement, 32 * movement],
   );
@@ -186,7 +184,7 @@ export default function ApertureCanvasShowcaseElement({
     [0, 0.48, 1],
     [104 * movement, 42 * movement, 124 * movement],
   );
-  const lineWidth = useTransform(progress, [0, 1], ["0%", "100%"]);
+  const lineWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <div
