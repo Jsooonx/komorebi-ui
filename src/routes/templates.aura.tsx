@@ -7,12 +7,12 @@ import { SunlightLeafLogo } from "@/components/DynamicIsland";
 // Resolve Aura URL from environment variable, checking both server-side process.env and client-side import.meta.env
 const getAuraUrl = () => {
   if (typeof window !== "undefined") {
-    return import.meta.env.VITE_AURA_URL || "http://localhost:3000";
+    return import.meta.env.VITE_AURA_URL || "https://aura-ai-komorebi.vercel.app/";
   }
   return (
     (typeof process !== "undefined" ? process.env.VITE_AURA_URL : undefined) ||
     import.meta.env.VITE_AURA_URL ||
-    "http://localhost:3000"
+    "https://aura-ai-komorebi.vercel.app/"
   );
 };
 
