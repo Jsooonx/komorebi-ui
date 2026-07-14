@@ -130,7 +130,6 @@ function DecisionArtifact({
   compact?: boolean;
 }) {
   return (
-  return (
     <div
       className={`relative overflow-hidden border border-[#18191d]/25 bg-[#faf8f2] text-[#18191d] shadow-[0_26px_70px_rgba(27,29,33,.2)] ${compact ? "h-[214px] p-3" : "h-[326px] p-5 sm:p-7"}`}
     >
