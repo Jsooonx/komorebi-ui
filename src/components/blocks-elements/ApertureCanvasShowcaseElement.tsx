@@ -84,10 +84,8 @@ function SourceFragment({ compact = false }: { compact?: boolean }) {
 function DecisionArtifact({ phase, compact = false }: { phase: number; compact?: boolean }) {
   const settled = phase === 2;
   return (
-    <motion.div
-      layout
-      transition={{ type: "spring", stiffness: 210, damping: 27, mass: 0.75 }}
-      className={`relative border border-[#18191d]/25 bg-[#faf8f2] text-[#18191d] shadow-[0_26px_70px_rgba(27,29,33,.2)] ${compact ? "p-3" : "p-5 sm:p-7"}`}
+    <div
+      className={`relative overflow-hidden border border-[#18191d]/25 bg-[#faf8f2] text-[#18191d] shadow-[0_26px_70px_rgba(27,29,33,.2)] ${compact ? "h-[190px] p-3" : "h-[300px] p-5 sm:p-7"}`}
     >
       <div className="flex items-center justify-between border-b border-[#18191d]/12 pb-3 font-mono text-[7px] uppercase tracking-[.18em] text-[#18191d]/50">
         <span>Decision brief</span>
@@ -132,7 +130,7 @@ function DecisionArtifact({ phase, compact = false }: { phase: number; compact?:
           </div>
         </motion.div>
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 
@@ -198,7 +196,9 @@ export default function ApertureCanvasShowcaseElement({
       className="h-full w-full overflow-y-auto overscroll-contain bg-[#e7e2d8] text-[#18191d] scrollbar-none"
     >
       <div className="relative" style={{ height: isCatalog ? "1250px" : "320dvh" }}>
-        <section className="sticky top-0 h-dvh min-h-[500px] w-full overflow-hidden bg-[#e7e2d8]">
+        <section
+          className={`${isCatalog ? "sticky top-0 h-[500px]" : "fixed inset-0 h-dvh"} min-h-[500px] w-full overflow-hidden bg-[#e7e2d8]`}
+        >
           <div className="pointer-events-none absolute inset-0 opacity-55 [background-image:linear-gradient(rgba(24,25,29,.06)_1px,transparent_1px),linear-gradient(90deg,rgba(24,25,29,.06)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_at_center,black_24%,transparent_79%)]" />
           <div
             className={`relative mx-auto grid h-full w-full max-w-6xl grid-rows-[auto_minmax(0,1fr)_auto] gap-5 px-5 sm:px-8 lg:px-12 ${isCatalog ? "py-6" : "py-8 sm:py-10"}`}
