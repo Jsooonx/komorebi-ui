@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import ShowcaseTerminal from "@/components/ShowcaseTerminal";
 import Highlights from "@/components/Highlights";
 import TemplateShowcase from "@/components/TemplateShowcase";
+import Credits from "@/components/Credits";
 import { clearNavigationOrigin } from "@/lib/navigation-state";
 
 export const Route = createFileRoute("/")({
@@ -95,6 +96,7 @@ function Index() {
 
       <Highlights />
       <TemplateShowcase />
+      <Credits />
 
       <Footer />
     </main>
