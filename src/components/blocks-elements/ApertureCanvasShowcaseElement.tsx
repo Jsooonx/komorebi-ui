@@ -175,12 +175,6 @@ export default function ApertureCanvasShowcaseElement({
     [0, 0.48, 1],
     [104 * movement, 42 * movement, 124 * movement],
   );
-  const artifactScale = useTransform(progress, [0, 0.42, 1], [0.88, 1, 1.04]);
-  const artifactClip = useTransform(
-    progress,
-    [0, 0.35, 1],
-    ["inset(10% 12% 10% 12%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)"],
-  );
   const lineWidth = useTransform(progress, [0, 1], ["0%", "100%"]);
 
   return (
@@ -230,12 +224,9 @@ export default function ApertureCanvasShowcaseElement({
                 <MetricFragment compact={isCatalog} />
               </motion.div>
               <div className="absolute inset-0 z-10 flex items-center justify-center">
-                <motion.div
-                  style={{ scale: artifactScale, clipPath: artifactClip }}
-                  className="w-[min(67vw,530px)] will-change-transform"
-                >
+                <div className="w-[min(67vw,530px)]">
                   <DecisionArtifact phase={phase} compact={isCatalog} />
-                </motion.div>
+                </div>
               </div>
               <motion.div
                 style={{ width: lineWidth }}
