@@ -4,8 +4,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { SunlightLeafLogo } from "@/components/DynamicIsland";
 
-// Resolve Aura URL from environment variable, fallback to localhost standard dev port
-const AURA_URL = import.meta.env.VITE_AURA_URL || "http://localhost:3000";
+// Resolve Aura URL from environment variable, checking both server-side process.env and client-side import.meta.env
+const getAuraUrl = () => {
+  if (typeof window !== "undefined") {
+    return import.meta.env.VITE_AURA_URL || "http://localhost:3000";
+  }
+  return (
+    (typeof process !== "undefined" ? process.env.VITE_AURA_URL : undefined) ||
+    import.meta.env.VITE_AURA_URL ||
+    "http://localhost:3000"
+  );
+};
+
+const AURA_URL = getAuraUrl();
 
 export const Route = createFileRoute("/templates/aura")({
   component: AuraTemplatePage,
