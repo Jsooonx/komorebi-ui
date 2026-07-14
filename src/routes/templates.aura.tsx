@@ -27,6 +27,13 @@ function AuraTemplatePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleBack = () => {
+    const returnToGallery = sessionStorage.getItem("komorebi_aura_return_to_gallery");
+    if (returnToGallery) {
+      sessionStorage.removeItem("komorebi_aura_return_to_gallery");
+      window.history.back();
+      return;
+    }
+
     navigate({ to: "/" });
   };
 

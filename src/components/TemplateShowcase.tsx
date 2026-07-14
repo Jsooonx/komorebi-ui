@@ -242,7 +242,7 @@ function TemplateCard({ item }: { item: TemplateItem }) {
         to="/templates/aura"
         onMouseEnter={handleMouseEnter}
         onClick={() => {
-          sessionStorage.setItem("komorebi_home_scroll_y", String(window.scrollY));
+          sessionStorage.setItem("komorebi_aura_return_to_gallery", "true");
         }}
         className="flex flex-col bg-[#0f0f12] border border-white/5 rounded-lg overflow-hidden hover:border-white/10 transition-all select-none group cursor-pointer"
       >
