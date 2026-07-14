@@ -138,7 +138,7 @@ export default function VersionFoldShowcaseElement({
         style={{ height: isCatalog ? "500px" : "100dvh" }}
       >
         <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:44px_44px]" />
-        <div className={`relative z-10 w-full ${compact ? "max-w-[760px]" : "max-w-5xl"}`}>
+        <div className={`relative z-10 w-full ${compact ? "max-w-[760px]" : "max-w-6xl"}`}>
           <div
             className={`mb-4 flex items-end justify-between border-b border-white/10 ${compact ? "pb-3" : "mb-6 pb-4"}`}
           >
@@ -159,7 +159,7 @@ export default function VersionFoldShowcaseElement({
 
           <LayoutGroup id={`version-fold-${previewMode}`}>
             <div
-              className={`grid items-stretch gap-px overflow-hidden border border-white/15 bg-white/15 ${compact ? "grid-cols-[92px_minmax(0,1fr)]" : "grid-cols-[132px_minmax(0,1fr)] sm:grid-cols-[168px_minmax(0,1fr)]"}`}
+              className={`grid items-stretch gap-px overflow-hidden border border-white/15 bg-white/15 ${compact ? "grid-cols-[92px_minmax(0,1fr)]" : "grid-cols-[148px_minmax(0,1fr)] sm:grid-cols-[188px_minmax(0,1fr)]"}`}
             >
               <div className="bg-[#111113] p-2 sm:p-3">
                 <div className="font-mono text-[8px] uppercase tracking-[0.18em] text-white/30">
@@ -207,7 +207,7 @@ export default function VersionFoldShowcaseElement({
               </div>
 
               <article
-                className={`relative min-w-0 bg-[#f2f0eb] text-[#101010] ${compact ? "min-h-[304px] p-4" : "min-h-[400px] p-5 sm:p-8"}`}
+                className={`relative min-w-0 bg-[#f2f0eb] text-[#101010] ${compact ? "min-h-[304px] p-4" : "min-h-[450px] p-6 sm:p-9"}`}
               >
                 <div className="flex items-center justify-between border-b border-black/10 pb-3">
                   <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-black/45">
@@ -219,7 +219,7 @@ export default function VersionFoldShowcaseElement({
                 </div>
 
                 <div
-                  className={`relative ${compact ? "mt-5 min-h-[136px]" : "mt-8 min-h-[172px]"}`}
+                  className={`relative ${compact ? "mt-5 min-h-[136px]" : "mt-9 min-h-[196px]"}`}
                 >
                   <AnimatePresence initial={false} mode="sync" custom={direction}>
                     <motion.div
