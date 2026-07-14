@@ -8,7 +8,7 @@ interface LogoItem {
 }
 
 const INSPIRATIONS: LogoItem[] = [
-  { name: "Skiper UI", src: "/logos/skiperui.png", url: "https://skiper-ui.vercel.app" },
+  { name: "Skiper UI", src: "/logos/skiperui.png", url: "https://skiper-ui.com/" },
   { name: "Aceternity UI", src: "/logos/aceternity.png", url: "https://ui.aceternity.com" },
   { name: "Tailark", src: "/logos/tailark.png", url: "https://tailark.com" },
   { name: "Shadcn UI", src: "/logos/shadcnui.png", url: "https://ui.shadcn.com" },
@@ -20,7 +20,7 @@ const STACK: LogoItem[] = [
   { name: "Tailwind CSS", src: "/logos/tailwindcss.svg", url: "https://tailwindcss.com" },
   { name: "Vercel", src: "/logos/vercel.com-logo.webp", url: "https://vercel.com" },
   { name: "Supabase", src: "/logos/supabase.com-logo.webp", url: "https://supabase.com" },
-  { name: "Codex", src: "/logos/codex-nobg.png", url: "https://codex.so" },
+  { name: "Codex", src: "/logos/codex-nobg.png", url: "https://chatgpt.com/codex/" },
 ];
 
 export default function Credits() {
