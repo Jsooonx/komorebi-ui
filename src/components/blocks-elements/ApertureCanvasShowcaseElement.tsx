@@ -91,45 +91,48 @@ function DecisionArtifact({ phase, compact = false }: { phase: number; compact?:
         <span>Decision brief</span>
         <span>0{phase + 1} / 03</span>
       </div>
-      <AnimatePresence mode="popLayout" initial={false}>
-        <motion.div
-          key={phase}
-          initial={{ opacity: 0, y: 8, filter: "blur(3px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          exit={{ opacity: 0, y: -7, filter: "blur(2px)" }}
-          transition={{ type: "spring", stiffness: 240, damping: 27, mass: 0.45 }}
-        >
-          <p className={`${compact ? "mt-4 text-[9px]" : "mt-6 text-xs"} text-[#18191d]/48`}>
-            Northline / release review
-          </p>
-          <h2
-            className={`${compact ? "mt-1 text-lg" : "mt-2 text-3xl sm:text-4xl"} max-w-sm font-serif leading-[.92] tracking-[-.06em]`}
+      <div className={`relative ${compact ? "mt-4 h-[132px]" : "mt-6 h-[198px]"}`}>
+        <AnimatePresence initial={false} mode="sync">
+          <motion.div
+            key={phase}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ type: "spring", stiffness: 260, damping: 30, mass: 0.4 }}
+            className="absolute inset-0"
           >
-            {phase === 0 && "Make the handoff visible before it becomes urgent."}
-            {phase === 1 && "Group the right context around one clear call."}
-            {phase === 2 && "Confirm the release brief and let the team move."}
-          </h2>
-          <div
-            className={`${compact ? "mt-4 gap-2" : "mt-6 gap-3"} grid grid-cols-2 border-t border-[#18191d]/12 pt-3`}
-          >
-            <div>
-              <div className="font-mono text-[7px] uppercase tracking-[.15em] text-[#18191d]/40">
-                Owner
+            <p className={`${compact ? "text-[9px]" : "text-xs"} text-[#18191d]/48`}>
+              Northline / release review
+            </p>
+            <h2
+              className={`${compact ? "mt-1 text-lg" : "mt-2 text-3xl sm:text-4xl"} max-w-sm font-serif leading-[.92] tracking-[-.06em]`}
+            >
+              {phase === 0 && "Make the handoff visible before it becomes urgent."}
+              {phase === 1 && "Group the right context around one clear call."}
+              {phase === 2 && "Confirm the release brief and let the team move."}
+            </h2>
+            <div
+              className={`${compact ? "mt-4 gap-2" : "mt-6 gap-3"} grid grid-cols-2 border-t border-[#18191d]/12 pt-3`}
+            >
+              <div>
+                <div className="font-mono text-[7px] uppercase tracking-[.15em] text-[#18191d]/40">
+                  Owner
+                </div>
+                <div className="mt-1 text-[9px] font-medium">Mara Ellison</div>
               </div>
-              <div className="mt-1 text-[9px] font-medium">Mara Ellison</div>
+              <div>
+                <div className="font-mono text-[7px] uppercase tracking-[.15em] text-[#18191d]/40">
+                  State
+                </div>
+                <div className="mt-1 flex items-center gap-1 text-[9px] font-medium">
+                  {settled && <Check className="h-2.5 w-2.5" />}{" "}
+                  {settled ? "Ready to share" : "Taking shape"}
+                </div>
+              </div>
             </div>
-            <div>
-              <div className="font-mono text-[7px] uppercase tracking-[.15em] text-[#18191d]/40">
-                State
-              </div>
-              <div className="mt-1 flex items-center gap-1 text-[9px] font-medium">
-                {settled && <Check className="h-2.5 w-2.5" />}{" "}
-                {settled ? "Ready to share" : "Taking shape"}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
