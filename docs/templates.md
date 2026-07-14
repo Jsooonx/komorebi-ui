@@ -8,7 +8,7 @@ The Template Showcase (located in Page 4) features 8 premium landing page templa
 
 *   **Aura AI Video Mockup:** The Aura B2B AI landing page (`aura`) features a 4MB MP4 video mockup. The video tag is set to `preload="none"` to block the browser from loading video files on the initial load, saving bandwidth and reducing initial CPU layout recalculations.
 *   **Smooth Hover Playhead Reset:** When a developer hovers over the Aura template card, the video starts playing from frame 0 (`videoRef.current.currentTime = 0; videoRef.current.play()`). This is handled via a ref pointer rather than unmounting and remounting react keys, removing black frame flashing.
-*   **Aura next section:** The generic ChatSimulator experiment was removed. The next section should continue Aura's cinematic support-system narrative instead of introducing a dashboard browser mockup or a fake chat interface.
+*   **Aura Resolution Relay:** The section after Aura's hero translates one incoming customer signal through intent, context, and resolution. It uses a native motion-driven relay rather than a browser mockup or a fake chat interface, keeping the template's support-system narrative cinematic and product-specific.
 *   **Coming Soon Placeholders:** 7 of the templates (`jplus`, `shyen`, `synergeus`, `vesper`, `aeon`, `apex`, `kora`) display a stylized "Coming Soon / In Queue" dashboard placeholder overlay, indicating templates scheduled for upcoming releases.
 
 ---

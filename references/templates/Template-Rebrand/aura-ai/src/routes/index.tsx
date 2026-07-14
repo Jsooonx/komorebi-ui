@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
+import ResolutionRelay from "../components/ResolutionRelay";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -374,6 +375,7 @@ function Index() {
         </a>
       </div>
     </div>
+      <ResolutionRelay />
     </div>
   );
 }
