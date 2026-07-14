@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import ChatSimulator from "../components/ChatSimulator";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -375,11 +374,6 @@ function Index() {
         </a>
       </div>
     </div>
-
-      {/* Section 2: Interactive Chat Simulator */}
-      <section id="widget" className="relative z-10 w-full flex flex-col items-center py-24 sm:py-32 px-6 md:px-12 bg-[#08090c] border-t border-white/5">
-        <ChatSimulator />
-      </section>
     </div>
   );
 }
