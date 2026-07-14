@@ -438,6 +438,17 @@ export const BLOCKS_MANIFEST: ComponentManifestItem[] = [
     viewportHeightClass: "h-[500px]",
   },
   {
+    id: "aperture-canvas-showcase",
+    name: "Aperture Canvas Showcase",
+    category: "Product Showcase",
+    description:
+      "An editorial product canvas where scattered source fragments gather into one shareable decision brief.",
+    dependencies: ["framer-motion"],
+    isNew: true,
+    gridClass: "md:col-span-2 md:row-span-2",
+    viewportHeightClass: "h-[500px]",
+  },
+  {
     id: "voice-index-testimonials",
     name: "Voice Index Testimonials",
     category: "Testimonials & Social Proof",

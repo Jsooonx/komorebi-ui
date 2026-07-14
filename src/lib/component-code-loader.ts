@@ -136,6 +136,9 @@ export async function loadComponentCode(id: string) {
       return (await import("../components/blocks-elements/StoryFrameCtaElement.tsx?raw")).default;
     case "proof-signal-cta":
       return (await import("../components/blocks-elements/ProofSignalCtaElement.tsx?raw")).default;
+    case "aperture-canvas-showcase":
+      return (await import("../components/blocks-elements/ApertureCanvasShowcaseElement.tsx?raw"))
+        .default;
     default:
       throw new Error(`No component code loader found for "${id}".`);
   }
