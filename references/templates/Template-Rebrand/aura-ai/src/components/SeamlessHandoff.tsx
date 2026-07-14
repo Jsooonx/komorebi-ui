@@ -7,6 +7,14 @@ const reveal = {
 
 const viewport = { once: true, amount: 0.2 };
 const transition = { duration: 0.78, ease: [0.16, 1, 0.3, 1] as const };
+const recordList = {
+  hidden: {},
+  visible: { transition: { delayChildren: 0.46, staggerChildren: 0.13 } },
+};
+const recordItem = {
+  hidden: { opacity: 0, x: 18, filter: "blur(5px)" },
+  visible: { opacity: 1, x: 0, filter: "blur(0px)", transition },
+};
 
 export default function SeamlessHandoff() {
   return (
@@ -76,12 +84,11 @@ export default function SeamlessHandoff() {
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          variants={reveal}
-          transition={{ ...transition, delay: 0.46 }}
+          variants={recordList}
         >
-          <li><span>01</span> Customer intent</li>
-          <li><span>02</span> Account context</li>
-          <li><span>03</span> Suggested next action</li>
+          <motion.li variants={recordItem}><span>01</span> Customer intent</motion.li>
+          <motion.li variants={recordItem}><span>02</span> Account context</motion.li>
+          <motion.li variants={recordItem}><span>03</span> Suggested next action</motion.li>
         </motion.ul>
       </div>
     </section>
