@@ -185,7 +185,6 @@ export default function ApertureCanvasShowcaseElement({
     [104 * movement, 42 * movement, 124 * movement],
   );
   const artifactScale = useTransform(progress, [0, 0.42, 1], [0.88, 1, 1.04]);
-  const artifactY = useTransform(progress, [0, 1], [14 * movement, -10 * movement]);
   const artifactClip = useTransform(
     progress,
     [0, 0.35, 1],
@@ -196,13 +195,13 @@ export default function ApertureCanvasShowcaseElement({
   return (
     <div
       ref={scrollRef}
-      className="h-full w-full overflow-y-auto bg-[#e7e2d8] text-[#18191d] scrollbar-none"
+      className="h-full w-full overflow-y-auto overscroll-contain bg-[#e7e2d8] text-[#18191d] scrollbar-none"
     >
       <div className="relative" style={{ height: isCatalog ? "1250px" : "320dvh" }}>
-        <section className="sticky top-0 flex min-h-[500px] h-[100dvh] w-full items-center overflow-hidden bg-[#e7e2d8]">
+        <section className="sticky top-0 h-dvh min-h-[500px] w-full overflow-hidden bg-[#e7e2d8]">
           <div className="pointer-events-none absolute inset-0 opacity-55 [background-image:linear-gradient(rgba(24,25,29,.06)_1px,transparent_1px),linear-gradient(90deg,rgba(24,25,29,.06)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_at_center,black_24%,transparent_79%)]" />
           <div
-            className={`relative mx-auto flex h-full w-full max-w-6xl flex-col justify-center px-5 sm:px-8 lg:px-12 ${isCatalog ? "py-6" : "py-12"}`}
+            className={`relative mx-auto grid h-full w-full max-w-6xl grid-rows-[auto_minmax(0,1fr)_auto] gap-5 px-5 sm:px-8 lg:px-12 ${isCatalog ? "py-6" : "py-8 sm:py-10"}`}
           >
             <div className="flex items-end justify-between border-b border-[#18191d]/15 pb-4">
               <div>
@@ -218,7 +217,7 @@ export default function ApertureCanvasShowcaseElement({
               </span>
             </div>
 
-            <div className="relative mx-auto mt-7 h-[min(62vh,560px)] w-full max-w-4xl [perspective:1200px]">
+            <div className="relative mx-auto min-h-0 w-full max-w-4xl self-stretch [perspective:1200px]">
               <motion.div
                 style={{ x: noteX, y: noteY }}
                 className="absolute left-[5%] top-[23%] z-20 w-[clamp(132px,20vw,220px)] will-change-transform"
@@ -237,17 +236,19 @@ export default function ApertureCanvasShowcaseElement({
               >
                 <MetricFragment compact={isCatalog} />
               </motion.div>
-              <motion.div
-                style={{ y: artifactY, scale: artifactScale, clipPath: artifactClip }}
-                className="absolute left-1/2 top-1/2 z-10 w-[min(67vw,530px)] -translate-x-1/2 -translate-y-1/2 will-change-transform"
-              >
-                <DecisionArtifact phase={phase} compact={isCatalog} />
-              </motion.div>
+              <div className="absolute inset-0 z-10 flex items-center justify-center">
+                <motion.div
+                  style={{ scale: artifactScale, clipPath: artifactClip }}
+                  className="w-[min(67vw,530px)] will-change-transform"
+                >
+                  <DecisionArtifact phase={phase} compact={isCatalog} />
+                </motion.div>
+              </div>
               <motion.div
                 style={{ width: lineWidth }}
                 className="absolute bottom-[5%] left-0 h-px bg-[#18191d]/45"
               />
-              <div className="absolute bottom-0 left-0 flex w-full items-center justify-between font-mono text-[8px] uppercase tracking-[.16em] text-[#18191d]/45">
+              <div className="absolute bottom-3 left-0 flex w-full items-center justify-between font-mono text-[8px] uppercase tracking-[.16em] text-[#18191d]/45">
                 <span>
                   {phases[phase].label} / 0{phase + 1}
                 </span>
@@ -255,7 +256,7 @@ export default function ApertureCanvasShowcaseElement({
               </div>
             </div>
 
-            <div className="absolute bottom-7 left-5 right-5 sm:bottom-9 sm:left-8 sm:right-8 lg:left-12 lg:right-12">
+            <div className="relative min-h-[44px] max-w-sm self-end">
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.div
                   key={phase}
