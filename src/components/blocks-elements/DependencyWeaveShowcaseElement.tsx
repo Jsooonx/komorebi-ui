@@ -101,7 +101,19 @@ const paths = [
 
 const transition = { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const };
 
-function isRelatedPath(path: (typeof paths)[number], activeId: NodeId) {
+const restingImpact = {
+  id: "resting",
+  index: "—",
+  status: "Path idle",
+  title: "Trace a project to reveal its impact.",
+  description: "Hover one artifact to see which work it depends on and what it can move forward.",
+  blockers: "—",
+  unblocks: "—",
+  milestone: "Awaiting trace",
+};
+
+function isRelatedPath(path: (typeof paths)[number], activeId: NodeId | null) {
+  if (!activeId) return false;
   return path.from === activeId || path.to === activeId;
 }
 
@@ -112,8 +124,9 @@ export default function DependencyWeaveShowcaseElement({
   previewMode?: PreviewMode;
 }) {
   const reducedMotion = useReducedMotion();
-  const [activeId, setActiveId] = useState<NodeId>("release");
-  const active = nodes.find((node) => node.id === activeId) ?? nodes[3];
+  const [activeId, setActiveId] = useState<NodeId | null>(null);
+  const activeNode = activeId ? nodes.find((node) => node.id === activeId) : undefined;
+  const impact = activeNode ?? restingImpact;
   const compact = previewMode === "catalog";
 
   return (
@@ -142,7 +155,7 @@ export default function DependencyWeaveShowcaseElement({
             </span>
           </div>
           <div
-            onMouseLeave={() => setActiveId("release")}
+            onMouseLeave={() => setActiveId(null)}
             className={`relative overflow-hidden border border-white/15 bg-[#101012] ${compact ? "h-[362px]" : "h-[610px]"}`}
           >
             <svg
@@ -211,12 +224,12 @@ export default function DependencyWeaveShowcaseElement({
                 <span className="flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.16em] text-white/40">
                   <Network className="h-3 w-3" /> Impact view
                 </span>
-                <span className="font-mono text-[8px] text-white/35">{active.index} / 04</span>
+                <span className="font-mono text-[8px] text-white/35">{impact.index} / 04</span>
               </div>
               <div className={`relative ${compact ? "mt-3 min-h-[118px]" : "mt-5 min-h-[142px]"}`}>
                 <AnimatePresence initial={false} mode="sync">
                   <motion.div
-                    key={active.id}
+                    key={impact.id}
                     initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
@@ -224,17 +237,17 @@ export default function DependencyWeaveShowcaseElement({
                     className="absolute inset-0"
                   >
                     <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/35">
-                      {active.status}
+                      {impact.status}
                     </div>
                     <h2
                       className={`mt-2 font-serif font-light leading-[0.95] tracking-[-0.045em] ${compact ? "text-[clamp(1.25rem,2.7vw,1.8rem)]" : "text-[clamp(1.8rem,3.5vw,3.1rem)]"}`}
                     >
-                      {active.title}
+                      {impact.title}
                     </h2>
                     <p
                       className={`max-w-sm text-white/50 ${compact ? "mt-2 text-[9px] leading-relaxed" : "mt-3 text-xs leading-relaxed"}`}
                     >
-                      {active.description}
+                      {impact.description}
                     </p>
                   </motion.div>
                 </AnimatePresence>
@@ -248,7 +261,7 @@ export default function DependencyWeaveShowcaseElement({
                   </div>
                   <div className="mt-1 flex items-center gap-1 text-[9px] text-white/70">
                     <Link2 className="h-2.5 w-2.5" />
-                    {active.blockers}
+                    {impact.blockers}
                   </div>
                 </div>
                 <div>
@@ -257,14 +270,14 @@ export default function DependencyWeaveShowcaseElement({
                   </div>
                   <div className="mt-1 flex items-center gap-1 text-[9px] text-white/70">
                     <MoveRight className="h-2.5 w-2.5" />
-                    {active.unblocks}
+                    {impact.unblocks}
                   </div>
                 </div>
               </div>
               <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-2.5">
                 <span className="flex items-center gap-1.5 text-[9px] text-white/55">
                   <CircleDot className="h-3 w-3" />
-                  {active.milestone}
+                  {impact.milestone}
                 </span>
                 <ArrowRight className="h-3 w-3 text-white/40" />
               </div>
