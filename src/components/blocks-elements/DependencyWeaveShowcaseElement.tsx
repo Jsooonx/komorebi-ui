@@ -142,6 +142,7 @@ export default function DependencyWeaveShowcaseElement({
             </span>
           </div>
           <div
+            onMouseLeave={() => setActiveId("release")}
             className={`relative overflow-hidden border border-white/15 bg-[#101012] ${compact ? "h-[362px]" : "h-[610px]"}`}
           >
             <svg
@@ -176,8 +177,9 @@ export default function DependencyWeaveShowcaseElement({
                 <button
                   key={node.id}
                   type="button"
-                  onClick={() => setActiveId(node.id)}
-                  aria-pressed={isActive}
+                  onMouseEnter={() => setActiveId(node.id)}
+                  onFocus={() => setActiveId(node.id)}
+                  aria-current={isActive ? "true" : undefined}
                   className={`group absolute z-10 w-[19%] min-w-[76px] overflow-hidden border text-left transition-colors duration-150 ${compact ? "" : "sm:w-[21%]"} ${node.position} ${isActive ? "border-white/75" : isRelated ? "border-white/35" : "border-white/10 hover:border-white/35"}`}
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-white/5">
