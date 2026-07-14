@@ -123,7 +123,7 @@ export default function DependencyWeaveShowcaseElement({
         style={{ height: compact ? "500px" : "100dvh" }}
       >
         <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:46px_46px]" />
-        <div className={`relative z-10 w-full ${compact ? "max-w-[780px]" : "max-w-6xl"}`}>
+        <div className={`relative z-10 w-full ${compact ? "max-w-[780px]" : "max-w-7xl"}`}>
           <div
             className={`mb-4 flex items-end justify-between border-b border-white/10 ${compact ? "pb-3" : "mb-6 pb-4"}`}
           >
@@ -142,7 +142,7 @@ export default function DependencyWeaveShowcaseElement({
             </span>
           </div>
           <div
-            className={`relative overflow-hidden border border-white/15 bg-[#101012] ${compact ? "h-[362px]" : "h-[540px]"}`}
+            className={`relative overflow-hidden border border-white/15 bg-[#101012] ${compact ? "h-[362px]" : "h-[610px]"}`}
           >
             <svg
               viewBox="0 0 1000 500"
@@ -178,7 +178,7 @@ export default function DependencyWeaveShowcaseElement({
                   type="button"
                   onClick={() => setActiveId(node.id)}
                   aria-pressed={isActive}
-                  className={`group absolute z-10 w-[19%] min-w-[76px] overflow-hidden border text-left transition-colors duration-150 ${node.position} ${isActive ? "border-white/75" : isRelated ? "border-white/35" : "border-white/10 hover:border-white/35"}`}
+                  className={`group absolute z-10 w-[19%] min-w-[76px] overflow-hidden border text-left transition-colors duration-150 ${compact ? "" : "sm:w-[21%]"} ${node.position} ${isActive ? "border-white/75" : isRelated ? "border-white/35" : "border-white/10 hover:border-white/35"}`}
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-white/5">
                     <img
@@ -203,7 +203,7 @@ export default function DependencyWeaveShowcaseElement({
               );
             })}
             <article
-              className={`absolute left-1/2 top-1/2 z-20 w-[43%] min-w-[180px] -translate-x-1/2 -translate-y-1/2 border border-white/20 bg-[#141416]/95 shadow-[0_20px_60px_rgba(0,0,0,0.42)] backdrop-blur ${compact ? "p-3" : "p-5 sm:p-6"}`}
+              className={`absolute left-1/2 top-1/2 z-20 w-[43%] min-w-[180px] -translate-x-1/2 -translate-y-1/2 border border-white/20 bg-[#141416]/95 shadow-[0_20px_60px_rgba(0,0,0,0.42)] backdrop-blur ${compact ? "p-3" : "p-6 sm:w-[46%] sm:p-7"}`}
             >
               <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
                 <span className="flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.16em] text-white/40">
