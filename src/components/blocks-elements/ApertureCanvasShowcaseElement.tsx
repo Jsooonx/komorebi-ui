@@ -7,7 +7,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { Check, Image } from "lucide-react";
+import { Image } from "lucide-react";
 import { useRef, useState } from "react";
 
 type PreviewMode = "catalog" | "fullscreen";
@@ -82,7 +82,11 @@ function SourceFragment({ compact = false }: { compact?: boolean }) {
 }
 
 function DecisionArtifact({ phase, compact = false }: { phase: number; compact?: boolean }) {
-  const settled = phase === 2;
+  const headlines = [
+    "Make the handoff visible before it becomes urgent.",
+    "Group the right context around one clear call.",
+    "Confirm the release brief and let the team move.",
+  ];
   return (
     <div
       className={`relative overflow-hidden border border-[#18191d]/25 bg-[#faf8f2] text-[#18191d] shadow-[0_26px_70px_rgba(27,29,33,.2)] ${compact ? "h-[190px] p-3" : "h-[300px] p-5 sm:p-7"}`}
@@ -92,46 +96,32 @@ function DecisionArtifact({ phase, compact = false }: { phase: number; compact?:
         <span>0{phase + 1} / 03</span>
       </div>
       <div className={`relative ${compact ? "mt-4 h-[132px]" : "mt-6 h-[198px]"}`}>
-        <AnimatePresence initial={false} mode="sync">
-          <motion.div
-            key={phase}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ type: "spring", stiffness: 260, damping: 30, mass: 0.4 }}
-            className="absolute inset-0"
+        <div className="absolute inset-0">
+          <p className={`${compact ? "text-[9px]" : "text-xs"} text-[#18191d]/48`}>
+            Northline / release review
+          </p>
+          <h2
+            className={`${compact ? "mt-1 text-lg" : "mt-2 text-3xl sm:text-4xl"} max-w-sm font-serif leading-[.92] tracking-[-.06em]`}
           >
-            <p className={`${compact ? "text-[9px]" : "text-xs"} text-[#18191d]/48`}>
-              Northline / release review
-            </p>
-            <h2
-              className={`${compact ? "mt-1 text-lg" : "mt-2 text-3xl sm:text-4xl"} max-w-sm font-serif leading-[.92] tracking-[-.06em]`}
-            >
-              {phase === 0 && "Make the handoff visible before it becomes urgent."}
-              {phase === 1 && "Group the right context around one clear call."}
-              {phase === 2 && "Confirm the release brief and let the team move."}
-            </h2>
-            <div
-              className={`${compact ? "mt-4 gap-2" : "mt-6 gap-3"} grid grid-cols-2 border-t border-[#18191d]/12 pt-3`}
-            >
-              <div>
-                <div className="font-mono text-[7px] uppercase tracking-[.15em] text-[#18191d]/40">
-                  Owner
-                </div>
-                <div className="mt-1 text-[9px] font-medium">Mara Ellison</div>
+            {headlines[phase]}
+          </h2>
+          <div
+            className={`${compact ? "mt-4 gap-2" : "mt-6 gap-3"} grid grid-cols-2 border-t border-[#18191d]/12 pt-3`}
+          >
+            <div>
+              <div className="font-mono text-[7px] uppercase tracking-[.15em] text-[#18191d]/40">
+                Owner
               </div>
-              <div>
-                <div className="font-mono text-[7px] uppercase tracking-[.15em] text-[#18191d]/40">
-                  State
-                </div>
-                <div className="mt-1 flex items-center gap-1 text-[9px] font-medium">
-                  {settled && <Check className="h-2.5 w-2.5" />}{" "}
-                  {settled ? "Ready to share" : "Taking shape"}
-                </div>
-              </div>
+              <div className="mt-1 text-[9px] font-medium">Mara Ellison</div>
             </div>
-          </motion.div>
-        </AnimatePresence>
+            <div>
+              <div className="font-mono text-[7px] uppercase tracking-[.15em] text-[#18191d]/40">
+                State
+              </div>
+              <div className="mt-1 text-[9px] font-medium">Review ready</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
