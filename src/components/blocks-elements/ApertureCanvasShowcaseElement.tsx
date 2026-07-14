@@ -106,9 +106,9 @@ function DecisionArtifact({ phase, compact = false }: { phase: number; compact?:
             <AnimatePresence initial={false} mode="sync">
               <motion.span
                 key={phase}
-                initial={{ opacity: 0, y: 5, clipPath: "inset(100% 0 0 0)" }}
-                animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" }}
-                exit={{ opacity: 0, y: -5, clipPath: "inset(0 0 100% 0)" }}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
                 transition={{ type: "spring", stiffness: 260, damping: 30, mass: 0.42 }}
                 className="absolute inset-x-0 top-0 block will-change-transform"
               >
