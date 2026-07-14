@@ -180,7 +180,7 @@ export default function ApertureCanvasShowcaseElement({
     [114 * movement, 26 * movement, 32 * movement],
   );
   const metricY = useTransform(
-    progress,
+    scrollYProgress,
     [0, 0.48, 1],
     [104 * movement, 42 * movement, 124 * movement],
   );
