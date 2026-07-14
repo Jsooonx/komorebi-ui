@@ -241,6 +241,9 @@ function TemplateCard({ item }: { item: TemplateItem }) {
       <Link
         to="/templates/aura"
         onMouseEnter={handleMouseEnter}
+        onClick={() => {
+          sessionStorage.setItem("komorebi_home_scroll_y", String(window.scrollY));
+        }}
         className="flex flex-col bg-[#0f0f12] border border-white/5 rounded-lg overflow-hidden hover:border-white/10 transition-all select-none group cursor-pointer"
       >
         {renderCardContent()}
@@ -257,7 +260,6 @@ function TemplateCard({ item }: { item: TemplateItem }) {
     </div>
   );
 }
-
 
 export default function TemplateShowcase() {
   const sectionVariants = {

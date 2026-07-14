@@ -63,6 +63,7 @@ The Components detail route resolves canonical component elements and has no nes
 ## Performance notes
 
 - TanStack Router owns native scroll restoration through the `createRouter({ scrollRestoration: true })` option; the deprecated `ScrollRestoration` component is not rendered in the root route.
+- Returning from a full-page template preview stores the exact landing-page `scrollY` before navigation and restores it synchronously on re-entry, rather than rendering the hero and then smooth-scrolling to a section anchor.
 - The command palette is lazy-loaded.
 - The main landing sections are currently loaded directly for navigation/re-entry testing.
 - The WebGL dither preview remains lazy-loaded because it pulls in the heavy Three.js/WebGL stack.

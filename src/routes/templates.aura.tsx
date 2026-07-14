@@ -27,8 +27,6 @@ function AuraTemplatePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleBack = () => {
-    // Save scroll target in session storage to trigger smooth scroll back on the landing page
-    sessionStorage.setItem("komorebi_scroll_target", "templates");
     navigate({ to: "/" });
   };
 

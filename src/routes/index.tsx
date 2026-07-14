@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import DynamicIsland from "@/components/DynamicIsland";
@@ -38,19 +38,7 @@ const itemVariants = {
 };
 
 function Index() {
-  useEffect(() => {
-    const scrollTarget = sessionStorage.getItem("komorebi_scroll_target");
-    if (scrollTarget) {
-      sessionStorage.removeItem("komorebi_scroll_target");
-      setTimeout(() => {
-        const element = document.getElementById(scrollTarget);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 350);
-      return;
-    }
-
+  useLayoutEffect(() => {
     const savedY = sessionStorage.getItem("komorebi_home_scroll_y");
     if (savedY) {
       const scrollY = Number.parseInt(savedY, 10);
