@@ -20,7 +20,7 @@ const STACK: LogoItem[] = [
   { name: "Tailwind CSS", src: "/logos/tailwindcss.svg", url: "https://tailwindcss.com" },
   { name: "Vercel", src: "/logos/vercel.com-logo.webp", url: "https://vercel.com" },
   { name: "Supabase", src: "/logos/supabase.com-logo.webp", url: "https://supabase.com" },
-  { name: "Claude AI", src: "/logos/claude.com-logo.webp", url: "https://claude.ai" },
+  { name: "Codex", src: "/logos/codex.png", url: "https://codex.so" },
 ];
 
 export default function Credits() {
