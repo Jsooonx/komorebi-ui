@@ -1,11 +1,11 @@
 import {
-  AnimatePresence,
   motion,
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useTransform,
 } from "framer-motion";
+import type { MotionValue } from "framer-motion";
 import { Image } from "lucide-react";
 import { useRef, useState } from "react";
 
@@ -80,12 +80,56 @@ function SourceFragment({ compact = false }: { compact?: boolean }) {
   );
 }
 
-function DecisionArtifact({ phase, compact = false }: { phase: number; compact?: boolean }) {
+function ScrollHeadline({
+  progress,
+  compact = false,
+}: {
+  progress: MotionValue<number>;
+  compact?: boolean;
+}) {
   const headlines = [
     "Make the handoff visible before it becomes urgent.",
     "Group the right context around one clear call.",
     "Confirm the release brief and let the team move.",
   ];
+  const firstOpacity = useTransform(progress, [0, 0.3, 0.36], [1, 1, 0]);
+  const firstY = useTransform(progress, [0, 0.3, 0.36], [0, 0, -5]);
+  const secondOpacity = useTransform(progress, [0.28, 0.38, 0.64, 0.72], [0, 1, 1, 0]);
+  const secondY = useTransform(progress, [0.28, 0.38, 0.64, 0.72], [5, 0, 0, -5]);
+  const thirdOpacity = useTransform(progress, [0.64, 0.74, 1], [0, 1, 1]);
+  const thirdY = useTransform(progress, [0.64, 0.74, 1], [5, 0, 0]);
+
+  return (
+    <h2
+      className={`relative ${compact ? "mt-1 h-[66px] text-lg" : "mt-2 h-[128px] text-3xl sm:text-4xl"} max-w-sm font-serif leading-[1] tracking-[-.06em]`}
+    >
+      {headlines.map((headline, index) => {
+        const opacity = index === 0 ? firstOpacity : index === 1 ? secondOpacity : thirdOpacity;
+        const y = index === 0 ? firstY : index === 1 ? secondY : thirdY;
+        return (
+          <motion.span
+            key={headline}
+            style={{ opacity, y }}
+            className="absolute inset-x-0 top-0 block will-change-transform"
+          >
+            {headline}
+          </motion.span>
+        );
+      })}
+    </h2>
+  );
+}
+
+function DecisionArtifact({
+  phase,
+  progress,
+  compact = false,
+}: {
+  phase: number;
+  progress: MotionValue<number>;
+  compact?: boolean;
+}) {
+  return (
   return (
     <div
       className={`relative overflow-hidden border border-[#18191d]/25 bg-[#faf8f2] text-[#18191d] shadow-[0_26px_70px_rgba(27,29,33,.2)] ${compact ? "h-[214px] p-3" : "h-[326px] p-5 sm:p-7"}`}
@@ -99,22 +143,7 @@ function DecisionArtifact({ phase, compact = false }: { phase: number; compact?:
           <p className={`${compact ? "text-[9px]" : "text-xs"} text-[#18191d]/48`}>
             Northline / release review
           </p>
-          <h2
-            className={`relative ${compact ? "mt-1 h-[66px] text-lg" : "mt-2 h-[128px] text-3xl sm:text-4xl"} max-w-sm font-serif leading-[1] tracking-[-.06em]`}
-          >
-            <AnimatePresence initial={false} mode="sync">
-              <motion.span
-                key={phase}
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -5 }}
-                transition={{ type: "spring", stiffness: 260, damping: 30, mass: 0.42 }}
-                className="absolute inset-x-0 top-0 block will-change-transform"
-              >
-                {headlines[phase]}
-              </motion.span>
-            </AnimatePresence>
-          </h2>
+          <ScrollHeadline progress={progress} compact={compact} />
           <div
             className={`${compact ? "mt-4 gap-2" : "mt-6 gap-3"} grid grid-cols-2 border-t border-[#18191d]/12 pt-3`}
           >
@@ -234,7 +263,7 @@ export default function ApertureCanvasShowcaseElement({
               </motion.div>
               <div className="absolute inset-0 z-10 flex items-center justify-center">
                 <div className="w-[min(67vw,530px)]">
-                  <DecisionArtifact phase={phase} compact={isCatalog} />
+                  <DecisionArtifact phase={phase} progress={scrollYProgress} compact={isCatalog} />
                 </div>
               </div>
               <motion.div
@@ -250,23 +279,12 @@ export default function ApertureCanvasShowcaseElement({
             </div>
 
             <div className="relative min-h-[44px] max-w-sm self-end">
-              <AnimatePresence mode="popLayout" initial={false}>
-                <motion.div
-                  key={phase}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ type: "spring", stiffness: 240, damping: 28 }}
-                  className="max-w-sm"
-                >
-                  <p className="font-mono text-[8px] uppercase tracking-[.16em] text-[#18191d]/45">
-                    {phases[phase].label}
-                  </p>
-                  <p className="mt-1.5 text-xs leading-relaxed text-[#18191d]/70">
-                    {phases[phase].copy}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
+              <p className="font-mono text-[8px] uppercase tracking-[.16em] text-[#18191d]/45">
+                {phases[phase].label}
+              </p>
+              <p className="mt-1.5 text-xs leading-relaxed text-[#18191d]/70">
+                {phases[phase].copy}
+              </p>
             </div>
           </div>
         </section>
