@@ -1,6 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
+const entrance = {
+  hidden: { opacity: 0, y: 28, filter: "blur(8px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+};
+
+const entranceViewport = { once: true, amount: 0.22 };
+const entranceTransition = { duration: 0.78, ease: [0.16, 1, 0.3, 1] as const };
+
 const stages = [
   {
     id: "signal",
@@ -35,32 +43,62 @@ export default function ResolutionRelay() {
   return (
     <section className="resolution-relay" id="widget" aria-labelledby="relay-title">
       <div className="resolution-relay__glow" aria-hidden="true" />
-      <div className="resolution-relay__header">
+      <motion.div
+        className="resolution-relay__header"
+        initial="hidden"
+        whileInView="visible"
+        viewport={entranceViewport}
+        variants={entrance}
+        transition={entranceTransition}
+      >
         <p className="resolution-relay__kicker">02 — Resolution relay</p>
         <h2 id="relay-title">Every answer starts with context.</h2>
         <p>
           A quiet system for moving customer signals from first contact to a
           confident outcome.
         </p>
-      </div>
+      </motion.div>
 
       <div className="resolution-relay__stage" onMouseLeave={() => setActiveStage(0)}>
-        <div className="resolution-relay__request" aria-label="Incoming customer signal">
+        <motion.div
+          className="resolution-relay__request"
+          aria-label="Incoming customer signal"
+          initial="hidden"
+          whileInView="visible"
+          viewport={entranceViewport}
+          variants={entrance}
+          transition={{ ...entranceTransition, delay: 0.1 }}
+        >
           <span className="resolution-relay__request-dot" />
           <span>Subscription renewal is tomorrow. Can we update the billing contact?</span>
           <small>Incoming signal</small>
-        </div>
+        </motion.div>
 
-        <div className="resolution-relay__path" aria-hidden="true">
+        <motion.div
+          className="resolution-relay__path"
+          aria-hidden="true"
+          initial={{ opacity: 0, scaleX: 0 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          viewport={entranceViewport}
+          transition={{ ...entranceTransition, delay: 0.22 }}
+        >
           <span className="resolution-relay__path-line" />
           <motion.span
             className="resolution-relay__pulse"
             animate={{ left: `${activeStage * 50}%` }}
             transition={{ type: "spring", stiffness: 165, damping: 23 }}
           />
-        </div>
+        </motion.div>
 
-        <div className="resolution-relay__controls" aria-label="Resolution stages">
+        <motion.div
+          className="resolution-relay__controls"
+          aria-label="Resolution stages"
+          initial="hidden"
+          whileInView="visible"
+          viewport={entranceViewport}
+          variants={entrance}
+          transition={{ ...entranceTransition, delay: 0.22 }}
+        >
           {stages.map((stage, index) => {
             const isActive = activeStage === index;
             return (
@@ -85,9 +123,17 @@ export default function ResolutionRelay() {
               </button>
             );
           })}
-        </div>
+        </motion.div>
 
-        <div className="resolution-relay__detail" aria-live="polite">
+        <motion.div
+          className="resolution-relay__detail"
+          aria-live="polite"
+          initial="hidden"
+          whileInView="visible"
+          viewport={entranceViewport}
+          variants={entrance}
+          transition={{ ...entranceTransition, delay: 0.34 }}
+        >
           <span className="resolution-relay__detail-mark" />
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
@@ -103,9 +149,16 @@ export default function ResolutionRelay() {
             </motion.div>
           </AnimatePresence>
           <span className="resolution-relay__detail-status">{active.detail}</span>
-        </div>
+        </motion.div>
 
-        <div className="resolution-relay__outcome">
+        <motion.div
+          className="resolution-relay__outcome"
+          initial="hidden"
+          whileInView="visible"
+          viewport={entranceViewport}
+          variants={entrance}
+          transition={{ ...entranceTransition, delay: 0.46 }}
+        >
           <img
             className="resolution-relay__outcome-art"
             src="/aura-resolution-relay.png"
@@ -116,7 +169,7 @@ export default function ResolutionRelay() {
             <strong>Resolved with continuity</strong>
             <small>Or handed to the right person with the full record intact.</small>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
