@@ -126,7 +126,9 @@ export default function Credits() {
               <img
                 src={item.src}
                 alt={item.name}
-                className="h-5.5 sm:h-6.5 w-auto object-contain transition-all duration-300 hover:scale-105 opacity-90 hover:opacity-100"
+                className={`h-5.5 sm:h-6.5 w-auto object-contain transition-all duration-300 hover:scale-105 opacity-90 hover:opacity-100 ${
+                  item.name === "Codex" ? "invert mix-blend-screen" : ""
+                }`}
               />
             </a>
           ))}
