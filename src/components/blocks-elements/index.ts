@@ -21,6 +21,7 @@ import MorphingLensPreloaderBlock from "./MorphingLensPreloaderBlock";
 import SignalWorkflowShowcaseBlock from "./SignalWorkflowShowcaseBlock";
 import FocusTourShowcaseBlock from "./FocusTourShowcaseBlock";
 import OrbitWorkspaceShowcaseBlock from "./OrbitWorkspaceShowcaseBlock";
+import VersionFoldShowcaseBlock from "./VersionFoldShowcaseBlock";
 import VoiceIndexTestimonialsBlock from "./VoiceIndexTestimonialsBlock";
 import ProofLedgerTestimonialsBlock from "./ProofLedgerTestimonialsBlock";
 import CommunityMosaicTestimonialsBlock from "./CommunityMosaicTestimonialsBlock";
@@ -54,6 +55,7 @@ const BLOCK_PAGES: Record<string, ComponentType> = {
   "signal-workflow-showcase": SignalWorkflowShowcaseBlock,
   "focus-tour-showcase": FocusTourShowcaseBlock,
   "orbit-workspace-showcase": OrbitWorkspaceShowcaseBlock,
+  "version-fold-showcase": VersionFoldShowcaseBlock,
   "voice-index-testimonials": VoiceIndexTestimonialsBlock,
   "proof-ledger-testimonials": ProofLedgerTestimonialsBlock,
   "community-mosaic-testimonials": CommunityMosaicTestimonialsBlock,

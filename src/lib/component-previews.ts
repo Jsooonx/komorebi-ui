@@ -40,6 +40,7 @@ import MorphingLensPreloaderCard from "../components/blocks-preview-elements/Mor
 import SignalWorkflowShowcaseCard from "../components/blocks-preview-elements/SignalWorkflowShowcaseCard";
 import FocusTourShowcaseCard from "../components/blocks-preview-elements/FocusTourShowcaseCard";
 import OrbitWorkspaceShowcaseCard from "../components/blocks-preview-elements/OrbitWorkspaceShowcaseCard";
+import VersionFoldShowcaseCard from "../components/blocks-preview-elements/VersionFoldShowcaseCard";
 import VoiceIndexTestimonialsCard from "../components/blocks-preview-elements/VoiceIndexTestimonialsCard";
 import ProofLedgerTestimonialsCard from "../components/blocks-preview-elements/ProofLedgerTestimonialsCard";
 import CommunityMosaicTestimonialsCard from "../components/blocks-preview-elements/CommunityMosaicTestimonialsCard";
@@ -96,6 +97,7 @@ export const BLOCK_PREVIEWS: Record<string, ComponentType<ComponentPreviewProps>
   "signal-workflow-showcase": SignalWorkflowShowcaseCard,
   "focus-tour-showcase": FocusTourShowcaseCard,
   "orbit-workspace-showcase": OrbitWorkspaceShowcaseCard,
+  "version-fold-showcase": VersionFoldShowcaseCard,
   "voice-index-testimonials": VoiceIndexTestimonialsCard,
   "proof-ledger-testimonials": ProofLedgerTestimonialsCard,
   "community-mosaic-testimonials": CommunityMosaicTestimonialsCard,
