@@ -26,8 +26,6 @@ function AuraTemplatePage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("Resolved VITE_AURA_URL:", AURA_URL);
-
   const handleBack = () => {
     // Save scroll target in session storage to trigger smooth scroll back on the landing page
     sessionStorage.setItem("komorebi_scroll_target", "templates");
