@@ -232,7 +232,7 @@ function VellumPage() {
         </div>
         <div className="lens__content">
           <p>Collector's lens</p>
-          <div className="lens__controls" onMouseLeave={() => setActiveLens("material")}>
+          <div className="lens__controls">
             {lenses.map((item) => (
               <button
                 type="button"
@@ -255,9 +255,9 @@ function VellumPage() {
               </button>
             ))}
           </div>
-          <AnimatePresence mode="wait" initial={false}>
+          <AnimatePresence initial={false}>
             <motion.div
-              className="lens__detail"
+              className="lens__detail-copy"
               key={lens.id}
               initial={{ opacity: 0, y: 12, filter: "blur(5px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}

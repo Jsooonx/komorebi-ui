@@ -156,6 +156,7 @@ img {
   font-weight: 400;
 }
 .vellum-hero__copy a {
+  position: relative;
   display: inline-flex;
   gap: 9px;
   align-items: center;
@@ -163,6 +164,25 @@ img {
   padding-bottom: 8px;
   border-bottom: 1px solid currentColor;
   font-size: 14px;
+}
+.vellum-hero__copy a::after,
+.notes__record a::after {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  height: 1px;
+  background: #000;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.vellum-hero__copy a:hover::after,
+.vellum-hero__copy a:focus-visible::after,
+.notes__record a:hover::after,
+.notes__record a:focus-visible::after {
+  transform: scaleX(1);
 }
 .vellum-hero__meta {
   position: absolute;
@@ -334,7 +354,7 @@ img {
 .lens__number {
   position: absolute;
   right: -10px;
-  bottom: -65px;
+  bottom: -10px;
   color: rgba(255, 255, 255, 0.08);
   font-family: var(--serif);
   font-size: 300px;
@@ -356,7 +376,7 @@ img {
   grid-template-columns: 44px 1fr 18px;
   width: 100%;
   align-items: center;
-  padding: 17px 0;
+  padding: 17px 13px;
   border: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.56);
@@ -382,27 +402,38 @@ img {
   font-weight: 500;
 }
 .lens__controls button.is-active {
-  padding-left: 13px;
   color: #fff;
 }
 .lens__detail {
+  position: relative;
   min-height: 240px;
   padding-top: 53px;
 }
-.lens__detail span {
+.lens__detail-copy {
+  position: absolute;
+  top: 53px;
+  right: 0;
+  left: 0;
+}
+.lens__detail span,
+.lens__detail-copy span {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.1em;
   color: rgba(255, 255, 255, 0.52);
   text-transform: uppercase;
 }
-.lens__detail h2 {
+.lens__detail h2,
+.lens__detail-copy h2 {
+  min-height: 114px;
   max-width: 430px;
   margin: 15px 0;
   font-size: clamp(38px, 4vw, 64px);
   line-height: 0.89;
 }
-.lens__detail p {
+.lens__detail p,
+.lens__detail-copy p {
+  min-height: 46px;
   max-width: 410px;
   margin: 0;
   color: rgba(255, 255, 255, 0.68);
@@ -467,6 +498,7 @@ img {
   font-size: 13px;
 }
 .notes__record a {
+  position: relative;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--ink);
 }
@@ -589,6 +621,22 @@ img {
   padding: 13px 15px;
   border: 1px solid rgba(255, 255, 255, 0.54);
   color: #fff;
+}
+.vellum-nav__cta,
+.viewing__cta {
+  transition:
+    color 0.26s ease,
+    background 0.26s ease,
+    border-color 0.26s ease;
+}
+.vellum-nav__cta:hover,
+.vellum-nav__cta:focus-visible,
+.viewing__cta:hover,
+.viewing__cta:focus-visible {
+  border-color: #111;
+  color: #fff;
+  background: #111;
+  outline: none;
 }
 .vellum-footer {
   display: grid;
