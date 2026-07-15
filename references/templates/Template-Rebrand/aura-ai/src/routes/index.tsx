@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import ConnectedContext from "../components/ConnectedContext";
 import AnticipationLoop from "../components/AnticipationLoop";
+import QuietLaunch from "../components/QuietLaunch";
 import GuidanceLayer from "../components/GuidanceLayer";
 import ResolutionRelay from "../components/ResolutionRelay";
 import SeamlessHandoff from "../components/SeamlessHandoff";
@@ -384,6 +385,7 @@ function Index() {
       <ConnectedContext />
       <GuidanceLayer />
       <AnticipationLoop />
+      <QuietLaunch />
     </div>
   );
 }
