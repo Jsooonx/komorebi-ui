@@ -1,6 +1,8 @@
 import {
   AnimatePresence,
   motion,
+  useMotionTemplate,
+  useMotionValue,
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
@@ -135,8 +137,12 @@ function ContextSurface({ compact = false }: { compact?: boolean }) {
       ))}
       {/* High-Fidelity Heartbeat Pulse Upgrade */}
       {!compact && (
-        <div className={`flex items-center justify-between rounded-md border border-white/[0.07] bg-black/35 ${compact ? "mt-2 px-2 py-1" : "mt-3 px-2.5 py-1.5"}`}>
-          <span className="text-[7.5px] uppercase tracking-[0.08em] text-white/30 font-mono">Pulse feed</span>
+        <div
+          className={`flex items-center justify-between rounded-md border border-white/[0.07] bg-black/35 ${compact ? "mt-2 px-2 py-1" : "mt-3 px-2.5 py-1.5"}`}
+        >
+          <span className="text-[7.5px] uppercase tracking-[0.08em] text-white/30 font-mono">
+            Pulse feed
+          </span>
           <svg className="h-4 w-20 text-[#c6d478]/30" viewBox="0 0 100 30" fill="none">
             <path
               d="M0,15 L30,15 L35,5 L40,25 L45,10 L50,18 L55,15 L100,15"
@@ -168,11 +174,24 @@ function NetworkSurface({ compact = false }: { compact?: boolean }) {
     <div className={`relative ${compact ? "mt-2.5 h-16" : "mt-4 h-24"}`}>
       {/* Active Node Graph Upgrade */}
       <svg className="w-full h-full opacity-60" viewBox="0 0 160 80">
-        <path d="M25,40 L75,20 L125,50 L85,60 Z" stroke="white" strokeWidth="0.75" strokeOpacity="0.15" fill="none" />
+        <path
+          d="M25,40 L75,20 L125,50 L85,60 Z"
+          stroke="white"
+          strokeWidth="0.75"
+          strokeOpacity="0.15"
+          fill="none"
+        />
         <path d="M75,20 L85,60" stroke="white" strokeWidth="0.75" strokeOpacity="0.15" />
         <path d="M25,40 L85,60" stroke="white" strokeWidth="0.75" strokeOpacity="0.1" />
-        
-        <circle cx="25" cy="40" r="3" fill="#ffffff" fillOpacity="0.8" className="animate-[pulse_2s_infinite]" />
+
+        <circle
+          cx="25"
+          cy="40"
+          r="3"
+          fill="#ffffff"
+          fillOpacity="0.8"
+          className="animate-[pulse_2s_infinite]"
+        />
         <circle cx="75" cy="20" r="3" fill="#c6d478" className="animate-[pulse_1.5s_infinite]" />
         <circle cx="125" cy="50" r="3" fill="#ffffff" fillOpacity="0.5" />
         <circle cx="85" cy="60" r="3.5" fill="#ffffff" fillOpacity="0.7" />
@@ -208,7 +227,9 @@ function DecisionsSurface({ compact = false }: { compact?: boolean }) {
             </span>
             <span className="truncate">{label}</span>
           </div>
-          <span className={`ml-2 shrink-0 rounded px-1.5 py-0.5 font-mono text-[7.5px] uppercase tracking-[0.05em] border ${badgeClass}`}>
+          <span
+            className={`ml-2 shrink-0 rounded px-1.5 py-0.5 font-mono text-[7.5px] uppercase tracking-[0.05em] border ${badgeClass}`}
+          >
             {status}
           </span>
         </div>
@@ -328,9 +349,11 @@ function OrbitPanel({
   const filter = useTransform(zOffset, (val) => (reducedMotion ? "none" : `blur(${val}px)`));
 
   return (
-    <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${
-      isCatalog ? "w-[110px]" : "w-[192px] sm:w-[226px]"
-    }`}>
+    <div
+      className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${
+        isCatalog ? "w-[110px]" : "w-[192px] sm:w-[226px]"
+      }`}
+    >
       <motion.div
         style={{
           x,
@@ -451,7 +474,10 @@ function ActiveWorkspace({
 
         <div className={`grid grid-cols-3 gap-2 ${isCatalog ? "mt-2" : "mt-3"}`}>
           {["Clarity", "Flow", "Confidence"].map((label, index) => (
-            <div key={label} className="rounded-lg border border-white/[0.07] bg-white/[0.02] p-2 hover:border-white/10 transition-colors duration-300">
+            <div
+              key={label}
+              className="rounded-lg border border-white/[0.07] bg-white/[0.02] p-2 hover:border-white/10 transition-colors duration-300"
+            >
               <div className="text-[8px] text-white/30">{label}</div>
               <div className="mt-1.5 flex items-center justify-between gap-2">
                 <span className="font-mono text-[10px] text-white/70">
@@ -476,9 +502,13 @@ export default function OrbitWorkspaceShowcaseElement({
   const scrollRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const tiltSpringX = useSpring(tiltX, { stiffness: 170, damping: 26, mass: 0.22 });
+  const tiltSpringY = useSpring(tiltY, { stiffness: 170, damping: 26, mass: 0.22 });
+  const tiltTransform = useMotionTemplate`perspective(1200px) rotateX(${tiltSpringY}deg) rotateY(${tiltSpringX}deg)`;
   const isCatalog = previewMode === "catalog";
-  
+
   const { scrollYProgress } = useScroll({ container: scrollRef });
   const progress = useSpring(scrollYProgress, {
     stiffness: 110,
@@ -493,7 +523,6 @@ export default function OrbitWorkspaceShowcaseElement({
     const nextIndex = Math.min(surfaceOrder.length - 1, Math.floor(latest * surfaceOrder.length));
     setActiveIndex((current) => (current === nextIndex ? current : nextIndex));
   });
-
 
   // Click handler to focus a specific index
   const handleFocusIndex = (index: number) => {
@@ -516,21 +545,19 @@ export default function OrbitWorkspaceShowcaseElement({
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
     const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
-    setTilt({ x: x * 10, y: -y * 10 }); // tilt max 10 degrees
+    tiltX.set(x * 6);
+    tiltY.set(-y * 6);
   };
 
   const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
+    tiltX.set(0);
+    tiltY.set(0);
   };
 
   const activeSurface = surfaceOrder[activeIndex];
   const titleOpacity = 1;
   const travelDistance = isCatalog ? 80 : 240;
-  const titleY = useTransform(
-    progress,
-    [0, 1],
-    [0, reducedMotion ? 0 : travelDistance],
-  );
+  const titleY = useTransform(progress, [0, 1], [0, reducedMotion ? 0 : travelDistance]);
   const outroOpacity = useTransform(progress, [0.72, 0.9, 1], [0, 0.3, 1]);
   const outroY = useTransform(progress, [0.72, 1], [reducedMotion ? 0 : 20, 0]);
   const progressWidth = useTransform(progress, [0, 1], ["0%", "100%"]);
@@ -539,8 +566,8 @@ export default function OrbitWorkspaceShowcaseElement({
     <div
       ref={scrollRef}
       className="h-full w-full overflow-y-auto bg-[#09090b] text-white scrollbar-none"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={isCatalog ? undefined : handleMouseMove}
+      onMouseLeave={isCatalog ? undefined : handleMouseLeave}
     >
       <div className="relative" style={{ height: isCatalog ? "980px" : "360dvh" }}>
         <section
@@ -558,14 +585,20 @@ export default function OrbitWorkspaceShowcaseElement({
               isCatalog ? "max-w-[180px]" : "max-w-[280px]"
             }`}
           >
-            <h1 className={`font-serif font-light leading-tight tracking-tight ${
-              isCatalog ? "text-sm" : "text-2xl leading-[0.98]"
-            }`}>
+            <h1
+              className={`font-serif font-light leading-tight tracking-tight ${
+                isCatalog ? "text-sm" : "text-2xl leading-[0.98]"
+              }`}
+            >
               Keep the whole system within reach.
             </h1>
-            <p className={`text-white/40 ${
-              isCatalog ? "text-[8px] leading-snug mt-1.5" : "text-[10px] leading-relaxed mt-3 sm:text-xs"
-            }`}>
+            <p
+              className={`text-white/40 ${
+                isCatalog
+                  ? "text-[8px] leading-snug mt-1.5"
+                  : "text-[10px] leading-relaxed mt-3 sm:text-xs"
+              }`}
+            >
               Move through connected surfaces without losing the center of the work.
             </p>
           </motion.div>
@@ -574,48 +607,67 @@ export default function OrbitWorkspaceShowcaseElement({
           <motion.div
             style={{ opacity: titleOpacity, y: titleY }}
             className={`absolute left-5 sm:left-8 z-40 text-left pointer-events-none hidden md:block ${
-              isCatalog 
-                ? "top-6 max-w-[160px]" 
-                : "top-[calc(50%-184px)] max-w-[280px]"
+              isCatalog ? "top-6 max-w-[160px]" : "top-[calc(50%-184px)] max-w-[280px]"
             }`}
           >
-            <h1 className={`font-serif font-light leading-tight tracking-tight ${
-              isCatalog ? "text-sm" : "text-3xl leading-[0.98]"
-            }`}>
+            <h1
+              className={`font-serif font-light leading-tight tracking-tight ${
+                isCatalog ? "text-sm" : "text-3xl leading-[0.98]"
+              }`}
+            >
               Keep the whole system within reach.
             </h1>
-            <p className={`text-white/40 ${
-              isCatalog ? "text-[8px] leading-snug mt-1.5 max-w-[150px]" : "text-[10px] leading-relaxed mt-3 max-w-[250px] sm:text-xs"
-            }`}>
+            <p
+              className={`text-white/40 ${
+                isCatalog
+                  ? "text-[8px] leading-snug mt-1.5 max-w-[150px]"
+                  : "text-[10px] leading-relaxed mt-3 max-w-[250px] sm:text-xs"
+              }`}
+            >
               Move through connected surfaces without losing the center of the work.
             </p>
           </motion.div>
 
-
           {/* The 3D Perspective Card Stage */}
           <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-8">
-            <motion.div 
+            <motion.div
               style={{
-                rotateX: tilt.y,
-                rotateY: tilt.x,
+                transform: isCatalog ? "none" : tiltTransform,
                 transformStyle: "preserve-3d",
               }}
               className={`relative w-full max-w-5xl [perspective:1200px] flex items-center justify-center transition-all duration-300 ease-out ${
                 isCatalog ? "h-[420px]" : "h-[380px] sm:h-[540px]"
               }`}
             >
-
-
               {/* Holographic Guide Orbit Rings */}
-              <svg className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.04] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] ${
-                isCatalog ? "h-[360px] w-[360px]" : "h-[540px] w-[540px]"
-              }`}>
-                <circle cx={isCatalog ? 180 : 270} cy={isCatalog ? 180 : 270} r={isCatalog ? 170 : 255} fill="none" stroke="white" strokeWidth="1" strokeDasharray="3 3" />
+              <svg
+                className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.04] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] ${
+                  isCatalog ? "h-[360px] w-[360px]" : "h-[540px] w-[540px]"
+                }`}
+              >
+                <circle
+                  cx={isCatalog ? 180 : 270}
+                  cy={isCatalog ? 180 : 270}
+                  r={isCatalog ? 170 : 255}
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="1"
+                  strokeDasharray="3 3"
+                />
               </svg>
-              <svg className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.02] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] ${
-                isCatalog ? "h-[360px] w-[360px]" : "h-[540px] w-[540px]"
-              }`}>
-                <circle cx={isCatalog ? 180 : 270} cy={isCatalog ? 180 : 270} r={isCatalog ? 180 : 265} fill="none" stroke="white" strokeWidth="1" />
+              <svg
+                className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.02] [transform-style:preserve-3d] [transform:rotateX(62deg)_rotateY(-8deg)] ${
+                  isCatalog ? "h-[360px] w-[360px]" : "h-[540px] w-[540px]"
+                }`}
+              >
+                <circle
+                  cx={isCatalog ? 180 : 270}
+                  cy={isCatalog ? 180 : 270}
+                  r={isCatalog ? 180 : 265}
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="1"
+                />
               </svg>
 
               <div className="absolute inset-0 [transform-style:preserve-3d]">
@@ -645,14 +697,14 @@ export default function OrbitWorkspaceShowcaseElement({
           <motion.div
             style={{ opacity: outroOpacity, y: outroY }}
             className={`pointer-events-none absolute left-1/2 z-30 -translate-x-1/2 text-center ${
-              isCatalog 
-                ? "bottom-12 w-[240px]" 
-                : "bottom-16 sm:bottom-20 w-[min(90vw,420px)]"
+              isCatalog ? "bottom-12 w-[240px]" : "bottom-16 sm:bottom-20 w-[min(90vw,420px)]"
             }`}
           >
-            <p className={`font-serif font-light tracking-tight text-white/75 ${
-              isCatalog ? "text-[10px] leading-tight" : "text-lg sm:text-2xl leading-tight"
-            }`}>
+            <p
+              className={`font-serif font-light tracking-tight text-white/75 ${
+                isCatalog ? "text-[10px] leading-tight" : "text-lg sm:text-2xl leading-tight"
+              }`}
+            >
               Move through the system, not around it.
             </p>
           </motion.div>
@@ -662,13 +714,13 @@ export default function OrbitWorkspaceShowcaseElement({
             <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-white/25">
               0{activeIndex + 1}
             </span>
-            
+
             <div className="flex flex-1 items-center gap-4">
               {/* Progress bar track */}
               <div className="relative h-px flex-1 bg-white/10">
                 <motion.div style={{ width: progressWidth }} className="h-full bg-white/60" />
               </div>
-              
+
               {/* Click-to-focus indicators */}
               <div className="flex gap-1.5">
                 {surfaceOrder.map((surface, index) => (

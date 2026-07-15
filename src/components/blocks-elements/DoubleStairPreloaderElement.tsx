@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView, useReducedMotion } from "framer-motion";
 import { RotateCcw } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 
@@ -9,6 +9,7 @@ export default function DoubleStairPreloaderElement() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+  const prefersReducedMotion = useReducedMotion();
   const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
@@ -19,6 +20,11 @@ export default function DoubleStairPreloaderElement() {
 
   useEffect(() => {
     if (!hasStarted || isAnimationFinished) return;
+
+    if (prefersReducedMotion) {
+      setIsAnimationFinished(true);
+      return;
+    }
 
     // Sequence timing
     // 1. Enter text
@@ -53,7 +59,7 @@ export default function DoubleStairPreloaderElement() {
       clearTimeout(wipeTimer);
       clearTimeout(finishTimer);
     };
-  }, [isAnimationFinished, hasStarted]);
+  }, [isAnimationFinished, hasStarted, prefersReducedMotion]);
 
   const handleRestart = () => {
     setIsAnimationFinished(false);
@@ -65,13 +71,19 @@ export default function DoubleStairPreloaderElement() {
   const columnsCount = 5;
 
   return (
-    <div ref={containerRef} className="w-full h-full relative overflow-hidden bg-[#09090b] flex flex-col items-center justify-center font-sans">
-      
+    <div
+      ref={containerRef}
+      className="w-full h-full relative overflow-hidden bg-[#09090b] flex flex-col items-center justify-center font-sans"
+    >
       {/* Mock Page Content Revealed Underneath */}
       <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center select-none z-10">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
-          animate={isAnimationFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+          animate={
+            isAnimationFinished
+              ? { opacity: 1, y: 0 }
+              : { opacity: 0, y: prefersReducedMotion ? 0 : 60 }
+          }
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-6 max-w-md"
         >
@@ -80,14 +92,15 @@ export default function DoubleStairPreloaderElement() {
           </h2>
 
           <p className="text-xs text-white/40 leading-relaxed font-heading max-w-xs mx-auto">
-            Double-parting vertical stair columns transition successfully uncovered the creative sandbox.
+            Double-parting vertical stair columns transition successfully uncovered the creative
+            sandbox.
           </p>
         </motion.div>
       </div>
 
       {/* Main Preloader Screen Overlay (for text phase) */}
       <AnimatePresence>
-        {hasStarted && !isWiped && (
+        {hasStarted && !isWiped && !prefersReducedMotion && (
           <motion.div
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -98,9 +111,9 @@ export default function DoubleStairPreloaderElement() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ 
+                  exit={{
                     opacity: 0,
-                    transition: { duration: 0.8, ease: "easeInOut" }
+                    transition: { duration: 0.8, ease: "easeInOut" },
                   }}
                   transition={{ duration: 1.2, ease: "easeInOut" }}
                   className="px-6 flex flex-col items-center select-none"
@@ -116,7 +129,9 @@ export default function DoubleStairPreloaderElement() {
                       WebkitTextFillColor: "transparent",
                       textShadow: "0 0 30px rgba(255,255,255,0.05)",
                     }}
-                    animate={textState === "shimmer" ? { backgroundPosition: ["200% 0", "-200% 0"] } : {}}
+                    animate={
+                      textState === "shimmer" ? { backgroundPosition: ["200% 0", "-200% 0"] } : {}
+                    }
                     transition={{ duration: 2.2, ease: "easeInOut" }}
                   >
                     Vertex
@@ -137,7 +152,7 @@ export default function DoubleStairPreloaderElement() {
       </AnimatePresence>
 
       {/* Double Staggered Vertical Stair Columns Wipe */}
-      {!isAnimationFinished && (
+      {!isAnimationFinished && !prefersReducedMotion && (
         <div className="absolute inset-0 z-50 flex pointer-events-none">
           {Array.from({ length: columnsCount }).map((_, i) => (
             <div key={i} className="h-full relative flex-1 border-l border-black/5">
