@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 
 function CornerMark({ className }: { className: string }) {
   return (
@@ -11,7 +11,12 @@ function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) 
   const scrollRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ container: scrollRef });
-  const progress = scrollYProgress;
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 118,
+    damping: 30,
+    mass: 0.25,
+  });
+  const progress = prefersReducedMotion ? scrollYProgress : smoothProgress;
   const frameTransform = useTransform(
     progress,
     [0, 0.25, 0.58, 0.82, 1],
@@ -66,7 +71,7 @@ function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) 
       className="relative h-full w-full overflow-y-auto bg-[#f2f0e9] text-[#111111] scrollbar-none"
     >
       <div
-        className={`relative min-h-full ${previewMode === "fullscreen" ? "h-[300dvh]" : "h-[2200px]"}`}
+        className={`relative min-h-full ${previewMode === "fullscreen" ? "h-[150dvh]" : "h-[1480px]"}`}
       >
         <div
           className={`sticky top-0 overflow-hidden ${
