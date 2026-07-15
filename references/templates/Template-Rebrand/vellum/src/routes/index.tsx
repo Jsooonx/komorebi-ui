@@ -255,20 +255,22 @@ function VellumPage() {
               </button>
             ))}
           </div>
-          <AnimatePresence initial={false}>
-            <motion.div
-              className="lens__detail-copy"
-              key={lens.id}
-              initial={{ opacity: 0, y: 12, filter: "blur(5px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -9, filter: "blur(5px)" }}
-              transition={{ duration: 0.28, ease }}
-            >
-              <span>{lens.note}</span>
-              <h2>{lens.title}</h2>
-              <p>{lens.copy}</p>
-            </motion.div>
-          </AnimatePresence>
+          <div className="lens__detail">
+            <AnimatePresence initial={false}>
+              <motion.div
+                className="lens__detail-copy"
+                key={lens.id}
+                initial={{ opacity: 0, y: 12, filter: "blur(5px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -9, filter: "blur(5px)" }}
+                transition={{ duration: 0.28, ease }}
+              >
+                <span>{lens.note}</span>
+                <h2>{lens.title}</h2>
+                <p>{lens.copy}</p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </section>
 
