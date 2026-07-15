@@ -59,21 +59,21 @@ export default function ConnectedContext() {
           }}
         />
         <svg className="connected-context__trace" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false}>
             {active && (
               <motion.g key={active.id}>
                 <motion.path
                   d={`M ${active.point[0]} ${active.point[1]} C ${active.point[0]} 50, 42 49, 50 49`}
-                  initial={{ pathLength: 0, opacity: 0 }}
+                  initial={{ pathLength: 0, opacity: 0.35 }}
                   animate={{ pathLength: 1, opacity: 1 }}
                   exit={{ pathLength: 0, opacity: 0 }}
-                  transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 />
                 <motion.circle
                   r="1.15"
                   initial={{ cx: active.point[0], cy: active.point[1], opacity: 0 }}
                   animate={{ cx: 50, cy: 49, opacity: [0, 1, 1, 0] }}
-                  transition={{ duration: 0.9, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
                 />
               </motion.g>
             )}
