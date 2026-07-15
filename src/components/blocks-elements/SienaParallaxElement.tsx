@@ -66,7 +66,7 @@ function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) 
       className="relative h-full w-full overflow-y-auto bg-[#f2f0e9] text-[#111111] scrollbar-none"
     >
       <div
-        className={`relative min-h-full ${previewMode === "fullscreen" ? "h-[150dvh]" : "h-[1480px]"}`}
+        className={`relative min-h-full ${previewMode === "fullscreen" ? "h-[300dvh]" : "h-[2200px]"}`}
       >
         <div
           className={`sticky top-0 overflow-hidden ${
