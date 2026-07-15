@@ -67,9 +67,9 @@ function VellumTemplatePage() {
       <div className="absolute left-6 top-6 z-40">
         <button
           onClick={handleBack}
-          className="flex items-center gap-2 border border-white/25 bg-[#1b1816]/90 px-4 py-2 text-xs font-semibold text-[#f1ede5] shadow-lg backdrop-blur transition-colors hover:bg-[#1b1816]"
+          className="flex cursor-pointer items-center gap-2 rounded-xl border border-white/5 border-t-white/10 bg-warm-cream/90 px-4 py-2 font-heading text-xs font-semibold text-moss-green shadow-lg backdrop-blur transition-all hover:bg-warm-cream active:scale-[0.98]"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-4 w-4 text-moss-green" />
           Back to Gallery
         </button>
       </div>

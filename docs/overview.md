@@ -64,7 +64,7 @@ The Components detail route resolves canonical component elements and has no nes
 
 - TanStack Router owns native scroll restoration through the `createRouter({ scrollRestoration: true })` option; the deprecated `ScrollRestoration` component is not rendered in the root route.
 - Returning from a template preview opened through the gallery uses its original browser history entry, allowing TanStack Router to restore the exact preceding landing-page scroll position without creating a new root navigation. Direct template visits safely fall back to `/`.
-- Every live template preview shares one Komorebi-owned shell: Aura's Sunlight Leaf loading treatment and warm-cream bottom-right attribution watermark. The embedded template itself may retain its own visual identity.
+- Every live template preview shares one Komorebi-owned shell: Aura's Sunlight Leaf loading treatment, warm-cream Back to Gallery control, and warm-cream bottom-right attribution watermark. The embedded template itself may retain its own visual identity.
 - The command palette is lazy-loaded.
 - The main landing sections are currently loaded directly for navigation/re-entry testing.
 - The WebGL dither preview remains lazy-loaded because it pulls in the heavy Three.js/WebGL stack.
