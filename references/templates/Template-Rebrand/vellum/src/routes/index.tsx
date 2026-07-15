@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDownRight, ArrowUpRight, Menu, Minus, Plus, X } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Menu, Plus, X } from "lucide-react";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -75,7 +75,18 @@ const reveal = {
   hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
   visible: { opacity: 1, y: 0, filter: "blur(0px)" },
 };
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: { delayChildren: 0.04, staggerChildren: 0.1 },
+  },
+};
+const imageReveal = {
+  hidden: { opacity: 0, scale: 1.025, clipPath: "inset(6% 5%)" },
+  visible: { opacity: 1, scale: 1, clipPath: "inset(0%)" },
+};
 const ease = [0.16, 1, 0.3, 1] as const;
+const sectionViewport = { once: true, amount: 0.18 };
 
 export const Route = createFileRoute("/")({ component: VellumPage });
 
@@ -88,28 +99,34 @@ function VellumPage() {
 
   return (
     <main className="vellum">
-      <header className="vellum-nav">
-        <a className="vellum-nav__brand" href="#top" aria-label="Vellum home">
+      <motion.header className="vellum-nav" initial="hidden" animate="visible" variants={stagger}>
+        <motion.a
+          className="vellum-nav__brand"
+          href="#top"
+          aria-label="Vellum home"
+          variants={reveal}
+        >
           <i>V</i>
           <span>Vellum</span>
-        </a>
-        <nav className="vellum-nav__links" aria-label="Main navigation">
+        </motion.a>
+        <motion.nav className="vellum-nav__links" aria-label="Main navigation" variants={reveal}>
           <a href="#editions">Editions</a>
           <a href="#lens">Approach</a>
           <a href="#notes">Notes</a>
-        </nav>
-        <a className="vellum-nav__cta" href="#viewing">
+        </motion.nav>
+        <motion.a className="vellum-nav__cta" href="#viewing" variants={reveal}>
           Request a viewing <ArrowUpRight size={14} />
-        </a>
-        <button
+        </motion.a>
+        <motion.button
           className="vellum-nav__menu"
           type="button"
           onClick={() => setMenuOpen(true)}
           aria-label="Open navigation"
+          variants={reveal}
         >
           <Menu size={20} />
-        </button>
-      </header>
+        </motion.button>
+      </motion.header>
 
       <AnimatePresence>
         {menuOpen && (
@@ -152,43 +169,58 @@ function VellumPage() {
           className="vellum-hero__copy"
           initial="hidden"
           animate="visible"
-          variants={reveal}
-          transition={{ duration: 0.85, ease, delay: 0.15 }}
+          variants={stagger}
+          transition={{ delay: 0.12 }}
         >
-          <p>Vellum / inaugural release / 2026</p>
-          <h1>
+          <motion.p variants={reveal} transition={{ duration: 0.72, ease }}>
+            Vellum / inaugural release / 2026
+          </motion.p>
+          <motion.h1 variants={reveal} transition={{ duration: 0.82, ease }}>
             Collect work
             <br />
             <em>that stays with you.</em>
-          </h1>
-          <a href="#editions">
+          </motion.h1>
+          <motion.a href="#editions" variants={reveal} transition={{ duration: 0.68, ease }}>
             Enter the viewing room <ArrowDownRight size={17} />
-          </a>
+          </motion.a>
         </motion.div>
         <motion.div
           className="vellum-hero__meta"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.7 }}
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          transition={{ delay: 0.54 }}
         >
-          <span>01—04</span>
-          <span>Lisbon / private edition</span>
+          <motion.span variants={reveal} transition={{ duration: 0.6, ease }}>
+            01—04
+          </motion.span>
+          <motion.span variants={reveal} transition={{ duration: 0.6, ease }}>
+            Lisbon / private edition
+          </motion.span>
         </motion.div>
       </section>
 
       <section className="editions" id="editions">
-        <div className="section-heading">
-          <p>Selected editions / 01—04</p>
-          <h2>
+        <motion.div
+          className="section-heading"
+          initial="hidden"
+          whileInView="visible"
+          viewport={sectionViewport}
+          variants={stagger}
+        >
+          <motion.p variants={reveal} transition={{ duration: 0.62, ease }}>
+            Selected editions / 01—04
+          </motion.p>
+          <motion.h2 variants={reveal} transition={{ duration: 0.76, ease }}>
             Four works,
             <br />
             <em>placed with intent.</em>
-          </h2>
-          <span>
+          </motion.h2>
+          <motion.span variants={reveal} transition={{ duration: 0.65, ease }}>
             Each release begins with a small, considered group of objects and the story that made
             them necessary.
-          </span>
-        </div>
+          </motion.span>
+        </motion.div>
         <div className="edition-grid">
           {editions.map((edition, index) => (
             <motion.article
@@ -223,18 +255,33 @@ function VellumPage() {
       </section>
 
       <section className="lens" id="lens">
-        <div className="lens__stage">
+        <motion.div
+          className="lens__stage"
+          initial="hidden"
+          whileInView="visible"
+          viewport={sectionViewport}
+          variants={imageReveal}
+          transition={{ duration: 0.95, ease }}
+        >
           <img src="/vellum/study.png" alt="Ceramic sculpture and oxblood textile on limestone" />
           <div className="lens__shade" />
           <div className="lens__number" aria-hidden="true">
             0{lenses.findIndex((entry) => entry.id === activeLens) + 1}
           </div>
-        </div>
-        <div className="lens__content">
-          <p>Collector's lens</p>
-          <div className="lens__controls">
+        </motion.div>
+        <motion.div
+          className="lens__content"
+          initial="hidden"
+          whileInView="visible"
+          viewport={sectionViewport}
+          variants={stagger}
+        >
+          <motion.p variants={reveal} transition={{ duration: 0.6, ease }}>
+            Collector's lens
+          </motion.p>
+          <motion.div className="lens__controls" variants={stagger}>
             {lenses.map((item) => (
-              <button
+              <motion.button
                 type="button"
                 key={item.id}
                 onMouseEnter={() => setActiveLens(item.id)}
@@ -242,6 +289,8 @@ function VellumPage() {
                 onClick={() => setActiveLens(item.id)}
                 className={activeLens === item.id ? "is-active" : ""}
                 aria-pressed={activeLens === item.id}
+                variants={reveal}
+                transition={{ duration: 0.56, ease }}
               >
                 {activeLens === item.id && (
                   <motion.span
@@ -252,10 +301,14 @@ function VellumPage() {
                 <small>{item.number}</small>
                 <b>{item.label}</b>
                 <Plus size={15} />
-              </button>
+              </motion.button>
             ))}
-          </div>
-          <div className="lens__detail">
+          </motion.div>
+          <motion.div
+            className="lens__detail"
+            variants={reveal}
+            transition={{ duration: 0.68, ease }}
+          >
             <AnimatePresence initial={false}>
               <motion.div
                 className="lens__detail-copy"
@@ -270,28 +323,37 @@ function VellumPage() {
                 <p>{lens.copy}</p>
               </motion.div>
             </AnimatePresence>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
-      <section className="notes" id="notes">
-        <div className="notes__quote">
+      <motion.section
+        className="notes"
+        id="notes"
+        initial="hidden"
+        whileInView="visible"
+        viewport={sectionViewport}
+        variants={stagger}
+      >
+        <motion.div className="notes__quote" variants={reveal} transition={{ duration: 0.7, ease }}>
           <p>Artist notes / Mara Voss</p>
           <blockquote>
             “I wanted the surface to feel like it had already been <em>remembered.</em>”
           </blockquote>
           <span>From the studio journal, April 2026</span>
-        </div>
+        </motion.div>
         <motion.div
           className="notes__image"
-          initial={{ opacity: 0, clipPath: "inset(8% 10%)" }}
-          whileInView={{ opacity: 1, clipPath: "inset(0%)" }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 1, ease }}
+          variants={imageReveal}
+          transition={{ duration: 0.95, ease }}
         >
           <img src="/vellum/edition-01.png" alt="Soft Measure, a travertine and bronze artwork" />
         </motion.div>
-        <div className="notes__record">
+        <motion.div
+          className="notes__record"
+          variants={reveal}
+          transition={{ duration: 0.68, ease }}
+        >
           <span>Edition 07 / 18</span>
           <p>
             Made slowly in a small foundry outside Lisbon. The linen is hand-dyed; each stone
@@ -300,20 +362,35 @@ function VellumPage() {
           <a href="#viewing">
             Read the edition record <ArrowUpRight size={15} />
           </a>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section className="viewing" id="viewing">
-        <div className="viewing__heading">
-          <p>Private viewing / room 01</p>
-          <h2>
+      <motion.section
+        className="viewing"
+        id="viewing"
+        initial="hidden"
+        whileInView="visible"
+        viewport={sectionViewport}
+        variants={stagger}
+      >
+        <motion.div className="viewing__heading" variants={stagger}>
+          <motion.p variants={reveal} transition={{ duration: 0.6, ease }}>
+            Private viewing / room 01
+          </motion.p>
+          <motion.h2 variants={reveal} transition={{ duration: 0.76, ease }}>
             Take your time
             <br />
             <em>with the work.</em>
-          </h2>
-          <span>Select an edition to bring it forward.</span>
-        </div>
-        <div className="viewing__composition">
+          </motion.h2>
+          <motion.span variants={reveal} transition={{ duration: 0.62, ease }}>
+            Select an edition to bring it forward.
+          </motion.span>
+        </motion.div>
+        <motion.div
+          className="viewing__composition"
+          variants={reveal}
+          transition={{ duration: 0.82, ease }}
+        >
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               className="viewing__frame"
@@ -347,32 +424,45 @@ function VellumPage() {
               </button>
             ))}
           </div>
-        </div>
-        <a className="viewing__cta" href="mailto:viewing@vellum.example">
+        </motion.div>
+        <motion.a
+          className="viewing__cta"
+          href="mailto:viewing@vellum.example"
+          variants={reveal}
+          transition={{ duration: 0.62, ease }}
+        >
           Request a private viewing <ArrowUpRight size={17} />
-        </a>
-      </section>
+        </motion.a>
+      </motion.section>
 
-      <footer className="vellum-footer">
-        <div>
+      <motion.footer
+        className="vellum-footer"
+        initial="hidden"
+        whileInView="visible"
+        viewport={sectionViewport}
+        variants={stagger}
+      >
+        <motion.div variants={reveal} transition={{ duration: 0.64, ease }}>
           <a className="vellum-nav__brand" href="#top">
             <i>V</i>
             <span>Vellum</span>
           </a>
           <p>Contemporary editions, carefully placed.</p>
-        </div>
-        <div>
+        </motion.div>
+        <motion.div variants={reveal} transition={{ duration: 0.64, ease }}>
           <span>Contact</span>
           <a href="mailto:studio@vellum.example">studio@vellum.example</a>
           <a href="#viewing">Private viewings</a>
-        </div>
-        <div>
+        </motion.div>
+        <motion.div variants={reveal} transition={{ duration: 0.64, ease }}>
           <span>Elsewhere</span>
           <a href="#editions">Selected editions</a>
           <a href="#notes">Artist notes</a>
-        </div>
-        <small>© 2026 Vellum. Made for slow looking.</small>
-      </footer>
+        </motion.div>
+        <motion.small variants={reveal} transition={{ duration: 0.64, ease }}>
+          © 2026 Vellum. Made for slow looking.
+        </motion.small>
+      </motion.footer>
     </main>
   );
 }

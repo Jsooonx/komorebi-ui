@@ -7,6 +7,7 @@ Vellum is a standalone contemporary-editions landing page rebuilt from the inter
 - Quiet museum editorial composition: limestone, charcoal, ivory, and restrained oxblood.
 - Six surfaces: Hero, Selected Editions, Collector's Lens, Artist Notes, Private Viewing, and Footer.
 - Local Framer Motion interactions: hover/focus morphs, in-place detail transitions, and no autoplay carousel.
+- Every surface enters in a quiet stagger: navigation and hero load in sequence, while each downstream section reveals its heading, visual, controls, and supporting content without replaying its local interactions.
 - Collector's Lens keeps its control geometry and an explicitly anchored detail wrapper stable during selection changes, so hover/tap cannot shift labels, flash stale copy, or escape into another section.
 - Box CTAs invert to black on hover; underline CTAs draw a black line over the resting rule from left to right.
 - Native mobile layout: visual stages retain the art while spatial controls become direct tap surfaces.
