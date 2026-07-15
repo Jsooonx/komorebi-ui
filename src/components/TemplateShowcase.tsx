@@ -19,15 +19,16 @@ interface TemplateItem {
 
 const TEMPLATES: TemplateItem[] = [
   {
-    id: "jplus",
-    title: "JPlus - Subscription E-Commerce",
-    creator: "E-Commerce",
+    id: "vellum",
+    title: "Vellum - Contemporary Editions",
+    creator: "Art / Culture",
     creatorAvatar: "/KomorebiLogoUpdate1.png",
-    sections: "2 Sections",
+    sections: "5 Sections",
     badgeType: "copy",
-    tags: ["E-Commerce", "Dark UI", "Subscription", "Subtle Animation"],
+    tags: ["Editorial", "Luxury", "Contemporary Art", "Staggered Motion"],
     prompt:
-      "Create a premium e-commerce landing page called JPlus for digital subscriptions. The design must be ultra-dark and modern with a browser viewport frame. The header has a JPlus logo, navigation, and 'Start shopping' button. Inside the browser window, display a sidebar listing categories (AI Tools, Streaming, Productivity, Design) and a main content grid. The grid should feature a beige analytics card ('Orders today: 1,247 delivered', 'Success: 99%') with a smooth line chart, and a pink customer card ('10k+ verified users'). Add subtle entrance animations on mount.",
+      "Create a private contemporary-editions landing page named Vellum. Use a quiet museum editorial direction with limestone, charcoal, ivory, and restrained oxblood tones. Build five primary surfaces: a gallery hero, selected editions, collector's lens, artist notes, and a private viewing room. Use original art imagery, refined serif display typography, and one-time staggered entrances. Keep selection and hover motion local, smooth, and deliberateâ€”never autoplaying or dashboard-like.",
+    videoSrc: "/Vellum.mp4",
   },
   {
     id: "aura",

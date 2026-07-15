@@ -19,8 +19,9 @@ The Template Showcase (located in Page 4) features 8 premium landing page templa
 *   **Vellum Rebrand:** `references/templates/Template-Rebrand/vellum/` is a standalone full rebrand informed by, but isolated from, `Lovable-Design/Pallet-Ross`. It replaces the original marketplace language with a private contemporary-editions platform and has six surfaces: Hero, Selected Editions, Collector's Lens, Artist Notes, Private Viewing, and Footer. Its original generated gallery imagery lives under `public/vellum/`; the source reference remains unchanged.
 *   **Vellum Interaction Refinement:** Collector's Lens uses a fixed detail slot and uniform row geometry so its shared hover highlight changes content without shifting controls or clipping the oversized index. Box CTAs invert to black locally; underline CTAs draw a black left-to-right cover line over their resting rule.
 *   **Vellum Entrances:** Vellum uses restrained, one-time staggered entrances across its navigation, hero, editions, lens, notes, viewing room, and footer. Content enters in reading order, while the existing hover and selection behavior remains independent and does not replay after entry.
+*   **Vellum Gallery Card:** Vellum replaces the former Jplus entry as the first Template Showcase card. Its supplied `public/Vellum.mp4` is the card preview and restarts cleanly on hover, matching the existing gallery-video behavior.
 *   **Template Identity Assets:** Aura and Vellum each expose a dedicated root-level SVG favicon with an explicit shortcut-icon fallback and versioned URL, so browser tabs use the template's actual identity rather than a blank, inherited, or cached application icon.
-*   **Coming Soon Placeholders:** 7 of the templates (`jplus`, `shyen`, `synergeus`, `vesper`, `aeon`, `apex`, `kora`) display a stylized "Coming Soon / In Queue" dashboard placeholder overlay, indicating templates scheduled for upcoming releases.
+*   **Coming Soon Placeholders:** 6 templates (`shyen`, `synergeus`, `vesper`, `aeon`, `apex`, `kora`) display a stylized "Coming Soon / In Queue" dashboard placeholder overlay, indicating templates scheduled for upcoming releases.
 
 ---
 
