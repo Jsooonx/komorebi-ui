@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
+import { SunlightLeafLogo } from "@/components/DynamicIsland";
 
 const getVellumUrl = () => {
   if (typeof window !== "undefined") {
@@ -21,18 +22,6 @@ export const Route = createFileRoute("/templates/vellum")({
   component: VellumTemplatePage,
 });
 
-function VellumMark({ className }: { className?: string }) {
-  return (
-    <span
-      className={`grid place-items-center rounded-full border border-current font-serif text-base font-normal ${className ?? ""}`}
-      aria-hidden="true"
-      style={{ width: 26, height: 26 }}
-    >
-      V
-    </span>
-  );
-}
-
 function VellumTemplatePage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
@@ -49,20 +38,20 @@ function VellumTemplatePage() {
   };
 
   return (
-    <div className="relative h-screen w-screen select-none overflow-hidden bg-[#1b1816]">
+    <div className="relative h-screen w-screen select-none overflow-hidden bg-[#08090c]">
       <AnimatePresence>
         {isLoading && (
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.45, ease: "easeInOut" }}
-            className="absolute inset-0 z-50 flex items-center justify-center bg-[#1b1816] text-[#f1ede5]"
+            className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#08090c]"
           >
             <motion.div
               animate={{ scale: [1, 1.06, 1], opacity: [0.62, 1, 0.62] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
             >
-              <VellumMark />
+              <SunlightLeafLogo className="h-12 w-12" />
             </motion.div>
           </motion.div>
         )}
@@ -85,9 +74,11 @@ function VellumTemplatePage() {
         </button>
       </div>
 
-      <div className="pointer-events-none absolute bottom-6 right-6 z-40 flex items-center gap-2 bg-[#1b1816]/90 px-4 py-2 text-xs font-semibold text-[#f1ede5] shadow-lg backdrop-blur">
-        <VellumMark className="text-sm" />
-        <span>Komorebi UI</span>
+      <div className="pointer-events-none absolute bottom-6 right-6 z-40">
+        <div className="flex items-center gap-2.5 rounded-xl border border-white/5 border-t-white/10 bg-warm-cream/90 px-4 py-2 font-heading text-xs font-semibold text-moss-green shadow-lg backdrop-blur">
+          <SunlightLeafLogo className="h-5 w-5" />
+          <span>Komorebi UI</span>
+        </div>
       </div>
     </div>
   );
