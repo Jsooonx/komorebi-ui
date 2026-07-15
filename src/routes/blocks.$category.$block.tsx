@@ -50,7 +50,7 @@ function BlockFullscreenPage() {
       <BlockPage />
       <button
         onClick={() => navigate({ to: "/blocks/$category", params: { category: returnCategory } })}
-        className="absolute right-5 top-5 z-50 rounded-full border border-white/10 bg-black/60 p-2 text-white/65 opacity-0 shadow-lg transition-all hover:bg-black/90 hover:text-white group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+        className="absolute right-5 top-5 z-50 rounded-full border border-white/10 bg-black/60 p-2 text-white/65 opacity-0 shadow-lg transition-[opacity,background-color,color,transform] duration-150 ease-[var(--ease-ui-out)] hover:bg-black/90 hover:text-white active:scale-[0.95] group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
         title="Exit Fullscreen"
         aria-label="Exit Fullscreen"
       >

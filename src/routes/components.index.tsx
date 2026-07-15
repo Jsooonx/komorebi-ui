@@ -65,20 +65,20 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.05,
+      staggerChildren: 0.035,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 18, scale: 0.98 },
+  hidden: { opacity: 0, y: 8, scale: 0.995 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.45,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 0.28,
+      ease: [0.23, 1, 0.32, 1],
     },
   },
 };
@@ -127,7 +127,7 @@ function ComponentCard({
       <div
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
-        className="group flex flex-col bg-[#0c0c0e] border border-white/[0.04] hover:border-white/10 rounded-2xl overflow-hidden p-4 select-none cursor-pointer relative transition-all duration-300 h-full"
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.04] bg-[#0c0c0e] p-4 transition-[border-color,background-color,transform] duration-200 ease-[var(--ease-ui-out)] hover:border-white/10 active:scale-[0.995] select-none cursor-pointer"
       >
         <div
           className={`relative w-full rounded-xl bg-black border border-white/5 overflow-hidden flex items-center justify-center transition-colors ${item.viewportHeightClass || "h-[180px]"}`}

@@ -97,12 +97,12 @@ export default function Credits() {
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex items-center justify-center transition-all duration-300"
+              className="group relative flex items-center justify-center transition-[transform,opacity] duration-200 ease-[var(--ease-ui-out)]"
             >
               <img
                 src={item.src}
                 alt={item.name}
-                className="h-6 sm:h-7 w-auto object-contain transition-all duration-300 hover:scale-105 opacity-90 hover:opacity-100"
+                className="h-6 w-auto object-contain opacity-90 transition-[transform,opacity] duration-200 ease-[var(--ease-ui-out)] hover:scale-105 hover:opacity-100 sm:h-7"
               />
             </a>
           ))}
@@ -133,12 +133,12 @@ export default function Credits() {
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex items-center justify-center transition-all duration-300"
+              className="group relative flex items-center justify-center transition-[transform,opacity] duration-200 ease-[var(--ease-ui-out)]"
             >
               <img
                 src={item.src}
                 alt={item.name}
-                className="h-5.5 sm:h-6.5 w-auto object-contain transition-all duration-300 hover:scale-105 opacity-90 hover:opacity-100"
+                className="h-5.5 w-auto object-contain opacity-90 transition-[transform,opacity] duration-200 ease-[var(--ease-ui-out)] hover:scale-105 hover:opacity-100 sm:h-6.5"
               />
             </a>
           ))}

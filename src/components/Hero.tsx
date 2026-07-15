@@ -143,7 +143,7 @@ export default function Hero() {
           {/* CLI Command Pill (Inspired by Skiper UI) */}
           <div
             onClick={handleCopy}
-            className="group flex items-center justify-between gap-3 px-5 py-3 rounded-full bg-white/5 text-moss-green border border-white/10 shadow-lg cursor-pointer hover:bg-white/10 active:scale-[0.98] transition-all w-full sm:w-auto font-mono text-sm max-w-[310px]"
+            className="group flex w-full max-w-[310px] cursor-pointer items-center justify-between gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 font-mono text-sm text-moss-green shadow-lg transition-[background-color,border-color,color,transform] duration-150 ease-[var(--ease-ui-out)] hover:bg-white/10 active:scale-[0.98] sm:w-auto"
           >
             <div className="flex items-center gap-2">
               <Terminal className="w-4 h-4 text-sage-green shrink-0" />
@@ -201,8 +201,8 @@ export default function Hero() {
 
             <div className="flex items-center animate-marquee w-max shrink-0 h-12">
               {COMPAT_BRANDS.concat(COMPAT_BRANDS).map((brand, idx) => (
-                <div 
-                  key={idx} 
+                <div
+                  key={idx}
                   className="flex items-center gap-2.5 shrink-0 cursor-pointer group"
                   style={{ marginRight: "40px" }}
                 >

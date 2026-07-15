@@ -168,14 +168,14 @@ function BlockRow({ item }: { item: BlockItem }) {
 
   return (
     <>
-      <div className="block-enter flex flex-col overflow-hidden rounded-xl border border-white/5 bg-[#09090b]">
+      <div className="flex flex-col overflow-hidden rounded-xl border border-white/5 bg-[#09090b]">
         {/* Top Toolbar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-4 py-3 bg-[#0d0d0f] border-b border-white/5">
           {/* Left: Tab options */}
           <div className="flex items-center gap-1.5 bg-black/35 p-1 rounded-lg border border-white/5 w-fit">
             <button
               onClick={() => setActiveTab("preview")}
-              className={`px-3 py-1 rounded-md text-[10px] font-semibold transition-all cursor-pointer ${
+              className={`cursor-pointer rounded-md px-3 py-1 text-[10px] font-semibold transition-[background-color,color,box-shadow,transform] duration-150 ease-[var(--ease-ui-out)] active:scale-[0.98] ${
                 activeTab === "preview"
                   ? "bg-white/10 text-white shadow-sm"
                   : "text-white/40 hover:text-white/70"
@@ -185,7 +185,7 @@ function BlockRow({ item }: { item: BlockItem }) {
             </button>
             <button
               onClick={() => setActiveTab("code")}
-              className={`px-3 py-1 rounded-md text-[10px] font-semibold transition-all cursor-pointer ${
+              className={`cursor-pointer rounded-md px-3 py-1 text-[10px] font-semibold transition-[background-color,color,box-shadow,transform] duration-150 ease-[var(--ease-ui-out)] active:scale-[0.98] ${
                 activeTab === "code"
                   ? "bg-white/10 text-white shadow-sm"
                   : "text-white/40 hover:text-white/70"

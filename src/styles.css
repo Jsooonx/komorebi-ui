@@ -15,6 +15,11 @@
   --color-sun-gold: #e8a969;
 }
 
+:root {
+  --ease-ui-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-ui-move: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
 @keyframes block-slide-up {
   from {
     opacity: 0;
@@ -26,7 +31,7 @@
   }
 }
 .block-enter {
-  animation: block-slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: block-slide-up 0.32s var(--ease-ui-out) both;
 }
 
 /* The catalog and detail playground supply the only visible shell. These scoped
@@ -157,6 +162,20 @@ html {
 
 body {
   font-family: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Frequent catalog interactions should feel immediate. Decorative block motion
+   is handled by each block's own reduced-motion-aware implementation. */
+@media (prefers-reduced-motion: reduce) {
+  .block-enter,
+  .animate-marquee,
+  .animate-marquee-up,
+  .animate-marquee-down,
+  .story-bar-1 .story-bar-fill,
+  .story-bar-2 .story-bar-fill {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 @custom-variant dark (&:is(.dark *));
