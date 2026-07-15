@@ -37,6 +37,7 @@ export default function GuidanceLayer() {
         </svg>
         <div className="guidance-layer__gates" aria-label="Aura guidance principles">
           {gates.map((gate) => <motion.button layout className={`guidance-layer__gate ${gate.position}${activeGate === gate.id ? " is-active" : ""}`} type="button" key={gate.id} onMouseEnter={() => setActiveGate(gate.id)} onFocus={() => setActiveGate(gate.id)} onClick={() => setActiveGate(gate.id)} aria-pressed={activeGate === gate.id} transition={{ type: "spring", stiffness: 290, damping: 26 }}>
+            {activeGate === gate.id && <motion.span className="guidance-layer__gate-highlight" layoutId="aura-guidance-active-highlight" transition={{ type: "spring", stiffness: 330, damping: 30, mass: 0.52 }} />}
             <span>{gate.number}</span><b>{gate.label}</b>
             <AnimatePresence initial={false}>{activeGate === gate.id && <motion.small initial={{ width: 0, opacity: 0, filter: "blur(4px)" }} animate={{ width: "auto", opacity: 1, filter: "blur(0px)" }} exit={{ width: 0, opacity: 0, filter: "blur(4px)" }} transition={{ duration: 0.22, ease }}>{gate.status}</motion.small>}</AnimatePresence>
           </motion.button>)}

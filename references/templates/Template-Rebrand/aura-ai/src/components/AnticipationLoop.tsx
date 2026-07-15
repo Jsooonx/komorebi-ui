@@ -37,6 +37,7 @@ export default function AnticipationLoop() {
         </svg>
         <div className="anticipation-loop__moments" aria-label="Proactive support moments">
           {moments.map((moment) => <motion.button layout className={`anticipation-loop__moment ${moment.position}${activeMoment === moment.id ? " is-active" : ""}`} type="button" key={moment.id} onMouseEnter={() => setActiveMoment(moment.id)} onFocus={() => setActiveMoment(moment.id)} onClick={() => setActiveMoment(moment.id)} aria-pressed={activeMoment === moment.id} transition={{ type: "spring", stiffness: 290, damping: 26 }}>
+            {activeMoment === moment.id && <motion.span className="anticipation-loop__moment-highlight" layoutId="aura-anticipation-active-highlight" transition={{ type: "spring", stiffness: 330, damping: 30, mass: 0.52 }} />}
             <span>{moment.number}</span><b>{moment.label}</b>
             <AnimatePresence initial={false}>{activeMoment === moment.id && <motion.small initial={{ width: 0, opacity: 0, filter: "blur(4px)" }} animate={{ width: "auto", opacity: 1, filter: "blur(0px)" }} exit={{ width: 0, opacity: 0, filter: "blur(4px)" }} transition={{ duration: 0.22, ease }}>{moment.status}</motion.small>}</AnimatePresence>
           </motion.button>)}

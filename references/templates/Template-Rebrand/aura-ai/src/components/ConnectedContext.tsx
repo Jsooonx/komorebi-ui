@@ -91,6 +91,7 @@ export default function ConnectedContext() {
             aria-pressed={activeSource === source.id}
             transition={{ type: "spring", stiffness: 290, damping: 26 }}
           >
+            {activeSource === source.id && <motion.span className="connected-context__source-highlight" layoutId="aura-context-active-highlight" transition={{ type: "spring", stiffness: 330, damping: 30, mass: 0.52 }} />}
             <span>0{index + 1}</span>
             <b>{source.label}</b>
             <AnimatePresence initial={false}>
