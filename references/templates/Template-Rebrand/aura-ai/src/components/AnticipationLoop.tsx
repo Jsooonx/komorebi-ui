@@ -45,6 +45,23 @@ export default function AnticipationLoop() {
         <div className="anticipation-loop__scene-note" aria-live="polite"><AnimatePresence mode="wait" initial={false}><motion.div key={active?.id ?? "resting"} initial={{ opacity: 0, y: 7, filter: "blur(4px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -5, filter: "blur(4px)" }} transition={{ duration: 0.22, ease }}><span>{active ? `${active.number} / ${active.label}` : "Aura anticipation"}</span><strong>{active?.title ?? "A quieter path to resolution."}</strong><p>{active?.copy ?? "Hover a moment to see how Aura turns an early signal into a helpful next step."}</p></motion.div></AnimatePresence></div>
       </motion.div>
 
+      <div className="anticipation-loop__mobile-list" aria-label="Proactive support moments">
+        {moments.map((moment) => (
+          <button
+            className={activeMoment === moment.id ? "is-active" : ""}
+            type="button"
+            key={moment.id}
+            onFocus={() => setActiveMoment(moment.id)}
+            onClick={() => setActiveMoment(moment.id)}
+            aria-pressed={activeMoment === moment.id}
+          >
+            <span>{moment.number}</span>
+            <b>{moment.label}</b>
+            <small>{activeMoment === moment.id ? moment.status : "Tap to inspect"}</small>
+          </button>
+        ))}
+      </div>
+
       <motion.div className="anticipation-loop__footer" initial="hidden" whileInView="visible" viewport={viewport} variants={reveal} transition={{ ...transition, delay: 0.28 }}>
         <p>Aura gets ahead of known friction so customers can stay focused on what they came to do.</p>
         <ol>{moments.map((moment) => <li className={activeMoment === moment.id ? "is-active" : ""} key={moment.id}><span>{moment.number}</span><strong>{moment.label}</strong><small>{moment.status}</small></li>)}</ol>

@@ -123,6 +123,23 @@ export default function ConnectedContext() {
         </motion.p>
       </motion.div>
 
+      <div className="connected-context__mobile-list" aria-label="Connected Aura sources">
+        {sources.map((source, index) => (
+          <button
+            className={activeSource === source.id ? "is-active" : ""}
+            type="button"
+            key={source.id}
+            onFocus={() => setActiveSource(source.id)}
+            onClick={() => setActiveSource(source.id)}
+            aria-pressed={activeSource === source.id}
+          >
+            <span>0{index + 1}</span>
+            <b>{source.label}</b>
+            <small>{activeSource === source.id ? source.copy : "Tap to trace"}</small>
+          </button>
+        ))}
+      </div>
+
       <motion.div
         className="connected-context__footer"
         initial="hidden"

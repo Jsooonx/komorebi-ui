@@ -47,6 +47,23 @@ export default function GuidanceLayer() {
         </div>
       </motion.div>
 
+      <div className="guidance-layer__mobile-list" aria-label="Aura guidance principles">
+        {gates.map((gate) => (
+          <button
+            className={activeGate === gate.id ? "is-active" : ""}
+            type="button"
+            key={gate.id}
+            onFocus={() => setActiveGate(gate.id)}
+            onClick={() => setActiveGate(gate.id)}
+            aria-pressed={activeGate === gate.id}
+          >
+            <span>{gate.number}</span>
+            <b>{gate.label}</b>
+            <small>{activeGate === gate.id ? gate.status : "Tap to inspect"}</small>
+          </button>
+        ))}
+      </div>
+
       <motion.div className="guidance-layer__footer" initial="hidden" whileInView="visible" viewport={viewport} variants={reveal} transition={{ ...transition, delay: 0.28 }}>
         <div className="guidance-layer__resting-copy"><span>One quiet operating layer</span><p>Your guidance shapes the response before it reaches a customer.</p><ul><li>Voice remains recognisable.</li><li>Knowledge remains approved.</li><li>Escalation remains human.</li></ul></div>
         <div className="guidance-layer__detail" aria-live="polite"><AnimatePresence mode="wait" initial={false}><motion.div key={active?.id ?? "resting"} initial={{ opacity: 0, y: 8, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -6, filter: "blur(5px)" }} transition={{ duration: 0.24, ease }}><span>{active ? `${active.number} / ${active.label}` : "Aura guidance"}</span><strong>{active?.title ?? "The customer meets one considered voice."}</strong><p>{active?.copy ?? "Hover a gate to see how Aura carries your standards through every moment."}</p></motion.div></AnimatePresence></div>

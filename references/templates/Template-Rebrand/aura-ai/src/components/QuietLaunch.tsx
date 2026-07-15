@@ -30,6 +30,22 @@ export default function QuietLaunch() {
         </div>
         <motion.p className="quiet-launch__active" key={active?.id ?? "resting"} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, ease }}>{active?.detail ?? "A considered rollout, not a leap of faith."}</motion.p>
       </motion.div>
+      <div className="quiet-launch__mobile-list" aria-label="Launch readiness checks">
+        {proofMarks.map((mark) => (
+          <button
+            className={activeMark === mark.id ? "is-active" : ""}
+            type="button"
+            key={mark.id}
+            onFocus={() => setActiveMark(mark.id)}
+            onClick={() => setActiveMark(mark.id)}
+            aria-pressed={activeMark === mark.id}
+          >
+            <span>{mark.number}</span>
+            <b>{mark.label}</b>
+            <small>{activeMark === mark.id ? mark.detail : "Tap to inspect"}</small>
+          </button>
+        ))}
+      </div>
       <motion.div className="quiet-launch__cta" initial="hidden" whileInView="visible" viewport={viewport} variants={reveal} transition={{ duration: 0.76, ease, delay: 0.14 }}>
         <p>Bring your knowledge, your standards, and one customer moment worth improving.</p>
         <button type="button">Plan your first conversation <span>↗</span></button>

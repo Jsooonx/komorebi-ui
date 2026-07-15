@@ -23,3 +23,7 @@ The Template Showcase (located in Page 4) features 8 premium landing page templa
 
 1.  **Prompt Storage:** The structured prompts containing typography specifications, layout structures, HSL tokens, and animation directives are stored in the templates data list (`TemplateShowcase.tsx`).
 2.  **Clipboard Copying:** Clicking "Copy Prompt" on any card copies the string to the user's clipboard and triggers a toast notification via `sonner`. Developers can paste this prompt directly into LLM builders like Claude, Lovable, or v0 to generate full page templates in seconds.
+
+## Aura mobile composition
+
+Aura has a native narrow-screen composition rather than a scaled desktop artboard. The desktop minimum width is removed; generated artwork becomes a compact visual stage; and the spatial controls in Connected Context, Guidance Layer, Anticipation Loop, and Quiet Launch become readable tap lists below their artwork. This preserves local trace interactions without cropped, overlapping labels or horizontal overflow.
