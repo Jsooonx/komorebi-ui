@@ -237,13 +237,16 @@ function TemplateCard({ item }: { item: TemplateItem }) {
     </>
   );
 
-  if (item.id === "aura") {
+  if (item.id === "aura" || item.id === "vellum") {
+    const previewRoute = item.id === "aura" ? "/templates/aura" : "/templates/vellum";
+    const returnStorageKey = `komorebi_${item.id}_return_to_gallery`;
+
     return (
       <Link
-        to="/templates/aura"
+        to={previewRoute}
         onMouseEnter={handleMouseEnter}
         onClick={() => {
-          sessionStorage.setItem("komorebi_aura_return_to_gallery", "true");
+          sessionStorage.setItem(returnStorageKey, "true");
         }}
         className="flex flex-col bg-[#0f0f12] border border-white/5 rounded-lg overflow-hidden hover:border-white/10 transition-all select-none group cursor-pointer"
       >
