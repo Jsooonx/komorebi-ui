@@ -466,6 +466,16 @@ body:not(.is-ready) .scroll-down { animation-play-state: paused !important; }
   .connected-context__source:hover, .connected-context__source:focus-visible, .connected-context__source.is-active { transform:translateY(-2px) scale(.85); }
 }
 
+/* ============ CONTEXT TO GUIDANCE BRIDGE ============ */
+.context-guidance-bridge { position:relative; height:clamp(270px,34vw,470px); overflow:hidden; margin-top:-1px; background:linear-gradient(180deg,#f9f0d6 0%,#f7f0dd 48%,#e7e7c6 100%); }
+.context-guidance-bridge::before { position:absolute; inset:0; background-image:linear-gradient(rgba(38,79,53,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(38,79,53,.045) 1px,transparent 1px); background-size:54px 54px; mask-image:linear-gradient(to bottom,black,transparent); content:""; pointer-events:none; }
+.context-guidance-bridge__core { position:absolute; top:-10%; left:50%; width:clamp(120px,16vw,240px); aspect-ratio:1; border-radius:50%; background:radial-gradient(circle,rgba(211,255,228,.96) 0 12%,rgba(85,212,160,.54) 28%,rgba(55,186,133,.2) 49%,transparent 70%); transform-origin:center; translate:-50% 0; filter:blur(2px); }
+.context-guidance-bridge__path { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.context-guidance-bridge__path path { fill:none; stroke:rgba(71,192,143,.86); stroke-width:.35; filter:drop-shadow(0 0 7px rgba(109,237,180,.85)); }
+.context-guidance-bridge__ribbon { position:absolute; bottom:-14%; left:50%; width:clamp(74px,11vw,168px); height:84%; border-radius:50% 50% 0 0 / 13% 13% 0 0; background:linear-gradient(90deg,transparent,rgba(150,255,207,.18) 19%,rgba(78,209,154,.72) 49%,rgba(150,255,207,.18) 81%,transparent); transform:translateX(-50%); transform-origin:bottom; filter:blur(1px); }
+.context-guidance-bridge p { position:absolute; bottom:clamp(25px,4vw,52px); left:50%; margin:0; color:rgba(31,76,48,.62); font-size:10px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; transform:translateX(-50%); white-space:nowrap; }
+@media (max-width:900px) { .context-guidance-bridge { height:280px; } }
+
 /* ============ GUIDANCE LAYER ============ */
 .guidance-layer { position:relative; overflow:hidden; padding:clamp(96px,12vw,170px) var(--page-pad); color:#183324; background:linear-gradient(145deg,#f8f0dd 0%,#e7e7c6 52%,#cfe0bb 100%); }
 .guidance-layer::before { position:absolute; inset:0; background:radial-gradient(circle at 18% 11%,rgba(255,244,193,.82),transparent 23%),radial-gradient(circle at 86% 81%,rgba(83,168,122,.17),transparent 28%); content:""; pointer-events:none; }
