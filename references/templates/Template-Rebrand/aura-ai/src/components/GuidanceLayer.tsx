@@ -18,6 +18,9 @@ export default function GuidanceLayer() {
 
   return (
     <section className="guidance-layer" id="docs" aria-labelledby="guidance-title">
+      <motion.svg className="guidance-layer__incoming-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.28 }}>
+        <motion.path d="M 39 0 C 39 25, 34 42, 43 61 C 48 74, 44 88, 39 100" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.72, ease }} />
+      </motion.svg>
       <div className="guidance-layer__header">
         <motion.p initial="hidden" whileInView="visible" viewport={viewport} variants={reveal} transition={transition}>05 — Guidance layer</motion.p>
         <motion.h2 id="guidance-title" initial="hidden" whileInView="visible" viewport={viewport} variants={reveal} transition={{ ...transition, delay: 0.1 }}>Intelligence should still sound like you.</motion.h2>
