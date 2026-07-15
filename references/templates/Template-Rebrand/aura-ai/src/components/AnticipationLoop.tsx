@@ -28,10 +28,10 @@ export default function AnticipationLoop() {
         <div className="anticipation-loop__wash" aria-hidden="true" />
         <motion.div className="anticipation-loop__focus" aria-hidden="true" animate={{ opacity: active ? 1 : 0 }} transition={{ duration: 0.28, ease }} style={{ background: active ? `radial-gradient(circle 230px at ${active.focus}, transparent 0 32%, rgba(16, 49, 32, 0.5) 86%)` : undefined }} />
         <svg className="anticipation-loop__trace" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false}>
             {active && <motion.g key={active.id}>
-              <motion.path d={`M 2 70 C 30 67, 40 58, ${active.point[0]} ${active.point[1]}`} initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} exit={{ pathLength: 0, opacity: 0 }} transition={{ duration: 0.64, ease }} />
-              <motion.circle r="1.05" initial={{ cx: 2, cy: 70, opacity: 0 }} animate={{ cx: active.point[0], cy: active.point[1], opacity: [0, 1, 1, 0] }} transition={{ duration: 0.84, delay: 0.1, ease }} />
+              <motion.path d={`M 2 70 C 30 67, 40 58, ${active.point[0]} ${active.point[1]}`} initial={{ pathLength: 0, opacity: 0.35 }} animate={{ pathLength: 1, opacity: 1 }} exit={{ pathLength: 0, opacity: 0 }} transition={{ duration: 0.4, ease }} />
+              <motion.circle r="1.05" initial={{ cx: 2, cy: 70, opacity: 0 }} animate={{ cx: active.point[0], cy: active.point[1], opacity: [0, 1, 1, 0] }} transition={{ duration: 0.56, ease }} />
             </motion.g>}
           </AnimatePresence>
         </svg>

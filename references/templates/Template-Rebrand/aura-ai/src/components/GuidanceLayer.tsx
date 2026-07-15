@@ -28,10 +28,10 @@ export default function GuidanceLayer() {
         <div className="guidance-layer__wash" aria-hidden="true" />
         <motion.div className="guidance-layer__focus" aria-hidden="true" animate={{ opacity: active ? 1 : 0 }} transition={{ duration: 0.28, ease }} style={{ background: active ? `radial-gradient(ellipse 250px 270px at ${active.focus}, transparent 0 32%, rgba(20, 47, 31, 0.47) 86%)` : undefined }} />
         <svg className="guidance-layer__trace" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false}>
             {active && <motion.g key={active.id}>
-              <motion.path d={`M 3 52 C 23 49, ${active.point[0] - 9} 55, ${active.point[0]} ${active.point[1]}`} initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} exit={{ pathLength: 0, opacity: 0 }} transition={{ duration: 0.62, ease }} />
-              <motion.circle r="1.05" initial={{ cx: 3, cy: 52, opacity: 0 }} animate={{ cx: active.point[0], cy: active.point[1], opacity: [0, 1, 1, 0] }} transition={{ duration: 0.82, delay: 0.1, ease }} />
+              <motion.path d={`M 3 52 C 23 49, ${active.point[0] - 9} 55, ${active.point[0]} ${active.point[1]}`} initial={{ pathLength: 0, opacity: 0.35 }} animate={{ pathLength: 1, opacity: 1 }} exit={{ pathLength: 0, opacity: 0 }} transition={{ duration: 0.4, ease }} />
+              <motion.circle r="1.05" initial={{ cx: 3, cy: 52, opacity: 0 }} animate={{ cx: active.point[0], cy: active.point[1], opacity: [0, 1, 1, 0] }} transition={{ duration: 0.56, ease }} />
             </motion.g>}
           </AnimatePresence>
         </svg>
