@@ -34,7 +34,7 @@ const TEMPLATES: TemplateItem[] = [
     title: "Aura - B2B Conversational AI",
     creator: "AI / SaaS",
     creatorAvatar: "/KomorebiLogoUpdate1.png",
-    sections: "6 Sections",
+    sections: "7 Sections",
     badgeType: "get",
     tags: ["B2B", "SaaS", "Conversational AI", "Staggered Text"],
     prompt:
