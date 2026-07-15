@@ -3,7 +3,7 @@ export default function PlanLensPricingCard({ minimal = false }: ComponentPrevie
   return (
     <div className="h-full w-full overflow-hidden bg-[#0a0a0b]">
       <video
-        src="/Blocks-Pricing-PlanLens.mp4"
+        src="/assets/blocks/pricing/plan-lens/preview.mp4"
         autoPlay
         muted
         loop

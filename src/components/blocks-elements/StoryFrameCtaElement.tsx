@@ -14,7 +14,7 @@ function EditorialVisual({ active }: { active: boolean }) {
       <motion.img
         animate={{ scale: active ? 1.08 : 1, x: active ? -12 : 0, y: active ? -8 : 0 }}
         transition={{ type: "spring", stiffness: 200, damping: 30 }}
-        src="/images/story-frame-cta.png"
+        src="/assets/blocks/cta/story-frame/visual.png"
         alt="Quiet architectural workspace"
         className="absolute inset-0 h-full w-full object-cover"
       />

@@ -9,7 +9,7 @@ const chapters = [
     eyebrow: "Field study / north",
     title: "Move toward the signal.",
     copy: "A clear direction begins with the details closest to the work.",
-    image: "/images/pinterest/unraveling.jpg",
+    image: "/assets/shared/editorial/pinterest/unraveling.jpg",
     position: "object-[center_35%]",
   },
   {
@@ -17,7 +17,7 @@ const chapters = [
     eyebrow: "Field study / light",
     title: "Keep the frame open.",
     copy: "Make room for the ideas that need a little longer to arrive.",
-    image: "/images/pinterest/shattered.jpg",
+    image: "/assets/shared/editorial/pinterest/shattered.jpg",
     position: "object-center",
   },
   {
@@ -25,7 +25,7 @@ const chapters = [
     eyebrow: "Field study / structure",
     title: "Build the quiet parts.",
     copy: "The strongest systems are often felt before they are noticed.",
-    image: "/images/pinterest/random1.jpg",
+    image: "/assets/shared/editorial/pinterest/random1.jpg",
     position: "object-center",
   },
   {
@@ -33,7 +33,7 @@ const chapters = [
     eyebrow: "Field study / horizon",
     title: "Leave space to continue.",
     copy: "A useful ending should still invite the next considered step.",
-    image: "/images/pinterest/hestia.jpg",
+    image: "/assets/shared/editorial/pinterest/hestia.jpg",
     position: "object-[center_38%]",
   },
 ] as const;

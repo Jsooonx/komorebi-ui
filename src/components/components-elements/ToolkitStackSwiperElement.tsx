@@ -5,19 +5,19 @@ const CARD_DATA = [
   {
     id: 0,
     glow: "rgba(190, 203, 109, 0.25)",
-    src: "/scenery_aurora.png",
+    src: "/assets/components/toolkit-stack-swiper/aurora.png",
     title: "Aurora Scenery",
   },
   {
     id: 1,
     glow: "rgba(232, 169, 105, 0.25)",
-    src: "/scenery_sunset.png",
+    src: "/assets/components/toolkit-stack-swiper/sunset.png",
     title: "Sunset Scenery",
   },
   {
     id: 2,
     glow: "rgba(232, 169, 105, 0.2)",
-    src: "/scenery_mountains.png",
+    src: "/assets/components/toolkit-stack-swiper/mountains.png",
     title: "Mountain Scenery",
   },
 ];

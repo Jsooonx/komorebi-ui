@@ -8,19 +8,31 @@ interface LogoItem {
 }
 
 const INSPIRATIONS: LogoItem[] = [
-  { name: "Skiper UI", src: "/logos/skiperui.png", url: "https://skiper-ui.com/" },
-  { name: "Aceternity UI", src: "/logos/aceternity.png", url: "https://ui.aceternity.com" },
-  { name: "Tailark", src: "/logos/tailark.png", url: "https://tailark.com" },
-  { name: "Shadcn UI", src: "/logos/shadcnui.png", url: "https://ui.shadcn.com" },
-  { name: "React Bits", src: "/logos/reactbits.png", url: "https://reactbits.dev" },
+  { name: "Skiper UI", src: "/assets/shared/logos/skiperui.png", url: "https://skiper-ui.com/" },
+  {
+    name: "Aceternity UI",
+    src: "/assets/shared/logos/aceternity.png",
+    url: "https://ui.aceternity.com",
+  },
+  { name: "Tailark", src: "/assets/shared/logos/tailark.png", url: "https://tailark.com" },
+  { name: "Shadcn UI", src: "/assets/shared/logos/shadcnui.png", url: "https://ui.shadcn.com" },
+  { name: "React Bits", src: "/assets/shared/logos/reactbits.png", url: "https://reactbits.dev" },
 ];
 
 const STACK: LogoItem[] = [
-  { name: "React.js", src: "/logos/react.svg", url: "https://react.dev" },
-  { name: "Tailwind CSS", src: "/logos/tailwindcss.svg", url: "https://tailwindcss.com" },
-  { name: "Vercel", src: "/logos/vercel.com-logo.webp", url: "https://vercel.com" },
-  { name: "Supabase", src: "/logos/supabase.com-logo.webp", url: "https://supabase.com" },
-  { name: "Codex", src: "/logos/codex-nobg.png", url: "https://chatgpt.com/codex/" },
+  { name: "React.js", src: "/assets/shared/logos/react.svg", url: "https://react.dev" },
+  {
+    name: "Tailwind CSS",
+    src: "/assets/shared/logos/tailwindcss.svg",
+    url: "https://tailwindcss.com",
+  },
+  { name: "Vercel", src: "/assets/shared/logos/vercel.com-logo.webp", url: "https://vercel.com" },
+  {
+    name: "Supabase",
+    src: "/assets/shared/logos/supabase.com-logo.webp",
+    url: "https://supabase.com",
+  },
+  { name: "Codex", src: "/assets/shared/logos/codex-nobg.png", url: "https://chatgpt.com/codex/" },
 ];
 
 export default function Credits() {

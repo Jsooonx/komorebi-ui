@@ -74,7 +74,7 @@ function SienaScene({ previewMode }: { previewMode: "catalog" | "fullscreen" }) 
             }}
           >
             <motion.img
-              src="/siena-parallax-editorial.png"
+              src="/assets/blocks/parallax/siena/editorial.png"
               alt="Monochrome editorial portrait"
               className="h-full w-full object-cover object-[58%_center]"
               style={{ scale: imageScale }}

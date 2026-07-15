@@ -31,7 +31,7 @@ const nodes: WeaveNode[] = [
     blockers: "None",
     unblocks: "Flow, Signal",
     milestone: "Brief confirmed",
-    image: "/images/dependency-weave/artifact-foundation.png",
+    image: "/assets/blocks/product-showcase/dependency-weave/artifact-foundation.png",
     position: "left-[4%] top-[8%]",
   },
   {
@@ -45,7 +45,7 @@ const nodes: WeaveNode[] = [
     blockers: "Foundation",
     unblocks: "Release",
     milestone: "Path reviewed",
-    image: "/images/dependency-weave/artifact-flow.png",
+    image: "/assets/blocks/product-showcase/dependency-weave/artifact-flow.png",
     position: "bottom-[8%] left-[14%]",
   },
   {
@@ -59,7 +59,7 @@ const nodes: WeaveNode[] = [
     blockers: "Foundation",
     unblocks: "Release",
     milestone: "Direction locked",
-    image: "/images/dependency-weave/artifact-signal.png",
+    image: "/assets/blocks/product-showcase/dependency-weave/artifact-signal.png",
     position: "right-[5%] top-[8%]",
   },
   {
@@ -72,7 +72,7 @@ const nodes: WeaveNode[] = [
     blockers: "Flow, Signal",
     unblocks: "Field learning",
     milestone: "Release window",
-    image: "/images/dependency-weave/artifact-release.png",
+    image: "/assets/blocks/product-showcase/dependency-weave/artifact-release.png",
     position: "bottom-[8%] right-[13%]",
   },
 ];

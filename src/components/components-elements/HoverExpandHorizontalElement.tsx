@@ -21,7 +21,7 @@ export default function HoverExpandHorizontalElement() {
   const items: AccordionItem[] = [
     {
       id: "velvet",
-      image: "/images/pinterest/unraveling.jpg",
+      image: "/assets/shared/editorial/pinterest/unraveling.jpg",
       bgClass: "brightness-[0.95] contrast-[1.05] grayscale",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4">
@@ -57,7 +57,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "neon",
-      image: "/images/pinterest/shattered.jpg",
+      image: "/assets/shared/editorial/pinterest/shattered.jpg",
       bgClass: "brightness-[0.8] contrast-[1.1] hue-rotate-[200deg] saturate-[2]", // blue tone
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4 bg-blue-900/40 mix-blend-color-burn">
@@ -77,7 +77,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "midnight",
-      image: "/images/pinterest/fightclub.jpg",
+      image: "/assets/shared/editorial/pinterest/fightclub.jpg",
       bgClass: "brightness-[0.4] contrast-[1.2]",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4">
@@ -99,7 +99,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "echo",
-      image: "/images/pinterest/mountain2.jpg",
+      image: "/assets/shared/editorial/pinterest/mountain2.jpg",
       bgClass:
         "brightness-[0.7] contrast-[1.3] saturate-[2.5] hue-rotate-[320deg] mix-blend-lighten", // bright red/orange tone
       renderOverlay: (isExpanded) => (
@@ -117,7 +117,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "brutalist",
-      image: "/images/pinterest/random1.jpg",
+      image: "/assets/shared/editorial/pinterest/random1.jpg",
       bgClass: "brightness-[0.4] contrast-[1.3] grayscale mix-blend-luminosity",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4 bg-emerald-950/60 mix-blend-color-burn">
@@ -141,7 +141,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "cosmic",
-      image: "/images/pinterest/sunset.jpg",
+      image: "/assets/shared/editorial/pinterest/sunset.jpg",
       bgClass: "opacity-0", // hidden to reveal the white background card
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 bg-[#f4f4f4] flex flex-col items-center justify-center p-4">
@@ -162,7 +162,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "horizon",
-      image: "/images/pinterest/hestia.jpg",
+      image: "/assets/shared/editorial/pinterest/hestia.jpg",
       bgClass: "brightness-[0.8] contrast-[1.1] grayscale",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-white/5">
@@ -182,7 +182,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "waves",
-      image: "/images/pinterest/dune.jpg",
+      image: "/assets/shared/editorial/pinterest/dune.jpg",
       bgClass: "brightness-[0.7] grayscale contrast-[1.15]",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex items-center justify-center p-4">
@@ -204,7 +204,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "stellar",
-      image: "/images/pinterest/soul.jpg",
+      image: "/assets/shared/editorial/pinterest/soul.jpg",
       bgClass: "brightness-[0.3] contrast-[1.2] grayscale",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex flex-col justify-between p-4 text-left select-none">
@@ -228,7 +228,7 @@ export default function HoverExpandHorizontalElement() {
     },
     {
       id: "prism",
-      image: "/images/pinterest/alexander.jpg",
+      image: "/assets/shared/editorial/pinterest/alexander.jpg",
       bgClass: "brightness-[0.7] grayscale",
       renderOverlay: (isExpanded) => (
         <div className="absolute inset-0 flex flex-col justify-between p-4 text-center select-none">

@@ -36,7 +36,7 @@ The source of truth is `src/lib/components-manifest.ts` through `COMPONENTS_MANI
 - The detail playground is the only component-level enlarged view. It intentionally has no second fullscreen mode or fullscreen controls.
 - The landing-page `Highlights` section is a curated subset of these entries.
 - The command palette searches only `COMPONENTS_MANIFEST`.
-- Hover Expand Accordion, Horizontal, and Vertical use the locally curated `public/images/pinterest/` image collection while retaining their respective accordion and directional expansion behavior.
+- Hover Expand Accordion, Horizontal, and Vertical use the locally curated shared editorial collection at `public/assets/shared/editorial/pinterest/` while retaining their respective accordion and directional expansion behavior.
 
 ## Components versus Blocks
 

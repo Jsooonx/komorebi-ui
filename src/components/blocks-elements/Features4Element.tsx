@@ -75,7 +75,7 @@ export default function Features4Card({
 
       <div className="mt-14 overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0b0b0d] shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
         <img
-          src="/features4-saas-dashboard.png"
+          src="/assets/blocks/features/features-4/saas-dashboard.png"
           alt="Abstract dark SaaS dashboard workspace"
           className="block h-auto w-full object-cover"
         />

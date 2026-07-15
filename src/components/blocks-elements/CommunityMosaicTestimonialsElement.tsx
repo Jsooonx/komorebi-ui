@@ -182,7 +182,7 @@ function TestimonialCard({
         className={`flex items-center ${testimonial.variant === "feature" ? "gap-3.5" : "gap-3"}`}
       >
         <img
-          src={`/images/testimonials/community-mosaic/${testimonial.avatar}`}
+          src={`/assets/blocks/testimonials/community-mosaic/avatars/${testimonial.avatar}`}
           alt=""
           className={`shrink-0 rounded-full object-cover grayscale transition duration-300 group-hover:grayscale-0 group-hover:brightness-110 ${compact ? "h-8 w-8" : style.avatar}`}
           loading="lazy"

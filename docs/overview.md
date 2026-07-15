@@ -58,6 +58,10 @@ src/
 
 Both catalogs are deliberately split by surface. `src/components/components-preview-elements/` serves compact `/components` sizing adapters, while `src/components/components-elements/` owns the canonical reusable source used by the detail playground. `src/components/highlights-elements/` separately owns the landing-page Bento curation. `src/components/blocks-preview-elements/` serves the compact `/blocks` catalog, while `src/components/blocks-elements/` owns the full-page entries used by fullscreen preview. This prevents catalog viewport sizing from leaking into the canonical component or full block-page experience.
 
+## Runtime asset ownership
+
+Runtime media is organized under `public/assets/`: `app/brand` for Komorebi identity, `shared/logos` for reused vendor marks, `shared/editorial/pinterest` for the intentionally shared editorial image library, and ownership folders for `components`, `blocks`, and `templates`. A block or component with exclusive media owns a folder named after its ID; shared media remains single-copy rather than being duplicated. `references/media/` is source/archive material only and must never be addressed by browser URLs.
+
 The Components detail route resolves canonical component elements and has no nested fullscreen state; the Blocks nested routes resolve full-page block implementations. Both catalog routes consume only their own manifest.
 
 ## Performance notes

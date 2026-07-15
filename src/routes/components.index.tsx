@@ -294,7 +294,7 @@ function ComponentsIndex() {
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity">
             <img
-              src="/KomorebiLogoUpdate1_transparent.png"
+              src="/assets/app/brand/komorebi-logo-transparent.png"
               alt="Komorebi UI"
               className="w-6 h-6 object-contain rounded"
             />

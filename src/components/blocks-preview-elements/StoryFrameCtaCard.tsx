@@ -30,7 +30,7 @@ export default function StoryFrameCtaCard(_: ComponentPreviewProps) {
           className={`relative min-h-[260px] overflow-hidden bg-[#c6d0d9] transition-all duration-500 ${active ? "[clip-path:inset(0)]" : "[clip-path:inset(7%_8%)]"}`}
         >
           <img
-            src="/images/story-frame-cta.png"
+            src="/assets/blocks/cta/story-frame/visual.png"
             alt="Quiet architectural workspace"
             className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ${active ? "scale-110 -translate-x-2 -translate-y-2" : ""}`}
           />

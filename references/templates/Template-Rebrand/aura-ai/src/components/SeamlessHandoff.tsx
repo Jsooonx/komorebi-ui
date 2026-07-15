@@ -49,7 +49,7 @@ export default function SeamlessHandoff() {
         transition={{ ...transition, delay: 0.2 }}
       >
         <img
-          src="/aura-seamless-handoff.png"
+          src="/assets/aura/aura-seamless-handoff.png"
           alt="Two connected glass forms carrying one continuous signal through a sunlit forest"
         />
         <div className="seamless-handoff__scene-wash" aria-hidden="true" />
@@ -75,8 +75,8 @@ export default function SeamlessHandoff() {
           variants={reveal}
           transition={{ ...transition, delay: 0.34 }}
         >
-          Aura carries intent, account history, urgency, and the next best action
-          forward—so the customer never has to repeat themselves.
+          Aura carries intent, account history, urgency, and the next best action forward—so the
+          customer never has to repeat themselves.
         </motion.p>
         <motion.ul
           className="seamless-handoff__record"
@@ -86,9 +86,15 @@ export default function SeamlessHandoff() {
           viewport={viewport}
           variants={recordList}
         >
-          <motion.li variants={recordItem}><span>01</span> Customer intent</motion.li>
-          <motion.li variants={recordItem}><span>02</span> Account context</motion.li>
-          <motion.li variants={recordItem}><span>03</span> Suggested next action</motion.li>
+          <motion.li variants={recordItem}>
+            <span>01</span> Customer intent
+          </motion.li>
+          <motion.li variants={recordItem}>
+            <span>02</span> Account context
+          </motion.li>
+          <motion.li variants={recordItem}>
+            <span>03</span> Suggested next action
+          </motion.li>
         </motion.ul>
       </div>
     </section>

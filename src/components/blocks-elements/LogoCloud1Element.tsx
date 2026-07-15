@@ -9,16 +9,16 @@ export default function LogoCloudCard({
 }) {
   // Brand listings to retrieve tech logos using local assets or logo.dev
   const brands = [
-    { name: "Vercel", path: "/logos/vercel.com-logo.webp" },
-    { name: "Supabase", path: "/logos/supabase.com-logo.webp" },
-    { name: "Stripe", path: "/logos/stripe.com-logo.webp" },
-    { name: "Claude", path: "/logos/claude.com-logo.webp" },
+    { name: "Vercel", path: "/assets/shared/logos/vercel.com-logo.webp" },
+    { name: "Supabase", path: "/assets/shared/logos/supabase.com-logo.webp" },
+    { name: "Stripe", path: "/assets/shared/logos/stripe.com-logo.webp" },
+    { name: "Claude", path: "/assets/shared/logos/claude.com-logo.webp" },
     { name: "Figma", domain: "figma.com" },
-    { name: "Spotify", path: "/logos/spotify.com-logo.webp" },
+    { name: "Spotify", path: "/assets/shared/logos/spotify.com-logo.webp" },
     { name: "Slack", domain: "slack.com" },
-    { name: "Hulu", path: "/logos/hulu.jp-logo.webp" },
-    { name: "Netflix", path: "/logos/netflix.com-logo.webp" },
-    { name: "Cisco", path: "/logos/cisco.com-logo.webp" },
+    { name: "Hulu", path: "/assets/shared/logos/hulu.jp-logo.webp" },
+    { name: "Netflix", path: "/assets/shared/logos/netflix.com-logo.webp" },
+    { name: "Cisco", path: "/assets/shared/logos/cisco.com-logo.webp" },
   ];
 
   const cssVariables = {

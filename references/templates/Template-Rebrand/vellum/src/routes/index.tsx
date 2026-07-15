@@ -9,7 +9,7 @@ const editions = [
     title: "Soft Measure",
     artist: "Mara Voss",
     medium: "Travertine, bronze, textile",
-    image: "/vellum/edition-01.png",
+    image: "/assets/vellum/artwork/edition-01.png",
     className: "edition--tall",
   },
   {
@@ -17,7 +17,7 @@ const editions = [
     title: "After Image",
     artist: "Elian Moor",
     medium: "Smoked glass, lacquer",
-    image: "/vellum/edition-02.png",
+    image: "/assets/vellum/artwork/edition-02.png",
     className: "edition--dark",
   },
   {
@@ -25,7 +25,7 @@ const editions = [
     title: "Held Form",
     artist: "Noa Elkin",
     medium: "Ceramic, linen",
-    image: "/vellum/study.png",
+    image: "/assets/vellum/artwork/study.png",
     className: "edition--wide",
   },
   {
@@ -33,7 +33,7 @@ const editions = [
     title: "Still, Turning",
     artist: "Ivo Kline",
     medium: "Resin, pigment",
-    image: "/vellum/hero.png",
+    image: "/assets/vellum/artwork/hero.png",
     className: "edition--hero",
   },
 ];
@@ -66,9 +66,9 @@ const lenses = [
 ];
 
 const viewingWorks = [
-  { id: "form", label: "Soft Measure", image: "/vellum/edition-01.png" },
-  { id: "glass", label: "After Image", image: "/vellum/edition-02.png" },
-  { id: "study", label: "Held Form", image: "/vellum/study.png" },
+  { id: "form", label: "Soft Measure", image: "/assets/vellum/artwork/edition-01.png" },
+  { id: "glass", label: "After Image", image: "/assets/vellum/artwork/edition-02.png" },
+  { id: "study", label: "Held Form", image: "/assets/vellum/artwork/study.png" },
 ];
 
 const reveal = {
@@ -163,7 +163,10 @@ function VellumPage() {
       </AnimatePresence>
 
       <section className="vellum-hero" id="top">
-        <img src="/vellum/hero.png" alt="Amber resin sculpture in a limestone gallery" />
+        <img
+          src="/assets/vellum/artwork/hero.png"
+          alt="Amber resin sculpture in a limestone gallery"
+        />
         <div className="vellum-hero__veil" />
         <motion.div
           className="vellum-hero__copy"
@@ -263,7 +266,10 @@ function VellumPage() {
           variants={imageReveal}
           transition={{ duration: 0.95, ease }}
         >
-          <img src="/vellum/study.png" alt="Ceramic sculpture and oxblood textile on limestone" />
+          <img
+            src="/assets/vellum/artwork/study.png"
+            alt="Ceramic sculpture and oxblood textile on limestone"
+          />
           <div className="lens__shade" />
           <div className="lens__number" aria-hidden="true">
             0{lenses.findIndex((entry) => entry.id === activeLens) + 1}
@@ -347,7 +353,10 @@ function VellumPage() {
           variants={imageReveal}
           transition={{ duration: 0.95, ease }}
         >
-          <img src="/vellum/edition-01.png" alt="Soft Measure, a travertine and bronze artwork" />
+          <img
+            src="/assets/vellum/artwork/edition-01.png"
+            alt="Soft Measure, a travertine and bronze artwork"
+          />
         </motion.div>
         <motion.div
           className="notes__record"

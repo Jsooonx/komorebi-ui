@@ -87,13 +87,13 @@ export default function DepthLensParallaxElement({
         >
           <div className="absolute inset-0 overflow-hidden bg-[#09090b]">
             <motion.img
-              src="/images/pinterest/soul.jpg"
+              src="/assets/shared/editorial/pinterest/soul.jpg"
               alt=""
               style={{ y: backgroundY, scale: 1.08 }}
               className="absolute inset-[-8%] h-[116%] w-[116%] object-cover object-center opacity-65 grayscale brightness-[0.42] contrast-[1.2] will-change-transform"
             />
             <motion.img
-              src="/images/pinterest/sunset.jpg"
+              src="/assets/shared/editorial/pinterest/sunset.jpg"
               alt=""
               style={{ y: midgroundY, scale: midgroundScale }}
               className="absolute inset-[8%] h-[84%] w-[84%] object-cover object-center opacity-35 mix-blend-screen grayscale brightness-[0.6] will-change-transform"
@@ -105,7 +105,7 @@ export default function DepthLensParallaxElement({
               className="absolute left-1/2 top-1/2 aspect-[3/4] w-[min(48vw,360px)] -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-black shadow-[0_30px_90px_rgba(0,0,0,0.52)] will-change-transform sm:w-[min(34vw,420px)]"
             >
               <motion.img
-                src="/images/pinterest/fightclub.jpg"
+                src="/assets/shared/editorial/pinterest/fightclub.jpg"
                 alt=""
                 style={{ filter: focalFilter }}
                 className="h-full w-full object-cover object-[center_34%]"

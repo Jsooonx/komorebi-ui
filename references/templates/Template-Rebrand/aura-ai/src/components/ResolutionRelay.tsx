@@ -53,10 +53,7 @@ export default function ResolutionRelay() {
       >
         <p className="resolution-relay__kicker">02 — Resolution relay</p>
         <h2 id="relay-title">Every answer starts with context.</h2>
-        <p>
-          A quiet system for moving customer signals from first contact to a
-          confident outcome.
-        </p>
+        <p>A quiet system for moving customer signals from first contact to a confident outcome.</p>
       </motion.div>
 
       <div className="resolution-relay__stage" onMouseLeave={() => setActiveStage(0)}>
@@ -161,7 +158,7 @@ export default function ResolutionRelay() {
         >
           <img
             className="resolution-relay__outcome-art"
-            src="/aura-resolution-relay.png"
+            src="/assets/aura/aura-resolution-relay.png"
             alt="An abstract Aura signal resolving into a luminous loop"
           />
           <div className="resolution-relay__outcome-copy">

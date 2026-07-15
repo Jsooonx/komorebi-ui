@@ -31,21 +31,21 @@ export default function OliverParallaxElement({
 
   // Group of images
   const col1Images = [
-    "/images/pinterest/unraveling.jpg",
-    "/images/pinterest/shattered.jpg",
-    "/images/pinterest/fightclub.jpg",
+    "/assets/shared/editorial/pinterest/unraveling.jpg",
+    "/assets/shared/editorial/pinterest/shattered.jpg",
+    "/assets/shared/editorial/pinterest/fightclub.jpg",
   ];
 
   const col2Images = [
-    "/images/pinterest/mountain2.jpg",
-    "/images/pinterest/random1.jpg",
-    "/images/pinterest/sunset.jpg",
+    "/assets/shared/editorial/pinterest/mountain2.jpg",
+    "/assets/shared/editorial/pinterest/random1.jpg",
+    "/assets/shared/editorial/pinterest/sunset.jpg",
   ];
 
   const col3Images = [
-    "/images/pinterest/hestia.jpg",
-    "/images/pinterest/dune.jpg",
-    "/images/pinterest/soul.jpg",
+    "/assets/shared/editorial/pinterest/hestia.jpg",
+    "/assets/shared/editorial/pinterest/dune.jpg",
+    "/assets/shared/editorial/pinterest/soul.jpg",
   ];
 
   return (

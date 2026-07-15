@@ -8,7 +8,7 @@ import TextRoll from "./ui/TextRoll";
 export function SunlightLeafLogo({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <img
-      src="/KomorebiLogoUpdate1_transparent.png"
+      src="/assets/app/brand/komorebi-logo-transparent.png"
       alt="Komorebi UI"
       className={`${className} object-contain rounded`}
     />

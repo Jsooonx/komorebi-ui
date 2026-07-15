@@ -77,13 +77,13 @@ export default function Features5Card({
         <FeatureVisualCard
           eyebrow="Operational clarity"
           title="Keep every moving part visible, from signal to shipped outcome."
-          image="/features5-operations-dashboard.png"
+          image="/assets/blocks/features/features-5/operations-dashboard.png"
           alt="Dark SaaS operations dashboard with charts and data rows"
         />
         <FeatureVisualCard
           eyebrow="Intentional rhythm"
           title="Turn scattered plans into a schedule your team can trust."
-          image="/features5-scheduling-dashboard.png"
+          image="/assets/blocks/features/features-5/scheduling-dashboard.png"
           alt="Dark SaaS scheduling calendar dashboard with selected time slot"
         />
       </div>

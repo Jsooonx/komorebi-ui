@@ -2,11 +2,46 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 const sources = [
-  { id: "crm", label: "CRM", copy: "Account history, ready when it matters.", position: "is-crm", focus: "23% 32%", point: [23, 32] },
-  { id: "billing", label: "Billing", copy: "The latest payment and renewal state.", position: "is-billing", focus: "29% 80%", point: [29, 80] },
-  { id: "knowledge", label: "Knowledge", copy: "Trusted guidance behind every answer.", position: "is-knowledge", focus: "71% 21%", point: [71, 21] },
-  { id: "product", label: "Product data", copy: "Live details from the product itself.", position: "is-product", focus: "82% 47%", point: [82, 47] },
-  { id: "support", label: "Support history", copy: "The conversation never begins from zero.", position: "is-support", focus: "72% 80%", point: [72, 80] },
+  {
+    id: "crm",
+    label: "CRM",
+    copy: "Account history, ready when it matters.",
+    position: "is-crm",
+    focus: "23% 32%",
+    point: [23, 32],
+  },
+  {
+    id: "billing",
+    label: "Billing",
+    copy: "The latest payment and renewal state.",
+    position: "is-billing",
+    focus: "29% 80%",
+    point: [29, 80],
+  },
+  {
+    id: "knowledge",
+    label: "Knowledge",
+    copy: "Trusted guidance behind every answer.",
+    position: "is-knowledge",
+    focus: "71% 21%",
+    point: [71, 21],
+  },
+  {
+    id: "product",
+    label: "Product data",
+    copy: "Live details from the product itself.",
+    position: "is-product",
+    focus: "82% 47%",
+    point: [82, 47],
+  },
+  {
+    id: "support",
+    label: "Support history",
+    copy: "The conversation never begins from zero.",
+    position: "is-support",
+    focus: "72% 80%",
+    point: [72, 80],
+  },
 ] as const;
 
 const reveal = {
@@ -43,7 +78,7 @@ export default function ConnectedContext() {
         onMouseLeave={() => setActiveSource(null)}
       >
         <img
-          src="/aura-connected-context.png"
+          src="/assets/aura/aura-connected-context.png"
           alt="Five connected glass sources flowing into Aura's central context intelligence"
         />
         <div className="connected-context__wash" aria-hidden="true" />
@@ -58,7 +93,12 @@ export default function ConnectedContext() {
               : undefined,
           }}
         />
-        <svg className="connected-context__trace" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <svg
+          className="connected-context__trace"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
           <AnimatePresence initial={false}>
             {active && (
               <motion.g key={active.id}>
@@ -91,7 +131,13 @@ export default function ConnectedContext() {
             aria-pressed={activeSource === source.id}
             transition={{ type: "spring", stiffness: 290, damping: 26 }}
           >
-            {activeSource === source.id && <motion.span className="connected-context__source-highlight" layoutId="aura-context-active-highlight" transition={{ type: "spring", stiffness: 330, damping: 30, mass: 0.52 }} />}
+            {activeSource === source.id && (
+              <motion.span
+                className="connected-context__source-highlight"
+                layoutId="aura-context-active-highlight"
+                transition={{ type: "spring", stiffness: 330, damping: 30, mass: 0.52 }}
+              />
+            )}
             <span>0{index + 1}</span>
             <b>{source.label}</b>
             <AnimatePresence initial={false}>
@@ -149,8 +195,8 @@ export default function ConnectedContext() {
         transition={{ ...transition, delay: 0.3 }}
       >
         <p>
-          Connect what your team already trusts. Aura assembles the relevant
-          record before it decides what to do next.
+          Connect what your team already trusts. Aura assembles the relevant record before it
+          decides what to do next.
         </p>
         <span>Hover a source to trace its context.</span>
       </motion.div>

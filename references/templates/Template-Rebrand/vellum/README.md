@@ -14,7 +14,7 @@ Vellum is a standalone contemporary-editions landing page rebuilt from the inter
 
 ## Assets
 
-All Vellum visual assets live in `public/vellum/`. They are original generated editorial-art images and are not copied from Pallet-Ross.
+All Vellum visual assets live in `public/assets/vellum/artwork/`. They are original generated editorial-art images and are not copied from Pallet-Ross.
 
 ## Development
 

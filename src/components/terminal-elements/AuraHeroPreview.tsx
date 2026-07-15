@@ -110,7 +110,7 @@ export default function AuraHeroPreview() {
         <div className="hero__bg">
           <img
             className="w-full h-full object-cover"
-            src="/aura-hero-bg.png"
+            src="/assets/templates/aura/hero-bg.png"
             alt="Aura Cosmic Network Flow"
           />
         </div>
@@ -132,13 +132,7 @@ export default function AuraHeroPreview() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <circle
-                className="logo__circle"
-                cx="14.3"
-                cy="14.9"
-                r="4.5"
-                fill="#fff"
-              />
+              <circle className="logo__circle" cx="14.3" cy="14.9" r="4.5" fill="#fff" />
               <path
                 className="logo__arc-1a"
                 pathLength="100"
@@ -294,7 +288,10 @@ export default function AuraHeroPreview() {
           {/* Conversational SDK Card */}
           <a className="about-card" href="#widget">
             <div className="about-card__image">
-              <img src="/aura-about-card.png" alt="Aura AI Conversational Sphere" />
+              <img
+                src="/assets/templates/aura/about-card.png"
+                alt="Aura AI Conversational Sphere"
+              />
             </div>
             <div className="about-card__content">
               <div>
