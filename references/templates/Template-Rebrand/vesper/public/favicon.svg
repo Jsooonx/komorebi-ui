@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 28 28" fill="none">
+  <style>
+    path {
+      fill: #937654; /* Light mode: Warm Bronze */
+      transition: fill 0.3s ease;
+    }
+    .right-slab {
+      fill-opacity: 0.7;
+    }
+    @media (prefers-color-scheme: dark) {
+      path {
+        fill: #C5A880; /* Dark mode: Warm Brass */
+      }
+    }
+  </style>
+  <!-- Left arm of V -->
+  <path d="M3 4 L9 4 L15 22 L9 22 Z" />
+  <!-- Right arm of V -->
+  <path class="right-slab" d="M25 4 L19 4 L13 22 L19 22 Z" />
+</svg>

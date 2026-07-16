@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useRef } from "react";
 import Background from "@/components/pallet/Background";
 import Navbar from "@/components/pallet/Navbar";
-import ScrollIndicator from "@/components/pallet/ScrollIndicator";
 import ScrollCards from "@/components/pallet/ScrollCards";
 import SectionOne from "@/components/pallet/SectionOne";
 import SectionTwo from "@/components/pallet/SectionTwo";
@@ -29,7 +28,6 @@ function Index() {
     >
       <Background />
       <Navbar />
-      <ScrollIndicator />
       <ScrollCards containerRef={containerRef} />
       <div style={{ position: "relative", zIndex: 10 }}>
         <SectionOne />
