@@ -36,3 +36,7 @@ The Template Showcase (located in Page 4) features 8 premium landing page templa
 ## Aura mobile composition
 
 Aura has a native narrow-screen composition rather than a scaled desktop artboard. The desktop minimum width is removed; generated artwork becomes a compact visual stage; and the spatial controls in Connected Context, Guidance Layer, Anticipation Loop, and Quiet Launch become readable tap lists below their artwork. This preserves local trace interactions without cropped, overlapping labels or horizontal overflow.
+
+## Morrow hero template
+
+`references/templates/Template-Rebrand/morrow/` is a standalone Vite + React hero-only template inspired by the supplied asymmetric portfolio-stack composition, but written with a new Morrow strategic-design-studio identity. Its four original generated artworks—Verdant Relay, Soft Signal, Night Index, and Tide Form—live in `public/assets/portfolio/`. Framer Motion staggers navigation, copy, CTA, social proof, and each card's own rotation-aware entry so the layered stack retains its intended depth; the layout has a reduced-motion fallback and a dedicated narrow-screen composition.
