@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComponentsIndexRouteImport } from './routes/components.index'
 import { Route as BlocksIndexRouteImport } from './routes/blocks.index'
+import { Route as TemplatesVesperRouteImport } from './routes/templates.vesper'
 import { Route as TemplatesVellumRouteImport } from './routes/templates.vellum'
+import { Route as TemplatesSereinRouteImport } from './routes/templates.serein'
 import { Route as TemplatesAuraRouteImport } from './routes/templates.aura'
 import { Route as ComponentsIdRouteImport } from './routes/components.$id'
 import { Route as BlocksCategoryRouteImport } from './routes/blocks.$category'
@@ -33,9 +35,19 @@ const BlocksIndexRoute = BlocksIndexRouteImport.update({
   path: '/blocks/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TemplatesVesperRoute = TemplatesVesperRouteImport.update({
+  id: '/templates/vesper',
+  path: '/templates/vesper',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TemplatesVellumRoute = TemplatesVellumRouteImport.update({
   id: '/templates/vellum',
   path: '/templates/vellum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TemplatesSereinRoute = TemplatesSereinRouteImport.update({
+  id: '/templates/serein',
+  path: '/templates/serein',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TemplatesAuraRoute = TemplatesAuraRouteImport.update({
@@ -64,7 +76,9 @@ export interface FileRoutesByFullPath {
   '/blocks/$category': typeof BlocksCategoryRouteWithChildren
   '/components/$id': typeof ComponentsIdRoute
   '/templates/aura': typeof TemplatesAuraRoute
+  '/templates/serein': typeof TemplatesSereinRoute
   '/templates/vellum': typeof TemplatesVellumRoute
+  '/templates/vesper': typeof TemplatesVesperRoute
   '/blocks/': typeof BlocksIndexRoute
   '/components/': typeof ComponentsIndexRoute
   '/blocks/$category/$block': typeof BlocksCategoryBlockRoute
@@ -74,7 +88,9 @@ export interface FileRoutesByTo {
   '/blocks/$category': typeof BlocksCategoryRouteWithChildren
   '/components/$id': typeof ComponentsIdRoute
   '/templates/aura': typeof TemplatesAuraRoute
+  '/templates/serein': typeof TemplatesSereinRoute
   '/templates/vellum': typeof TemplatesVellumRoute
+  '/templates/vesper': typeof TemplatesVesperRoute
   '/blocks': typeof BlocksIndexRoute
   '/components': typeof ComponentsIndexRoute
   '/blocks/$category/$block': typeof BlocksCategoryBlockRoute
@@ -85,7 +101,9 @@ export interface FileRoutesById {
   '/blocks/$category': typeof BlocksCategoryRouteWithChildren
   '/components/$id': typeof ComponentsIdRoute
   '/templates/aura': typeof TemplatesAuraRoute
+  '/templates/serein': typeof TemplatesSereinRoute
   '/templates/vellum': typeof TemplatesVellumRoute
+  '/templates/vesper': typeof TemplatesVesperRoute
   '/blocks/': typeof BlocksIndexRoute
   '/components/': typeof ComponentsIndexRoute
   '/blocks/$category/$block': typeof BlocksCategoryBlockRoute
@@ -97,7 +115,9 @@ export interface FileRouteTypes {
     | '/blocks/$category'
     | '/components/$id'
     | '/templates/aura'
+    | '/templates/serein'
     | '/templates/vellum'
+    | '/templates/vesper'
     | '/blocks/'
     | '/components/'
     | '/blocks/$category/$block'
@@ -107,7 +127,9 @@ export interface FileRouteTypes {
     | '/blocks/$category'
     | '/components/$id'
     | '/templates/aura'
+    | '/templates/serein'
     | '/templates/vellum'
+    | '/templates/vesper'
     | '/blocks'
     | '/components'
     | '/blocks/$category/$block'
@@ -117,7 +139,9 @@ export interface FileRouteTypes {
     | '/blocks/$category'
     | '/components/$id'
     | '/templates/aura'
+    | '/templates/serein'
     | '/templates/vellum'
+    | '/templates/vesper'
     | '/blocks/'
     | '/components/'
     | '/blocks/$category/$block'
@@ -128,7 +152,9 @@ export interface RootRouteChildren {
   BlocksCategoryRoute: typeof BlocksCategoryRouteWithChildren
   ComponentsIdRoute: typeof ComponentsIdRoute
   TemplatesAuraRoute: typeof TemplatesAuraRoute
+  TemplatesSereinRoute: typeof TemplatesSereinRoute
   TemplatesVellumRoute: typeof TemplatesVellumRoute
+  TemplatesVesperRoute: typeof TemplatesVesperRoute
   BlocksIndexRoute: typeof BlocksIndexRoute
   ComponentsIndexRoute: typeof ComponentsIndexRoute
 }
@@ -156,11 +182,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlocksIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/templates/vesper': {
+      id: '/templates/vesper'
+      path: '/templates/vesper'
+      fullPath: '/templates/vesper'
+      preLoaderRoute: typeof TemplatesVesperRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/templates/vellum': {
       id: '/templates/vellum'
       path: '/templates/vellum'
       fullPath: '/templates/vellum'
       preLoaderRoute: typeof TemplatesVellumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/templates/serein': {
+      id: '/templates/serein'
+      path: '/templates/serein'
+      fullPath: '/templates/serein'
+      preLoaderRoute: typeof TemplatesSereinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/templates/aura': {
@@ -211,7 +251,9 @@ const rootRouteChildren: RootRouteChildren = {
   BlocksCategoryRoute: BlocksCategoryRouteWithChildren,
   ComponentsIdRoute: ComponentsIdRoute,
   TemplatesAuraRoute: TemplatesAuraRoute,
+  TemplatesSereinRoute: TemplatesSereinRoute,
   TemplatesVellumRoute: TemplatesVellumRoute,
+  TemplatesVesperRoute: TemplatesVesperRoute,
   BlocksIndexRoute: BlocksIndexRoute,
   ComponentsIndexRoute: ComponentsIndexRoute,
 }

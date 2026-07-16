@@ -19,6 +19,18 @@ interface TemplateItem {
 
 const TEMPLATES: TemplateItem[] = [
   {
+    id: "serein",
+    title: "Serein - Place-led Stays",
+    creator: "Hospitality / Travel",
+    creatorAvatar: "/assets/app/brand/komorebi-logo.png",
+    sections: "6 Sections",
+    badgeType: "copy",
+    tags: ["Hospitality", "Scroll Narrative", "Cinematic", "Editorial"],
+    prompt:
+      "Create a place-led hospitality landing page named Serein. Use a pale mineral canvas, an expressive editorial serif, and quiet sans-serif metadata. Make the hero image deck scroll-driven: same-size place photographs remain stacked, then glide left and soften one at a time as the next image takes focus. Keep the headline fixed, navigation distinct, and every movement cinematic rather than ornamental.",
+    videoSrc: "/assets/templates/serein/preview.mp4",
+  },
+  {
     id: "vellum",
     title: "Vellum - Contemporary Editions",
     creator: "Art / Culture",
@@ -66,14 +78,15 @@ const TEMPLATES: TemplateItem[] = [
   },
   {
     id: "vesper",
-    title: "Vesper - Developer Space Layout",
-    creator: "Portfolio / SaaS",
+    title: "Vesper - Material Studies",
+    creator: "Art / Architecture",
     creatorAvatar: "/assets/app/brand/komorebi-logo.png",
-    sections: "8 Sections",
+    sections: "6 Sections",
     badgeType: "premium",
-    tags: ["Minimalist", "Developer", "Obsidian Dark", "Command Menu"],
+    tags: ["Architecture", "Obsidian", "Scroll Cards", "Brutalist"],
     prompt:
-      "Create a minimalist obsidian developer space portfolio template called Vesper with an integrated command panel palette and tabbed code editor mockup interfaces.",
+      "Create a dark architectural archive named Vesper. Pair obsidian, warm brass, and ivory with raw material studies. Use generated brutalist imagery, material annotations, and a high-fidelity scroll-card progression that reveals each work as a physical object rather than a dashboard.",
+    videoSrc: "/assets/templates/vesper/preview.mp4",
   },
   {
     id: "aeon",
@@ -237,8 +250,9 @@ function TemplateCard({ item }: { item: TemplateItem }) {
     </>
   );
 
-  if (item.id === "aura" || item.id === "vellum") {
-    const previewRoute = item.id === "aura" ? "/templates/aura" : "/templates/vellum";
+  if (["aura", "vellum", "serein", "vesper"].includes(item.id)) {
+    const previewRoute = `/templates/${item.id}` as
+      "/templates/aura" | "/templates/vellum" | "/templates/serein" | "/templates/vesper";
     const returnStorageKey = `komorebi_${item.id}_return_to_gallery`;
 
     return (
