@@ -1,0 +1,512 @@
+@import "tailwindcss" source(none);
+@source "../src";
+:root {
+  --ink: #26332e;
+  --paper: #e8e4d9;
+  --line: rgba(38, 51, 46, 0.25);
+  --serif: "Instrument Serif", serif;
+  --sans: "Instrument Sans", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--sans);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+.serein {
+  overflow: clip;
+}
+.serein-nav {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px clamp(22px, 4vw, 68px);
+  color: #fff;
+}
+.serein-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  font-size: 16px;
+}
+.serein-brand i {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: var(--serif);
+  font-style: normal;
+  font-size: 17px;
+}
+.serein-nav nav {
+  display: flex;
+  gap: 2px;
+  padding: 5px;
+  border: 1px solid rgba(232, 238, 231, 0.26);
+  border-radius: 999px;
+  background: rgba(31, 51, 45, 0.54);
+  box-shadow: 0 10px 28px rgba(16, 29, 25, 0.16);
+  backdrop-filter: blur(14px);
+  font-size: 11px;
+}
+.serein-nav nav a {
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.72);
+  opacity: 1;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
+}
+.serein-nav nav a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+.serein-nav__cta {
+  position: relative;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding: 7px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+.serein-nav__cta::after,
+.serein-hero__copy a::after,
+.serein-stay a::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: #fff;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.serein-nav__cta:hover {
+  border-color: #fff;
+  color: #fff;
+}
+.serein-nav__cta:hover::after,
+.serein-nav__cta:focus-visible::after,
+.serein-hero__copy a:hover::after,
+.serein-hero__copy a:focus-visible::after,
+.serein-stay a:hover::after,
+.serein-stay a:focus-visible::after {
+  transform: scaleX(1);
+}
+.serein-nav__cta svg,
+.serein-hero__copy a svg,
+.serein-stay a svg {
+  transition: transform 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.serein-nav__cta:hover svg,
+.serein-nav__cta:focus-visible svg,
+.serein-hero__copy a:hover svg,
+.serein-hero__copy a:focus-visible svg,
+.serein-stay a:hover svg,
+.serein-stay a:focus-visible svg {
+  transform: translate(3px, -2px);
+}
+.serein-nav__menu,
+.serein-menu {
+  display: none;
+}
+.serein-hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  color: #fff;
+  background: #44534f;
+}
+.serein-hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.serein-hero__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(21, 35, 31, 0.73), rgba(21, 35, 31, 0.12) 65%),
+    linear-gradient(0deg, rgba(21, 35, 31, 0.42), transparent 42%);
+}
+.serein-hero__copy {
+  position: relative;
+  z-index: 1;
+  max-width: 1220px;
+  padding: clamp(190px, 28vh, 290px) clamp(24px, 8vw, 140px) 80px;
+}
+.serein p {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.serein h1,
+.serein h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+}
+.serein h1 {
+  margin-top: 19px;
+  font-size: clamp(62px, 7.5vw, 124px);
+  line-height: 0.81;
+}
+.serein h1 em,
+.serein h2 em {
+  font-weight: 400;
+}
+.serein-hero__copy a,
+.serein-stay a {
+  position: relative;
+  display: inline-flex;
+  gap: 9px;
+  align-items: center;
+  margin-top: 39px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid currentColor;
+  font-size: 14px;
+}
+.serein-hero__meta {
+  position: absolute;
+  z-index: 1;
+  bottom: 26px;
+  left: clamp(22px, 4vw, 68px);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.serein-story {
+  height: 360vh;
+  background: #d9dfd9;
+}
+.serein-story__sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  padding: clamp(86px, 12vh, 130px) clamp(22px, 6vw, 100px) 35px;
+}
+.serein-story__label {
+  position: relative;
+  z-index: 2;
+}
+.serein-story h2 {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin-top: 22px;
+  font-size: clamp(56px, 7.3vw, 116px);
+  line-height: 0.84;
+}
+.serein-story__images {
+  position: absolute;
+  top: clamp(124px, calc(12vh + 38px), 168px);
+  left: 52%;
+  width: min(52vw, 760px);
+  height: min(62vh, 650px);
+  transform: translate(-12%, 0);
+}
+.serein-story__image {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  margin: 0;
+  box-shadow: 0 24px 56px rgba(32, 47, 42, 0.14);
+  will-change: transform, opacity, filter;
+}
+.serein-story__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.serein-story__image figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 17px;
+  color: #fff;
+  background: linear-gradient(0deg, rgba(18, 29, 26, 0.68), transparent);
+  font-size: 12px;
+}
+.serein-story__image figcaption span {
+  opacity: 0.72;
+}
+.serein-story__image--coast {
+  z-index: 3;
+}
+.serein-story__image--court {
+  z-index: 2;
+}
+.serein-story__image--north {
+  z-index: 1;
+}
+.serein-story__rail {
+  position: absolute;
+  right: clamp(22px, 4vw, 68px);
+  bottom: 34px;
+  left: clamp(22px, 4vw, 68px);
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+}
+.serein-story__rail i {
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.serein-approach {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 10vw;
+  padding: clamp(110px, 16vw, 240px) clamp(22px, 7vw, 120px);
+}
+.serein-approach h2 {
+  margin-top: 20px;
+  font-size: clamp(58px, 6.7vw, 112px);
+  line-height: 0.84;
+}
+.serein-principles {
+  border-top: 1px solid var(--line);
+}
+.serein-principles article {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 10px;
+  padding: 24px 0 30px;
+  border-bottom: 1px solid var(--line);
+}
+.serein-principles span {
+  font-family: var(--mono);
+  font-size: 10px;
+}
+.serein-principles h3 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.serein-principles p {
+  grid-column: 2;
+  max-width: 280px;
+  color: rgba(38, 51, 46, 0.68);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.serein-stay {
+  position: relative;
+  min-height: 82svh;
+  overflow: hidden;
+  color: #fff;
+  background: #4d5d57;
+}
+.serein-stay > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.serein-stay__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(19, 32, 28, 0.72), rgba(19, 32, 28, 0.12));
+}
+.serein-stay > div:last-child {
+  position: relative;
+  z-index: 1;
+  padding: clamp(150px, 23vh, 240px) clamp(24px, 8vw, 140px) 80px;
+}
+.serein-stay h2 {
+  margin-top: 19px;
+  font-size: clamp(56px, 7.5vw, 120px);
+  line-height: 0.83;
+}
+.serein-footer {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr auto;
+  gap: 30px;
+  align-items: end;
+  padding: 53px clamp(22px, 5vw, 80px) 27px;
+  color: #e8e4d9;
+  background: #26332e;
+}
+.serein-footer p {
+  max-width: 250px;
+  color: rgba(232, 228, 217, 0.65);
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.serein-footer > span {
+  font-family: var(--mono);
+  font-size: 10px;
+  opacity: 0.58;
+}
+@media (max-width: 760px) {
+  .serein-nav nav,
+  .serein-nav__cta {
+    display: none;
+  }
+  .serein-nav__menu {
+    display: block;
+    border: 0;
+    color: #fff;
+    background: none;
+  }
+  .serein-menu {
+    position: absolute;
+    top: 62px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+    background: #26332e;
+    font-size: 13px;
+  }
+  .serein-hero__copy {
+    padding: 29vh 23px 80px;
+  }
+  .serein h1 {
+    font-size: clamp(56px, 16vw, 80px);
+  }
+  .serein-story {
+    height: 290vh;
+  }
+  .serein-story__sticky {
+    padding: 15vh 22px 28px;
+  }
+  .serein-story h2 {
+    font-size: clamp(50px, 14vw, 72px);
+  }
+  .serein-story__images {
+    top: 40%;
+    left: 50%;
+    width: 82vw;
+    height: 48vh;
+    transform: translate(-50%, 0);
+  }
+  .serein-story__image--coast {
+    z-index: 3;
+  }
+  .serein-story__image--court {
+    z-index: 2;
+  }
+  .serein-story__image--north {
+    z-index: 1;
+  }
+  .serein-story__image figcaption {
+    font-size: 10px;
+  }
+  .serein-approach {
+    display: block;
+    padding: 100px 22px;
+  }
+  .serein-principles {
+    margin-top: 56px;
+  }
+  .serein-stay > div:last-child {
+    padding: 23vh 23px 70px;
+  }
+  .serein-footer {
+    grid-template-columns: 1fr;
+    padding: 45px 22px 22px;
+  }
+  .serein-footer p {
+    margin: 0;
+  }
+  .serein-footer > span {
+    margin-top: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .serein-story {
+    height: auto;
+  }
+  .serein-story__sticky {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+  }
+  .serein-story__images {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+    margin-top: 55px;
+    transform: none;
+  }
+  .serein-story__image {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: 300px !important;
+    margin: 16px 0;
+    transform: none !important;
+  }
+  .serein-story__rail {
+    position: relative;
+    inset: auto;
+    margin-top: 18px;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

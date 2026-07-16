@@ -1,8 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
 import { SunlightLeafLogo } from "@/components/DynamicIsland";
+import { TemplatePreviewControls } from "@/components/templates/TemplatePreviewControls";
 
 // Resolve Aura URL from environment variable, checking both server-side process.env and client-side import.meta.env
 const getAuraUrl = () => {
@@ -74,24 +74,7 @@ function AuraTemplatePage() {
         onLoad={() => setIsLoading(false)}
       />
 
-      {/* Floating Control: Back Button */}
-      <div className="absolute top-6 left-6 z-40">
-        <button
-          onClick={handleBack}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-warm-cream/90 hover:bg-warm-cream text-moss-green border border-white/5 border-t-white/10 shadow-lg backdrop-blur cursor-pointer transition-all active:scale-[0.98] font-heading font-semibold text-xs"
-        >
-          <ArrowLeft className="w-4 h-4 text-moss-green" />
-          Back to Gallery
-        </button>
-      </div>
-
-      {/* Watermark: Bottom Right */}
-      <div className="absolute bottom-6 right-6 z-40 pointer-events-none">
-        <div className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-warm-cream/90 text-moss-green border border-white/5 border-t-white/10 shadow-lg backdrop-blur font-heading font-semibold text-xs">
-          <SunlightLeafLogo className="w-5 h-5" />
-          <span>Komorebi UI</span>
-        </div>
-      </div>
+      <TemplatePreviewControls onBack={handleBack} />
     </div>
   );
 }
