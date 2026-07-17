@@ -165,8 +165,8 @@ button {
   background: #fff;
   color: #101116;
 }
-.project-link span,
-.story span {
+.project-link .arrow,
+.story .arrow {
   display: grid;
   place-items: center;
   width: 30px;
@@ -314,7 +314,7 @@ button {
   left: 6px;
   border-radius: 6px;
 }
-.story span {
+.story .arrow {
   background: transparent;
   position: relative;
   z-index: 2;

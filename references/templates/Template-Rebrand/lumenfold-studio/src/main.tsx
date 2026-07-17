@@ -6,7 +6,7 @@ import "./styles.css";
 const rise = { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 } };
 
 // Reused arrow treatment inside the two primary calls to action.
-const Arrow = () => <span aria-hidden="true">→</span>;
+const Arrow = () => <span className="arrow" aria-hidden="true">→</span>;
 
 // Top navigation: edit the location label, menu label, and primary CTA here.
 function Topbar() {
