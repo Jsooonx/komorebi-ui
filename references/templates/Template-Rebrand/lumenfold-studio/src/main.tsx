@@ -416,6 +416,85 @@ function WorksPage({ activeProjectId }: { activeProjectId: string | null }) {
   );
 }
 
+const approachItems = [
+  {
+    index: "01",
+    title: "Frame the signal",
+    body: "We find the sharpest idea inside the noise, then give it a clear point of view.",
+  },
+  {
+    index: "02",
+    title: "Shape the system",
+    body: "We turn that point of view into a visual language that stays coherent at every scale.",
+  },
+  {
+    index: "03",
+    title: "Make it move",
+    body: "We add motion with purpose, so every transition feels considered and every detail earns its place.",
+  },
+];
+
+function ApproachSection() {
+  return (
+    <motion.section
+      className="approach-section"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      aria-labelledby="approach-title"
+    >
+      <div className="approach-header">
+        <motion.p
+          className="approach-eyebrow"
+          variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
+        >
+          How we work
+        </motion.p>
+        <motion.h2
+          id="approach-title"
+          variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
+        >
+          Clarity first. <em>Movement</em> always.
+        </motion.h2>
+        <motion.p
+          className="approach-intro"
+          variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
+        >
+          A quiet process for making digital spaces feel unmistakably yours.
+        </motion.p>
+      </div>
+
+      <div className="approach-grid">
+        {approachItems.map((item, index) => (
+          <motion.article
+            key={item.index}
+            className="approach-card"
+            variants={{ hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0 } }}
+            transition={{ delay: 0.12 + index * 0.1, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="approach-index">{item.index}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+            <span className="approach-arrow" aria-hidden="true">↗</span>
+          </motion.article>
+        ))}
+      </div>
+
+      <motion.a
+        className="approach-cta"
+        href="#contact"
+        variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0 } }}
+        transition={{ delay: 0.48, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <span>Start a brief</span>
+        <Arrow />
+      </motion.a>
+    </motion.section>
+  );
+}
+
 function App() {
   const reducedMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -490,6 +569,8 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {!isWorks && <ApproachSection />}
 
       <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </main>

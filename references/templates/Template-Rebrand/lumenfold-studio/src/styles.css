@@ -40,6 +40,133 @@ button {
   background: #101116;
 }
 
+/* How we work: a quiet editorial process section below the landing hero. */
+.approach-section {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 150px 58px 170px;
+  color: #fbfbfd;
+}
+.approach-header {
+  display: grid;
+  grid-template-columns: 0.7fr 1.65fr 0.8fr;
+  gap: 32px;
+  align-items: end;
+  padding-bottom: 68px;
+}
+.approach-eyebrow {
+  margin: 0 0 8px;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.approach-header h2 {
+  max-width: 680px;
+  margin: 0;
+  font-size: clamp(46px, 7vw, 100px);
+  font-weight: 700;
+  letter-spacing: -0.09em;
+  line-height: 0.88;
+  text-wrap: balance;
+}
+.approach-header h2 em {
+  color: rgba(255, 255, 255, 0.45);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.07em;
+}
+.approach-intro {
+  max-width: 220px;
+  margin: 0 0 4px auto;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 14px;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.approach-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+.approach-card {
+  position: relative;
+  min-height: 255px;
+  padding: 26px 28px 30px 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.approach-card + .approach-card {
+  padding-left: 28px;
+}
+.approach-card:last-child {
+  border-right: 0;
+}
+.approach-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.42);
+}
+.approach-index {
+  display: block;
+  margin-bottom: 86px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+.approach-card h3 {
+  margin: 0 0 13px;
+  font-size: clamp(21px, 2vw, 28px);
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+.approach-card p {
+  max-width: 290px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.53);
+  font-size: 13px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+.approach-arrow {
+  position: absolute;
+  top: 27px;
+  right: 28px;
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 18px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.approach-card:hover .approach-arrow {
+  color: #fff;
+  transform: translate(3px, -3px);
+}
+.approach-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  margin-top: 64px;
+  padding: 6px 8px 6px 22px;
+  border-radius: 9px;
+  background: #fff;
+  color: #101116;
+  font-size: 14px;
+  font-weight: 700;
+  transition: color 0.25s ease, transform 0.2s ease;
+}
+.approach-cta:hover {
+  color: #fff;
+  background: #0c0d10;
+}
+.approach-cta:active {
+  transform: scale(0.96);
+}
+.approach-cta .arrow {
+  background: #0c0d10;
+}
+
 /* Generated hero image and its contrast overlay. Change the image URL in .artwork. */
 .artwork,
 .shade {
@@ -1182,5 +1309,44 @@ button {
   .filter-btn {
     font-size: 12px;
     padding: 6px 10px;
+  }
+}
+
+@media (max-width: 800px) {
+  .approach-section {
+    padding: 110px 24px 120px;
+  }
+  .approach-header {
+    display: block;
+    padding-bottom: 52px;
+  }
+  .approach-header h2 {
+    margin: 16px 0 24px;
+  }
+  .approach-intro {
+    max-width: 260px;
+    margin: 0;
+  }
+  .approach-grid {
+    display: block;
+  }
+  .approach-card,
+  .approach-card + .approach-card {
+    min-height: 0;
+    padding: 24px 36px 28px 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  .approach-card:last-child {
+    border-bottom: 0;
+  }
+  .approach-index {
+    margin-bottom: 38px;
+  }
+  .approach-arrow {
+    right: 4px;
+  }
+  .approach-cta {
+    margin-top: 42px;
   }
 }
