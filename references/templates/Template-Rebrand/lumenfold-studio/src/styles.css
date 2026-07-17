@@ -162,8 +162,32 @@ button {
   justify-self: end;
   padding: 6px 8px 6px 22px;
   border-radius: 9px;
+  position: relative;
+  isolation: isolate;
   background: #fff;
   color: #101116;
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-link::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 6px;
+  right: 8px;
+  left: calc(100% - 38px);
+  height: 30px;
+  border-radius: 7px;
+  background: #0c0d10;
+  transition: 
+    left 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-link:hover {
+  color: #fff;
+}
+.project-link:hover::before {
+  left: 8px;
+  border-radius: 7px;
 }
 .project-link .arrow,
 .story .arrow {
@@ -172,9 +196,11 @@ button {
   width: 30px;
   height: 30px;
   border-radius: 7px;
-  background: #0c0d10;
+  background: transparent;
   color: #fff;
   font-size: 18px;
+  position: relative;
+  z-index: 2;
 }
 
 /* Centered top brand tab and its small symbol. */
@@ -314,11 +340,7 @@ button {
   left: 6px;
   border-radius: 6px;
 }
-.story .arrow {
-  background: transparent;
-  position: relative;
-  z-index: 2;
-}
+
 
 /* Bottom-right credential / editorial recognition card. */
 .recognition {
