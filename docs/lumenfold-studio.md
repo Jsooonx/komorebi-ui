@@ -12,7 +12,7 @@
 - The Works page renders a responsive asymmetrical Bento Grid (3-column on desktop, 2-column on tablet, and 1-column stack on mobile) alongside a floating sidebar filter category selector (rotating to horizontal on smaller viewports).
 - Clicking a project card morphs it into a full case study layout overlay (`CaseStudyModal`) using Framer Motion's `layoutId` shared layout animation.
 - Several works-page layout bugs were fixed:
-  - Topbar location overlap resolved by using a stable `40px` positive margin instead of fragile negative margins.
+  - Topbar location overlap resolved by placing the location/clock directly next to the Menu button with a stable `20px` positive margin on both desktop and tablet layout states.
   - Card hover scroll lock resolved by applying `pointer-events: none` on bento card children, stopping compositing hover states from delaying mouse wheel events.
   - Category filter switching lag resolved by removing the exit-animation AnimatePresence container, causing filtered bento items to update instantly.
 
