@@ -6,3 +6,7 @@
 - Motion is limited to a reduced-motion-aware load-in and local social-link hover feedback.
 
 Run it from its folder with `npm install` then `npm run dev`.
+
+## Editing map
+
+`src/main.tsx` is split into small, commented hero sections: `Topbar`, `BrandTab`, `Headline`, `GuideMarks`, `StudioIntro`, `RecognitionCard`, and `SocialLinks`. Each comment identifies the copy or interaction it owns. The generated background artwork path and the styling for each named section remain in `src/styles.css`.
