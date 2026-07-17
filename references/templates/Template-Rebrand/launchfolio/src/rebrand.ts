@@ -125,11 +125,20 @@ function rebuildSplitHeadline() {
 }
 
 function rebuildClientMarks() {
-  const marks = ["NORTHFORM", "PALISADE", "COMMON KIND", "TERRAIN", "SOLAIRE", "HINTER"];
   const ticker = document.querySelector<HTMLElement>("[data-framer-name='Ticker']");
   if (!ticker) return;
 
-  ticker.innerHTML = `<div aria-label="Vanta Studio partner marks" style="align-items:center;display:flex;gap:42px;height:100%;justify-content:space-between;width:100%">${marks.map((name) => `<span aria-label="${name} partner mark" style="color:#12141a;font-family:Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:-0.04em;line-height:1;white-space:nowrap">${name}</span>`).join("")}</div>`;
+  const logos = [
+    '<svg viewBox="0 0 44 28" aria-hidden="true"><path d="M5 21 15 6l10 15L35 6"/><circle cx="35" cy="20" r="4"/></svg>',
+    '<svg viewBox="0 0 44 28" aria-hidden="true"><path d="M5 21 14 7l8 14L31 7l8 14"/><path d="M5 7h34"/></svg>',
+    '<svg viewBox="0 0 44 28" aria-hidden="true"><circle cx="14" cy="14" r="8"/><path d="M25 6h14M25 14h10M25 22h14"/></svg>',
+    '<svg viewBox="0 0 44 28" aria-hidden="true"><path d="m5 21 8-14 9 14 8-14 9 14"/></svg>',
+    '<svg viewBox="0 0 44 28" aria-hidden="true"><path d="M6 14h32M22 4v20"/><circle cx="22" cy="14" r="7"/></svg>',
+    '<svg viewBox="0 0 44 28" aria-hidden="true"><path d="M5 7h34v14H5zM5 7l17 14L39 7"/></svg>',
+  ];
+  const set = `<div class="vanta-logo-set">${logos.map((logo) => `<span class="vanta-partner-logo">${logo}</span>`).join("")}</div>`;
+
+  ticker.innerHTML = `<div class="vanta-logo-ticker" aria-label="Vanta Studio partner marks"><div class="vanta-logo-track">${set}${set}</div></div>`;
   ticker.style.cssText += ";display:block;transform:none;width:100%;";
 }
 

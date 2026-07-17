@@ -6,6 +6,14 @@ nav.framer-ywdXq [data-framer-name="Links / Dots"] { align-items: center !import
 nav.framer-ywdXq [data-framer-name="Links / Dots"] > div:not(.framer-2o9mc6-container) { opacity: 1 !important; transform: none !important; }
 nav.framer-ywdXq [data-framer-name="Desktop"] { align-items: center !important; display: flex !important; gap: 22px !important; height: 40px !important; inset: auto !important; justify-content: flex-end !important; opacity: 1 !important; position: static !important; transform: none !important; width: auto !important; }
 nav.framer-ywdXq .framer-2o9mc6-container, nav.framer-ywdXq [data-framer-name="Dot 3"] { display: none !important; }
+[data-framer-name="Ticker"] { overflow: hidden !important; }
+.vanta-logo-ticker { align-items: center; display: flex; height: 100%; overflow: hidden; width: 100%; }
+.vanta-logo-track { align-items: center; animation: vanta-logo-marquee 22s linear infinite; display: flex; flex: none; min-width: max-content; will-change: transform; }
+.vanta-logo-set { align-items: center; display: flex; flex: none; gap: clamp(52px, 7vw, 118px); padding-right: clamp(52px, 7vw, 118px); }
+.vanta-partner-logo { align-items: center; display: flex; height: 30px; justify-content: center; width: 44px; }
+.vanta-partner-logo svg { fill: none; height: 28px; overflow: visible; stroke: #161820; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; width: 44px; }
+@keyframes vanta-logo-marquee { to { transform: translate3d(-50%, 0, 0); } }
+@media (prefers-reduced-motion: reduce) { .vanta-logo-track { animation: none; } }
 .rebuild-hero-stack { position: absolute; left: calc(50% + 18px); top: 142px; width: 440px; height: 320px; z-index: 8; pointer-events: none; }
 .rebuild-hero-static-card { position: absolute !important; inset: auto !important; margin: 0 !important; opacity: 1 !important; pointer-events: auto; }
 .rebuild-hero-static-card > [data-framer-name="Image Container"] { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; transform: none !important; }
