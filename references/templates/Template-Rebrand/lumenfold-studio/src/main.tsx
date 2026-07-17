@@ -225,6 +225,10 @@ function MenuOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             >
+              <a href="#" onClick={onClose}>
+                <span>Home</span>
+                <span aria-hidden="true">↗</span>
+              </a>
               <a href="#/works" onClick={onClose}>
                 <span>Work</span>
                 <span aria-hidden="true">↗</span>
