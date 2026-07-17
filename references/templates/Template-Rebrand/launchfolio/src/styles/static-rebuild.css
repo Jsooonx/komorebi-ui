@@ -10,8 +10,10 @@ nav.framer-ywdXq .framer-2o9mc6-container, nav.framer-ywdXq [data-framer-name="D
 .vanta-logo-ticker { align-items: center; display: flex; height: 100%; overflow: hidden; width: 100%; }
 .vanta-logo-track { align-items: center; animation: vanta-logo-marquee 22s linear infinite; display: flex; flex: none; min-width: max-content; will-change: transform; }
 .vanta-logo-set { align-items: center; display: flex; flex: none; gap: clamp(52px, 7vw, 118px); padding-right: clamp(52px, 7vw, 118px); }
-.vanta-partner-logo { align-items: center; display: flex; height: 30px; justify-content: center; width: 44px; }
+.vanta-partner-logo { align-items: center; display: inline-flex; gap: 8px; height: 30px; justify-content: center; white-space: nowrap; }
+.vanta-partner-mark { display: block; height: 28px; width: 44px; }
 .vanta-partner-logo svg { fill: none; height: 28px; overflow: visible; stroke: #161820; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; width: 44px; }
+.vanta-partner-name { color: #161820; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: -0.035em; line-height: 1; }
 @keyframes vanta-logo-marquee { to { transform: translate3d(-50%, 0, 0); } }
 @media (prefers-reduced-motion: reduce) { .vanta-logo-track { animation: none; } }
 .rebuild-hero-stack { position: absolute; left: calc(50% + 18px); top: 142px; width: 440px; height: 320px; z-index: 8; pointer-events: none; }
