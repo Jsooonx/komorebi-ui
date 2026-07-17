@@ -64,7 +64,11 @@ function GuideMarks() {
 function StudioIntro() {
   return (
     <motion.section {...rise} transition={{ delay: 0.66 }} className="intro">
-      <div className="faces" aria-label="Portraits of studio team members"><span>KA</span><span>MJ</span><span>RO</span></div>
+      <div className="faces" aria-label="Studio brand marks">
+        <span className="logo-1"><img src="/assets/logo-1.png" alt="Logo 1" /></span>
+        <span className="logo-2"><img src="/assets/logo-2.png" alt="Logo 2" /></span>
+        <span className="logo-3"><img src="/assets/logo-3.png" alt="Logo 3" /></span>
+      </div>
       <div className="count"><strong>24</strong><small>launches</small></div>
       <p>We shape identities and digital spaces with a sense of movement, clarity, and material depth.</p>
       <a className="story" href="#story">

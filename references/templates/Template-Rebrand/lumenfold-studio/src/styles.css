@@ -307,12 +307,30 @@ button {
   margin-left: -7px;
   border: 2px solid #262834;
   border-radius: 50%;
-  background: linear-gradient(145deg, #b7d5ee, #624349 65%, #12161f);
-  font-size: 10px;
-  font-weight: 800;
+  overflow: hidden;
 }
 .faces span:first-child {
   margin-left: 0;
+}
+.faces img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+.faces .logo-1 {
+  background: #000;
+  border-color: #262834;
+}
+.faces .logo-2 {
+  background: #fff;
+  border-color: #262834;
+  padding: 4px;
+}
+.faces .logo-3 {
+  background: #fff;
+  border-color: #262834;
+  padding: 4px;
 }
 .count {
   display: inline-flex;
