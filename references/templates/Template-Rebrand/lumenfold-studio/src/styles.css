@@ -124,7 +124,7 @@ button {
 /* Location label: adjust margin to move it inside the header grid. */
 .location {
   justify-self: start;
-  margin: 12px 0 0 18px;
+  margin: 12px 0 0 -460px;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -149,14 +149,15 @@ button {
   font-size: 18px;
 }
 
-/* Centered top brand tab and its small symbol. */
+/* Brand tab centered in the hero. Change top/left to reposition it. */
 .brand-tab {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  z-index: 1;
+  transform: translate(-50%, -50%);
   min-width: 185px;
-  padding: 13px 27px 15px;
+  padding: 13px 27px px;
   text-align: center;
   border-radius: 0 0 12px 12px;
   background: #050507;
@@ -165,7 +166,7 @@ button {
   letter-spacing: -1.5px;
 }
 .brand-mark {
-  margin-right: 3px;
+  margin-right: 10px;
   font-size: 18px;
 }
 
@@ -348,6 +349,7 @@ button {
     grid-column: 2;
   }
   .brand-tab {
+    top: 50%;
     min-width: 150px;
     padding: 10px 20px 12px;
     font-size: 19px;
