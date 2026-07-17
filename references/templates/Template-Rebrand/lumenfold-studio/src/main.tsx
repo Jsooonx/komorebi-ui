@@ -105,40 +105,50 @@ function MenuOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="menu-overlay"
+          className="menu-backdrop"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: "easeInOut" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          onClick={onClose}
         >
-          {/* Close button at top-left */}
-          <button className="menu-close-button" onClick={onClose} aria-label="Close menu">
-            ✕
-          </button>
+          <motion.div
+            className="menu-drawer"
+            initial={{ x: reducedMotion ? 0 : "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: reducedMotion ? 0 : "-100%" }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button at top-left */}
+            <button className="menu-close-button" onClick={onClose} aria-label="Close menu">
+              ✕
+            </button>
 
-          {/* Bottom left contact details & socials */}
-          <div className="menu-content">
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.12, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="menu-contact"
-            >
-              <a href="tel:+0278346236" className="menu-phone">+027 834 6236</a>
-              <a href="mailto:hello@norvin.agency" className="menu-email">hello@norvin.agency</a>
-            </motion.div>
+            {/* Bottom left contact details & socials */}
+            <div className="menu-content">
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="menu-contact"
+              >
+                <a href="tel:+0278346236" className="menu-phone">+027 834 6236</a>
+                <a href="mailto:hello@norvin.agency" className="menu-email">hello@norvin.agency</a>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.22, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="menu-socials"
-            >
-              <a href="#x">X</a>
-              <a href="#instagram">◎</a>
-              <a href="#dribbble">◌</a>
-            </motion.div>
-          </div>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="menu-socials"
+              >
+                <a href="#x">X</a>
+                <a href="#instagram">◎</a>
+                <a href="#dribbble">◌</a>
+              </motion.div>
+            </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
