@@ -133,9 +133,25 @@ function rebuildClientMarks() {
   ticker.style.cssText += ";display:block;transform:none;width:100%;";
 }
 
+function mountBrandMark() {
+  document.querySelectorAll<HTMLElement>("nav [data-framer-name='Profile Pic / Name']").forEach((brand) => {
+    brand.querySelector<HTMLElement>(".framer-1mf7mjt-container")?.remove();
+    if (brand.querySelector(".vanta-brand-mark")) return;
+    brand.insertAdjacentHTML("afterbegin", '<img class="vanta-brand-mark" src="/assets/vanta/vanta-mark.svg" alt="Vanta Studio">');
+  });
+}
+
+function removeHeroCardLabels() {
+  document.querySelectorAll<HTMLElement>("a[data-framer-name='Hero'] [data-framer-name='Project Client / Open case study'], a[data-framer-name='Hero'] [data-framer-name='Project Name'], a[data-framer-name='Hero'] [data-framer-name='Type of Work'], a[data-framer-name='Hero'] [data-framer-name='Open case study']").forEach((element) => {
+    element.style.setProperty("display", "none", "important");
+  });
+}
+
 export function applyVantaRebrand() {
   rebuildSplitHeadline();
   rebuildClientMarks();
+  mountBrandMark();
+  removeHeroCardLabels();
   replaceRemoteMedia();
   replaceLegacyLinks();
   document.documentElement.style.setProperty("--vanta-cobalt", "#1647cc");
