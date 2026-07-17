@@ -6,6 +6,47 @@ import "./styles.css";
 // Shared entrance state for the smaller hero elements.
 const rise = { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 } };
 
+// Stagger animation variants for logo lists and social icons.
+const logoContainerVariants = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.66,
+    }
+  }
+};
+
+const logoItemVariants = {
+  initial: { opacity: 0, scale: 0.8, y: 12 },
+  animate: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0,
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const }
+  }
+};
+
+const socialsContainerVariants = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.82,
+    }
+  }
+};
+
+const socialItemVariants = {
+  initial: { opacity: 0, scale: 0.8, y: 15 },
+  animate: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0,
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const }
+  }
+};
+
 // Reused arrow treatment inside the two primary calls to action.
 const Arrow = () => <span className="arrow" aria-hidden="true">→</span>;
 
@@ -64,11 +105,17 @@ function GuideMarks() {
 function StudioIntro() {
   return (
     <motion.section {...rise} transition={{ delay: 0.66 }} className="intro">
-      <div className="faces" aria-label="Studio brand marks">
-        <span className="logo-1"><img src="/assets/logo-1.png" alt="Logo 1" /></span>
-        <span className="logo-2"><img src="/assets/logo-2.png" alt="Logo 2" /></span>
-        <span className="logo-3"><img src="/assets/logo-3.png" alt="Logo 3" /></span>
-      </div>
+      <motion.div 
+        variants={logoContainerVariants} 
+        initial="initial"
+        animate="animate"
+        className="faces" 
+        aria-label="Studio brand marks"
+      >
+        <motion.span variants={logoItemVariants} className="logo-1"><img src="/assets/logo-1.png" alt="Logo 1" /></motion.span>
+        <motion.span variants={logoItemVariants} className="logo-2"><img src="/assets/logo-2.png" alt="Logo 2" /></motion.span>
+        <motion.span variants={logoItemVariants} className="logo-3"><img src="/assets/logo-3.png" alt="Logo 3" /></motion.span>
+      </motion.div>
       <div className="count"><strong>24</strong><small>launches</small></div>
       <p>We shape identities and digital spaces with a sense of movement, clarity, and material depth.</p>
       <a className="story" href="#story">
@@ -129,10 +176,16 @@ function RecognitionCard() {
 // Bottom social shortcuts: replace placeholder anchors with the production URLs.
 function SocialLinks() {
   return (
-    <motion.nav {...rise} transition={{ delay: 0.82 }} className="socials" aria-label="Social links">
-      <a href="#x" aria-label="X"><img src="/assets/social-x.png" alt="X" /></a>
-      <a href="#instagram" aria-label="Instagram"><img src="/assets/social-instagram.png" alt="Instagram" /></a>
-      <a href="#dribbble" aria-label="Dribbble"><img src="/assets/social-dribbble.png" alt="Dribbble" /></a>
+    <motion.nav 
+      variants={socialsContainerVariants} 
+      initial="initial"
+      animate="animate"
+      className="socials" 
+      aria-label="Social links"
+    >
+      <motion.a variants={socialItemVariants} href="#x" aria-label="X"><img src="/assets/social-x.png" alt="X" /></motion.a>
+      <motion.a variants={socialItemVariants} href="#instagram" aria-label="Instagram"><img src="/assets/social-instagram.png" alt="Instagram" /></motion.a>
+      <motion.a variants={socialItemVariants} href="#dribbble" aria-label="Dribbble"><img src="/assets/social-dribbble.png" alt="Dribbble" /></motion.a>
     </motion.nav>
   );
 }
