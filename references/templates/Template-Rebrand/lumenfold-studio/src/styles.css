@@ -260,10 +260,39 @@ button {
   text-wrap: pretty;
 }
 .story {
+  position: relative;
+  isolation: isolate;
   padding: 6px 6px 6px 20px;
   border-radius: 8px;
   background: #fff;
   color: #101116;
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.story::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 6px;
+  right: 6px;
+  left: calc(100% - 36px);
+  height: 30px;
+  border-radius: 7px;
+  background: #0c0d10;
+  transition: 
+    left 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.story:hover {
+  color: #fff;
+}
+.story:hover::before {
+  left: 6px;
+  border-radius: 6px;
+}
+.story span {
+  background: transparent;
+  position: relative;
+  z-index: 2;
 }
 
 /* Bottom-right credential / editorial recognition card. */

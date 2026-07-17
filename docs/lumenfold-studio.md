@@ -3,7 +3,7 @@
 `references/templates/Template-Rebrand/lumenfold-studio/` is a standalone Vite, React, and Framer Motion hero-only template. It uses original Lumenfold branding, copy, and generated visual artwork.
 
 - The hero artwork is `public/assets/lumenfold-hero.png`.
-- Motion is limited to a reduced-motion-aware load-in and local social-link hover feedback.
+- Motion is limited to a reduced-motion-aware load-in, local social-link hover feedback, and a premium hover transition on the "Enter the studio" CTA (where the arrow's black background box expands to cover the entire button, and the text color transitions to white).
 
 Run it from its folder with `npm install` then `npm run dev`.
 
