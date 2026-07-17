@@ -5,6 +5,8 @@
   font-family: Manrope, Arial, sans-serif;
   color: #fbfbfd;
   background: #050507;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 * {
   box-sizing: border-box;
@@ -48,6 +50,7 @@ button {
   z-index: -3;
   background: center/cover no-repeat url("/assets/lumenfold-hero.png");
   transform: scale(1.005);
+  outline: 1px solid rgba(255, 255, 255, 0.1);
 }
 .shade {
   z-index: -2;
@@ -153,10 +156,10 @@ button {
 .brand-tab {
   position: absolute;
   top: 0;
-  left: 50%;
+  left: 45%;
   transform: translateX(-50%);
   min-width: 185px;
-  padding: 13px 27px px;
+  padding: 13px 27px 15px;
   text-align: center;
   border-radius: 0 0 12px 12px;
   background: #050507;
@@ -181,6 +184,7 @@ button {
   letter-spacing: -0.105em;
   line-height: 0.78;
   font-weight: 800;
+  text-wrap: balance;
 }
 .headline p {
   margin: 45px 0 0;
@@ -241,6 +245,7 @@ button {
   font-size: 29px;
   letter-spacing: -0.09em;
   line-height: 0.8;
+  font-variant-numeric: tabular-nums;
 }
 .count small {
   margin-top: 8px;
@@ -252,6 +257,7 @@ button {
   font-size: 13px;
   line-height: 1.42;
   max-width: 245px;
+  text-wrap: pretty;
 }
 .story {
   padding: 6px 6px 6px 20px;
@@ -323,12 +329,52 @@ button {
   background: rgba(255, 255, 255, 0.14);
   transform: translateY(-3px);
 }
+.menu-button:active,
+.project-link:active,
+.story:active,
+.socials a:active {
+  transform: scale(0.96);
+}
 .contact-anchor {
   position: absolute;
   bottom: 0;
 }
 
-/* Narrow-screen composition: simplify the header and preserve readable hierarchy. */
+/* Tablet layout: remove desktop-only offsets before the content begins to collide. */
+@media (max-width: 1280px) {
+  .topbar {
+    grid-template-columns: auto 1fr auto;
+    padding: 24px 32px;
+  }
+  .location {
+    justify-self: center;
+    margin: 11px 0 0;
+  }
+  .headline {
+    top: 18%;
+    left: 32px;
+  }
+  .headline h1 {
+    font-size: clamp(82px, 15vw, 170px);
+  }
+  .intro {
+    left: 32px;
+    bottom: 30px;
+    width: 220px;
+  }
+  .recognition {
+    right: 32px;
+    bottom: 30px;
+    width: min(36vw, 310px);
+    min-height: 220px;
+    padding: 24px;
+  }
+  .socials {
+    bottom: 30px;
+  }
+}
+
+/* Narrow screens use a stacked editorial layout instead of competing absolute panels. */
 @media (max-width: 800px) {
   .stage {
     padding: 7px;
@@ -353,7 +399,7 @@ button {
     font-size: 19px;
   }
   .headline {
-    top: 19%;
+    top: 17%;
     left: 24px;
   }
   .headline h1 {
@@ -379,17 +425,15 @@ button {
   .intro {
     left: 24px;
     bottom: 24px;
-    width: 230px;
-  }
-  .intro p {
-    display: none;
+    width: calc(100% - 48px);
   }
   .recognition {
-    right: 18px;
-    bottom: 19px;
-    width: 152px;
-    min-height: 150px;
-    padding: 18px;
+    top: 57%;
+    right: 24px;
+    bottom: auto;
+    width: calc(100% - 48px);
+    min-height: 165px;
+    padding: 20px;
     border-radius: 15px;
   }
   .recognition h2 {
@@ -403,6 +447,74 @@ button {
     bottom: 12px;
   }
   .socials {
+    bottom: auto;
+    top: 49%;
+  }
+}
+
+/* Phone layout: reserve vertical space so the headline, card, and studio summary never overlap. */
+@media (max-width: 560px) {
+  .hero {
+    min-height: 880px;
+  }
+  .project-link {
+    padding-left: 14px;
+  }
+  .headline {
+    top: 18%;
+  }
+  .headline h1 {
+    font-size: clamp(68px, 19vw, 110px);
+  }
+  .headline p {
+    margin-top: 22px;
+  }
+  .crosses {
+    top: 49%;
+  }
+  .socials {
+    top: 51%;
+  }
+  .recognition {
+    top: 58%;
+  }
+  .intro p {
+    margin: 16px 0 18px;
+    max-width: 30ch;
+  }
+}
+
+/* Small phones: protect the header controls and reduce secondary information density. */
+@media (max-width: 390px) {
+  .topbar {
+    padding: 16px;
+  }
+  .menu-button {
+    padding-right: 9px;
+  }
+  .menu-button > span:last-child {
     display: none;
+  }
+  .project-link {
+    gap: 8px;
+    padding: 6px;
+    font-size: 12px;
+  }
+  .headline {
+    left: 20px;
+  }
+  .intro,
+  .recognition {
+    width: calc(100% - 40px);
+  }
+  .intro {
+    left: 20px;
+  }
+  .recognition {
+    right: 20px;
+  }
+  .crosses {
+    left: 12%;
+    right: 12%;
   }
 }
