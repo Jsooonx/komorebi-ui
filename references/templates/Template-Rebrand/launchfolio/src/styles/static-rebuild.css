@@ -1,0 +1,23 @@
+nav.framer-ywdXq { width: min(640px, calc(100vw - 32px)) !important; overflow: visible !important; }
+nav.framer-ywdXq [data-framer-name="Links / Dots"] { position: absolute !important; inset: 12px 12px auto auto !important; width: 370px !important; height: 32px !important; overflow: visible !important; transform: none !important; opacity: 1 !important; }
+nav.framer-ywdXq [data-framer-name="Links / Dots"] > div:not(.framer-2o9mc6-container) { opacity: 1 !important; transform: none !important; }
+nav.framer-ywdXq [data-framer-name="Desktop"] { position: absolute !important; inset: -16px 0 auto 0 !important; width: 100% !important; height: 32px !important; transform: none !important; opacity: 1 !important; }
+nav.framer-ywdXq .framer-2o9mc6-container, nav.framer-ywdXq [data-framer-name="Dot 3"] { display: none !important; }
+.rebuild-hero-stack { position: absolute; left: calc(50% + 18px); top: 142px; width: 440px; height: 320px; z-index: 8; pointer-events: none; }
+.rebuild-hero-static-card { position: absolute !important; inset: auto !important; margin: 0 !important; opacity: 1 !important; pointer-events: auto; }
+.rebuild-hero-static-card > [data-framer-name="Image Container"] { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; transform: none !important; }
+.rebuild-hero-aperture { left: 8.5% !important; top: 3.5% !important; width: 78% !important; height: 88% !important; transform: rotate(7deg) !important; z-index: 4; }
+.rebuild-hero-lumen { left: 19% !important; top: 0 !important; width: 81% !important; height: 95% !important; transform: rotate(5deg) !important; z-index: 1; }
+.rebuild-hero-nocturne { left: 0 !important; top: 4% !important; width: 74% !important; height: 81% !important; transform: rotate(-5deg) !important; z-index: 2; }
+.rebuild-hero-tide { left: 12% !important; top: 18% !important; width: 74% !important; height: 81% !important; transform: rotate(3deg) !important; z-index: 3; }
+.rebuild-projects-section { min-height: 1160px !important; height: auto !important; }
+.rebuild-project-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 24px 20px !important; height: auto !important; min-height: 900px !important; position: relative !important; width: 100% !important; }
+.rebuild-grid-card { position: relative !important; inset: auto !important; width: 100% !important; height: 430px !important; margin: 0 !important; transform: none !important; opacity: 1 !important; pointer-events: auto !important; }
+.rebuild-grid-card > [data-framer-name="Image Container"] { height: calc(100% - 64px) !important; width: 100% !important; }
+.rebuild-grid-card > [data-framer-name="Project Client / View Project"] { bottom: 0 !important; top: auto !important; width: 100% !important; }
+@media (max-width: 767px) {
+  .rebuild-hero-stack { left: 48%; top: 300px; width: 44vw; height: 32vw; }
+  .rebuild-project-grid { grid-template-columns: 1fr !important; min-height: 1720px !important; }
+  .rebuild-projects-section { min-height: 1980px !important; }
+  .rebuild-grid-card { height: 410px !important; }
+}
