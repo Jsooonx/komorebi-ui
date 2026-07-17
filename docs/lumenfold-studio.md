@@ -5,6 +5,7 @@
 - The menu label was updated from "Index" to "Menu".
 - Click on the "Menu" button opens a left drawer (occupying 1/3 of the screen width on desktop) showing contact information and animated socials. The remaining portion of the screen displays a blurred, semi-transparent backdrop. Clicking on the backdrop or the close button closes the menu drawer. It locks body scroll when open.
 - The team initials avatar circles in the bottom-left intro section (originally KA, MJ, RO) were replaced with three custom brand logo images (`logo-1.png`, `logo-2.png`, `logo-3.png`) with customized backgrounds and paddings to fit concentricity.
+- The text-based social media shortcut links (originally X, ◎, ◌) in both the landing page footer and overlay menu drawer were replaced with custom brand logo images (`social-x.png`, `social-instagram.png`, `social-dribbble.png`) with a consistent circular background, padding, and layout overflow clipping.
 - Motion is limited to a reduced-motion-aware load-in, local social-link hover feedback, a premium hover transition on both CTA buttons and the Menu button (where the arrow's/icon's black background box expands to cover the entire button, and the text color transitions to white), and a premium text roll-up (slide-up) animation on hover for the CTA and Menu buttons.
 
 Run it from its folder with `npm install` then `npm run dev`.

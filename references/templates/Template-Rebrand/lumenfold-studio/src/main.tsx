@@ -97,7 +97,9 @@ function RecognitionCard() {
 function SocialLinks() {
   return (
     <motion.nav {...rise} transition={{ delay: 0.82 }} className="socials" aria-label="Social links">
-      <a href="#x">X</a><a href="#instagram">◎</a><a href="#dribbble">◌</a>
+      <a href="#x" aria-label="X"><img src="/assets/social-x.png" alt="X" /></a>
+      <a href="#instagram" aria-label="Instagram"><img src="/assets/social-instagram.png" alt="Instagram" /></a>
+      <a href="#dribbble" aria-label="Dribbble"><img src="/assets/social-dribbble.png" alt="Dribbble" /></a>
     </motion.nav>
   );
 }
@@ -147,9 +149,9 @@ function MenuOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                 transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="menu-socials"
               >
-                <a href="#x">X</a>
-                <a href="#instagram">◎</a>
-                <a href="#dribbble">◌</a>
+                <a href="#x" aria-label="X"><img src="/assets/social-x.png" alt="X" /></a>
+                <a href="#instagram" aria-label="Instagram"><img src="/assets/social-instagram.png" alt="Instagram" /></a>
+                <a href="#dribbble" aria-label="Dribbble"><img src="/assets/social-dribbble.png" alt="Dribbble" /></a>
               </motion.div>
             </div>
           </motion.div>
