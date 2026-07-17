@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { createRoot } from "react-dom/client";
+import { projects, Project } from "./data/projects";
 import "./styles.css";
 
 // Shared entrance state for the smaller hero elements.
@@ -78,9 +79,9 @@ function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
 // Centered tab logo: change the brand mark and wordmark together here.
 function BrandTab() {
   return (
-    <motion.div className="brand-tab" initial={{ y: -48, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.25, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}>
+    <motion.a href="#" className="brand-tab" initial={{ y: -48, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.25, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}>
       <span className="brand-mark">✦</span>Lumenfold
-    </motion.div>
+    </motion.a>
   );
 }
 
@@ -118,7 +119,7 @@ function StudioIntro() {
       </motion.div>
       <div className="count"><strong>24</strong><small>launches</small></div>
       <p>We shape identities and digital spaces with a sense of movement, clarity, and material depth.</p>
-      <a className="story" href="#story">
+      <a className="story" href="#/works">
         <span className="text-wrapper">
           <span className="text-original">Enter the studio</span>
           <span className="text-hover" aria-hidden="true">Enter the studio</span>
@@ -247,9 +248,171 @@ function MenuOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
   );
 }
 
+function CaseStudyModal({ project }: { project: Project }) {
+  useEffect(() => {
+    // Disable body scroll when modal is open
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.35 }}
+      className="case-study-overlay"
+      onClick={() => window.location.hash = "#/works"}
+    >
+      <motion.div 
+        layoutId={`project-card-${project.id}`}
+        className="case-study-modal"
+        onClick={(e) => e.stopPropagation()}
+        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="case-study-grid">
+          {/* Left / Top Side: Large Image */}
+          <div className="case-study-media">
+            <motion.img 
+              src={project.image} 
+              alt={project.title} 
+              layoutId={`project-image-${project.id}`}
+              className="case-study-image"
+            />
+          </div>
+
+          {/* Right / Bottom Side: Case Study Details */}
+          <div className="case-study-details">
+            <button 
+              className="case-study-close" 
+              onClick={() => window.location.hash = "#/works"}
+              aria-label="Close case study"
+            >
+              ✕
+            </button>
+            <div className="case-study-meta">
+              <div className="meta-item">
+                <span className="meta-label">Client</span>
+                <span className="meta-val">{project.client}</span>
+              </div>
+              <div className="meta-item">
+                <span className="meta-label">Year</span>
+                <span className="meta-val">{project.year}</span>
+              </div>
+              <div className="meta-item">
+                <span className="meta-label">Category</span>
+                <span className="meta-val">{project.category}</span>
+              </div>
+            </div>
+            <h2 className="case-study-title">{project.title}</h2>
+            <p className="case-study-desc">{project.description}</p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function WorksPage({ activeProjectId }: { activeProjectId: string | null }) {
+  const [filter, setFilter] = useState("All");
+  
+  const filteredProjects = filter === "All" 
+    ? projects 
+    : projects.filter(p => p.category === filter);
+
+  const activeProject = projects.find(p => p.id === activeProjectId);
+
+  const gridContainerVariants = {
+    initial: {},
+    animate: {
+      transition: {
+        staggerChildren: 0.08,
+      }
+    }
+  };
+
+  const cardVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }
+    }
+  };
+
+  return (
+    <div className="works-wrapper">
+      {/* Floating Sidebar Filter */}
+      <nav className="floating-filter" aria-label="Project categories">
+        {["All", "Branding", "Editorial", "3D Art", "Digital"].map((cat) => (
+          <button
+            key={cat}
+            className={`filter-btn ${filter === cat ? "active" : ""}`}
+            onClick={() => setFilter(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </nav>
+
+      {/* Bento Grid */}
+      <motion.div 
+        variants={gridContainerVariants}
+        initial="initial"
+        animate="animate"
+        className="bento-grid"
+        layout
+      >
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.map((project) => (
+            <motion.a
+              key={project.id}
+              href={`#/works/${project.id}`}
+              variants={cardVariants}
+              layoutId={`project-card-${project.id}`}
+              className={`bento-card bento-${project.gridSize}`}
+              style={{ originY: 0 }}
+            >
+              <motion.img 
+                src={project.image} 
+                alt={project.title} 
+                className="bento-image"
+                layoutId={`project-image-${project.id}`}
+              />
+              <div className="bento-card-overlay" />
+              <div className="bento-card-info">
+                <span className="bento-category">{project.category}</span>
+                <h3 className="bento-title">{project.title}</h3>
+              </div>
+            </motion.a>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Case Study Detail Modal (morphing open) */}
+      <AnimatePresence>
+        {activeProject && (
+          <CaseStudyModal project={activeProject} />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 function App() {
   const reducedMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   useEffect(() => {
     if (menuOpen) {
@@ -262,24 +425,57 @@ function App() {
     };
   }, [menuOpen]);
 
+  const isWorks = currentHash.startsWith("#/works");
+  let activeProjectId: string | null = null;
+  if (isWorks) {
+    const match = currentHash.match(/^#\/works\/([^/]+)$/);
+    if (match) activeProjectId = match[1];
+  }
+
   return (
     <main className="stage">
-      <motion.div className="hero" initial={{ opacity: 0, scale: reducedMotion ? 1 : 1.015 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: reducedMotion ? 0.01 : 0.8, ease: [0.16, 1, 0.3, 1] }}>
-        {/* Background image and its readable dark overlay. Swap the artwork path in styles.css. */}
-        <div className="artwork" aria-hidden="true" />
-        <div className="shade" aria-hidden="true" />
-        {/* Vertical composition rules; they are decorative and can be removed. */}
-        <div className="vertical-line first" /><div className="vertical-line second" /><div className="vertical-line third" />
-        <Topbar onMenuClick={() => setMenuOpen(true)} />
-        <BrandTab />
-        <Headline />
-        <GuideMarks />
-        <StudioIntro />
-        <RecognitionCard />
-        <SocialLinks />
-        {/* Target for the top-right CTA until a real contact section is added. */}
-        <div id="contact" className="contact-anchor" />
-      </motion.div>
+      <AnimatePresence mode="wait">
+        {!isWorks ? (
+          <motion.div 
+            key="landing"
+            className="hero" 
+            initial={{ opacity: 0, scale: reducedMotion ? 1 : 1.015 }} 
+            animate={{ opacity: 1, scale: 1 }} 
+            exit={{ opacity: 0, scale: reducedMotion ? 1 : 0.985 }}
+            transition={{ duration: reducedMotion ? 0.01 : 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="artwork" aria-hidden="true" />
+            <div className="shade" aria-hidden="true" />
+            <div className="vertical-line first" /><div className="vertical-line second" /><div className="vertical-line third" />
+            
+            <Topbar onMenuClick={() => setMenuOpen(true)} />
+            <BrandTab />
+            <Headline />
+            <GuideMarks />
+            <StudioIntro />
+            <RecognitionCard />
+            <SocialLinks />
+            <div id="contact" className="contact-anchor" />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="works"
+            className="hero works-hero"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="artwork works-artwork" aria-hidden="true" />
+            <div className="shade" aria-hidden="true" />
+            
+            <Topbar onMenuClick={() => setMenuOpen(true)} />
+            <BrandTab />
+            <WorksPage activeProjectId={activeProjectId} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </main>
   );
