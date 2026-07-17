@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
@@ -9,10 +10,10 @@ const rise = { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 } };
 const Arrow = () => <span className="arrow" aria-hidden="true">→</span>;
 
 // Top navigation: edit the location label, menu label, and primary CTA here.
-function Topbar() {
+function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
   return (
     <header className="topbar">
-      <motion.button {...rise} transition={{ delay: 0.15 }} className="menu-button">
+      <motion.button {...rise} transition={{ delay: 0.15 }} className="menu-button" onClick={onMenuClick}>
         <span className="menu-icon"><i /><i /><i /></span>
         <span className="text-wrapper">
           <span className="text-original">Menu</span>
@@ -97,8 +98,67 @@ function SocialLinks() {
   );
 }
 
+function MenuOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const reducedMotion = useReducedMotion();
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="menu-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25, ease: "easeInOut" }}
+        >
+          {/* Close button at top-left */}
+          <button className="menu-close-button" onClick={onClose} aria-label="Close menu">
+            ✕
+          </button>
+
+          {/* Bottom left contact details & socials */}
+          <div className="menu-content">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.12, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              className="menu-contact"
+            >
+              <a href="tel:+0278346236" className="menu-phone">+027 834 6236</a>
+              <a href="mailto:hello@norvin.agency" className="menu-email">hello@norvin.agency</a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.22, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              className="menu-socials"
+            >
+              <a href="#x">X</a>
+              <a href="#instagram">◎</a>
+              <a href="#dribbble">◌</a>
+            </motion.div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function App() {
   const reducedMotion = useReducedMotion();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   return (
     <main className="stage">
@@ -108,7 +168,7 @@ function App() {
         <div className="shade" aria-hidden="true" />
         {/* Vertical composition rules; they are decorative and can be removed. */}
         <div className="vertical-line first" /><div className="vertical-line second" /><div className="vertical-line third" />
-        <Topbar />
+        <Topbar onMenuClick={() => setMenuOpen(true)} />
         <BrandTab />
         <Headline />
         <GuideMarks />
@@ -118,6 +178,7 @@ function App() {
         {/* Target for the top-right CTA until a real contact section is added. */}
         <div id="contact" className="contact-anchor" />
       </motion.div>
+      <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </main>
   );
 }

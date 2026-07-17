@@ -3,6 +3,7 @@
 `references/templates/Template-Rebrand/lumenfold-studio/` is a standalone Vite, React, and Framer Motion hero-only template. It uses original Lumenfold branding, copy, and generated visual artwork.
 
 - The menu label was updated from "Index" to "Menu".
+- Click on the "Menu" button opens a full-screen overlays showing contact information and animated socials. It locks body scroll when open and closes via the top-left "✕" button.
 - Motion is limited to a reduced-motion-aware load-in, local social-link hover feedback, a premium hover transition on both CTA buttons and the Menu button (where the arrow's/icon's black background box expands to cover the entire button, and the text color transitions to white), and a premium text roll-up (slide-up) animation on hover for the CTA and Menu buttons.
 
 Run it from its folder with `npm install` then `npm run dev`.
