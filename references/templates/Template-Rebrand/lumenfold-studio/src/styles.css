@@ -687,6 +687,42 @@ button {
 .menu-close-button:active {
   transform: scale(0.92);
 }
+.menu-navigation {
+  margin-top: 40px;
+}
+.menu-navigation a {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  color: #fff;
+  font-size: clamp(30px, 3.2vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+.menu-navigation a span:last-child {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.55em;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+.menu-navigation a:hover {
+  color: rgba(255, 255, 255, 0.7);
+  transform: translateX(4px);
+}
+.menu-navigation a:hover span:last-child {
+  color: #fff;
+  transform: translate(3px, -3px);
+}
+.menu-navigation a:active {
+  transform: scale(0.96);
+}
 .menu-content {
   margin-top: auto;
   display: flex;
@@ -1142,5 +1178,4 @@ button {
     padding: 6px 10px;
   }
 }
-
 

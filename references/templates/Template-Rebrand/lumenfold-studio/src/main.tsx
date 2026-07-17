@@ -218,6 +218,19 @@ function MenuOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               ✕
             </button>
 
+            <motion.nav
+              className="menu-navigation"
+              aria-label="Primary navigation"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <a href="#/works" onClick={onClose}>
+                <span>Work</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </motion.nav>
+
             {/* Bottom left contact details & socials */}
             <div className="menu-content">
               <motion.div
