@@ -149,13 +149,12 @@ button {
   font-size: 18px;
 }
 
-/* Brand tab centered in the hero. Change top/left to reposition it. */
+/* Centered top brand tab and its small symbol. */
 .brand-tab {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 50%;
-  z-index: 1;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   min-width: 185px;
   padding: 13px 27px px;
   text-align: center;
@@ -349,7 +348,6 @@ button {
     grid-column: 2;
   }
   .brand-tab {
-    top: 50%;
     min-width: 150px;
     padding: 10px 20px 12px;
     font-size: 19px;
