@@ -365,30 +365,28 @@ function WorksPage({ activeProjectId }: { activeProjectId: string | null }) {
         className="bento-grid"
         layout
       >
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project) => (
-            <motion.a
-              key={project.id}
-              href={`#/works/${project.id}`}
-              variants={cardVariants}
-              layoutId={`project-card-${project.id}`}
-              className={`bento-card bento-${project.gridSize}`}
-              style={{ originY: 0 }}
-            >
-              <motion.img 
-                src={project.image} 
-                alt={project.title} 
-                className="bento-image"
-                layoutId={`project-image-${project.id}`}
-              />
-              <div className="bento-card-overlay" />
-              <div className="bento-card-info">
-                <span className="bento-category">{project.category}</span>
-                <h3 className="bento-title">{project.title}</h3>
-              </div>
-            </motion.a>
-          ))}
-        </AnimatePresence>
+        {filteredProjects.map((project) => (
+          <motion.a
+            key={project.id}
+            href={`#/works/${project.id}`}
+            variants={cardVariants}
+            layoutId={`project-card-${project.id}`}
+            className={`bento-card bento-${project.gridSize}`}
+            style={{ originY: 0 }}
+          >
+            <motion.img 
+              src={project.image} 
+              alt={project.title} 
+              className="bento-image"
+              layoutId={`project-image-${project.id}`}
+            />
+            <div className="bento-card-overlay" />
+            <div className="bento-card-info">
+              <span className="bento-category">{project.category}</span>
+              <h3 className="bento-title">{project.title}</h3>
+            </div>
+          </motion.a>
+        ))}
       </motion.div>
 
       {/* Case Study Detail Modal (morphing open) */}
