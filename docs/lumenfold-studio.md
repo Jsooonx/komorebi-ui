@@ -2,8 +2,7 @@
 
 `references/templates/Template-Rebrand/lumenfold-studio/` is a standalone Vite, React, and Framer Motion hero-only template. It uses original Lumenfold branding, copy, and generated visual artwork.
 
-- The hero artwork is `public/assets/lumenfold-hero.png`.
-- Motion is limited to a reduced-motion-aware load-in, local social-link hover feedback, and a premium hover transition on the "Enter the studio" CTA (where the arrow's black background box expands to cover the entire button, and the text color transitions to white).
+- Motion is limited to a reduced-motion-aware load-in, local social-link hover feedback, a premium hover transition on the "Enter the studio" CTA (where the arrow's black background box expands to cover the entire button, and the text color transitions to white), and a premium text roll-up (slide-up) animation on hover for both CTA buttons.
 
 Run it from its folder with `npm install` then `npm run dev`.
 
@@ -15,4 +14,4 @@ Run it from its folder with `npm install` then `npm run dev`.
 
 ## Responsive behavior
 
-The hero has dedicated desktop, tablet (`1280px`), narrow-screen (`800px`), phone (`560px`), and small-phone (`390px`) rules. Tablet removes the desktop-only location offset before it can collide with navigation. On narrow screens, the recognition card and studio summary stack vertically within a taller hero instead of sharing the lower row, preventing overlap and horizontal overflow.
+The hero has dedicated desktop, tablet (`1280px`), narrow-screen (`800px`), phone (`560px`), and small-phone (`390px`) rules. Tablet removes the desktop-only location offset before it can collide with navigation. On narrow screens, the header uses a compact icon-only project CTA beside a centered brand tab, nonessential social controls are hidden, and the recognition card and studio summary stack vertically within a taller hero.

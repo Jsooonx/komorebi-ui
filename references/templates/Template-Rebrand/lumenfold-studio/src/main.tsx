@@ -20,7 +20,11 @@ function Topbar() {
         Copenhagen, DK&nbsp; · &nbsp;08:41
       </motion.p>
       <motion.a {...rise} transition={{ delay: 0.3 }} className="project-link" href="#contact">
-        Start a brief <Arrow />
+        <span className="text-wrapper">
+          <span className="text-original">Start a brief</span>
+          <span className="text-hover" aria-hidden="true">Start a brief</span>
+        </span>
+        <Arrow />
       </motion.a>
     </header>
   );
@@ -59,7 +63,13 @@ function StudioIntro() {
       <div className="faces" aria-label="Portraits of studio team members"><span>KA</span><span>MJ</span><span>RO</span></div>
       <div className="count"><strong>24</strong><small>launches</small></div>
       <p>We shape identities and digital spaces with a sense of movement, clarity, and material depth.</p>
-      <a className="story" href="#story">Enter the studio <Arrow /></a>
+      <a className="story" href="#story">
+        <span className="text-wrapper">
+          <span className="text-original">Enter the studio</span>
+          <span className="text-hover" aria-hidden="true">Enter the studio</span>
+        </span>
+        <Arrow />
+      </a>
     </motion.section>
   );
 }
