@@ -42,6 +42,8 @@ The hero trust rail replaces inherited partner logos with an original generated 
 
 Each Vanta ticker wordmark uses its own font, weight, casing, and spacing treatment, while the generated raster mark is optically enlarged to read clearly at marquee speed.
 
+Vanta Studio now includes a dedicated `/projects` route: a responsive 2×2 selected-work grid reusing Aperture House, Lumen Field, Nocturne Index, and Tide Study from the hero stack, with distinct project labels and staggered card entrances.
+
 Vanta Studio's hero navigation now uses a dedicated lime-star SVG mark in place of the inherited portrait, a grid-based desktop layout that prevents link overlap, and image-only stacked portfolio cards without project labels, types, or case-study links.
 
 `references/templates/Template-Rebrand/launchfolio/` is now rebranded as Vanta Studio. The captured Framer source stays as the structural base, while `rebrand.ts` replaces legacy copy, labels, links, every remote image, and the split hero headline through a structural selector at mount time. Original generated assets—Aperture House, Lumen Field, Nocturne Index, Tide Study, and the Vanta director portrait—live in `public/assets/vanta/`; project stack handles now use Vanta-specific names rather than the source project names.
