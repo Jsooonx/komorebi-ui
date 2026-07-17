@@ -120,26 +120,54 @@ button {
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .story:hover .text-original,
-.project-link:hover .text-original {
+.project-link:hover .text-original,
+.menu-button:hover .text-original {
   transform: translateY(-100%);
 }
 .story:hover .text-hover,
-.project-link:hover .text-hover {
+.project-link:hover .text-hover,
+.menu-button:hover .text-hover {
   transform: translateY(-100%);
 }
 .menu-button {
   justify-self: start;
   padding: 8px 12px 8px 8px;
   border-radius: 10px;
+  position: relative;
+  isolation: isolate;
   color: #0c0d10;
   background: rgba(255, 255, 255, 0.66);
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.menu-button::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 8px;
+  left: 8px;
+  right: calc(100% - 33px);
+  height: 24px;
+  border-radius: 8px;
+  background: #0a0b0e;
+  transition: 
+    right 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.menu-button:hover {
+  color: #fff;
+}
+.menu-button:hover::before {
+  right: 8px;
+  border-radius: 7px;
 }
 .menu-icon {
   display: grid;
   gap: 3px;
   padding: 6px;
   border-radius: 8px;
-  background: #0a0b0e;
+  background: transparent;
+  position: relative;
+  z-index: 2;
 }
 .menu-icon i {
   display: block;

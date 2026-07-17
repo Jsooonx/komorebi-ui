@@ -14,7 +14,10 @@ function Topbar() {
     <header className="topbar">
       <motion.button {...rise} transition={{ delay: 0.15 }} className="menu-button">
         <span className="menu-icon"><i /><i /><i /></span>
-        <span>Index</span>
+        <span className="text-wrapper">
+          <span className="text-original">Menu</span>
+          <span className="text-hover" aria-hidden="true">Menu</span>
+        </span>
       </motion.button>
       <motion.p {...rise} transition={{ delay: 0.22 }} className="location">
         Copenhagen, DK&nbsp; · &nbsp;08:41
