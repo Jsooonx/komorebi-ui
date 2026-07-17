@@ -180,7 +180,7 @@ button {
 /* Location label: adjust margin to move it safely next to the Menu button. */
 .location {
   justify-self: start;
-  margin: 12px 0 0 20px;
+  margin: 12px 0 0 10px;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -479,7 +479,7 @@ button {
   }
   .location {
     justify-self: start;
-    margin: 12px 0 0 20px;
+    margin: 12px 0 0 10px;
   }
   .headline {
     top: 18%;
