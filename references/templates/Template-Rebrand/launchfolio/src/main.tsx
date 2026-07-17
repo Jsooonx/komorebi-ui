@@ -5,7 +5,7 @@ import { startMotion } from './motion';
 import { applyVantaRebrand, rebrandMarkup } from './rebrand';
 import { projectsPageMarkup } from './projects-page';
 
-if (window.location.pathname === '/projects' || window.location.pathname === '/projects/') {
+if (/\/projects\/?$/.test(window.location.pathname)) {
   document.body.innerHTML = projectsPageMarkup();
 } else {
 for (const [name, value] of Object.entries(htmlAttrs)) document.documentElement.setAttribute(name, String(value));
