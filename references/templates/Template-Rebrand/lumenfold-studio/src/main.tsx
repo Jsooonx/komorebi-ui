@@ -82,13 +82,46 @@ function StudioIntro() {
   );
 }
 
-// Bottom-right editorial card: replace this proof point with a real award, press mention, or credential.
+// Bottom-right editorial card: replaced with a sliding loop showcasing the Aespa, Vogue, and Urban Style posters.
+const slides = [
+  "/assets/slide-1.jpg",
+  "/assets/slide-2.png",
+  "/assets/slide-3.jpg",
+];
+
+const slideVariants = {
+  initial: { x: "100%", opacity: 0 },
+  animate: { x: 0, opacity: 1 },
+  exit: { x: "-100%", opacity: 0 },
+};
+
 function RecognitionCard() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 4000); // Transitions every 4 seconds
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <motion.aside {...rise} transition={{ delay: 0.74 }} className="recognition">
-      <span className="stars">✦ ✦ ✦ ✦ ✦</span>
-      <h2>DESIGN<br />ARCHIVE<br /><em>SELECTED ’26</em></h2>
-      <p>Independent<br />studio practice.</p>
+    <motion.aside {...rise} transition={{ delay: 0.74 }} className="recognition slider-card">
+      <div className="slider-container">
+        <AnimatePresence initial={false} mode="popLayout">
+          <motion.img
+            key={index}
+            src={slides[index]}
+            alt={`Project Slide ${index + 1}`}
+            variants={slideVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="slide-image"
+          />
+        </AnimatePresence>
+      </div>
     </motion.aside>
   );
 }
