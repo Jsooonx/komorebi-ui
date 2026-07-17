@@ -128,15 +128,8 @@ function rebuildClientMarks() {
   const ticker = document.querySelector<HTMLElement>("[data-framer-name='Ticker']");
   if (!ticker) return;
 
-  const logos = [
-    { name: "Northform", mark: '<svg viewBox="0 0 44 28" aria-hidden="true"><path d="M5 21 15 6l10 15L35 6"/><circle cx="35" cy="20" r="4"/></svg>' },
-    { name: "Palisade", mark: '<svg viewBox="0 0 44 28" aria-hidden="true"><path d="M5 21 14 7l8 14L31 7l8 14"/><path d="M5 7h34"/></svg>' },
-    { name: "Common Kind", mark: '<svg viewBox="0 0 44 28" aria-hidden="true"><circle cx="14" cy="14" r="8"/><path d="M25 6h14M25 14h10M25 22h14"/></svg>' },
-    { name: "Terrain", mark: '<svg viewBox="0 0 44 28" aria-hidden="true"><path d="m5 21 8-14 9 14 8-14 9 14"/></svg>' },
-    { name: "Solaire", mark: '<svg viewBox="0 0 44 28" aria-hidden="true"><path d="M6 14h32M22 4v20"/><circle cx="22" cy="14" r="7"/></svg>' },
-    { name: "Hinter", mark: '<svg viewBox="0 0 44 28" aria-hidden="true"><path d="M5 7h34v14H5zM5 7l17 14L39 7"/></svg>' },
-  ];
-  const set = `<div class="vanta-logo-set">${logos.map((logo) => `<span class="vanta-partner-logo"><span class="vanta-partner-mark">${logo.mark}</span><span class="vanta-partner-name">${logo.name}</span></span>`).join("")}</div>`;
+  const brands = ["Northform", "Palisade", "Common Kind", "Terrain", "Solaire", "Hinter"];
+  const set = `<div class="vanta-logo-set">${brands.map((name) => `<span class="vanta-partner-logo"><img class="vanta-partner-mark" src="/assets/vanta/partner-mark.png" alt=""><span class="vanta-partner-name">${name}</span></span>`).join("")}</div>`;
 
   ticker.innerHTML = `<div class="vanta-logo-ticker" aria-label="Vanta Studio partner marks"><div class="vanta-logo-track">${set}${set}</div></div>`;
   ticker.style.cssText += ";display:block;transform:none;width:100%;";

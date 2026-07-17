@@ -38,7 +38,7 @@ The Template Showcase (located in Page 4) features 8 premium landing page templa
 Aura has a native narrow-screen composition rather than a scaled desktop artboard. The desktop minimum width is removed; generated artwork becomes a compact visual stage; and the spatial controls in Connected Context, Guidance Layer, Anticipation Loop, and Quiet Launch become readable tap lists below their artwork. This preserves local trace interactions without cropped, overlapping labels or horizontal overflow.
 ## Vanta Studio rebrand
 
-The hero trust rail replaces inherited partner logos with six original abstract SVG marks plus their companion brand names inside a duplicated, seamless right-to-left marquee track; it respects reduced-motion preferences.
+The hero trust rail replaces inherited partner logos with an original generated raster mark plus companion brand names inside a duplicated, seamless right-to-left marquee track; it respects reduced-motion preferences.
 
 Vanta Studio's hero navigation now uses a dedicated lime-star SVG mark in place of the inherited portrait, a grid-based desktop layout that prevents link overlap, and image-only stacked portfolio cards without project labels, types, or case-study links.
 
