@@ -9,10 +9,16 @@ nav.framer-ywdXq .framer-2o9mc6-container, nav.framer-ywdXq [data-framer-name="D
 [data-framer-name="Ticker"] { overflow: hidden !important; }
 .vanta-logo-ticker { align-items: center; display: flex; height: 100%; overflow: hidden; width: 100%; }
 .vanta-logo-track { align-items: center; animation: vanta-logo-marquee 22s linear infinite; display: flex; flex: none; min-width: max-content; will-change: transform; }
-.vanta-logo-set { align-items: center; display: flex; flex: none; gap: clamp(52px, 7vw, 118px); padding-right: clamp(52px, 7vw, 118px); }
-.vanta-partner-logo { align-items: center; display: inline-flex; gap: 8px; height: 30px; justify-content: center; white-space: nowrap; }
-.vanta-partner-mark { display: block; height: 30px; object-fit: contain; width: 30px; }
-.vanta-partner-name { color: #161820; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: -0.035em; line-height: 1; }
+.vanta-logo-set { align-items: center; display: flex; flex: none; gap: clamp(66px, 8vw, 132px); padding-right: clamp(66px, 8vw, 132px); }
+.vanta-partner-logo { align-items: center; display: inline-flex; gap: 12px; height: 60px; justify-content: center; white-space: nowrap; }
+.vanta-partner-mark { display: block; height: 64px; object-fit: contain; transform: scale(1.6); transform-origin: center; width: 64px; }
+.vanta-partner-name { color: #161820; font-family: Arial, sans-serif; font-size: 16px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+.vanta-partner-0 .vanta-partner-name { font-family: Georgia, 'Times New Roman', serif; font-size: 18px; font-weight: 700; letter-spacing: -0.06em; }
+.vanta-partner-1 .vanta-partner-name { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 18px; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; }
+.vanta-partner-2 .vanta-partner-name { font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 15px; font-weight: 800; letter-spacing: -0.07em; }
+.vanta-partner-3 .vanta-partner-name { font-family: 'Courier New', monospace; font-size: 15px; font-weight: 700; letter-spacing: -0.11em; text-transform: uppercase; }
+.vanta-partner-4 .vanta-partner-name { font-family: 'Times New Roman', serif; font-size: 19px; font-style: italic; font-weight: 700; letter-spacing: -0.07em; }
+.vanta-partner-5 .vanta-partner-name { font-family: Verdana, Arial, sans-serif; font-size: 14px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
 @keyframes vanta-logo-marquee { to { transform: translate3d(-50%, 0, 0); } }
 @media (prefers-reduced-motion: reduce) { .vanta-logo-track { animation: none; } }
 .rebuild-hero-stack { position: absolute; left: calc(50% + 18px); top: 142px; width: 440px; height: 320px; z-index: 8; pointer-events: none; }

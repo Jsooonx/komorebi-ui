@@ -129,7 +129,7 @@ function rebuildClientMarks() {
   if (!ticker) return;
 
   const brands = ["Northform", "Palisade", "Common Kind", "Terrain", "Solaire", "Hinter"];
-  const set = `<div class="vanta-logo-set">${brands.map((name) => `<span class="vanta-partner-logo"><img class="vanta-partner-mark" src="/assets/vanta/partner-mark.png" alt=""><span class="vanta-partner-name">${name}</span></span>`).join("")}</div>`;
+  const set = `<div class="vanta-logo-set">${brands.map((name, index) => `<span class="vanta-partner-logo vanta-partner-${index}"><img class="vanta-partner-mark" src="/assets/vanta/partner-mark.png" alt=""><span class="vanta-partner-name">${name}</span></span>`).join("")}</div>`;
 
   ticker.innerHTML = `<div class="vanta-logo-ticker" aria-label="Vanta Studio partner marks"><div class="vanta-logo-track">${set}${set}</div></div>`;
   ticker.style.cssText += ";display:block;transform:none;width:100%;";
