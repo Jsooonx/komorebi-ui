@@ -65,7 +65,7 @@ function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
       <motion.p {...rise} transition={{ delay: 0.22 }} className="location">
         Copenhagen, DK&nbsp; · &nbsp;08:41
       </motion.p>
-      <motion.a {...rise} transition={{ delay: 0.3 }} className="project-link" href="#contact">
+      <motion.a {...rise} transition={{ delay: 0.3 }} className="project-link" href="#/contact">
         <span className="text-wrapper">
           <span className="text-original">Start a brief</span>
           <span className="text-hover" aria-hidden="true">Start a brief</span>
@@ -80,7 +80,7 @@ function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
 function BrandTab() {
   return (
     <motion.a href="#" className="brand-tab" initial={{ y: -48, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.25, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}>
-      <span className="brand-mark">✦</span>Lumenfold
+      <span className="brand-mark">✦</span>Lumenfold Studio
     </motion.a>
   );
 }
@@ -90,7 +90,7 @@ function Headline() {
   return (
     <section className="headline">
       <motion.h1 initial={{ opacity: 0, y: 42 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
-        Lumenfold
+        Lumenfold Studio
       </motion.h1>
       <motion.p {...rise} transition={{ delay: 0.54 }}>Digital<br />Atelier</motion.p>
     </section>
@@ -332,6 +332,236 @@ function CaseStudyModal({ project }: { project: Project }) {
   );
 }
 
+function ContactPage() {
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [budget, setBudget] = useState<number>(25000);
+  const [timeline, setTimeline] = useState<string>("3-6 Months");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [submitted, setSubmitted] = useState<boolean>(false);
+
+  const toggleService = (service: string) => {
+    setSelectedServices(prev => 
+      prev.includes(service) ? prev.filter(s => s !== service) : [...prev, service]
+    );
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email) {
+      alert("Please fill in your name and email.");
+      return;
+    }
+    setSubmitted(true);
+    console.log("Brief Submitted:", {
+      selectedServices,
+      budget,
+      timeline,
+      name,
+      email,
+      message
+    });
+  };
+
+  const formatBudget = (val: number) => {
+    if (val >= 100000) return "$100,000+";
+    return `$${val.toLocaleString()}`;
+  };
+
+  return (
+    <div className="contact-wrapper">
+      <div className="contact-grid">
+        {/* Left: Builder Panel */}
+        <form onSubmit={handleSubmit} className="contact-panel-left">
+          <div className="contact-section">
+            <h2 className="section-title">01 / Choose Services</h2>
+            <div className="services-pills">
+              {["Brand Strategy", "Motion Design", "Web App Development", "3D Art"].map((service) => {
+                const isSelected = selectedServices.includes(service);
+                return (
+                  <button
+                    type="button"
+                    key={service}
+                    className={`service-pill ${isSelected ? "active" : ""}`}
+                    onClick={() => toggleService(service)}
+                  >
+                    {service}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="contact-section">
+            <h2 className="section-title">02 / Project Budget</h2>
+            <div className="budget-slider-container">
+              <input
+                type="range"
+                min="5000"
+                max="100000"
+                step="5000"
+                value={budget}
+                onChange={(e) => setBudget(Number(e.target.value))}
+                className="budget-slider"
+              />
+              <div className="budget-value">
+                <span>Budget Limit:</span>
+                <span className="amount">{formatBudget(budget)}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="contact-section">
+            <h2 className="section-title">03 / Target Timeline</h2>
+            <div className="timeline-cards">
+              {["1-3 Months", "3-6 Months", "Flexible"].map((time) => {
+                const isSelected = timeline === time;
+                return (
+                  <button
+                    type="button"
+                    key={time}
+                    className={`timeline-card ${isSelected ? "active" : ""}`}
+                    onClick={() => setTimeline(time)}
+                  >
+                    {time}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="contact-section">
+            <h2 className="section-title">04 / Tell us about you</h2>
+            <div className="input-group">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your Name *"
+                required
+                className="contact-input"
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email Address *"
+                required
+                className="contact-input"
+              />
+            </div>
+            <div className="input-group">
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="What are we building? (Optional brief description)"
+                className="contact-textarea"
+                rows={3}
+              />
+            </div>
+          </div>
+
+          <button type="submit" className="submit-brief-btn">
+            Send Brief Proposal <span className="arrow">→</span>
+          </button>
+        </form>
+
+        {/* Right: Live Preview Panel */}
+        <div className="contact-panel-right">
+          <div className="proposal-card">
+            <div className="proposal-header">
+              <span className="proposal-tag">✦ Client Briefing</span>
+              <span className="proposal-date">Draft Proposal</span>
+            </div>
+            
+            <div className="proposal-body">
+              <p className="proposal-narrative">
+                Hello Lumenfold Studio, my name is{" "}
+                <span className={`narrative-fill ${name ? "filled" : ""}`}>
+                  {name || "________"}
+                </span>{" "}
+                and you can reach me at{" "}
+                <span className={`narrative-fill ${email ? "filled" : ""}`}>
+                  {email || "________"}
+                </span>.
+              </p>
+              
+              <p className="proposal-narrative">
+                We are looking to collaborate on a{" "}
+                <span className={`narrative-fill ${selectedServices.length > 0 ? "filled" : ""}`}>
+                  {selectedServices.length > 0 ? selectedServices.join(" & ") : "_______"}
+                </span>{" "}
+                project.
+              </p>
+              
+              <p className="proposal-narrative">
+                Our target timeline for the launch is{" "}
+                <span className="narrative-fill filled">
+                  {timeline}
+                </span>{" "}
+                and we have set aside a budget of approximately{" "}
+                <span className="narrative-fill filled">
+                  {formatBudget(budget)}
+                </span>.
+              </p>
+
+              {message && (
+                <div className="proposal-message-block">
+                  <span className="block-label">Project Details:</span>
+                  <p className="block-text">{message}</p>
+                </div>
+              )}
+            </div>
+
+            <div className="proposal-footer">
+              <span className="proposal-note">Lumenfold Studio © {new Date().getFullYear()}</span>
+              <span className="proposal-status">Ready to submit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Success Modal Overlay */}
+      <AnimatePresence>
+        {submitted && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="success-overlay"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="success-modal"
+            >
+              <div className="success-icon">✦</div>
+              <h2 className="success-title">Brief Received!</h2>
+              <p className="success-message">
+                Thank you, <strong>{name}</strong>. We have saved your project briefing for {selectedServices.join(" & ") || "design & development"}. Our team will review the proposal and reach back to <strong>{email}</strong> within 24 hours.
+              </p>
+              
+              <div className="receipt-details">
+                <div className="receipt-row"><span>Services:</span><span>{selectedServices.join(", ") || "General Inquiry"}</span></div>
+                <div className="receipt-row"><span>Budget:</span><span>{formatBudget(budget)}</span></div>
+                <div className="receipt-row"><span>Timeline:</span><span>{timeline}</span></div>
+              </div>
+
+              <a href="#" className="close-success-btn" onClick={() => setSubmitted(false)}>
+                Back to Studio
+              </a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 function WorksPage({ activeProjectId }: { activeProjectId: string | null }) {
   const [filter, setFilter] = useState("All");
   
@@ -441,6 +671,7 @@ function App() {
   }, [menuOpen]);
 
   const isWorks = currentHash.startsWith("#/works");
+  const isContact = currentHash === "#/contact";
   let activeProjectId: string | null = null;
   if (isWorks) {
     const match = currentHash.match(/^#\/works\/([^/]+)$/);
@@ -450,7 +681,39 @@ function App() {
   return (
     <main className="stage">
       <AnimatePresence mode="wait">
-        {!isWorks ? (
+        {isContact ? (
+          <motion.div 
+            key="contact"
+            className="hero contact-hero" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="artwork works-artwork" aria-hidden="true" />
+            <div className="shade" aria-hidden="true" />
+            
+            <Topbar onMenuClick={() => setMenuOpen(true)} />
+            <BrandTab />
+            <ContactPage />
+          </motion.div>
+        ) : isWorks ? (
+          <motion.div
+            key="works"
+            className="hero works-hero"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="artwork works-artwork" aria-hidden="true" />
+            <div className="shade" aria-hidden="true" />
+            
+            <Topbar onMenuClick={() => setMenuOpen(true)} />
+            <BrandTab />
+            <WorksPage activeProjectId={activeProjectId} />
+          </motion.div>
+        ) : (
           <motion.div 
             key="landing"
             className="hero" 
@@ -471,22 +734,6 @@ function App() {
             <RecognitionCard />
             <SocialLinks />
             <div id="contact" className="contact-anchor" />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="works"
-            className="hero works-hero"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="artwork works-artwork" aria-hidden="true" />
-            <div className="shade" aria-hidden="true" />
-            
-            <Topbar onMenuClick={() => setMenuOpen(true)} />
-            <BrandTab />
-            <WorksPage activeProjectId={activeProjectId} />
           </motion.div>
         )}
       </AnimatePresence>
