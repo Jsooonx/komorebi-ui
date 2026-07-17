@@ -18,8 +18,6 @@
 
 Run it from its folder with `npm install` then `npm run dev`.
 
-The landing page now continues below the hero with a How We Work editorial section: Frame the signal, Shape the system, and Make it move, followed by a single Start a brief CTA.
-
 ## Editing map
 
 `src/main.tsx` is split into small, commented hero sections: `Topbar`, `BrandTab`, `Headline`, `GuideMarks`, `StudioIntro`, `RecognitionCard`, `SocialLinks`, `WorksPage`, and `CaseStudyModal`. Each comment identifies the copy or interaction it owns. The generated background artwork path and the styling for each named section remain in `src/styles.css`.
