@@ -1,4 +1,4 @@
-nav.framer-ywdXq { align-items: center !important; display: grid !important; grid-template-columns: 190px minmax(0, 1fr) !important; height: 56px !important; overflow: visible !important; padding: 0 12px !important; width: min(680px, calc(100vw - 32px)) !important; }
+nav.framer-ywdXq { align-items: center !important; display: grid !important; grid-template-columns: auto minmax(0, 1fr) !important; column-gap: 24px !important; height: 56px !important; overflow: visible !important; padding: 0 12px !important; width: min(680px, calc(100vw - 32px)) !important; }
 nav.framer-ywdXq [data-framer-name="Details / Mobile Dots"] { align-items: center !important; display: flex !important; height: 100% !important; position: static !important; width: auto !important; }
 nav.framer-ywdXq [data-framer-name="Profile Pic / Name"] { align-items: center !important; display: flex !important; gap: 9px !important; height: 40px !important; position: static !important; width: auto !important; }
 nav.framer-ywdXq .vanta-brand-mark { display: block !important; flex: 0 0 28px !important; height: 28px !important; object-fit: contain !important; width: 28px !important; }
